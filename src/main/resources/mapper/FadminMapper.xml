@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.FadminMapper">
+    <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.Fadmin">
+        <id column="fid" jdbcType="INTEGER" property="fid"/>
+        <result column="fstatus" jdbcType="INTEGER" property="fstatus"/>
+        <result column="froleid" jdbcType="INTEGER" property="froleid"/>
+        <result column="fname" jdbcType="VARCHAR" property="fname"/>
+        <result column="fpassword" jdbcType="VARCHAR" property="fpassword"/>
+        <result column="fcreatetime" jdbcType="TIMESTAMP" property="fcreatetime"/>
+        <result column="fgoogleauthenticator" jdbcType="VARCHAR" property="fgoogleauthenticator"/>
+        <result column="fgoogleurl" jdbcType="VARCHAR" property="fgoogleurl"/>
+        <result column="fgooglebind" jdbcType="BIT" property="fgooglebind"/>
+        <result column="fopengooglevalidate" jdbcType="BIT" property="fopengooglevalidate"/>
+        <result column="fgooglevalidate" jdbcType="BIT" property="fgooglevalidate"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="ftelephone" jdbcType="VARCHAR" property="ftelephone"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    fid, fstatus, froleid, fname, fpassword, fcreatetime, fgoogleauthenticator, fgoogleurl, 
+    fgooglebind, fopengooglevalidate, fgooglevalidate, version,salt,ftelephone
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_admin
+        where fid = #{fid,jdbcType=INTEGER}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_admin
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_admin
+        <if test="filter != null">
+            ${filter}
+        </if>
+        <if test="isFY != null and isFY = true ">
+            limit ${firstResult}, ${maxResults}
+        </if>
+
+    </select>
+
+    <select id="getAllCount" resultType="java.lang.Integer">
+        select count(1) from f_admin
+        <if test="filter != null">
+            ${filter}
+        </if>
+    </select>
+
+    <select id="login" parameterType="com.me.szzc.pojo.entity.Fadmin" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_admin
+        where fname = #{fname} and fpassword = #{fpassword}
+    </select>
+
+    <select id="findByProperty" parameterType="com.me.szzc.pojo.entity.Fadmin" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_admin
+        where 1=1
+        <if test="fstatus != null">
+            and fstatus = #{fstatus}
+        </if>
+        <if test="froleid != null">
+            and froleid = #{froleid}
+        </if>
+        <if test="fname != null">
+            and fname = #{fname}
+        </if>
+        <if test="fpassword != null">
+            and fpassword = #{fpassword}
+        </if>
+
+        <if test="fgoogleauthenticator != null">
+            and fgoogleauthenticator = #{fgoogleauthenticator}
+        </if>
+        <if test="fgoogleurl != null">
+            and fgoogleurl = #{fgoogleurl}
+        </if>
+        <if test="fgooglebind != null">
+            and fgooglebind = #{fgooglebind}
+        </if>
+        <if test="fopengooglevalidate != null">
+            and fopengooglevalidate = #{fopengooglevalidate}
+        </if>
+
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_admin
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.me.szzc.pojo.entity.Fadmin">
+    insert into f_admin (fid, fstatus, froleid, 
+      fname, fpassword, fcreatetime, 
+      fgoogleauthenticator, fgoogleurl, fgooglebind, 
+      fopengooglevalidate, fgooglevalidate, version,salt,ftelephone
+      )
+    values (#{fid,jdbcType=INTEGER}, #{fstatus,jdbcType=INTEGER}, #{froleid,jdbcType=INTEGER}, 
+      #{fname,jdbcType=VARCHAR}, #{fpassword,jdbcType=VARCHAR}, #{fcreatetime,jdbcType=TIMESTAMP}, 
+      #{fgoogleauthenticator,jdbcType=VARCHAR}, #{fgoogleurl,jdbcType=VARCHAR}, #{fgooglebind,jdbcType=BIT}, 
+      #{fopengooglevalidate,jdbcType=BIT}, #{fgooglevalidate,jdbcType=BIT}, #{version,jdbcType=INTEGER},
+      #{salt},#{ftelephone}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.Fadmin">
+        insert into f_admin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fid != null">
+                fid,
+            </if>
+            <if test="fstatus != null">
+                fstatus,
+            </if>
+            <if test="froleid != null">
+                froleid,
+            </if>
+            <if test="fname != null">
+                fname,
+            </if>
+            <if test="fpassword != null">
+                fpassword,
+            </if>
+            <if test="fcreatetime != null">
+                fcreatetime,
+            </if>
+            <if test="fgoogleauthenticator != null">
+                fgoogleauthenticator,
+            </if>
+            <if test="fgoogleurl != null">
+                fgoogleurl,
+            </if>
+            <if test="fgooglebind != null">
+                fgooglebind,
+            </if>
+            <if test="fopengooglevalidate != null">
+                fopengooglevalidate,
+            </if>
+            <if test="fgooglevalidate != null">
+                fgooglevalidate,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="ftelephone != null">
+                ftelephone,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fid != null">
+                #{fid,jdbcType=INTEGER},
+            </if>
+            <if test="fstatus != null">
+                #{fstatus,jdbcType=INTEGER},
+            </if>
+            <if test="froleid != null">
+                #{froleid,jdbcType=INTEGER},
+            </if>
+            <if test="fname != null">
+                #{fname,jdbcType=VARCHAR},
+            </if>
+            <if test="fpassword != null">
+                #{fpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="fcreatetime != null">
+                #{fcreatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fgoogleauthenticator != null">
+                #{fgoogleauthenticator,jdbcType=VARCHAR},
+            </if>
+            <if test="fgoogleurl != null">
+                #{fgoogleurl,jdbcType=VARCHAR},
+            </if>
+            <if test="fgooglebind != null">
+                #{fgooglebind,jdbcType=BIT},
+            </if>
+            <if test="fopengooglevalidate != null">
+                #{fopengooglevalidate,jdbcType=BIT},
+            </if>
+            <if test="fgooglevalidate != null">
+                #{fgooglevalidate,jdbcType=BIT},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="salt != null">
+                #{salt},
+            </if>
+            <if test="ftelephone != null">
+                #{ftelephone},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.Fadmin">
+        update f_admin
+        <set>
+            <if test="fstatus != null">
+                fstatus = #{fstatus,jdbcType=INTEGER},
+            </if>
+            <if test="froleid != null">
+                froleid = #{froleid,jdbcType=INTEGER},
+            </if>
+            <if test="fname != null">
+                fname = #{fname,jdbcType=VARCHAR},
+            </if>
+            <if test="fpassword != null">
+                fpassword = #{fpassword,jdbcType=VARCHAR},
+            </if>
+            <if test="fcreatetime != null">
+                fcreatetime = #{fcreatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fgoogleauthenticator != null">
+                fgoogleauthenticator = #{fgoogleauthenticator,jdbcType=VARCHAR},
+            </if>
+            <if test="fgoogleurl != null">
+                fgoogleurl = #{fgoogleurl,jdbcType=VARCHAR},
+            </if>
+            <if test="fgooglebind != null">
+                fgooglebind = #{fgooglebind,jdbcType=BIT},
+            </if>
+            <if test="fopengooglevalidate != null">
+                fopengooglevalidate = #{fopengooglevalidate,jdbcType=BIT},
+            </if>
+            <if test="fgooglevalidate != null">
+                fgooglevalidate = #{fgooglevalidate,jdbcType=BIT},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="salt != null">
+                salt = #{salt},
+            </if>
+            <if test="ftelephone != null">
+                ftelephone = #{ftelephone},
+            </if>
+        </set>
+        where fid = #{fid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.Fadmin">
+    update f_admin
+    set fstatus = #{fstatus,jdbcType=INTEGER},
+      froleid = #{froleid,jdbcType=INTEGER},
+      fname = #{fname,jdbcType=VARCHAR},
+      fpassword = #{fpassword,jdbcType=VARCHAR},
+      fcreatetime = #{fcreatetime,jdbcType=TIMESTAMP},
+      fgoogleauthenticator = #{fgoogleauthenticator,jdbcType=VARCHAR},
+      fgoogleurl = #{fgoogleurl,jdbcType=VARCHAR},
+      fgooglebind = #{fgooglebind,jdbcType=BIT},
+      fopengooglevalidate = #{fopengooglevalidate,jdbcType=BIT},
+      fgooglevalidate = #{fgooglevalidate,jdbcType=BIT},
+      version = #{version,jdbcType=INTEGER},
+      ftelephone = #{ftelephone}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

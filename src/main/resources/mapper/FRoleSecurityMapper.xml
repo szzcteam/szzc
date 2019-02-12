@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.me.szzc.dao.FroleSecurityMapper">
+    <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.FroleSecurity">
+        <id column="fid" property="fid" jdbcType="INTEGER"/>
+        <result column="fsecurityid" property="fsecurityid" jdbcType="INTEGER"/>
+        <result column="froleid" property="froleid" jdbcType="INTEGER"/>
+        <collection property="fsecurity" ofType="com.me.szzc.pojo.entity.Fsecurity" column="fid" select="com.me.szzc.dao.FsecurityMapper.selectByPrimaryKey" />
+    </resultMap>
+
+    <delete id="deleteByRoleId" parameterType="java.lang.Integer">
+    delete from f_role_security
+    where froleid = #{froleid,jdbcType=INTEGER}
+  </delete>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+     delete from f_role_security where fid = #{fid}
+  </delete>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.me.szzc.pojo.entity.FroleSecurity">
+    select fid, fsecurityid, froleid
+  	from f_role_security
+  	where fid = #{froleid,jdbcType=INTEGER}
+  </select>
+
+    <insert id="insert" parameterType="java.util.List">
+        insert into f_role_security (fsecurityid, froleid)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.fsecurityid,jdbcType=INTEGER}, #{item.froleid,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <select id="selectByRoleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select fid, fsecurityid, froleid
+  	from f_role_security
+  	where froleid = #{froleid,jdbcType=INTEGER}
+  </select>
+
+
+    <select id="findAll" resultMap="BaseResultMap">
+    select fid, fsecurityid, froleid
+  	from f_role_security
+  </select>
+
+    <select id="findByProperty" resultMap="BaseResultMap">
+        select fid, fsecurityid, froleid
+        from f_role_security
+        where 1=1
+        <if test="froleid != null">
+            and froleid = #{froleid}
+        </if>
+        <if test="fsecurityid != null">
+            and fsecurityid = #{fsecurityid}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.FwebbaseinfoMapper">
+  <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.Fwebbaseinfo">
+    <id column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="ftitle" jdbcType="VARCHAR" property="ftitle" />
+    <result column="fkeywords" jdbcType="VARCHAR" property="fkeywords" />
+    <result column="fdescription" jdbcType="VARCHAR" property="fdescription" />
+    <result column="fcopyRights" jdbcType="VARCHAR" property="fcopyRights" />
+    <result column="fbeianInfo" jdbcType="VARCHAR" property="fbeianInfo" />
+    <result column="fsystemMail" jdbcType="VARCHAR" property="fsystemMail" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fid, ftitle, fkeywords, fdescription, fcopyRights, fbeianInfo, fsystemMail, version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_webbaseinfo
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from f_webbaseinfo
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from f_webbaseinfo
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.me.szzc.pojo.entity.Fwebbaseinfo">
+    insert into f_webbaseinfo (fid, ftitle, fkeywords, 
+      fdescription, fcopyRights, fbeianInfo, 
+      fsystemMail, version)
+    values (#{fid,jdbcType=INTEGER}, #{ftitle,jdbcType=VARCHAR}, #{fkeywords,jdbcType=VARCHAR}, 
+      #{fdescription,jdbcType=VARCHAR}, #{fcopyrights,jdbcType=VARCHAR}, #{fbeianinfo,jdbcType=VARCHAR}, 
+      #{fsystemmail,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.Fwebbaseinfo">
+    insert into f_webbaseinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="ftitle != null">
+        ftitle,
+      </if>
+      <if test="fkeywords != null">
+        fkeywords,
+      </if>
+      <if test="fdescription != null">
+        fdescription,
+      </if>
+      <if test="fcopyrights != null">
+        fcopyRights,
+      </if>
+      <if test="fbeianinfo != null">
+        fbeianInfo,
+      </if>
+      <if test="fsystemmail != null">
+        fsystemMail,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="ftitle != null">
+        #{ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fkeywords != null">
+        #{fkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="fdescription != null">
+        #{fdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fcopyrights != null">
+        #{fcopyrights,jdbcType=VARCHAR},
+      </if>
+      <if test="fbeianinfo != null">
+        #{fbeianinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fsystemmail != null">
+        #{fsystemmail,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.Fwebbaseinfo">
+    update f_webbaseinfo
+    <set>
+      <if test="ftitle != null">
+        ftitle = #{ftitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fkeywords != null">
+        fkeywords = #{fkeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="fdescription != null">
+        fdescription = #{fdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fcopyrights != null">
+        fcopyRights = #{fcopyrights,jdbcType=VARCHAR},
+      </if>
+      <if test="fbeianinfo != null">
+        fbeianInfo = #{fbeianinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fsystemmail != null">
+        fsystemMail = #{fsystemmail,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.Fwebbaseinfo">
+    update f_webbaseinfo
+    set ftitle = #{ftitle,jdbcType=VARCHAR},
+      fkeywords = #{fkeywords,jdbcType=VARCHAR},
+      fdescription = #{fdescription,jdbcType=VARCHAR},
+      fcopyRights = #{fcopyrights,jdbcType=VARCHAR},
+      fbeianInfo = #{fbeianinfo,jdbcType=VARCHAR},
+      fsystemMail = #{fsystemmail,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

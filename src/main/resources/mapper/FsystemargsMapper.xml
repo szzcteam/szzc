@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.FsystemargsMapper">
+    <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.Fsystemargs">
+        <id column="fid" jdbcType="INTEGER" property="fid"/>
+        <result column="fkey" jdbcType="VARCHAR" property="fkey"/>
+        <result column="ftype" jdbcType="INTEGER" property="ftype"/>
+        <result column="fdescription" jdbcType="VARCHAR" property="fdescription"/>
+        <result column="fvalue" jdbcType="VARCHAR" property="fvalue"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+        <result column="furl" jdbcType="VARCHAR" property="furl"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    fid, fkey, ftype, fdescription, fvalue, version, furl
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_systemargs
+        where fid = #{fid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_systemargs
+    </select>
+
+    <select id="selectByProperty" resultMap="BaseResultMap" parameterType="com.me.szzc.pojo.entity.Fsystemargs">
+        select
+        <include refid="Base_Column_List"/>
+        from f_systemargs
+        <if test="fkey != null">
+            fkey = #{fkey,jdbcType=VARCHAR},
+        </if>
+        <if test="ftype != null">
+            ftype = #{ftype,jdbcType=INTEGER},
+        </if>
+        <if test="fdescription != null">
+            fdescription = #{fdescription,jdbcType=VARCHAR},
+        </if>
+        <if test="fvalue != null">
+            fvalue = #{fvalue,jdbcType=VARCHAR},
+        </if>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from f_systemargs
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.me.szzc.pojo.entity.Fsystemargs">
+    insert into f_systemargs (fid, fkey, ftype, 
+      fdescription, fvalue, version, 
+      furl)
+    values (#{fid,jdbcType=INTEGER}, #{fkey,jdbcType=VARCHAR}, #{ftype,jdbcType=INTEGER}, 
+      #{fdescription,jdbcType=VARCHAR}, #{fvalue,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
+      #{furl,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.Fsystemargs">
+        insert into f_systemargs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fid != null">
+                fid,
+            </if>
+            <if test="fkey != null">
+                fkey,
+            </if>
+            <if test="ftype != null">
+                ftype,
+            </if>
+            <if test="fdescription != null">
+                fdescription,
+            </if>
+            <if test="fvalue != null">
+                fvalue,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="furl != null">
+                furl,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fid != null">
+                #{fid,jdbcType=INTEGER},
+            </if>
+            <if test="fkey != null">
+                #{fkey,jdbcType=VARCHAR},
+            </if>
+            <if test="ftype != null">
+                #{ftype,jdbcType=INTEGER},
+            </if>
+            <if test="fdescription != null">
+                #{fdescription,jdbcType=VARCHAR},
+            </if>
+            <if test="fvalue != null">
+                #{fvalue,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="furl != null">
+                #{furl,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.Fsystemargs">
+        update f_systemargs
+        <set>
+            <if test="fkey != null">
+                fkey = #{fkey,jdbcType=VARCHAR},
+            </if>
+            <if test="ftype != null">
+                ftype = #{ftype,jdbcType=INTEGER},
+            </if>
+            <if test="fdescription != null">
+                fdescription = #{fdescription,jdbcType=VARCHAR},
+            </if>
+            <if test="fvalue != null">
+                fvalue = #{fvalue,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="furl != null">
+                furl = #{furl,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where fid = #{fid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.Fsystemargs">
+    update f_systemargs
+    set fkey = #{fkey,jdbcType=VARCHAR},
+      ftype = #{ftype,jdbcType=INTEGER},
+      fdescription = #{fdescription,jdbcType=VARCHAR},
+      fvalue = #{fvalue,jdbcType=VARCHAR},
+      version = #{version,jdbcType=INTEGER},
+      furl = #{furl,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

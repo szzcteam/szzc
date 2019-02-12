@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.me.szzc.dao.FsecurityMapper">
+	<resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.Fsecurity">
+		<id column="fid" property="fid" jdbcType="INTEGER" />
+		<result column="fdescription" property="fdescription" jdbcType="VARCHAR" />
+		<result column="fname" property="fname" jdbcType="VARCHAR" />
+		<result column="fpriority" property="fpriority" jdbcType="INTEGER" />
+		<result column="fparentid" property="fparentid" jdbcType="INTEGER" />
+		<result column="furl" property="furl" jdbcType="VARCHAR" />
+		<collection property="fsecurities" ofType="com.me.szzc.pojo.entity.Fsecurity" column="fid" select="com.me.szzc.dao.FsecurityMapper.selectByParentid" />
+	</resultMap>
+
+    <resultMap id="BaseResultMap1" type="com.me.szzc.pojo.entity.Fsecurity">
+        <id column="fid" property="fid" jdbcType="INTEGER" />
+        <result column="fdescription" property="fdescription" jdbcType="VARCHAR" />
+        <result column="fname" property="fname" jdbcType="VARCHAR" />
+        <result column="fpriority" property="fpriority" jdbcType="INTEGER" />
+        <result column="fparentid" property="fparentid" jdbcType="INTEGER" />
+        <result column="furl" property="furl" jdbcType="VARCHAR" />
+        <result column="roleId" property="roleId" />
+        <collection property="fsecurities" ofType="com.me.szzc.pojo.entity.Fsecurity" column="fid" select="com.me.szzc.dao.FsecurityMapper.selectByParentid" />
+        <collection property="froleSecurities" ofType="com.me.szzc.pojo.entity.Fsecurity" column="{fparentid=fid,froleid=roleId}" select="com.me.szzc.dao.FsecurityMapper.selectByParentidAndRole" />
+    </resultMap>
+
+	<sql id="SecurityColumn">fid, fdescription, fname, fpriority, fparentid, furl</sql>
+
+
+	<select id="selectByParentid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select <include refid="SecurityColumn" />
+		from f_security
+		where fparentid = #{fparentid}
+	</select>
+
+	<select id="selectByParentidAndRole" resultMap="BaseResultMap1" parameterType="java.util.Map">
+		select <include refid="SecurityColumn" />
+		<if test="froleid != null">,if(#{froleid} is null,null,#{froleid}) as roleId</if>
+		from f_security WHERE
+		<if test="froleid != null">
+			fid in
+			(
+			SELECT fsecurityid FROM `f_role_security` WHERE froleid=#{froleid}
+			)
+			AND
+		</if>
+		fparentid = #{fparentid}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from f_security
+		where fid = #{fid}
+	</delete>
+
+	<select id="getSecurityByPid" resultType="com.me.szzc.pojo.entity.Fsecurity" parameterType="java.util.Map" >
+		select <include refid="SecurityColumn" />
+		from f_security
+		where 1=1
+		<if test="keyword != null">
+		   and fname like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+		</if>
+		and fparentid = #{fparentid}
+		order by ${orderField} ${orderDirection}
+		limit ${offset},${limit}
+	</select>
+
+	<select id="countSecurityByPid" resultType="java.lang.Integer" parameterType="java.util.Map">
+		select count(fid)
+		from f_security
+		where 1=1
+		<if test="keyword != null">
+		   and fname like concat('%',#{keyword,jdbcType=VARCHAR},'%')
+		</if>
+		and fparentid = #{fparentid}
+	</select>
+
+
+	<select id="selectByPrimaryKeyAndRole" resultMap="BaseResultMap1"
+			parameterType="java.util.Map">
+		select <include refid="SecurityColumn" />
+		<if test="froleid != null">,if(#{froleid} is null,null,#{froleid}) as roleId</if>
+		from f_security
+		where fid = #{fid}
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select <include refid="SecurityColumn" />
+		from f_security
+		where fid = #{fid}
+	</select>
+
+	<insert id="insert" parameterType="com.me.szzc.pojo.entity.Fsecurity" keyProperty="fid">
+		insert into f_security (
+			fdescription,
+			fname,
+			fpriority,
+			fparentid,
+			furl
+		)values (
+		    #{fdescription,jdbcType=VARCHAR},
+			#{fname,jdbcType=VARCHAR},
+			#{fpriority,jdbcType=INTEGER},
+			#{fparentid,jdbcType=INTEGER},
+			#{furl,jdbcType=VARCHAR} )
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.Fsecurity">
+		update f_security
+		set fdescription = #{fdescription,jdbcType=VARCHAR},
+		fname = #{fname,jdbcType=VARCHAR},
+		fpriority = #{fpriority,jdbcType=INTEGER},
+		fparentid = #{fparentid,jdbcType=INTEGER},
+		furl = #{furl,jdbcType=VARCHAR}
+		where fid = #{fid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select <include refid="SecurityColumn" />
+		from f_security
+	</select>
+
+	<select id="selectByProperty" resultMap="BaseResultMap" parameterType="com.me.szzc.pojo.entity.Fsecurity">
+		select <include refid="SecurityColumn" />
+		from f_security
+		where 1=1
+
+	</select>
+
+	<select id="findFSecurityList" resultMap="BaseResultMap">
+		select <include refid="SecurityColumn" />
+		from f_security where fid in (select fsecurityid from f_role_security
+		where froleid = #{froleid})
+	</select>
+	<select id="getSecurityByTree" resultMap="BaseResultMap">
+		select <include refid="SecurityColumn" />
+		from f_security where FIND_IN_SET(fid, queryChildrenInfo(1));
+	</select>
+</mapper>

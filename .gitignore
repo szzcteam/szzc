@@ -1,0 +1,13 @@
+*.DS_Store
+
+*.iml
+*.project
+*.classpath
+*.txt
+
+*.settings/
+.idea/
+target/
+bin/
+overlays/
+/.metadata/
