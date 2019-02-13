@@ -2,6 +2,7 @@ package com.me.szzc.dao;
 
 
 import com.me.szzc.pojo.entity.Frole;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public interface FroleMapper {
     /**
      * 根据主键id查询角色
      */
-    Frole selectByPrimaryKey(Integer fid);
+    Frole selectByPrimaryKey(Long fid);
 
     /**
      * 查询所以角色
@@ -41,4 +42,10 @@ public interface FroleMapper {
     int checkRole(String fname);
 
     int delete(int fid);
+
+    List<Frole> list(@Param("firstResult") int firstResult, @Param("maxResults")int maxResults,
+                     @Param("filter") String filter, @Param("isFY") boolean isFY);
+
+
+    Integer getAllCount(@Param("filter") String filter);
 }

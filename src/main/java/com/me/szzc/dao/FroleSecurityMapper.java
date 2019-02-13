@@ -15,13 +15,13 @@ public interface FroleSecurityMapper {
     /**
      * 删除角色的权限信息
      */
-    int deleteByRoleId(Integer roleId);
+    int deleteByRoleId(Long roleId);
 
-    int deleteById(Integer fid);
+    int deleteById(Long fid);
 
-    FroleSecurity findById(Integer fid);
+    FroleSecurity findById(Long fid);
     
-    List<FroleSecurity> selectByRoleId(Integer roleId);
+    List<FroleSecurity> selectByRoleId(Long roleId);
 
     List<FroleSecurity> findAll();
 

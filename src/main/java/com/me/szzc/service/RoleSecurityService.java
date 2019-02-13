@@ -14,7 +14,7 @@ public class RoleSecurityService {
 	@Autowired
 	private FroleSecurityMapper froleSecurityMapper;
 
-	public FroleSecurity findById(int id) {
+	public FroleSecurity findById(Long id) {
 		return this.froleSecurityMapper.findById(id);
 	}
 
@@ -24,7 +24,7 @@ public class RoleSecurityService {
 		this.froleSecurityMapper.insert(list);
 	}
 
-	public void deleteObj(int id) {
+	public void deleteObj(Long id) {
 		this.froleSecurityMapper.deleteById(id);
 
 
@@ -49,7 +49,7 @@ public class RoleSecurityService {
 		return this.froleSecurityMapper.findAll();
 	}
 	
-	public void deleteByRoleId(int roleId) {
+	public void deleteByRoleId(Long roleId) {
 		this.froleSecurityMapper.deleteByRoleId(roleId);
 	}
 }

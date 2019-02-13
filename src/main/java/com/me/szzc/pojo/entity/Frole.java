@@ -13,7 +13,7 @@ public class Frole implements java.io.Serializable {
 
 	// Fields
 
-	private Integer fid;
+	private Long fid;
 	private String fdescription;
 	private String fname;
 

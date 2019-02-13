@@ -1,10 +1,7 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.init.ConstantMap;
-import com.me.szzc.service.AdminService;
-import com.me.szzc.service.RoleService;
-import com.me.szzc.service.SecurityService;
-import com.me.szzc.service.WebBaseInfoService;
+import com.me.szzc.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -28,5 +25,11 @@ public class BaseServiceCtrl {
 
     @Autowired
     SecurityService securityService;
+
+    @Autowired
+    RoleSecurityService roleSecurityService;
+
+    @Autowired
+    SysLogService sysLogService;
 
 }

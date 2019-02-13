@@ -40,4 +40,8 @@ public class SysLogService {
 			String filter,boolean isFY) {
 		return this.fsystemoperatorlogMapper.list(null);
 	}
+
+	public Integer getAllCount(String filter) {
+		return this.fsystemoperatorlogMapper.getAllCount(filter);
+	}
 }

@@ -13,7 +13,7 @@ public class RoleService {
 	@Autowired
 	private FroleMapper froleMapper;
 
-	public Frole findById(int id) {
+	public Frole findById(Long id) {
 		Frole role = this.froleMapper.selectByPrimaryKey(id);
 		return role;
 	}
@@ -43,7 +43,12 @@ public class RoleService {
 
 	public List<Frole> list(int firstResult, int maxResults,
 			String filter,boolean isFY) {
-		//TODO  待处理
-		return this.froleMapper.selectAll();
+		return this.froleMapper.list(firstResult, maxResults, filter, isFY);
 	}
+
+	public Integer getAllCount(String filter) {
+		return this.froleMapper.getAllCount(filter);
+	}
+
+
 }

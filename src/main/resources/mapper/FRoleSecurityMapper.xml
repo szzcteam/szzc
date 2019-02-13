@@ -8,16 +8,16 @@
         <collection property="fsecurity" ofType="com.me.szzc.pojo.entity.Fsecurity" column="fid" select="com.me.szzc.dao.FsecurityMapper.selectByPrimaryKey" />
     </resultMap>
 
-    <delete id="deleteByRoleId" parameterType="java.lang.Integer">
+    <delete id="deleteByRoleId" parameterType="java.lang.Long">
     delete from f_role_security
     where froleid = #{froleid,jdbcType=INTEGER}
   </delete>
 
-    <delete id="deleteById" parameterType="java.lang.Integer">
+    <delete id="deleteById" parameterType="java.lang.Long">
      delete from f_role_security where fid = #{fid}
   </delete>
 
-    <select id="findById" parameterType="java.lang.Integer" resultType="com.me.szzc.pojo.entity.FroleSecurity">
+    <select id="findById" parameterType="java.lang.Long" resultType="com.me.szzc.pojo.entity.FroleSecurity">
     select fid, fsecurityid, froleid
   	from f_role_security
   	where fid = #{froleid,jdbcType=INTEGER}
@@ -31,7 +31,7 @@
         </foreach>
     </insert>
 
-    <select id="selectByRoleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
   	select fid, fsecurityid, froleid
   	from f_role_security
   	where froleid = #{froleid,jdbcType=INTEGER}
