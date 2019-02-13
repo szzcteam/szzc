@@ -39,7 +39,10 @@ public class SecurityService {
 
 	public List<Fsecurity> list(int firstResult, int maxResults,
 			String filter,boolean isFY) {
-		//TODO  分页待处理
-		return this.fsecurityMapper.selectAll();
+		return this.fsecurityMapper.list(firstResult, maxResults, filter, isFY);
+	}
+
+	public Integer getAllCount(String filter) {
+		return this.fsecurityMapper.getAllCount(filter);
 	}
 }

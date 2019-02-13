@@ -31,6 +31,12 @@ public interface FsecurityMapper {
 	 */
 	List<Fsecurity> selectAll();
 
+	List<Fsecurity> list(@Param("firstResult") int firstResult, @Param("maxResults")int maxResults,
+						 @Param("filter") String filter, @Param("isFY") boolean isFY);
+
+	Integer getAllCount(@Param("filter") String filter);
+
+
 	List<Fsecurity> selectByProperty(Fsecurity obj);
 
 	/**

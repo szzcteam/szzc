@@ -118,6 +118,25 @@
 		from f_security
 	</select>
 
+	<select id="list" resultMap="BaseResultMap">
+		select <include refid="SecurityColumn" />
+		from f_security
+		<if test="filter != null">
+			${filter}
+		</if>
+		<if test="isFY != null and isFY = true ">
+			limit ${firstResult}, ${maxResults}
+		</if>
+	</select>
+
+
+	<select id="getAllCount" resultType="java.lang.Integer">
+		select count(1) from f_security
+		<if test="filter != null">
+			${filter}
+		</if>
+	</select>
+
 	<select id="selectByProperty" resultMap="BaseResultMap" parameterType="com.me.szzc.pojo.entity.Fsecurity">
 		select <include refid="SecurityColumn" />
 		from f_security
