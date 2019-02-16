@@ -138,7 +138,7 @@
     delete from t_notice
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.abtnetworks.totems.policy.domain.Notice">
+  <insert id="insert" parameterType="com.me.szzc.pojo.entity.Notice">
     insert into t_notice (id, card_no, project_name, 
       years, months, days, 
       house_owner, lessee, phone, 
@@ -218,7 +218,7 @@
       #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.abtnetworks.totems.policy.domain.Notice">
+  <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.Notice">
     insert into t_notice
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -843,7 +843,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.abtnetworks.totems.policy.domain.Notice">
+  <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.Notice">
     update t_notice
     <set>
       <if test="cardNo != null">
@@ -1155,7 +1155,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.abtnetworks.totems.policy.domain.Notice">
+  <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.Notice">
     update t_notice
     set card_no = #{cardNo,jdbcType=VARCHAR},
       project_name = #{projectName,jdbcType=VARCHAR},

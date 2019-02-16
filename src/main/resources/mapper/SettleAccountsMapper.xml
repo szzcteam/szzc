@@ -145,7 +145,7 @@
     delete from t_settle_accounts
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+  <insert id="insert" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     insert into t_settle_accounts (id, card_no, house_owner, 
       lessee, phone, lessee_phone, 
       use, check_in_area, in_area, 
@@ -227,7 +227,7 @@
       #{receiveMoney8,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
       #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+  <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     insert into t_settle_accounts
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -882,12 +882,12 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+  <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     update t_settle_accounts
     <set>
       <if test="cardNo != null">
         card_no = #{cardNo,jdbcType=VARCHAR},
-      </if>
+      </if>com.me.szzc.pojo.entity.SettleAccounts
       <if test="houseOwner != null">
         house_owner = #{houseOwner,jdbcType=VARCHAR},
       </if>
@@ -1209,7 +1209,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+  <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     update t_settle_accounts
     set card_no = #{cardNo,jdbcType=VARCHAR},
       house_owner = #{houseOwner,jdbcType=VARCHAR},

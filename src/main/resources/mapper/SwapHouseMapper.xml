@@ -89,7 +89,7 @@
     delete from t_swap_house
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.abtnetworks.totems.policy.domain.SwapHouse">
+  <insert id="insert" parameterType="com.me.szzc.pojo.entity.SwapHouse">
     insert into t_swap_house (id, card_no, mng_office, 
       company, house_owner, recompense_plan, 
       address, house_owner_number, public_owner_number, 
@@ -135,7 +135,7 @@
       #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, 
       #{modifiedUserId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.abtnetworks.totems.policy.domain.SwapHouse">
+  <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.SwapHouse">
     insert into t_swap_house
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -520,7 +520,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.abtnetworks.totems.policy.domain.SwapHouse">
+  <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.SwapHouse">
     update t_swap_house
     <set>
       <if test="cardNo != null">
@@ -712,7 +712,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.abtnetworks.totems.policy.domain.SwapHouse">
+  <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.SwapHouse">
     update t_swap_house
     set card_no = #{cardNo,jdbcType=VARCHAR},
       mng_office = #{mngOffice,jdbcType=VARCHAR},

@@ -74,7 +74,7 @@
     delete from t_rmb_recompense
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.abtnetworks.totems.policy.domain.RmbRecompense">
+  <insert id="insert" parameterType="com.me.szzc.pojo.entity.RmbRecompense">
     insert into t_rmb_recompense (id, card_no, mng_office, 
       company, house_owner, recompense_plan, 
       address, house_owner_number, public_owner_number, 
@@ -112,7 +112,7 @@
       #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.abtnetworks.totems.policy.domain.RmbRecompense">
+  <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.RmbRecompense">
     insert into t_rmb_recompense
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -419,7 +419,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.abtnetworks.totems.policy.domain.RmbRecompense">
+  <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.RmbRecompense">
     update t_rmb_recompense
     <set>
       <if test="cardNo != null">
@@ -572,7 +572,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.abtnetworks.totems.policy.domain.RmbRecompense">
+  <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.RmbRecompense">
     update t_rmb_recompense
     set card_no = #{cardNo,jdbcType=VARCHAR},
       mng_office = #{mngOffice,jdbcType=VARCHAR},
