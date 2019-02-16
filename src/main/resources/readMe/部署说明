@@ -1,0 +1,10 @@
+
+
+1、配置好tomcat之后，需要在VM options中配置如下参数：
+-Duser.timezone=GMT+8
+-Duser.language=zh
+-Duser.country=CN
+-DMFR_ENVFILE="file:D:\config\szzc\server.properties"
+-Dlogback.configurationFile="file:D:\config\szzc\logback.xml"
+
+将上述properties和logback.xml 指向个人配置文件路径即可，2份配置文件详情参考readMe下的同名文件
