@@ -111,6 +111,7 @@ public class AdminController extends BaseController {
 		}
 		Fadmin fadmin = new Fadmin();
 		fadmin.setFname(fname);
+
 		fadmin.setFtelephone(fTelephone);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
 		String dateString = sdf.format(new java.util.Date());
