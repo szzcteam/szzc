@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/notice")
-public class NoticeContrller extends BaseController {
+public class NoticeController extends BaseController {
 
     @RequestMapping("ssadmin/add")
     public ModelAndView saveNotice(@RequestBody Notice notice) throws Exception{
