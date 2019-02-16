@@ -38,4 +38,7 @@ public class BaseServiceCtrl {
     @Autowired
     SwapHouseService swapHouseService;
 
+    @Autowired
+    NoticeService noticeService;
+
 }
