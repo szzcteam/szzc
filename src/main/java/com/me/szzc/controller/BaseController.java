@@ -1,5 +1,7 @@
 package com.me.szzc.controller;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -58,5 +60,18 @@ public class BaseController extends BaseServiceCtrl{
     public HttpSession getSession(HttpServletRequest request){
         return request.getSession() ;
     }
+
+
+    /**此方法会在每个controller前执行**/
+    @ModelAttribute
+    public void addConstant(HttpServletRequest request){
+        //前端常量
+        request.setAttribute("constant", constantMap.getMap()) ;
+        String ossURL = "";
+        //静态文件在项目里面，无需配置全局oss_url
+        request.setAttribute("oss_url", ossURL) ;
+
+    }
+
 
 }

@@ -40,10 +40,14 @@ public class SystemArgsService {
 
 	public List<Fsystemargs> list(int firstResult, int maxResults,
 			String filter,boolean isFY) {
-		//TODO  待分页处理
-		return this.fsystemargsMapper.selectAll();
+		return this.fsystemargsMapper.list(firstResult, maxResults, filter, isFY);
 	}
-	
+
+
+	public Integer getAllCount(String filter) {
+		return this.fsystemargsMapper.getAllCount(filter);
+	}
+
 	public String getValue(String key){
 		String ret = "" ;
 		Fsystemargs record = new Fsystemargs();

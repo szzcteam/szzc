@@ -37,8 +37,8 @@
       fdescription, fcopyRights, fbeianInfo, 
       fsystemMail, version)
     values (#{fid,jdbcType=INTEGER}, #{ftitle,jdbcType=VARCHAR}, #{fkeywords,jdbcType=VARCHAR}, 
-      #{fdescription,jdbcType=VARCHAR}, #{fcopyrights,jdbcType=VARCHAR}, #{fbeianinfo,jdbcType=VARCHAR}, 
-      #{fsystemmail,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER})
+      #{fdescription,jdbcType=VARCHAR}, #{fcopyRights,jdbcType=VARCHAR}, #{fbeianInfo,jdbcType=VARCHAR},
+      #{fsystemMail,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.Fwebbaseinfo">
     insert into f_webbaseinfo
@@ -55,13 +55,13 @@
       <if test="fdescription != null">
         fdescription,
       </if>
-      <if test="fcopyrights != null">
+      <if test="fcopyRights != null">
         fcopyRights,
       </if>
-      <if test="fbeianinfo != null">
+      <if test="fbeianInfo != null">
         fbeianInfo,
       </if>
-      <if test="fsystemmail != null">
+      <if test="fsystemMail != null">
         fsystemMail,
       </if>
       <if test="version != null">
@@ -81,14 +81,14 @@
       <if test="fdescription != null">
         #{fdescription,jdbcType=VARCHAR},
       </if>
-      <if test="fcopyrights != null">
-        #{fcopyrights,jdbcType=VARCHAR},
+      <if test="fcopyRights != null">
+        #{fcopyRights,jdbcType=VARCHAR},
       </if>
-      <if test="fbeianinfo != null">
-        #{fbeianinfo,jdbcType=VARCHAR},
+      <if test="fbeianInfo != null">
+        #{fbeianInfo,jdbcType=VARCHAR},
       </if>
-      <if test="fsystemmail != null">
-        #{fsystemmail,jdbcType=VARCHAR},
+      <if test="fsystemMail != null">
+        #{fsystemMail,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=INTEGER},
@@ -107,14 +107,14 @@
       <if test="fdescription != null">
         fdescription = #{fdescription,jdbcType=VARCHAR},
       </if>
-      <if test="fcopyrights != null">
-        fcopyRights = #{fcopyrights,jdbcType=VARCHAR},
+      <if test="fcopyRights != null">
+        fcopyRights = #{fcopyRights,jdbcType=VARCHAR},
       </if>
-      <if test="fbeianinfo != null">
-        fbeianInfo = #{fbeianinfo,jdbcType=VARCHAR},
+      <if test="fbeianInfo != null">
+        fbeianInfo = #{fbeianInfo,jdbcType=VARCHAR},
       </if>
-      <if test="fsystemmail != null">
-        fsystemMail = #{fsystemmail,jdbcType=VARCHAR},
+      <if test="fsystemMail != null">
+        fsystemMail = #{fsystemMail,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=INTEGER},
@@ -127,9 +127,9 @@
     set ftitle = #{ftitle,jdbcType=VARCHAR},
       fkeywords = #{fkeywords,jdbcType=VARCHAR},
       fdescription = #{fdescription,jdbcType=VARCHAR},
-      fcopyRights = #{fcopyrights,jdbcType=VARCHAR},
-      fbeianInfo = #{fbeianinfo,jdbcType=VARCHAR},
-      fsystemMail = #{fsystemmail,jdbcType=VARCHAR},
+      fcopyRights = #{fcopyRights,jdbcType=VARCHAR},
+      fbeianInfo = #{fbeianInfo,jdbcType=VARCHAR},
+      fsystemMail = #{fsystemMail,jdbcType=VARCHAR},
       version = #{version,jdbcType=INTEGER}
     where fid = #{fid,jdbcType=INTEGER}
   </update>

@@ -32,4 +32,7 @@ public class BaseServiceCtrl {
     @Autowired
     SysLogService sysLogService;
 
+    @Autowired
+    SystemArgsService systemArgsService;
+
 }

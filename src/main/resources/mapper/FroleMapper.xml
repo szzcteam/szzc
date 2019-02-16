@@ -36,18 +36,18 @@
     </update>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-    select fid, fdescription, fname
+    select <include refid="RoleColumn" />
     from f_role
     where fid = #{fid,jdbcType=INTEGER} AND fstatus=1
   </select>
 
     <select id="selectAll" resultMap="BaseResultMap">
-    select fid, fdescription, fname
+    select <include refid="RoleColumn" />
     from f_role where fstatus=1
   </select>
 
     <select id="selectRolePageList" resultType="com.me.szzc.pojo.entity.Frole" parameterType="java.util.Map">
-        select fid, fdescription, fname
+        select <include refid="RoleColumn" />
         from f_role
         where fstatus=1
         <if test="fname != null">

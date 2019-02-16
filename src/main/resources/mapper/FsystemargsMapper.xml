@@ -26,6 +26,28 @@
         from f_systemargs
     </select>
 
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_systemargs
+        <if test="filter != null">
+            ${filter}
+        </if>
+        <if test="isFY != null and isFY = true ">
+            limit ${firstResult}, ${maxResults}
+        </if>
+    </select>
+
+
+    <select id="getAllCount" resultType="java.lang.Integer">
+        select count(1) from f_systemargs
+        <if test="filter != null">
+            ${filter}
+        </if>
+    </select>
+
+
     <select id="selectByProperty" resultMap="BaseResultMap" parameterType="com.me.szzc.pojo.entity.Fsystemargs">
         select
         <include refid="Base_Column_List"/>
