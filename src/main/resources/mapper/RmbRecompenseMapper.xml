@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.abtnetworks.totems.policy.dao.mysql.RmbRecompenseMapper">
-  <resultMap id="BaseResultMap" type="com.abtnetworks.totems.policy.domain.RmbRecompense">
+<mapper namespace="com.me.szzc.dao.RmbRecompenseMapper">
+  <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.RmbRecompense">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
     <result column="mng_office" jdbcType="VARCHAR" property="mngOffice" />
