@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abtnetworks.totems.policy.dao.mysql.SettleAccountsMapper">
+  <resultMap id="BaseResultMap" type="com.abtnetworks.totems.policy.domain.SettleAccounts">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
+    <result column="house_owner" jdbcType="VARCHAR" property="houseOwner" />
+    <result column="lessee" jdbcType="VARCHAR" property="lessee" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="lessee_phone" jdbcType="VARCHAR" property="lesseePhone" />
+    <result column="use" jdbcType="VARCHAR" property="use" />
+    <result column="check_in_area" jdbcType="DECIMAL" property="checkInArea" />
+    <result column="in_area" jdbcType="DECIMAL" property="inArea" />
+    <result column="assess_price" jdbcType="DECIMAL" property="assessPrice" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="calc_value_compensate" jdbcType="VARCHAR" property="calcValueCompensate" />
+    <result column="value_compensate" jdbcType="DECIMAL" property="valueCompensate" />
+    <result column="value_compensate_bz" jdbcType="VARCHAR" property="valueCompensateBz" />
+    <result column="calc_decoration_compensate" jdbcType="VARCHAR" property="calcDecorationCompensate" />
+    <result column="decoration_compensate" jdbcType="DECIMAL" property="decorationCompensate" />
+    <result column="decoration_compensate_bz" jdbcType="VARCHAR" property="decorationCompensateBz" />
+    <result column="calc_move_house_fee" jdbcType="VARCHAR" property="calcMoveHouseFee" />
+    <result column="move_house_fee" jdbcType="DECIMAL" property="moveHouseFee" />
+    <result column="move_house_fee_bz" jdbcType="VARCHAR" property="moveHouseFeeBz" />
+    <result column="calc_interim_fee" jdbcType="VARCHAR" property="calcInterimFee" />
+    <result column="interim_fee" jdbcType="DECIMAL" property="interimFee" />
+    <result column="interim_fee_bz" jdbcType="VARCHAR" property="interimFeeBz" />
+    <result column="calc_move_water meter_fee" jdbcType="VARCHAR" property="calcMoveWaterMeterFee" />
+    <result column="move_water meter_fee" jdbcType="DECIMAL" property="moveWaterMeterFee" />
+    <result column="move_water meter_fee_bz" jdbcType="VARCHAR" property="moveWaterMeterFeeBz" />
+    <result column="calc_move_ammeter_fee" jdbcType="VARCHAR" property="calcMoveAmmeterFee" />
+    <result column="move_ammeter_fee" jdbcType="DECIMAL" property="moveAmmeterFee" />
+    <result column="move_ammeter_fee_bz" jdbcType="VARCHAR" property="moveAmmeterFeeBz" />
+    <result column="calc_move_air_conditioning_fee" jdbcType="VARCHAR" property="calcMoveAirConditioningFee" />
+    <result column="move_air_conditioning_fee" jdbcType="DECIMAL" property="moveAirConditioningFee" />
+    <result column="move_air_conditioning_fee_bz" jdbcType="VARCHAR" property="moveAirConditioningFeeBz" />
+    <result column="calc_hot_water_compensate" jdbcType="VARCHAR" property="calcHotWaterCompensate" />
+    <result column="hot_water_compensate" jdbcType="DECIMAL" property="hotWaterCompensate" />
+    <result column="hot_water_compensate_bz" jdbcType="VARCHAR" property="hotWaterCompensateBz" />
+    <result column="calc_gas_fee" jdbcType="VARCHAR" property="calcGasFee" />
+    <result column="gas_fee" jdbcType="VARCHAR" property="gasFee" />
+    <result column="gas_fee_bz" jdbcType="VARCHAR" property="gasFeeBz" />
+    <result column="calc_structure_compensate" jdbcType="VARCHAR" property="calcStructureCompensate" />
+    <result column="structure_compensate" jdbcType="DECIMAL" property="structureCompensate" />
+    <result column="structure_compensate_bz" jdbcType="VARCHAR" property="structureCompensateBz" />
+    <result column="calc_affiliated_other" jdbcType="VARCHAR" property="calcAffiliatedOther" />
+    <result column="affiliated_other" jdbcType="DECIMAL" property="affiliatedOther" />
+    <result column="affiliated_other_bz" jdbcType="VARCHAR" property="affiliatedOtherBz" />
+    <result column="calc_no_check_compensate" jdbcType="VARCHAR" property="calcNoCheckCompensate" />
+    <result column="no_check_compensate" jdbcType="DECIMAL" property="noCheckCompensate" />
+    <result column="no_check_compensate_bz" jdbcType="VARCHAR" property="noCheckCompensateBz" />
+    <result column="calc_rmb_compensate" jdbcType="VARCHAR" property="calcRmbCompensate" />
+    <result column="rmb_compensate" jdbcType="DECIMAL" property="rmbCompensate" />
+    <result column="rmb_compensate_bz" jdbcType="VARCHAR" property="rmbCompensateBz" />
+    <result column="calc_life_compensate" jdbcType="VARCHAR" property="calcLifeCompensate" />
+    <result column="life_compensate" jdbcType="DECIMAL" property="lifeCompensate" />
+    <result column="life_compensate_bz" jdbcType="VARCHAR" property="lifeCompensateBz" />
+    <result column="calc_change_compensate" jdbcType="VARCHAR" property="calcChangeCompensate" />
+    <result column="change_compensate" jdbcType="DECIMAL" property="changeCompensate" />
+    <result column="change_compensate_bz" jdbcType="VARCHAR" property="changeCompensateBz" />
+    <result column="calc_building_area_fee" jdbcType="VARCHAR" property="calcBuildingAreaFee" />
+    <result column="building_area_fee" jdbcType="DECIMAL" property="buildingAreaFee" />
+    <result column="building_area_fee_bz" jdbcType="VARCHAR" property="buildingAreaFeeBz" />
+    <result column="calc_suspend_business_fee" jdbcType="VARCHAR" property="calcSuspendBusinessFee" />
+    <result column="suspend_business_fee" jdbcType="DECIMAL" property="suspendBusinessFee" />
+    <result column="suspend_business_fee_bz" jdbcType="VARCHAR" property="suspendBusinessFeeBz" />
+    <result column="calc_no_move_compensate" jdbcType="VARCHAR" property="calcNoMoveCompensate" />
+    <result column="no_move_compensate" jdbcType="DECIMAL" property="noMoveCompensate" />
+    <result column="no_move_compensate_bz" jdbcType="VARCHAR" property="noMoveCompensateBz" />
+    <result column="calc_move_reward" jdbcType="VARCHAR" property="calcMoveReward" />
+    <result column="move_reward" jdbcType="DECIMAL" property="moveReward" />
+    <result column="move_reward_bz" jdbcType="VARCHAR" property="moveRewardBz" />
+    <result column="calc_rmb_move_reward" jdbcType="VARCHAR" property="calcRmbMoveReward" />
+    <result column="rmb_move_reward" jdbcType="DECIMAL" property="rmbMoveReward" />
+    <result column="rmb_move_reward_bz" jdbcType="VARCHAR" property="rmbMoveRewardBz" />
+    <result column="calc_small_area _reward" jdbcType="VARCHAR" property="calcSmallAreaReward" />
+    <result column="small_area _reward" jdbcType="DECIMAL" property="smallAreaReward" />
+    <result column="small_area _reward_bz" jdbcType="VARCHAR" property="smallAreaRewardBz" />
+    <result column="calc_other" jdbcType="VARCHAR" property="calcOther" />
+    <result column="other_rmb" jdbcType="DECIMAL" property="otherRmb" />
+    <result column="other_bz" jdbcType="VARCHAR" property="otherBz" />
+    <result column="calc_sum_compensate" jdbcType="VARCHAR" property="calcSumCompensate" />
+    <result column="sum_compensate" jdbcType="DECIMAL" property="sumCompensate" />
+    <result column="sum_compensate_bz" jdbcType="VARCHAR" property="sumCompensateBz" />
+    <result column="change_area" jdbcType="DECIMAL" property="changeArea" />
+    <result column="calcm" jdbcType="DECIMAL" property="calcm" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="deduction" jdbcType="DECIMAL" property="deduction" />
+    <result column="calc_pay_total" jdbcType="VARCHAR" property="calcPayTotal" />
+    <result column="pay_total" jdbcType="DECIMAL" property="payTotal" />
+    <result column="pay_total_bz" jdbcType="VARCHAR" property="payTotalBz" />
+    <result column="receive_total" jdbcType="DECIMAL" property="receiveTotal" />
+    <result column="pay_money1" jdbcType="VARCHAR" property="payMoney1" />
+    <result column="pay_money2" jdbcType="VARCHAR" property="payMoney2" />
+    <result column="pay_money3" jdbcType="VARCHAR" property="payMoney3" />
+    <result column="pay_money4" jdbcType="VARCHAR" property="payMoney4" />
+    <result column="pay_money5" jdbcType="VARCHAR" property="payMoney5" />
+    <result column="pay_money6" jdbcType="VARCHAR" property="payMoney6" />
+    <result column="pay_money7" jdbcType="VARCHAR" property="payMoney7" />
+    <result column="pay_money8" jdbcType="VARCHAR" property="payMoney8" />
+    <result column="receive_money1" jdbcType="VARCHAR" property="receiveMoney1" />
+    <result column="receive_money2" jdbcType="VARCHAR" property="receiveMoney2" />
+    <result column="receive_money3" jdbcType="VARCHAR" property="receiveMoney3" />
+    <result column="receive_money4" jdbcType="VARCHAR" property="receiveMoney4" />
+    <result column="receive_money5" jdbcType="VARCHAR" property="receiveMoney5" />
+    <result column="receive_money6" jdbcType="VARCHAR" property="receiveMoney6" />
+    <result column="receive_money7" jdbcType="VARCHAR" property="receiveMoney7" />
+    <result column="receive_money8" jdbcType="VARCHAR" property="receiveMoney8" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
+    <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, card_no, house_owner, lessee, phone, lessee_phone, use, check_in_area, in_area, 
+    assess_price, address, calc_value_compensate, value_compensate, value_compensate_bz, 
+    calc_decoration_compensate, decoration_compensate, decoration_compensate_bz, calc_move_house_fee, 
+    move_house_fee, move_house_fee_bz, calc_interim_fee, interim_fee, interim_fee_bz, 
+    "calc_move_water meter_fee", "move_water meter_fee", "move_water meter_fee_bz", calc_move_ammeter_fee, 
+    move_ammeter_fee, move_ammeter_fee_bz, calc_move_air_conditioning_fee, move_air_conditioning_fee, 
+    move_air_conditioning_fee_bz, calc_hot_water_compensate, hot_water_compensate, hot_water_compensate_bz, 
+    calc_gas_fee, gas_fee, gas_fee_bz, calc_structure_compensate, structure_compensate, 
+    structure_compensate_bz, calc_affiliated_other, affiliated_other, affiliated_other_bz, 
+    calc_no_check_compensate, no_check_compensate, no_check_compensate_bz, calc_rmb_compensate, 
+    rmb_compensate, rmb_compensate_bz, calc_life_compensate, life_compensate, life_compensate_bz, 
+    calc_change_compensate, change_compensate, change_compensate_bz, calc_building_area_fee, 
+    building_area_fee, building_area_fee_bz, calc_suspend_business_fee, suspend_business_fee, 
+    suspend_business_fee_bz, calc_no_move_compensate, no_move_compensate, no_move_compensate_bz, 
+    calc_move_reward, move_reward, move_reward_bz, calc_rmb_move_reward, rmb_move_reward, 
+    rmb_move_reward_bz, "calc_small_area _reward", "small_area _reward", "small_area _reward_bz", 
+    calc_other, other_rmb, other_bz, calc_sum_compensate, sum_compensate, sum_compensate_bz, 
+    change_area, calcm, price, deduction, calc_pay_total, pay_total, pay_total_bz, receive_total, 
+    pay_money1, pay_money2, pay_money3, pay_money4, pay_money5, pay_money6, pay_money7, 
+    pay_money8, receive_money1, receive_money2, receive_money3, receive_money4, receive_money5, 
+    receive_money6, receive_money7, receive_money8, create_date, create_user_id, modified_date, 
+    modified_user_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_settle_accounts
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_settle_accounts
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+    insert into t_settle_accounts (id, card_no, house_owner, 
+      lessee, phone, lessee_phone, 
+      use, check_in_area, in_area, 
+      assess_price, address, calc_value_compensate, 
+      value_compensate, value_compensate_bz, calc_decoration_compensate, 
+      decoration_compensate, decoration_compensate_bz, 
+      calc_move_house_fee, move_house_fee, move_house_fee_bz, 
+      calc_interim_fee, interim_fee, interim_fee_bz, 
+      "calc_move_water meter_fee", "move_water meter_fee", 
+      "move_water meter_fee_bz", calc_move_ammeter_fee, 
+      move_ammeter_fee, move_ammeter_fee_bz, calc_move_air_conditioning_fee, 
+      move_air_conditioning_fee, move_air_conditioning_fee_bz, 
+      calc_hot_water_compensate, hot_water_compensate, 
+      hot_water_compensate_bz, calc_gas_fee, gas_fee, 
+      gas_fee_bz, calc_structure_compensate, structure_compensate, 
+      structure_compensate_bz, calc_affiliated_other, 
+      affiliated_other, affiliated_other_bz, calc_no_check_compensate, 
+      no_check_compensate, no_check_compensate_bz, 
+      calc_rmb_compensate, rmb_compensate, rmb_compensate_bz, 
+      calc_life_compensate, life_compensate, life_compensate_bz, 
+      calc_change_compensate, change_compensate, 
+      change_compensate_bz, calc_building_area_fee, 
+      building_area_fee, building_area_fee_bz, calc_suspend_business_fee, 
+      suspend_business_fee, suspend_business_fee_bz, 
+      calc_no_move_compensate, no_move_compensate, 
+      no_move_compensate_bz, calc_move_reward, move_reward, 
+      move_reward_bz, calc_rmb_move_reward, rmb_move_reward, 
+      rmb_move_reward_bz, "calc_small_area _reward", "small_area _reward", 
+      "small_area _reward_bz", calc_other, other_rmb, 
+      other_bz, calc_sum_compensate, sum_compensate, 
+      sum_compensate_bz, change_area, calcm, 
+      price, deduction, calc_pay_total, 
+      pay_total, pay_total_bz, receive_total, 
+      pay_money1, pay_money2, pay_money3, 
+      pay_money4, pay_money5, pay_money6, 
+      pay_money7, pay_money8, receive_money1, 
+      receive_money2, receive_money3, receive_money4, 
+      receive_money5, receive_money6, receive_money7, 
+      receive_money8, create_date, create_user_id, 
+      modified_date, modified_user_id)
+    values (#{id,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR}, 
+      #{lessee,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{lesseePhone,jdbcType=VARCHAR}, 
+      #{use,jdbcType=VARCHAR}, #{checkInArea,jdbcType=DECIMAL}, #{inArea,jdbcType=DECIMAL}, 
+      #{assessPrice,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, #{calcValueCompensate,jdbcType=VARCHAR}, 
+      #{valueCompensate,jdbcType=DECIMAL}, #{valueCompensateBz,jdbcType=VARCHAR}, #{calcDecorationCompensate,jdbcType=VARCHAR}, 
+      #{decorationCompensate,jdbcType=DECIMAL}, #{decorationCompensateBz,jdbcType=VARCHAR}, 
+      #{calcMoveHouseFee,jdbcType=VARCHAR}, #{moveHouseFee,jdbcType=DECIMAL}, #{moveHouseFeeBz,jdbcType=VARCHAR}, 
+      #{calcInterimFee,jdbcType=VARCHAR}, #{interimFee,jdbcType=DECIMAL}, #{interimFeeBz,jdbcType=VARCHAR}, 
+      #{calcMoveWaterMeterFee,jdbcType=VARCHAR}, #{moveWaterMeterFee,jdbcType=DECIMAL}, 
+      #{moveWaterMeterFeeBz,jdbcType=VARCHAR}, #{calcMoveAmmeterFee,jdbcType=VARCHAR}, 
+      #{moveAmmeterFee,jdbcType=DECIMAL}, #{moveAmmeterFeeBz,jdbcType=VARCHAR}, #{calcMoveAirConditioningFee,jdbcType=VARCHAR}, 
+      #{moveAirConditioningFee,jdbcType=DECIMAL}, #{moveAirConditioningFeeBz,jdbcType=VARCHAR}, 
+      #{calcHotWaterCompensate,jdbcType=VARCHAR}, #{hotWaterCompensate,jdbcType=DECIMAL}, 
+      #{hotWaterCompensateBz,jdbcType=VARCHAR}, #{calcGasFee,jdbcType=VARCHAR}, #{gasFee,jdbcType=VARCHAR}, 
+      #{gasFeeBz,jdbcType=VARCHAR}, #{calcStructureCompensate,jdbcType=VARCHAR}, #{structureCompensate,jdbcType=DECIMAL}, 
+      #{structureCompensateBz,jdbcType=VARCHAR}, #{calcAffiliatedOther,jdbcType=VARCHAR}, 
+      #{affiliatedOther,jdbcType=DECIMAL}, #{affiliatedOtherBz,jdbcType=VARCHAR}, #{calcNoCheckCompensate,jdbcType=VARCHAR}, 
+      #{noCheckCompensate,jdbcType=DECIMAL}, #{noCheckCompensateBz,jdbcType=VARCHAR}, 
+      #{calcRmbCompensate,jdbcType=VARCHAR}, #{rmbCompensate,jdbcType=DECIMAL}, #{rmbCompensateBz,jdbcType=VARCHAR}, 
+      #{calcLifeCompensate,jdbcType=VARCHAR}, #{lifeCompensate,jdbcType=DECIMAL}, #{lifeCompensateBz,jdbcType=VARCHAR}, 
+      #{calcChangeCompensate,jdbcType=VARCHAR}, #{changeCompensate,jdbcType=DECIMAL}, 
+      #{changeCompensateBz,jdbcType=VARCHAR}, #{calcBuildingAreaFee,jdbcType=VARCHAR}, 
+      #{buildingAreaFee,jdbcType=DECIMAL}, #{buildingAreaFeeBz,jdbcType=VARCHAR}, #{calcSuspendBusinessFee,jdbcType=VARCHAR}, 
+      #{suspendBusinessFee,jdbcType=DECIMAL}, #{suspendBusinessFeeBz,jdbcType=VARCHAR}, 
+      #{calcNoMoveCompensate,jdbcType=VARCHAR}, #{noMoveCompensate,jdbcType=DECIMAL}, 
+      #{noMoveCompensateBz,jdbcType=VARCHAR}, #{calcMoveReward,jdbcType=VARCHAR}, #{moveReward,jdbcType=DECIMAL}, 
+      #{moveRewardBz,jdbcType=VARCHAR}, #{calcRmbMoveReward,jdbcType=VARCHAR}, #{rmbMoveReward,jdbcType=DECIMAL}, 
+      #{rmbMoveRewardBz,jdbcType=VARCHAR}, #{calcSmallAreaReward,jdbcType=VARCHAR}, #{smallAreaReward,jdbcType=DECIMAL}, 
+      #{smallAreaRewardBz,jdbcType=VARCHAR}, #{calcOther,jdbcType=VARCHAR}, #{otherRmb,jdbcType=DECIMAL}, 
+      #{otherBz,jdbcType=VARCHAR}, #{calcSumCompensate,jdbcType=VARCHAR}, #{sumCompensate,jdbcType=DECIMAL}, 
+      #{sumCompensateBz,jdbcType=VARCHAR}, #{changeArea,jdbcType=DECIMAL}, #{calcm,jdbcType=DECIMAL}, 
+      #{price,jdbcType=DECIMAL}, #{deduction,jdbcType=DECIMAL}, #{calcPayTotal,jdbcType=VARCHAR}, 
+      #{payTotal,jdbcType=DECIMAL}, #{payTotalBz,jdbcType=VARCHAR}, #{receiveTotal,jdbcType=DECIMAL}, 
+      #{payMoney1,jdbcType=VARCHAR}, #{payMoney2,jdbcType=VARCHAR}, #{payMoney3,jdbcType=VARCHAR}, 
+      #{payMoney4,jdbcType=VARCHAR}, #{payMoney5,jdbcType=VARCHAR}, #{payMoney6,jdbcType=VARCHAR}, 
+      #{payMoney7,jdbcType=VARCHAR}, #{payMoney8,jdbcType=VARCHAR}, #{receiveMoney1,jdbcType=VARCHAR}, 
+      #{receiveMoney2,jdbcType=VARCHAR}, #{receiveMoney3,jdbcType=VARCHAR}, #{receiveMoney4,jdbcType=VARCHAR}, 
+      #{receiveMoney5,jdbcType=VARCHAR}, #{receiveMoney6,jdbcType=VARCHAR}, #{receiveMoney7,jdbcType=VARCHAR}, 
+      #{receiveMoney8,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
+      #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+    insert into t_settle_accounts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cardNo != null">
+        card_no,
+      </if>
+      <if test="houseOwner != null">
+        house_owner,
+      </if>
+      <if test="lessee != null">
+        lessee,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="lesseePhone != null">
+        lessee_phone,
+      </if>
+      <if test="use != null">
+        use,
+      </if>
+      <if test="checkInArea != null">
+        check_in_area,
+      </if>
+      <if test="inArea != null">
+        in_area,
+      </if>
+      <if test="assessPrice != null">
+        assess_price,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="calcValueCompensate != null">
+        calc_value_compensate,
+      </if>
+      <if test="valueCompensate != null">
+        value_compensate,
+      </if>
+      <if test="valueCompensateBz != null">
+        value_compensate_bz,
+      </if>
+      <if test="calcDecorationCompensate != null">
+        calc_decoration_compensate,
+      </if>
+      <if test="decorationCompensate != null">
+        decoration_compensate,
+      </if>
+      <if test="decorationCompensateBz != null">
+        decoration_compensate_bz,
+      </if>
+      <if test="calcMoveHouseFee != null">
+        calc_move_house_fee,
+      </if>
+      <if test="moveHouseFee != null">
+        move_house_fee,
+      </if>
+      <if test="moveHouseFeeBz != null">
+        move_house_fee_bz,
+      </if>
+      <if test="calcInterimFee != null">
+        calc_interim_fee,
+      </if>
+      <if test="interimFee != null">
+        interim_fee,
+      </if>
+      <if test="interimFeeBz != null">
+        interim_fee_bz,
+      </if>
+      <if test="calcMoveWaterMeterFee != null">
+        "calc_move_water meter_fee",
+      </if>
+      <if test="moveWaterMeterFee != null">
+        "move_water meter_fee",
+      </if>
+      <if test="moveWaterMeterFeeBz != null">
+        "move_water meter_fee_bz",
+      </if>
+      <if test="calcMoveAmmeterFee != null">
+        calc_move_ammeter_fee,
+      </if>
+      <if test="moveAmmeterFee != null">
+        move_ammeter_fee,
+      </if>
+      <if test="moveAmmeterFeeBz != null">
+        move_ammeter_fee_bz,
+      </if>
+      <if test="calcMoveAirConditioningFee != null">
+        calc_move_air_conditioning_fee,
+      </if>
+      <if test="moveAirConditioningFee != null">
+        move_air_conditioning_fee,
+      </if>
+      <if test="moveAirConditioningFeeBz != null">
+        move_air_conditioning_fee_bz,
+      </if>
+      <if test="calcHotWaterCompensate != null">
+        calc_hot_water_compensate,
+      </if>
+      <if test="hotWaterCompensate != null">
+        hot_water_compensate,
+      </if>
+      <if test="hotWaterCompensateBz != null">
+        hot_water_compensate_bz,
+      </if>
+      <if test="calcGasFee != null">
+        calc_gas_fee,
+      </if>
+      <if test="gasFee != null">
+        gas_fee,
+      </if>
+      <if test="gasFeeBz != null">
+        gas_fee_bz,
+      </if>
+      <if test="calcStructureCompensate != null">
+        calc_structure_compensate,
+      </if>
+      <if test="structureCompensate != null">
+        structure_compensate,
+      </if>
+      <if test="structureCompensateBz != null">
+        structure_compensate_bz,
+      </if>
+      <if test="calcAffiliatedOther != null">
+        calc_affiliated_other,
+      </if>
+      <if test="affiliatedOther != null">
+        affiliated_other,
+      </if>
+      <if test="affiliatedOtherBz != null">
+        affiliated_other_bz,
+      </if>
+      <if test="calcNoCheckCompensate != null">
+        calc_no_check_compensate,
+      </if>
+      <if test="noCheckCompensate != null">
+        no_check_compensate,
+      </if>
+      <if test="noCheckCompensateBz != null">
+        no_check_compensate_bz,
+      </if>
+      <if test="calcRmbCompensate != null">
+        calc_rmb_compensate,
+      </if>
+      <if test="rmbCompensate != null">
+        rmb_compensate,
+      </if>
+      <if test="rmbCompensateBz != null">
+        rmb_compensate_bz,
+      </if>
+      <if test="calcLifeCompensate != null">
+        calc_life_compensate,
+      </if>
+      <if test="lifeCompensate != null">
+        life_compensate,
+      </if>
+      <if test="lifeCompensateBz != null">
+        life_compensate_bz,
+      </if>
+      <if test="calcChangeCompensate != null">
+        calc_change_compensate,
+      </if>
+      <if test="changeCompensate != null">
+        change_compensate,
+      </if>
+      <if test="changeCompensateBz != null">
+        change_compensate_bz,
+      </if>
+      <if test="calcBuildingAreaFee != null">
+        calc_building_area_fee,
+      </if>
+      <if test="buildingAreaFee != null">
+        building_area_fee,
+      </if>
+      <if test="buildingAreaFeeBz != null">
+        building_area_fee_bz,
+      </if>
+      <if test="calcSuspendBusinessFee != null">
+        calc_suspend_business_fee,
+      </if>
+      <if test="suspendBusinessFee != null">
+        suspend_business_fee,
+      </if>
+      <if test="suspendBusinessFeeBz != null">
+        suspend_business_fee_bz,
+      </if>
+      <if test="calcNoMoveCompensate != null">
+        calc_no_move_compensate,
+      </if>
+      <if test="noMoveCompensate != null">
+        no_move_compensate,
+      </if>
+      <if test="noMoveCompensateBz != null">
+        no_move_compensate_bz,
+      </if>
+      <if test="calcMoveReward != null">
+        calc_move_reward,
+      </if>
+      <if test="moveReward != null">
+        move_reward,
+      </if>
+      <if test="moveRewardBz != null">
+        move_reward_bz,
+      </if>
+      <if test="calcRmbMoveReward != null">
+        calc_rmb_move_reward,
+      </if>
+      <if test="rmbMoveReward != null">
+        rmb_move_reward,
+      </if>
+      <if test="rmbMoveRewardBz != null">
+        rmb_move_reward_bz,
+      </if>
+      <if test="calcSmallAreaReward != null">
+        "calc_small_area _reward",
+      </if>
+      <if test="smallAreaReward != null">
+        "small_area _reward",
+      </if>
+      <if test="smallAreaRewardBz != null">
+        "small_area _reward_bz",
+      </if>
+      <if test="calcOther != null">
+        calc_other,
+      </if>
+      <if test="otherRmb != null">
+        other_rmb,
+      </if>
+      <if test="otherBz != null">
+        other_bz,
+      </if>
+      <if test="calcSumCompensate != null">
+        calc_sum_compensate,
+      </if>
+      <if test="sumCompensate != null">
+        sum_compensate,
+      </if>
+      <if test="sumCompensateBz != null">
+        sum_compensate_bz,
+      </if>
+      <if test="changeArea != null">
+        change_area,
+      </if>
+      <if test="calcm != null">
+        calcm,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="deduction != null">
+        deduction,
+      </if>
+      <if test="calcPayTotal != null">
+        calc_pay_total,
+      </if>
+      <if test="payTotal != null">
+        pay_total,
+      </if>
+      <if test="payTotalBz != null">
+        pay_total_bz,
+      </if>
+      <if test="receiveTotal != null">
+        receive_total,
+      </if>
+      <if test="payMoney1 != null">
+        pay_money1,
+      </if>
+      <if test="payMoney2 != null">
+        pay_money2,
+      </if>
+      <if test="payMoney3 != null">
+        pay_money3,
+      </if>
+      <if test="payMoney4 != null">
+        pay_money4,
+      </if>
+      <if test="payMoney5 != null">
+        pay_money5,
+      </if>
+      <if test="payMoney6 != null">
+        pay_money6,
+      </if>
+      <if test="payMoney7 != null">
+        pay_money7,
+      </if>
+      <if test="payMoney8 != null">
+        pay_money8,
+      </if>
+      <if test="receiveMoney1 != null">
+        receive_money1,
+      </if>
+      <if test="receiveMoney2 != null">
+        receive_money2,
+      </if>
+      <if test="receiveMoney3 != null">
+        receive_money3,
+      </if>
+      <if test="receiveMoney4 != null">
+        receive_money4,
+      </if>
+      <if test="receiveMoney5 != null">
+        receive_money5,
+      </if>
+      <if test="receiveMoney6 != null">
+        receive_money6,
+      </if>
+      <if test="receiveMoney7 != null">
+        receive_money7,
+      </if>
+      <if test="receiveMoney8 != null">
+        receive_money8,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="modifiedDate != null">
+        modified_date,
+      </if>
+      <if test="modifiedUserId != null">
+        modified_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cardNo != null">
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="houseOwner != null">
+        #{houseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="lessee != null">
+        #{lessee,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="lesseePhone != null">
+        #{lesseePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="use != null">
+        #{use,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInArea != null">
+        #{checkInArea,jdbcType=DECIMAL},
+      </if>
+      <if test="inArea != null">
+        #{inArea,jdbcType=DECIMAL},
+      </if>
+      <if test="assessPrice != null">
+        #{assessPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="calcValueCompensate != null">
+        #{calcValueCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="valueCompensate != null">
+        #{valueCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="valueCompensateBz != null">
+        #{valueCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcDecorationCompensate != null">
+        #{calcDecorationCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="decorationCompensate != null">
+        #{decorationCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="decorationCompensateBz != null">
+        #{decorationCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveHouseFee != null">
+        #{calcMoveHouseFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveHouseFee != null">
+        #{moveHouseFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveHouseFeeBz != null">
+        #{moveHouseFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcInterimFee != null">
+        #{calcInterimFee,jdbcType=VARCHAR},
+      </if>
+      <if test="interimFee != null">
+        #{interimFee,jdbcType=DECIMAL},
+      </if>
+      <if test="interimFeeBz != null">
+        #{interimFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveWaterMeterFee != null">
+        #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveWaterMeterFee != null">
+        #{moveWaterMeterFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveWaterMeterFeeBz != null">
+        #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveAmmeterFee != null">
+        #{calcMoveAmmeterFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveAmmeterFee != null">
+        #{moveAmmeterFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveAmmeterFeeBz != null">
+        #{moveAmmeterFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveAirConditioningFee != null">
+        #{calcMoveAirConditioningFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveAirConditioningFee != null">
+        #{moveAirConditioningFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveAirConditioningFeeBz != null">
+        #{moveAirConditioningFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcHotWaterCompensate != null">
+        #{calcHotWaterCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="hotWaterCompensate != null">
+        #{hotWaterCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="hotWaterCompensateBz != null">
+        #{hotWaterCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcGasFee != null">
+        #{calcGasFee,jdbcType=VARCHAR},
+      </if>
+      <if test="gasFee != null">
+        #{gasFee,jdbcType=VARCHAR},
+      </if>
+      <if test="gasFeeBz != null">
+        #{gasFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcStructureCompensate != null">
+        #{calcStructureCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="structureCompensate != null">
+        #{structureCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="structureCompensateBz != null">
+        #{structureCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcAffiliatedOther != null">
+        #{calcAffiliatedOther,jdbcType=VARCHAR},
+      </if>
+      <if test="affiliatedOther != null">
+        #{affiliatedOther,jdbcType=DECIMAL},
+      </if>
+      <if test="affiliatedOtherBz != null">
+        #{affiliatedOtherBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcNoCheckCompensate != null">
+        #{calcNoCheckCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="noCheckCompensate != null">
+        #{noCheckCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="noCheckCompensateBz != null">
+        #{noCheckCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcRmbCompensate != null">
+        #{calcRmbCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="rmbCompensate != null">
+        #{rmbCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="rmbCompensateBz != null">
+        #{rmbCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcLifeCompensate != null">
+        #{calcLifeCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeCompensate != null">
+        #{lifeCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="lifeCompensateBz != null">
+        #{lifeCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcChangeCompensate != null">
+        #{calcChangeCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="changeCompensate != null">
+        #{changeCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="changeCompensateBz != null">
+        #{changeCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcBuildingAreaFee != null">
+        #{calcBuildingAreaFee,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingAreaFee != null">
+        #{buildingAreaFee,jdbcType=DECIMAL},
+      </if>
+      <if test="buildingAreaFeeBz != null">
+        #{buildingAreaFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcSuspendBusinessFee != null">
+        #{calcSuspendBusinessFee,jdbcType=VARCHAR},
+      </if>
+      <if test="suspendBusinessFee != null">
+        #{suspendBusinessFee,jdbcType=DECIMAL},
+      </if>
+      <if test="suspendBusinessFeeBz != null">
+        #{suspendBusinessFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcNoMoveCompensate != null">
+        #{calcNoMoveCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="noMoveCompensate != null">
+        #{noMoveCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="noMoveCompensateBz != null">
+        #{noMoveCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveReward != null">
+        #{calcMoveReward,jdbcType=VARCHAR},
+      </if>
+      <if test="moveReward != null">
+        #{moveReward,jdbcType=DECIMAL},
+      </if>
+      <if test="moveRewardBz != null">
+        #{moveRewardBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcRmbMoveReward != null">
+        #{calcRmbMoveReward,jdbcType=VARCHAR},
+      </if>
+      <if test="rmbMoveReward != null">
+        #{rmbMoveReward,jdbcType=DECIMAL},
+      </if>
+      <if test="rmbMoveRewardBz != null">
+        #{rmbMoveRewardBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcSmallAreaReward != null">
+        #{calcSmallAreaReward,jdbcType=VARCHAR},
+      </if>
+      <if test="smallAreaReward != null">
+        #{smallAreaReward,jdbcType=DECIMAL},
+      </if>
+      <if test="smallAreaRewardBz != null">
+        #{smallAreaRewardBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcOther != null">
+        #{calcOther,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRmb != null">
+        #{otherRmb,jdbcType=DECIMAL},
+      </if>
+      <if test="otherBz != null">
+        #{otherBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcSumCompensate != null">
+        #{calcSumCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="sumCompensate != null">
+        #{sumCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCompensateBz != null">
+        #{sumCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="changeArea != null">
+        #{changeArea,jdbcType=DECIMAL},
+      </if>
+      <if test="calcm != null">
+        #{calcm,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="deduction != null">
+        #{deduction,jdbcType=DECIMAL},
+      </if>
+      <if test="calcPayTotal != null">
+        #{calcPayTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="payTotal != null">
+        #{payTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="payTotalBz != null">
+        #{payTotalBz,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTotal != null">
+        #{receiveTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="payMoney1 != null">
+        #{payMoney1,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney2 != null">
+        #{payMoney2,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney3 != null">
+        #{payMoney3,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney4 != null">
+        #{payMoney4,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney5 != null">
+        #{payMoney5,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney6 != null">
+        #{payMoney6,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney7 != null">
+        #{payMoney7,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney8 != null">
+        #{payMoney8,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney1 != null">
+        #{receiveMoney1,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney2 != null">
+        #{receiveMoney2,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney3 != null">
+        #{receiveMoney3,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney4 != null">
+        #{receiveMoney4,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney5 != null">
+        #{receiveMoney5,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney6 != null">
+        #{receiveMoney6,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney7 != null">
+        #{receiveMoney7,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney8 != null">
+        #{receiveMoney8,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedDate != null">
+        #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserId != null">
+        #{modifiedUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+    update t_settle_accounts
+    <set>
+      <if test="cardNo != null">
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="houseOwner != null">
+        house_owner = #{houseOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="lessee != null">
+        lessee = #{lessee,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="lesseePhone != null">
+        lessee_phone = #{lesseePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="use != null">
+        use = #{use,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInArea != null">
+        check_in_area = #{checkInArea,jdbcType=DECIMAL},
+      </if>
+      <if test="inArea != null">
+        in_area = #{inArea,jdbcType=DECIMAL},
+      </if>
+      <if test="assessPrice != null">
+        assess_price = #{assessPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="calcValueCompensate != null">
+        calc_value_compensate = #{calcValueCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="valueCompensate != null">
+        value_compensate = #{valueCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="valueCompensateBz != null">
+        value_compensate_bz = #{valueCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcDecorationCompensate != null">
+        calc_decoration_compensate = #{calcDecorationCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="decorationCompensate != null">
+        decoration_compensate = #{decorationCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="decorationCompensateBz != null">
+        decoration_compensate_bz = #{decorationCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveHouseFee != null">
+        calc_move_house_fee = #{calcMoveHouseFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveHouseFee != null">
+        move_house_fee = #{moveHouseFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveHouseFeeBz != null">
+        move_house_fee_bz = #{moveHouseFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcInterimFee != null">
+        calc_interim_fee = #{calcInterimFee,jdbcType=VARCHAR},
+      </if>
+      <if test="interimFee != null">
+        interim_fee = #{interimFee,jdbcType=DECIMAL},
+      </if>
+      <if test="interimFeeBz != null">
+        interim_fee_bz = #{interimFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveWaterMeterFee != null">
+        "calc_move_water meter_fee" = #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveWaterMeterFee != null">
+        "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveWaterMeterFeeBz != null">
+        "move_water meter_fee_bz" = #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveAmmeterFee != null">
+        calc_move_ammeter_fee = #{calcMoveAmmeterFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveAmmeterFee != null">
+        move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveAmmeterFeeBz != null">
+        move_ammeter_fee_bz = #{moveAmmeterFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveAirConditioningFee != null">
+        calc_move_air_conditioning_fee = #{calcMoveAirConditioningFee,jdbcType=VARCHAR},
+      </if>
+      <if test="moveAirConditioningFee != null">
+        move_air_conditioning_fee = #{moveAirConditioningFee,jdbcType=DECIMAL},
+      </if>
+      <if test="moveAirConditioningFeeBz != null">
+        move_air_conditioning_fee_bz = #{moveAirConditioningFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcHotWaterCompensate != null">
+        calc_hot_water_compensate = #{calcHotWaterCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="hotWaterCompensate != null">
+        hot_water_compensate = #{hotWaterCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="hotWaterCompensateBz != null">
+        hot_water_compensate_bz = #{hotWaterCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcGasFee != null">
+        calc_gas_fee = #{calcGasFee,jdbcType=VARCHAR},
+      </if>
+      <if test="gasFee != null">
+        gas_fee = #{gasFee,jdbcType=VARCHAR},
+      </if>
+      <if test="gasFeeBz != null">
+        gas_fee_bz = #{gasFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcStructureCompensate != null">
+        calc_structure_compensate = #{calcStructureCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="structureCompensate != null">
+        structure_compensate = #{structureCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="structureCompensateBz != null">
+        structure_compensate_bz = #{structureCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcAffiliatedOther != null">
+        calc_affiliated_other = #{calcAffiliatedOther,jdbcType=VARCHAR},
+      </if>
+      <if test="affiliatedOther != null">
+        affiliated_other = #{affiliatedOther,jdbcType=DECIMAL},
+      </if>
+      <if test="affiliatedOtherBz != null">
+        affiliated_other_bz = #{affiliatedOtherBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcNoCheckCompensate != null">
+        calc_no_check_compensate = #{calcNoCheckCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="noCheckCompensate != null">
+        no_check_compensate = #{noCheckCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="noCheckCompensateBz != null">
+        no_check_compensate_bz = #{noCheckCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcRmbCompensate != null">
+        calc_rmb_compensate = #{calcRmbCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="rmbCompensate != null">
+        rmb_compensate = #{rmbCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="rmbCompensateBz != null">
+        rmb_compensate_bz = #{rmbCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcLifeCompensate != null">
+        calc_life_compensate = #{calcLifeCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="lifeCompensate != null">
+        life_compensate = #{lifeCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="lifeCompensateBz != null">
+        life_compensate_bz = #{lifeCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcChangeCompensate != null">
+        calc_change_compensate = #{calcChangeCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="changeCompensate != null">
+        change_compensate = #{changeCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="changeCompensateBz != null">
+        change_compensate_bz = #{changeCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcBuildingAreaFee != null">
+        calc_building_area_fee = #{calcBuildingAreaFee,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingAreaFee != null">
+        building_area_fee = #{buildingAreaFee,jdbcType=DECIMAL},
+      </if>
+      <if test="buildingAreaFeeBz != null">
+        building_area_fee_bz = #{buildingAreaFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcSuspendBusinessFee != null">
+        calc_suspend_business_fee = #{calcSuspendBusinessFee,jdbcType=VARCHAR},
+      </if>
+      <if test="suspendBusinessFee != null">
+        suspend_business_fee = #{suspendBusinessFee,jdbcType=DECIMAL},
+      </if>
+      <if test="suspendBusinessFeeBz != null">
+        suspend_business_fee_bz = #{suspendBusinessFeeBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcNoMoveCompensate != null">
+        calc_no_move_compensate = #{calcNoMoveCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="noMoveCompensate != null">
+        no_move_compensate = #{noMoveCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="noMoveCompensateBz != null">
+        no_move_compensate_bz = #{noMoveCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMoveReward != null">
+        calc_move_reward = #{calcMoveReward,jdbcType=VARCHAR},
+      </if>
+      <if test="moveReward != null">
+        move_reward = #{moveReward,jdbcType=DECIMAL},
+      </if>
+      <if test="moveRewardBz != null">
+        move_reward_bz = #{moveRewardBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcRmbMoveReward != null">
+        calc_rmb_move_reward = #{calcRmbMoveReward,jdbcType=VARCHAR},
+      </if>
+      <if test="rmbMoveReward != null">
+        rmb_move_reward = #{rmbMoveReward,jdbcType=DECIMAL},
+      </if>
+      <if test="rmbMoveRewardBz != null">
+        rmb_move_reward_bz = #{rmbMoveRewardBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcSmallAreaReward != null">
+        "calc_small_area _reward" = #{calcSmallAreaReward,jdbcType=VARCHAR},
+      </if>
+      <if test="smallAreaReward != null">
+        "small_area _reward" = #{smallAreaReward,jdbcType=DECIMAL},
+      </if>
+      <if test="smallAreaRewardBz != null">
+        "small_area _reward_bz" = #{smallAreaRewardBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcOther != null">
+        calc_other = #{calcOther,jdbcType=VARCHAR},
+      </if>
+      <if test="otherRmb != null">
+        other_rmb = #{otherRmb,jdbcType=DECIMAL},
+      </if>
+      <if test="otherBz != null">
+        other_bz = #{otherBz,jdbcType=VARCHAR},
+      </if>
+      <if test="calcSumCompensate != null">
+        calc_sum_compensate = #{calcSumCompensate,jdbcType=VARCHAR},
+      </if>
+      <if test="sumCompensate != null">
+        sum_compensate = #{sumCompensate,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCompensateBz != null">
+        sum_compensate_bz = #{sumCompensateBz,jdbcType=VARCHAR},
+      </if>
+      <if test="changeArea != null">
+        change_area = #{changeArea,jdbcType=DECIMAL},
+      </if>
+      <if test="calcm != null">
+        calcm = #{calcm,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="deduction != null">
+        deduction = #{deduction,jdbcType=DECIMAL},
+      </if>
+      <if test="calcPayTotal != null">
+        calc_pay_total = #{calcPayTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="payTotal != null">
+        pay_total = #{payTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="payTotalBz != null">
+        pay_total_bz = #{payTotalBz,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTotal != null">
+        receive_total = #{receiveTotal,jdbcType=DECIMAL},
+      </if>
+      <if test="payMoney1 != null">
+        pay_money1 = #{payMoney1,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney2 != null">
+        pay_money2 = #{payMoney2,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney3 != null">
+        pay_money3 = #{payMoney3,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney4 != null">
+        pay_money4 = #{payMoney4,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney5 != null">
+        pay_money5 = #{payMoney5,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney6 != null">
+        pay_money6 = #{payMoney6,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney7 != null">
+        pay_money7 = #{payMoney7,jdbcType=VARCHAR},
+      </if>
+      <if test="payMoney8 != null">
+        pay_money8 = #{payMoney8,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney1 != null">
+        receive_money1 = #{receiveMoney1,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney2 != null">
+        receive_money2 = #{receiveMoney2,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney3 != null">
+        receive_money3 = #{receiveMoney3,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney4 != null">
+        receive_money4 = #{receiveMoney4,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney5 != null">
+        receive_money5 = #{receiveMoney5,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney6 != null">
+        receive_money6 = #{receiveMoney6,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney7 != null">
+        receive_money7 = #{receiveMoney7,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveMoney8 != null">
+        receive_money8 = #{receiveMoney8,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedDate != null">
+        modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedUserId != null">
+        modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.abtnetworks.totems.policy.domain.SettleAccounts">
+    update t_settle_accounts
+    set card_no = #{cardNo,jdbcType=VARCHAR},
+      house_owner = #{houseOwner,jdbcType=VARCHAR},
+      lessee = #{lessee,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      lessee_phone = #{lesseePhone,jdbcType=VARCHAR},
+      use = #{use,jdbcType=VARCHAR},
+      check_in_area = #{checkInArea,jdbcType=DECIMAL},
+      in_area = #{inArea,jdbcType=DECIMAL},
+      assess_price = #{assessPrice,jdbcType=DECIMAL},
+      address = #{address,jdbcType=VARCHAR},
+      calc_value_compensate = #{calcValueCompensate,jdbcType=VARCHAR},
+      value_compensate = #{valueCompensate,jdbcType=DECIMAL},
+      value_compensate_bz = #{valueCompensateBz,jdbcType=VARCHAR},
+      calc_decoration_compensate = #{calcDecorationCompensate,jdbcType=VARCHAR},
+      decoration_compensate = #{decorationCompensate,jdbcType=DECIMAL},
+      decoration_compensate_bz = #{decorationCompensateBz,jdbcType=VARCHAR},
+      calc_move_house_fee = #{calcMoveHouseFee,jdbcType=VARCHAR},
+      move_house_fee = #{moveHouseFee,jdbcType=DECIMAL},
+      move_house_fee_bz = #{moveHouseFeeBz,jdbcType=VARCHAR},
+      calc_interim_fee = #{calcInterimFee,jdbcType=VARCHAR},
+      interim_fee = #{interimFee,jdbcType=DECIMAL},
+      interim_fee_bz = #{interimFeeBz,jdbcType=VARCHAR},
+      "calc_move_water meter_fee" = #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
+      "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+      "move_water meter_fee_bz" = #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
+      calc_move_ammeter_fee = #{calcMoveAmmeterFee,jdbcType=VARCHAR},
+      move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
+      move_ammeter_fee_bz = #{moveAmmeterFeeBz,jdbcType=VARCHAR},
+      calc_move_air_conditioning_fee = #{calcMoveAirConditioningFee,jdbcType=VARCHAR},
+      move_air_conditioning_fee = #{moveAirConditioningFee,jdbcType=DECIMAL},
+      move_air_conditioning_fee_bz = #{moveAirConditioningFeeBz,jdbcType=VARCHAR},
+      calc_hot_water_compensate = #{calcHotWaterCompensate,jdbcType=VARCHAR},
+      hot_water_compensate = #{hotWaterCompensate,jdbcType=DECIMAL},
+      hot_water_compensate_bz = #{hotWaterCompensateBz,jdbcType=VARCHAR},
+      calc_gas_fee = #{calcGasFee,jdbcType=VARCHAR},
+      gas_fee = #{gasFee,jdbcType=VARCHAR},
+      gas_fee_bz = #{gasFeeBz,jdbcType=VARCHAR},
+      calc_structure_compensate = #{calcStructureCompensate,jdbcType=VARCHAR},
+      structure_compensate = #{structureCompensate,jdbcType=DECIMAL},
+      structure_compensate_bz = #{structureCompensateBz,jdbcType=VARCHAR},
+      calc_affiliated_other = #{calcAffiliatedOther,jdbcType=VARCHAR},
+      affiliated_other = #{affiliatedOther,jdbcType=DECIMAL},
+      affiliated_other_bz = #{affiliatedOtherBz,jdbcType=VARCHAR},
+      calc_no_check_compensate = #{calcNoCheckCompensate,jdbcType=VARCHAR},
+      no_check_compensate = #{noCheckCompensate,jdbcType=DECIMAL},
+      no_check_compensate_bz = #{noCheckCompensateBz,jdbcType=VARCHAR},
+      calc_rmb_compensate = #{calcRmbCompensate,jdbcType=VARCHAR},
+      rmb_compensate = #{rmbCompensate,jdbcType=DECIMAL},
+      rmb_compensate_bz = #{rmbCompensateBz,jdbcType=VARCHAR},
+      calc_life_compensate = #{calcLifeCompensate,jdbcType=VARCHAR},
+      life_compensate = #{lifeCompensate,jdbcType=DECIMAL},
+      life_compensate_bz = #{lifeCompensateBz,jdbcType=VARCHAR},
+      calc_change_compensate = #{calcChangeCompensate,jdbcType=VARCHAR},
+      change_compensate = #{changeCompensate,jdbcType=DECIMAL},
+      change_compensate_bz = #{changeCompensateBz,jdbcType=VARCHAR},
+      calc_building_area_fee = #{calcBuildingAreaFee,jdbcType=VARCHAR},
+      building_area_fee = #{buildingAreaFee,jdbcType=DECIMAL},
+      building_area_fee_bz = #{buildingAreaFeeBz,jdbcType=VARCHAR},
+      calc_suspend_business_fee = #{calcSuspendBusinessFee,jdbcType=VARCHAR},
+      suspend_business_fee = #{suspendBusinessFee,jdbcType=DECIMAL},
+      suspend_business_fee_bz = #{suspendBusinessFeeBz,jdbcType=VARCHAR},
+      calc_no_move_compensate = #{calcNoMoveCompensate,jdbcType=VARCHAR},
+      no_move_compensate = #{noMoveCompensate,jdbcType=DECIMAL},
+      no_move_compensate_bz = #{noMoveCompensateBz,jdbcType=VARCHAR},
+      calc_move_reward = #{calcMoveReward,jdbcType=VARCHAR},
+      move_reward = #{moveReward,jdbcType=DECIMAL},
+      move_reward_bz = #{moveRewardBz,jdbcType=VARCHAR},
+      calc_rmb_move_reward = #{calcRmbMoveReward,jdbcType=VARCHAR},
+      rmb_move_reward = #{rmbMoveReward,jdbcType=DECIMAL},
+      rmb_move_reward_bz = #{rmbMoveRewardBz,jdbcType=VARCHAR},
+      "calc_small_area _reward" = #{calcSmallAreaReward,jdbcType=VARCHAR},
+      "small_area _reward" = #{smallAreaReward,jdbcType=DECIMAL},
+      "small_area _reward_bz" = #{smallAreaRewardBz,jdbcType=VARCHAR},
+      calc_other = #{calcOther,jdbcType=VARCHAR},
+      other_rmb = #{otherRmb,jdbcType=DECIMAL},
+      other_bz = #{otherBz,jdbcType=VARCHAR},
+      calc_sum_compensate = #{calcSumCompensate,jdbcType=VARCHAR},
+      sum_compensate = #{sumCompensate,jdbcType=DECIMAL},
+      sum_compensate_bz = #{sumCompensateBz,jdbcType=VARCHAR},
+      change_area = #{changeArea,jdbcType=DECIMAL},
+      calcm = #{calcm,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      deduction = #{deduction,jdbcType=DECIMAL},
+      calc_pay_total = #{calcPayTotal,jdbcType=VARCHAR},
+      pay_total = #{payTotal,jdbcType=DECIMAL},
+      pay_total_bz = #{payTotalBz,jdbcType=VARCHAR},
+      receive_total = #{receiveTotal,jdbcType=DECIMAL},
+      pay_money1 = #{payMoney1,jdbcType=VARCHAR},
+      pay_money2 = #{payMoney2,jdbcType=VARCHAR},
+      pay_money3 = #{payMoney3,jdbcType=VARCHAR},
+      pay_money4 = #{payMoney4,jdbcType=VARCHAR},
+      pay_money5 = #{payMoney5,jdbcType=VARCHAR},
+      pay_money6 = #{payMoney6,jdbcType=VARCHAR},
+      pay_money7 = #{payMoney7,jdbcType=VARCHAR},
+      pay_money8 = #{payMoney8,jdbcType=VARCHAR},
+      receive_money1 = #{receiveMoney1,jdbcType=VARCHAR},
+      receive_money2 = #{receiveMoney2,jdbcType=VARCHAR},
+      receive_money3 = #{receiveMoney3,jdbcType=VARCHAR},
+      receive_money4 = #{receiveMoney4,jdbcType=VARCHAR},
+      receive_money5 = #{receiveMoney5,jdbcType=VARCHAR},
+      receive_money6 = #{receiveMoney6,jdbcType=VARCHAR},
+      receive_money7 = #{receiveMoney7,jdbcType=VARCHAR},
+      receive_money8 = #{receiveMoney8,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
