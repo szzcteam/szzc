@@ -8,6 +8,7 @@ import java.util.List;
 public interface FwebbaseinfoMapper {
     int deleteByPrimaryKey(Long fid);
 
+
     int insert(Fwebbaseinfo record);
 
     int insertSelective(Fwebbaseinfo record);
