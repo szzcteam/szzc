@@ -73,7 +73,7 @@
     <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.bar.js"></script>
     <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.line.js"></script>
     <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.pie.js"></script>
-    <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.htmlt.js"></script>
+    <%--<script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.htmlt.js"></script>--%>
 
     <script src="${oss_url}/static/ssadmin/js/js/dwz.core.js" type="text/javascript"></script>
     <script src="${oss_url}/static/ssadmin/js/js/dwz.util.date.js"

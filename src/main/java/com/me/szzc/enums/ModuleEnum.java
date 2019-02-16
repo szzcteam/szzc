@@ -10,10 +10,7 @@ import java.util.Map;
  */
 public enum ModuleEnum {
 
-    VIRTUAL_OPERATION(ModuleConstont.VIRTUAL_OPERATION, "虚拟货币管理"),
-    CYN_OPERATION(ModuleConstont.CYN_OPERATION, "人民币操作管理"),
-    USER_OPERATION(ModuleConstont.USER_OPERATION,"会员管理"),
-    ARTICLE_OPEATION(ModuleConstont.ARTICLE_OPERATION,"资讯管理"),
+    PROTOCOL_OPERATION(ModuleConstont.PROTOCOL_OPERATION, "协议管理"),
     SYSTEM_OPERATION(ModuleConstont.SYSTEM_OPERATION,"系统管理");
 
     private String code;

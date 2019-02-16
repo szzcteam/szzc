@@ -80,7 +80,7 @@ public class AdminController extends BaseController {
 		}
 		
 		List<Frole> roleList = this.roleService.findAll();
-		Map map = new HashMap();
+		Map<Long, String> map = new HashMap();
 		for (Frole frole : roleList) {
 			map.put(frole.getFid(),frole.getFname());
 		}
@@ -92,7 +92,7 @@ public class AdminController extends BaseController {
 	@SysLog(code = ModuleConstont.SYSTEM_OPERATION, method = "新增管理员")
 	public ModelAndView saveAdmin(@RequestParam String fname,
                                   @RequestParam String fpassword,
-                                  @RequestParam Integer roleId,
+                                  @RequestParam Long roleId,
                                   @RequestParam String fTelephone,
 								  HttpServletRequest request) throws Exception{
 		ModelAndView modelAndView = new ModelAndView() ;
@@ -237,7 +237,7 @@ public class AdminController extends BaseController {
 			return modelAndView;
 		}
 		
-		int roleId = Integer.parseInt(request.getParameter("frole.fid"));
+		Long roleId = Long.parseLong(request.getParameter("frole.fid"));
 		fadmin.setFroleid(roleId);
 		this.adminService.updateObj(fadmin);
 		

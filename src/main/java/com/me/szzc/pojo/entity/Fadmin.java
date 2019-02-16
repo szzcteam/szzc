@@ -22,7 +22,7 @@ public class Fadmin implements java.io.Serializable {
 
 	private Integer fstatus;
 
-	private Integer froleid;
+	private Long froleid;
 
 	/**角色名称**/
 	private String froleName;

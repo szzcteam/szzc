@@ -4,7 +4,8 @@
 <%!public String tree(Fsecurity security) {
 		StringBuilder builder = new StringBuilder();
 		
-		Long pid = security.getFsecurity() == null ? 0:security.getFsecurity().getFid();
+//		Long pid = security.getFsecurity() == null ? 0:security.getFsecurity().getFid();
+	Long pid = security == null ? 0:security.getFparentid();
 		builder.append("{id:" + security.getFid() +  ", pId:" + pid + 
 				", name:\"" + security.getFname() + "\", url:\"ssadmin/goSecurityJSP.html?url=ssadmin/securityList1&treeId=" + security.getFid() + "\", target:\"ajax\", rel:\"jbsxBox2moduleList\"},");
 		System.out.print(builder);

@@ -5,7 +5,7 @@
         <id column="fid" property="fid" jdbcType="INTEGER"/>
         <result column="fsecurityid" property="fsecurityid" jdbcType="INTEGER"/>
         <result column="froleid" property="froleid" jdbcType="INTEGER"/>
-        <collection property="fsecurity" ofType="com.me.szzc.pojo.entity.Fsecurity" column="fid" select="com.me.szzc.dao.FsecurityMapper.selectByPrimaryKey" />
+        <collection property="fsecurity" ofType="com.me.szzc.pojo.entity.Fsecurity" column="fsecurityid" select="com.me.szzc.dao.FsecurityMapper.selectByPrimaryKey" />
     </resultMap>
 
     <delete id="deleteByRoleId" parameterType="java.lang.Long">

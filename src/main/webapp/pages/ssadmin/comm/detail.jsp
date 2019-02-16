@@ -10,23 +10,13 @@
 		</div>
 		<div class="accordionContent">
 			<ul class="tree treeFolder">
-				<shiro:hasPermission name="ssadmin/coinSurveyList.html">
-					<li><a href="ssadmin/coinSurveyList.html" target="navTab"
-						   rel="coinSurveyList">新币管理</a></li>
-				</shiro:hasPermission>
-				<shiro:hasPermission name="ssadmin/coinSurveyHistory.html">
-					<li><a href="ssadmin/coinSurveyHistory.html" target="navTab"
-						   rel="coinSurveyHistory">观察历史</a></li>
+				<shiro:hasPermission name="/ssadmin/protocolList.html">
+					<li><a href="/ssadmin/protocolList.html" target="navTab"
+						   rel="coinSurveyList">协议管理</a></li>
 				</shiro:hasPermission>
 			</ul>
 		</div>
 	</shiro:hasPermission>
-
-
-
-
-
-
 
 	<shiro:hasPermission name="system">
 		<div class="accordionHeader">

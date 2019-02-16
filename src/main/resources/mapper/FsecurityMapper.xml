@@ -83,7 +83,7 @@
 	</select>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
+		parameterType="java.lang.Long">
 		select <include refid="SecurityColumn" />
 		from f_security
 		where fid = #{fid}

@@ -1,6 +1,7 @@
 package com.me.szzc.pojo.entity;
 
 
+import com.me.szzc.utils.DateHelper;
 import lombok.Data;
 import java.util.Date;
 
@@ -28,6 +29,9 @@ public class Fsystemoperatorlog {
      * 操作时间,所属表字段为tbl_system_operator_log.operator_date
      */
     private Date operatorDate;
+
+    /**操作时间字符串格式**/
+    private String operatorDateStr;
 
     /**
      * 操作人,所属表字段为tbl_system_operator_log.user_id
@@ -88,4 +92,8 @@ public class Fsystemoperatorlog {
      */
     private String remart;
 
+
+    public String getOperatorDateStr() {
+        return DateHelper.date2String(this.operatorDate, DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond);
+    }
 }

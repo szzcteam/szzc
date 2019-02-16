@@ -41,7 +41,7 @@ public class SecurityController extends BaseController {
 				filter.append("and fname like '%"+keyWord+"%' ");
 				modelAndView.addObject("keywords", keyWord);
 			}
-			filter.append("and fsecurity.fid="+fid+" ");
+			filter.append("and fparentid="+fid+" ");
 			if(orderField != null && orderField.trim().length() >0){
 				filter.append("order by "+orderField+"");
 			}

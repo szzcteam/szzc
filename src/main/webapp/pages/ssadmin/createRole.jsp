@@ -6,11 +6,13 @@
 <%!public String role_tree(Fsecurity security, Integer[] securityIndex) {
 	StringBuilder explandBuilder = null;
 	
-	if (security.getFsecurity() != null) {
-		explandBuilder = new StringBuilder("<tr id=\"" + security.getFid() + "\" pId=\"" + security.getFsecurity().getFid() + "\">\n");
+	if (security != null) {
+		explandBuilder = new StringBuilder("<tr id=\"" + security.getFid() + "\" pId=\"" + security.getFparentid() + "\">\n");
 	} else {
 		explandBuilder = new StringBuilder("<tr id=\"" + security.getFid() + "\">\n");
 	}
+
+
 	
 	explandBuilder.append("<td><span ref=\"treeChk\" class=\"button chk checkbox_false_full\"/><span ref=\"allChk\" class=\"button chk checkbox_false_full setAll\"/>" + security.getFname() + "</td>\n");
 	explandBuilder.append("<td>\n");

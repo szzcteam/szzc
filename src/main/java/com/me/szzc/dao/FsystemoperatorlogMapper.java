@@ -17,7 +17,8 @@ public interface FsystemoperatorlogMapper {
 
     List<Fsystemoperatorlog> selectAll();
 
-    List<Fsystemoperatorlog> list(Fsystemoperatorlog record);
+    List<Fsystemoperatorlog> list(@Param("firstResult") int firstResult, @Param("maxResults")int maxResults,
+                                  @Param("filter") String filter, @Param("isFY") boolean isFY);
 
     Integer getAllCount(@Param("filter") String filter);
 

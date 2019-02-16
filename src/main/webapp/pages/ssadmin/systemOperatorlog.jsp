@@ -71,7 +71,7 @@
 				<tr target="sid_user" rel="${syslog.id}">
 					<td>${num.index +1}</td>
 					<td>${syslog.loginName}</td>
-					<td>${syslog.operatorDate}</td>
+					<td>${syslog.operatorDateStr}</td>
 					<td>${syslog.module}</td>
 					<td>${syslog.ip}</td>
 					<td>${syslog.operatorCode}</td>

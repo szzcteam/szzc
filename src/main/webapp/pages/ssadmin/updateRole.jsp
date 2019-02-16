@@ -7,9 +7,9 @@
 
 <%!public String role_tree(Fsecurity security,Frole role, Integer[] securityIndex) {
 	StringBuilder explandBuilder = null;
-	
-	if (security.getFsecurity() != null) {
-		explandBuilder = new StringBuilder("<tr id=\"" + security.getFid() + "\" pId=\"" + security.getFsecurity().getFid() + "\">\n");
+
+	if (security != null) {
+		explandBuilder = new StringBuilder("<tr id=\"" + security.getFid() + "\" pId=\"" + security.getFparentid() + "\">\n");
 	} else {
 		explandBuilder = new StringBuilder("<tr id=\"" + security.getFid() + "\">\n");
 	}
@@ -21,7 +21,7 @@
     explandBuilder.append(security.getFname() + "<input type='checkbox' name='role[" +  security.getFid() + "]' value='" + security.getFid() + "'");
 			boolean isFind = false;
 		for(FroleSecurity roleSecurities : role.getFroleSecurities()) {
-			if (roleSecurities.getFsecurity().getFid().equals(security.getFid())) {
+			if (roleSecurities.getFsecurityid().equals(security.getFid())) {
 				explandBuilder.append("checked='checked'/>");
 				isFind = true;
 				break;

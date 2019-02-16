@@ -38,7 +38,7 @@ public class SysLogService {
 
 	public List<Fsystemoperatorlog> list(int firstResult, int maxResults,
 			String filter,boolean isFY) {
-		return this.fsystemoperatorlogMapper.list(null);
+		return this.fsystemoperatorlogMapper.list(firstResult, maxResults, filter, isFY);
 	}
 
 	public Integer getAllCount(String filter) {

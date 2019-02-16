@@ -69,7 +69,7 @@ public interface FsecurityMapper {
 	/**
 	 * 通过父id查询所有的子元素
 	 */
-	List<Fsecurity> selectByParentid(int pid);
+	List<Fsecurity> selectByParentid(Long pid);
 
 	List<Fsecurity> selectByParentidAndRole(@Param("froleid") Integer froleid, @Param("fparentid") Integer fparentid);
 

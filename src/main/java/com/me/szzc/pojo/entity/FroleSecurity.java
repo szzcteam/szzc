@@ -14,6 +14,8 @@ public class FroleSecurity implements java.io.Serializable {
 	// Fields
 
 	private Integer fid;
+
+	/**fsecurityid 对应的菜单资源详情**/
 	private Fsecurity fsecurity;
 	private Frole frole;
 

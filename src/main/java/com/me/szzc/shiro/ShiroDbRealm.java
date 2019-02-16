@@ -52,7 +52,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
             	Fadmin admin = all.get(0);
             	if(admin.getFroleid() != null){
             	    //查询角色
-                    int roleId = admin.getFroleid();
+                    Long roleId = admin.getFroleid();
                     Frole role = roleService.findById(roleId);
             		String roleName = "";
             		if(role != null && StringUtils.isNotBlank(role.getFname())) {

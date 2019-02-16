@@ -39,7 +39,15 @@ public class SecurityService {
 
 	public List<Fsecurity> list(int firstResult, int maxResults,
 			String filter,boolean isFY) {
-		return this.fsecurityMapper.list(firstResult, maxResults, filter, isFY);
+		List<Fsecurity> list = this.fsecurityMapper.list(firstResult, maxResults, filter, isFY);
+		if(list == null || list.size() == 0) {
+			return list;
+		}
+
+		for(Fsecurity s : list) {
+			s.setFsecurity(this.fsecurityMapper.selectByPrimaryKey(s.getFparentid()));
+		}
+		return list;
 	}
 
 	public Integer getAllCount(String filter) {
