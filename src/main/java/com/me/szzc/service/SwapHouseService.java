@@ -13,7 +13,12 @@ public class SwapHouseService {
     @Autowired
     private SwapHouseMapper swapHouseMapper;
 
-    public void add(SwapHouse request) {
-        swapHouseMapper.insert(request);
+    public void addSwapHouse(SwapHouse request) {
+        swapHouseMapper.insertSelective(request);
+    }
+
+    public SwapHouse selectByPrimaryKey(Long id) {
+        return swapHouseMapper.selectByPrimaryKey(id);
+
     }
 }
