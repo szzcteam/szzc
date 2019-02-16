@@ -41,4 +41,10 @@ public class BaseServiceCtrl {
     @Autowired
     NoticeService noticeService;
 
+    @Autowired
+    RmbRecompenseService rmbRecompenseService;
+
+    @Autowired
+    SettleAccountsService settleAccountsService;
+
 }

@@ -1,68 +1,67 @@
 package com.me.szzc.controller;
 
-import com.me.szzc.pojo.entity.Notice;
-import org.apache.commons.lang3.StringUtils;
+import com.me.szzc.pojo.entity.SettleAccounts;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
-
 /**
- * 房屋征收补偿资金结算通知单
+ * 房屋征收补偿资金结算单
  */
-@Controller
-@RequestMapping("/notice")
-public class NoticeController extends BaseController {
 
-    @RequestMapping("/ssadmin/add")
-    public ModelAndView saveNotice(@RequestBody Notice notice) throws Exception{
+@Controller
+@RequestMapping("/settleAccounts")
+public class SettleAccountsController extends BaseController {
+
+
+    @RequestMapping("ssadmin/add")
+    public ModelAndView saveSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         //条件判断
 
-        this.noticeService.add(notice);
+        this.settleAccountsService.add(settleAccounts);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","新增成功");
         modelAndView.addObject("callbackType","closeCurrent");
         return modelAndView;
     }
 
-    @RequestMapping("/ssadmin/detele")
-    public ModelAndView deteleNotice(@RequestBody Notice notice)throws Exception{
+    @RequestMapping("ssadmin/detele")
+    public ModelAndView deteleSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         //条件判断
 
-        this.noticeService.detele(notice);
+        this.settleAccountsService.detele(settleAccounts);
         modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","删除成功");
+        modelAndView.addObject("message","删除");
         modelAndView.addObject("callbackType","closeCurrent");
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/update")
-    public ModelAndView updateNotice(@RequestBody Notice notice)throws Exception{
+    public ModelAndView updateSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         //条件判断
 
-        this.noticeService.update(notice);
+        this.settleAccountsService.update(settleAccounts);
         modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","修改成功");
+        modelAndView.addObject("message","修改");
         modelAndView.addObject("callbackType","closeCurrent");
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/query")
-    public ModelAndView queryNotice(@RequestBody Notice notice)throws Exception{
+    public ModelAndView querySettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         //条件判断
 
-        this.noticeService.query(notice);
+        this.settleAccountsService.query(settleAccounts);
         modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","查询成功");
+        modelAndView.addObject("message","查询");
         modelAndView.addObject("callbackType","closeCurrent");
         return modelAndView;
     }
+
 
 }
