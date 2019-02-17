@@ -12,7 +12,7 @@
     <result column="house_owner_number" jdbcType="VARCHAR" property="houseOwnerNumber" />
     <result column="public_owner_number" jdbcType="VARCHAR" property="publicOwnerNumber" />
     <result column="proportion" jdbcType="DECIMAL" property="proportion" />
-    <result column="use" jdbcType="VARCHAR" property="use" />
+    <result column="useing" jdbcType="VARCHAR" property="useing" />
     <result column="check_in_area" jdbcType="DECIMAL" property="checkInArea" />
     <result column="residence_area" jdbcType="DECIMAL" property="residenceArea" />
     <result column="operate_area" jdbcType="DECIMAL" property="operateArea" />
@@ -26,7 +26,7 @@
     <result column="move_phone_fee" jdbcType="DECIMAL" property="movePhoneFee" />
     <result column="tv_fee" jdbcType="DECIMAL" property="tvFee" />
     <result column="move_ammeter_fee" jdbcType="DECIMAL" property="moveAmmeterFee" />
-    <result column="move_water meter_fee" jdbcType="DECIMAL" property="moveWaterMeterFee" />
+    <result column="move_water_meter_fee" jdbcType="DECIMAL" property="moveWaterMeterFee" />
     <result column="wifi_fee" jdbcType="DECIMAL" property="wifiFee" />
     <result column="move_air_conditioning_fee" jdbcType="DECIMAL" property="moveAirConditioningFee" />
     <result column="gas_fee" jdbcType="DECIMAL" property="gasFee" />
@@ -55,9 +55,9 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, card_no, mng_office, company, house_owner, recompense_plan, address, house_owner_number, 
-    public_owner_number, proportion, use, check_in_area, residence_area, operate_area, 
+    public_owner_number, proportion, useing, check_in_area, residence_area, operate_area,
     office_area, produce_area, other_area, no_check_area, value_compensate, decoration_compensate, 
-    structure_compensate, move_phone_fee, tv_fee, move_ammeter_fee, "move_water meter_fee", 
+    structure_compensate, move_phone_fee, tv_fee, move_ammeter_fee, move_water_meter_fee,
     wifi_fee, move_air_conditioning_fee, gas_fee, hot_water_compensate, subtotal, move_house_fee, 
     interim_price, interim_month, interim_fee, suspend_business_fee, rmb_compensate, 
     life_compensate, change_compensate, move_reward, close_balcony, no_check_compensate, 
@@ -78,16 +78,16 @@
     insert into t_rmb_recompense (id, card_no, mng_office, 
       company, house_owner, recompense_plan, 
       address, house_owner_number, public_owner_number, 
-      proportion, use, check_in_area, 
+      proportion, useing, check_in_area,
       residence_area, operate_area, office_area, 
       produce_area, other_area, no_check_area, 
       value_compensate, decoration_compensate, 
       structure_compensate, move_phone_fee, tv_fee, 
-      move_ammeter_fee, "move_water meter_fee", wifi_fee, 
+      move_ammeter_fee, move_water_meter_fee, wifi_fee,
       move_air_conditioning_fee, gas_fee, hot_water_compensate, 
       subtotal, move_house_fee, interim_price, 
       interim_month, interim_fee, suspend_business_fee, 
-      rmb_compensate, life_compensate, change_compensate, 
+      rmb_compensate, life_compensate, change_compensate,
       move_reward, close_balcony, no_check_compensate, 
       other_fee, sum_rbm, upper_rmb, 
       other_terms_one, other_terms_two, create_date, 
@@ -96,7 +96,7 @@
     values (#{id,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{mngOffice,jdbcType=VARCHAR}, 
       #{company,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR}, #{recompensePlan,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{houseOwnerNumber,jdbcType=VARCHAR}, #{publicOwnerNumber,jdbcType=VARCHAR}, 
-      #{proportion,jdbcType=DECIMAL}, #{use,jdbcType=VARCHAR}, #{checkInArea,jdbcType=DECIMAL}, 
+      #{proportion,jdbcType=DECIMAL}, #{useing,jdbcType=VARCHAR}, #{checkInArea,jdbcType=DECIMAL},
       #{residenceArea,jdbcType=DECIMAL}, #{operateArea,jdbcType=DECIMAL}, #{officeArea,jdbcType=DECIMAL}, 
       #{produceArea,jdbcType=DECIMAL}, #{otherArea,jdbcType=DECIMAL}, #{noCheckArea,jdbcType=DECIMAL}, 
       #{valueCompensate,jdbcType=DECIMAL}, #{decorationCompensate,jdbcType=DECIMAL}, 
@@ -145,8 +145,8 @@
       <if test="proportion != null">
         proportion,
       </if>
-      <if test="use != null">
-        use,
+      <if test="useing != null">
+        useing,
       </if>
       <if test="checkInArea != null">
         check_in_area,
@@ -188,7 +188,7 @@
         move_ammeter_fee,
       </if>
       <if test="moveWaterMeterFee != null">
-        "move_water meter_fee",
+        "move_water_meter_fee",
       </if>
       <if test="wifiFee != null">
         wifi_fee,
@@ -297,8 +297,8 @@
       <if test="proportion != null">
         #{proportion,jdbcType=DECIMAL},
       </if>
-      <if test="use != null">
-        #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         #{checkInArea,jdbcType=DECIMAL},
@@ -449,8 +449,8 @@
       <if test="proportion != null">
         proportion = #{proportion,jdbcType=DECIMAL},
       </if>
-      <if test="use != null">
-        use = #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        useing = #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         check_in_area = #{checkInArea,jdbcType=DECIMAL},
@@ -492,7 +492,7 @@
         move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
       </if>
       <if test="moveWaterMeterFee != null">
-        "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+        "move_water_meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
       </if>
       <if test="wifiFee != null">
         wifi_fee = #{wifiFee,jdbcType=DECIMAL},
@@ -583,7 +583,7 @@
       house_owner_number = #{houseOwnerNumber,jdbcType=VARCHAR},
       public_owner_number = #{publicOwnerNumber,jdbcType=VARCHAR},
       proportion = #{proportion,jdbcType=DECIMAL},
-      use = #{use,jdbcType=VARCHAR},
+      useing = #{useing,jdbcType=VARCHAR},
       check_in_area = #{checkInArea,jdbcType=DECIMAL},
       residence_area = #{residenceArea,jdbcType=DECIMAL},
       operate_area = #{operateArea,jdbcType=DECIMAL},
@@ -597,7 +597,7 @@
       move_phone_fee = #{movePhoneFee,jdbcType=DECIMAL},
       tv_fee = #{tvFee,jdbcType=DECIMAL},
       move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
-      "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+      "move_water_meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
       wifi_fee = #{wifiFee,jdbcType=DECIMAL},
       move_air_conditioning_fee = #{moveAirConditioningFee,jdbcType=DECIMAL},
       gas_fee = #{gasFee,jdbcType=DECIMAL},
