@@ -48,7 +48,7 @@
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/addRmbRecompense.html">
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense&uid={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增货币补偿协议</span>
                 </a></li>
                 <li><a class="edit"

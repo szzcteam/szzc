@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="comm/include.inc.jsp" %>
-<h2 class="contentTitle">添加产权调换协议</h2>
+<h2 class="contentTitle">添加货币补偿协议</h2>
 
 
 <style>
@@ -13,7 +13,7 @@
 
 <div class="pageContent">
 
-    <form method="post" action="ssadmin/addSwapHouse.html"
+    <form method="post" action="ssadmin/RmbRecompense/add.html"
           class="pageForm required-validate" enctype="multipart/form-data"
           onsubmit="return iframeCallback(this, dialogAjaxDone);">
 
@@ -147,37 +147,43 @@
                     </dd>
                 </dl>
                 <dl>
-                    <dt>7、生活困难补助:</dt>
+                    <dt>7、货币补偿补助:</dt>
+                    <dd>
+                        <input type="text" name="rmbCompensate" maxlength="50"  size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>8、生活困难补助:</dt>
                     <dd>
                         <input type="text" name="lifeCompensate" maxlength="50"  size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
                 </dl>
                 <dl>
-                    <dt>8、住改商补助:</dt>
+                    <dt>9、住改商补助:</dt>
                     <dd>
                         <input type="text" name="changeCompensate" maxlength="50"  size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
                 </dl>
                 <dl>
-                    <dt>9、搬迁奖励:</dt>
+                    <dt>10、搬迁奖励:</dt>
                     <dd>
                         <input type="text" name="moveReward" maxlength="50"  class="required"  size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
                 </dl>
                 <dl>
-                    <dt>10、封闭阳台:</dt>
+                    <dt>11、封闭阳台:</dt>
                     <dd>
                         <input type="text" name="closeBalcony" maxlength="50"  size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
                 </dl>
                 <dl>
-                    <dt>11、未登记建筑:</dt>
+                    <dt>12、未登记建筑:</dt>
                     <dd>
                         <input type="text" name="noCheckCompensate" maxlength="50"  size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
                 </dl>
                 <dl>
-                    <dt>12、其他:</dt>
+                    <dt>13、其他:</dt>
                     <dd>
                         <input type="text" name="otherFee" maxlength="50"  size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
@@ -185,7 +191,7 @@
                 <dl>
                     <dt>&nbsp;</dt>
                     <dd style="width: 95%;">
-                        以上1-12项统计人民币&nbsp;&nbsp;<input type="text" name="sumRbm" maxlength="50"   class="required"  size="20" style="clear: both;float: none;"/>&nbsp;&nbsp;&nbsp;&nbsp;元
+                        以上1-13项统计人民币&nbsp;&nbsp;<input type="text" name="sumRbm" maxlength="50"   class="required"  size="20" style="clear: both;float: none;"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大写：<input type="text" name="upperRmb" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 200px;"/>
                     </dd>
                 </dl>
@@ -193,53 +199,17 @@
             </fieldset>
             <br/><br/>
             <fieldset>
-                <legend>产权调换房屋基本信息</legend>
-                <dl>
-                    <dd style="line-height: 26px;width: 95%; padding-left: 10px;">
-                        乙方选定&nbsp;&nbsp;<input type="text" name="newHouseAddress" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 200px;"/>、
-                        <input type="text" name="seat" maxlength="255"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;栋、
-                        <input type="text" name="unit" maxlength="255"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;单元、
-                        <input type="text" name="floors" maxlength="255"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;层、
-                        <input type="text" name="houseNumber" maxlength="255"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;号房屋。
-                        该房屋面积&nbsp;&nbsp;<input type="text" name="coveredArea" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;"/>&nbsp;&nbsp;平方米，
-                        单价&nbsp;&nbsp;<input type="text" name="price" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;"/>&nbsp;&nbsp;元/平方米，
-                        预估房屋总价人民币&nbsp;&nbsp;<input type="text" name="totalPrice" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>&nbsp;&nbsp;元
-                        （大写：&nbsp;&nbsp;<input type="text" name="upperTotalPrice" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>），
-                        交房时间为&nbsp;&nbsp;<input type="text" name="years" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 60px;"/>&nbsp;&nbsp;年
-                        &nbsp;&nbsp;<input type="text" name="months" maxlength="50"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 50px;"/>&nbsp;&nbsp;月。
-                    </dd>
-                </dl>
-
-            </fieldset>
-            <br/><br/>
-            <fieldset>
-                <legend>支付期限</legend>
-                <dl>
-                    <dd style="line-height: 26px;width: 95%; padding-left: 10px;">
-                        如房屋征收补偿款总额大于预购房款，其差额部分&nbsp;&nbsp;<input type="text" name="difference" maxlength="255"   class=" bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 120px;"/>&nbsp;&nbsp;元
-                        （大写：&nbsp;&nbsp;<input type="text" name="upperDifference" maxlength="255"   class=" bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>&nbsp;&nbsp;）
-                        经会计机构审核出具审计报告后7个工作日内，由甲方一次性支付给乙方；如房屋征收补偿总额小于预购房款，其差额部分&nbsp;&nbsp;<input type="text" name="lessDifference" maxlength="255"   class=" bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 120px;"/>&nbsp;&nbsp;元
-                        （大写：&nbsp;&nbsp;<input type="text" name="upperLessDifference" maxlength="255"   class=" bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>&nbsp;&nbsp;）
-                        待办理入住手续时，据实结算由乙方一次性支付给甲方。
-                    </dd>
-                </dl>
-            </fieldset>
-            <br/><br/>
-            <fieldset>
-                <legend>过渡期限</legend>
-                <dl>
-                    <dt>过渡月份:</dt>
-                    <dd>
-                        <input type="text" name="moveMonth" maxlength="10"  class="required"   size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
-                    </dd>
-                </dl>
-            </fieldset>
-            <fieldset>
                 <legend>其它约定</legend>
                 <dl>
-                    <dt>约定明细:</dt>
+                    <dt>约定明细1:</dt>
                     <dd>
                         <input type="text" name="otherTermsOne" maxlength="255"    size="40"/>&nbsp;&nbsp;&nbsp;&nbsp;元
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>约定明细2:</dt>
+                    <dd>
+                        <input type="text" name="otherTermsTwo" maxlength="255"    size="40"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
                 </dl>
             </fieldset>
@@ -258,6 +228,8 @@
                     <div class="button">
                         <div class="buttonContent">
                             <button type="button" class="close">取消</button>
+
+                            <button type="button" onclick="vfull()">默认填充值</button>
                         </div>
                     </div>
                 </li>
@@ -274,5 +246,10 @@
             return false;
         return true;
     }
-
+    function vfull() {
+        var inputTexts = $("input[type='text']");
+        $.each(inputTexts, function (index, obj) {
+            $(obj).val("123");
+        });
+    }
 </script>
