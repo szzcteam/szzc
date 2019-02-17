@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RmbRecompenseController extends BaseController {
 
     @RequestMapping("ssadmin/RmbRecompense/add")
-    public ModelAndView saveRmbRecompense (@RequestBody RmbRecompense rmbRecompense)throws Exception{
+    public ModelAndView saveRmbRecompense ( RmbRecompense rmbRecompense)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/rmbRecompense");
         this.rmbRecompenseService.add(rmbRecompense);
