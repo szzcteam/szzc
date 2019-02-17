@@ -1,5 +1,6 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.pojo.entity.Fadmin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,6 +72,17 @@ public class BaseController extends BaseServiceCtrl{
         //静态文件在项目里面，无需配置全局oss_url
         request.setAttribute("oss_url", ossURL) ;
 
+    }
+
+
+    //获得管理员session
+    public Fadmin getAdminSession(HttpServletRequest request){
+        Object session = getSession(request).getAttribute("login_admin");
+        Fadmin fadmin = null;
+        if (session != null) {
+            fadmin = (Fadmin) session;
+        }
+        return fadmin;
     }
 
 

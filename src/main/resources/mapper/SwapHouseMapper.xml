@@ -72,7 +72,7 @@
   value_compensate,decoration_compensate,structure_compensate,move_phone_fee,tv_fee,move_ammeter_fee,move_water_meter_fee,
   wifi_fee,move_air_conditioning_fee,gas_fee,hot_water_compensate,subtotal,move_house_fee,interim_price,interim_month,
   interim_fee,suspend_business_fee,life_compensate,change_compensate,move_reward,close_balcony,no_check_compensate,
-  other_fee,sum_rbm,upper_rmb,new_house_address,seat,unit,house_number,covered_area,price,total_price,upper_total_price,
+  other_fee,sum_rbm,upper_rmb,new_house_address,seat,unit,floors,house_number,covered_area,price,total_price,upper_total_price,
   years,months,difference,upper_difference,less_difference,upper_less_difference,move_month,other_terms_one,
   create_date,create_user_id,modified_date,modified_user_id
   </sql>
@@ -90,21 +90,21 @@
     insert into t_swap_house (id, card_no, mng_office, 
       company, house_owner, recompense_plan, 
       address, house_owner_number, public_owner_number, 
-      proportion, use, check_in_area, 
+      proportion, useing, check_in_area,
       residence_area, operate_area, office_area, 
       produce_area, other_area, no_check_area, 
       value_compensate, decoration_compensate, 
       structure_compensate, move_phone_fee, tv_fee, 
-      move_ammeter_fee, "move_water meter_fee", wifi_fee, 
+      move_ammeter_fee, move_water_meter_fee, wifi_fee,
       move_air_conditioning_fee, gas_fee, hot_water_compensate, 
       subtotal, move_house_fee, interim_price, 
       interim_month, interim_fee, suspend_business_fee, 
       life_compensate, change_compensate, move_reward, 
-      "close_ balcony", no_check_compensate, other_fee, 
+      close_balcony, no_check_compensate, other_fee,
       sum_rbm, upper_rmb, new_house_address, 
-      seat, unit, house_number, 
+      seat, unit, floors, house_number,
       covered_area, price, total_price, 
-      upper_total_price, year, months, 
+      upper_total_price, years, months,
       difference, upper_difference, less_difference, 
       upper_less_difference, move_month, other_terms_one, 
       create_date, create_user_id, modified_date, 
@@ -112,7 +112,7 @@
     values (#{id,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{mngOffice,jdbcType=VARCHAR}, 
       #{company,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR}, #{recompensePlan,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{houseOwnerNumber,jdbcType=VARCHAR}, #{publicOwnerNumber,jdbcType=VARCHAR}, 
-      #{proportion,jdbcType=DECIMAL}, #{use,jdbcType=VARCHAR}, #{checkInArea,jdbcType=DECIMAL}, 
+      #{proportion,jdbcType=DECIMAL}, #{useing,jdbcType=VARCHAR}, #{checkInArea,jdbcType=DECIMAL},
       #{residenceArea,jdbcType=DECIMAL}, #{operateArea,jdbcType=DECIMAL}, #{officeArea,jdbcType=DECIMAL}, 
       #{produceArea,jdbcType=DECIMAL}, #{otherArea,jdbcType=DECIMAL}, #{noCheckArea,jdbcType=DECIMAL}, 
       #{valueCompensate,jdbcType=DECIMAL}, #{decorationCompensate,jdbcType=DECIMAL}, 
@@ -124,9 +124,9 @@
       #{lifeCompensate,jdbcType=DECIMAL}, #{changeCompensate,jdbcType=DECIMAL}, #{moveReward,jdbcType=DECIMAL}, 
       #{closeBalcony,jdbcType=DECIMAL}, #{noCheckCompensate,jdbcType=DECIMAL}, #{otherFee,jdbcType=DECIMAL}, 
       #{sumRbm,jdbcType=DECIMAL}, #{upperRmb,jdbcType=VARCHAR}, #{newHouseAddress,jdbcType=VARCHAR}, 
-      #{seat,jdbcType=VARCHAR}, #{unit,jdbcType=INTEGER}, #{houseNumber,jdbcType=VARCHAR}, 
+      #{seat,jdbcType=VARCHAR}, #{unit,jdbcType=INTEGER}, #{floors}, #{houseNumber,jdbcType=VARCHAR},
       #{coveredArea,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{totalPrice,jdbcType=DECIMAL}, 
-      #{upperTotalPrice,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, #{months,jdbcType=VARCHAR}, 
+      #{upperTotalPrice,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR}, #{months,jdbcType=VARCHAR},
       #{difference,jdbcType=DECIMAL}, #{upperDifference,jdbcType=VARCHAR}, #{lessDifference,jdbcType=DECIMAL}, 
       #{upperLessDifference,jdbcType=VARCHAR}, #{moveMonth,jdbcType=INTEGER}, #{otherTermsOne,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, 
@@ -135,9 +135,6 @@
   <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.SwapHouse">
     insert into t_swap_house
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="cardNo != null">
         card_no,
       </if>
@@ -165,8 +162,8 @@
       <if test="proportion != null">
         proportion,
       </if>
-      <if test="use != null">
-        use,
+      <if test="useing != null">
+        useing,
       </if>
       <if test="checkInArea != null">
         check_in_area,
@@ -208,7 +205,7 @@
         move_ammeter_fee,
       </if>
       <if test="moveWaterMeterFee != null">
-        "move_water meter_fee",
+        move_water_meter_fee,
       </if>
       <if test="wifiFee != null">
         wifi_fee,
@@ -250,7 +247,7 @@
         move_reward,
       </if>
       <if test="closeBalcony != null">
-        "close_ balcony",
+        close_balcony,
       </if>
       <if test="noCheckCompensate != null">
         no_check_compensate,
@@ -273,6 +270,9 @@
       <if test="unit != null">
         unit,
       </if>
+      <if test="floors != null">
+        floors,
+      </if>
       <if test="houseNumber != null">
         house_number,
       </if>
@@ -288,8 +288,8 @@
       <if test="upperTotalPrice != null">
         upper_total_price,
       </if>
-      <if test="year != null">
-        year,
+      <if test="years != null">
+        years,
       </if>
       <if test="months != null">
         months,
@@ -326,9 +326,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="cardNo != null">
         #{cardNo,jdbcType=VARCHAR},
       </if>
@@ -356,8 +353,8 @@
       <if test="proportion != null">
         #{proportion,jdbcType=DECIMAL},
       </if>
-      <if test="use != null">
-        #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         #{checkInArea,jdbcType=DECIMAL},
@@ -464,6 +461,9 @@
       <if test="unit != null">
         #{unit,jdbcType=INTEGER},
       </if>
+      <if test="floors != null">
+        #{floors},
+      </if>
       <if test="houseNumber != null">
         #{houseNumber,jdbcType=VARCHAR},
       </if>
@@ -479,8 +479,8 @@
       <if test="upperTotalPrice != null">
         #{upperTotalPrice,jdbcType=VARCHAR},
       </if>
-      <if test="year != null">
-        #{year,jdbcType=VARCHAR},
+      <if test="years != null">
+        #{years,jdbcType=VARCHAR},
       </if>
       <if test="months != null">
         #{months,jdbcType=VARCHAR},
@@ -547,8 +547,8 @@
       <if test="proportion != null">
         proportion = #{proportion,jdbcType=DECIMAL},
       </if>
-      <if test="use != null">
-        use = #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        useing = #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         check_in_area = #{checkInArea,jdbcType=DECIMAL},
@@ -590,7 +590,7 @@
         move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
       </if>
       <if test="moveWaterMeterFee != null">
-        "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+        move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
       </if>
       <if test="wifiFee != null">
         wifi_fee = #{wifiFee,jdbcType=DECIMAL},
@@ -632,7 +632,7 @@
         move_reward = #{moveReward,jdbcType=DECIMAL},
       </if>
       <if test="closeBalcony != null">
-        "close_ balcony" = #{closeBalcony,jdbcType=DECIMAL},
+        close_balcony = #{closeBalcony,jdbcType=DECIMAL},
       </if>
       <if test="noCheckCompensate != null">
         no_check_compensate = #{noCheckCompensate,jdbcType=DECIMAL},
@@ -655,6 +655,9 @@
       <if test="unit != null">
         unit = #{unit,jdbcType=INTEGER},
       </if>
+      <if test="floors != null">
+        floors = #{floors,jdbcType=INTEGER},
+      </if>
       <if test="houseNumber != null">
         house_number = #{houseNumber,jdbcType=VARCHAR},
       </if>
@@ -670,8 +673,8 @@
       <if test="upperTotalPrice != null">
         upper_total_price = #{upperTotalPrice,jdbcType=VARCHAR},
       </if>
-      <if test="year != null">
-        year = #{year,jdbcType=VARCHAR},
+      <if test="years != null">
+        years = #{years,jdbcType=VARCHAR},
       </if>
       <if test="months != null">
         months = #{months,jdbcType=VARCHAR},
@@ -720,7 +723,7 @@
       house_owner_number = #{houseOwnerNumber,jdbcType=VARCHAR},
       public_owner_number = #{publicOwnerNumber,jdbcType=VARCHAR},
       proportion = #{proportion,jdbcType=DECIMAL},
-      use = #{use,jdbcType=VARCHAR},
+      useing = #{useing,jdbcType=VARCHAR},
       check_in_area = #{checkInArea,jdbcType=DECIMAL},
       residence_area = #{residenceArea,jdbcType=DECIMAL},
       operate_area = #{operateArea,jdbcType=DECIMAL},
@@ -734,7 +737,7 @@
       move_phone_fee = #{movePhoneFee,jdbcType=DECIMAL},
       tv_fee = #{tvFee,jdbcType=DECIMAL},
       move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
-      "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+      move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
       wifi_fee = #{wifiFee,jdbcType=DECIMAL},
       move_air_conditioning_fee = #{moveAirConditioningFee,jdbcType=DECIMAL},
       gas_fee = #{gasFee,jdbcType=DECIMAL},
@@ -748,7 +751,7 @@
       life_compensate = #{lifeCompensate,jdbcType=DECIMAL},
       change_compensate = #{changeCompensate,jdbcType=DECIMAL},
       move_reward = #{moveReward,jdbcType=DECIMAL},
-      "close_ balcony" = #{closeBalcony,jdbcType=DECIMAL},
+      close_balcony = #{closeBalcony,jdbcType=DECIMAL},
       no_check_compensate = #{noCheckCompensate,jdbcType=DECIMAL},
       other_fee = #{otherFee,jdbcType=DECIMAL},
       sum_rbm = #{sumRbm,jdbcType=DECIMAL},
@@ -756,12 +759,13 @@
       new_house_address = #{newHouseAddress,jdbcType=VARCHAR},
       seat = #{seat,jdbcType=VARCHAR},
       unit = #{unit,jdbcType=INTEGER},
+      floors = #{floors},
       house_number = #{houseNumber,jdbcType=VARCHAR},
       covered_area = #{coveredArea,jdbcType=DECIMAL},
       price = #{price,jdbcType=DECIMAL},
       total_price = #{totalPrice,jdbcType=DECIMAL},
       upper_total_price = #{upperTotalPrice,jdbcType=VARCHAR},
-      year = #{year,jdbcType=VARCHAR},
+      years = #{years,jdbcType=VARCHAR},
       months = #{months,jdbcType=VARCHAR},
       difference = #{difference,jdbcType=DECIMAL},
       upper_difference = #{upperDifference,jdbcType=VARCHAR},

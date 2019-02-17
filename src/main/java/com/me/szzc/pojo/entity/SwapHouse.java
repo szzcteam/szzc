@@ -97,6 +97,9 @@ public class SwapHouse {
 
     private String seat;
 
+
+    private String floors;
+
     private Integer unit;
 
     private String houseNumber;

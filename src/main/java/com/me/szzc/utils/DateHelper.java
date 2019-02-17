@@ -1,5 +1,6 @@
 package com.me.szzc.utils;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +14,10 @@ import java.util.Date;
  */
 public final class DateHelper {
     private DateHelper() {
+    }
+
+    public static Timestamp getTimestamp() {
+        return new Timestamp(System.currentTimeMillis());
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.aspect.SysLog;
+import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.service.SwapHouseService;
 import com.me.szzc.utils.DateHelper;
@@ -28,10 +30,14 @@ import java.util.Map;
 public class SwapHouseController extends BaseController {
 
     @RequestMapping("/ssadmin/addSwapHouse")
-    public ModelAndView addSwapHouse(@RequestBody SwapHouse request) {
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增产权调换协议")
+    public ModelAndView addSwapHouse( SwapHouse swapHouse, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
-        this.swapHouseService.addSwapHouse(request);
+        Long userId = getAdminSession(request).getFid();
+        swapHouse.setCreateUserId(userId);
+        swapHouse.setModifiedUserId(userId);
+        this.swapHouseService.addSwapHouse(swapHouse);
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "新增成功");
         modelAndView.addObject("callbackType", "closeCurrent");

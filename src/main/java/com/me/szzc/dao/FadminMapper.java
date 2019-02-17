@@ -7,13 +7,13 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface FadminMapper {
-    int deleteByPrimaryKey(Integer fid);
+    int deleteByPrimaryKey(Long fid);
 
     int insert(Fadmin record);
 
     int insertSelective(Fadmin record);
 
-    Fadmin selectByPrimaryKey(Integer fid);
+    Fadmin selectByPrimaryKey(Long fid);
 
     List<Fadmin> findAll();
 

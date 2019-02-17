@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="comm/include.inc.jsp"%>
-<form id="pagerForm" method="post" action="ssadmin/systemArgsList.html">
+<form id="pagerForm" method="post" action="ssadmin/protocolList.html">
     <input type="hidden" name="status" value="${param.status}"> <input
         type="hidden" name="keywords" value="${keywords}" /> <input
         type="hidden" name="pageNum" value="${currentPage}" /> <input
@@ -11,7 +11,7 @@
 
 <div class="pageHeader">
     <form onsubmit="return navTabSearch(this);"
-          action="ssadmin/systemArgsList.html" method="post">
+          action="ssadmin/protocolList.html" method="post">
         <div class="searchBar">
 
             <table class="searchContent">
