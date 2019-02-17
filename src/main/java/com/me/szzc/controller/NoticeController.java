@@ -14,14 +14,19 @@ import java.util.List;
  * 房屋征收补偿资金结算通知单
  */
 @Controller
-@RequestMapping("/notice")
 public class NoticeController extends BaseController {
 
-    @RequestMapping("/ssadmin/add")
+    @RequestMapping("/ssadmin/notice/add")
     public ModelAndView saveNotice(@RequestBody Notice notice) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/notice") ;
         //条件判断
-
+       /* if(StringUtils.isEmpty(notice.getProjectName())){
+            modelAndView.addObject("statusCode",300);
+            modelAndView.addObject("message","请求参数不正确");
+            modelAndView.addObject("callbackType","closeCurrent");
+            return modelAndView;
+        }*/
         this.noticeService.add(notice);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","新增成功");
@@ -29,9 +34,10 @@ public class NoticeController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("/ssadmin/detele")
+    @RequestMapping("/ssadmin/notice/detele")
     public ModelAndView deteleNotice(@RequestBody Notice notice)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/notice") ;
         //条件判断
 
         this.noticeService.detele(notice);
@@ -44,6 +50,7 @@ public class NoticeController extends BaseController {
     @RequestMapping("ssadmin/update")
     public ModelAndView updateNotice(@RequestBody Notice notice)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/notice") ;
         //条件判断
 
         this.noticeService.update(notice);
@@ -53,9 +60,10 @@ public class NoticeController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/query")
+    @RequestMapping("ssadmin/notice/query")
     public ModelAndView queryNotice(@RequestBody Notice notice)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/notice") ;
         //条件判断
 
         this.noticeService.query(notice);

@@ -11,13 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@RequestMapping("/settleAccounts")
 public class SettleAccountsController extends BaseController {
 
 
-    @RequestMapping("ssadmin/add")
+    @RequestMapping("ssadmin/settleAccounts/add")
     public ModelAndView saveSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
 
         this.settleAccountsService.add(settleAccounts);
@@ -27,9 +27,10 @@ public class SettleAccountsController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/detele")
+    @RequestMapping("ssadmin/settleAccounts/detele")
     public ModelAndView deteleSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
 
         this.settleAccountsService.detele(settleAccounts);
@@ -39,9 +40,10 @@ public class SettleAccountsController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/update")
+    @RequestMapping("ssadmin/settleAccounts/update")
     public ModelAndView updateSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
 
         this.settleAccountsService.update(settleAccounts);
@@ -51,9 +53,10 @@ public class SettleAccountsController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/query")
+    @RequestMapping("ssadmin/settleAccounts/query")
     public ModelAndView querySettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
 
         this.settleAccountsService.query(settleAccounts);
