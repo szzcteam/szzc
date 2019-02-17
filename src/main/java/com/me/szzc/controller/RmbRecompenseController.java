@@ -10,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
  * 货币补偿协议
  */
 @Controller
-@RequestMapping("/RmbRecompense")
 public class RmbRecompenseController extends BaseController {
 
-    @RequestMapping("ssadmin/add")
+    @RequestMapping("ssadmin/RmbRecompense/add")
     public ModelAndView saveRmbRecompense (@RequestBody RmbRecompense rmbRecompense)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/rmbRecompense");
         this.rmbRecompenseService.add(rmbRecompense);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","新增成功");
@@ -23,9 +23,10 @@ public class RmbRecompenseController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/detele")
+    @RequestMapping("ssadmin/RmbRecompense/detele")
     public ModelAndView dateleRmbRecompense (@RequestBody RmbRecompense rmbRecompense)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/rmbRecompense");
         this.rmbRecompenseService.detele(rmbRecompense);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","删除成功");
@@ -33,9 +34,10 @@ public class RmbRecompenseController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/update")
+    @RequestMapping("ssadmin/RmbRecompense/update")
     public ModelAndView updateRmbRecompense (@RequestBody RmbRecompense rmbRecompense)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/rmbRecompense");
         this.rmbRecompenseService.update(rmbRecompense);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","删除成功");
@@ -43,9 +45,10 @@ public class RmbRecompenseController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/query")
+    @RequestMapping("ssadmin/RmbRecompense/query")
     public ModelAndView queryRmbRecompense (@RequestBody RmbRecompense rmbRecompense)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/rmbRecompense");
         this.rmbRecompenseService.query(rmbRecompense);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","删除成功");
