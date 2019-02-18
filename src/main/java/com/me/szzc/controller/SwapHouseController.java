@@ -45,16 +45,27 @@ public class SwapHouseController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("/ssadmin/exportSwapHouse")
-    public ModelAndView exportSwapHouse(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping("/ssadmin/selectSwapHouseByHouseOwner")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "查询产权调换协议")
+    public ModelAndView selectSwapHouseByHouseOwner(@RequestParam String houseOwner) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
-        SwapHouse swapHouse = this.swapHouseService.selectByPrimaryKey(id);
+        SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "查询成功");
+        modelAndView.addObject("callbackType", "closeCurrent");
+        return modelAndView;
+    }
+
+    @RequestMapping("/ssadmin/exportSwapHouse")
+    public ModelAndView exportSwapHouse(@RequestParam String houseOwner, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //SwapHouse swapHouse = this.swapHouseService.selectByPrimaryKey(id);
+        SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
         Map<String, String> map = ObjTransMapUtils.obj2Map(swapHouse);
         //协议书名称
         String protocol = ProtocolEnum.HOUSING_PROPERTY_ECHANGE_AGREEMENT.getCode();
-        //乙方名称
-        String houseOwner = swapHouse.getHouseOwner();
         //yyyyMMddHHmmssSSS的时间格式
         String date = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
         WordUtils.exportMillCertificateWord

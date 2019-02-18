@@ -22,6 +22,10 @@ public class SwapHouseService {
 
     public SwapHouse selectByPrimaryKey(Long id) {
         return swapHouseMapper.selectByPrimaryKey(id);
-
     }
+
+    public SwapHouse selectSwapHouseByHouseOwner(String houseOwner) {
+        return swapHouseMapper.selectSwapHouseByHouseOwner(houseOwner);
+    }
+
 }

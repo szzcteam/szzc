@@ -14,4 +14,7 @@ public interface SwapHouseMapper {
     int updateByPrimaryKeySelective(SwapHouse record);
 
     int updateByPrimaryKey(SwapHouse record);
+
+    SwapHouse selectSwapHouseByHouseOwner(String houseOwner);
+
 }

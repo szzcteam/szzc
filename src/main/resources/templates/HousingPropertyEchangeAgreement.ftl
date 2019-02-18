@@ -2423,7 +2423,7 @@
                                 <w:spacing w:val="20"/>
                                 <w:u w:val="single"/>
                             </w:rPr>
-                            <w:t xml:space="preserve">}  </w:t>
+                            <w:t xml:space="preserve"></w:t>
                         </w:r>
                         <w:r w:rsidR="00811886" w:rsidRPr="006D402B">
                             <w:rPr>
