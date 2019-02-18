@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.ModuleConstont;
+import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.service.SwapHouseService;
 import com.me.szzc.utils.DateHelper;
@@ -31,7 +32,7 @@ public class SwapHouseController extends BaseController {
 
     @RequestMapping("/ssadmin/addSwapHouse")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增产权调换协议")
-    public ModelAndView addSwapHouse( SwapHouse swapHouse, HttpServletRequest request) {
+    public ModelAndView addSwapHouse(SwapHouse swapHouse, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         Long userId = getAdminSession(request).getFid();
@@ -45,17 +46,19 @@ public class SwapHouseController extends BaseController {
     }
 
     @RequestMapping("/ssadmin/exportSwapHouse")
-    public ModelAndView exportSwapHouse(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView exportSwapHouse(@RequestParam Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         SwapHouse swapHouse = this.swapHouseService.selectByPrimaryKey(id);
         Map<String, String> map = ObjTransMapUtils.obj2Map(swapHouse);
-        String s = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
-        try {
-            WordUtils.exportMillCertificateWord(request,response,map,s,"HousingPropertyEchangeAgreement.xml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //协议书名称
+        String protocol = ProtocolEnum.HOUSING_PROPERTY_ECHANGE_AGREEMENT.getCode();
+        //乙方名称
+        String houseOwner = swapHouse.getHouseOwner();
+        //yyyyMMddHHmmssSSS的时间格式
+        String date = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
+        WordUtils.exportMillCertificateWord
+                (request, response, map, protocol + "_" + houseOwner + "_" + date, "HousingPropertyEchangeAgreement.ftl");
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "导出成功");
         modelAndView.addObject("callbackType", "closeCurrent");
