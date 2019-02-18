@@ -70,7 +70,7 @@ public class AdminController extends BaseController {
 		ModelAndView modelAndView = new ModelAndView() ;
 		modelAndView.setViewName(url) ;
 		if(request.getParameter("uid") != null){
-			int fid = Integer.parseInt(request.getParameter("uid"));
+			Long fid = Long.parseLong(request.getParameter("uid"));
 			Fadmin admin = this.adminService.findById(fid);
 			modelAndView.addObject("fadmin", admin);
 		}
@@ -135,9 +135,9 @@ public class AdminController extends BaseController {
 	public ModelAndView forbbinAdmin(HttpServletRequest request) throws Exception{
 		ModelAndView modelAndView = new ModelAndView() ;
 		modelAndView.setViewName("ssadmin/comm/ajaxDone") ;
-		int fid = Integer.parseInt(request.getParameter("uid"));
+		Long fid = Long.parseLong(request.getParameter("uid"));
 		Fadmin sessionAdmin = (Fadmin)request.getSession().getAttribute("login_admin");
-		if(fid == sessionAdmin.getFid()){
+		if(fid.equals( sessionAdmin.getFid())){
 			modelAndView.addObject("statusCode",300);
 			modelAndView.addObject("message","不允许禁用当前登陆的管理员！");
 			return modelAndView;
@@ -165,7 +165,7 @@ public class AdminController extends BaseController {
 	@SysLog(code = ModuleConstont.SYSTEM_OPERATION, method = "修改管理员密码")
 	public ModelAndView updateAdmin(HttpServletRequest request) throws Exception{
 		ModelAndView modelAndView = new ModelAndView() ;
-		int fid = Integer.parseInt(request.getParameter("fadmin.fid"));
+		Long fid = Long.parseLong(request.getParameter("fadmin.fid"));
 		Fadmin fadmin = this.adminService.findById(fid);
 		Fadmin sessionAdmin = (Fadmin)request.getSession().getAttribute("login_admin");
 		if(fid == sessionAdmin.getFid()){
@@ -190,7 +190,7 @@ public class AdminController extends BaseController {
 	@SysLog(code = ModuleConstont.SYSTEM_OPERATION, method = "修改密码")
 	public ModelAndView updateAdminPassword(HttpServletRequest request) throws Exception{
 		ModelAndView modelAndView = new ModelAndView() ;
-		int fid = Integer.parseInt(request.getParameter("fadmin.fid"));
+		Long fid = Long.parseLong(request.getParameter("fadmin.fid"));
 		Fadmin fadmin = this.adminService.findById(fid);
 		String truePassword = fadmin.getFpassword();
 		String newPassWord = request.getParameter("fadmin.fpassword");
@@ -229,7 +229,7 @@ public class AdminController extends BaseController {
 	@SysLog(code = ModuleConstont.SYSTEM_OPERATION, method = "修改管理员角色")
 	public ModelAndView updateAdminRole(HttpServletRequest request) throws Exception{
 		ModelAndView modelAndView = new ModelAndView() ;
-		int fid = Integer.parseInt(request.getParameter("fadmin.fid"));
+		Long fid = Long.parseLong(request.getParameter("fadmin.fid"));
 		Fadmin fadmin = this.adminService.findById(fid);
 		if(fadmin.getFname().equals("admin")){
 			modelAndView.setViewName("ssadmin/comm/ajaxDone") ;

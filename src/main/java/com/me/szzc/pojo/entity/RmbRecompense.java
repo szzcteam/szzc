@@ -24,7 +24,7 @@ public class RmbRecompense {
 
     private BigDecimal proportion;
 
-    private String use;
+    private String useing;
 
     private BigDecimal checkInArea;
 
@@ -184,12 +184,12 @@ public class RmbRecompense {
         this.proportion = proportion;
     }
 
-    public String getUse() {
-        return use;
+    public String getUseing() {
+        return useing;
     }
 
-    public void setUse(String use) {
-        this.use = use == null ? null : use.trim();
+    public void setUseing(String useing) {
+        this.useing = useing == null ? null : useing.trim();
     }
 
     public BigDecimal getCheckInArea() {

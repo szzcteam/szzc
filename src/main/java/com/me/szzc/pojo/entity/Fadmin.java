@@ -18,7 +18,7 @@ public class Fadmin implements java.io.Serializable {
 	/**状态描述**/
 	private String fstatus_s;
 
-	private Integer fid;
+	private Long fid;
 
 	private Integer fstatus;
 
