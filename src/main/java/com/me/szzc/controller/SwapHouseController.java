@@ -46,7 +46,7 @@ public class SwapHouseController extends BaseController {
         Map<String, String> map = ObjTransMapUtils.obj2Map(swapHouse);
         String s = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
         try {
-            WordUtils.exportMillCertificateWord(request,response,map,s,"HousingPropertyEchangeAgreement.ftl");
+            WordUtils.exportMillCertificateWord(request,response,map,s,"HousingPropertyEchangeAgreement.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }
