@@ -1,11 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="comm/include.inc.jsp"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="comm/include.inc.jsp" %>
 <form id="pagerForm" method="post" action="ssadmin/protocolList.html">
     <input type="hidden" name="status" value="${param.status}"> <input
-        type="hidden" name="keywords" value="${keywords}" /> <input
-        type="hidden" name="pageNum" value="${currentPage}" /> <input
-        type="hidden" name="numPerPage" value="${numPerPage}" /> <input
-        type="hidden" name="orderField" value="${param.orderField}" />
+        type="hidden" name="keywords" value="${keywords}"/> <input
+        type="hidden" name="pageNum" value="${currentPage}"/> <input
+        type="hidden" name="numPerPage" value="${numPerPage}"/> <input
+        type="hidden" name="orderField" value="${param.orderField}"/>
 </form>
 
 
@@ -17,66 +17,100 @@
             <table class="searchContent">
                 <tr>
                     <td>KEY：<input type="text" name="keywords" value="${keywords}"
-                                   size="60" />
+                                   size="60"/>
                     </td>
                 </tr>
             </table>
             <div class="subBar">
                 <ul>
-                    <li><div class="buttonActive">
-                        <div class="buttonContent">
-                            <button type="submit">查询</button>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">查询</button>
+                            </div>
                         </div>
-                    </div></li>
+                    </li>
                 </ul>
             </div>
         </div>
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar">
+    <div class="panelBar" style="height: 52px;">
         <ul class="toolBar">
-            <shiro:hasPermission name="ssadmin/addSwapHouse.html">
+            <!-- 新增 -->
+            <shiro:hasPermission name="ssadmin/addProtocol.html">
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增产权调换协议</span>
+                       height="400" width="800" target="dialog" rel="addSwapHouse"><span>新增产权调换协议</span>
                 </a></li>
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense&uid={sid_user}"
+                       height="400" width="800" target="dialog" rel="addRmbRecompense"><span>新增货币补偿协议</span>
+                </a></li>
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增手续通知单</span>
+                </a></li>
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增补偿资金结算单</span>
+                </a></li>
+            </shiro:hasPermission>
+            <!-- 修改 -->
+            <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/updateSwapHouse&uid={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改产权调换协议</span>
-                </a></li>
-            </shiro:hasPermission>
-            <shiro:hasPermission name="ssadmin/addRmbRecompense.html">
-                <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense&uid={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增货币补偿协议</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改货币补偿协议</span>
                 </a></li>
-            </shiro:hasPermission>
-
-            <shiro:hasPermission name="ssadmin/addProtocolNotice.html">
-                <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增手续通知单</span>
-                </a></li>
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改手续通知单</span>
                 </a></li>
-            </shiro:hasPermission>
-
-
-            <shiro:hasPermission name="ssadmin/addSettleAccounts.html">
-                <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增补偿资金结算单</span>
-                </a></li>
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改补偿资金结算单</span>
+                </a></li>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/deleteProtocol.html">
+                <li><a class="delete"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       target="ajaxTodo" title="确定要删除产权调换协议吗?"><span>删除产权调换协议</span>
+                </a></li>
+                <li><a class="delete"
+                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       target="ajaxTodo" title="确定要删除货币补偿协议吗?"><span>删除货币补偿协议</span>
+                </a></li>
+                <li><a class="delete"
+                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       target="ajaxTodo" title="确定要删除通知单吗?"><span>删除通知单</span>
+                </a></li>
+                <li><a class="delete"
+                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       target="ajaxTodo" title="确定要删除结算单吗?"><span>删除结算单</span>
+                </a></li>
+            </shiro:hasPermission>
+
+            <shiro:hasPermission name="ssadmin/deleteProtocol.html">
+                <li><a class="icon"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       target="dwzExport" targetType="navTab"><span>导出产权调换</span>
+                </a></li>
+                <li><a class="icon"
+                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       target="dwzExport" targetType="navTab"><span>导出货币补偿</span>
+                </a></li>
+                <li><a class="icon"
+                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       target="dwzExport" targetType="navTab"><span>导出通知单</span>
+                </a></li>
+                <li><a class="icon"
+                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       target="dwzExport" targetType="navTab"><span>导出结算单</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>
@@ -130,7 +164,6 @@
             <td width="60">√</td>
             <td width="60"></td>
         </tr>
-
 
 
         <%--<c:forEach items="${systemArgsList}" var="systemArgs" varStatus="num">
