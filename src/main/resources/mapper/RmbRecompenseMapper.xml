@@ -683,5 +683,12 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
+  <select id="selectOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_rmb_recompense
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
 
 </mapper>

@@ -17,4 +17,6 @@ public interface RmbRecompenseMapper {
 
 
     void updateByStatus(Long id, int detele);
+
+    int selectOne(Long id);
 }

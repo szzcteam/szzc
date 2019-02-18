@@ -28,4 +28,8 @@ public class RmbRecompenseService {
     public void query(RmbRecompense rmbRecompense) {
         this.rmbRecompenseMapper.selectByPrimaryKey(rmbRecompense.getId());
     }
+
+    public int queryOne(Long id) {
+        return this.rmbRecompenseMapper.selectOne(id);
+    }
 }

@@ -24,9 +24,15 @@ public class RmbRecompenseController extends BaseController {
     }
 
     @RequestMapping("ssadmin/RmbRecompense/detele")
-    public ModelAndView dateleRmbRecompense (@RequestBody RmbRecompense rmbRecompense)throws Exception{
+    public ModelAndView dateleRmbRecompense (RmbRecompense rmbRecompense)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/rmbRecompense");
+        int i =  this.rmbRecompenseService.queryOne(rmbRecompense.getId());
+        if(i==0){
+            modelAndView.addObject("statusCode",300);
+            modelAndView.addObject("message","用户不存在此协议");
+            return modelAndView;
+        }
         this.rmbRecompenseService.detele(rmbRecompense);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","删除成功");
