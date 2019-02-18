@@ -104,6 +104,8 @@ public class RmbRecompense {
 
     private Long modifiedUserId;
 
+    private int Detele;
+
     public Long getId() {
         return id;
     }
@@ -502,5 +504,13 @@ public class RmbRecompense {
 
     public void setModifiedUserId(Long modifiedUserId) {
         this.modifiedUserId = modifiedUserId;
+    }
+
+    public int getDetele() {
+        return Detele;
+    }
+
+    public void setDetele(int detele) {
+        Detele = detele;
     }
 }
