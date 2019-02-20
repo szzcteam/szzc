@@ -17,4 +17,6 @@ public interface SwapHouseMapper {
 
     SwapHouse selectSwapHouseByHouseOwner(String houseOwner);
 
+    int  delete(SwapHouse swapHouse);
+
 }

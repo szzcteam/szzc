@@ -136,4 +136,7 @@ public class SwapHouse {
 
     private Long modifiedUserId;
 
+
+    private Boolean deleted;
+
 }

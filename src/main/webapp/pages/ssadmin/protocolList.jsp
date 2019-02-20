@@ -60,7 +60,7 @@
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/updateSwapHouse&uid={sid_user}"
+                       href="ssadmin/selectSwapHouseByHouseOwner.html?url=ssadmin/updateSwapHouse&houseOwner={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改产权调换协议</span>
                 </a></li>
                 <li><a class="edit"
@@ -78,7 +78,7 @@
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="delete"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       href="ssadmin/deleteSwapHouse.html?houseOwner={sid_user}"
                        target="ajaxTodo" title="确定要删除产权调换协议吗?"><span>删除产权调换协议</span>
                 </a></li>
                 <li><a class="delete"
@@ -131,7 +131,7 @@
         <tbody>
 
 
-        <tr target="sid_user" rel="1">
+        <tr target="sid_user" rel="张三">
             <td width="20">1</td>
             <td width="60">张三</td>
             <td width="60">13075474895</td>
@@ -142,7 +142,7 @@
             <td width="60"></td>
         </tr>
 
-        <tr target="sid_user" rel="2">
+        <tr target="sid_user" rel="李四">
             <td width="20">2</td>
             <td width="60">李四</td>
             <td width="60">13075474895</td>
@@ -154,7 +154,7 @@
         </tr>
 
 
-        <tr target="sid_user" rel="3">
+        <tr target="sid_user" rel="王五">
             <td width="20">1</td>
             <td width="60">王五</td>
             <td width="60">13077654895</td>

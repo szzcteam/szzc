@@ -1,6 +1,7 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.aspect.SysLog;
+import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.SwapHouse;
@@ -35,9 +36,12 @@ public class SwapHouseController extends BaseController {
     public ModelAndView addSwapHouse(SwapHouse swapHouse, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //创建人
         Long userId = getAdminSession(request).getFid();
         swapHouse.setCreateUserId(userId);
         swapHouse.setModifiedUserId(userId);
+        //征收公司
+        swapHouse.setCompany(constantMap.getValue(SystemArgsConstant.COMPANY));
         this.swapHouseService.addSwapHouse(swapHouse);
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "新增成功");
@@ -45,12 +49,60 @@ public class SwapHouseController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("/ssadmin/selectSwapHouseByHouseOwner")
-    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "查询产权调换协议")
-    public ModelAndView selectSwapHouseByHouseOwner(@RequestParam String houseOwner) {
+    @RequestMapping("/ssadmin/updateSwapHouse")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改产权调换协议")
+    public ModelAndView updateSwapHouse(SwapHouse swapHouse, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        swapHouse.setModifiedUserId(userId);
+        this.swapHouseService.updateSwapHouse(swapHouse);
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "修改成功");
+        modelAndView.addObject("callbackType", "closeCurrent");
+        return modelAndView;
+    }
+
+    @RequestMapping("/ssadmin/deleteSwapHouse")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "删除产权调换协议")
+    public ModelAndView deleteSwapHouse(String houseOwner, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
+        if(swapHouse == null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "参数错误，查询不到产权调换协议");
+            return modelAndView;
+        }
+
+        if(swapHouse.getDeleted()) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            return modelAndView;
+        }
+
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        swapHouse.setModifiedUserId(userId);
+        this.swapHouseService.delete(swapHouse);
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "删除成功");
+        return modelAndView;
+    }
+
+
+
+
+    @RequestMapping("/ssadmin/selectSwapHouseByHouseOwner")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "查询产权调换协议")
+    public ModelAndView selectSwapHouseByHouseOwner(String houseOwner, String url) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(url);
+        SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
+        if(swapHouse != null) {
+            modelAndView.addObject("swapHouse", swapHouse);
+        }
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "查询成功");
         modelAndView.addObject("callbackType", "closeCurrent");

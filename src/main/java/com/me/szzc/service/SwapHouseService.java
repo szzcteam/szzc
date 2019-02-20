@@ -17,8 +17,23 @@ public class SwapHouseService {
     public void addSwapHouse(SwapHouse request) {
         request.setCreateDate(DateHelper.getTimestamp());
         request.setModifiedDate(DateHelper.getTimestamp());
+        request.setDeleted(false);
         swapHouseMapper.insertSelective(request);
     }
+
+    public void delete(SwapHouse swapHouse) {
+        swapHouse.setModifiedDate(DateHelper.getTimestamp());
+        swapHouse.setDeleted(true);
+        swapHouseMapper.delete(swapHouse);
+    }
+
+
+    public void updateSwapHouse(SwapHouse request) {
+        request.setModifiedDate(DateHelper.getTimestamp());
+        swapHouseMapper.updateByPrimaryKeySelective(request);
+    }
+
+
 
     public SwapHouse selectByPrimaryKey(Long id) {
         return swapHouseMapper.selectByPrimaryKey(id);
