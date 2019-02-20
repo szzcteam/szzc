@@ -8,7 +8,7 @@
     <result column="lessee" jdbcType="VARCHAR" property="lessee" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="lessee_phone" jdbcType="VARCHAR" property="lesseePhone" />
-    <result column="use" jdbcType="VARCHAR" property="use" />
+    <result column="useing" jdbcType="VARCHAR" property="useing" />
     <result column="check_in_area" jdbcType="DECIMAL" property="checkInArea" />
     <result column="in_area" jdbcType="DECIMAL" property="inArea" />
     <result column="assess_price" jdbcType="DECIMAL" property="assessPrice" />
@@ -25,9 +25,9 @@
     <result column="calc_interim_fee" jdbcType="VARCHAR" property="calcInterimFee" />
     <result column="interim_fee" jdbcType="DECIMAL" property="interimFee" />
     <result column="interim_fee_bz" jdbcType="VARCHAR" property="interimFeeBz" />
-    <result column="calc_move_water meter_fee" jdbcType="VARCHAR" property="calcMoveWaterMeterFee" />
-    <result column="move_water meter_fee" jdbcType="DECIMAL" property="moveWaterMeterFee" />
-    <result column="move_water meter_fee_bz" jdbcType="VARCHAR" property="moveWaterMeterFeeBz" />
+    <result column="calc_move_water_meter_fee" jdbcType="VARCHAR" property="calcMoveWaterMeterFee" />
+    <result column="move_water_meter_fee" jdbcType="DECIMAL" property="moveWaterMeterFee" />
+    <result column="move_water_meter_fee_bz" jdbcType="VARCHAR" property="moveWaterMeterFeeBz" />
     <result column="calc_move_ammeter_fee" jdbcType="VARCHAR" property="calcMoveAmmeterFee" />
     <result column="move_ammeter_fee" jdbcType="DECIMAL" property="moveAmmeterFee" />
     <result column="move_ammeter_fee_bz" jdbcType="VARCHAR" property="moveAmmeterFeeBz" />
@@ -110,13 +110,14 @@
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
     <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, card_no, house_owner, lessee, phone, lessee_phone, use, check_in_area, in_area, 
+    id, card_no, house_owner, lessee, phone, lessee_phone, useing, check_in_area, in_area,
     assess_price, address, calc_value_compensate, value_compensate, value_compensate_bz, 
     calc_decoration_compensate, decoration_compensate, decoration_compensate_bz, calc_move_house_fee, 
     move_house_fee, move_house_fee_bz, calc_interim_fee, interim_fee, interim_fee_bz, 
-    "calc_move_water meter_fee", "move_water meter_fee", "move_water meter_fee_bz", calc_move_ammeter_fee, 
+    "calc_move_water_meter_fee", "move_water_meter_fee", "move_water_meter_fee_bz", calc_move_ammeter_fee,
     move_ammeter_fee, move_ammeter_fee_bz, calc_move_air_conditioning_fee, move_air_conditioning_fee, 
     move_air_conditioning_fee_bz, calc_hot_water_compensate, hot_water_compensate, hot_water_compensate_bz, 
     calc_gas_fee, gas_fee, gas_fee_bz, calc_structure_compensate, structure_compensate, 
@@ -133,7 +134,7 @@
     pay_money1, pay_money2, pay_money3, pay_money4, pay_money5, pay_money6, pay_money7, 
     pay_money8, receive_money1, receive_money2, receive_money3, receive_money4, receive_money5, 
     receive_money6, receive_money7, receive_money8, create_date, create_user_id, modified_date, 
-    modified_user_id
+    modified_user_id,deleted
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -148,14 +149,14 @@
   <insert id="insert" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     insert into t_settle_accounts (id, card_no, house_owner, 
       lessee, phone, lessee_phone, 
-      use, check_in_area, in_area, 
+      useing, check_in_area, in_area,
       assess_price, address, calc_value_compensate, 
       value_compensate, value_compensate_bz, calc_decoration_compensate, 
       decoration_compensate, decoration_compensate_bz, 
       calc_move_house_fee, move_house_fee, move_house_fee_bz, 
       calc_interim_fee, interim_fee, interim_fee_bz, 
-      "calc_move_water meter_fee", "move_water meter_fee", 
-      "move_water meter_fee_bz", calc_move_ammeter_fee, 
+      calc_move_water_meter_fee, move_water_meter_fee,
+      move_water_meter_fee_bz, calc_move_ammeter_fee,
       move_ammeter_fee, move_ammeter_fee_bz, calc_move_air_conditioning_fee, 
       move_air_conditioning_fee, move_air_conditioning_fee_bz, 
       calc_hot_water_compensate, hot_water_compensate, 
@@ -185,10 +186,10 @@
       receive_money2, receive_money3, receive_money4, 
       receive_money5, receive_money6, receive_money7, 
       receive_money8, create_date, create_user_id, 
-      modified_date, modified_user_id)
+      modified_date, modified_user_id, deleted)
     values (#{id,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR}, 
       #{lessee,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{lesseePhone,jdbcType=VARCHAR}, 
-      #{use,jdbcType=VARCHAR}, #{checkInArea,jdbcType=DECIMAL}, #{inArea,jdbcType=DECIMAL}, 
+      #{useing,jdbcType=VARCHAR}, #{checkInArea,jdbcType=DECIMAL}, #{inArea,jdbcType=DECIMAL},
       #{assessPrice,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, #{calcValueCompensate,jdbcType=VARCHAR}, 
       #{valueCompensate,jdbcType=DECIMAL}, #{valueCompensateBz,jdbcType=VARCHAR}, #{calcDecorationCompensate,jdbcType=VARCHAR}, 
       #{decorationCompensate,jdbcType=DECIMAL}, #{decorationCompensateBz,jdbcType=VARCHAR}, 
@@ -225,7 +226,7 @@
       #{receiveMoney2,jdbcType=VARCHAR}, #{receiveMoney3,jdbcType=VARCHAR}, #{receiveMoney4,jdbcType=VARCHAR}, 
       #{receiveMoney5,jdbcType=VARCHAR}, #{receiveMoney6,jdbcType=VARCHAR}, #{receiveMoney7,jdbcType=VARCHAR}, 
       #{receiveMoney8,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
-      #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT})
+      #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}, 0 )
   </insert>
   <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     insert into t_settle_accounts
@@ -248,8 +249,8 @@
       <if test="lesseePhone != null">
         lessee_phone,
       </if>
-      <if test="use != null">
-        use,
+      <if test="useing != null">
+        useing,
       </if>
       <if test="checkInArea != null">
         check_in_area,
@@ -300,13 +301,13 @@
         interim_fee_bz,
       </if>
       <if test="calcMoveWaterMeterFee != null">
-        "calc_move_water meter_fee",
+        calc_move_water_meter_fee,
       </if>
       <if test="moveWaterMeterFee != null">
-        "move_water meter_fee",
+        move_water_meter_fee,
       </if>
       <if test="moveWaterMeterFeeBz != null">
-        "move_water meter_fee_bz",
+        move_water_meter_fee_bz,
       </if>
       <if test="calcMoveAmmeterFee != null">
         calc_move_ammeter_fee,
@@ -554,6 +555,9 @@
       <if test="modifiedUserId != null">
         modified_user_id,
       </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -574,8 +578,8 @@
       <if test="lesseePhone != null">
         #{lesseePhone,jdbcType=VARCHAR},
       </if>
-      <if test="use != null">
-        #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         #{checkInArea,jdbcType=DECIMAL},
@@ -880,6 +884,9 @@
       <if test="modifiedUserId != null">
         #{modifiedUserId,jdbcType=BIGINT},
       </if>
+      <if test="deleted != null">
+        #{deleted},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
@@ -900,8 +907,8 @@
       <if test="lesseePhone != null">
         lessee_phone = #{lesseePhone,jdbcType=VARCHAR},
       </if>
-      <if test="use != null">
-        use = #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        useing = #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         check_in_area = #{checkInArea,jdbcType=DECIMAL},
@@ -952,13 +959,13 @@
         interim_fee_bz = #{interimFeeBz,jdbcType=VARCHAR},
       </if>
       <if test="calcMoveWaterMeterFee != null">
-        "calc_move_water meter_fee" = #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
+        calc_move_water_meter_fee = #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
       </if>
       <if test="moveWaterMeterFee != null">
-        "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+        move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
       </if>
       <if test="moveWaterMeterFeeBz != null">
-        "move_water meter_fee_bz" = #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
+        move_water_meter_fee_bz = #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
       </if>
       <if test="calcMoveAmmeterFee != null">
         calc_move_ammeter_fee = #{calcMoveAmmeterFee,jdbcType=VARCHAR},
@@ -1216,7 +1223,7 @@
       lessee = #{lessee,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       lessee_phone = #{lesseePhone,jdbcType=VARCHAR},
-      use = #{use,jdbcType=VARCHAR},
+      useing = #{useing,jdbcType=VARCHAR},
       check_in_area = #{checkInArea,jdbcType=DECIMAL},
       in_area = #{inArea,jdbcType=DECIMAL},
       assess_price = #{assessPrice,jdbcType=DECIMAL},
@@ -1233,9 +1240,9 @@
       calc_interim_fee = #{calcInterimFee,jdbcType=VARCHAR},
       interim_fee = #{interimFee,jdbcType=DECIMAL},
       interim_fee_bz = #{interimFeeBz,jdbcType=VARCHAR},
-      "calc_move_water meter_fee" = #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
-      "move_water meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
-      "move_water meter_fee_bz" = #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
+      calc_move_water_meter_fee = #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
+      move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
+      move_water_meter_fee_bz = #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
       calc_move_ammeter_fee = #{calcMoveAmmeterFee,jdbcType=VARCHAR},
       move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
       move_ammeter_fee_bz = #{moveAmmeterFeeBz,jdbcType=VARCHAR},

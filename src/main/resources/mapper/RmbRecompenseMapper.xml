@@ -52,7 +52,7 @@
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
     <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
-    <result column="datele" jdbcType="BIGINT" property="detele" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
   </resultMap>
   <sql id="Base_Column_List">
     id, card_no, mng_office, company, house_owner, recompense_plan, address, house_owner_number, 
@@ -63,7 +63,7 @@
     interim_price, interim_month, interim_fee, suspend_business_fee, rmb_compensate, 
     life_compensate, change_compensate, move_reward, close_balcony, no_check_compensate, 
     other_fee, sum_rbm, upper_rmb, other_terms_one, other_terms_two, create_date, create_user_id, 
-    modified_date, modified_user_id,detele
+    modified_date, modified_user_id,deleted
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -266,6 +266,9 @@
       <if test="modifiedUserId != null">
         modified_user_id,
       </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -417,6 +420,9 @@
       </if>
       <if test="modifiedUserId != null">
         #{modifiedUserId,jdbcType=BIGINT},
+      </if>
+      <if test="deleted != null">
+        #{deleted},
       </if>
     </trim>
   </insert>
