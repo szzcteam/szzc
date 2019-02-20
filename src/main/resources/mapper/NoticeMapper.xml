@@ -12,7 +12,7 @@
     <result column="lessee" jdbcType="VARCHAR" property="lessee" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="lessee_phone" jdbcType="VARCHAR" property="lesseePhone" />
-    <result column="use" jdbcType="VARCHAR" property="use" />
+    <result column="useing" jdbcType="VARCHAR" property="useing" />
     <result column="check_in_area" jdbcType="VARCHAR" property="checkInArea" />
     <result column="proportion" jdbcType="DECIMAL" property="proportion" />
     <result column="assess_price" jdbcType="DECIMAL" property="assessPrice" />
@@ -105,10 +105,11 @@
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
     <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
   </resultMap>
   <sql id="Base_Column_List">
     id, card_no, project_name, years, months, days, house_owner, lessee, phone, lessee_phone, 
-    use, check_in_area, proportion, assess_price, identity_no, address, calc_value_compensate, 
+    useing, check_in_area, proportion, assess_price, identity_no, address, calc_value_compensate,
     value_compensate, value_compensate_bz, calc_decoration_compensate, decoration_compensate, 
     decoration_compensate_bz, calc_structure_compensate, structure_compensate, structure_compensate_bz, 
     calc_move_ammeter_fee, move_ammeter_fee, move_ammeter_fee_bz, calc_move_water_meter_fee, 
@@ -126,7 +127,8 @@
     calc_other, other_rmb, other_bz, calc_pay_total, pay_total, pay_total_bz, change_area, 
     calc_change_rmb, change_rmb, change_rmb_bz, real_receive_total, real_pay_total, real_pay_money1, 
     real_pay_money2, real_pay_money3, real_pay_money4, real_pay_money5, real_pay_money6, 
-    real_pay_money7, real_pay_money8, create_date, create_user_id, modified_date, modified_user_id
+    real_pay_money7, real_pay_money8, create_date, create_user_id, modified_date, modified_user_id,
+    deleted
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -142,7 +144,7 @@
     insert into t_notice (id, card_no, project_name, 
       years, months, days, 
       house_owner, lessee, phone, 
-      lessee_phone, use, check_in_area, 
+      lessee_phone, useing, check_in_area,
       proportion, assess_price, identity_no, 
       address, calc_value_compensate, value_compensate, 
       value_compensate_bz, calc_decoration_compensate, 
@@ -176,12 +178,12 @@
       real_pay_money1, real_pay_money2, real_pay_money3, 
       real_pay_money4, real_pay_money5, real_pay_money6, 
       real_pay_money7, real_pay_money8, create_date, 
-      create_user_id, modified_date, modified_user_id
+      create_user_id, modified_date, modified_user_id,deleted
       )
     values (#{id,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
       #{years,jdbcType=VARCHAR}, #{months,jdbcType=VARCHAR}, #{days,jdbcType=VARCHAR}, 
       #{houseOwner,jdbcType=VARCHAR}, #{lessee,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{lesseePhone,jdbcType=VARCHAR}, #{use,jdbcType=VARCHAR}, #{checkInArea,jdbcType=VARCHAR}, 
+      #{lesseePhone,jdbcType=VARCHAR}, #{useing,jdbcType=VARCHAR}, #{checkInArea,jdbcType=VARCHAR},
       #{proportion,jdbcType=DECIMAL}, #{assessPrice,jdbcType=DECIMAL}, #{identityNo,jdbcType=INTEGER}, 
       #{address,jdbcType=VARCHAR}, #{calcValueCompensate,jdbcType=VARCHAR}, #{valueCompensate,jdbcType=DECIMAL}, 
       #{valueCompensateBz,jdbcType=VARCHAR}, #{calcDecorationCompensate,jdbcType=VARCHAR}, 
@@ -215,7 +217,7 @@
       #{realPayMoney1,jdbcType=VARCHAR}, #{realPayMoney2,jdbcType=VARCHAR}, #{realPayMoney3,jdbcType=VARCHAR}, 
       #{realPayMoney4,jdbcType=VARCHAR}, #{realPayMoney5,jdbcType=VARCHAR}, #{realPayMoney6,jdbcType=VARCHAR}, 
       #{realPayMoney7,jdbcType=VARCHAR}, #{realPayMoney8,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}
+      #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT},0
       )
   </insert>
   <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.Notice">
@@ -251,8 +253,8 @@
       <if test="lesseePhone != null">
         lessee_phone,
       </if>
-      <if test="use != null">
-        use,
+      <if test="useing != null">
+        useing,
       </if>
       <if test="checkInArea != null">
         check_in_area,
@@ -530,6 +532,9 @@
       <if test="modifiedUserId != null">
         modified_user_id,
       </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -562,8 +567,8 @@
       <if test="lesseePhone != null">
         #{lesseePhone,jdbcType=VARCHAR},
       </if>
-      <if test="use != null">
-        #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         #{checkInArea,jdbcType=VARCHAR},
@@ -841,6 +846,9 @@
       <if test="modifiedUserId != null">
         #{modifiedUserId,jdbcType=BIGINT},
       </if>
+      <if test="deleted != null">
+        #{deleted},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.Notice">
@@ -873,8 +881,8 @@
       <if test="lesseePhone != null">
         lessee_phone = #{lesseePhone,jdbcType=VARCHAR},
       </if>
-      <if test="use != null">
-        use = #{use,jdbcType=VARCHAR},
+      <if test="useing != null">
+        useing = #{useing,jdbcType=VARCHAR},
       </if>
       <if test="checkInArea != null">
         check_in_area = #{checkInArea,jdbcType=VARCHAR},
@@ -1166,7 +1174,7 @@
       lessee = #{lessee,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       lessee_phone = #{lesseePhone,jdbcType=VARCHAR},
-      use = #{use,jdbcType=VARCHAR},
+      useing = #{useing,jdbcType=VARCHAR},
       check_in_area = #{checkInArea,jdbcType=VARCHAR},
       proportion = #{proportion,jdbcType=DECIMAL},
       assess_price = #{assessPrice,jdbcType=DECIMAL},
