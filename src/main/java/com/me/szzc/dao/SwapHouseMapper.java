@@ -19,4 +19,5 @@ public interface SwapHouseMapper {
 
     int  delete(SwapHouse swapHouse);
 
+    int selectNmae(String houseOwner);
 }

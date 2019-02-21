@@ -21,4 +21,6 @@ public interface RmbRecompenseMapper {
     int selectOne(Long id);
 
     RmbRecompense selectByHouseOwner(String houseOwner);
+
+    int selectNmae(String houseOwner);
 }

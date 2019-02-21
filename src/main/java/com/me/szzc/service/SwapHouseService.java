@@ -43,4 +43,11 @@ public class SwapHouseService {
         return swapHouseMapper.selectSwapHouseByHouseOwner(houseOwner);
     }
 
+    public boolean queryName(String name) {
+        int i = this.swapHouseMapper.selectNmae(name);
+        if(i==0){
+            return false;
+        }
+        else return true;
+    }
 }

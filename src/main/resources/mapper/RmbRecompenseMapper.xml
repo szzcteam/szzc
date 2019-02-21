@@ -703,4 +703,11 @@
     where house_owner = #{houseOwner}
   </select>
 
+
+  <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    select COUNT(1)
+    from t_rmb_recompense
+    where house_owner = #{houseOwner}
+  </select>
+
 </mapper>

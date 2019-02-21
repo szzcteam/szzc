@@ -1327,4 +1327,11 @@
       modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    select COUNT(1)
+    from t_settle_accounts
+    where house_owner = #{houseOwner , jdbcType=VARCHAR}
+  </select>
+
 </mapper>

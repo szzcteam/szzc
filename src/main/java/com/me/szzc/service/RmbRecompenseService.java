@@ -36,4 +36,12 @@ public class RmbRecompenseService {
     public RmbRecompense selectByHouseOwner(String houseOwner) {
         return this.rmbRecompenseMapper.selectByHouseOwner(houseOwner);
     }
+
+    public boolean queryName(String name) {
+        int i = this.rmbRecompenseMapper.selectNmae(name);
+        if(i==0){
+            return false;
+        }
+        else return true;
+    }
 }

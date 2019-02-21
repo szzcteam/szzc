@@ -97,7 +97,7 @@
 
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="icon"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       href="ssadmin/exportSwapHouse.html?houseOwner={sid_user}"
                        target="dwzExport" targetType="navTab"><span>导出产权调换</span>
                 </a></li>
                 <li><a class="icon"
@@ -130,50 +130,18 @@
         </thead>
         <tbody>
 
-
-        <tr target="sid_user" rel="张三">
-            <td width="20">1</td>
-            <td width="60">张三</td>
-            <td width="60">13075474895</td>
-            <td width="60">已完成</td>
-            <td width="60">√</td>
-            <td width="60">√</td>
-            <td width="60">√</td>
-            <td width="60"></td>
-        </tr>
-
-        <tr target="sid_user" rel="李四">
-            <td width="20">2</td>
-            <td width="60">李四</td>
-            <td width="60">13075474895</td>
-            <td width="60">已完成</td>
-            <td width="60">√</td>
-            <td width="60">√</td>
-            <td width="60">√</td>
-            <td width="60"></td>
-        </tr>
-
-
-        <tr target="sid_user" rel="王五">
-            <td width="20">1</td>
-            <td width="60">王五</td>
-            <td width="60">13077654895</td>
-            <td width="60">未完成</td>
-            <td width="60">√</td>
-            <td width="60"></td>
-            <td width="60">√</td>
-            <td width="60"></td>
-        </tr>
-
-
-        <%--<c:forEach items="${systemArgsList}" var="systemArgs" varStatus="num">
-            <tr target="sid_user" rel="${systemArgs.fid}">
+        <c:forEach items="${protocolList}" var="protocol" varStatus="num">
+            <tr target="sid_user" rel="${protocol.name}">
                 <td>${num.index +1}</td>
-                <td>${systemArgs.fkey}</td>
-                <td>${systemArgs.fvalue_s}</td>
-                <td>${systemArgs.fdescription}</td>
+                <td>${protocol.name}</td>
+                <td>${protocol.phone}</td>
+                <td>${protocol.status}</td>
+                <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>
+                <td><c:if test="${protocol.rmbRecompenseFlag == true}">√</c:if></td>
+                <td><c:if test="${protocol.swapHouseFlag == true}">√</c:if></td>
+                <td><c:if test="${protocol.settleAccountsFlag == true}">√</c:if></td>
             </tr>
-        </c:forEach>--%>
+        </c:forEach>
         </tbody>
     </table>
 

@@ -5,7 +5,9 @@ import com.me.szzc.pojo.entity.Notice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NoticeService {
@@ -28,4 +30,16 @@ public class NoticeService {
     public void query(Notice notice) {
         this.noticeMapper.selectByPrimaryKey(notice.getId());
     }
+
+
+    public Map<String ,String> queryAll() {
+        List<Notice> listNotice= this.noticeMapper.selectAll();
+
+        Map<String, String> map = new HashMap<String, String>();
+        for (Notice notice:listNotice) {
+            map.put(notice.getHouseOwner(),notice.getPhone());
+        }
+        return map;
+    }
+
 }

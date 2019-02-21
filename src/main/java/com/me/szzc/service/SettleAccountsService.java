@@ -26,4 +26,12 @@ public class SettleAccountsService {
     public void query(SettleAccounts settleAccounts) {
         this.settleAccountsMapper.selectByPrimaryKey(settleAccounts.getId());
     }
+
+    public boolean queryName(String name) {
+        int i = this.settleAccountsMapper.selectNmae(name);
+        if(i==0){
+            return false;
+        }
+        else return true;
+    }
 }
