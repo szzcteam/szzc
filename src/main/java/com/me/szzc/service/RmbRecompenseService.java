@@ -17,8 +17,8 @@ public class RmbRecompenseService {
 
     public void detele(RmbRecompense rmbRecompense) {
         //this.rmbRecompenseMapper.deleteByPrimaryKey(rmbRecompense.getId());
-        rmbRecompense.setDetele(0);
-        this.rmbRecompenseMapper.updateByStatus(rmbRecompense.getId(),rmbRecompense.getDetele());
+        rmbRecompense.setDeleted(false);
+        this.rmbRecompenseMapper.updateByStatus(rmbRecompense.getId(),rmbRecompense.getDeleted());
     }
 
     public void update(RmbRecompense rmbRecompense) {

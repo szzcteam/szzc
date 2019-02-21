@@ -16,7 +16,7 @@ public interface RmbRecompenseMapper {
     int updateByPrimaryKey(RmbRecompense record);
 
 
-    void updateByStatus(Long id, Boolean detele);
+    void updateByStatus(Long id, Boolean deteled);
 
     int selectOne(Long id);
 
