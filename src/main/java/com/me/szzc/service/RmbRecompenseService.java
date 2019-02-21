@@ -2,6 +2,7 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.RmbRecompenseMapper;
 import com.me.szzc.pojo.entity.RmbRecompense;
+import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +13,20 @@ public class RmbRecompenseService {
     private RmbRecompenseMapper rmbRecompenseMapper;
 
     public void add(RmbRecompense rmbRecompense) {
+        rmbRecompense.setCreateDate(DateHelper.getTimestamp());
+        rmbRecompense.setModifiedDate(DateHelper.getTimestamp());
+        rmbRecompense.setDeleted(false);
         this.rmbRecompenseMapper.insert(rmbRecompense);
     }
 
     public void detele(RmbRecompense rmbRecompense) {
         //this.rmbRecompenseMapper.deleteByPrimaryKey(rmbRecompense.getId());
-        rmbRecompense.setDetele(0);
-        this.rmbRecompenseMapper.updateByStatus(rmbRecompense.getId(),rmbRecompense.getDetele());
+        rmbRecompense.setDeleted(true);
+        this.rmbRecompenseMapper.updateByStatus(rmbRecompense.getId(),rmbRecompense.getDeleted());
     }
 
     public void update(RmbRecompense rmbRecompense) {
-        this.rmbRecompenseMapper.updateByPrimaryKey(rmbRecompense);
+        this.rmbRecompenseMapper.updateByPrimaryKeySelective(rmbRecompense);
     }
 
     public void query(RmbRecompense rmbRecompense) {
@@ -31,5 +35,10 @@ public class RmbRecompenseService {
 
     public int queryOne(Long id) {
         return this.rmbRecompenseMapper.selectOne(id);
+    }
+
+
+    public RmbRecompense selectByHouseOwner(String houseOwner) {
+        return rmbRecompenseMapper.selectByHouseOwner(houseOwner);
     }
 }

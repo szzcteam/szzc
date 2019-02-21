@@ -228,8 +228,6 @@
                     <div class="button">
                         <div class="buttonContent">
                             <button type="button" class="close">取消</button>
-
-                            <button type="button" onclick="vfull()">默认填充值</button>
                         </div>
                     </div>
                 </li>
@@ -246,10 +244,5 @@
             return false;
         return true;
     }
-    function vfull() {
-        var inputTexts = $("input[type='text']");
-        $.each(inputTexts, function (index, obj) {
-            $(obj).val("123");
-        });
-    }
+
 </script>
