@@ -73,9 +73,9 @@
     <result column="calc_rmb_move_reward" jdbcType="VARCHAR" property="calcRmbMoveReward" />
     <result column="rmb_move_reward" jdbcType="DECIMAL" property="rmbMoveReward" />
     <result column="rmb_move_reward_bz" jdbcType="VARCHAR" property="rmbMoveRewardBz" />
-    <result column="calc_small_area _reward" jdbcType="VARCHAR" property="calcSmallAreaReward" />
-    <result column="small_area _reward" jdbcType="DECIMAL" property="smallAreaReward" />
-    <result column="small_area _reward_bz" jdbcType="VARCHAR" property="smallAreaRewardBz" />
+    <result column="calc_small_area_reward" jdbcType="VARCHAR" property="calcSmallAreaReward" />
+    <result column="small_area_reward" jdbcType="DECIMAL" property="smallAreaReward" />
+    <result column="small_area_reward_bz" jdbcType="VARCHAR" property="smallAreaRewardBz" />
     <result column="calc_other" jdbcType="VARCHAR" property="calcOther" />
     <result column="other_rmb" jdbcType="DECIMAL" property="otherRmb" />
     <result column="other_bz" jdbcType="VARCHAR" property="otherBz" />
@@ -128,7 +128,7 @@
     building_area_fee, building_area_fee_bz, calc_suspend_business_fee, suspend_business_fee, 
     suspend_business_fee_bz, calc_no_move_compensate, no_move_compensate, no_move_compensate_bz, 
     calc_move_reward, move_reward, move_reward_bz, calc_rmb_move_reward, rmb_move_reward, 
-    rmb_move_reward_bz, "calc_small_area _reward", "small_area _reward", "small_area _reward_bz", 
+    rmb_move_reward_bz, "calc_small_area_reward", "small_area_reward", "small_area_reward_bz",
     calc_other, other_rmb, other_bz, calc_sum_compensate, sum_compensate, sum_compensate_bz, 
     change_area, calcm, price, deduction, calc_pay_total, pay_total, pay_total_bz, receive_total, 
     pay_money1, pay_money2, pay_money3, pay_money4, pay_money5, pay_money6, pay_money7, 
@@ -174,8 +174,8 @@
       calc_no_move_compensate, no_move_compensate, 
       no_move_compensate_bz, calc_move_reward, move_reward, 
       move_reward_bz, calc_rmb_move_reward, rmb_move_reward, 
-      rmb_move_reward_bz, "calc_small_area _reward", "small_area _reward", 
-      "small_area _reward_bz", calc_other, other_rmb, 
+      rmb_move_reward_bz, calc_small_area_reward, small_area_reward,
+      small_area_reward_bz, calc_other, other_rmb,
       other_bz, calc_sum_compensate, sum_compensate, 
       sum_compensate_bz, change_area, calcm, 
       price, deduction, calc_pay_total, 
@@ -445,13 +445,13 @@
         rmb_move_reward_bz,
       </if>
       <if test="calcSmallAreaReward != null">
-        "calc_small_area _reward",
+        calc_small_area_reward,
       </if>
       <if test="smallAreaReward != null">
-        "small_area _reward",
+        small_area_reward,
       </if>
       <if test="smallAreaRewardBz != null">
-        "small_area _reward_bz",
+        small_area_reward_bz,
       </if>
       <if test="calcOther != null">
         calc_other,
@@ -1103,13 +1103,13 @@
         rmb_move_reward_bz = #{rmbMoveRewardBz,jdbcType=VARCHAR},
       </if>
       <if test="calcSmallAreaReward != null">
-        "calc_small_area _reward" = #{calcSmallAreaReward,jdbcType=VARCHAR},
+        calc_small_area_reward = #{calcSmallAreaReward,jdbcType=VARCHAR},
       </if>
       <if test="smallAreaReward != null">
-        "small_area _reward" = #{smallAreaReward,jdbcType=DECIMAL},
+        small_area_reward = #{smallAreaReward,jdbcType=DECIMAL},
       </if>
       <if test="smallAreaRewardBz != null">
-        "small_area _reward_bz" = #{smallAreaRewardBz,jdbcType=VARCHAR},
+        small_area_reward_bz = #{smallAreaRewardBz,jdbcType=VARCHAR},
       </if>
       <if test="calcOther != null">
         calc_other = #{calcOther,jdbcType=VARCHAR},
@@ -1288,9 +1288,9 @@
       calc_rmb_move_reward = #{calcRmbMoveReward,jdbcType=VARCHAR},
       rmb_move_reward = #{rmbMoveReward,jdbcType=DECIMAL},
       rmb_move_reward_bz = #{rmbMoveRewardBz,jdbcType=VARCHAR},
-      "calc_small_area _reward" = #{calcSmallAreaReward,jdbcType=VARCHAR},
-      "small_area _reward" = #{smallAreaReward,jdbcType=DECIMAL},
-      "small_area _reward_bz" = #{smallAreaRewardBz,jdbcType=VARCHAR},
+      calc_small_area_reward = #{calcSmallAreaReward,jdbcType=VARCHAR},
+      small_area_reward = #{smallAreaReward,jdbcType=DECIMAL},
+      small_area_reward_bz = #{smallAreaRewardBz,jdbcType=VARCHAR},
       calc_other = #{calcOther,jdbcType=VARCHAR},
       other_rmb = #{otherRmb,jdbcType=DECIMAL},
       other_bz = #{otherBz,jdbcType=VARCHAR},

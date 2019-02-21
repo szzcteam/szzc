@@ -15,11 +15,10 @@ public class SettleAccountsController extends BaseController {
 
 
     @RequestMapping("ssadmin/settleAccounts/add")
-    public ModelAndView saveSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
+    public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
-
         this.settleAccountsService.add(settleAccounts);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","新增成功");
