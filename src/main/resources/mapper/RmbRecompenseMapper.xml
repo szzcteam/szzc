@@ -499,7 +499,7 @@
         move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
       </if>
       <if test="moveWaterMeterFee != null">
-        "move_water_meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+        move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
       </if>
       <if test="wifiFee != null">
         wifi_fee = #{wifiFee,jdbcType=DECIMAL},
@@ -659,7 +659,7 @@
       move_phone_fee = #{movePhoneFee,jdbcType=DECIMAL},
       tv_fee = #{tvFee,jdbcType=DECIMAL},
       move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
-      "move_water_meter_fee" = #{moveWaterMeterFee,jdbcType=DECIMAL},
+      move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
       wifi_fee = #{wifiFee,jdbcType=DECIMAL},
       move_air_conditioning_fee = #{moveAirConditioningFee,jdbcType=DECIMAL},
       gas_fee = #{gasFee,jdbcType=DECIMAL},
@@ -696,5 +696,11 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectByHouseOwner" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_rmb_recompense
+    where house_owner = #{houseOwner}
+  </select>
 
 </mapper>

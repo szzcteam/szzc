@@ -19,4 +19,6 @@ public interface RmbRecompenseMapper {
     void updateByStatus(Long id, Boolean detele);
 
     int selectOne(Long id);
+
+    RmbRecompense selectByHouseOwner(String houseOwner);
 }

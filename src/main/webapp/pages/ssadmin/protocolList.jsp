@@ -64,7 +64,7 @@
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改产权调换协议</span>
                 </a></li>
                 <li><a class="edit"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&houseOwner={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改货币补偿协议</span>
                 </a></li>
                 <li><a class="edit"

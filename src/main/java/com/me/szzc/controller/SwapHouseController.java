@@ -95,7 +95,6 @@ public class SwapHouseController extends BaseController {
 
 
     @RequestMapping("/ssadmin/selectSwapHouseByHouseOwner")
-    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "查询产权调换协议")
     public ModelAndView selectSwapHouseByHouseOwner(String houseOwner, String url) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url);
@@ -105,7 +104,6 @@ public class SwapHouseController extends BaseController {
         }
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "查询成功");
-        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 
