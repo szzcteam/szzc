@@ -17,16 +17,10 @@ import java.util.List;
 public class NoticeController extends BaseController {
 
     @RequestMapping("/ssadmin/notice/add")
-    public ModelAndView saveNotice(@RequestBody Notice notice) throws Exception{
+    public ModelAndView saveNotice(Notice notice) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/notice") ;
-        //条件判断
-       /* if(StringUtils.isEmpty(notice.getProjectName())){
-            modelAndView.addObject("statusCode",300);
-            modelAndView.addObject("message","请求参数不正确");
-            modelAndView.addObject("callbackType","closeCurrent");
-            return modelAndView;
-        }*/
+
         this.noticeService.add(notice);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","新增成功");
