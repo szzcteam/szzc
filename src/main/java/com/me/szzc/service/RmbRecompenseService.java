@@ -32,4 +32,8 @@ public class RmbRecompenseService {
     public int queryOne(Long id) {
         return this.rmbRecompenseMapper.selectOne(id);
     }
+
+    public RmbRecompense selectByHouseOwner(String houseOwner) {
+        return this.rmbRecompenseMapper.selectByHouseOwner(houseOwner);
+    }
 }
