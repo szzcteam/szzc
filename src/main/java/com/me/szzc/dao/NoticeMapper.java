@@ -26,5 +26,5 @@ public interface NoticeMapper {
 
     int queryByname(String houseOwner);
 
-    Notice selectByHouseOwner(String houseOwner);
+    Notice selectByHouseOwner(String houseOwner );
 }
