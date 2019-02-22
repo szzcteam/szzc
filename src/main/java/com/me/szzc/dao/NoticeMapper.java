@@ -2,6 +2,7 @@ package com.me.szzc.dao;
 
 
 import com.me.szzc.pojo.entity.Notice;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ public interface NoticeMapper {
     int updateByPrimaryKey(Notice record);
 
     List<Notice> selectAll();
+    
+    List<Notice> list(@Param("firstResult") int firstResult, @Param("maxResults")int maxResults);
 
-    Notice selectByHouseOwner(String houseOwner);
+
+    int queryByname(String houseOwner);
+
 }

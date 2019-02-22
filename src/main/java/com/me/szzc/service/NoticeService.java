@@ -2,7 +2,6 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.NoticeMapper;
 import com.me.szzc.pojo.entity.Notice;
-import com.me.szzc.pojo.entity.SwapHouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,8 +42,28 @@ public class NoticeService {
         return map;
     }
 
+    public Map<String,String> list(int firstResult, int maxResults) {
+        List<Notice> listNotice =  this.noticeMapper.list(firstResult, maxResults);
+        Map<String, String> map = new HashMap<String, String>();
+        for (Notice notice:listNotice) {
+            map.put(notice.getHouseOwner(),notice.getPhone());
+        }
+        return map;
+    }
+
+    public Boolean queryName(String houseOwner) {
+        int i = this.noticeMapper.queryByname(houseOwner);
+        if(i==0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     public Notice selectByHouseOwner(String houseOwner) {
         return this.noticeMapper.selectByHouseOwner(houseOwner);
 
     }
+
 }

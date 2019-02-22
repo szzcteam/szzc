@@ -26,8 +26,13 @@ public class ProtocolController extends BaseController {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/protocolList");
         int currentPage = 1;
+        if(request.getParameter("pageNum") != null){
+            currentPage = Integer.parseInt(request.getParameter("pageNum"));
+        }
 
-        Map<String ,String>map= this.noticeService.queryAll();
+        Map<String ,String>map= this.noticeService.list((currentPage - 1) * numPerPage, numPerPage);
+
+        //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
 
         for (Map.Entry<String,String> maps:map.entrySet()) {
@@ -54,6 +59,8 @@ public class ProtocolController extends BaseController {
         }
 
         view.addObject("protocolList", list);
+        view.addObject("numPerPage", numPerPage);
+        view.addObject("currentPage", currentPage);
         return view;
     }
 
