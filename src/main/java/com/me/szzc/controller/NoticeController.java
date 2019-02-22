@@ -75,13 +75,18 @@ public class NoticeController extends BaseController {
         modelAndView.setViewName("ssadmin/notice") ;
         //条件判断
 
-        Notice notice1 = this.noticeService.selectByHouseOwner(notice.getHouseOwner());
-        if(notice1 != null) {
-            modelAndView.addObject("swapHouse", notice1);
+        notice = this.noticeService.selectByHouseOwner(notice.getHouseOwner());
+        if(notice != null) {
+            modelAndView.addObject("swapHouse", notice);
+            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("message","查询成功");
+            return modelAndView;
+        }else{
+            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("message","查询失败");
+            return modelAndView;
         }
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","查询成功");
-        return modelAndView;
+
     }
 
     @RequestMapping("/ssadmin/exportNotice")

@@ -46,6 +46,10 @@ public class SettleAccountsController extends BaseController {
         if(settleAccounts!=null){
             this.settleAccountsService.update(settleAccounts);
             modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "删除成功");
+            modelAndView.addObject("callbackType", "closeCurrent");
+        }else{
+            modelAndView.addObject("statusCode", 200);
             modelAndView.addObject("message", "用户不存在");
             modelAndView.addObject("callbackType", "closeCurrent");
         }
@@ -53,7 +57,7 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("ssadmin/settleAccounts/update")
-    public ModelAndView updateSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception {
+    public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
@@ -66,16 +70,23 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("ssadmin/settleAccounts/query")
-    public ModelAndView querySettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception {
+    public ModelAndView querySettleAccounts(SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
+        settleAccounts = this.settleAccountsService.selectByHouseOwner(settleAccounts.getHouseOwner());
+        if(settleAccounts !=null){
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "查询成功");
+            modelAndView.addObject("callbackType", "closeCurrent");
+            return modelAndView;
+        }else{
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "查询失败");
+            modelAndView.addObject("callbackType", "closeCurrent");
+            return modelAndView;
+        }
 
-        this.settleAccountsService.query(settleAccounts);
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "查询");
-        modelAndView.addObject("callbackType", "closeCurrent");
-        return modelAndView;
     }
 
     @RequestMapping("/ssadmin/exportSettleAccounts")
