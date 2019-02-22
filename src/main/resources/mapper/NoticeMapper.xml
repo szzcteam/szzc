@@ -1266,14 +1266,22 @@
       create_date = #{createDate,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=BIGINT},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
-      modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
+      modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=TINYINT}
+    where house_owner = #{houseOwner,jdbcType=BIGINT}
   </update>
 
-  <select id="selectAll" resultMap="BaseResultMap">
+ <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_notice
   </select>
+
+  <select id="queryByname" resultType="java.lang.Integer">
+    select COUNT(1)
+    FROM t_notice
+    WHERE house_owner = #{houseOwner,jdbcType=VARCHAR}
+  </select>
+
 
 </mapper>

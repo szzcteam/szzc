@@ -29,15 +29,21 @@ public class NoticeController extends BaseController {
     }
 
     @RequestMapping("/ssadmin/notice/detele")
-    public ModelAndView deteleNotice(@RequestBody Notice notice)throws Exception{
+    public ModelAndView deteleNotice(Notice notice)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/notice") ;
-        //条件判断
+        Boolean notices = this.noticeService.queryName(notice.getHouseOwner());
+        if(notices){
+            this.noticeService.detele(notice);
+            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("message","删除成功");
+            modelAndView.addObject("callbackType","closeCurrent");
 
-        this.noticeService.detele(notice);
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","删除成功");
-        modelAndView.addObject("callbackType","closeCurrent");
+        }else{
+            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("message","用户未签订此协议");
+            modelAndView.addObject("callbackType","closeCurrent");
+        }
         return modelAndView;
     }
 
