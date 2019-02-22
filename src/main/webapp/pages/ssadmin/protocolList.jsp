@@ -49,8 +49,8 @@
                        height="400" width="800" target="dialog" rel="addRmbRecompense"><span>新增货币补偿协议</span>
                 </a></li>
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增手续通知单</span>
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addNotice&uid={sid_user}"
+                       height="600" width="800" target="dialog" rel="updateSystemArgs"><span>新增手续通知单</span>
                 </a></li>
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
