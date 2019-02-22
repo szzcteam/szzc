@@ -1291,6 +1291,14 @@
     from t_notice
   </select>
 
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from f_admin
+      limit ${firstResult}, ${maxResults}
+  </select>
+
+
   <select id="queryByname" resultType="java.lang.Integer">
     select COUNT(1)
     FROM t_notice
