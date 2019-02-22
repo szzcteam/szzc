@@ -45,5 +45,6 @@ public class NoticeService {
 
     public Notice selectByHouseOwner(String houseOwner) {
         return this.noticeMapper.selectByHouseOwner(houseOwner);
+
     }
 }
