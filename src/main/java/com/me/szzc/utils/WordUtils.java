@@ -19,7 +19,7 @@ public class WordUtils {
     private static Configuration configuration = null;
     //这里注意的是利用WordUtils的类加载器动态获得模板文件的位置
     // private static final String templateFolder = WordUtils.class.getClassLoader().getResource("../../").getPath() + "WEB-INF/templetes/";
-    private static final String templateFolder = "D:\\project\\cqb_szzc\\szzc\\src\\main\\resources\\templates";
+    private static final String templateFolder = "C:\\Users\\DELL-5490\\Desktop\\szzc\\src\\main\\resources\\templates";
 
     static {
         configuration = new Configuration();
