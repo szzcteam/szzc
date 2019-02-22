@@ -57,12 +57,11 @@ public class NoticeController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/update")
-    public ModelAndView updateNotice(@RequestBody Notice notice)throws Exception{
+    @RequestMapping("ssadmin/notice/update")
+    public ModelAndView updateNotice(Notice notice)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/notice") ;
         //条件判断
-
         this.noticeService.update(notice);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","修改成功");
@@ -71,15 +70,17 @@ public class NoticeController extends BaseController {
     }
 
     @RequestMapping("ssadmin/notice/query")
-    public ModelAndView queryNotice(@RequestBody Notice notice)throws Exception{
+    public ModelAndView queryNotice(Notice notice)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/notice") ;
         //条件判断
 
-        this.noticeService.query(notice);
+        Notice notice1 = this.noticeService.selectByHouseOwner(notice.getHouseOwner());
+        if(notice1 != null) {
+            modelAndView.addObject("swapHouse", notice1);
+        }
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","查询成功");
-        modelAndView.addObject("callbackType","closeCurrent");
         return modelAndView;
     }
 

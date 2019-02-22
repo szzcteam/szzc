@@ -1173,6 +1173,10 @@
       <if test="modifiedUserId != null">
         modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
       </if>
+
+      <if test="deleted != null">
+        deleted = #{deleted},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
