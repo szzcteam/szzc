@@ -34,4 +34,8 @@ public class SettleAccountsService {
         }
         else return true;
     }
+
+    public SettleAccounts selectByHouseOwner(String houseOwner) {
+        return settleAccountsMapper.selectByHouseOwner(houseOwner);
+    }
 }

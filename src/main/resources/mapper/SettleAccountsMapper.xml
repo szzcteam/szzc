@@ -112,6 +112,7 @@
     <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
     <result column="deleted" jdbcType="TINYINT" property="deleted" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, card_no, house_owner, lessee, phone, lessee_phone, useing, check_in_area, in_area,
     assess_price, address, calc_value_compensate, value_compensate, value_compensate_bz, 
@@ -136,16 +137,26 @@
     receive_money6, receive_money7, receive_money8, create_date, create_user_id, modified_date, 
     modified_user_id,deleted
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_settle_accounts
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByHouseOwner" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_settle_accounts
+    where house_owner = #{houseOwner}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_settle_accounts
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     insert into t_settle_accounts (id, card_no, house_owner, 
       lessee, phone, lessee_phone, 
@@ -228,6 +239,7 @@
       #{receiveMoney8,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, 
       #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}, 0 )
   </insert>
+
   <insert id="insertSelective" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     insert into t_settle_accounts
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -889,6 +901,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     update t_settle_accounts
     <set>
@@ -1216,6 +1229,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     update t_settle_accounts
     set card_no = #{cardNo,jdbcType=VARCHAR},
