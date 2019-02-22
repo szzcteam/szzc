@@ -2,6 +2,7 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.NoticeMapper;
 import com.me.szzc.pojo.entity.Notice;
+import com.me.szzc.pojo.entity.SwapHouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,4 +43,7 @@ public class NoticeService {
         return map;
     }
 
+    public Notice selectByHouseOwner(String houseOwner) {
+        return this.noticeMapper.selectByHouseOwner(houseOwner);
+    }
 }
