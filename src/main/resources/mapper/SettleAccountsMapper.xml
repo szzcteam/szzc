@@ -149,7 +149,7 @@
     select
     <include refid="Base_Column_List" />
     from t_settle_accounts
-    where house_owner = #{houseOwner,jdbcType="VARCHAR"}
+    where house_owner = #{houseOwner}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
