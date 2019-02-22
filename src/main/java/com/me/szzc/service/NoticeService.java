@@ -20,8 +20,7 @@ public class NoticeService {
     }
 
     public void detele(Notice notice) {
-        notice.setDeleted(false);
-        this.noticeMapper.updateByPrimaryKey(notice);
+        this.noticeMapper.deleteByPrimaryKey(notice.getId());
     }
 
     public void update(Notice notice) {
@@ -43,13 +42,4 @@ public class NoticeService {
         return map;
     }
 
-    public Boolean queryName(String houseOwner) {
-        int i= this.noticeMapper.queryByname(houseOwner);
-        if(i==0){
-            return false;
-        }else{
-            return true;
-        }
-
-    }
 }

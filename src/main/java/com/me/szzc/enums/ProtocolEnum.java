@@ -8,7 +8,9 @@ import com.me.szzc.service.RmbRecompenseService;
  */
 public enum ProtocolEnum {
     HOUSING_PROPERTY_ECHANGE_AGREEMENT("房屋产权易变协议书"),
-    RMB_RECOMPENSE_AGREEMENT("货币补偿协议书")
+    RMB_RECOMPENSE_AGREEMENT("货币补偿协议书"),
+    NOTICE_AGREEMENT("房屋征收补偿资金结算通知单"),
+    SETTLE_ACCOUNTS_AGREEMENT("房屋征收补偿资金结算单")
     ;
 
     private final String code;

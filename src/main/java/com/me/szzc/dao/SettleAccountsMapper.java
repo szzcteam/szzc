@@ -16,4 +16,6 @@ public interface SettleAccountsMapper {
     int updateByPrimaryKey(SettleAccounts record);
 
     int selectNmae(String houseOwner);
+
+    SettleAccounts selectByHouseOwner(String houseOwner);
 }

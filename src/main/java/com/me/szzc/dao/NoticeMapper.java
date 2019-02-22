@@ -20,5 +20,4 @@ public interface NoticeMapper {
 
     List<Notice> selectAll();
 
-    int queryByname(String houseOwner);
 }
