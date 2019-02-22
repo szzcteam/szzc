@@ -25,55 +25,54 @@ import java.util.Map;
 @Controller
 public class SettleAccountsController extends BaseController {
 
-
     @RequestMapping("ssadmin/settleAccounts/add")
-    public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts) throws Exception{
+    public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
         this.settleAccountsService.add(settleAccounts);
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","新增成功");
-        modelAndView.addObject("callbackType","closeCurrent");
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "新增成功");
+        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/settleAccounts/detele")
-    public ModelAndView deteleSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
+    public ModelAndView deteleSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
 
         this.settleAccountsService.detele(settleAccounts);
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","删除");
-        modelAndView.addObject("callbackType","closeCurrent");
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "删除");
+        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/settleAccounts/update")
-    public ModelAndView updateSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
+    public ModelAndView updateSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
 
         this.settleAccountsService.update(settleAccounts);
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","修改");
-        modelAndView.addObject("callbackType","closeCurrent");
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "修改");
+        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/settleAccounts/query")
-    public ModelAndView querySettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception{
+    public ModelAndView querySettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
 
         this.settleAccountsService.query(settleAccounts);
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","查询");
-        modelAndView.addObject("callbackType","closeCurrent");
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "查询");
+        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 
