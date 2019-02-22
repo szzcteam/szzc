@@ -38,15 +38,17 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("ssadmin/settleAccounts/detele")
-    public ModelAndView deteleSettleAccounts(@RequestBody SettleAccounts settleAccounts) throws Exception {
+    public ModelAndView deteleSettleAccounts(SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/settleAccounts");
         //条件判断
-
-        this.settleAccountsService.detele(settleAccounts);
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "删除");
-        modelAndView.addObject("callbackType", "closeCurrent");
+        settleAccounts = this.settleAccountsService.selectByHouseOwner(settleAccounts.getHouseOwner());
+        if(settleAccounts!=null){
+            this.settleAccountsService.update(settleAccounts);
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "用户不存在");
+            modelAndView.addObject("callbackType", "closeCurrent");
+        }
         return modelAndView;
     }
 

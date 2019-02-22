@@ -118,7 +118,7 @@
     assess_price, address, calc_value_compensate, value_compensate, value_compensate_bz, 
     calc_decoration_compensate, decoration_compensate, decoration_compensate_bz, calc_move_house_fee, 
     move_house_fee, move_house_fee_bz, calc_interim_fee, interim_fee, interim_fee_bz, 
-    "calc_move_water_meter_fee", "move_water_meter_fee", "move_water_meter_fee_bz", calc_move_ammeter_fee,
+    calc_move_water_meter_fee, move_water_meter_fee, move_water_meter_fee_bz, calc_move_ammeter_fee,
     move_ammeter_fee, move_ammeter_fee_bz, calc_move_air_conditioning_fee, move_air_conditioning_fee, 
     move_air_conditioning_fee_bz, calc_hot_water_compensate, hot_water_compensate, hot_water_compensate_bz, 
     calc_gas_fee, gas_fee, gas_fee_bz, calc_structure_compensate, structure_compensate, 
@@ -129,7 +129,7 @@
     building_area_fee, building_area_fee_bz, calc_suspend_business_fee, suspend_business_fee, 
     suspend_business_fee_bz, calc_no_move_compensate, no_move_compensate, no_move_compensate_bz, 
     calc_move_reward, move_reward, move_reward_bz, calc_rmb_move_reward, rmb_move_reward, 
-    rmb_move_reward_bz, "calc_small_area_reward", "small_area_reward", "small_area_reward_bz",
+    rmb_move_reward_bz, calc_small_area_reward, small_area_reward, "small_area_reward_bz",
     calc_other, other_rmb, other_bz, calc_sum_compensate, sum_compensate, sum_compensate_bz, 
     change_area, calcm, price, deduction, calc_pay_total, pay_total, pay_total_bz, receive_total, 
     pay_money1, pay_money2, pay_money3, pay_money4, pay_money5, pay_money6, pay_money7, 
@@ -149,7 +149,7 @@
     select
     <include refid="Base_Column_List" />
     from t_settle_accounts
-    where house_owner = #{houseOwner}
+    where house_owner = #{houseOwner,jdbcType="VARCHAR"}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -1339,7 +1339,7 @@
       create_user_id = #{createUserId,jdbcType=BIGINT},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
       modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
+    where house_owner = #{houseOwner,jdbcType=VARCHAR}
   </update>
 
   <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer" >

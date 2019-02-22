@@ -697,8 +697,7 @@
   </select>
 
   <select id="selectByHouseOwner" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
+    select COUNT(1)
     from t_rmb_recompense
     where house_owner = #{houseOwner}
   </select>
