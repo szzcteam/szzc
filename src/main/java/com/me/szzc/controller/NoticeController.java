@@ -42,28 +42,33 @@ public class NoticeController extends BaseController {
     }
 
     @RequestMapping("/ssadmin/notice/detele")
-    public ModelAndView deteleNotice(Notice notice)throws Exception{
+    public ModelAndView deteleNotice(String houseOwner, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/notice") ;
-        Boolean notices = this.noticeService.queryName(notice.getHouseOwner());
-        if(notices){
-            this.noticeService.detele(notice);
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message","删除成功");
-            modelAndView.addObject("callbackType","closeCurrent");
-
-        }else{
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        Notice notices = this.noticeService.selectByHouseOwner(houseOwner);
+        if(notices == null){
             modelAndView.addObject("statusCode",200);
             modelAndView.addObject("message","用户未签订此协议");
-            modelAndView.addObject("callbackType","closeCurrent");
+            return modelAndView;
         }
+
+        if(notices.getDeleted()) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            return modelAndView;
+        }
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        notices.setModifiedUserId(userId);
+        this.noticeService.detele(notices);
+
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/notice/update")
     public ModelAndView updateNotice(Notice notice)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/notice") ;
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
         this.noticeService.update(notice);
         modelAndView.addObject("statusCode",200);
@@ -73,23 +78,17 @@ public class NoticeController extends BaseController {
     }
 
     @RequestMapping("ssadmin/notice/query")
-    public ModelAndView queryNotice(Notice notice)throws Exception{
+    public ModelAndView queryNotice(String houseOwner, String url)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/notice") ;
+        modelAndView.setViewName(url) ;
         //条件判断
-
-        notice = this.noticeService.selectByHouseOwner(notice.getHouseOwner());
+        Notice notice = this.noticeService.selectByHouseOwner(houseOwner);
         if(notice != null) {
-            modelAndView.addObject("swapHouse", notice);
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message","查询成功");
-            return modelAndView;
-        }else{
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message","查询失败");
-            return modelAndView;
+            modelAndView.addObject("notice", notice);
         }
-
+        modelAndView.addObject("statusCode",200);
+        modelAndView.addObject("message","查询成功");
+        return modelAndView;
     }
 
     @RequestMapping("/ssadmin/exportNotice")

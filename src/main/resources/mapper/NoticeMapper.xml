@@ -1229,6 +1229,7 @@
     select
     <include refid="Base_Column_List"/>
     from t_notice
+    where deleted = 0
       limit ${firstResult}, ${maxResults}
   </select>
 
@@ -1239,5 +1240,10 @@
     WHERE house_owner = #{houseOwner,jdbcType=VARCHAR}
   </select>
 
+  <update id="delete" parameterType="com.me.szzc.pojo.entity.Notice">
+    update t_notice set deleted  = 1 ,
+      modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId}
+      where id = #{id}
+  </update>
 
 </mapper>

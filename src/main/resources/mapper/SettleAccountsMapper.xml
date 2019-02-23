@@ -1345,7 +1345,7 @@
   <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer" >
     select COUNT(1)
     from t_settle_accounts
-    where house_owner = #{houseOwner , jdbcType=VARCHAR}
+    where house_owner = #{houseOwner , jdbcType=VARCHAR}  and deleted = 0
   </select>
 
 </mapper>

@@ -9,6 +9,8 @@ public interface RmbRecompenseMapper {
 
     int insertSelective(RmbRecompense record);
 
+    int delete(RmbRecompense record);
+
     RmbRecompense selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(RmbRecompense record);

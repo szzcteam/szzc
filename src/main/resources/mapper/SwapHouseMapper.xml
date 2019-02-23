@@ -808,7 +808,7 @@
   <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer">
     SELECT COUNT(1)
     from t_swap_house
-     where house_owner = #{houseOwner,jdbcType=VARCHAR}
+     where house_owner = #{houseOwner,jdbcType=VARCHAR}  and deleted = 0
   </select>
 
 </mapper>

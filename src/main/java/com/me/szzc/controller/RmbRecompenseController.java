@@ -28,7 +28,7 @@ public class RmbRecompenseController extends BaseController {
     @RequestMapping("ssadmin/RmbRecompense/add")
     public ModelAndView saveRmbRecompense ( RmbRecompense rmbRecompense, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/rmbRecompense");
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //创建人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setCreateUserId(userId);
@@ -43,19 +43,26 @@ public class RmbRecompenseController extends BaseController {
     }
 
     @RequestMapping("ssadmin/RmbRecompense/detele")
-    public ModelAndView dateleRmbRecompense (RmbRecompense rmbRecompense)throws Exception{
+    public ModelAndView dateleRmbRecompense (String houseOwner, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/rmbRecompense");
-        int i =  this.rmbRecompenseService.queryOne(rmbRecompense.getId());
-        if(i==0){
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        RmbRecompense rmbRecompense =  this.rmbRecompenseService.selectByHouseOwner(houseOwner);
+        if(rmbRecompense ==  null){
             modelAndView.addObject("statusCode",300);
             modelAndView.addObject("message","用户不存在此协议");
             return modelAndView;
         }
+        if(rmbRecompense.getDeleted()) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            return modelAndView;
+        }
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        rmbRecompense.setModifiedUserId(userId);
         this.rmbRecompenseService.detele(rmbRecompense);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","删除成功");
-        modelAndView.addObject("callbackType","closeCurrent");
         return modelAndView;
     }
 

@@ -34,7 +34,9 @@ public class NoticeService {
     }
 
     public void detele(Notice notice) {
-        this.noticeMapper.deleteByPrimaryKey(notice.getId());
+        notice.setModifiedDate(DateHelper.getTimestamp());
+        notice.setDeleted(true);
+        this.noticeMapper.delete(notice);
     }
 
     public void update(Notice notice) {

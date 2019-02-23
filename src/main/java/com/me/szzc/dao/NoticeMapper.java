@@ -9,6 +9,8 @@ import java.util.List;
 public interface NoticeMapper {
     int deleteByPrimaryKey(Long id);
 
+    int delete(Notice record);
+
     int insert(Notice record);
 
     int insertSelective(Notice record);

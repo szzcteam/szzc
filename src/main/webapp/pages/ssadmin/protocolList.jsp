@@ -68,8 +68,8 @@
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改货币补偿协议</span>
                 </a></li>
                 <li><a class="edit"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改手续通知单</span>
+                       href="ssadmin/notice/query.html?url=ssadmin/updateNotice&houseOwner={sid_user}"
+                       height="600" width="800" target="dialog" rel="updateSystemArgs"><span>修改手续通知单</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
@@ -82,11 +82,11 @@
                        target="ajaxTodo" title="确定要删除产权调换协议吗?"><span>删除产权调换协议</span>
                 </a></li>
                 <li><a class="delete"
-                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       href="ssadmin/RmbRecompense/detele.html?houseOwner={sid_user}"
                        target="ajaxTodo" title="确定要删除货币补偿协议吗?"><span>删除货币补偿协议</span>
                 </a></li>
                 <li><a class="delete"
-                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       href="/ssadmin/notice/detele.html?houseOwner={sid_user}"
                        target="ajaxTodo" title="确定要删除通知单吗?"><span>删除通知单</span>
                 </a></li>
                 <li><a class="delete"

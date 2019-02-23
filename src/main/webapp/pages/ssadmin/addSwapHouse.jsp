@@ -36,7 +36,12 @@
                     <input type="text" name="houseOwner" maxlength="50" class="required" size="20"/>
                 </dd>
             </dl>
-
+            <dl>
+                <dt>补偿方案:</dt>
+                <dd>
+                    <input type="text" name="recompensePlan" maxlength="50" class="required" size="40"/>
+                </dd>
+            </dl>
             <fieldset>
                 <legend>被征收房屋基本信息</legend>
                 <dl>

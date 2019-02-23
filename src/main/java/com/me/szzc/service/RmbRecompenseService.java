@@ -2,8 +2,12 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.RmbRecompenseMapper;
 import com.me.szzc.pojo.entity.RmbRecompense;
+import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 @Service
 public class RmbRecompenseService {
@@ -12,12 +16,17 @@ public class RmbRecompenseService {
     private RmbRecompenseMapper rmbRecompenseMapper;
 
     public void add(RmbRecompense rmbRecompense) {
-        this.rmbRecompenseMapper.insert(rmbRecompense);
+        Timestamp date = DateHelper.getTimestamp();
+        rmbRecompense.setCreateDate(date);
+        rmbRecompense.setModifiedDate(date);
+        rmbRecompense.setDeleted(false);
+        this.rmbRecompenseMapper.insertSelective(rmbRecompense);
     }
 
     public void detele(RmbRecompense rmbRecompense) {
-        rmbRecompense.setDeleted(false);
-        this.rmbRecompenseMapper.updateByStatus(rmbRecompense.getId(),rmbRecompense.getDeleted());
+        rmbRecompense.setModifiedDate(DateHelper.getTimestamp());
+        rmbRecompense.setDeleted(true);
+        this.rmbRecompenseMapper.delete(rmbRecompense);
     }
 
     public void update(RmbRecompense rmbRecompense) {
