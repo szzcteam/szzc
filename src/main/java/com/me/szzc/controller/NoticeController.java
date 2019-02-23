@@ -27,10 +27,13 @@ import java.util.Map;
 public class NoticeController extends BaseController {
 
     @RequestMapping("/ssadmin/notice/add")
-    public ModelAndView saveNotice(Notice notice) throws Exception{
+    public ModelAndView saveNotice(Notice notice, HttpServletRequest request) throws Exception{
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/notice") ;
-
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //创建人
+        Long userId = getAdminSession(request).getFid();
+        notice.setCreateUserId(userId);
+        notice.setModifiedUserId(userId);
         this.noticeService.add(notice);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","新增成功");

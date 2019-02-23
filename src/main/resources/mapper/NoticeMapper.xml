@@ -81,6 +81,7 @@
     <result column="calc_no_check_compensate" jdbcType="VARCHAR" property="calcNoCheckCompensate" />
     <result column="no_check_compensate" jdbcType="DECIMAL" property="noCheckCompensate" />
     <result column="no_check_compensate_bz" jdbcType="VARCHAR" property="noCheckCompensateBz" />
+    <result column="other_desc" jdbcType="VARCHAR" property="otherDesc" />
     <result column="calc_other" jdbcType="VARCHAR" property="calcOther" />
     <result column="other_rmb" jdbcType="DECIMAL" property="otherRmb" />
     <result column="other_bz" jdbcType="VARCHAR" property="otherBz" />
@@ -93,14 +94,7 @@
     <result column="change_rmb_bz" jdbcType="VARCHAR" property="changeRmbBz" />
     <result column="real_receive_total" jdbcType="DECIMAL" property="realReceiveTotal" />
     <result column="real_pay_total" jdbcType="DECIMAL" property="realPayTotal" />
-    <result column="real_pay_money1" jdbcType="VARCHAR" property="realPayMoney1" />
-    <result column="real_pay_money2" jdbcType="VARCHAR" property="realPayMoney2" />
-    <result column="real_pay_money3" jdbcType="VARCHAR" property="realPayMoney3" />
-    <result column="real_pay_money4" jdbcType="VARCHAR" property="realPayMoney4" />
-    <result column="real_pay_money5" jdbcType="VARCHAR" property="realPayMoney5" />
-    <result column="real_pay_money6" jdbcType="VARCHAR" property="realPayMoney6" />
-    <result column="real_pay_money7" jdbcType="VARCHAR" property="realPayMoney7" />
-    <result column="real_pay_money8" jdbcType="VARCHAR" property="realPayMoney8" />
+    <result column="real_pay_money" jdbcType="VARCHAR" property="realPayMoney" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
@@ -125,10 +119,9 @@
     life_compensate_bz, calc_change_compensate, change_compensate, change_compensate_bz, 
     calc_move_reward, move_reward, move_reward_bz, calc_close_balcony, close_balcony, 
     close_balcony_bz, calc_no_check_compensate, no_check_compensate, no_check_compensate_bz, 
-    calc_other, other_rmb, other_bz, calc_pay_total, pay_total, pay_total_bz, change_area, 
-    calc_change_rmb, change_rmb, change_rmb_bz, real_receive_total, real_pay_total, real_pay_money1, 
-    real_pay_money2, real_pay_money3, real_pay_money4, real_pay_money5, real_pay_money6, 
-    real_pay_money7, real_pay_money8, create_date, create_user_id, modified_date, modified_user_id,
+    other_desc, calc_other, other_rmb, other_bz, calc_pay_total, pay_total, pay_total_bz, change_area,
+    calc_change_rmb, change_rmb, change_rmb_bz, real_receive_total, real_pay_total, real_pay_money,
+     create_date, create_user_id, modified_date, modified_user_id,
     deleted
   </sql>
 
@@ -182,13 +175,11 @@
       move_reward_bz, calc_close_balcony, close_balcony, 
       close_balcony_bz, calc_no_check_compensate, 
       no_check_compensate, no_check_compensate_bz, 
-      calc_other, other_rmb, other_bz, 
+      other_desc, calc_other, other_rmb, other_bz,
       calc_pay_total, pay_total, pay_total_bz, 
       change_area, calc_change_rmb, change_rmb, 
-      change_rmb_bz, real_receive_total, real_pay_total, 
-      real_pay_money1, real_pay_money2, real_pay_money3, 
-      real_pay_money4, real_pay_money5, real_pay_money6, 
-      real_pay_money7, real_pay_money8, create_date, 
+      change_rmb_bz, real_receive_total, real_pay_total,
+      real_pay_money , create_date,
       create_user_id, modified_date, modified_user_id,deleted
       )
     values (#{id,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
@@ -220,14 +211,13 @@
       #{changeCompensateBz,jdbcType=VARCHAR}, #{calcMoveReward,jdbcType=VARCHAR}, #{moveReward,jdbcType=DECIMAL}, 
       #{moveRewardBz,jdbcType=VARCHAR}, #{calcCloseBalcony,jdbcType=VARCHAR}, #{closeBalcony,jdbcType=DECIMAL}, 
       #{closeBalconyBz,jdbcType=VARCHAR}, #{calcNoCheckCompensate,jdbcType=VARCHAR}, 
-      #{noCheckCompensate,jdbcType=DECIMAL}, #{noCheckCompensateBz,jdbcType=VARCHAR}, 
+      #{noCheckCompensate,jdbcType=DECIMAL}, #{noCheckCompensateBz,jdbcType=VARCHAR},
+      #{otherDesc},
       #{calcOther,jdbcType=VARCHAR}, #{otherRmb,jdbcType=DECIMAL}, #{otherBz,jdbcType=VARCHAR}, 
       #{calcPayTotal,jdbcType=VARCHAR}, #{payTotal,jdbcType=DECIMAL}, #{payTotalBz,jdbcType=VARCHAR}, 
       #{changeArea,jdbcType=DECIMAL}, #{calcChangeRmb,jdbcType=VARCHAR}, #{changeRmb,jdbcType=DECIMAL}, 
       #{changeRmbBz,jdbcType=VARCHAR}, #{realReceiveTotal,jdbcType=DECIMAL}, #{realPayTotal,jdbcType=DECIMAL}, 
-      #{realPayMoney1,jdbcType=VARCHAR}, #{realPayMoney2,jdbcType=VARCHAR}, #{realPayMoney3,jdbcType=VARCHAR}, 
-      #{realPayMoney4,jdbcType=VARCHAR}, #{realPayMoney5,jdbcType=VARCHAR}, #{realPayMoney6,jdbcType=VARCHAR}, 
-      #{realPayMoney7,jdbcType=VARCHAR}, #{realPayMoney8,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{realPayMoney,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
       #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT},0
       )
   </insert>
@@ -472,6 +462,9 @@
       <if test="noCheckCompensateBz != null">
         no_check_compensate_bz,
       </if>
+      <if test="otherDesc != null">
+        other_desc,
+      </if>
       <if test="calcOther != null">
         calc_other,
       </if>
@@ -508,29 +501,8 @@
       <if test="realPayTotal != null">
         real_pay_total,
       </if>
-      <if test="realPayMoney1 != null">
-        real_pay_money1,
-      </if>
-      <if test="realPayMoney2 != null">
-        real_pay_money2,
-      </if>
-      <if test="realPayMoney3 != null">
-        real_pay_money3,
-      </if>
-      <if test="realPayMoney4 != null">
-        real_pay_money4,
-      </if>
-      <if test="realPayMoney5 != null">
-        real_pay_money5,
-      </if>
-      <if test="realPayMoney6 != null">
-        real_pay_money6,
-      </if>
-      <if test="realPayMoney7 != null">
-        real_pay_money7,
-      </if>
-      <if test="realPayMoney8 != null">
-        real_pay_money8,
+      <if test="realPayMoney != null">
+        real_pay_money,
       </if>
       <if test="createDate != null">
         create_date,
@@ -786,6 +758,9 @@
       <if test="noCheckCompensateBz != null">
         #{noCheckCompensateBz,jdbcType=VARCHAR},
       </if>
+      <if test="otherDesc != null">
+        #{otherDesc},
+      </if>
       <if test="calcOther != null">
         #{calcOther,jdbcType=VARCHAR},
       </if>
@@ -822,29 +797,8 @@
       <if test="realPayTotal != null">
         #{realPayTotal,jdbcType=DECIMAL},
       </if>
-      <if test="realPayMoney1 != null">
-        #{realPayMoney1,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney2 != null">
-        #{realPayMoney2,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney3 != null">
-        #{realPayMoney3,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney4 != null">
-        #{realPayMoney4,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney5 != null">
-        #{realPayMoney5,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney6 != null">
-        #{realPayMoney6,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney7 != null">
-        #{realPayMoney7,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney8 != null">
-        #{realPayMoney8,jdbcType=VARCHAR},
+      <if test="realPayMoney != null">
+        #{realPayMoney,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
@@ -1107,6 +1061,9 @@
       <if test="otherRmb != null">
         other_rmb = #{otherRmb,jdbcType=DECIMAL},
       </if>
+      <if test="otherDesc != null">
+        other_desc = #{otherDesc},
+      </if>
       <if test="otherBz != null">
         other_bz = #{otherBz,jdbcType=VARCHAR},
       </if>
@@ -1137,29 +1094,8 @@
       <if test="realPayTotal != null">
         real_pay_total = #{realPayTotal,jdbcType=DECIMAL},
       </if>
-      <if test="realPayMoney1 != null">
-        real_pay_money1 = #{realPayMoney1,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney2 != null">
-        real_pay_money2 = #{realPayMoney2,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney3 != null">
-        real_pay_money3 = #{realPayMoney3,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney4 != null">
-        real_pay_money4 = #{realPayMoney4,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney5 != null">
-        real_pay_money5 = #{realPayMoney5,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney6 != null">
-        real_pay_money6 = #{realPayMoney6,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney7 != null">
-        real_pay_money7 = #{realPayMoney7,jdbcType=VARCHAR},
-      </if>
-      <if test="realPayMoney8 != null">
-        real_pay_money8 = #{realPayMoney8,jdbcType=VARCHAR},
+      <if test="realPayMoney != null">
+        real_pay_money = #{realPayMoney},
       </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -1261,6 +1197,7 @@
       calc_no_check_compensate = #{calcNoCheckCompensate,jdbcType=VARCHAR},
       no_check_compensate = #{noCheckCompensate,jdbcType=DECIMAL},
       no_check_compensate_bz = #{noCheckCompensateBz,jdbcType=VARCHAR},
+      other_desc = #{otherDesc},
       calc_other = #{calcOther,jdbcType=VARCHAR},
       other_rmb = #{otherRmb,jdbcType=DECIMAL},
       other_bz = #{otherBz,jdbcType=VARCHAR},
@@ -1273,14 +1210,7 @@
       change_rmb_bz = #{changeRmbBz,jdbcType=VARCHAR},
       real_receive_total = #{realReceiveTotal,jdbcType=DECIMAL},
       real_pay_total = #{realPayTotal,jdbcType=DECIMAL},
-      real_pay_money1 = #{realPayMoney1,jdbcType=VARCHAR},
-      real_pay_money2 = #{realPayMoney2,jdbcType=VARCHAR},
-      real_pay_money3 = #{realPayMoney3,jdbcType=VARCHAR},
-      real_pay_money4 = #{realPayMoney4,jdbcType=VARCHAR},
-      real_pay_money5 = #{realPayMoney5,jdbcType=VARCHAR},
-      real_pay_money6 = #{realPayMoney6,jdbcType=VARCHAR},
-      real_pay_money7 = #{realPayMoney7,jdbcType=VARCHAR},
-      real_pay_money8 = #{realPayMoney8,jdbcType=VARCHAR},
+      real_pay_money = #{realPayMoney,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       create_user_id = #{createUserId,jdbcType=BIGINT},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},

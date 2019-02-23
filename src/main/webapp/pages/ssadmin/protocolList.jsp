@@ -41,19 +41,19 @@
             <!-- 新增 -->
             <shiro:hasPermission name="ssadmin/addProtocol.html">
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse"
                        height="400" width="800" target="dialog" rel="addSwapHouse"><span>新增产权调换协议</span>
                 </a></li>
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense&uid={sid_user}"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense"
                        height="400" width="800" target="dialog" rel="addRmbRecompense"><span>新增货币补偿协议</span>
                 </a></li>
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addNotice&uid={sid_user}"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addNotice"
                        height="600" width="800" target="dialog" rel="updateSystemArgs"><span>新增手续通知单</span>
                 </a></li>
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse"
                        height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增补偿资金结算单</span>
                 </a></li>
             </shiro:hasPermission>

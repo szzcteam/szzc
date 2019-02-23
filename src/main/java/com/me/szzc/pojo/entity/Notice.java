@@ -166,6 +166,8 @@ public class Notice {
 
     private String noCheckCompensateBz;
 
+    private String otherDesc;
+
     private String calcOther;
 
     private BigDecimal otherRmb;
@@ -190,21 +192,7 @@ public class Notice {
 
     private BigDecimal realPayTotal;
 
-    private String realPayMoney1;
-
-    private String realPayMoney2;
-
-    private String realPayMoney3;
-
-    private String realPayMoney4;
-
-    private String realPayMoney5;
-
-    private String realPayMoney6;
-
-    private String realPayMoney7;
-
-    private String realPayMoney8;
+    private String realPayMoney;
 
     private Date createDate;
 

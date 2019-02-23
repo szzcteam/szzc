@@ -2,9 +2,12 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.NoticeMapper;
 import com.me.szzc.pojo.entity.Notice;
+import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +19,18 @@ public class NoticeService {
     private NoticeMapper noticeMapper;
 
     public void add(Notice notice) {
-        this.noticeMapper.insert(notice);
+        Timestamp  date = DateHelper.getTimestamp();
+        notice.setCreateDate(date);
+        notice.setModifiedDate(date);
+        notice.setDeleted(false);
+        //封装年月日
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        notice.setYears(cal.get(Calendar.YEAR)+"");
+        int month = cal.get(Calendar.MONTH)+1;
+        notice.setMonths(month+"");
+        notice.setDays(cal.get(Calendar.DATE)+"");
+        this.noticeMapper.insertSelective(notice);
     }
 
     public void detele(Notice notice) {
