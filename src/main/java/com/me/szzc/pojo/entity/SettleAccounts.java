@@ -12,6 +12,8 @@ public class SettleAccounts {
 
     private String cardNo;
 
+    private String projectName;
+
     private String houseOwner;
 
     private String lessee;
@@ -90,6 +92,8 @@ public class SettleAccounts {
 
     private String structureCompensateBz;
 
+    private String affiliatedOtherDesc;
+
     private String calcAffiliatedOther;
 
     private BigDecimal affiliatedOther;
@@ -156,6 +160,8 @@ public class SettleAccounts {
 
     private String smallAreaRewardBz;
 
+    private String otherDesc;
+
     private String calcOther;
 
     private BigDecimal otherRmb;
@@ -184,37 +190,9 @@ public class SettleAccounts {
 
     private BigDecimal receiveTotal;
 
-    private String payMoney1;
+    private String payMoney;
 
-    private String payMoney2;
-
-    private String payMoney3;
-
-    private String payMoney4;
-
-    private String payMoney5;
-
-    private String payMoney6;
-
-    private String payMoney7;
-
-    private String payMoney8;
-
-    private String receiveMoney1;
-
-    private String receiveMoney2;
-
-    private String receiveMoney3;
-
-    private String receiveMoney4;
-
-    private String receiveMoney5;
-
-    private String receiveMoney6;
-
-    private String receiveMoney7;
-
-    private String receiveMoney8;
+    private String receiveMoney;
 
     private Date createDate;
 

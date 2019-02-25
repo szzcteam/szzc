@@ -100,7 +100,7 @@
                         <td style="width: 35px;">序号</td>
                         <td colspan="4">补偿内容</td>
                         <td colspan="3">计算公式</td>
-                        <td colspan="2">金额</td>
+                        <td colspan="2">金额(元)</td>
                         <td>备注</td>
                     </tr>
                     <tr>

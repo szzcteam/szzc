@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="comm/include.inc.jsp" %>
-<h2 class="contentTitle">添加手续通知单</h2>
+<h2 class="contentTitle">添加资金结算单</h2>
 
 <style>
     .tableInfo {
@@ -89,10 +89,6 @@
                         <td><input type="text" name="assessPrice" class="samll_input_text"></td>
                     </tr>
                     <tr>
-                        <td colspan="5">个人身份证号或单位账号</td>
-                        <td colspan="6"><input type="text" name="identityNo" class="none_border" style="width: 400px;"></td>
-                    </tr>
-                    <tr>
                         <td colspan="5">被征收房屋地址</td>
                         <td colspan="6"><input type="text" name="address" class="none_border" style="width: 400px;"></td>
                     </tr>
@@ -105,25 +101,39 @@
                     </tr>
                     <tr>
                         <td>一</td>
-                        <td colspan="4">房屋价值补偿</td>
+                        <td colspan="4">证载房屋价值补偿</td>
                         <td colspan="3"><input type="text" name="calcValueCompensate" class="none_border width_220px"></td>
                         <td colspan="2"><input type="text" name="valueCompensate" class="none_border width_110px"></td>
                         <td><input type="text" name="valueCompensateBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td>二</td>
-                        <td colspan="4">室内装饰装修补偿</td>
+                        <td colspan="4">装修折旧补偿</td>
                         <td colspan="3"><input type="text" name="calcDecorationCompensate" class="none_border width_220px"></td>
                         <td colspan="2"><input type="text" name="decorationCompensate" class="none_border width_110px"></td>
                         <td><input type="text" name="decorationCompensateBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td rowspan="9">三</td>
-                        <td rowspan="9" style="width: 35px;">房屋附属设施补偿</td>
-                        <td colspan="3" class="td_left">1、构建物补偿</td>
-                        <td colspan="3"><input type="text" name="calcStructureCompensate" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="structureCompensate" class="none_border width_110px"></td>
-                        <td><input type="text" name="structureCompensateBz" class="none_border width_70px"></td>
+                        <td>三</td>
+                        <td colspan="4" class="td_left">搬迁补偿（搬家费）</td>
+                        <td colspan="3"><input type="text" name="calcMoveHouseFee" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="moveHouseFee" class="none_border width_110px"></td>
+                        <td><input type="text" name="moveHouseFeeBz" class="none_border width_70px"></td>
+                    </tr>
+                    <tr>
+                        <td>四</td>
+                        <td colspan="4" class="td_left">临时安置补偿（过渡费）</td>
+                        <td colspan="3"><input type="text" name="calcInterimFee" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="interimFee" class="none_border width_110px"></td>
+                        <td><input type="text" name="interimFeeBz" class="none_border width_70px"></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="7">五</td>
+                        <td rowspan="7" style="width: 35px;">房屋附属设施补偿</td>
+                        <td colspan="3" class="td_left">1、水表迁移费</td>
+                        <td colspan="3"><input type="text" name="calcMoveWaterMeterFee" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="moveWaterMeterFee" class="none_border width_110px"></td>
+                        <td><input type="text" name="moveWaterMeterFeeBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td colspan="3" class="td_left">2、电表迁移费</td>
@@ -132,67 +142,41 @@
                         <td><input type="text" name="moveAmmeterFeeBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="td_left">3、水表迁移费</td>
-                        <td colspan="3"><input type="text" name="calcMoveWaterMeterFee" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="moveWaterMeterFee" class="none_border width_110px"></td>
-                        <td><input type="text" name="moveWaterMeterFeeBz" class="none_border width_70px"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="td_left">4、空调移机费</td>
+                        <td colspan="3" class="td_left">3、空调移机费</td>
                         <td colspan="3"><input type="text" name="calcMoveAirConditioningFee" class="none_border width_220px"></td>
                         <td colspan="2"><input type="text" name="moveAirConditioningFee" class="none_border width_110px"></td>
                         <td><input type="text" name="moveAirConditioningFeeBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="td_left">5、管道煤气拆装补偿</td>
-                        <td colspan="3"><input type="text" name="calcGasFee" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="gasFee" class="none_border width_110px"></td>
-                        <td><input type="text" name="gasFeeBz" class="none_border width_70px"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="td_left">6、热水器拆装补偿</td>
+                        <td colspan="3" class="td_left">4、热水器拆装费</td>
                         <td colspan="3"><input type="text" name="calcHotWaterCompensate" class="none_border width_220px"></td>
                         <td colspan="2"><input type="text" name="hotWaterCompensate" class="none_border width_110px"></td>
                         <td><input type="text" name="hotWaterCompensateBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><input type="text" name="affiliated1Desc" class="none_border width_185px" style="margin-top: 3px;">&nbsp;</td>
-                        <td colspan="3"><input type="text" name="calcAffiliated1Desc" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="affiliated1Rmb" class="none_border width_110px"></td>
-                        <td><input type="text" name="affiliated1Bz" class="none_border width_70px"></td>
+                        <td colspan="3" class="td_left">5、管道煤气拆装费</td>
+                        <td colspan="3"><input type="text" name="calcGasFee" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="gasFee" class="none_border width_110px"></td>
+                        <td><input type="text" name="gasFeeBz" class="none_border width_70px"></td>
                     </tr>
+                   <tr>
+                       <td colspan="3" class="td_left">6、构建物补偿</td>
+                       <td colspan="3"><input type="text" name="calcStructureCompensate" class="none_border width_220px"></td>
+                       <td colspan="2"><input type="text" name="structureCompensate" class="none_border width_110px"></td>
+                       <td><input type="text" name="structureCompensateBz" class="none_border width_70px"></td>
+                   </tr>
                     <tr>
-                        <td colspan="3"><input type="text" name="affiliated2Desc" class="none_border width_185px" style="margin-top: 3px;">&nbsp;</td>
-                        <td colspan="3"><input type="text" name="calcAffiliated2Desc" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="affiliated2Rmb" class="none_border width_110px"></td>
-                        <td><input type="text" name="affiliated2Bz" class="none_border width_70px"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><input type="text" name="affiliated3Desc" class="none_border width_185px" style="margin-top: 3px;">&nbsp;</td>
-                        <td colspan="3"><input type="text" name="calcAffiliated3Desc" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="affiliated3Rmb" class="none_border width_110px"></td>
-                        <td><input type="text" name="affiliated3Bz" class="none_border width_70px"></td>
-                    </tr>
-                    <tr>
-                        <td>四</td>
-                        <td colspan="4" class="td_left">搬迁补偿（搬家费）</td>
-                        <td colspan="3"><input type="text" name="calcMoveHouseFee" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="moveHouseFee" class="none_border width_110px"></td>
-                        <td><input type="text" name="moveHouseFeeBz" class="none_border width_70px"></td>
-                    </tr>
-                    <tr>
-                        <td>五</td>
-                        <td colspan="4" class="td_left">临时安置补偿（过渡费）</td>
-                        <td colspan="3"><input type="text" name="calcInterimFee" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="interimFee" class="none_border width_110px"></td>
-                        <td><input type="text" name="interimFeeBz" class="none_border width_70px"></td>
+                        <td colspan="3" class="td_left">7、其他<input type="text" name="affiliated1Desc" class="none_border" style="margin-top: 3px;width: 110px;float: none;">&nbsp;</td>
+                        <td colspan="3"><input type="text" name="calcAffiliatedOther" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="affiliatedOther" class="none_border width_110px"></td>
+                        <td><input type="text" name="affiliatedOtherBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td>六</td>
-                        <td colspan="4" class="td_left">停产停业损失补偿</td>
-                        <td colspan="3"><input type="text" name="calcSuspendBusinessFee" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="suspendBusinessFee" class="none_border width_110px"></td>
-                        <td><input type="text" name="suspendBusinessFeeBz" class="none_border width_70px"></td>
+                        <td colspan="4" class="td_left">未登记建筑房屋补偿</td>
+                        <td colspan="3"><input type="text" name="calcNoCheckCompensate" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="noCheckCompensate" class="none_border width_110px"></td>
+                        <td><input type="text" name="noCheckCompensateBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td>七</td>
@@ -217,60 +201,90 @@
                     </tr>
                     <tr>
                         <td>十</td>
+                        <td colspan="4" class="td_left">建筑面积补助</td>
+                        <td colspan="3"><input type="text" name="calcBuildingAreaFee" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="buildingAreaFee" class="none_border width_110px"></td>
+                        <td><input type="text" name="buildingAreaFeeBz" class="none_border width_70px"></td>
+                    </tr>
+                    <tr>
+                        <td>十一</td>
+                        <td colspan="4" class="td_left">停产停业损失补偿</td>
+                        <td colspan="3"><input type="text" name="calcSuspendBusinessFee" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="suspendBusinessFee" class="none_border width_110px"></td>
+                        <td><input type="text" name="suspendBusinessFeeBz" class="none_border width_70px"></td>
+                    </tr>
+                    <tr>
+                        <td>十二</td>
+                        <td colspan="4" class="td_left">不可移动设备设施补偿</td>
+                        <td colspan="3"><input type="text" name="calcNoMoveCompensate" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="noMoveCompensate" class="none_border width_110px"></td>
+                        <td><input type="text" name="noMoveCompensateBz" class="none_border width_70px"></td>
+                    </tr>
+                    <tr>
+                        <td>十三</td>
                         <td colspan="4" class="td_left">搬迁奖励</td>
                         <td colspan="3"><input type="text" name="calcMoveReward" class="none_border width_220px"></td>
                         <td colspan="2"><input type="text" name="moveReward" class="none_border width_110px"></td>
                         <td><input type="text" name="moveRewardBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td>十一</td>
-                        <td colspan="4" class="td_left">封闭阳台</td>
-                        <td colspan="3"><input type="text" name="calcCloseBalcony" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="closeBalcony" class="none_border width_110px"></td>
-                        <td><input type="text" name="closeBalconyBz" class="none_border width_70px"></td>
+                        <td>十四</td>
+                        <td colspan="4" class="td_left">货币搬迁奖励</td>
+                        <td colspan="3"><input type="text" name="calcRmbMoveReward" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="rmbMoveReward" class="none_border width_110px"></td>
+                        <td><input type="text" name="rmbMoveRewardBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td>十二</td>
-                        <td colspan="4" class="td_left">未登记建筑</td>
-                        <td colspan="3"><input type="text" name="calcNoCheckCompensate" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="noCheckCompensate" class="none_border width_110px"></td>
-                        <td><input type="text" name="noCheckCompensateBz" class="none_border width_70px"></td>
+                        <td>十五</td>
+                        <td colspan="4" class="td_left">小面积住房搬迁奖励</td>
+                        <td colspan="3"><input type="text" name="calcSmallAreaReward" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="smallAreaReward" class="none_border width_110px"></td>
+                        <td><input type="text" name="smallAreaRewardBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td>十三</td>
+                        <td>十六</td>
                         <td colspan="4" class="td_left">其他<input type="text" name="otherDesc" class="none_border width_110px" style="clear: both;float: none;"></td>
                         <td colspan="3"><input type="text" name="calcOther" class="none_border width_220px"></td>
                         <td colspan="2"><input type="text" name="otherRmb" class="none_border width_110px"></td>
                         <td><input type="text" name="otherBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td colspan="5">应付款合计</td>
-                        <td colspan="3"><input type="text" name="calcPayTotal" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="payTotal" class="none_border width_110px"></td>
-                        <td><input type="text" name="payTotalBz" class="none_border width_70px"></td>
+                        <td colspan="5">被征收房屋补偿合计</td>
+                        <td colspan="3"><input type="text" name="calcSumCompensate" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="sumCompensate" class="none_border width_110px"></td>
+                        <td><input type="text" name="sumCompensateBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td rowspan="3">仅产权调换方式</td>
-                        <td colspan="3">产权调换房屋应收价款</td>
-                        <td style="width: 140px;">建筑面积<input type="text" name="changeArea" class="none_border width_70px" style="clear: both;float:none;width: 50px;"> m<sup>2</sup></td>
-                        <td colspan="3"><input type="text" name="calcChangeRmb" class="none_border width_220px"></td>
-                        <td colspan="2"><input type="text" name="changeRmb" class="none_border width_110px"></td>
-                        <td><input type="text" name="changeRmbBz" class="none_border width_70px"></td>
+                        <td colspan="3" rowspan="2">产权调换房价款</td>
+                        <td style="width: 100px;">建筑面积</td>
+                        <td colspan="3">其中<input type="text" name="changeArea" class="none_border width_70px" style="clear: both;float:none;width: 50px;"> m<sup>2</sup>与被征收房屋(元)置换互不补差价</td>
+                        <td rowspan="2" colspan="2"><input type="text" name="changeRmb" class="none_border width_110px"></td>
+                        <td rowspan="2"><small>置换建筑面积=被征收房屋套内面积*调换房系数</small></td>
                     </tr>
                     <tr>
-                        <td rowspan="2" colspan="3">实际结算</td>
-                        <td>收款</td>
-                        <td colspan="3"><input type="text" name="realReceiveTotal" class="none_border width_220px"></td>
-                        <td rowspan="3">被征收人签字</td>
-                        <td rowspan="3" colspan="2">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td colspan="3"></td>
                     </tr>
                     <tr>
-                        <td>付款</td>
-                        <td colspan="3"><input type="text" name="realPayTotal" class="none_border width_220px"></td>
+                        <td colspan="4">已抵扣安置房款</td>
+                        <td colspan="3"></td>
+                        <td colspan="2"></td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td colspan="4">实际金额(大写)</td>
-                        <td colspan="4"><input type="text" name="realPayMoney" class="none_border" style="width: 335px;"></td>
+                       <td colspan="5">应付合计</td>
+                        <td colspan="2"></td>
+                        <td>应收合计</td>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">&nbsp;</td>
+                        <td colspan="2" rowspan="2">被征收人签字</td>
+                        <td rowspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">&nbsp;</td>
                     </tr>
                 </table>
             </dl>

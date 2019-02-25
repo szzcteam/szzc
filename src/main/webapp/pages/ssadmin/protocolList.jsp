@@ -50,30 +50,30 @@
                 </a></li>
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addNotice"
-                       height="600" width="800" target="dialog" rel="updateSystemArgs"><span>新增手续通知单</span>
+                       height="600" width="800" target="dialog" rel="addNotice"><span>新增手续通知单</span>
                 </a></li>
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>新增补偿资金结算单</span>
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addSettleAccounts"
+                       height="400" width="800" target="dialog" rel="addSettleAccounts"><span>新增资金结算单</span>
                 </a></li>
             </shiro:hasPermission>
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
                        href="ssadmin/selectSwapHouseByHouseOwner.html?url=ssadmin/updateSwapHouse&houseOwner={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改产权调换协议</span>
+                       height="400" width="800" target="dialog" rel="updateSwapHouse"><span>修改产权调换协议</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&houseOwner={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改货币补偿协议</span>
+                       height="400" width="800" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿协议</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/notice/query.html?url=ssadmin/updateNotice&houseOwner={sid_user}"
-                       height="600" width="800" target="dialog" rel="updateSystemArgs"><span>修改手续通知单</span>
+                       height="600" width="800" target="dialog" rel="updateNotice"><span>修改手续通知单</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse&uid={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改补偿资金结算单</span>
+                       height="400" width="800" target="dialog" rel="updateSystemArgs"><span>修改资金结算单</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
