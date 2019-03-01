@@ -388,6 +388,32 @@ $.fn.extend({
 				event.preventDefault();
 			});
 		});
+	},
+	dwzOnlyExport: function(){
+		function _doExport($this) {
+			var $p = $this.attr("targetType") == "dialog" ? $.pdialog.getCurrent() : navTab.getCurrentPanel();
+			var $form = $("#pagerForm", $p);
+			var url = $this.attr("href");
+			if (url.indexOf("{") != -1 && url.indexOf("}") != -1) {
+				//取行值
+				url = unescape(url).replaceTmById($(event.target).parents(".unitBox:first"));
+			}
+			window.location = url;
+		}
+
+		return this.each(function(){
+			var $this = $(this);
+			$this.click(function(event){
+				var title = $this.attr("title");
+				if (title) {
+					alertMsg.confirm(title, {
+						okCall: function(){_doExport($this);}
+					});
+				} else {_doExport($this);}
+
+				event.preventDefault();
+			});
+		});
 	}
 });
 
