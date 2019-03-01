@@ -97,20 +97,20 @@
 
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="icon"
-                       href="ssadmin/exportSwapHouse.html?houseOwner=张三"
-                       target="dwzExport" targetType="navTab"><span>导出产权调换</span>
+                       href="ssadmin/exportSwapHouse.html?houseOwner={sid_user}"
+                       target="dwzOnlyExport" targetType="navTab"><span>导出产权调换</span>
                 </a></li>
                 <li><a class="icon"
                        href="ssadmin/RmbRecompense/detele?uid={sid_user}"
-                       target="dwzExport" targetType="navTab"><span>导出货币补偿</span>
+                       target="dwzOnlyExport" targetType="navTab"><span>导出货币补偿</span>
                 </a></li>
                 <li><a class="icon"
                        href="ssadmin/RmbRecompense/detele?uid={sid_user}"
-                       target="dwzExport" targetType="navTab"><span>导出通知单</span>
+                       target="dwzOnlyExport" targetType="navTab"><span>导出通知单</span>
                 </a></li>
                 <li><a class="icon"
                        href="ssadmin/RmbRecompense/detele?uid={sid_user}"
-                       target="dwzExport" targetType="navTab"><span>导出结算单</span>
+                       target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>
