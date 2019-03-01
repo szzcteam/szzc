@@ -106,9 +106,10 @@ public class SettleAccountsController extends BaseController {
         String protocol = ProtocolEnum.SETTLE_ACCOUNTS_AGREEMENT.getCode();
         //yyyyMMddHHmmssSSS的时间格式
         String date = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
+        String fileName = protocol + "_" + houseOwner + "_" + date + ".doc";
         //文件导出
         WordUtils.exportMillCertificateWord
-                (request, response, map, protocol + "_" + houseOwner + "_" + date, "SettleAccountsAgreement.ftl");
+                (response, map, fileName, "SettleAccountsAgreement.ftl");
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "导出成功");
         modelAndView.addObject("callbackType", "closeCurrent");

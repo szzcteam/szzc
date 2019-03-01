@@ -19,7 +19,7 @@ public class WordUtils {
     private static Configuration configuration = null;
     //这里注意的是利用WordUtils的类加载器动态获得模板文件的位置
     // private static final String templateFolder = WordUtils.class.getClassLoader().getResource("../../").getPath() + "WEB-INF/templetes/";
-    private static final String templateFolder = "C:\\Users\\DELL-5490\\Desktop\\szzc\\src\\main\\resources\\templates";
+    private static final String templateFolder = CustomizedPropertyConfigurer.getValue("template.folder");
 
     static {
         configuration = new Configuration();
@@ -35,7 +35,7 @@ public class WordUtils {
         throw new AssertionError();
     }
 
-    public static void exportMillCertificateWord(HttpServletRequest request, HttpServletResponse response, Map map, String title, String ftlFile) throws IOException {
+    public static void exportMillCertificateWord(HttpServletResponse response, Map map, String fileName, String ftlFile) throws IOException {
         Template freemarkerTemplate = configuration.getTemplate(ftlFile);
         File file = null;
         InputStream fin = null;
@@ -48,7 +48,6 @@ public class WordUtils {
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/msword");
             // 设置浏览器以下载的方式处理该文件名
-            String fileName = title+".doc";
             response.setHeader("Content-Disposition", "attachment;filename="
                     .concat(String.valueOf(URLEncoder.encode(fileName, "UTF-8"))));
             response.setCharacterEncoding("utf-8");

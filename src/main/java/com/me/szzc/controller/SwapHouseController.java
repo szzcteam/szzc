@@ -110,7 +110,7 @@ public class SwapHouseController extends BaseController {
     @RequestMapping("/ssadmin/exportSwapHouse")
     public ModelAndView exportSwapHouse(@RequestParam String houseOwner, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+
         //根据人名获取产权协议书数据
         SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
         //对象转map
@@ -119,12 +119,14 @@ public class SwapHouseController extends BaseController {
         String protocol = ProtocolEnum.HOUSING_PROPERTY_ECHANGE_AGREEMENT.getCode();
         //yyyyMMddHHmmssSSS的时间格式
         String date = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
+        String fileName = protocol + "_" + houseOwner + "_" + date +".doc";
         //文件导出
         WordUtils.exportMillCertificateWord
-                (request, response, map, protocol + "_" + houseOwner + "_" + date, "HousingPropertyEchangeAgreement.ftl");
+                (response, map, fileName, "HousingPropertyEchangeAgreement.ftl");
+
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "导出成功");
-        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 }

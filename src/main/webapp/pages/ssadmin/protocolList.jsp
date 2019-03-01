@@ -97,7 +97,7 @@
 
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="icon"
-                       href="ssadmin/exportSwapHouse.html?houseOwner={sid_user}"
+                       href="ssadmin/exportSwapHouse.html?houseOwner=张三"
                        target="dwzExport" targetType="navTab"><span>导出产权调换</span>
                 </a></li>
                 <li><a class="icon"
