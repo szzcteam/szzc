@@ -176,11 +176,19 @@ public class SettleAccounts {
 
     private BigDecimal changeArea;
 
+    private String calcChangeArea;
+
     private BigDecimal calcm;
 
     private BigDecimal price;
 
+    private BigDecimal houseMoney;
+
+    private String calcDeduction;
+
     private BigDecimal deduction;
+
+    private String deductionBz;
 
     private String calcPayTotal;
 

@@ -633,62 +633,6 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <update id="updateByStatus" parameterType="com.me.szzc.pojo.entity.RmbRecompense">
-    update t_rmb_recompense
-    set
-    card_no = #{cardNo,jdbcType=VARCHAR},
-      mng_office = #{mngOffice,jdbcType=VARCHAR},
-      company = #{company,jdbcType=VARCHAR},
-      house_owner = #{houseOwner,jdbcType=VARCHAR},
-      recompense_plan = #{recompensePlan,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      house_owner_number = #{houseOwnerNumber,jdbcType=VARCHAR},
-      public_owner_number = #{publicOwnerNumber,jdbcType=VARCHAR},
-      proportion = #{proportion,jdbcType=DECIMAL},
-      useing = #{useing,jdbcType=VARCHAR},
-      check_in_area = #{checkInArea,jdbcType=DECIMAL},
-      residence_area = #{residenceArea,jdbcType=DECIMAL},
-      operate_area = #{operateArea,jdbcType=DECIMAL},
-      office_area = #{officeArea,jdbcType=DECIMAL},
-      produce_area = #{produceArea,jdbcType=DECIMAL},
-      other_area = #{otherArea,jdbcType=DECIMAL},
-      no_check_area = #{noCheckArea,jdbcType=DECIMAL},
-      value_compensate = #{valueCompensate,jdbcType=DECIMAL},
-      decoration_compensate = #{decorationCompensate,jdbcType=DECIMAL},
-      structure_compensate = #{structureCompensate,jdbcType=DECIMAL},
-      move_phone_fee = #{movePhoneFee,jdbcType=DECIMAL},
-      tv_fee = #{tvFee,jdbcType=DECIMAL},
-      move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
-      move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
-      wifi_fee = #{wifiFee,jdbcType=DECIMAL},
-      move_air_conditioning_fee = #{moveAirConditioningFee,jdbcType=DECIMAL},
-      gas_fee = #{gasFee,jdbcType=DECIMAL},
-      hot_water_compensate = #{hotWaterCompensate,jdbcType=DECIMAL},
-      subtotal = #{subtotal,jdbcType=DECIMAL},
-      move_house_fee = #{moveHouseFee,jdbcType=DECIMAL},
-      interim_price = #{interimPrice,jdbcType=DECIMAL},
-      interim_month = #{interimMonth,jdbcType=INTEGER},
-      interim_fee = #{interimFee,jdbcType=DECIMAL},
-      suspend_business_fee = #{suspendBusinessFee,jdbcType=DECIMAL},
-      rmb_compensate = #{rmbCompensate,jdbcType=DECIMAL},
-      life_compensate = #{lifeCompensate,jdbcType=DECIMAL},
-      change_compensate = #{changeCompensate,jdbcType=DECIMAL},
-      move_reward = #{moveReward,jdbcType=DECIMAL},
-      close_balcony = #{closeBalcony,jdbcType=DECIMAL},
-      no_check_compensate = #{noCheckCompensate,jdbcType=DECIMAL},
-      other_fee = #{otherFee,jdbcType=DECIMAL},
-      sum_rbm = #{sumRbm,jdbcType=DECIMAL},
-      upper_rmb = #{upperRmb,jdbcType=VARCHAR},
-      other_terms_one = #{otherTermsOne,jdbcType=VARCHAR},
-      other_terms_two = #{otherTermsTwo,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
-      modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
-    deleted = #{deleted,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-
   <select id="selectOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

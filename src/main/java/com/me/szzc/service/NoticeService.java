@@ -33,7 +33,7 @@ public class NoticeService {
         this.noticeMapper.insertSelective(notice);
     }
 
-    public void detele(Notice notice) {
+    public void delete(Notice notice) {
         notice.setModifiedDate(DateHelper.getTimestamp());
         notice.setDeleted(true);
         this.noticeMapper.delete(notice);

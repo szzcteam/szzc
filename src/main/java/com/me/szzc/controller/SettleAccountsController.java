@@ -26,9 +26,13 @@ import java.util.Map;
 public class SettleAccountsController extends BaseController {
 
     @RequestMapping("ssadmin/settleAccounts/add")
-    public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts) throws Exception {
+    public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/settleAccounts");
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //创建人
+        Long userId = getAdminSession(request).getFid();
+        settleAccounts.setCreateUserId(userId);
+        settleAccounts.setModifiedUserId(userId);
         //条件判断
         this.settleAccountsService.add(settleAccounts);
         modelAndView.addObject("statusCode", 200);
@@ -37,56 +41,57 @@ public class SettleAccountsController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/settleAccounts/detele")
-    public ModelAndView deteleSettleAccounts(SettleAccounts settleAccounts) throws Exception {
+    @RequestMapping("ssadmin/settleAccounts/delete")
+    public ModelAndView deleteSettleAccounts(String houseOwner, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/settleAccounts");
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
-        settleAccounts = this.settleAccountsService.selectByHouseOwner(settleAccounts.getHouseOwner());
-        if(settleAccounts!=null){
-            this.settleAccountsService.update(settleAccounts);
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "删除成功");
-            modelAndView.addObject("callbackType", "closeCurrent");
-        }else{
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "用户不存在");
-            modelAndView.addObject("callbackType", "closeCurrent");
+        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
+
+        if(settleAccounts == null){
+            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("message","用户未签订此协议");
+            return modelAndView;
         }
+
+        if(settleAccounts.getDeleted()) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            return modelAndView;
+        }
+
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        settleAccounts.setModifiedUserId(userId);
+        this.settleAccountsService.delete(settleAccounts);
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/settleAccounts/update")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/settleAccounts");
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
 
         this.settleAccountsService.update(settleAccounts);
         modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "修改");
-        modelAndView.addObject("callbackType", "closeCurrent");
+        modelAndView.addObject("message","修改成功");
+        modelAndView.addObject("callbackType","closeCurrent");
         return modelAndView;
     }
 
     @RequestMapping("ssadmin/settleAccounts/query")
-    public ModelAndView querySettleAccounts(SettleAccounts settleAccounts) throws Exception {
+    public ModelAndView querySettleAccounts(String houseOwner, String url) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/settleAccounts");
+        modelAndView.setViewName(url) ;
         //条件判断
-        settleAccounts = this.settleAccountsService.selectByHouseOwner(settleAccounts.getHouseOwner());
+        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
         if(settleAccounts !=null){
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "查询成功");
-            modelAndView.addObject("callbackType", "closeCurrent");
-            return modelAndView;
-        }else{
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "查询失败");
-            modelAndView.addObject("callbackType", "closeCurrent");
-            return modelAndView;
+            modelAndView.addObject("settleAccounts", settleAccounts);
         }
-
+        modelAndView.addObject("statusCode",200);
+        modelAndView.addObject("message","查询成功");
+        return modelAndView;
     }
 
     @RequestMapping("/ssadmin/exportSettleAccounts")

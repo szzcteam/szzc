@@ -23,7 +23,7 @@ public class RmbRecompenseService {
         this.rmbRecompenseMapper.insertSelective(rmbRecompense);
     }
 
-    public void detele(RmbRecompense rmbRecompense) {
+    public void delete(RmbRecompense rmbRecompense) {
         rmbRecompense.setModifiedDate(DateHelper.getTimestamp());
         rmbRecompense.setDeleted(true);
         this.rmbRecompenseMapper.delete(rmbRecompense);

@@ -42,8 +42,8 @@ public class RmbRecompenseController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("ssadmin/RmbRecompense/detele")
-    public ModelAndView dateleRmbRecompense (String houseOwner, HttpServletRequest request)throws Exception{
+    @RequestMapping("ssadmin/RmbRecompense/delete")
+    public ModelAndView deleteRmbRecompense (String houseOwner, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         RmbRecompense rmbRecompense =  this.rmbRecompenseService.selectByHouseOwner(houseOwner);
@@ -60,7 +60,7 @@ public class RmbRecompenseController extends BaseController {
         //修改人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setModifiedUserId(userId);
-        this.rmbRecompenseService.detele(rmbRecompense);
+        this.rmbRecompenseService.delete(rmbRecompense);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","删除成功");
         return modelAndView;

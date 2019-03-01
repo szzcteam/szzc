@@ -41,8 +41,8 @@ public class NoticeController extends BaseController {
         return modelAndView;
     }
 
-    @RequestMapping("/ssadmin/notice/detele")
-    public ModelAndView deteleNotice(String houseOwner, HttpServletRequest request)throws Exception{
+    @RequestMapping("/ssadmin/notice/delete")
+    public ModelAndView deleteNotice(String houseOwner, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         Notice notices = this.noticeService.selectByHouseOwner(houseOwner);
@@ -60,7 +60,7 @@ public class NoticeController extends BaseController {
         //修改人
         Long userId = getAdminSession(request).getFid();
         notices.setModifiedUserId(userId);
-        this.noticeService.detele(notices);
+        this.noticeService.delete(notices);
 
         return modelAndView;
     }

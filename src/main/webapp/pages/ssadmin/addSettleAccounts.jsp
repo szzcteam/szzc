@@ -51,7 +51,7 @@
 
 <div class="pageContent">
 
-    <form method="post" action="ssadmin/notice/add.html"
+    <form method="post" action="ssadmin/settleAccounts/add.html"
           class="pageForm required-validate" enctype="multipart/form-data"
           onsubmit="return iframeCallback(this, dialogAjaxDone);">
 
@@ -75,7 +75,7 @@
                         <td style="width: 100px;"><input type="text" name="phone" class="none_border"></td>
                         <td style="width: 60px;">房屋用途</td>
                         <td style="width: 60px;">建筑面积</td>
-                        <td style="width: 60px;">产权比例</td>
+                        <td style="width: 60px;">套内面积</td>
                         <td style="width: 80px;">房屋评估单价</td>
                     </tr>
                     <tr>
@@ -85,7 +85,7 @@
                         <td><input type="text" name="lesseePhone" class="none_border"></td>
                         <td><input type="text" name="useing" class="samll_input_text"></td>
                         <td><input type="text" name="checkInArea" class="samll_input_text" ></td>
-                        <td><input type="text" name="proportion" class="samll_input_text" ></td>
+                        <td><input type="text" name="inArea" class="samll_input_text" ></td>
                         <td><input type="text" name="assessPrice" class="samll_input_text"></td>
                     </tr>
                     <tr>
@@ -166,7 +166,7 @@
                        <td><input type="text" name="structureCompensateBz" class="none_border width_70px"></td>
                    </tr>
                     <tr>
-                        <td colspan="3" class="td_left">7、其他<input type="text" name="affiliated1Desc" class="none_border" style="margin-top: 3px;width: 110px;float: none;">&nbsp;</td>
+                        <td colspan="3" class="td_left">7、其他<input type="text" name="affiliatedOtherDesc" class="none_border" style="margin-top: 3px;width: 110px;float: none;">&nbsp;</td>
                         <td colspan="3"><input type="text" name="calcAffiliatedOther" class="none_border width_220px"></td>
                         <td colspan="2"><input type="text" name="affiliatedOther" class="none_border width_110px"></td>
                         <td><input type="text" name="affiliatedOtherBz" class="none_border width_70px"></td>
@@ -258,33 +258,34 @@
                         <td rowspan="3">仅产权调换方式</td>
                         <td colspan="3" rowspan="2">产权调换房价款</td>
                         <td style="width: 100px;">建筑面积</td>
-                        <td colspan="3">其中<input type="text" name="changeArea" class="none_border width_70px" style="clear: both;float:none;width: 50px;"> m<sup>2</sup>与被征收房屋(元)置换互不补差价</td>
-                        <td rowspan="2" colspan="2"><input type="text" name="changeRmb" class="none_border width_110px"></td>
-                        <td rowspan="2"><small>置换建筑面积=被征收房屋套内面积*调换房系数</small></td>
+                        <td colspan="3" style="font-size: xx-small;">其中<input type="text" name="calcm" class="none_border" style="clear: both;float:none;width: 40px;"> m<sup>2</sup>
+                            与被征收房屋(<input type="text" name="price" class="none_border" style="clear: both;float:none;width: 50px;">元)置换互不补差价</td>
+                        <td rowspan="2" colspan="2"><input type="text" name="houseMoney" class="none_border width_110px" style="height: 40px;"></td>
+                        <td rowspan="2"><small style="line-height: 20px;font-size: xx-small;">置换建筑面积=被征收房屋套内面积*调换房系数</small></td>
                     </tr>
                     <tr>
-                        <td>&nbsp;</td>
-                        <td colspan="3"></td>
+                        <td><input type="text" name="changeArea" class="none_border width_70px" style="clear: both;float:none;width: 50px;"></td>
+                        <td colspan="3"><input type="text" name="calcChangeArea" class="none_border width_220px"></td>
                     </tr>
                     <tr>
                         <td colspan="4">已抵扣安置房款</td>
-                        <td colspan="3"></td>
-                        <td colspan="2"></td>
-                        <td></td>
+                        <td colspan="3"><input type="text" name="calcDeduction" class="none_border width_220px"></td>
+                        <td colspan="2"><input type="text" name="deduction" class="none_border width_110px"></td>
+                        <td><input type="text" name="deductionBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                        <td colspan="5">应付合计</td>
-                        <td colspan="2"></td>
+                        <td colspan="2"><input type="text" name="payTotal" class="none_border" style="width: 170px;"></td>
                         <td>应收合计</td>
-                        <td colspan="3"></td>
+                        <td colspan="3"><input type="text" name="receiveTotal" class="none_border" style="width: 170px;"></td>
                     </tr>
                     <tr>
-                        <td colspan="8">&nbsp;</td>
+                        <td colspan="8">实际支付金额(大写)：<input type="text" name="payMoney" class="none_border" style="width: 320px;clear: both;float: none;"></td>
                         <td colspan="2" rowspan="2">被征收人签字</td>
                         <td rowspan="2"></td>
                     </tr>
                     <tr>
-                        <td colspan="8">&nbsp;</td>
+                        <td colspan="8">实际应收金额(大写)：<input type="text" name="receiveMoney" class="none_border" style="width: 320px;clear: both;float: none;"></td>
                     </tr>
                 </table>
             </dl>
