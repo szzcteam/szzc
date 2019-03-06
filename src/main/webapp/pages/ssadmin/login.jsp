@@ -20,13 +20,13 @@ alert("${error}") ;
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
-				<a href="/"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_logo.gif" /></a>
+				<a href="/" style="font-size: 36px;">协议管理<%--<img src="${oss_url}/static/ssadmin/js/themes/default/images/login_logo.gif" />--%></a>
 			</h1>
 			<div class="login_headerContent">
 				<div class="navList">
 
 				</div>
-				<h2 class="login_title"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_title.png" /></h2>
+				<h2 class="login_title" style="padding: 0px;text-align: center;"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_title.png" style="width: 96px;height: 96px;"/></h2>
 			</div>
 		</div>
 		<script type="text/javascript">
