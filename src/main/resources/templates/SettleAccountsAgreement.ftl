@@ -208,16 +208,16 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>$</w:t>
+                            <w:t></w:t>
                         </w:r>
                         <w:r w:rsidR="00636C47">
-                            <w:t>{</w:t>
+                            <w:t></w:t>
                         </w:r>
                         <w:r w:rsidR="00636C47" w:rsidRPr="00636C47">
                             <w:t>${cardno}</w:t>
                         </w:r>
                         <w:r w:rsidR="00636C47">
-                            <w:t>}</w:t>
+                            <w:t></w:t>
                         </w:r>
                     </w:p>
                     <w:tbl>
@@ -271,16 +271,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00F378BC">
                                         <w:t>${houseowner}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -309,7 +309,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
                                         <w:t>${phone}</w:t>
@@ -412,16 +412,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="0058688B">
                                         <w:t>${lessee}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -450,10 +450,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="0058688B">
                                         <w:t>${lesseephone}</w:t>
@@ -490,16 +490,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00F41757">
                                         <w:t>${checkinarea}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -513,7 +513,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
                                         <w:t>${inarea}</w:t>
@@ -530,10 +530,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00B946C3">
                                         <w:t>${assessprice}</w:t>
@@ -739,10 +739,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="001D7514">
                                         <w:t>${calcvaluecompensate}</w:t>
@@ -757,7 +757,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -771,16 +771,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00982A90">
                                         <w:t>${valuecompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -794,10 +794,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00982A90">
                                         <w:t>${valuecompensatebz}</w:t>
@@ -870,7 +870,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -884,16 +884,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="000024E6">
                                         <w:t>${decorationcompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -907,10 +907,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="000024E6">
                                         <w:t>${decorationcompensatebz}</w:t>
@@ -992,7 +992,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1006,10 +1006,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="005F3C92">
                                         <w:t>${movehousefee}</w:t>
@@ -1018,7 +1018,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1041,7 +1041,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1114,7 +1114,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1137,7 +1137,7 @@
                                         <w:t>${interimfee}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1157,7 +1157,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1254,7 +1254,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1268,10 +1268,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="005F3C92">
                                         <w:t>${movewatermeterfee}</w:t>
@@ -1280,7 +1280,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1379,7 +1379,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1393,10 +1393,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="005F3C92">
                                         <w:t>${moveammeterfee}</w:t>
@@ -1405,7 +1405,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1428,7 +1428,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1510,7 +1510,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1530,7 +1530,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1626,7 +1626,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1640,16 +1640,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="002C43E1">
                                         <w:t>${hotwatercompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1669,7 +1669,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1742,10 +1742,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="007E25F9">
                                         <w:t>${calcgasfee}</w:t>
@@ -1754,7 +1754,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1768,16 +1768,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="007E25F9">
                                         <w:t>${gasfee}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1797,7 +1797,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1865,7 +1865,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1879,16 +1879,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00736E38">
                                         <w:t>${structurecompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1908,7 +1908,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1990,10 +1990,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00736E38">
                                         <w:t>${affiliatedother}</w:t>
@@ -2083,7 +2083,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2097,16 +2097,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00CC021D">
                                         <w:t>${nocheckcompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2120,10 +2120,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00CC021D">
                                         <w:t>${nocheckcompensatebz}</w:t>
@@ -2196,7 +2196,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2210,16 +2210,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="007D51CC">
                                         <w:t>${rmbcompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2233,10 +2233,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="007D51CC">
                                         <w:t>${rmbcompensatebz}</w:t>
@@ -2309,7 +2309,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2323,16 +2323,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00131996">
                                         <w:t>${lifecompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2421,7 +2421,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2435,16 +2435,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="0027459D">
                                         <w:t>${changecompensate}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2629,7 +2629,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2643,16 +2643,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="003C4805">
                                         <w:t>${suspendbusinessfee}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2666,7 +2666,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00C7613C">
-                                        <w:t>${suspendbusinessbz}</w:t>
+                                        <w:t>${suspendbusinessfeebz}</w:t>
                                     </w:r>
                                     <w:r>
                                         <w:t></w:t>
@@ -2742,7 +2742,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2771,7 +2771,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2858,7 +2858,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2872,10 +2872,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="005F3C92">
                                         <w:t>${movereward}</w:t>
@@ -2884,7 +2884,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2962,10 +2962,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="00FA1888">
                                         <w:t>${calcrmbmovereward}</w:t>
@@ -2977,7 +2977,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3274,7 +3274,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3297,7 +3297,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3311,10 +3311,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidR="009B1260">
                                         <w:rPr>
@@ -3589,7 +3589,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>${change_area}</w:t>
+                                        <w:t>${changearea}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3605,7 +3605,7 @@
                                             <w:sz w:val="18"/>
                                             <w:szCs w:val="18"/>
                                         </w:rPr>
-                                        <w:t>${calcchangermb}</w:t>
+                                        <w:t>${calcchangearea}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3622,7 +3622,7 @@
                                         <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>${changermb}</w:t>
+                                        <w:t>${calcm}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3683,16 +3683,16 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="002C753F">
                                         <w:t>${deduction}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>}</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3776,10 +3776,10 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>$</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t>{</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                     <w:r w:rsidRPr="00311538">
                                         <w:t>${receivetotal}</w:t>
@@ -3813,219 +3813,19 @@
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
-                                        <w:t xml:space="preserve">) </w:t>
+                                        <w:t xml:space="preserve">) ：</w:t>
                                     </w:r>
                                     <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
-                                        <w:t>${paymoney8}</w:t>
+                                        <w:t>${paymoney}</w:t>
                                         </w:r>
                                         <w:r w:rsidR="000B7B1A">
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
                                         <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>仟</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${paymoney7}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve">佰 </w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${paymoney6}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve">拾 </w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${paymoney5}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>万</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${paymoney4}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve"> </w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve">仟 </w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${paymoney3}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve"> </w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve">佰 </w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${paymoney2}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve"> </w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve">拾 </w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="000B7B1A" w:rsidRPr="000B7B1A">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${paymoney1}</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve"> </w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>元整</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -4081,13 +3881,13 @@
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
-                                        <w:t xml:space="preserve">) </w:t>
+                                        <w:t xml:space="preserve">)： </w:t>
                                     </w:r>
                                     <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
-                                        <w:t>${receivemoney8}</w:t>
+                                        <w:t>${receivemoney}</w:t>
                                         </w:r>
                                         <w:r w:rsidR="00517FBD">
                                         <w:rPr>
@@ -4095,188 +3895,7 @@
                                         </w:rPr>
                                         <w:t></w:t>
                                     </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>仟</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${receivemoney7}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>佰</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${receivemoney6}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>拾</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${receivemoney5}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>万</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${receivemoney4}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve"> </w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve">仟 </w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${receivemoney3}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t xml:space="preserve">佰 </w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${receivemoney2}</w:t>
-                                        </w:r>
-                                        <w:r w:rsidR="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t></w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>拾</w:t>
-                                    </w:r>
-                                    <w:r w:rsidR="00517FBD" w:rsidRPr="00517FBD">
-                                        <w:rPr>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>${receivemoney1}</w:t>
-                                    </w:r>
-                                    <w:r w:rsidRPr="002306C7">
-                                        <w:rPr>
-                                            <w:rFonts w:hint="eastAsia"/>
-                                            <w:spacing w:val="-10"/>
-                                        </w:rPr>
-                                        <w:t>元整</w:t>
-                                    </w:r>
+
                                 </w:p>
                             </w:tc>
                             <w:tc>
