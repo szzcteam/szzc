@@ -101,15 +101,15 @@
                        target="dwzOnlyExport" targetType="navTab"><span>导出产权调换</span>
                 </a></li>
                 <li><a class="icon"
-                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       href="ssadmin/exportRmbRecompense.html?houseOwner={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出货币补偿</span>
                 </a></li>
                 <li><a class="icon"
-                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       href="ssadmin/exportNotice.html?houseOwner={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出通知单</span>
                 </a></li>
                 <li><a class="icon"
-                       href="ssadmin/RmbRecompense/detele?uid={sid_user}"
+                       href="ssadmin/exportSettleAccounts.html?houseOwner={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
                 </a></li>
             </shiro:hasPermission>
