@@ -29,8 +29,15 @@ public class ObjTransMapUtils {
                 // 获取在对象f中属性fields[i]对应的对象中的变量
                 Object o = fields[i].get(obj);
                 if (o != null) {
-                    map.put(varName, o.toString());
-                } else{
+                    String s = o.toString();
+                    if (s.contains(".00")){
+                        String substring = s.substring(s.length() - 3, s.length());
+                        if (".00".equals(substring)) {
+                            s = s.substring(0, s.length() - 3);
+                        }
+                    }
+                    map.put(varName, s);
+                } else {
                     map.put(varName, "");
                 }
 

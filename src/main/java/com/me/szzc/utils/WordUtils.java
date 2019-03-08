@@ -20,9 +20,10 @@ public class WordUtils {
     //这里注意的是利用WordUtils的类加载器动态获得模板文件的位置
     // private static final String templateFolder = WordUtils.class.getClassLoader().getResource("../../").getPath() + "WEB-INF/templetes/";
     private static final String templateFolder = CustomizedPropertyConfigurer.getValue("template.folder");
+    //private static final String templateFolder = "C:\\Users\\DELL-5490\\Desktop\\szzc\\src\\main\\resources\\templates\\";
 
     static {
-        configuration = new Configuration();
+        configuration = new Configuration(Configuration.VERSION_2_3_0);
         configuration.setDefaultEncoding("utf-8");
         try {
             configuration.setDirectoryForTemplateLoading(new File(templateFolder));
@@ -42,7 +43,7 @@ public class WordUtils {
         ServletOutputStream out = null;
         try {
             // 调用工具类的createDoc方法生成Word文档
-            file = createDoc(map,freemarkerTemplate);
+            file = createDoc(map, freemarkerTemplate);
             fin = new FileInputStream(file);
 
             response.setCharacterEncoding("utf-8");
@@ -56,18 +57,18 @@ public class WordUtils {
             byte[] buffer = new byte[512];  // 缓冲区
             int bytesToRead = -1;
             // 通过循环将读入的Word文件的内容输出到浏览器中
-            while((bytesToRead = fin.read(buffer)) != -1) {
+            while ((bytesToRead = fin.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesToRead);
             }
         } finally {
-            if(fin != null) fin.close();
-            if(out != null) out.close();
-            if(file != null) file.delete(); // 删除临时文件
+            if (fin != null) fin.close();
+            if (out != null) out.close();
+            if (file != null) file.delete(); // 删除临时文件
         }
     }
 
     private static File createDoc(Map<?, ?> dataMap, Template template) {
-        String name =  "jianli.doc";
+        String name = "agreement.doc";
         File f = new File(name);
         Template t = template;
         try {
