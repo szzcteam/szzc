@@ -123,7 +123,7 @@
                             <w:jc w:val="center"/>
                         </w:pPr>
                         <w:r>
-                            <w:t>${projectname}</w:t>
+                            <w:t></w:t>
                         </w:r>
                         <w:r w:rsidRPr="0068381F">
                             <w:rPr>
@@ -131,7 +131,7 @@
                                 <w:sz w:val="30"/>
                                 <w:szCs w:val="30"/>
                             </w:rPr>
-                            <w:t>项目房屋征收补偿资金结算单</w:t>
+                            <w:t>${projectname}项目房屋征收补偿资金结算单</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="506EB548" w14:textId="4D83779A" w:rsidR="0068381F" w:rsidRPr="0068381F"
@@ -2729,7 +2729,7 @@
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r>
-                                        <w:t>86.00</w:t>
+                                        <w:t>${changearea}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2745,7 +2745,7 @@
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="00602659">
-                                        <w:t>123</w:t>
+                                        <w:t>${calcchangearea}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2818,7 +2818,7 @@
                                 <w:p w14:paraId="499925A6" w14:textId="2F05B567" w:rsidR="00091FE5"
                                      w:rsidRDefault="002C753F" w:rsidP="00091FE5">
                                     <w:r w:rsidRPr="002C753F">
-                                        <w:t>123.00</w:t>
+                                        <w:t>${calcdeduction}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>

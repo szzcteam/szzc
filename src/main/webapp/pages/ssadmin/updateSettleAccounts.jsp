@@ -264,7 +264,7 @@
                         <td rowspan="2"><small style="line-height: 20px;font-size: xx-small;">置换建筑面积=被征收房屋套内面积*调换房系数</small></td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="changeArea" class="none_border width_70px" style="clear: both;float:none;width: 50px;"></td>
+                        <td><input type="text" name="changeArea" class="none_border width_70px" value="${settleAccounts.changeArea}" style="clear: both;float:none;width: 50px;"></td>
                         <td colspan="3"><input type="text" name="calcChangeArea" value="${settleAccounts.calcChangeArea}"  class="none_border width_220px"></td>
                     </tr>
                     <tr>
