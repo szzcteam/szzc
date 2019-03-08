@@ -489,7 +489,7 @@ CREATE TABLE `t_settle_accounts` (
   `hot_water_compensate` decimal(10,2) DEFAULT NULL COMMENT '热水器拆装费',
   `hot_water_compensate_bz` varchar(255) DEFAULT NULL COMMENT '热水器拆装费备注',
   `calc_gas_fee` varchar(255) DEFAULT NULL COMMENT '管道燃气拆装费计算公式',
-  `gas_fee` varchar(255) DEFAULT NULL COMMENT '管道燃气拆装费',
+  `gas_fee` decimal(10,2) DEFAULT NULL COMMENT '管道燃气拆装费',
   `gas_fee_bz` varchar(255) DEFAULT NULL COMMENT '管道燃气拆装费备注',
   `calc_structure_compensate` varchar(255) DEFAULT NULL COMMENT '构建物补偿计算公式',
   `structure_compensate` decimal(10,2) DEFAULT NULL COMMENT '构建物补偿费',

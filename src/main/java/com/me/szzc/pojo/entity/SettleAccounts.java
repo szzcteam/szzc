@@ -82,7 +82,7 @@ public class SettleAccounts {
 
     private String calcGasFee;
 
-    private String gasFee;
+    private BigDecimal gasFee;
 
     private String gasFeeBz;
 
