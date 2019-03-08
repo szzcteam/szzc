@@ -430,6 +430,8 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="1275" w:type="dxa"/>
+                                    <w:noWrap/>
+                                    <w:tcFitText/>
                                 </w:tcPr>
                                 <w:p w14:paraId="63528656" w14:textId="251D5B1E" w:rsidR="00D05C4D"
                                      w:rsidRDefault="004B00FE" w:rsidP="007E1B25">
@@ -571,6 +573,8 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="1275" w:type="dxa"/>
+                                    <w:noWrap/>
+                                    <w:tcFitText/>
                                 </w:tcPr>
                                 <w:p w14:paraId="21C30DAF" w14:textId="56379CFB" w:rsidR="00D05C4D"
                                      w:rsidRDefault="004B00FE" w:rsidP="007E1B25">
@@ -602,6 +606,9 @@
                                 </w:tcPr>
                                 <w:p w14:paraId="52F0C7C4" w14:textId="3C0A701A" w:rsidR="00D05C4D"
                                      w:rsidRDefault="004B00FE" w:rsidP="007E1B25">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
                                     <w:r>
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
@@ -619,6 +626,9 @@
                                 </w:tcPr>
                                 <w:p w14:paraId="7A2C9832" w14:textId="451F80B9" w:rsidR="00D05C4D"
                                      w:rsidRDefault="004B00FE" w:rsidP="007E1B25">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
                                     <w:r>
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
@@ -644,6 +654,9 @@
                                 </w:tcPr>
                                 <w:p w14:paraId="1BD7A8E2" w14:textId="516C3E6E" w:rsidR="00D05C4D"
                                      w:rsidRDefault="004B00FE" w:rsidP="007E1B25">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
                                     <w:r>
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
@@ -667,6 +680,9 @@
                                 </w:tcPr>
                                 <w:p w14:paraId="3B769D2D" w14:textId="2B7CFF34" w:rsidR="00D05C4D"
                                      w:rsidRDefault="004B00FE" w:rsidP="007E1B25">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
                                     <w:r>
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
