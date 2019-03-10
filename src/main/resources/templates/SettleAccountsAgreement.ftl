@@ -2659,10 +2659,18 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="1134" w:type="dxa"/>
+                                    <w:vMerge w:val="restart"/>
                                     <w:vAlign w:val="center"/>
                                 </w:tcPr>
                                 <w:p w14:paraId="6029FA5C" w14:textId="77777777" w:rsidR="00091FE5"
-                                     w:rsidRDefault="00091FE5" w:rsidP="00091FE5"/>
+                                     w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:t>${housemoney}</w:t>
+                                    </w:r>
+                                </w:p>
                             </w:tc>
                             <w:tc>
                                 <w:tcPr>
@@ -2752,6 +2760,7 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="1134" w:type="dxa"/>
+                                    <w:vMerge/>
                                     <w:vAlign w:val="center"/>
                                 </w:tcPr>
                                 <w:p w14:paraId="26CA9CE0" w14:textId="41D19331" w:rsidR="00091FE5"
@@ -2759,9 +2768,6 @@
                                     <w:pPr>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
-                                    <w:r>
-                                        <w:t>80.00</w:t>
-                                    </w:r>
                                 </w:p>
                             </w:tc>
                             <w:tc>
@@ -2812,8 +2818,8 @@
                             </w:tc>
                             <w:tc>
                                 <w:tcPr>
-                                    <w:tcW w:w="5528" w:type="dxa"/>
-                                    <w:gridSpan w:val="5"/>
+                                    <w:tcW w:w="4394" w:type="dxa"/>
+                                    <w:gridSpan w:val="4"/>
                                 </w:tcPr>
                                 <w:p w14:paraId="499925A6" w14:textId="2F05B567" w:rsidR="00091FE5"
                                      w:rsidRDefault="002C753F" w:rsidP="00091FE5">
@@ -2824,10 +2830,27 @@
                             </w:tc>
                             <w:tc>
                                 <w:tcPr>
+                                    <w:tcW w:w="1134" w:type="dxa"/>
+                                </w:tcPr>
+                                <w:p w14:paraId="499925A6" w14:textId="2EE06E39" w:rsidR="008D71CA"
+                                     w:rsidRDefault="008D71CA" w:rsidP="00091FE5">
+                                    <w:r w:rsidRPr="002C753F">
+                                        <w:t>${deduction}</w:t>
+                                    </w:r>
+                                </w:p>
+                            </w:tc>
+                            <w:tc>
+                                <w:tcPr>
                                     <w:tcW w:w="1422" w:type="dxa"/>
                                 </w:tcPr>
-                                <w:p w14:paraId="13463569" w14:textId="77777777" w:rsidR="00091FE5"
-                                     w:rsidRDefault="00091FE5" w:rsidP="00091FE5"/>
+                                <w:p w14:paraId="13463569" w14:textId="77777777" w:rsidR="008D71CA"
+                                     w:rsidRDefault="008D71CA" w:rsidP="00091FE5">
+                                    <w:bookmarkStart w:id="0" w:name="_GoBack"/>
+                                    <w:bookmarkEnd w:id="0"/>
+                                    <w:r w:rsidRPr="002C753F">
+                                        <w:t>${deductionbz}</w:t>
+                                    </w:r>
+                                </w:p>
                             </w:tc>
                         </w:tr>
                         <w:tr w:rsidR="00091FE5" w14:paraId="68D4DBFA" w14:textId="77777777" w:rsidTr="004E69D6">

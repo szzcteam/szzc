@@ -48,10 +48,10 @@
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense"
                        height="400" width="800" target="dialog" rel="addRmbRecompense"><span>新增货币补偿协议</span>
                 </a></li>
-                <li><a class="add"
+               <%-- <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addNotice"
                        height="600" width="800" target="dialog" rel="addNotice"><span>新增手续通知单</span>
-                </a></li>
+                </a></li>--%>
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSettleAccounts"
                        height="400" width="800" target="dialog" rel="addSettleAccounts"><span>新增资金结算单</span>
@@ -67,10 +67,10 @@
                        href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&houseOwner={sid_user}"
                        height="400" width="800" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿协议</span>
                 </a></li>
-                <li><a class="edit"
+                <%--<li><a class="edit"
                        href="ssadmin/notice/query.html?url=ssadmin/updateNotice&houseOwner={sid_user}"
                        height="600" width="800" target="dialog" rel="updateNotice"><span>修改手续通知单</span>
-                </a></li>
+                </a></li>--%>
                 <li><a class="edit"
                        href="ssadmin/settleAccounts/query.html?url=ssadmin/updateSettleAccounts&houseOwner={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSettleAccounts"><span>修改资金结算单</span>
@@ -85,10 +85,10 @@
                        href="ssadmin/RmbRecompense/delete.html?houseOwner={sid_user}"
                        target="ajaxTodo" title="确定要删除货币补偿协议吗?"><span>删除货币补偿协议</span>
                 </a></li>
-                <li><a class="delete"
+                <%--<li><a class="delete"
                        href="/ssadmin/notice/delete.html?houseOwner={sid_user}"
                        target="ajaxTodo" title="确定要删除通知单吗?"><span>删除通知单</span>
-                </a></li>
+                </a></li>--%>
                 <li><a class="delete"
                        href="ssadmin/settleAccounts/delete?uid={sid_user}"
                        target="ajaxTodo" title="确定要删除结算单吗?"><span>删除结算单</span>
@@ -104,10 +104,10 @@
                        href="ssadmin/exportRmbRecompense.html?houseOwner={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出货币补偿</span>
                 </a></li>
-                <li><a class="icon"
+                <%--<li><a class="icon"
                        href="ssadmin/exportNotice.html?houseOwner={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出通知单</span>
-                </a></li>
+                </a></li>--%>
                 <li><a class="icon"
                        href="ssadmin/exportSettleAccounts.html?houseOwner={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
