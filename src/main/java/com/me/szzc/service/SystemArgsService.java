@@ -5,7 +5,6 @@ import com.me.szzc.pojo.entity.Fsystemargs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -19,6 +18,7 @@ public class SystemArgsService {
 	}
 
 	public void saveObj(Fsystemargs obj) {
+		obj.setFtype(1);
 		this.fsystemargsMapper.insertSelective(obj);
 	}
 
@@ -59,5 +59,10 @@ public class SystemArgsService {
 		}
 		
 		return ret ;
+	}
+
+
+	public List<Fsystemargs> selectByLike(String keyword) {
+		return this.fsystemargsMapper.selectByLike(keyword);
 	}
 }

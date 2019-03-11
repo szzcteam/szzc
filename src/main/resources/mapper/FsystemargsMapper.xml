@@ -161,4 +161,11 @@
       furl = #{furl,jdbcType=VARCHAR}
     where fid = #{fid,jdbcType=INTEGER}
   </update>
+
+    <!-- 模糊查询 -->
+    <select id="selectByLike" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from f_systemargs where fkey like concat('%','#{keyword}','%')
+    </select>
 </mapper>

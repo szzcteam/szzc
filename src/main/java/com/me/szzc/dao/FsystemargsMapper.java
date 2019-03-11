@@ -27,4 +27,7 @@ public interface FsystemargsMapper {
     int updateByPrimaryKeySelective(Fsystemargs record);
 
     int updateByPrimaryKey(Fsystemargs record);
+
+    List<Fsystemargs> selectByLike(@Param("keyword") String keyword);
+
 }

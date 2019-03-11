@@ -1,5 +1,7 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.pojo.entity.Fsystemargs;
 import com.me.szzc.pojo.vo.ProtocolVO;
 import com.me.szzc.utils.Utils;
 import org.springframework.stereotype.Controller;
@@ -68,8 +70,15 @@ public class ProtocolController extends BaseController {
     @RequestMapping("/ssadmin/goProtocolJSP")
     public ModelAndView toPage(HttpServletRequest request) {
         String url = request.getParameter("url");
-        ModelAndView modelAndView = new ModelAndView() ;
-        modelAndView.setViewName(url) ;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(url);
+        //查询空调
+        List<Fsystemargs> airList = systemArgsService.selectByLike(SystemArgsConstant.PREFIX_AIR_CONDITIONER);
+        modelAndView.addObject("airList", airList);
+
+        //查询水表
+        List<Fsystemargs> waterList = systemArgsService.selectByLike(SystemArgsConstant.PREFIX_WATER_METER);
+        modelAndView.addObject("waterList", waterList);
         return modelAndView;
     }
 

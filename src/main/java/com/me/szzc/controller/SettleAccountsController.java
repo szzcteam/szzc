@@ -1,13 +1,11 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.enums.ProtocolEnum;
-import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
