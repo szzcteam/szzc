@@ -163,9 +163,9 @@
   </update>
 
     <!-- 模糊查询 -->
-    <select id="selectByLike" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectByLike" resultMap="BaseResultMap" >
         select
         <include refid="Base_Column_List"/>
-        from f_systemargs where fkey like concat('%','#{keyword}','%')
+        from f_systemargs where fkey like concat('%',#{keywordFilter},'%')
     </select>
 </mapper>

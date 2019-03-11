@@ -42,11 +42,11 @@
             <shiro:hasPermission name="ssadmin/addProtocol.html">
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse"
-                       height="400" width="800" target="dialog" rel="addSwapHouse"><span>新增产权调换协议</span>
+                       height="400" width="800" target="dialog" rel="addSwapHouse"><span>新增产权调换</span>
                 </a></li>
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense"
-                       height="400" width="800" target="dialog" rel="addRmbRecompense"><span>新增货币补偿协议</span>
+                       height="400" width="800" target="dialog" rel="addRmbRecompense"><span>新增货币补偿</span>
                 </a></li>
                <%-- <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addNotice"
@@ -54,18 +54,18 @@
                 </a></li>--%>
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSettleAccounts"
-                       height="400" width="800" target="dialog" rel="addSettleAccounts"><span>新增资金结算单</span>
+                       height="400" width="800" target="dialog" rel="addSettleAccounts"><span>新增结算单</span>
                 </a></li>
             </shiro:hasPermission>
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
                        href="ssadmin/selectSwapHouseByHouseOwner.html?url=ssadmin/updateSwapHouse&houseOwner={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSwapHouse"><span>修改产权调换协议</span>
+                       height="400" width="800" target="dialog" rel="updateSwapHouse"><span>修改产权调换</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&houseOwner={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿协议</span>
+                       height="400" width="800" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿</span>
                 </a></li>
                 <%--<li><a class="edit"
                        href="ssadmin/notice/query.html?url=ssadmin/updateNotice&houseOwner={sid_user}"
@@ -73,17 +73,17 @@
                 </a></li>--%>
                 <li><a class="edit"
                        href="ssadmin/settleAccounts/query.html?url=ssadmin/updateSettleAccounts&houseOwner={sid_user}"
-                       height="400" width="800" target="dialog" rel="updateSettleAccounts"><span>修改资金结算单</span>
+                       height="400" width="800" target="dialog" rel="updateSettleAccounts"><span>修改结算单</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="delete"
                        href="ssadmin/deleteSwapHouse.html?houseOwner={sid_user}"
-                       target="ajaxTodo" title="确定要删除产权调换协议吗?"><span>删除产权调换协议</span>
+                       target="ajaxTodo" title="确定要删除产权调换协议吗?"><span>删除产权调换</span>
                 </a></li>
                 <li><a class="delete"
                        href="ssadmin/RmbRecompense/delete.html?houseOwner={sid_user}"
-                       target="ajaxTodo" title="确定要删除货币补偿协议吗?"><span>删除货币补偿协议</span>
+                       target="ajaxTodo" title="确定要删除货币补偿协议吗?"><span>删除货币补偿</span>
                 </a></li>
                 <%--<li><a class="delete"
                        href="/ssadmin/notice/delete.html?houseOwner={sid_user}"

@@ -28,6 +28,6 @@ public interface FsystemargsMapper {
 
     int updateByPrimaryKey(Fsystemargs record);
 
-    List<Fsystemargs> selectByLike(@Param("keyword") String keyword);
+    List<Fsystemargs> selectByLike(@Param("keywordFilter") String keywordFilter);
 
 }
