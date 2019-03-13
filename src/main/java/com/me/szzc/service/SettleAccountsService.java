@@ -1,12 +1,16 @@
 package com.me.szzc.service;
 
 import com.me.szzc.dao.SettleAccountsMapper;
+import com.me.szzc.pojo.entity.Notice;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class SettleAccountsService {
@@ -49,5 +53,15 @@ public class SettleAccountsService {
         return settleAccountsMapper.selectByHouseOwner(houseOwner);
     }
 
+
+    public Map<String,String> list(int firstResult, int maxResults) {
+
+        List<SettleAccounts> listSettleAccounts =  this.settleAccountsMapper.list(firstResult, maxResults);
+        Map<String, String> map = new HashMap<String, String>();
+        for (SettleAccounts settleAccounts:listSettleAccounts) {
+            map.put(settleAccounts.getHouseOwner(),settleAccounts.getPhone());
+        }
+        return map;
+    }
 
 }

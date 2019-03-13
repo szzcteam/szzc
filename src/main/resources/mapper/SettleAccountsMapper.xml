@@ -1069,6 +1069,14 @@
       where id = #{id}
   </update>
 
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_settle_accounts
+    where deleted = 0
+    limit ${firstResult}, ${maxResults}
+  </select>
+
 
 
 </mapper>

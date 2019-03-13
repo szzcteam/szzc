@@ -32,7 +32,10 @@ public class ProtocolController extends BaseController {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
 
-        Map<String ,String>map= this.noticeService.list((currentPage - 1) * numPerPage, numPerPage);
+       // Map<String ,String>map= this.noticeService.list((currentPage - 1) * numPerPage, numPerPage);
+
+        Map<String ,String>map= this.settleAccountsService.list((currentPage - 1) * numPerPage, numPerPage);
+
 
         //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
@@ -43,17 +46,15 @@ public class ProtocolController extends BaseController {
             protocol.setPhone(maps.getValue());
             boolean swapHouse = this.swapHouseService.queryName(maps.getKey());
             boolean rmbRecompense = this.rmbRecompenseService.queryName(maps.getKey());
-            boolean settleAccounts = this.settleAccountsService.queryName(maps.getKey());
-            protocol.setNoticeFlag(true);
+           // boolean settleAccounts = this.settleAccountsService.queryName(maps.getKey());
+            protocol.setSettleAccountsFlag(true);
             protocol.setSwapHouseFlag(swapHouse);
             protocol.setRmbRecompenseFlag(rmbRecompense);
-            protocol.setSettleAccountsFlag(settleAccounts);
+           // protocol.setSettleAccountsFlag(settleAccounts);
 
-            if(true&&swapHouse&&settleAccounts){
+            if(true&&swapHouse&&rmbRecompense){
                 protocol.setStatus("已完成");
-            }else if(true&&rmbRecompense&&settleAccounts){
-                protocol.setStatus("已完成");
-            }else{
+            } else{
                 protocol.setStatus("未完成");
             }
 

@@ -1,6 +1,9 @@
 package com.me.szzc.dao;
 
 import com.me.szzc.pojo.entity.SettleAccounts;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SettleAccountsMapper {
     int deleteByPrimaryKey(Long id);
@@ -17,4 +20,5 @@ public interface SettleAccountsMapper {
 
     int delete(SettleAccounts record);
 
+    List<SettleAccounts> list(@Param("firstResult") int firstResult, @Param("maxResults")int maxResults);
 }
