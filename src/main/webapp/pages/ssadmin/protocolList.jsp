@@ -36,26 +36,30 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar" style="height: 52px;">
+    <div class="panelBar" style="height: 30px;">
         <ul class="toolBar">
             <!-- 新增 -->
             <shiro:hasPermission name="ssadmin/addProtocol.html">
                 <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol"
+                       height="400" width="810" target="dialog" rel="addProtocol"><span>新增</span>
+                </a></li>
+               <%-- <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSwapHouse"
                        height="400" width="800" target="dialog" rel="addSwapHouse"><span>新增产权调换</span>
                 </a></li>
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addRmbRecompense"
                        height="400" width="800" target="dialog" rel="addRmbRecompense"><span>新增货币补偿</span>
-                </a></li>
+                </a></li>--%>
                <%-- <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addNotice"
                        height="600" width="800" target="dialog" rel="addNotice"><span>新增手续通知单</span>
                 </a></li>--%>
-                <li><a class="add"
+                <%--<li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addSettleAccounts"
                        height="400" width="800" target="dialog" rel="addSettleAccounts"><span>新增结算单</span>
-                </a></li>
+                </a></li>--%>
             </shiro:hasPermission>
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
@@ -122,7 +126,7 @@
             <th width="60">被征收人</th>
             <th width="60">电话</th>
             <th width="60">状态</th>
-            <th width="60">付(收)款手续通知单</th>
+            <%--<th width="60">付(收)款手续通知单</th>--%>
             <th width="60">货币补偿协议</th>
             <th width="60">产权调换协议</th>
             <th width="60">补偿资金结算单</th>
@@ -136,7 +140,7 @@
                 <td>${protocol.name}</td>
                 <td>${protocol.phone}</td>
                 <td>${protocol.status}</td>
-                <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>
+               <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>
                 <td><c:if test="${protocol.rmbRecompenseFlag == true}">√</c:if></td>
                 <td><c:if test="${protocol.swapHouseFlag == true}">√</c:if></td>
                 <td><c:if test="${protocol.settleAccountsFlag == true}">√</c:if></td>

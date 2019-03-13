@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="comm/include.inc.jsp" %>
-<h2 class="contentTitle">添加资金结算单</h2>
-
+<%--<h2 class="contentTitle">添加资金结算单</h2>--%>
+<script type="text/javascript" src="${oss_url}/static/ssadmin/js/business/add_settleAccounts.js"/>
 <style>
     .tableInfo {
         width: 750px;
