@@ -52,9 +52,11 @@ public class ProtocolController extends BaseController {
             protocol.setRmbRecompenseFlag(rmbRecompense);
            // protocol.setSettleAccountsFlag(settleAccounts);
 
-            if(true&&swapHouse&&rmbRecompense){
+            if(true&&swapHouse){
                 protocol.setStatus("已完成");
-            } else{
+            }else if(true&&rmbRecompense){
+                protocol.setStatus("已完成");
+            }else{
                 protocol.setStatus("未完成");
             }
 
