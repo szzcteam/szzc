@@ -4,6 +4,12 @@ package com.me.szzc.utils;
  * Created by bbfang on 2019/2/18.
  */
 public class NumberToCapitalizedUtils {
+
+    public static void main(String[] args) {
+        double a = 2365;
+        System.out.println(digitUppercase(a));
+    }
+
     /**
      * 数字金额大写转换，思想先写个完整的然后将如零拾替换成零 要用到正则表达式
      */

@@ -51,6 +51,16 @@ $(document).ready(function(){
         }
     });
 
+    //旧房金额：被征收房屋补偿合计; 绑定失去焦点、变更事件
+    $("input[name='sumCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.fullPayReceive();
+    });
+
+    //新房金额  新房金额
+    $("input[name='houseMoney']").eq(0).on("blur change", function () {
+        settleAccountObj.fullPayReceive();
+    });
+
 });
 
 
@@ -160,8 +170,30 @@ var settleAccountObj = {
             + lifeCompensate_num + changeCompensate_num + buildingAreaFee_num + suspendBusinessFee_num + noMoveCompensate_num
             + moveReward_num + rmbMoveReward_num + smallAreaReward_num + otherRmb_num;
         $("input[name='sumCompensate']").eq(0).val(sumCompensate);
+    },
+
+    //填充应收、应付款
+    fullPayReceive:function () {
+        //旧房金额
+        var sumCompensate = $("input[name='sumCompensate']").eq(0).val() || 0;
+        sumCompensate = new Number(sumCompensate);
+        //新房金额
+        var houseMoney =  $("input[name='houseMoney']").eq(0).val() || 0;
+        houseMoney = new Number(houseMoney);
+        if(sumCompensate > houseMoney)  {
+            //应付合计填写差
+            var payTotal = sumCompensate - houseMoney;
+            $("input[name='payTotal']").eq(0).val(payTotal);
+            var payTotalChinese = Araia_To_Chinese(payTotal);
+            $("input[name='payMoney']").eq(0).val(payTotalChinese);
+        }else if(sumCompensate < houseMoney){
+            //应收合计填写差
+            var receiveTotal = houseMoney - sumCompensate;
+            $("input[name='receiveTotal']").eq(0).val(receiveTotal);
+            var receiveTotalChinese = Araia_To_Chinese(receiveTotal);
+            $("input[name='receiveMoney']").eq(0).val(receiveTotalChinese);
+        }
+
     }
-
-
 
 };
