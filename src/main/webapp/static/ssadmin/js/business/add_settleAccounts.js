@@ -2,16 +2,24 @@ $(document).ready(function(){
 
     //房屋评估单价失去焦点
     $("input[name='assessPrice']").eq(0).blur(function () {
-        settleAccountObj.changePriceArea();
+        settleAccountObj.fullCalcValueCompensate();
+        settleAccountObj.fullCalcMoveReward();
     });
 
     //建筑面积失去焦点
     $("input[name='checkInArea']").eq(0).blur(function () {
-        settleAccountObj.changePriceArea();
+        //计算房屋价值补偿
+        settleAccountObj.fullCalcValueCompensate();
+        //计算搬迁奖励
+        settleAccountObj.fullCalcMoveReward();
+        //填充装修折旧的面积
+        settleAccountObj.fullCalcObjArea("calcDecorationCompensate");
+        //填充临时安置补偿过渡费的面积
+        settleAccountObj.fullCalcObjArea("calcInterimFee");
     });
 
     //房屋价值补偿计算公式失去焦点
-    $("input[name='calcValueCompensate']").eq(0).blur(function () {
+    $("input[name='calcValueCompensate']").eq(0).on("blur change", function () {
         settleAccountObj.changeCalcValueCompensate();
     });
 
@@ -56,36 +64,146 @@ $(document).ready(function(){
         settleAccountObj.fullPayReceive();
     });
 
-    //新房金额  新房金额
+    //新房金额 ；绑定失去焦点、变更事件
     $("input[name='houseMoney']").eq(0).on("blur change", function () {
         settleAccountObj.fullPayReceive();
     });
+
+
+    //水表迁移计算绑定
+    $("#water_meter_main,#water_meter_sub").on("change", function(){
+        settleAccountObj.fullWaterMeter();
+    });
+
+    //电表迁移计算绑定
+    $("#ammeter_main,#ammeter_sub").on("change", function () {
+        settleAccountObj.fullAmmeter();
+    });
+
+    //空调移机费
+    $("#air_conditioner_shutter,#air_conditioner_hang,#air_conditioner_cabinet").on("change", function () {
+        settleAccountObj.fullAirConditioner();
+    });
+
+    //装修折旧公式，绑定失去焦点事件， 计算金额
+    $("input[name='calcDecorationCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.calcDecorationCompensate();
+    });
+
+
+    //搬迁奖励公式，绑定失去焦点、变更事件，计算金额
+    $("input[name='calcMoveReward']").eq(0).on("blur change", function () {
+        settleAccountObj.calcMoveReward();
+    });
+
+    //过渡费公式，绑定失去焦点、变更事件，计算金额
+    $("input[name='calcInterimFee']").eq(0).on("blur change", function () {
+        settleAccountObj.calcInterimFee();
+    });
+
 
 });
 
 
 var settleAccountObj = {
 
-    //改变房屋单价、建筑面积
-    changePriceArea:function(){
+    //改变房屋单价、建筑面积时，填充房屋价值补偿
+    fullCalcValueCompensate:function(){
         //房屋评估单价
-        var assessPrice = $("input[name='assessPrice']").eq(0).val();
+        var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
         //建筑面积
-        var checkInArea = $("input[name='checkInArea']").eq(0).val();
-
+        var checkInArea = $("input[name='checkInArea']").eq(0).val() || 0;
         if(!assessPrice){
             return;
         }
-
         if(!checkInArea){
             return;
         }
+        var tmpCalcValue = checkInArea + "*" + assessPrice;
 
         //房屋价值补偿
-        var calcValueCompensate = checkInArea + "*" + assessPrice;
-        $("input[name='calcValueCompensate']").eq(0).val(calcValueCompensate);
-        var valueCompensate = eval(calcValueCompensate);
-        $("input[name='valueCompensate']").eq(0).val(valueCompensate).change();
+        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val();
+        //是初次填写面积、单价
+        if(!calcValueCompensate) {
+            $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
+            return;
+        }
+
+        //如果刚好是面积*单价
+        var vArr = calcValueCompensate.split("*");
+        //刚好是2个数字相乘，则也是直接覆盖，填充面积*单价
+        if(vArr.length == 2) {
+            $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
+            return;
+        }
+
+        //是2个以上数字的相乘，则替换第一个的面积，即面积有更新
+        var area_multiply_index = calcValueCompensate.indexOf("*");
+        if( area_multiply_index == -1) {
+            return;
+        }
+        var waitPriceCalc = calcValueCompensate.substring(area_multiply_index+1, calcValueCompensate.length);
+        tmpCalcValue = checkInArea + calcValueCompensate.substring(area_multiply_index, calcValueCompensate.length);
+        //覆盖公式中的面积
+        $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
+
+        //替换第二个的单价，即单价有更新
+        var price_multiply_index = waitPriceCalc.indexOf("*");
+        if( waitPriceCalc == -1) {
+            return;
+        }
+        tmpCalcValue =  checkInArea + "*" + assessPrice +   waitPriceCalc.substring(price_multiply_index, waitPriceCalc.length);
+        //覆盖公式中的单价
+        $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
+    },
+    //改变房屋单价、建筑面积时，填充搬迁奖励中的计算公式
+    fullCalcMoveReward:function(){
+        //房屋评估单价
+        var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
+        //建筑面积
+        var checkInArea = $("input[name='checkInArea']").eq(0).val() || 0;
+        if(!assessPrice){
+            return;
+        }
+        if(!checkInArea){
+            return;
+        }
+        var tmpCalcValue = checkInArea + "*" + assessPrice;
+
+        //搬迁奖励
+        var calcMoveReward = $("input[name='calcMoveReward']").eq(0).val();
+        //是初次填写面积、单价
+        if(!calcMoveReward) {
+            $("input[name='calcMoveReward']").eq(0).val(tmpCalcValue).change();
+            return;
+        }
+
+        //如果刚好是面积*单价
+        var vArr = calcMoveReward.split("*");
+        //刚好是2个数字相乘，则也是直接覆盖，填充面积*单价
+        if(vArr.length == 2) {
+            $("input[name='calcMoveReward']").eq(0).val(tmpCalcValue).change();
+            return;
+        }
+
+        //是2个以上数字的相乘，则替换第一个的面积，即面积有更新
+        var area_multiply_index = calcMoveReward.indexOf("*");
+        if( area_multiply_index == -1) {
+            return;
+        }
+        var waitPriceCalc = calcMoveReward.substring(area_multiply_index+1, calcMoveReward.length);
+        tmpCalcValue = checkInArea + calcMoveReward.substring(area_multiply_index, calcMoveReward.length);
+        //覆盖公式中的面积
+        $("input[name='calcMoveReward']").eq(0).val(tmpCalcValue).change();
+
+        //替换第二个的单价，即单价有更新
+        var price_multiply_index = waitPriceCalc.indexOf("*");
+        if( waitPriceCalc == -1) {
+            return;
+        }
+        tmpCalcValue =  checkInArea + "*" + assessPrice +   waitPriceCalc.substring(price_multiply_index, waitPriceCalc.length);
+        //覆盖公式中的单价
+        $("input[name='calcMoveReward']").eq(0).val(tmpCalcValue).change();
     },
 
     //改变房屋价值补偿计算公式
@@ -202,6 +320,104 @@ var settleAccountObj = {
             $("input[name='payMoney']").eq(0).val("");
         }
 
+    },
+
+
+    //计算水表
+    fullWaterMeter:function(){
+        //获取主表
+        var waterMeterMain = $("#water_meter_main").val() || 0;
+        var waterMeterMainFee = eval(waterMeterMain);
+        //获取副表
+        var waterMeterSub = $("#water_meter_sub").val() || 0;
+        var waterMeterSubFee = eval(waterMeterSub);
+        var moveWaterMeterFee = waterMeterMainFee + waterMeterSubFee;
+        //水表迁移费
+        $("input[name='moveWaterMeterFee']").eq(0).val(moveWaterMeterFee).change();
+        //水表迁移费计算公式
+        $("input[name='calcMoveWaterMeterFee']").eq(0).val(waterMeterMain + "+" + waterMeterSub);
+    },
+    //计算电表
+    fullAmmeter:function(){
+        //获取主表
+        var ammeterMain = $("#ammeter_main").val() || 0;
+        var ammeterMainFee = eval(ammeterMain);
+        //获取副表
+        var ammeterSub = $("#ammeter_sub").val() || 0;
+        var ammeterSubFee = eval(ammeterSub);
+        var moveAmmeterFee = ammeterMainFee + ammeterSubFee;
+        //电表迁移费
+        $("input[name='moveAmmeterFee']").eq(0).val(moveAmmeterFee).change();
+        //电表迁移费计算公式
+        $("input[name='calcMoveAmmeterFee']").eq(0).val(ammeterMain + "+" + ammeterMain);
+    },
+    //计算空调移机费
+    fullAirConditioner: function () {
+        //获取窗机
+        var airConditionerShutter = $("#air_conditioner_cabinet").val() || 0;
+        var airConditionerShutterFee = eval(airConditionerShutter);
+
+        //获取挂机
+        var airConditionerHang = $("#air_conditioner_hang").val() || 0;
+        var airConditionerHangFee = eval(airConditionerHang);
+
+        //获取柜机
+        var airConditionerCabinet = $("#air_conditioner_shutter").val() || 0;
+        var airConditionerCabinetFee = eval(airConditionerCabinet);
+
+        var moveAirConditioningFee = airConditionerCabinetFee + airConditionerShutterFee + airConditionerHangFee;
+
+        $("input[name='moveAirConditioningFee']").eq(0).val(moveAirConditioningFee).change();
+        $("input[name='calcMoveAirConditioningFee']").eq(0).val(airConditionerShutter + "+" + airConditionerHang + "+" + airConditionerCabinet);
+    },
+    /**
+     * 填充计算对象中的面积：装修折旧补偿、临时安置补偿过渡费的面积
+     * 这2个对象都是面积*某系数=金额
+     * @param calcObjName  计算公式框名称
+     * @param moneyName   金额框名称
+     */
+    fullCalcObjArea:function (calcObjName) {
+        console.log("填充公式中的面积: calcObjName=" + calcObjName);
+        //建筑面积
+        var checkInArea = $("input[name='checkInArea']").eq(0).val();
+        //获取计算公式
+        var calcDecorationCompensate = $("input[name='"+calcObjName+"']").eq(0).val();
+        if(!calcDecorationCompensate) {
+            console.log("计算公式没有填写");
+            $("input[name='"+calcObjName+"']").eq(0).val(checkInArea).change();
+            return;
+        }
+
+        //已有计算公式，则替换第一个的面积，即面积有更新
+        var multiply_index = calcDecorationCompensate.indexOf("*");
+        console.log("装修折旧补偿公式*位置:" + multiply_index);
+        if( multiply_index == -1) {
+            $("input[name='"+calcObjName+"']").eq(0).val(checkInArea).change();
+            return;
+        }
+        calcDecorationCompensate = checkInArea + calcDecorationCompensate.substring(multiply_index, calcDecorationCompensate.length);
+        //覆盖公式
+        $("input[name='"+calcObjName+"']").eq(0).val(calcDecorationCompensate).change();
+    },
+    //运行装修补偿的计算公式，得到折旧费用
+    calcDecorationCompensate: function () {
+        console.log("yufsafsdf");
+        var calcDecorationCompensate = $("input[name='calcDecorationCompensate']").eq(0).val() || 0;
+        console.log("装修折旧计算公式:" + calcDecorationCompensate);
+        var decorationCompensate = eval(calcDecorationCompensate);
+        $("input[name='decorationCompensate']").eq(0).val(decorationCompensate).change();
+    },
+    //运行搬迁奖励的计算公式，得到搬迁奖励费用
+    calcMoveReward: function () {
+        var calcMoveReward = $("input[name='calcMoveReward']").eq(0).val() || 0;
+        var moveReward = eval(calcMoveReward);
+        $("input[name='moveReward']").eq(0).val(moveReward).change();
+    },
+    //运行临时安置过渡费的计算公式，得到过渡费
+    calcInterimFee: function () {
+        var calcInterimFee = $("input[name='calcInterimFee']").eq(0).val() || 0;
+        var interimFee = eval(calcInterimFee);
+        $("input[name='interimFee']").eq(0).val(interimFee).change();
     }
 
 };

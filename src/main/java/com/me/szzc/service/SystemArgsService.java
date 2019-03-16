@@ -2,6 +2,7 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.FsystemargsMapper;
 import com.me.szzc.pojo.entity.Fsystemargs;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,15 +50,10 @@ public class SystemArgsService {
 	}
 
 	public String getValue(String key){
-		String ret = "" ;
-		Fsystemargs record = new Fsystemargs();
-		record.setFkey(key);
-		List<Fsystemargs> fsystemargs = this.fsystemargsMapper.selectByProperty(record) ;
-		if(fsystemargs.size()>0){
-			Fsystemargs fsystemargs2 = fsystemargs.get(0) ;
-			ret = fsystemargs2.getFvalue() ;
+		String ret = this.fsystemargsMapper.selectValue(key) ;
+		if(StringUtils.isBlank(ret)) {
+			ret = "";
 		}
-		
 		return ret ;
 	}
 

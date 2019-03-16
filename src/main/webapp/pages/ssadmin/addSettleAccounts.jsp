@@ -47,6 +47,12 @@
         width: 185px;
     }
 
+    .select_fix{
+        margin-top: 2px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
 </style>
 
 <div class="pageContent">
@@ -131,19 +137,70 @@
                         <td rowspan="7">五</td>
                         <td rowspan="7" style="width: 35px;">房屋附属设施补偿</td>
                         <td colspan="3" class="td_left">1、水表迁移费</td>
-                        <td colspan="3"><input type="text" name="calcMoveWaterMeterFee" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select id="water_meter_main" class="select_fix">
+                                <option value="0*${waterMeterMain}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${waterMeterMain}">${idx}&nbsp;主表</option>
+                                </c:forEach>
+                            </select>
+                            <select id="water_meter_sub" class="select_fix">
+                                <option value="0*${waterMeterSub}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${waterMeterSub}">${idx}&nbsp;副表</option>
+                                </c:forEach>
+                            </select>
+                            <!--隐藏存储表单提交值-->
+                            <input type="hidden" name="calcMoveWaterMeterFee" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="moveWaterMeterFee" class="none_border width_110px"></td>
                         <td><input type="text" name="moveWaterMeterFeeBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td colspan="3" class="td_left">2、电表迁移费</td>
-                        <td colspan="3"><input type="text" name="calcMoveAmmeterFee" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select id="ammeter_main" class="select_fix">
+                                <option value="0*${ammeterMain}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${ammeterMain}">${idx}&nbsp;主表</option>
+                                </c:forEach>
+                            </select>
+                            <select id="ammeter_sub" class="select_fix">
+                                <option value="0*${ammeterSub}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${ammeterSub}">${idx}&nbsp;副表</option>
+                                </c:forEach>
+                            </select>
+                            <!--隐藏存储表单提交值-->
+                            <input type="hidden" name="calcMoveAmmeterFee" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="moveAmmeterFee" class="none_border width_110px"></td>
                         <td><input type="text" name="moveAmmeterFeeBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td colspan="3" class="td_left">3、空调移机费</td>
-                        <td colspan="3"><input type="text" name="calcMoveAirConditioningFee" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select id="air_conditioner_shutter" class="select_fix">
+                                <option value="0*${airConditionerShutter}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${airConditionerShutter}">${idx}&nbsp;窗机</option>
+                                </c:forEach>
+                            </select>
+                            <select id="air_conditioner_hang" class="select_fix">
+                                <option value="0*${airConditionerHang}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${airConditionerHang}">${idx}&nbsp;挂机</option>
+                                </c:forEach>
+                            </select>
+                            <select id="air_conditioner_cabinet" class="select_fix">
+                                <option value="0*${airConditionerCabinet}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${airConditionerCabinet}">${idx}&nbsp;柜机</option>
+                                </c:forEach>
+                            </select>
+                            <!--隐藏存储表单提交值-->
+                            <input type="hidden" name="calcMoveAirConditioningFee" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="moveAirConditioningFee" class="none_border width_110px"></td>
                         <td><input type="text" name="moveAirConditioningFeeBz" class="none_border width_70px"></td>
                     </tr>
