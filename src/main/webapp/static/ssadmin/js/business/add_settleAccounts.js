@@ -186,12 +186,20 @@ var settleAccountObj = {
             $("input[name='payTotal']").eq(0).val(payTotal);
             var payTotalChinese = Araia_To_Chinese(payTotal);
             $("input[name='payMoney']").eq(0).val(payTotalChinese);
+
+            //应收合计填空
+            $("input[name='receiveTotal']").eq(0).val("");
+            $("input[name='receiveMoney']").eq(0).val("");
         }else if(sumCompensate < houseMoney){
             //应收合计填写差
             var receiveTotal = houseMoney - sumCompensate;
             $("input[name='receiveTotal']").eq(0).val(receiveTotal);
             var receiveTotalChinese = Araia_To_Chinese(receiveTotal);
             $("input[name='receiveMoney']").eq(0).val(receiveTotalChinese);
+
+            //应付合计填写空
+            $("input[name='payTotal']").eq(0).val("");
+            $("input[name='payMoney']").eq(0).val("");
         }
 
     }

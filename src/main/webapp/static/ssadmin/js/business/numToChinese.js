@@ -63,11 +63,12 @@ function Arabia_To_SimplifiedChinese(Num) {
     return newchar;
 }
 
+
 //阿拉伯数字转换为中文汉字 900 -> 玖佰
 function Araia_To_Chinese(num){
     var fraction = ["角", "分"];
     var digit = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
-    var unit = [["元", "万", "亿"],["拾","佰", "仟"]];
+    var unit = [["元", "万", "亿"],["", "拾","佰", "仟"]];
 
     if (isNaN(num)) { //验证输入的字符是否为数字
         //alert("请检查小写金额是否正确");
@@ -79,7 +80,7 @@ function Araia_To_Chinese(num){
     num = Math.abs(num);
     var s = "";
     for(var i=0; i<fraction.length;i++){
-        s+=(digit[Math.floor(num*10*Math.pow(10, i))%10]+fraction[i]).replaceAll(/(零.)+/,"");
+        s+=(digit[Math.floor(num*10*Math.pow(10, i))%10]+fraction[i]).replace(/(零.)+/,"");
     }
     s = s || '整';
     var integerPart =  Math.floor(num);
@@ -87,12 +88,34 @@ function Araia_To_Chinese(num){
         var p = "";
         for (var j = 0; j < unit[1].length && num > 0; j++) {
             p = digit[integerPart % 10] + unit[1][j] + p;
-            integerPart = integerPart / 10;
+            integerPart = parseInt(integerPart / 10);
         }
-        s = p.replaceAll(/(零.)*零$/, "").replaceAll(/^$/, "零") + unit[0][i] + s;
+        s = p.replace(/(零.)*零$/, "").replace(/^$/, "零") + unit[0][i] + s;
     }
+    //循序替换
+    var returnStr = heads + s.replace(/(零.)*零元/, '元');
+    // console.log("1="+returnStr);
+    //处理首个零
+    returnStr = replaceFirstZero(returnStr);
+    // console.log("2="+returnStr);
+    returnStr = returnStr.replace(/(零.)+/, "零");
+    // console.log("3="+returnStr);
+    returnStr = returnStr.replace(/^整$/, "零元整");
+    // console.log("4="+returnStr);
+    // console.log(returnStr);
+    return returnStr;
 
-    return heads + s.replaceAll(/(零.)*零元/,'元').replace(/(零.)+/g, "零").replaceAll(/^整$/,"零元整");
+
+}
 
 
+function replaceFirstZero(str) {
+    var tmpStr = str.substr(0,1);
+    // console.log("首个字符是:" + tmpStr);
+    if(tmpStr == "零") {
+        str = str.substr(2, str.length);
+        return replaceFirstZero(str);
+    }else{
+        return str;
+    }
 }
