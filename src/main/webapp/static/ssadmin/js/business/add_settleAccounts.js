@@ -101,6 +101,67 @@ $(document).ready(function(){
         settleAccountObj.calcInterimFee();
     });
 
+    //搬家费
+    $("input[name='calcMoveHouseFee']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcMoveHouseFee", "moveHouseFee");
+    });
+    //热水器拆装费
+    $("input[name='calcHotWaterCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcHotWaterCompensate", "hotWaterCompensate");
+    });
+    //管道煤气拆装费
+    $("input[name='calcGasFee']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcGasFee", "gasFee");
+    });
+    //构建物补偿
+    $("input[name='calcStructureCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcStructureCompensate", "structureCompensate");
+    });
+    //附属设施---其他
+    $("input[name='calcAffiliatedOther']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcAffiliatedOther", "affiliatedOther");
+    });
+    //未登记建筑补偿
+    $("input[name='calcNoCheckCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcNoCheckCompensate", "noCheckCompensate");
+    });
+    //货币补偿补助
+    $("input[name='calcRmbCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcRmbCompensate", "rmbCompensate");
+    });
+    //生活困难补助
+    $("input[name='calcLifeCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcLifeCompensate", "lifeCompensate");
+    });
+    //住改商补助
+    $("input[name='calcChangeCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcChangeCompensate", "changeCompensate");
+    });
+    //建筑面积补助
+    $("input[name='calcBuildingAreaFee']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcBuildingAreaFee", "buildingAreaFee");
+    });
+    //停产停业损失补偿
+    $("input[name='calcSuspendBusinessFee']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcSuspendBusinessFee", "suspendBusinessFee");
+    });
+    //不可移动设备设施补偿
+    $("input[name='calcNoMoveCompensate']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcNoMoveCompensate", "noMoveCompensate");
+    });
+    //货币搬迁奖励
+    $("input[name='calcRmbMoveReward']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcRmbMoveReward", "rmbMoveReward");
+    });
+    //小面积住房搬迁奖励
+    $("input[name='calcSmallAreaReward']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcSmallAreaReward", "smallAreaReward");
+    });
+    //其他
+    $("input[name='calcOther']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcOther", "otherRmb");
+    });
+
 
 });
 
@@ -208,8 +269,8 @@ var settleAccountObj = {
 
     //改变房屋价值补偿计算公式
     changeCalcValueCompensate:function () {
-        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val();
-        var valueCompensate = eval(calcValueCompensate);
+        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
+        var valueCompensate = Math.round(eval(calcValueCompensate));
         $("input[name='valueCompensate']").eq(0).val(valueCompensate)
     },
 
@@ -404,20 +465,30 @@ var settleAccountObj = {
         console.log("yufsafsdf");
         var calcDecorationCompensate = $("input[name='calcDecorationCompensate']").eq(0).val() || 0;
         console.log("装修折旧计算公式:" + calcDecorationCompensate);
-        var decorationCompensate = eval(calcDecorationCompensate);
+        var decorationCompensate = Math.round(eval(calcDecorationCompensate));
         $("input[name='decorationCompensate']").eq(0).val(decorationCompensate).change();
     },
     //运行搬迁奖励的计算公式，得到搬迁奖励费用
     calcMoveReward: function () {
         var calcMoveReward = $("input[name='calcMoveReward']").eq(0).val() || 0;
-        var moveReward = eval(calcMoveReward);
+        var moveReward = Math.round(eval(calcMoveReward));
         $("input[name='moveReward']").eq(0).val(moveReward).change();
     },
     //运行临时安置过渡费的计算公式，得到过渡费
     calcInterimFee: function () {
         var calcInterimFee = $("input[name='calcInterimFee']").eq(0).val() || 0;
-        var interimFee = eval(calcInterimFee);
+        var interimFee = Math.round(eval(calcInterimFee));
         $("input[name='interimFee']").eq(0).val(interimFee).change();
+    },
+    /**
+     * 普通框，执行计算公式
+     * @param calcObjName  计算公式框名称
+     * @param moneyObjName  金额框名称
+     */
+    runCalc:function (calcObjName, moneyObjName) {
+        var calcText = $("input[name='"+calcObjName+"']").eq(0).val() || 0;
+        var money = Math.round(eval(calcText));
+        $("input[name='"+moneyObjName+"']").eq(0).val(money).change();
     }
 
 };
