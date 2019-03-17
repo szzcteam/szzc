@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    console.log("进入");
     //房屋评估单价失去焦点
     $("input[name='assessPrice']").eq(0).blur(function () {
         settleAccountObj.fullCalcValueCompensate();
@@ -269,7 +269,7 @@ var settleAccountObj = {
     changeCalcValueCompensate:function () {
         var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
         var valueCompensate = Math.round(eval(calcValueCompensate));
-        $("input[name='valueCompensate']").eq(0).val(valueCompensate)
+        $("input[name='valueCompensate']").eq(0).val(valueCompensate).change();
     },
 
     //填充被征收房屋补偿合计

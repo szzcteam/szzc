@@ -14,6 +14,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <c:if test="${error != null}">
 alert("${error}") ;
 </c:if>
+
+	//模拟结算
+	function simulate(area) {
+		window.open("/front/simulate.html?area="+area)
+	}
+
 </script>
 </head>
 <body>
@@ -61,8 +67,11 @@ alert("${error}") ;
 
 				</ul>
 				<div class="login_inner">
-					<%--<p><a href="/new_user/register.html">注册</a></p>--%>
 					<p>HTTPS高级安全加密协议，客户资料全加密传输，防止通过网络泄漏 ……</p>
+					<p>模拟结算： <select id="pro_select" onchange="simulate(this.value)">
+						<option value="">请选择</option>
+						<option value="1">农讲所片区结算</option>
+					</select></p>
 				</div>
 			</div>
 		</div>

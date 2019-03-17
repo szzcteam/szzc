@@ -45,6 +45,6 @@ public class BaseServiceCtrl {
     RmbRecompenseService rmbRecompenseService;
 
     @Autowired
-    SettleAccountsService settleAccountsService;
+    protected SettleAccountsService settleAccountsService;
 
 }
