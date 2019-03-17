@@ -1,5 +1,6 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.DateHelper;
@@ -87,6 +88,8 @@ public class SettleAccountsController extends BaseController {
         if(settleAccounts !=null){
             modelAndView.addObject("settleAccounts", settleAccounts);
         }
+        //初始化水电空调参数
+        initWaterAmmerParam(modelAndView);
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","查询成功");
         return modelAndView;
@@ -113,5 +116,6 @@ public class SettleAccountsController extends BaseController {
         modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
+
 
 }

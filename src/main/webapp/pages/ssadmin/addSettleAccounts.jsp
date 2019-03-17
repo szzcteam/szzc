@@ -2,58 +2,7 @@
 <%@ include file="comm/include.inc.jsp" %>
 <%--<h2 class="contentTitle">添加资金结算单</h2>--%>
 <script type="text/javascript" src="${oss_url}/static/ssadmin/js/business/add_settleAccounts.js"/>
-<style>
-    .tableInfo {
-        width: 750px;
-        min-height: 25px;
-        line-height: 28px;
-        text-align: center;
-        border-color: #a2bac0 ;
-        border-collapse: collapse;
-    }
-
-    .tableInfo tr td {
-        border: 1px solid #a2bac0;
-        line-height: 28px;
-    }
-
-    .td_left{
-        text-align: left;
-        padding-left: 5px;
-    }
-
-    .samll_input_text {
-        width: 50px;
-        border: none;
-    }
-
-    .none_border {
-        border: none;
-    }
-
-    .width_70px {
-        width: 70px;
-    }
-
-    .width_110px {
-        width: 110px;
-    }
-
-    .width_220px{
-        width: 220px;
-    }
-
-    .width_185px{
-        width: 185px;
-    }
-
-    .select_fix{
-        margin-top: 2px;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-
-</style>
+<link href="${oss_url}/static/ssadmin/css/add_settleAccounts.css" rel="stylesheet" type="text/css" />
 
 <div class="pageContent">
 

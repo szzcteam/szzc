@@ -2,52 +2,9 @@
 <%@ include file="comm/include.inc.jsp" %>
 <h2 class="contentTitle">修改资金结算单</h2>
 
-<style>
-    .tableInfo {
-        width: 750px;
-        min-height: 25px;
-        line-height: 28px;
-        text-align: center;
-        border-color: #a2bac0 ;
-        border-collapse: collapse;
-    }
-
-    .tableInfo tr td {
-        border: 1px solid #a2bac0;
-        line-height: 28px;
-    }
-
-    .td_left{
-        text-align: left;
-        padding-left: 5px;
-    }
-
-    .samll_input_text {
-        width: 50px;
-        border: none;
-    }
-
-    .none_border {
-        border: none;
-    }
-
-    .width_70px {
-        width: 70px;
-    }
-
-    .width_110px {
-        width: 110px;
-    }
-
-    .width_220px{
-        width: 220px;
-    }
-
-    .width_185px{
-        width: 185px;
-    }
-
-</style>
+<script type="text/javascript" src="${oss_url}/static/ssadmin/js/business/add_settleAccounts.js"/>
+<script type="text/javascript" src="${oss_url}/static/ssadmin/js/business/update_settleAccounts.js"/>
+<link href="${oss_url}/static/ssadmin/css/add_settleAccounts.css" rel="stylesheet" type="text/css" />
 
 <div class="pageContent">
 
@@ -123,7 +80,9 @@
                     <tr>
                         <td>四</td>
                         <td colspan="4" class="td_left">临时安置补偿（过渡费）</td>
-                        <td colspan="3"><input type="text" name="calcInterimFee" value="${settleAccounts.calcInterimFee}" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcInterimFee" value="${settleAccounts.calcInterimFee}" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="interimFee" value="${settleAccounts.interimFee}" class="none_border width_110px"></td>
                         <td><input type="text" name="interimFeeBz" value="${settleAccounts.interimFeeBz}" class="none_border width_70px"></td>
                     </tr>
@@ -131,19 +90,70 @@
                         <td rowspan="7">五</td>
                         <td rowspan="7" style="width: 35px;">房屋附属设施补偿</td>
                         <td colspan="3" class="td_left">1、水表迁移费</td>
-                        <td colspan="3"><input type="text" name="calcMoveWaterMeterFee" value="${settleAccounts.calcMoveWaterMeterFee}"  class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select id="water_meter_main" class="select_fix">
+                                <option value="0*${waterMeterMain}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${waterMeterMain}">${idx}&nbsp;主表</option>
+                                </c:forEach>
+                            </select>
+                            <select id="water_meter_sub" class="select_fix">
+                                <option value="0*${waterMeterSub}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${waterMeterSub}">${idx}&nbsp;副表</option>
+                                </c:forEach>
+                            </select>
+                            <!--隐藏存储表单提交值-->
+                            <input type="hidden" name="calcMoveWaterMeterFee" value="${settleAccounts.calcMoveWaterMeterFee}"  class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="moveWaterMeterFee" value="${settleAccounts.moveWaterMeterFee}" class="none_border width_110px"></td>
                         <td><input type="text" name="moveWaterMeterFeeBz" value="${settleAccounts.moveWaterMeterFeeBz}"  class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td colspan="3" class="td_left">2、电表迁移费</td>
-                        <td colspan="3"><input type="text" name="calcMoveAmmeterFee" value="${settleAccounts.calcMoveAmmeterFee}" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select id="ammeter_main" class="select_fix">
+                                <option value="0*${ammeterMain}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${ammeterMain}">${idx}&nbsp;主表</option>
+                                </c:forEach>
+                            </select>
+                            <select id="ammeter_sub" class="select_fix">
+                                <option value="0*${ammeterSub}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${ammeterSub}">${idx}&nbsp;副表</option>
+                                </c:forEach>
+                            </select>
+                            <!--隐藏存储表单提交值-->
+                            <input type="hidden" name="calcMoveAmmeterFee" value="${settleAccounts.calcMoveAmmeterFee}" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="moveAmmeterFee" value="${settleAccounts.moveAmmeterFee}" class="none_border width_110px"></td>
                         <td><input type="text" name="moveAmmeterFeeBz" value="${settleAccounts.moveAmmeterFeeBz}" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td colspan="3" class="td_left">3、空调移机费</td>
-                        <td colspan="3"><input type="text" name="calcMoveAirConditioningFee" value="${settleAccounts.calcMoveAirConditioningFee}" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select id="air_conditioner_shutter" class="select_fix">
+                                <option value="0*${airConditionerShutter}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${airConditionerShutter}">${idx}&nbsp;窗机</option>
+                                </c:forEach>
+                            </select>
+                            <select id="air_conditioner_hang" class="select_fix">
+                                <option value="0*${airConditionerHang}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${airConditionerHang}">${idx}&nbsp;挂机</option>
+                                </c:forEach>
+                            </select>
+                            <select id="air_conditioner_cabinet" class="select_fix">
+                                <option value="0*${airConditionerCabinet}">请选择</option>
+                                <c:forEach begin="1" end="10" var="idx">
+                                    <option value="${idx}*${airConditionerCabinet}">${idx}&nbsp;柜机</option>
+                                </c:forEach>
+                            </select>
+                            <!--隐藏存储表单提交值-->
+                            <input type="hidden" name="calcMoveAirConditioningFee" value="${settleAccounts.calcMoveAirConditioningFee}" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="moveAirConditioningFee" value="${settleAccounts.moveAirConditioningFee}" class="none_border width_110px"></td>
                         <td><input type="text" name="moveAirConditioningFeeBz" value="${settleAccounts.moveAirConditioningFeeBz}" class="none_border width_70px"></td>
                     </tr>

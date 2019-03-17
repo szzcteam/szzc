@@ -48,16 +48,12 @@ $(document).ready(function(){
     sumCompensateNameArr[20] = "smallAreaReward";  //小面积住房搬迁奖励
     sumCompensateNameArr[21] = "otherRmb";  //其他
 
-    $("input[type='text']").each(function (i, obj) {
-        var name = $(obj).attr("name");
-        for(var i=0;i<sumCompensateNameArr.length;i++) {
-            if(name == sumCompensateNameArr[i]) {
-                $("input[name='"+name+"']").eq(0).on("blur change", function () {
-                    settleAccountObj.fullSumCompensate();
-                });
-            }
-        }
-    });
+    for(var i=0;i<sumCompensateNameArr.length;i++){
+        var nameText = sumCompensateNameArr[i];
+        $("input[name='"+nameText+"']").eq(0).on("blur change", function () {
+            settleAccountObj.fullSumCompensate();
+        });
+    }
 
     //旧房金额：被征收房屋补偿合计; 绑定失去焦点、变更事件
     $("input[name='sumCompensate']").eq(0).on("blur change", function () {
@@ -172,8 +168,10 @@ var settleAccountObj = {
     fullCalcValueCompensate:function(){
         //房屋评估单价
         var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
+        console.log("单价:" + assessPrice);
         //建筑面积
         var checkInArea = $("input[name='checkInArea']").eq(0).val() || 0;
+        console.log("面积:" + checkInArea);
         if(!assessPrice){
             return;
         }

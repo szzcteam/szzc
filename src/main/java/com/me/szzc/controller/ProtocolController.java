@@ -75,25 +75,8 @@ public class ProtocolController extends BaseController {
         String url = request.getParameter("url");
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url);
-        //查询空调
-        String airConditionerCabinet = systemArgsService.getValue(SystemArgsConstant.AIR_CONDITIONER_CABINET);
-        String airConditionerHang = systemArgsService.getValue(SystemArgsConstant.AIR_CONDITIONER_HANG);
-        String airConditionerShutter = systemArgsService.getValue(SystemArgsConstant.AIR_CONDITIONER_SHUTTER);
-        modelAndView.addObject("airConditionerCabinet", airConditionerCabinet);
-        modelAndView.addObject("airConditionerHang", airConditionerHang);
-        modelAndView.addObject("airConditionerShutter", airConditionerShutter);
-
-        //查询水表
-        String waterMeterMain = systemArgsService.getValue(SystemArgsConstant.WATER_METER_MAIN);
-        String waterMeterSub = systemArgsService.getValue(SystemArgsConstant.WATER_METER_SUB);
-        modelAndView.addObject("waterMeterMain", waterMeterMain);
-        modelAndView.addObject("waterMeterSub", waterMeterSub);
-
-        //查询电表
-        String ammeterMain= systemArgsService.getValue(SystemArgsConstant.AMMETER_MAIN);
-        String ammeterSub= systemArgsService.getValue(SystemArgsConstant.AMMETER_SUB);
-        modelAndView.addObject("ammeterMain", ammeterMain);
-        modelAndView.addObject("ammeterSub", ammeterSub);
+        //初始化水电空调参数
+        initWaterAmmerParam(modelAndView);
         return modelAndView;
     }
 
