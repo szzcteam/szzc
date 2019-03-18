@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log("进入");
     //房屋评估单价失去焦点
     $("input[name='assessPrice']").eq(0).blur(function () {
         settleAccountObj.fullCalcValueCompensate();
@@ -98,8 +97,9 @@ $(document).ready(function(){
     });
 
     //搬家费
-    $("input[name='calcMoveHouseFee']").eq(0).on("blur change", function () {
-        settleAccountObj.runCalc("calcMoveHouseFee", "moveHouseFee");
+    $("select[name='calcMoveHouseFee']").eq(0).change(function () {
+        var moveHouseFee = $(this).val();
+        $("input[name='moveHouseFee']").eq(0).val(moveHouseFee).change();
     });
     //热水器拆装费
     $("input[name='calcHotWaterCompensate']").eq(0).on("blur change", function () {

@@ -71,7 +71,13 @@
                     <tr>
                         <td>三</td>
                         <td colspan="4" class="td_left">搬迁补偿（搬家费）</td>
-                        <td colspan="3"><input type="text" name="calcMoveHouseFee" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select name="calcMoveHouseFee" class="select_fix" style="width: 80px;">
+                                <option value="">请选择</option>
+                                <option value="${moveHouseRmb}">货币补偿</option>
+                                <option value="${moveHouseSwap}">产权调换</option>
+                            </select>
+                        </td>
                         <td colspan="2"><input type="text" name="moveHouseFee" class="none_border width_110px"></td>
                         <td><input type="text" name="moveHouseFeeBz" class="none_border width_70px"></td>
                     </tr>

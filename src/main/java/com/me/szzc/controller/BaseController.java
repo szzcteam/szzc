@@ -110,6 +110,12 @@ public class BaseController extends BaseServiceCtrl{
         String ammeterSub= systemArgsService.getValue(SystemArgsConstant.AMMETER_SUB);
         modelAndView.addObject("ammeterMain", ammeterMain);
         modelAndView.addObject("ammeterSub", ammeterSub);
+
+        //查询搬家费
+        String moveHouseRmb= systemArgsService.getValue(SystemArgsConstant.MOVE_HOUSE_RMB);
+        String moveHouseSwap= systemArgsService.getValue(SystemArgsConstant.MOVE_HOUSE_SWAP);
+        modelAndView.addObject("moveHouseRmb", moveHouseRmb);
+        modelAndView.addObject("moveHouseSwap", moveHouseSwap);
     }
 
 

@@ -24,4 +24,8 @@ public interface SystemArgsConstant {
     String AMMETER_MAIN = "ammeter_main";
 
     String AMMETER_SUB = "ammeter_sub";
+
+    /**搬家费**/
+    String MOVE_HOUSE_RMB = "move_house_rmb";
+    String MOVE_HOUSE_SWAP = "move_house_swap";
 }
