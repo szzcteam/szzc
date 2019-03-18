@@ -9,6 +9,7 @@ import com.me.szzc.utils.WordUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -115,6 +116,14 @@ public class SettleAccountsController extends BaseController {
         modelAndView.addObject("message", "导出成功");
         modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
+    }
+
+
+    @RequestMapping("ssadmin/settleAccounts/detail")
+    @ResponseBody
+    public SettleAccounts querySettleAccounts(String houseOwner) throws Exception {
+        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
+        return settleAccounts;
     }
 
 

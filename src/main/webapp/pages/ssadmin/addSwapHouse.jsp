@@ -2,6 +2,7 @@
 <%@ include file="comm/include.inc.jsp" %>
 <%--<h2 class="contentTitle">添加产权调换协议</h2>--%>
 
+<script type="text/javascript" src="${oss_url}/static/ssadmin/js/business/add_swapHouse.js"/>
 
 <style>
     .samll_input_text {
