@@ -244,7 +244,14 @@
                     <tr>
                         <td>十三</td>
                         <td colspan="4" class="td_left">搬迁奖励</td>
-                        <td colspan="3"><input type="text" name="calcMoveReward" value="${settleAccounts.calcMoveReward}" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select name="calcMoveReward" class="select_fix" style="width: 120px;">
+                                <option value="">请选择</option>
+                                <option value="${oneMoveReward}" <c:if test="${oneMoveReward == settleAccounts.calcMoveReward}">selected</c:if>>第一奖励期</option>
+                                <option value="${twoMoveReward}" <c:if test="${twoMoveReward == settleAccounts.calcMoveReward}">selected</c:if>>第二奖励期</option>
+                                <option value="${threeMoveReward}" <c:if test="${threeMoveReward == settleAccounts.calcMoveReward}">selected</c:if>>第三奖励期</option>
+                            </select>
+                        </td>
                         <td colspan="2"><input type="text" name="moveReward" value="${settleAccounts.moveReward}" class="none_border width_110px"></td>
                         <td><input type="text" name="moveRewardBz" value="${settleAccounts.moveRewardBz}"  class="none_border width_70px"></td>
                     </tr>

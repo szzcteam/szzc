@@ -34,4 +34,9 @@ public interface SystemArgsConstant {
     String DISABILITY_SUBSIDY = "disability_subsidy";
     String BASIC_LIVING_SUBSIDY = "basic_living_subsidy";
 
+    /**搬迁奖励**/
+    String ONE_MOVE_REWARD = "one_move_reward";
+    String TWO_MOVE_REWARD = "two_move_reward";
+    String THREE_MOVE_REWARD = "three_move_reward";
+
 }

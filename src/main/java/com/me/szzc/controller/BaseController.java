@@ -125,6 +125,14 @@ public class BaseController extends BaseServiceCtrl{
         modelAndView.addObject("disabilitySubsidy", disabilitySubsidy);
         modelAndView.addObject("basicLivingSubsidy", basicLivingSubsidy);
 
+        //搬迁奖励
+        String oneMoveReward = systemArgsService.getValue(SystemArgsConstant.ONE_MOVE_REWARD);
+        String twoMoveReward = systemArgsService.getValue(SystemArgsConstant.TWO_MOVE_REWARD);
+        String threeMoveReward = systemArgsService.getValue(SystemArgsConstant.THREE_MOVE_REWARD);
+        modelAndView.addObject("oneMoveReward", oneMoveReward);
+        modelAndView.addObject("twoMoveReward", twoMoveReward);
+        modelAndView.addObject("threeMoveReward", threeMoveReward);
+
     }
 
 
