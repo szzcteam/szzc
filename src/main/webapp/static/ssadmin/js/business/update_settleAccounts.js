@@ -46,5 +46,19 @@ $(document).ready(function () {
         }
     });
 
+
+    //生活困难补助复选框
+    var calcLifeCompensate = $("input[name='calcLifeCompensate']").eq(0).val();
+    var lifeCompensateArr = calcLifeCompensate.split("+");
+    if (new Number(lifeCompensateArr[0]) > 0) {
+        $("input[name='diseaseSubsidy']").eq(0).prop("checked", true);
+    }
+    if (new Number(lifeCompensateArr[1]) > 0) {
+        $("input[name='disabilitySubsidy']").eq(0).prop("checked", true);
+    }
+    if (new Number(lifeCompensateArr[2]) > 0) {
+        $("input[name='basicLivingSubsidy']").eq(0).prop("checked", true);
+    }
+
 });
 

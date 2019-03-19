@@ -125,9 +125,34 @@ $(document).ready(function(){
     $("input[name='calcRmbCompensate']").eq(0).on("blur change", function () {
         settleAccountObj.runCalc("calcRmbCompensate", "rmbCompensate");
     });
-    //生活困难补助
+    //生活困难补助计算公式
     $("input[name='calcLifeCompensate']").eq(0).on("blur change", function () {
         settleAccountObj.runCalc("calcLifeCompensate", "lifeCompensate");
+    });
+    //生活困难补助复选框
+    $("#lifeCalcTd input[type='checkbox']").on("click", function () {
+        var diseaseSubsidyFlag = $("input[name='diseaseSubsidy']").eq(0).prop("checked");
+        var disabilitySubsidyFlag = $("input[name='disabilitySubsidy']").eq(0).prop("checked");
+        var basicLivingSubsidyFlag = $("input[name='basicLivingSubsidy']").eq(0).prop("checked");
+        var calcLifeCompensate = "";
+        console.log("生活困难补助选择："+diseaseSubsidyFlag + "  " + disabilitySubsidyFlag + " " + basicLivingSubsidyFlag);
+        if(diseaseSubsidyFlag) {
+            calcLifeCompensate = $("input[name='diseaseSubsidy']").eq(0).val() || 0;
+        }else{
+            calcLifeCompensate = 0;
+        }
+        if(disabilitySubsidyFlag) {
+            calcLifeCompensate = calcLifeCompensate + "+" + $("input[name='disabilitySubsidy']").eq(0).val() || 0;
+        }else{
+            calcLifeCompensate = calcLifeCompensate + "+" + 0;
+        }
+        if(basicLivingSubsidyFlag) {
+            calcLifeCompensate = calcLifeCompensate + "+" + $("input[name='basicLivingSubsidy']").eq(0).val() || 0;
+        }else{
+            calcLifeCompensate =  calcLifeCompensate + "+" + 0;
+        }
+
+        $("input[name='calcLifeCompensate']").val(calcLifeCompensate).change();
     });
     //住改商补助
     $("input[name='calcChangeCompensate']").eq(0).on("blur change", function () {

@@ -200,7 +200,13 @@
                     <tr>
                         <td>八</td>
                         <td colspan="4" class="td_left">生活困难补助</td>
-                        <td colspan="3"><input type="text" name="calcLifeCompensate" class="none_border width_220px"></td>
+                        <td colspan="3" id="lifeCalcTd">
+                            <input type="checkbox" name="diseaseSubsidy" value="${diseaseSubsidy}"/>重症&nbsp;&nbsp;
+                            <input type="checkbox" name="disabilitySubsidy" value="${disabilitySubsidy}"/>残疾&nbsp;&nbsp;
+                            <input type="checkbox" name="basicLivingSubsidy" value="${basicLivingSubsidy}"/>低保&nbsp;&nbsp;
+                            <!--隐藏选择值-->
+                            <input type="hidden" name="calcLifeCompensate" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="lifeCompensate" class="none_border width_110px"></td>
                         <td><input type="text" name="lifeCompensateBz" class="none_border width_70px"></td>
                     </tr>

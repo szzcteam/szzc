@@ -106,16 +106,25 @@ public class BaseController extends BaseServiceCtrl{
         modelAndView.addObject("waterMeterSub", waterMeterSub);
 
         //查询电表
-        String ammeterMain= systemArgsService.getValue(SystemArgsConstant.AMMETER_MAIN);
-        String ammeterSub= systemArgsService.getValue(SystemArgsConstant.AMMETER_SUB);
+        String ammeterMain = systemArgsService.getValue(SystemArgsConstant.AMMETER_MAIN);
+        String ammeterSub = systemArgsService.getValue(SystemArgsConstant.AMMETER_SUB);
         modelAndView.addObject("ammeterMain", ammeterMain);
         modelAndView.addObject("ammeterSub", ammeterSub);
 
         //查询搬家费
-        String moveHouseRmb= systemArgsService.getValue(SystemArgsConstant.MOVE_HOUSE_RMB);
-        String moveHouseSwap= systemArgsService.getValue(SystemArgsConstant.MOVE_HOUSE_SWAP);
+        String moveHouseRmb = systemArgsService.getValue(SystemArgsConstant.MOVE_HOUSE_RMB);
+        String moveHouseSwap = systemArgsService.getValue(SystemArgsConstant.MOVE_HOUSE_SWAP);
         modelAndView.addObject("moveHouseRmb", moveHouseRmb);
         modelAndView.addObject("moveHouseSwap", moveHouseSwap);
+
+        //查询生活困难补助
+        String diseaseSubsidy = systemArgsService.getValue(SystemArgsConstant.DISEASE_SUBSIDY);
+        String disabilitySubsidy = systemArgsService.getValue(SystemArgsConstant.DISABILITY_SUBSIDY);
+        String basicLivingSubsidy = systemArgsService.getValue(SystemArgsConstant.BASIC_LIVING_SUBSIDY);
+        modelAndView.addObject("diseaseSubsidy", diseaseSubsidy);
+        modelAndView.addObject("disabilitySubsidy", disabilitySubsidy);
+        modelAndView.addObject("basicLivingSubsidy", basicLivingSubsidy);
+
     }
 
 

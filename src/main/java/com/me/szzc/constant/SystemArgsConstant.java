@@ -28,4 +28,10 @@ public interface SystemArgsConstant {
     /**搬家费**/
     String MOVE_HOUSE_RMB = "move_house_rmb";
     String MOVE_HOUSE_SWAP = "move_house_swap";
+
+    /**生活困难补助**/
+    String DISEASE_SUBSIDY = "disease_subsidy";
+    String DISABILITY_SUBSIDY = "disability_subsidy";
+    String BASIC_LIVING_SUBSIDY = "basic_living_subsidy";
+
 }
