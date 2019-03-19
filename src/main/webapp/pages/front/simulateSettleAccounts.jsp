@@ -220,7 +220,7 @@
             <tr>
                 <td>八</td>
                 <td colspan="4" class="td_left">生活困难补助</td>
-                <td colspan="3">
+                <td colspan="3" id="lifeCalcTd">
                     <input type="checkbox" name="diseaseSubsidy" value="${diseaseSubsidy}" style="float: none;"/>重症&nbsp;&nbsp;
                     <input type="checkbox" name="disabilitySubsidy" value="${disabilitySubsidy}" style="float: none;"/>残疾&nbsp;&nbsp;
                     <input type="checkbox" name="basicLivingSubsidy" value="${basicLivingSubsidy}" style="float: none;"/>低保&nbsp;&nbsp;
