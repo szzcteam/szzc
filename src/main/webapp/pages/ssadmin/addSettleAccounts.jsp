@@ -57,14 +57,25 @@
                     <tr>
                         <td>一</td>
                         <td colspan="4">证载房屋价值补偿</td>
-                        <td colspan="3"><input type="text" name="calcValueCompensate" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcValueCompensateArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcValueCompensatePrice" class="required none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcValueCompensateProportion" class="required none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <!--隐藏计算公式-->
+                            <input type="hidden" name="calcValueCompensate" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="valueCompensate" class="none_border width_110px"></td>
                         <td><input type="text" name="valueCompensateBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
                         <td>二</td>
                         <td colspan="4">装修折旧补偿</td>
-                        <td colspan="3"><input type="text" name="calcDecorationCompensate" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcDecorationCompensateArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcDecorationCompensatePrice" class="required none_border" placeholder="折旧单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <!--隐藏计算公式-->
+                            <input type="hidden" name="calcDecorationCompensate" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="decorationCompensate" class="none_border width_110px"></td>
                         <td><input type="text" name="decorationCompensateBz" class="none_border width_70px"></td>
                     </tr>
@@ -84,7 +95,12 @@
                     <tr>
                         <td>四</td>
                         <td colspan="4" class="td_left">临时安置补偿（过渡费）</td>
-                        <td colspan="3"><input type="text" name="calcInterimFee" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcDecorationCompensateArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcDecorationCompensatePrice" class="required none_border" placeholder="折旧单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <!--隐藏计算公式-->
+                            <input type="hidden" name="calcInterimFee" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="interimFee" class="none_border width_110px"></td>
                         <td><input type="text" name="interimFeeBz" class="none_border width_70px"></td>
                     </tr>
@@ -227,7 +243,13 @@
                     <tr>
                         <td>十一</td>
                         <td colspan="4" class="td_left">停产停业损失补偿</td>
-                        <td colspan="3"><input type="text" name="calcSuspendBusinessFee" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <select name="sel_calcSuspendBusinessFee" class="select_fix" style="width: 120px;">
+                                <option value="0">请选择</option>
+                                <option value="${suspendBusinessProportion}">生产经营性用房</option>
+                            </select>
+                            <input type="hidden" name="calcSuspendBusinessFee" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="suspendBusinessFee" class="none_border width_110px"></td>
                         <td><input type="text" name="suspendBusinessFeeBz" class="none_border width_70px"></td>
                     </tr>

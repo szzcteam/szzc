@@ -133,6 +133,10 @@ public class BaseController extends BaseServiceCtrl{
         modelAndView.addObject("twoMoveReward", twoMoveReward);
         modelAndView.addObject("threeMoveReward", threeMoveReward);
 
+        //停产停业损失补偿比例
+        String suspendBusinessProportion = systemArgsService.getValue(SystemArgsConstant.SUSPEND_BUSINESS_PROPORTION);
+        modelAndView.addObject("suspendBusinessProportion", suspendBusinessProportion);
+
     }
 
 

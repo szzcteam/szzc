@@ -46,6 +46,29 @@ $(document).ready(function () {
         }
     });
 
+    //价值补偿，利用计算公式，填充3小框
+    var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val();
+    if(calcValueCompensate) {
+        var arr = calcValueCompensate.split("*");
+        $("input[name='calcValueCompensateArea']").val(arr[0]);
+        $("input[name='calcValueCompensatePrice']").val(arr[1]);
+        $("input[name='calcValueCompensateProportion']").val(arr[2]);
+    }
+
+    //装修折旧补偿，利用计算公式，填充2小框
+    var calcDecorationCompensate = $("input[name='calcDecorationCompensate']").eq(0).val();
+    if(calcDecorationCompensate) {
+        var arr = calcDecorationCompensate.split("*")
+        $("input[name='calcDecorationCompensateArea']").val(arr[0]);
+        $("input[name='calcDecorationCompensatePrice']").val(arr[1]);
+    }
+
+    //停产停业补偿，利用计算公式，选中下拉框
+    var calcSuspendBusinessFee = $("input[name='calcSuspendBusinessFee']").eq(0).val();
+    if(calcSuspendBusinessFee) {
+        var arr = calcSuspendBusinessFee.split("*")
+        $("select[name='sel_calcSuspendBusinessFee']").eq(0).val(arr[1]);
+    }
 
     //生活困难补助复选框
     var calcLifeCompensate = $("input[name='calcLifeCompensate']").eq(0).val();

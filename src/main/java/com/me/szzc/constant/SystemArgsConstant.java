@@ -39,4 +39,8 @@ public interface SystemArgsConstant {
     String TWO_MOVE_REWARD = "two_move_reward";
     String THREE_MOVE_REWARD = "three_move_reward";
 
+    //停产停业损失补偿比例
+    String SUSPEND_BUSINESS_PROPORTION = "suspend_business_proportion";
+
+
 }

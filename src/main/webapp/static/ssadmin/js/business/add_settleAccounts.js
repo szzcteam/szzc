@@ -1,20 +1,39 @@
 $(document).ready(function(){
     //房屋评估单价失去焦点
     $("input[name='assessPrice']").eq(0).blur(function () {
-        settleAccountObj.fullCalcValueCompensate();
-        settleAccountObj.fullCalcMoveReward();
+        var assessPrice = $(this).val() || 0;
+        $("input[name='calcValueCompensatePrice']").val(assessPrice).change();
     });
 
     //建筑面积失去焦点
     $("input[name='checkInArea']").eq(0).blur(function () {
-        //计算房屋价值补偿
-        settleAccountObj.fullCalcValueCompensate();
-        //计算搬迁奖励
-        settleAccountObj.fullCalcMoveReward();
+        var checkInArea = $(this).val() || 0;
+        //填充价值补偿的面积
+        $("input[name='calcValueCompensateArea']").val(checkInArea).change();
         //填充装修折旧的面积
+        $("input[name='calcDecorationCompensateArea']").val(checkInArea).change();
         settleAccountObj.fullCalcObjArea("calcDecorationCompensate");
         //填充临时安置补偿过渡费的面积
         settleAccountObj.fullCalcObjArea("calcInterimFee");
+    });
+
+    //装修折旧 2小框，失去交单，重新计算公式
+    $("input[name='calcDecorationCompensateArea']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcDecoration();
+    });
+    $("input[name='calcDecorationCompensatePrice']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcDecoration();
+    });
+
+    //房屋价值补偿，3小框，失去焦点，重新计算公式
+    $("input[name='calcValueCompensateArea']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcValueCompensate();
+    });
+    $("input[name='calcValueCompensatePrice']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcValueCompensate();
+    });
+    $("input[name='calcValueCompensateProportion']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcValueCompensate();
     });
 
     //房屋价值补偿计算公式失去焦点
@@ -85,6 +104,32 @@ $(document).ready(function(){
         settleAccountObj.calcDecorationCompensate();
     });
 
+
+    //停产停业损失下拉选择框
+    $("select[name='sel_calcSuspendBusinessFee']").eq(0).change(function () {
+        var proportion = $(this).val();
+        if(proportion == 0) {
+            $("input[name='calcSuspendBusinessFee']").eq(0).val("0").change();
+        }else{
+            //第一项，价值补偿*5%
+            var valueCompensate = $("input[name='valueCompensate']").eq(0).val() || 0;
+            //如果价值补偿为空，则进行提示
+            if (valueCompensate <= 0) {
+                var simulateFlag = $("#simulate");
+                if(!simulateFlag) {
+                    //非结算页面
+                    alertMsg.warn("证载房屋价值补偿金额为空，无法进行停产停业损失计算");
+                }else{
+                    alert("证载房屋价值补偿金额为空，无法进行停产停业损失计算");
+                }
+
+                $(this).val(0);
+                return;
+            }
+            var calcSuspendBusinessFee = valueCompensate + "*" + proportion;
+            $("input[name='calcSuspendBusinessFee']").eq(0).val(calcSuspendBusinessFee).change();
+        }
+    });
 
     //搬迁奖励计算公式
     $("select[name='calcMoveReward']").eq(0).change(function () {
@@ -185,61 +230,21 @@ $(document).ready(function(){
     });
 
 
+
 });
 
 
 var settleAccountObj = {
 
-    //改变房屋单价、建筑面积时，填充房屋价值补偿
+    //改变房屋单价、建筑面积时，填充房屋价值补偿计算公式
     fullCalcValueCompensate:function(){
-        //房屋评估单价
-        var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
-        console.log("单价:" + assessPrice);
-        //建筑面积
-        var checkInArea = $("input[name='checkInArea']").eq(0).val() || 0;
-        console.log("面积:" + checkInArea);
-        if(!assessPrice){
-            return;
-        }
-        if(!checkInArea){
-            return;
-        }
-        var tmpCalcValue = checkInArea + "*" + assessPrice;
 
-        //房屋价值补偿
-        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val();
-        //是初次填写面积、单价
-        if(!calcValueCompensate) {
-            $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
-            return;
-        }
-
-        //如果刚好是面积*单价
-        var vArr = calcValueCompensate.split("*");
-        //刚好是2个数字相乘，则也是直接覆盖，填充面积*单价
-        if(vArr.length == 2) {
-            $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
-            return;
-        }
-
-        //是2个以上数字的相乘，则替换第一个的面积，即面积有更新
-        var area_multiply_index = calcValueCompensate.indexOf("*");
-        if( area_multiply_index == -1) {
-            return;
-        }
-        var waitPriceCalc = calcValueCompensate.substring(area_multiply_index+1, calcValueCompensate.length);
-        tmpCalcValue = checkInArea + calcValueCompensate.substring(area_multiply_index, calcValueCompensate.length);
-        //覆盖公式中的面积
-        $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
-
-        //替换第二个的单价，即单价有更新
-        var price_multiply_index = waitPriceCalc.indexOf("*");
-        if( waitPriceCalc == -1) {
-            return;
-        }
-        tmpCalcValue =  checkInArea + "*" + assessPrice +   waitPriceCalc.substring(price_multiply_index, waitPriceCalc.length);
+        var checkInArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
+        var assessPrice = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
+        var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
+        var calcValueCompensate = checkInArea + "*" + assessPrice + "*" + proportion;
         //覆盖公式中的单价
-        $("input[name='calcValueCompensate']").eq(0).val(tmpCalcValue).change();
+        $("input[name='calcValueCompensate']").eq(0).val(calcValueCompensate).change();
     },
 
 
@@ -407,40 +412,9 @@ var settleAccountObj = {
         $("input[name='moveAirConditioningFee']").eq(0).val(moveAirConditioningFee).change();
         $("input[name='calcMoveAirConditioningFee']").eq(0).val(airConditionerShutter + "+" + airConditionerHang + "+" + airConditionerCabinet);
     },
-    /**
-     * 填充计算对象中的面积：装修折旧补偿、临时安置补偿过渡费的面积
-     * 这2个对象都是面积*某系数=金额
-     * @param calcObjName  计算公式框名称
-     * @param moneyName   金额框名称
-     */
-    fullCalcObjArea:function (calcObjName) {
-        console.log("填充公式中的面积: calcObjName=" + calcObjName);
-        //建筑面积
-        var checkInArea = $("input[name='checkInArea']").eq(0).val();
-        //获取计算公式
-        var calcDecorationCompensate = $("input[name='"+calcObjName+"']").eq(0).val();
-        if(!calcDecorationCompensate) {
-            console.log("计算公式没有填写");
-            $("input[name='"+calcObjName+"']").eq(0).val(checkInArea).change();
-            return;
-        }
-
-        //已有计算公式，则替换第一个的面积，即面积有更新
-        var multiply_index = calcDecorationCompensate.indexOf("*");
-        console.log("装修折旧补偿公式*位置:" + multiply_index);
-        if( multiply_index == -1) {
-            $("input[name='"+calcObjName+"']").eq(0).val(checkInArea).change();
-            return;
-        }
-        calcDecorationCompensate = checkInArea + calcDecorationCompensate.substring(multiply_index, calcDecorationCompensate.length);
-        //覆盖公式
-        $("input[name='"+calcObjName+"']").eq(0).val(calcDecorationCompensate).change();
-    },
     //运行装修补偿的计算公式，得到折旧费用
     calcDecorationCompensate: function () {
-        console.log("yufsafsdf");
         var calcDecorationCompensate = $("input[name='calcDecorationCompensate']").eq(0).val() || 0;
-        console.log("装修折旧计算公式:" + calcDecorationCompensate);
         var decorationCompensate = Math.round(eval(calcDecorationCompensate));
         $("input[name='decorationCompensate']").eq(0).val(decorationCompensate).change();
     },
@@ -459,6 +433,14 @@ var settleAccountObj = {
         var calcText = $("input[name='"+calcObjName+"']").eq(0).val() || 0;
         var money = Math.round(eval(calcText));
         $("input[name='"+moneyObjName+"']").eq(0).val(money).change();
+    },
+    //折旧补偿，利用2小框数字，得到计算公式
+    fullCalcDecoration:function () {
+        var calcDecorationCompensateArea = $("input[name='calcDecorationCompensateArea']").eq(0).val() || 0;
+        var calcDecorationCompensatePrice = $("input[name='calcDecorationCompensatePrice']").eq(0).val() || 0;
+        var calcDecorationCompensate = calcDecorationCompensateArea + "*" + calcDecorationCompensatePrice;
+        $("input[name='calcDecorationCompensate']").eq(0).val(calcDecorationCompensate).change();
+
     }
 
 };

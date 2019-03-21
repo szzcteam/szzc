@@ -25,7 +25,9 @@
 .none_border {
     border: none;
 }
-
+.width_60px {
+    width: 60px;
+}
 .width_70px {
     width: 70px;
 }
@@ -47,3 +49,5 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+
+
