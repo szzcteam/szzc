@@ -42,5 +42,10 @@ public interface SystemArgsConstant {
     //停产停业损失补偿比例
     String SUSPEND_BUSINESS_PROPORTION = "suspend_business_proportion";
 
+    /**货币补偿补助**/
+    String RMB_COMPENSATE_PROPORTION = "rmb_compensate_proportion";
+
+    /**货币搬迁奖励**/
+    String RMB_MOVE_REWARD_PROPORTION = "rmb_move_reward_proportion";
 
 }

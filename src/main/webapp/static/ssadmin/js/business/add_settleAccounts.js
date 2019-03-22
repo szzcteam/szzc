@@ -3,6 +3,10 @@ $(document).ready(function(){
     $("input[name='assessPrice']").eq(0).blur(function () {
         var assessPrice = $(this).val() || 0;
         $("input[name='calcValueCompensatePrice']").val(assessPrice).change();
+        //货币补偿补助
+        $("input[name='calcRmbCompensatePrice']").val(assessPrice).change();
+        //货币搬迁奖励
+        $("input[name='calcRmbMoveRewardPrice']").val(assessPrice).change();
     });
 
     //建筑面积失去焦点
@@ -14,8 +18,34 @@ $(document).ready(function(){
         $("input[name='calcDecorationCompensateArea']").val(checkInArea).change();
         //填充临时安置补偿过渡费的面积
         $("input[name='calcInterimFeeArea']").val(checkInArea).change();
-
+        //货币补偿补助
+        $("input[name='calcRmbCompensateArea']").val(checkInArea).change();
+        //货币搬迁奖励
+        $("input[name='calcRmbMoveRewardArea']").val(checkInArea).change();
     });
+
+    //货币补偿补助3小框，失去焦点，重新计算公式
+    $("input[name='calcRmbCompensateArea']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcRmbCompensate();
+    });
+    $("input[name='calcRmbCompensatePrice']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcRmbCompensate();
+    });
+    $("input[name='calcRmbCompensateProportion']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcRmbCompensate();
+    });
+
+    //货币搬迁奖励3小框，失去焦点，重新计算公式
+    $("input[name='calcRmbMoveRewardArea']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcRmbMoveReward();
+    });
+    $("input[name='calcRmbMoveRewardPrice']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcRmbMoveReward();
+    });
+    $("input[name='calcRmbMoveRewardProportion']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcRmbMoveReward();
+    });
+
 
     //未登记补偿3小框，失去焦点，重新计算公式
     $("input[name='calcNoCheckCompensateArea']").eq(0).on("blur change", function () {
@@ -473,7 +503,22 @@ var settleAccountObj = {
         var calcNoCheckCompensateProportion = $("input[name='calcNoCheckCompensateProportion']").eq(0).val() || 0;
         var calcNoCheckCompensate = calcNoCheckCompensateArea + "*" + calcNoCheckCompensatePrice + "*" + calcNoCheckCompensateProportion;
         $("input[name='calcNoCheckCompensate']").eq(0).val(calcNoCheckCompensate).change();
+    },
+    //货币补偿补助，利用3小框，得到计算公式
+    fullCalcRmbCompensate:function () {
+        var calcRmbCompensateArea = $("input[name='calcRmbCompensateArea']").eq(0).val() || 0;
+        var calcRmbCompensatePrice = $("input[name='calcRmbCompensatePrice']").eq(0).val() || 0;
+        var calcRmbCompensateProportion = $("input[name='calcRmbCompensateProportion']").eq(0).val() || 0;
+        var calcRmbCompensate = calcRmbCompensateArea + "*" + calcRmbCompensatePrice + "*" + calcRmbCompensateProportion;
+        $("input[name='calcRmbCompensate']").eq(0).val(calcRmbCompensate).change();
+    },
+    //货币搬迁奖励，利用3小框，得到计算公式
+    fullCalcRmbMoveReward: function () {
+        var calcRmbMoveRewardArea = $("input[name='calcRmbMoveRewardArea']").eq(0).val() || 0;
+        var calcRmbMoveRewardPrice = $("input[name='calcRmbMoveRewardPrice']").eq(0).val() || 0;
+        var calcRmbMoveRewardProportion = $("input[name='calcRmbMoveRewardProportion']").eq(0).val() || 0;
+        var calcRmbMoveReward = calcRmbMoveRewardArea + "*" + calcRmbMoveRewardPrice + "*" + calcRmbMoveRewardProportion;
+        $("input[name='calcRmbMoveReward']").eq(0).val(calcRmbMoveReward).change();
     }
-
 
 };

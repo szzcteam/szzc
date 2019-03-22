@@ -206,7 +206,7 @@
                         <td colspan="4" class="td_left">未登记建筑房屋补偿</td>
                         <td colspan="3">
                             <input type="text" name="calcNoCheckCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcNoCheckCompensatePrice" class="none_border" placeholder="金额" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcNoCheckCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                             <input type="text" name="calcNoCheckCompensateProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcNoCheckCompensate" value="${settleAccounts.calcNoCheckCompensate}" class="none_border width_220px">
@@ -217,7 +217,13 @@
                     <tr>
                         <td>七</td>
                         <td colspan="4" class="td_left">货币补偿补助</td>
-                        <td colspan="3"><input type="text" name="calcRmbCompensate" value="${settleAccounts.calcRmbCompensate}" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcRmbCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcRmbCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcRmbCompensateProportion" class="none_border" placeholder="比例" value="${rmbCompensateProportion}" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <!--隐藏计算公式-->
+                            <input type="hidden" name="calcRmbCompensate" value="${settleAccounts.calcRmbCompensate}" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="rmbCompensate" value="${settleAccounts.rmbCompensate}" class="none_border width_110px"></td>
                         <td><input type="text" name="rmbCompensateBz" value="${settleAccounts.rmbCompensateBz}" class="none_border width_70px"></td>
                     </tr>
@@ -285,7 +291,13 @@
                     <tr>
                         <td>十四</td>
                         <td colspan="4" class="td_left">货币搬迁奖励</td>
-                        <td colspan="3"><input type="text" name="calcRmbMoveReward" value="${settleAccounts.calcRmbMoveReward}"  class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcRmbMoveRewardArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcRmbMoveRewardPrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcRmbMoveRewardProportion" class="none_border" placeholder="比例" value="${rmbMoveRewardProportion}" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <!--隐藏计算公式-->
+                            <input type="hidden" name="calcRmbMoveReward" value="${settleAccounts.calcRmbMoveReward}"  class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="rmbMoveReward" value="${settleAccounts.rmbMoveReward}"  class="none_border width_110px"></td>
                         <td><input type="text" name="rmbMoveRewardBz" value="${settleAccounts.rmbMoveRewardBz}"  class="none_border width_70px"></td>
                     </tr>

@@ -101,5 +101,23 @@ $(document).ready(function () {
         $("input[name='calcNoCheckCompensateProportion']").val(arr[2]);
     }
 
+    //货币补偿补助，利用计算公式，填充3小框
+    var calcRmbCompensate = $("input[name='calcRmbCompensate']").eq(0).val();
+    if (calcRmbCompensate) {
+        var arr = calcRmbCompensate.split("*");
+        $("input[name='calcRmbCompensateArea']").val(arr[0]);
+        $("input[name='calcRmbCompensatePrice']").val(arr[1]);
+        $("input[name='calcRmbCompensateProportion']").val(arr[2]);
+    }
+
+    //货币搬迁奖励，利用计算公式，填充3小框
+    var calcRmbMoveReward = $("input[name='calcRmbMoveReward']").eq(0).val();
+    if(calcRmbMoveReward) {
+        var arr = calcRmbMoveReward.split("*");
+        $("input[name='calcRmbMoveRewardArea']").val(arr[0]);
+        $("input[name='calcRmbMoveRewardPrice']").val(arr[1]);
+        $("input[name='calcRmbMoveRewardProportion']").val(arr[2]);
+    }
+
 });
 
