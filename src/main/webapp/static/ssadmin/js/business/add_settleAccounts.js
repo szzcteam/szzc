@@ -14,6 +14,18 @@ $(document).ready(function(){
         $("input[name='calcDecorationCompensateArea']").val(checkInArea).change();
         //填充临时安置补偿过渡费的面积
         $("input[name='calcInterimFeeArea']").val(checkInArea).change();
+
+    });
+
+    //未登记补偿3小框，失去焦点，重新计算公式
+    $("input[name='calcNoCheckCompensateArea']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcNoCheckCompensate();
+    });
+    $("input[name='calcNoCheckCompensatePrice']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcNoCheckCompensate();
+    });
+    $("input[name='calcNoCheckCompensateProportion']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcNoCheckCompensate();
     });
 
     //临时安置3小框，失去焦点，重新计算公式
@@ -453,6 +465,15 @@ var settleAccountObj = {
         var calcInterimFeeMonth = $("input[name='calcInterimFeeMonth']").eq(0).val() || 0;
         var calcInterimFee = calcInterimFeeArea + "*" + calcInterimFeePrice + "*" + calcInterimFeeMonth;
         $("input[name='calcInterimFee']").eq(0).val(calcInterimFee).change();
+    },
+    //未登记面积补偿，利用3小框，得到计算公式
+    fullCalcNoCheckCompensate:function () {
+        var calcNoCheckCompensateArea = $("input[name='calcNoCheckCompensateArea']").eq(0).val() || 0;
+        var calcNoCheckCompensatePrice = $("input[name='calcNoCheckCompensatePrice']").eq(0).val() || 0;
+        var calcNoCheckCompensateProportion = $("input[name='calcNoCheckCompensateProportion']").eq(0).val() || 0;
+        var calcNoCheckCompensate = calcNoCheckCompensateArea + "*" + calcNoCheckCompensatePrice + "*" + calcNoCheckCompensateProportion;
+        $("input[name='calcNoCheckCompensate']").eq(0).val(calcNoCheckCompensate).change();
     }
+
 
 };

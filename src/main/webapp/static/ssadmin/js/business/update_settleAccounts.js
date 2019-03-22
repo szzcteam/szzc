@@ -92,5 +92,14 @@ $(document).ready(function () {
         $("input[name='calcInterimFeeMonth']").val(arr[2]);
     }
 
+    //未登记面积补偿，利用计算公式，填充3小框
+    var calcNoCheckCompensate = $("input[name='calcNoCheckCompensate']").eq(0).val();
+    if(calcNoCheckCompensate) {
+        var arr = calcNoCheckCompensate.split("*");
+        $("input[name='calcNoCheckCompensateArea']").val(arr[0]);
+        $("input[name='calcNoCheckCompensatePrice']").val(arr[1]);
+        $("input[name='calcNoCheckCompensateProportion']").val(arr[2]);
+    }
+
 });
 

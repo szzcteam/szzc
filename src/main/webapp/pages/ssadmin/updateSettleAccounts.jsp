@@ -204,7 +204,13 @@
                     <tr>
                         <td>六</td>
                         <td colspan="4" class="td_left">未登记建筑房屋补偿</td>
-                        <td colspan="3"><input type="text" name="calcNoCheckCompensate" value="${settleAccounts.calcNoCheckCompensate}" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcNoCheckCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcNoCheckCompensatePrice" class="none_border" placeholder="金额" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcNoCheckCompensateProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <!--隐藏计算公式-->
+                            <input type="hidden" name="calcNoCheckCompensate" value="${settleAccounts.calcNoCheckCompensate}" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="noCheckCompensate" value="${settleAccounts.noCheckCompensate}" class="none_border width_110px"></td>
                         <td><input type="text" name="noCheckCompensateBz" value="${settleAccounts.noCheckCompensateBz}" class="none_border width_70px"></td>
                     </tr>
