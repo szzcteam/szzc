@@ -236,15 +236,15 @@
             <tr>
                 <td>七</td>
                 <td colspan="4" class="td_left">货币补偿补助</td>
-                <td colspan="3">
+                <td colspan="3" id="rmbCompensate_td1">
                     <input type="text" name="calcRmbCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <input type="text" name="calcRmbCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <input type="text" name="calcRmbCompensateProportion" class="none_border" placeholder="比例" value="${rmbCompensateProportion}" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <!--隐藏计算公式-->
                     <input type="hidden" name="calcRmbCompensate" class="none_border width_220px">
                 </td>
-                <td colspan="2"><input type="text" name="rmbCompensate" class="none_border width_110px"></td>
-                <td><input type="text" name="rmbCompensateBz" class="none_border width_70px"></td>
+                <td colspan="2" id="rmbCompensate_td2"><input type="text" name="rmbCompensate" class="none_border width_110px"></td>
+                <td id="rmbCompensate_td3"><input type="text" name="rmbCompensateBz" class="none_border width_70px"></td>
             </tr>
             <tr>
                 <td>八</td>
@@ -310,15 +310,15 @@
             <tr>
                 <td>十四</td>
                 <td colspan="4" class="td_left">货币搬迁奖励</td>
-                <td colspan="3">
+                <td colspan="3" id="rmbMoveReward_td1">
                     <input type="text" name="calcRmbMoveRewardArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <input type="text" name="calcRmbMoveRewardPrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <input type="text" name="calcRmbMoveRewardProportion" class="none_border" placeholder="比例" value="${rmbMoveRewardProportion}" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <!--隐藏计算公式-->
                     <input type="hidden" name="calcRmbMoveReward" class="none_border width_220px">
                 </td>
-                <td colspan="2"><input type="text" name="rmbMoveReward" class="none_border width_110px"></td>
-                <td><input type="text" name="rmbMoveRewardBz" class="none_border width_70px"></td>
+                <td colspan="2" id="rmbMoveReward_td2"><input type="text" name="rmbMoveReward" class="none_border width_110px"></td>
+                <td id="rmbMoveReward_td3"><input type="text" name="rmbMoveRewardBz" class="none_border width_70px"></td>
             </tr>
             <tr>
                 <td>十五</td>

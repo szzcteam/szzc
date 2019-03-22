@@ -198,6 +198,31 @@ $(document).ready(function(){
     $("select[name='calcMoveHouseFee']").eq(0).change(function () {
         var moveHouseFee = $(this).val();
         $("input[name='moveHouseFee']").eq(0).val(moveHouseFee).change();
+        //级联货币补偿补助、货币搬迁奖励，当被征收人选择产权调换时，这2项隐藏
+        var text =  $("select[name='calcMoveHouseFee']").eq(0).find("option:selected").text();
+        if(text == "货币补偿"){
+
+            $("#rmbCompensate_td1 input[type='text']").css("display", "inline-block");
+            $("#rmbCompensate_td2 input[type='text']").css("display", "inline-block");
+            $("#rmbCompensate_td3 input[type='text']").css("display", "inline-block");
+            $("input[name='calcRmbCompensateProportion']").eq(0).change();
+
+            $("#rmbMoveReward_td1 input[type='text']").css("display", "inline-block");
+            $("#rmbMoveReward_td2 input[type='text']").css("display", "inline-block");
+            $("#rmbMoveReward_td3 input[type='text']").css("display", "inline-block");
+            $("input[name='calcRmbMoveRewardProportion']").eq(0).change();
+        }else{
+            //产权调换、请选择
+            $("#rmbCompensate_td1 input[type='text']").css("display", "none");
+            $("#rmbCompensate_td2 input[type='text']").css("display", "none");
+            $("#rmbCompensate_td3 input[type='text']").css("display", "none");
+            $("input[name='calcRmbMoveReward']").eq(0).val("0*0*0").change();
+
+            $("#rmbMoveReward_td1 input[type='text']").css("display", "none");
+            $("#rmbMoveReward_td2 input[type='text']").css("display", "none");
+            $("#rmbMoveReward_td3 input[type='text']").css("display", "none");
+            $("input[name='calcRmbMoveReward']").eq(0).val("0*0*0").change();
+        }
     });
     //热水器拆装费
     $("input[name='calcHotWaterCompensate']").eq(0).on("blur change", function () {

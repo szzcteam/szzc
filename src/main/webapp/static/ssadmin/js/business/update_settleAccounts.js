@@ -119,5 +119,8 @@ $(document).ready(function () {
         $("input[name='calcRmbMoveRewardProportion']").val(arr[2]);
     }
 
+    //搬家费，根据搬家类型选择让货币补偿补助、货币搬迁奖励是否显示
+    $("select[name='calcMoveHouseFee']").eq(0).change();
+
 });
 
