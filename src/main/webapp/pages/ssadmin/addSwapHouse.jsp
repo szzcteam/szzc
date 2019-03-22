@@ -8,11 +8,9 @@
     .samll_input_text {
         width: 50px;
     }
-
-
 </style>
 
-<div class="pageContent">
+<div class="pageContent" id="swapHouseDiv">
 
     <form method="post" action="ssadmin/addSwapHouse.html"
           class="pageForm required-validate" enctype="multipart/form-data"
@@ -118,7 +116,7 @@
                 </dl>
                 <dl>
                     <dt>3、房屋附属设施补偿:</dt>
-                    <dd style="line-height: 26px;">
+                    <dd style="line-height: 26px;" id="subsidiary_item">
                         构建物补偿&nbsp;&nbsp;<input type="text" name="structureCompensate" maxlength="50"  class="samll_input_text" style="clear: both;float: none;"/>&nbsp;元，
                         电话移机费&nbsp;&nbsp;<input type="text" name="movePhoneFee" maxlength="50"  class="samll_input_text" style="clear: both;float: none;"/>&nbsp;元，
                         有线电视复装费&nbsp;&nbsp;<input type="text" name="tvFee" maxlength="50"  class="samll_input_text" style="clear: both;float: none;"/>&nbsp;元，
@@ -141,9 +139,10 @@
                 <dl>
                     <dt>5、临时安置补偿(过渡费):</dt>
                     <dd>
-                        <input type="text" name="interimPrice" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;元/月×
+                        <input type="text" name="interimArea" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>&nbsp;&nbsp;×&nbsp;&nbsp;
+                        <input type="text" name="interimPrice" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;元/月&nbsp;&nbsp;×&nbsp;&nbsp;
                         <input type="text" name="interimMonth" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;个月
-                        =<input type="text" name="interimFee" maxlength="50" class="required" style="clear: both;float: none;"/>&nbsp;&nbsp;元
+                        &nbsp;&nbsp;=&nbsp;&nbsp;<input type="text" name="interimFee" maxlength="50" class="required" style="clear: both;float: none;"/>&nbsp;&nbsp;元
                     </dd>
                 </dl>
                 <dl>

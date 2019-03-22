@@ -5,8 +5,8 @@
         <select id="protocolType" onchange="changeProtocolType(this.value)">
             <option value="">请选择</option>
             <option value="1" selected>结算单</option>
-            <option value="2">产权调换协议</option>
-            <option value="3">货币补偿协议</option>
+            <option value="2">货币补偿协议</option>
+            <option value="3">产权调换协议</option>
         </select>
     </div>
     <div id="businessPage">
