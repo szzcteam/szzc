@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    //是3个页面在一起，所以区分用户名；  产权调换协议
     $("#swapHouseDiv input[name='houseOwner']").eq(0).blur(function () {
        swapHouseObj.houseNameSync($(this).val());
     });
@@ -28,11 +27,18 @@ $(document).ready(function () {
     });
 
 
+    //13项之和，转大写
+    $("#rmbRecompenseDiv input[name='sumRbm']").eq(0).on("blur change", function () {
+        swapHouseObj.sumRmbToUpper();
+    });
+
+
 });
 
 
 var swapHouseObj = {
 
+    //被征收人失去焦点，查询结算单
     houseNameSync: function (houseName) {
         if(!houseName){
             return;
@@ -104,6 +110,13 @@ var swapHouseObj = {
         });
 
 
+    },
+
+    //统计13项，人民币之和转大写
+    sumRmbToUpper:function () {
+        var rmb = $("#rmbRecompenseDiv input[name='sumRbm']").eq(0).val() || 0;
+        var rmb_upper = Araia_To_Chinese(rmb);
+        $("#rmbRecompenseDiv input[name='upperRmb']").eq(0).val(rmb_upper);
     }
 
 }
