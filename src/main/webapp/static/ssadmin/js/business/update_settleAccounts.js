@@ -83,5 +83,14 @@ $(document).ready(function () {
         $("input[name='basicLivingSubsidy']").eq(0).prop("checked", true);
     }
 
+    //临时安置过渡费，利用计算公式，填充3小框
+    var calcInterimFee = $("input[name='calcInterimFee']").eq(0).val();
+    if(calcInterimFee) {
+        var arr = calcInterimFee.split("*");
+        $("input[name='calcInterimFeeArea']").val(arr[0]);
+        $("input[name='calcInterimFeePrice']").val(arr[1]);
+        $("input[name='calcInterimFeeMonth']").val(arr[2]);
+    }
+
 });
 

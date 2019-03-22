@@ -115,7 +115,13 @@
             <tr>
                 <td>四</td>
                 <td colspan="4" class="td_left">临时安置补偿（过渡费）</td>
-                <td colspan="3"><input type="text" name="calcInterimFee" class="none_border width_220px"></td>
+                <td colspan="3">
+                    <input type="text" name="calcInterimFeeArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                    <input type="text" name="calcInterimFeePrice" class="required none_border" placeholder="金额" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                    <input type="text" name="calcInterimFeeMonth" class="required none_border" placeholder="月数" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                    <!--隐藏计算公式-->
+                    <input type="hidden" name="calcInterimFee" class="none_border width_220px">
+                </td>
                 <td colspan="2"><input type="text" name="interimFee" class="none_border width_110px"></td>
                 <td><input type="text" name="interimFeeBz" class="none_border width_70px"></td>
             </tr>

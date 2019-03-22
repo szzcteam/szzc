@@ -12,12 +12,22 @@ $(document).ready(function(){
         $("input[name='calcValueCompensateArea']").val(checkInArea).change();
         //填充装修折旧的面积
         $("input[name='calcDecorationCompensateArea']").val(checkInArea).change();
-        settleAccountObj.fullCalcObjArea("calcDecorationCompensate");
         //填充临时安置补偿过渡费的面积
-        settleAccountObj.fullCalcObjArea("calcInterimFee");
+        $("input[name='calcInterimFeeArea']").val(checkInArea).change();
     });
 
-    //装修折旧 2小框，失去交单，重新计算公式
+    //临时安置3小框，失去焦点，重新计算公式
+    $("input[name='calcInterimFeeArea']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcInterimFee();
+    });
+    $("input[name='calcInterimFeePrice']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcInterimFee();
+    });
+    $("input[name='calcInterimFeeMonth']").eq(0).on("blur change", function () {
+        settleAccountObj.fullCalcInterimFee();
+    });
+
+    //装修折旧 2小框，失去焦点，重新计算公式
     $("input[name='calcDecorationCompensateArea']").eq(0).on("blur change", function () {
         settleAccountObj.fullCalcDecoration();
     });
@@ -139,7 +149,7 @@ $(document).ready(function(){
 
     //过渡费公式，绑定失去焦点、变更事件，计算金额
     $("input[name='calcInterimFee']").eq(0).on("blur change", function () {
-        settleAccountObj.calcInterimFee();
+        settleAccountObj.runCalc("calcInterimFee", "interimFee");
     });
 
     //搬家费
@@ -418,12 +428,6 @@ var settleAccountObj = {
         var decorationCompensate = Math.round(eval(calcDecorationCompensate));
         $("input[name='decorationCompensate']").eq(0).val(decorationCompensate).change();
     },
-    //运行临时安置过渡费的计算公式，得到过渡费
-    calcInterimFee: function () {
-        var calcInterimFee = $("input[name='calcInterimFee']").eq(0).val() || 0;
-        var interimFee = Math.round(eval(calcInterimFee));
-        $("input[name='interimFee']").eq(0).val(interimFee).change();
-    },
     /**
      * 普通框，执行计算公式
      * @param calcObjName  计算公式框名称
@@ -441,6 +445,14 @@ var settleAccountObj = {
         var calcDecorationCompensate = calcDecorationCompensateArea + "*" + calcDecorationCompensatePrice;
         $("input[name='calcDecorationCompensate']").eq(0).val(calcDecorationCompensate).change();
 
+    },
+    //临时安置补偿，利用3小框，得到计算公式
+    fullCalcInterimFee: function () {
+        var calcInterimFeeArea = $("input[name='calcInterimFeeArea']").eq(0).val() || 0;
+        var calcInterimFeePrice = $("input[name='calcInterimFeePrice']").eq(0).val() || 0;
+        var calcInterimFeeMonth = $("input[name='calcInterimFeeMonth']").eq(0).val() || 0;
+        var calcInterimFee = calcInterimFeeArea + "*" + calcInterimFeePrice + "*" + calcInterimFeeMonth;
+        $("input[name='calcInterimFee']").eq(0).val(calcInterimFee).change();
     }
 
 };
