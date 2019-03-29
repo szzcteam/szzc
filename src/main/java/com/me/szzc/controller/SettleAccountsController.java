@@ -3,6 +3,7 @@ package com.me.szzc.controller;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.SettleAccounts;
+import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
@@ -102,8 +103,9 @@ public class SettleAccountsController extends BaseController {
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //根据人名获取产权协议书数据
         SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
+        SettleAccountsVO vo =  SettleAccountsVO.parse(settleAccounts);
         //对象转map
-        Map<String, String> map = ObjTransMapUtils.obj2Map(settleAccounts);
+        Map<String, String> map = ObjTransMapUtils.obj2Map(vo);
         //协议书名称(枚举保存维护)
         String protocol = ProtocolEnum.SETTLE_ACCOUNTS_AGREEMENT.getCode();
         //yyyyMMddHHmmssSSS的时间格式
