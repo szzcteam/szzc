@@ -380,22 +380,23 @@ public class SettleAccountsVO {
         vo.setNoMoveCompensate(BigDecimalUtil.stripTrailingZeros(entity.getNoMoveCompensate()));
         vo.setNoMoveCompensateBz(entity.getNoMoveCompensateBz());
 
-        vo.setCalcMoveReward(entity.getCalcMoveReward());
+
+        //搬迁奖励
+        String calcMoveReward = entity.getCalcMoveReward();
+        if(StringUtils.isNotBlank(calcMoveReward)) {
+            if(calcMoveReward.equals("40000")) {
+                vo.setCalcMoveReward("第一奖励期 " + calcMoveReward);
+            }else if(calcMoveReward.equals("15000")) {
+                vo.setCalcMoveReward("第二奖励期 " + calcMoveReward);
+            }else if(calcMoveReward.equals("5000")) {
+                vo.setCalcMoveReward("第三奖励期 " + calcMoveReward);
+            }
+        }
         vo.setMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getMoveReward()));
         vo.setMoveRewardBz(entity.getMoveRewardBz());
 
-        //搬迁奖励
-        String calcRmbMoveReward = entity.getCalcRmbMoveReward();
-        if(StringUtils.isNotBlank(calcRmbMoveReward)) {
-            if(calcRmbMoveReward.equals("40000")) {
-                vo.setCalcRmbMoveReward("第一奖励期 " + calcRmbMoveReward);
-            }else if(calcRmbMoveReward.equals("15000")) {
-                vo.setCalcRmbMoveReward("第二奖励期 " + calcRmbMoveReward);
-            }else if(calcRmbMoveReward.equals("5000")) {
-                vo.setCalcRmbMoveReward("第三奖励期 " + calcRmbMoveReward);
-            }
-        }
 
+        vo.setCalcRmbMoveReward(entity.getCalcRmbMoveReward());
         vo.setRmbMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getRmbMoveReward()));
         vo.setRmbMoveRewardBz(entity.getRmbMoveRewardBz());
 
