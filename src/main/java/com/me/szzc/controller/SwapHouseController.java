@@ -110,9 +110,12 @@ public class SwapHouseController extends BaseController {
     @RequestMapping("/ssadmin/exportSwapHouse")
     public ModelAndView exportSwapHouse(@RequestParam String houseOwner, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
-
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //根据人名获取产权协议书数据
         SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
+        if(swapHouse == null) {
+            swapHouse = new SwapHouse();
+        }
         //对象转map
         Map<String, String> map = ObjTransMapUtils.obj2Map(swapHouse);
         //协议书名称(枚举保存维护)
@@ -124,7 +127,6 @@ public class SwapHouseController extends BaseController {
         WordUtils.exportMillCertificateWord
                 (response, map, fileName, "HousingPropertyEchangeAgreement.ftl");
 
-        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "导出成功");
         return modelAndView;

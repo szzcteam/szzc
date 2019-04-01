@@ -99,6 +99,9 @@ public class RmbRecompenseController extends BaseController {
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //根据人名获取产权协议书数据
         RmbRecompense rmbRecompense = this.rmbRecompenseService.selectByHouseOwner(houseOwner);
+        if(rmbRecompense == null) {
+            rmbRecompense = new RmbRecompense();
+        }
         //对象转map
         Map<String, String> map = ObjTransMapUtils.obj2Map(rmbRecompense);
         //协议书名称(枚举保存维护)
