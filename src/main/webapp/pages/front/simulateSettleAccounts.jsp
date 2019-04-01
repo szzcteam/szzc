@@ -19,8 +19,6 @@
 
     <link href="${oss_url}/static/ssadmin/js/themes/css/core.css" rel="stylesheet"
           type="text/css"/>
-    <link href="${oss_url}/static/ssadmin/css/add_settleAccounts.css" rel="stylesheet" type="text/css" />
-
 
     <script src="${oss_url}/static/ssadmin/js/js/jquery-1.7.2.js" type="text/javascript"></script>
 
@@ -33,6 +31,61 @@
         table input{
             margin-left: 5px;
             float: left;
+        }
+
+        .tableInfo {
+            width: 750px;
+            min-height: 25px;
+            line-height: 28px;
+            text-align: center;
+            border-color: #a2bac0;
+            border-collapse: collapse;
+        }
+
+        .tableInfo tr td {
+            border: 1px solid #a2bac0;
+            line-height: 28px;
+        }
+
+        .td_left {
+            text-align: left;
+            padding-left: 5px;
+        }
+
+        .samll_input_text {
+            width: 50px;
+            /*border: none;*/
+        }
+
+        .none_border {
+            /*border:none;
+            border-bottom: 1px solid #a2bac0;*/
+            border: 1px solid #a2bac0;
+            height: 17px;
+        }
+        .width_60px {
+            width: 60px;
+        }
+        .width_70px {
+            width: 70px;
+        }
+
+        .width_110px {
+            width: 110px;
+        }
+
+        .width_220px {
+            width: 220px;
+        }
+
+        .width_185px {
+            width: 185px;
+        }
+
+        .select_fix {
+            margin-top: 2px;
+            margin-left: 5px;
+            margin-right: 5px;
         }
     </style>
 
@@ -58,10 +111,10 @@
                 <td colspan="2"><input type="text" name="lessee" class="none_border"></td>
                 <td>电话</td>
                 <td><input type="text" name="lesseePhone" class="none_border"></td>
-                <td><input type="text" name="useing" class="samll_input_text"></td>
-                <td><input type="text" name="checkInArea" class="samll_input_text" ></td>
-                <td><input type="text" name="inArea" class="samll_input_text" ></td>
-                <td><input type="text" name="assessPrice" class="samll_input_text"></td>
+                <td><input type="text" name="useing" class="samll_input_text none_border"></td>
+                <td><input type="text" name="checkInArea" class="samll_input_text none_border" ></td>
+                <td><input type="text" name="inArea" class="samll_input_text none_border" ></td>
+                <td><input type="text" name="assessPrice" class="samll_input_text none_border"></td>
             </tr>
             <tr>
                 <td colspan="5">被征收房屋地址</td>
