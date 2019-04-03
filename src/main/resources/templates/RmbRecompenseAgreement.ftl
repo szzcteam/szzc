@@ -2115,6 +2115,8 @@
                                 乙方保证：向甲方所提供的所有产权证书及其他相关证明材料，均属可观、真实，否则乙方愿承担一切法律责任。乙方未隐瞒被征收房屋的产权纠纷或抵押担保等状况，如有隐瞒或提供材料不实产生的法律责任由乙方承担。
                             </w:t>
                         </w:r>
+                        <w:bookmarkStart w:id="13" w:name="_GoBack"/>
+                        <w:bookmarkEnd w:id="13"/>
                     </w:p>
                     <w:p w14:paraId="0FACF7E7" w14:textId="77777777" w:rsidR="005042B3" w:rsidRPr="005042B3"
                          w:rsidRDefault="005042B3" w:rsidP="006466BA">
