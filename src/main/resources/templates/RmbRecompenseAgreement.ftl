@@ -171,8 +171,8 @@
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:b/>
                                 <w:color w:val="000000"/>
-                                <w:sz w:val="36"/>
-                                <w:szCs w:val="36"/>
+                                <w:sz w:val="32"/>
+                                <w:szCs w:val="32"/>
                             </w:rPr>
                             <w:t>武昌区</w:t>
                         </w:r>
@@ -181,8 +181,8 @@
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:b/>
                                 <w:color w:val="000000"/>
-                                <w:sz w:val="36"/>
-                                <w:szCs w:val="36"/>
+                                <w:sz w:val="32"/>
+                                <w:szCs w:val="32"/>
                             </w:rPr>
                             <w:t>国有土地上房屋征收</w:t>
                         </w:r>
@@ -191,8 +191,8 @@
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:b/>
                                 <w:color w:val="000000"/>
-                                <w:sz w:val="36"/>
-                                <w:szCs w:val="36"/>
+                                <w:sz w:val="32"/>
+                                <w:szCs w:val="32"/>
                             </w:rPr>
                             <w:t>货币补偿协议</w:t>
                         </w:r>
@@ -201,14 +201,12 @@
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:b/>
                                 <w:color w:val="000000"/>
-                                <w:sz w:val="36"/>
-                                <w:szCs w:val="36"/>
+                                <w:sz w:val="32"/>
+                                <w:szCs w:val="32"/>
                             </w:rPr>
                             <w:t>书</w:t>
                         </w:r>
                     </w:p>
-                    <w:p w14:paraId="61840CB8" w14:textId="77777777" w:rsidR="00A502C9" w:rsidRPr="00C83E09"
-                         w:rsidRDefault="00A502C9" w:rsidP="00C83E09"/>
                     <w:p w14:paraId="2F60CA56" w14:textId="484FD3CF" w:rsidR="00DD5784" w:rsidRPr="001E36BE"
                          w:rsidRDefault="00DD5784" w:rsidP="00C83E09">
                         <w:pPr>
