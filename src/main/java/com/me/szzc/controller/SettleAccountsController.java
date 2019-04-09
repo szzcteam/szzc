@@ -65,6 +65,8 @@ public class SettleAccountsController extends BaseController {
         Long userId = getAdminSession(request).getFid();
         settleAccounts.setModifiedUserId(userId);
         this.settleAccountsService.delete(settleAccounts);
+        modelAndView.addObject("statusCode",200);
+        modelAndView.addObject("message","删除成功");
         return modelAndView;
     }
 

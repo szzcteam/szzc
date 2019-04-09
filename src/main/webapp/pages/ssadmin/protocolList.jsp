@@ -94,7 +94,7 @@
                        target="ajaxTodo" title="确定要删除通知单吗?"><span>删除通知单</span>
                 </a></li>--%>
                 <li><a class="delete"
-                       href="ssadmin/settleAccounts/delete?uid={sid_user}"
+                       href="ssadmin/settleAccounts/delete.html?houseOwner={sid_user}"
                        target="ajaxTodo" title="确定要删除结算单吗?"><span>删除结算单</span>
                 </a></li>
             </shiro:hasPermission>

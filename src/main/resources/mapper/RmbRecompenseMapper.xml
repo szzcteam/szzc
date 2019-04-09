@@ -643,7 +643,7 @@
   <select id="selectByHouseOwner" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     from t_rmb_recompense
-    where house_owner = #{houseOwner}
+    where house_owner = #{houseOwner} and deleted = 0
   </select>
 
 

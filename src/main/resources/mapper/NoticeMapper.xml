@@ -136,7 +136,7 @@
     select
     <include refid="Base_Column_List" />
     from t_notice
-    where house_owner = #{houseOwner}
+    where house_owner = #{houseOwner} and deleted = 0
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
