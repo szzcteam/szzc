@@ -133,13 +133,13 @@
                             <w:snapToGrid w:val="0"/>
                             <w:pStyle w:val="HTML"/>
                             <w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/>
-                            <w:spacing w:line="360" w:lineRule="auto"/>
+                            <w:spacing w:line="240" w:lineRule="auto"/>
                             <w:jc w:val="center"/>
                             <w:rPr>
                                 <w:b/>
                                 <w:color w:val="000000"/>
-                                <w:sz w:val="36"/>
-                                <w:szCs w:val="36"/>
+                                <w:sz w:val="32"/>
+                                <w:szCs w:val="32"/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
@@ -147,8 +147,8 @@
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:b/>
                                 <w:color w:val="000000"/>
-                                <w:sz w:val="36"/>
-                                <w:szCs w:val="36"/>
+                                <w:sz w:val="32"/>
+                                <w:szCs w:val="32"/>
                             </w:rPr>
                             <w:t>武昌区</w:t>
                         </w:r>
@@ -157,20 +157,22 @@
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:b/>
                                 <w:color w:val="000000"/>
-                                <w:sz w:val="36"/>
-                                <w:szCs w:val="36"/>
+                                <w:sz w:val="32"/>
+                                <w:szCs w:val="32"/>
                             </w:rPr>
                             <w:t>国有土地上房屋征收产权调换协议书</w:t>
                         </w:r>
+                        <w:bookmarkStart w:id="0" w:name="_GoBack"/>
+                        <w:bookmarkEnd w:id="0"/>
                     </w:p>
-                    <w:p w14:paraId="61840CB8" w14:textId="77777777" w:rsidR="00A502C9" w:rsidRPr="00C83E09"
+                    <#--屏蔽空行<w:p w14:paraId="61840CB8" w14:textId="77777777" w:rsidR="00A502C9" w:rsidRPr="00C83E09"
                          w:rsidRDefault="00A502C9" w:rsidP="00C83E09">
                         <w:pPr>
                             <w:snapToGrid w:val="0"/>
                         </w:pPr>
                         <w:bookmarkStart w:id="0" w:name="_GoBack"/>
                         <w:bookmarkEnd w:id="0"/>
-                    </w:p>
+                    </w:p>-->
                     <w:p w14:paraId="2F60CA56" w14:textId="05B8EEE8" w:rsidR="00DD5784" w:rsidRPr="001E36BE"
                          w:rsidRDefault="00DD5784" w:rsidP="00811886">
                         <w:pPr>
@@ -2953,14 +2955,14 @@
                                 <w:spacing w:val="10"/>
                             </w:rPr>
                         </w:pPr>
+                        <w:bookmarkStart w:id="0" w:name="_GoBack"/>
+                        <w:bookmarkEnd w:id="0"/>
                         <w:r w:rsidRPr="005042B3">
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:spacing w:val="10"/>
                             </w:rPr>
-                            <w:t>
-                                乙方保证：向甲方所提供的所有产权证书及其他相关证明材料，均属可观、真实，否则乙方愿承担一切法律责任。乙方未隐瞒被征收房屋的产权纠纷或抵押担保等状况，如有隐瞒或提供材料不实产生的法律责任由乙方承担。
-                            </w:t>
+                            <w:t>乙方保证：向甲方所提供的所有产权证书及其他相关证明材料，均属可观、真实，否则乙方愿承担一切法律责任。乙方未隐瞒被征收房屋的产权纠纷或抵押担保等状况，如有隐瞒或提供材料不实产生的法律责任由乙方承担。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="0FACF7E7" w14:textId="77777777" w:rsidR="005042B3" w:rsidRPr="005042B3"
