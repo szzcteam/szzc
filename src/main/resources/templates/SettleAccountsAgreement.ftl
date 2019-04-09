@@ -120,6 +120,7 @@
                     <w:p w14:paraId="3727D551" w14:textId="15C9B476" w:rsidR="0068381F" w:rsidRDefault="0068381F"
                          w:rsidP="0068381F">
                         <w:pPr>
+                            <w:snapToGrid w:val="0"/>
                             <w:jc w:val="center"/>
                         </w:pPr>
                         <w:r>
@@ -324,6 +325,7 @@
                                 <w:p w14:paraId="7444C439" w14:textId="520BF60E" w:rsidR="00D05C4D" w:rsidRPr="0001230F"
                                      w:rsidRDefault="00D05C4D" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -407,6 +409,7 @@
                                 <w:p w14:paraId="52F0C7C4" w14:textId="65F5ED35" w:rsidR="00D05C4D"
                                      w:rsidRDefault="00F41757" w:rsidP="00820C41">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r>
@@ -421,6 +424,7 @@
                                 <w:p w14:paraId="7A2C9832" w14:textId="33A5A074" w:rsidR="00D05C4D"
                                      w:rsidRDefault="00F41757" w:rsidP="00820C41">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="00F41757">
@@ -435,6 +439,7 @@
                                 <w:p w14:paraId="1BD7A8E2" w14:textId="42B2F7A1" w:rsidR="00D05C4D"
                                      w:rsidRDefault="00F41757" w:rsidP="00820C41">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r>
@@ -449,6 +454,7 @@
                                 <w:p w14:paraId="3B769D2D" w14:textId="1E56DDFF" w:rsidR="00D05C4D"
                                      w:rsidRDefault="00B946C3" w:rsidP="00820C41">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="00B946C3">
@@ -503,6 +509,7 @@
                                 <w:p w14:paraId="60207B07" w14:textId="309D7C8D" w:rsidR="0096409D"
                                      w:rsidRDefault="0096409D" w:rsidP="00650148">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="0001230F">
@@ -522,6 +529,7 @@
                                 <w:p w14:paraId="51168934" w14:textId="61AEE385" w:rsidR="0096409D"
                                      w:rsidRDefault="0096409D" w:rsidP="00650148">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="0001230F">
@@ -541,6 +549,7 @@
                                 <w:p w14:paraId="2669602E" w14:textId="600E1DA2" w:rsidR="0096409D"
                                      w:rsidRDefault="0096409D" w:rsidP="00650148">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="0001230F">
@@ -559,6 +568,7 @@
                                 <w:p w14:paraId="339B93D6" w14:textId="3D3789AA" w:rsidR="0096409D"
                                      w:rsidRDefault="0096409D" w:rsidP="00650148">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="0001230F">
@@ -583,6 +593,7 @@
                                 <w:p w14:paraId="72834B63" w14:textId="6DBA52ED" w:rsidR="0096409D"
                                      w:rsidRDefault="0096409D" w:rsidP="00650148">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="0001230F">
@@ -607,6 +618,7 @@
                                 <w:p w14:paraId="5EABAF82" w14:textId="076606DC" w:rsidR="0096409D" w:rsidRPr="00877A41"
                                      w:rsidRDefault="0096409D" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -695,6 +707,7 @@
                                 <w:p w14:paraId="749A69FE" w14:textId="6421091C" w:rsidR="0096409D" w:rsidRPr="00877A41"
                                      w:rsidRDefault="0096409D" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -772,6 +785,7 @@
                                 <w:p w14:paraId="717E248E" w14:textId="5E89A51F" w:rsidR="0096409D" w:rsidRPr="00877A41"
                                      w:rsidRDefault="0096409D" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -855,6 +869,7 @@
                                 <w:p w14:paraId="2FC8581F" w14:textId="619076FE" w:rsidR="0096409D" w:rsidRPr="00877A41"
                                      w:rsidRDefault="0096409D" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -939,6 +954,7 @@
                                 <w:p w14:paraId="3E1A9DD3" w14:textId="1DC960E8" w:rsidR="007F2CC4" w:rsidRPr="00877A41"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -962,6 +978,7 @@
                                 <w:p w14:paraId="1E256F10" w14:textId="22836CD7" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="00001DFC">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -983,6 +1000,7 @@
                                 <w:p w14:paraId="3198212F" w14:textId="08B68741" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1044,6 +1062,7 @@
                                 <w:p w14:paraId="59E8AF72" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="00877A41"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1059,6 +1078,7 @@
                                 <w:p w14:paraId="4E9F7BF5" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1072,6 +1092,7 @@
                                 <w:p w14:paraId="4F963DD6" w14:textId="7FF32234" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1133,6 +1154,7 @@
                                 <w:p w14:paraId="357AA800" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="00877A41"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1148,6 +1170,7 @@
                                 <w:p w14:paraId="3D8BC60B" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1161,6 +1184,7 @@
                                 <w:p w14:paraId="42F56193" w14:textId="08809C4D" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1222,6 +1246,7 @@
                                 <w:p w14:paraId="24BC63B8" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="00877A41"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1237,6 +1262,7 @@
                                 <w:p w14:paraId="6A4A5F8F" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1250,6 +1276,7 @@
                                 <w:p w14:paraId="2F59AADE" w14:textId="53A81EF8" w:rsidR="007F2CC4" w:rsidRPr="002306C7"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1320,6 +1347,7 @@
                                 <w:p w14:paraId="517A1031" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="00877A41"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1414,6 +1442,7 @@
                                 <w:p w14:paraId="3187EF48" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="00877A41"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1492,6 +1521,7 @@
                                 <w:p w14:paraId="2CC42409" w14:textId="77777777" w:rsidR="007F2CC4" w:rsidRPr="00877A41"
                                      w:rsidRDefault="007F2CC4" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1569,6 +1599,7 @@
                                 <w:p w14:paraId="54C3A3A5" w14:textId="51976ACA" w:rsidR="00304816" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00304816" w:rsidP="007E1B25">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1646,6 +1677,7 @@
                                 <w:p w14:paraId="63C4A3C9" w14:textId="38E89E4D" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1723,6 +1755,7 @@
                                 <w:p w14:paraId="51349B70" w14:textId="4F0DBE6C" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1800,6 +1833,7 @@
                                 <w:p w14:paraId="725A973E" w14:textId="5D4F15E4" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1822,6 +1856,7 @@
                                 <w:p w14:paraId="371B985D" w14:textId="2D13875B" w:rsidR="00091FE5" w:rsidRPr="002306C7"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
                                         </w:rPr>
@@ -1891,6 +1926,7 @@
                                 <w:p w14:paraId="62125508" w14:textId="3E07B1CE" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -1973,6 +2009,7 @@
                                 <w:p w14:paraId="7656A70B" w14:textId="6933A23D" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2050,6 +2087,7 @@
                                 <w:p w14:paraId="1E839664" w14:textId="7CE3F657" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2127,6 +2165,7 @@
                                 <w:p w14:paraId="31B04AA7" w14:textId="506E754B" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2204,6 +2243,7 @@
                                 <w:p w14:paraId="67B67E92" w14:textId="3896AAAB" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2281,6 +2321,8 @@
                                 <w:p w14:paraId="402B71E1" w14:textId="7407F62B" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2364,6 +2406,7 @@
                                 <w:p w14:paraId="1170FBE1" w14:textId="707BBA2B" w:rsidR="00091FE5" w:rsidRPr="00877A41"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2501,6 +2544,7 @@
                                 <w:p w14:paraId="5F6C5861" w14:textId="703EF950" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="002306C7">
@@ -2521,6 +2565,7 @@
                                 <w:p w14:paraId="159B617E" w14:textId="1D383F96" w:rsidR="00091FE5" w:rsidRPr="002306C7"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2543,6 +2588,7 @@
                                 <w:p w14:paraId="33E1E08F" w14:textId="1FCFFBA3" w:rsidR="00091FE5" w:rsidRPr="002306C7"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                         <w:rPr>
                                             <w:spacing w:val="-10"/>
@@ -2566,6 +2612,7 @@
                                 <w:p w14:paraId="456F76B6" w14:textId="165A7472" w:rsidR="00091FE5" w:rsidRPr="006D4755"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:sz w:val="18"/>
                                             <w:szCs w:val="18"/>
@@ -2665,6 +2712,7 @@
                                 <w:p w14:paraId="6029FA5C" w14:textId="77777777" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r>
@@ -2680,6 +2728,7 @@
                                 <w:p w14:paraId="457677E2" w14:textId="111D9D70" w:rsidR="00091FE5" w:rsidRPr="006D4755"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:rPr>
                                             <w:sz w:val="18"/>
                                             <w:szCs w:val="18"/>
@@ -2709,6 +2758,7 @@
                                 <w:p w14:paraId="3CB41515" w14:textId="77777777" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                 </w:p>
@@ -2722,6 +2772,7 @@
                                 <w:p w14:paraId="14F08CD3" w14:textId="77777777" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                 </w:p>
@@ -2734,6 +2785,7 @@
                                 <w:p w14:paraId="0BB6AC79" w14:textId="196CEEA8" w:rsidR="00091FE5"
                                      w:rsidRDefault="00F93418" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r>
@@ -2750,6 +2802,7 @@
                                 <w:p w14:paraId="57244DD4" w14:textId="232680F0" w:rsidR="00091FE5"
                                      w:rsidRDefault="00C75924" w:rsidP="006D2A90">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="00602659">
@@ -2766,6 +2819,7 @@
                                 <w:p w14:paraId="26CA9CE0" w14:textId="41D19331" w:rsidR="00091FE5"
                                      w:rsidRDefault="00C75924" w:rsidP="006D2A90">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                 </w:p>
@@ -2792,6 +2846,7 @@
                                 <w:p w14:paraId="2A05286D" w14:textId="77777777" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                 </w:p>
@@ -2805,6 +2860,7 @@
                                 <w:p w14:paraId="645719B5" w14:textId="4E1D5E6D" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="002306C7">
@@ -2866,6 +2922,7 @@
                                 <w:p w14:paraId="550F2405" w14:textId="437FDB94" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="002306C7">
@@ -2897,6 +2954,7 @@
                                 <w:p w14:paraId="6AD1BDDA" w14:textId="001FDC20" w:rsidR="00091FE5"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="002306C7">
@@ -2963,6 +3021,7 @@
                                 <w:p w14:paraId="498F6487" w14:textId="2E3CD190" w:rsidR="00091FE5" w:rsidRPr="00431498"
                                      w:rsidRDefault="00091FE5" w:rsidP="00091FE5">
                                     <w:pPr>
+                                        <w:snapToGrid w:val="0"/>
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="002306C7">
@@ -4199,6 +4258,7 @@
                     <w:name w:val="Normal"/>
                     <w:qFormat/>
                     <w:pPr>
+                        <w:snapToGrid w:val="0"/>
                         <w:widowControl w:val="0"/>
                         <w:jc w:val="both"/>
                     </w:pPr>
@@ -4254,6 +4314,7 @@
                     <w:unhideWhenUsed/>
                     <w:rsid w:val="005A0B85"/>
                     <w:pPr>
+                        <w:snapToGrid w:val="0"/>
                         <w:pBdr>
                             <w:bottom w:val="single" w:sz="6" w:space="1" w:color="auto"/>
                         </w:pBdr>
@@ -4288,6 +4349,7 @@
                     <w:unhideWhenUsed/>
                     <w:rsid w:val="005A0B85"/>
                     <w:pPr>
+                        <w:snapToGrid w:val="0"/>
                         <w:tabs>
                             <w:tab w:val="center" w:pos="4153"/>
                             <w:tab w:val="right" w:pos="8306"/>
@@ -4332,6 +4394,7 @@
                     <w:unhideWhenUsed/>
                     <w:rsid w:val="009C1597"/>
                     <w:pPr>
+                        <w:snapToGrid w:val="0"/>
                         <w:jc w:val="left"/>
                     </w:pPr>
                 </w:style>
