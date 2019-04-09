@@ -1,11 +1,6 @@
 package com.me.szzc.utils;
 
-import com.me.szzc.pojo.entity.Frole;
-import sun.applet.Main;
-
-import javax.activation.MailcapCommandMap;
 import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
