@@ -3695,7 +3695,7 @@
                         <w:headerReference w:type="even" r:id="rId7"/>
                         <w:headerReference w:type="default" r:id="rId8"/>
                         <w:pgSz w:w="23811" w:h="16838" w:orient="landscape" w:code="8"/>
-                        <w:pgMar w:top="1800" w:right="1440" w:bottom="1800" w:left="1440" w:header="851" w:footer="992"
+                        <w:pgMar w:top="1418" w:right="1440" w:bottom="1418" w:left="1440" w:header="851" w:footer="992"
                                  w:gutter="0"/>
                         <w:cols w:num="2" w:space="425"/>
                         <w:docGrid w:type="lines" w:linePitch="312"/>
