@@ -3132,7 +3132,7 @@
                          w:rsidRDefault="00E755FD"/>
                     <w:sectPr w:rsidR="00E755FD" w:rsidRPr="0068381F" w:rsidSect="006F3B39">
                         <w:pgSz w:w="11906" w:h="16838"/>
-                        <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="851" w:footer="992"
+                        <w:pgMar w:top="1418" w:right="1440" w:bottom="1418" w:left="1440" w:header="851" w:footer="992"
                                  w:gutter="0"/>
                         <w:cols w:space="425"/>
                         <w:docGrid w:type="lines" w:linePitch="312"/>
