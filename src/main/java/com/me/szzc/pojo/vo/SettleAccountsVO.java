@@ -360,7 +360,7 @@ public class SettleAccountsVO {
             vo.setCalcLifeCompensate(txt);
         }
 
-        vo.setLifeCompensateBz(BigDecimalUtil.stripTrailingZeros(entity.getLifeCompensate()));
+        vo.setLifeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getLifeCompensate()));
         vo.setLifeCompensateBz(entity.getLifeCompensateBz());
 
         vo.setCalcChangeCompensate(entity.getCalcChangeCompensate());
