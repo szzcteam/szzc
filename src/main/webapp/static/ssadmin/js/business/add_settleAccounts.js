@@ -306,7 +306,11 @@ $(document).ready(function(){
         settleAccountObj.runCalc("calcOther", "otherRmb");
     });
 
-
+    //左上角补偿方式选择，级联搬迁补偿(搬家费)
+    $("select[name='choose_type']").eq(0).on("change", function () {
+        var value = $(this).val();
+        $("select[name='calcMoveHouseFee']").eq(0).val(value).change();
+    });
 
 });
 

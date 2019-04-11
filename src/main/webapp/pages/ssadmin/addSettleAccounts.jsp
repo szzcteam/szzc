@@ -12,6 +12,16 @@
 
         <div class="pageFormContent nowrap" layoutH="97">
             <dl>
+                <dt style="width: 80px;">补偿方式：</dt>
+                <dt>
+                    <select name="choose_type" style="width: 100px;margin-top: 2px;" class="required" >
+                        <option value="">请选择</option>
+                        <option value="${moveHouseRmb}">货币补偿</option>
+                        <option value="${moveHouseSwap}">产权调换</option>
+                    </select>
+                </dt>
+            </dl>
+            <dl>
                 <dt style="width: 80px;">项目名称:</dt>
                 <dt style="width: 300px;">
                     <input type="text" name="projectName" maxlength="50" class="required" size="40"/>

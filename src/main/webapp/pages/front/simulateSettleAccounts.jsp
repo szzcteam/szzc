@@ -95,6 +95,18 @@
 <div class="pageContent" style="margin-left: 24%;width: 800px;">
 
     <div class="pageFormContent nowrap" layoutH="97">
+        <div>
+            <dl>
+                <dt style="width: 80px;">补偿方式：</dt>
+                <dt>
+                    <select name="choose_type" style="width: 100px;" >
+                        <option value="">请选择</option>
+                        <option value="${moveHouseRmb}">货币补偿</option>
+                        <option value="${moveHouseSwap}">产权调换</option>
+                    </select>
+                </dt>
+            </dl>
+        </div>
         <table  border="1" class="tableInfo">
             <tr>
                 <td colspan="3">被征收人</td>
