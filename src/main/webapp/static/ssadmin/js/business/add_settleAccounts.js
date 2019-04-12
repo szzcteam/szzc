@@ -330,6 +330,7 @@ $(document).ready(function(){
         }
     });
 
+    //无烟灶台选择数量
     $("#sel_stove").on("change", function () {
         var v = $(this).val() || 0;
         $("input[name='calcStructureCompensate']").eq(0).val(v).change();
@@ -344,6 +345,41 @@ $(document).ready(function(){
     $("input[name='calcStructureCompensatePrice']").eq(0).on("blur change", function () {
         settleAccountObj.calcDarkBuilding();
     });
+
+    //热水器拆装费
+    $("#water_heater_type").on("change", function () {
+        var water_heater_type = $(this).val();
+        if (water_heater_type == 0) {
+            $("#sel_water_heater").css("display", "none");
+            $("input[name='calcHotWaterCompensateMoney']").eq(0).css("display", "none");
+            $("input[name='calcHotWaterCompensateConvert']").eq(0).css("display", "none");
+        } else if (water_heater_type == 1) {
+            $("#sel_water_heater").css("display", "inline-block").change();
+            $("input[name='calcHotWaterCompensateMoney']").eq(0).css("display", "none");
+            $("input[name='calcHotWaterCompensateConvert']").eq(0).css("display", "none");
+        } else if (water_heater_type == 2) {
+            $("#sel_water_heater").css("display", "none");
+            $("input[name='calcHotWaterCompensateMoney']").eq(0).css("display", "inline-block").change();
+            $("input[name='calcHotWaterCompensateConvert']").eq(0).css("display", "inline-block").change();
+        }
+    });
+
+    //电热水器选择数量
+    $("#sel_water_heater").on("change", function () {
+        var v = $(this).val() || 0;
+        $("input[name='calcHotWaterCompensate']").eq(0).val(v).change();
+    });
+
+    //太阳能热水器：金额
+    $("input[name='calcHotWaterCompensateMoney']").eq(0).on("blur change", function () {
+        settleAccountObj.calcHotWater();
+    });
+
+    //太阳能热水器：折算比例
+    $("input[name='calcHotWaterCompensateConvert']").eq(0).on("blur change", function () {
+        settleAccountObj.calcHotWater();
+    });
+
 
 });
 
@@ -589,6 +625,14 @@ var settleAccountObj = {
         var calcStructureCompensatePrice = $("input[name='calcStructureCompensatePrice']").eq(0).val() || 0;
         var calcStructureCompensate = calcStructureCompensateArea + "*" + calcStructureCompensatePrice;
         $("input[name='calcStructureCompensate']").eq(0).val(calcStructureCompensate).change();
+    },
+
+    //太阳能热水器计算
+    calcHotWater:function () {
+        var calcHotWaterCompensateMoney = $("input[name='calcHotWaterCompensateMoney']").eq(0).val() || 0;
+        var calcHotWaterCompensateConvert = $("input[name='calcHotWaterCompensateConvert']").eq(0).val() || 0;
+        var calcHotWaterCompensate = calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert;
+        $("input[name='calcHotWaterCompensate']").eq(0).val(calcHotWaterCompensate).change();
     }
 
 };

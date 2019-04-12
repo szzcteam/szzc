@@ -125,11 +125,9 @@ $(document).ready(function () {
     //构建物下拉框选择：根据计算公式选择
     var calcStructureCompensate = $("input[name='calcStructureCompensate']").eq(0).val() || 0;
     if(calcStructureCompensate != null && calcStructureCompensate != "" && calcStructureCompensate != 0 && calcStructureCompensate.indexOf("0*") == -1) {
-        var stove_price = $("#sel_stove").attr("price");
-        var stove_flag = calcStructureCompensate.indexOf(stove_price);
-        console.log("构建物判断:" +stove_flag + "公式:" + calcStructureCompensate);
+        var isExists = optionExistValue(calcStructureCompensate, "sel_stove");
         //灶台
-        if(stove_flag != -1) {
+        if(isExists) {
             $("#sel_stove").find("option[value='"+calcStructureCompensate+"']").attr("selected",true);
             $("#sel_structure").val(1).change();
         }else{
@@ -142,5 +140,40 @@ $(document).ready(function () {
     }
 
 
+    //热水器拆装费
+    var calcHotWaterCompensate = $("input[name='calcHotWaterCompensate']").eq(0).val() || 0;
+    if(calcHotWaterCompensate != null && calcHotWaterCompensate != "" && calcHotWaterCompensate != 0) {
+        var isExists = optionExistValue(calcHotWaterCompensate, "sel_water_heater");
+        //电热水器
+        if(isExists) {
+            $("#sel_water_heater").find("option[value='"+calcHotWaterCompensate+"']").attr("selected",true);
+            $("#water_heater_type").val(1).change();
+        }else{
+            //太阳能热水器
+            var arr = calcHotWaterCompensate.split("*");
+            $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
+            $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
+            $("#water_heater_type").val(2).change();
+        }
+    }
+
+
+
+
 });
+
+//下拉框是否存在某个选项值
+function optionExistValue(value, selId) {
+    var isExist = false;
+    var count = $('#' + selId).find('option').length;
+
+    for (var i = 0; i < count; i++) {
+        if ($('#' + selId).get(0).options[i].value == value) {
+            isExist = true;
+            break;
+        }
+    }
+
+    return isExist;
+}
 

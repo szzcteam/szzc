@@ -51,4 +51,10 @@ public interface SystemArgsConstant {
     /**无烟灶台**/
     String SMOKE_FREE_STOVE = "smoke_free_stove";
 
+    /**电热水器**/
+    String WATER_HEATER ="water_heater";
+
+    /**太阳能电热水器**/
+    String SOLAR_WATER_HEATERS ="solar_water_heaters";
+
 }

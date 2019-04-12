@@ -146,9 +146,17 @@ public class BaseController extends BaseServiceCtrl{
         String rmbMoveRewardProportion = systemArgsService.getValue(SystemArgsConstant.RMB_MOVE_REWARD_PROPORTION);
         modelAndView.addObject("rmbMoveRewardProportion", rmbMoveRewardProportion);
 
+        /**无烟灶台**/
         String smokeFreeStove = systemArgsService.getValue(SystemArgsConstant.SMOKE_FREE_STOVE);
         modelAndView.addObject("smokeFreeStove", smokeFreeStove);
 
+        /**电热水器**/
+        String waterHeater = systemArgsService.getValue(SystemArgsConstant.WATER_HEATER);
+        modelAndView.addObject("waterHeater", waterHeater);
+
+        /**太阳能热水器**/
+        String solarWaterHeaters = systemArgsService.getValue(SystemArgsConstant.SOLAR_WATER_HEATERS);
+        modelAndView.addObject("solarWaterHeaters", solarWaterHeaters);
 
 
     }
