@@ -146,6 +146,9 @@ public class BaseController extends BaseServiceCtrl{
         String rmbMoveRewardProportion = systemArgsService.getValue(SystemArgsConstant.RMB_MOVE_REWARD_PROPORTION);
         modelAndView.addObject("rmbMoveRewardProportion", rmbMoveRewardProportion);
 
+        String smokeFreeStove = systemArgsService.getValue(SystemArgsConstant.SMOKE_FREE_STOVE);
+        modelAndView.addObject("smokeFreeStove", smokeFreeStove);
+
 
 
     }

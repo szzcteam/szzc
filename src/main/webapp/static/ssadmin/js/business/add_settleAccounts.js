@@ -312,6 +312,39 @@ $(document).ready(function(){
         $("select[name='calcMoveHouseFee']").eq(0).val(value).change();
     });
 
+    //构建物补偿选择
+    $("#sel_structure").on("change", function () {
+        var structure = $(this).val();
+        if (structure == 0) {
+            $("#sel_stove").css("display", "none");
+            $("input[name='calcStructureCompensateArea']").eq(0).css("display", "none");
+            $("input[name='calcStructureCompensatePrice']").eq(0).css("display", "none");
+        } else if (structure == 1) {
+            $("#sel_stove").css("display", "inline-block").change();
+            $("input[name='calcStructureCompensateArea']").eq(0).css("display", "none");
+            $("input[name='calcStructureCompensatePrice']").eq(0).css("display", "none");
+        } else if (structure == 2) {
+            $("#sel_stove").css("display", "none");
+            $("input[name='calcStructureCompensateArea']").eq(0).css("display", "inline-block").change();
+            $("input[name='calcStructureCompensatePrice']").eq(0).css("display", "inline-block").change();
+        }
+    });
+
+    $("#sel_stove").on("change", function () {
+        var v = $(this).val() || 0;
+        $("input[name='calcStructureCompensate']").eq(0).val(v).change();
+    });
+
+    //构建物：暗楼面积
+    $("input[name='calcStructureCompensateArea']").eq(0).on("blur change", function () {
+        settleAccountObj.calcDarkBuilding();
+    });
+
+    //构建物：暗楼单价
+    $("input[name='calcStructureCompensatePrice']").eq(0).on("blur change", function () {
+        settleAccountObj.calcDarkBuilding();
+    });
+
 });
 
 
@@ -548,6 +581,14 @@ var settleAccountObj = {
         var calcRmbMoveRewardProportion = $("input[name='calcRmbMoveRewardProportion']").eq(0).val() || 0;
         var calcRmbMoveReward = calcRmbMoveRewardArea + "*" + calcRmbMoveRewardPrice + "*" + calcRmbMoveRewardProportion;
         $("input[name='calcRmbMoveReward']").eq(0).val(calcRmbMoveReward).change();
+    },
+
+    //构建物：暗楼 补偿
+    calcDarkBuilding:function () {
+        var calcStructureCompensateArea = $("input[name='calcStructureCompensateArea']").eq(0).val() || 0;
+        var calcStructureCompensatePrice = $("input[name='calcStructureCompensatePrice']").eq(0).val() || 0;
+        var calcStructureCompensate = calcStructureCompensateArea + "*" + calcStructureCompensatePrice;
+        $("input[name='calcStructureCompensate']").eq(0).val(calcStructureCompensate).change();
     }
 
 };

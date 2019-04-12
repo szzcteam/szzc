@@ -48,4 +48,7 @@ public interface SystemArgsConstant {
     /**货币搬迁奖励**/
     String RMB_MOVE_REWARD_PROPORTION = "rmb_move_reward_proportion";
 
+    /**无烟灶台**/
+    String SMOKE_FREE_STOVE = "smoke_free_stove";
+
 }

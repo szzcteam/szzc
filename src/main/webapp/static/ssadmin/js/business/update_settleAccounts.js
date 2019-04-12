@@ -122,5 +122,25 @@ $(document).ready(function () {
     //搬家费，根据搬家类型选择让货币补偿补助、货币搬迁奖励是否显示
     $("select[name='calcMoveHouseFee']").eq(0).change();
 
+    //构建物下拉框选择：根据计算公式选择
+    var calcStructureCompensate = $("input[name='calcStructureCompensate']").eq(0).val() || 0;
+    if(calcStructureCompensate != null && calcStructureCompensate != "" && calcStructureCompensate != 0 && calcStructureCompensate.indexOf("0*") == -1) {
+        var stove_price = $("#sel_stove").attr("price");
+        var stove_flag = calcStructureCompensate.indexOf(stove_price);
+        console.log("构建物判断:" +stove_flag + "公式:" + calcStructureCompensate);
+        //灶台
+        if(stove_flag != -1) {
+            $("#sel_stove").find("option[value='"+calcStructureCompensate+"']").attr("selected",true);
+            $("#sel_structure").val(1).change();
+        }else{
+            //暗楼
+            var arr = calcStructureCompensate.split("*");
+            $("input[name='calcStructureCompensateArea']").eq(0).val(arr[0]);
+            $("input[name='calcStructureCompensatePrice']").eq(0).val(arr[1]);
+            $("#sel_structure").val(2).change();
+        }
+    }
+
+
 });
 
