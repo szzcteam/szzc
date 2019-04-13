@@ -288,7 +288,12 @@
                     <tr>
                         <td>九</td>
                         <td colspan="4" class="td_left">住改商补助</td>
-                        <td colspan="3"><input type="text" name="calcChangeCompensate" class="none_border width_220px"></td>
+                        <td colspan="3">
+                            <input type="text" name="calcChangeCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcChangeCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <!--隐藏存储值-->
+                            <input type="hidden" name="calcChangeCompensate" class="none_border width_220px">
+                        </td>
                         <td colspan="2"><input type="text" name="changeCompensate" class="none_border width_110px"></td>
                         <td><input type="text" name="changeCompensateBz" class="none_border width_70px"></td>
                     </tr>
