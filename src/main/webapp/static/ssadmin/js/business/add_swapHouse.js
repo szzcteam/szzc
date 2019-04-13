@@ -27,10 +27,65 @@ $(document).ready(function () {
     });
 
 
-    //13项之和，转大写
-    $("#rmbRecompenseDiv input[name='sumRbm']").eq(0).on("blur change", function () {
+    //12项之和，转大写
+    $("#swapHouseDiv input[name='sumRbm']").eq(0).on("blur change", function () {
         swapHouseObj.sumRmbToUpper();
     });
+
+    //支付期限，差额
+    $("#swapHouseDiv  input[name='difference']").eq(0).on("blur change", function () {
+        swapHouseObj.differenceToUpper();
+    });
+
+    $("#swapHouseDiv  input[name='lessDifference']").eq(0).on("blur change", function () {
+        swapHouseObj.lessDifferenceToUpper();
+    });
+
+    //调换房金额
+    $("#swapHouseDiv  input[name='totalPrice']").eq(0).on("blur change", function () {
+        swapHouseObj.totalPriceToUpper();
+    });
+
+    //调换房面积、金额触发事件
+    $("#swapHouseDiv  input[name='coveredArea']").eq(0).on("blur change", function () {
+        swapHouseObj.calcNewHouseMoney();
+    });
+    $("#swapHouseDiv  input[name='price']").eq(0).on("blur change", function () {
+        swapHouseObj.calcNewHouseMoney();
+    });
+
+    //补偿款项绑定事件
+    var compensateItem = new Array();
+    compensateItem[0]= "valueCompensate";
+    compensateItem[1]= "decorationCompensate";
+    compensateItem[2]= "subtotal";
+    compensateItem[3]= "moveHouseFee";
+    compensateItem[4]= "interimFee";
+    compensateItem[5]= "suspendBusinessFee";
+    compensateItem[6]= "lifeCompensate";
+    compensateItem[7]= "changeCompensate";
+    compensateItem[8]= "moveReward";
+    compensateItem[9]= "closeBalcony";
+    compensateItem[10]= "noCheckCompensate";
+    compensateItem[11]= "otherFee";
+    for(var i=0;i<compensateItem.length;i++){
+        var nameText = compensateItem[i];
+        $("#swapHouseDiv input[name='"+nameText+"']").eq(0).on("blur change", function () {
+            swapHouseObj.summary12Num();
+        });
+    }
+
+    //临时安置过渡费3小框，绑定事件
+    $("#swapHouseDiv input[name='interimArea']").eq(0).on("blur change", function () {
+        swapHouseObj.fullInterimFee();
+    });
+    $("#swapHouseDiv input[name='interimPrice']").eq(0).on("blur change", function () {
+        swapHouseObj.fullInterimFee();
+    });
+    $("#swapHouseDiv input[name='interimMonth']").eq(0).on("blur change", function () {
+        swapHouseObj.fullInterimFee();
+    });
+
 
 
 });
@@ -104,6 +159,8 @@ var swapHouseObj = {
                             $("#swapHouseDiv input[name='noCheckArea']").eq(0).val(calcNoCheckCompensateArr[0]);
                         }
 
+                        //触发一下求和
+                        swapHouseObj.summary12Num();
                     }
                 });
             }
@@ -112,11 +169,98 @@ var swapHouseObj = {
 
     },
 
-    //统计13项，人民币之和转大写
+    //统计12项，人民币之和转大写
     sumRmbToUpper:function () {
-        var rmb = $("#rmbRecompenseDiv input[name='sumRbm']").eq(0).val() || 0;
+        var rmb = $("#swapHouseDiv input[name='sumRbm']").eq(0).val() || 0;
         var rmb_upper = Araia_To_Chinese(rmb);
-        $("#rmbRecompenseDiv input[name='upperRmb']").eq(0).val(rmb_upper);
-    }
+        $("#swapHouseDiv input[name='upperRmb']").eq(0).val(rmb_upper);
+    },
+
+    //支付期限，差额大写
+    differenceToUpper: function () {
+        var difference = $("#swapHouseDiv  input[name='difference']").eq(0).val();
+        var rmb_upper = Araia_To_Chinese(difference);
+        $("#swapHouseDiv input[name='upperDifference']").eq(0).val(rmb_upper);
+    },
+
+    //支付期限，差额2
+    lessDifferenceToUpper:function () {
+        var lessDifference = $("#swapHouseDiv  input[name='lessDifference']").eq(0).val();
+        var rmb_upper = Araia_To_Chinese(lessDifference);
+        $("#swapHouseDiv input[name='upperLessDifference']").eq(0).val(rmb_upper);
+    },
+
+    //调换房，金额
+    totalPriceToUpper:function () {
+        var totalPrice = $("#swapHouseDiv  input[name='totalPrice']").eq(0).val();
+        var rmb_upper = Araia_To_Chinese(totalPrice);
+        $("#swapHouseDiv input[name='upperTotalPrice']").eq(0).val(rmb_upper);
+    },
+
+    //调换房金额计算
+    calcNewHouseMoney:function () {
+        var coveredArea = $("#swapHouseDiv  input[name='coveredArea']").eq(0).val() || 0;
+        var price = $("#swapHouseDiv  input[name='price']").eq(0).val() || 0;
+        var money = coveredArea + "*" + price;
+        money = eval(money);
+        $("#swapHouseDiv  input[name='totalPrice']").eq(0).val(money).change();
+
+    },
+
+    //汇总12项之和
+    summary12Num:function () {
+        var valueCompensate = $("#swapHouseDiv  input[name='valueCompensate']").eq(0).val() || 0;
+        var valueCompensate_num = new Number(valueCompensate);
+
+        var decorationCompensate = $("#swapHouseDiv  input[name='decorationCompensate']").eq(0).val() || 0;
+        var decorationCompensate_num = new Number(decorationCompensate);
+
+        var subtotal = $("#swapHouseDiv  input[name='subtotal']").eq(0).val() || 0;
+        var subtotal_num = new Number(subtotal);
+
+        var moveHouseFee = $("#swapHouseDiv  input[name='moveHouseFee']").eq(0).val() || 0;
+        var moveHouseFee_num = new Number(moveHouseFee);
+
+        var interimFee = $("#swapHouseDiv  input[name='interimFee']").eq(0).val() || 0;
+        var interimFee_num = new Number(interimFee);
+
+        var suspendBusinessFee = $("#swapHouseDiv  input[name='suspendBusinessFee']").eq(0).val() || 0;
+        var suspendBusinessFee_num = new Number(suspendBusinessFee);
+
+        var lifeCompensate = $("#swapHouseDiv  input[name='lifeCompensate']").eq(0).val() || 0;
+        var lifeCompensate_num = new Number(lifeCompensate);
+
+        var changeCompensate = $("#swapHouseDiv  input[name='changeCompensate']").eq(0).val() || 0;
+        var changeCompensate_num = new Number(changeCompensate);
+
+        var moveReward = $("#swapHouseDiv  input[name='moveReward']").eq(0).val() || 0;
+        var moveReward_num = new Number(moveReward);
+
+        var closeBalcony = $("#swapHouseDiv  input[name='closeBalcony']").eq(0).val() || 0;
+        var closeBalcony_num = new Number(closeBalcony);
+
+        var noCheckCompensate = $("#swapHouseDiv  input[name='noCheckCompensate']").eq(0).val() || 0;
+        var noCheckCompensate_num = new Number(noCheckCompensate);
+
+        var otherFee = $("#swapHouseDiv  input[name='otherFee']").eq(0).val() || 0;
+        var otherFee_num = new Number(otherFee);
+
+        var sumRbm = valueCompensate_num + decorationCompensate_num + subtotal_num +
+            moveHouseFee_num + interimFee_num + suspendBusinessFee_num +
+            lifeCompensate_num + changeCompensate_num + moveReward_num +
+            closeBalcony_num + noCheckCompensate_num + otherFee_num;
+        $("#swapHouseDiv  input[name='sumRbm']").eq(0).val(sumRbm).change();
+    },
+
+    //临时安置补偿，利用3小框，得到计算公式
+    fullInterimFee: function () {
+        var calcInterimFeeArea = $("#swapHouseDiv input[name='interimArea']").eq(0).val() || 0;
+        var calcInterimFeePrice = $("#swapHouseDiv input[name='interimPrice']").eq(0).val() || 0;
+        var calcInterimFeeMonth = $("#swapHouseDiv input[name='interimMonth']").eq(0).val() || 0;
+        var calcInterimFee = calcInterimFeeArea + "*" + calcInterimFeePrice + "*" + calcInterimFeeMonth;
+        console.log("临时过渡费计算公式:" + calcInterimFee);
+        var interimFee = Math.round(eval(calcInterimFee));
+        $("#swapHouseDiv input[name='interimFee']").eq(0).val(interimFee).change();
+    },
 
 }

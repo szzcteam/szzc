@@ -209,13 +209,13 @@
                 <dl>
                     <dt>约定明细1:</dt>
                     <dd>
-                        <input type="text" name="otherTermsOne" maxlength="255"    size="40" value="${rmbRecom.otherTermsOne}" />&nbsp;&nbsp;&nbsp;&nbsp;元
+                        <input type="text" name="otherTermsOne" maxlength="255"    size="40" value="${rmbRecom.otherTermsOne}" />&nbsp;&nbsp;&nbsp;&nbsp;
                     </dd>
                 </dl>
                 <dl>
                     <dt>约定明细2:</dt>
                     <dd>
-                        <input type="text" name="otherTermsTwo" maxlength="255"    size="40" value="${rmbRecom.otherTermsTwo}" />&nbsp;&nbsp;&nbsp;&nbsp;元
+                        <input type="text" name="otherTermsTwo" maxlength="255"    size="40" value="${rmbRecom.otherTermsTwo}" />&nbsp;&nbsp;&nbsp;&nbsp;
                     </dd>
                 </dl>
             </fieldset>

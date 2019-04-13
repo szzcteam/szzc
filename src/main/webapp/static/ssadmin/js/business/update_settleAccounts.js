@@ -157,7 +157,17 @@ $(document).ready(function () {
         }
     }
 
-
+    //住改商补助，利用计算公式，填充2小框
+    var calcChangeCompensate = $("input[name='calcChangeCompensate']").eq(0).val();
+    if(calcChangeCompensate){
+        //公式：面积*(单价-评估单价)
+        var arr = calcChangeCompensate.split("*");
+        $("input[name='calcChangeCompensateArea']").eq(0).val(arr[0]);
+        var price = arr[1];
+        price = price.substring(1, price.length - 1);
+        var priceArr = price.split("-");
+        $("input[name='calcChangeCompensatePrice']").eq(0).val(priceArr[0]);
+    }
 
 
 });

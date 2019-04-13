@@ -2,11 +2,14 @@ $(document).ready(function(){
     //房屋评估单价失去焦点
     $("input[name='assessPrice']").eq(0).blur(function () {
         var assessPrice = $(this).val() || 0;
+        //价值补偿
         $("input[name='calcValueCompensatePrice']").val(assessPrice).change();
         //货币补偿补助
         $("input[name='calcRmbCompensatePrice']").val(assessPrice).change();
         //货币搬迁奖励
         $("input[name='calcRmbMoveRewardPrice']").val(assessPrice).change();
+        //住改商补助触发计算
+        settleAccountObj.calcChangeCompensates();
     });
 
     //建筑面积失去焦点
@@ -380,6 +383,15 @@ $(document).ready(function(){
         settleAccountObj.calcHotWater();
     });
 
+    //住改商补助
+    $("input[name='calcChangeCompensateArea']").eq(0).on("blur change", function () {
+        settleAccountObj.calcChangeCompensates();
+    });
+
+    $("input[name='calcChangeCompensatePrice']").eq(0).on("blur change", function () {
+        settleAccountObj.calcChangeCompensates();
+    });
+
 
 });
 
@@ -633,6 +645,20 @@ var settleAccountObj = {
         var calcHotWaterCompensateConvert = $("input[name='calcHotWaterCompensateConvert']").eq(0).val() || 0;
         var calcHotWaterCompensate = calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert;
         $("input[name='calcHotWaterCompensate']").eq(0).val(calcHotWaterCompensate).change();
+    },
+    
+    //住改商补助计算
+    calcChangeCompensates:function () {
+        //面积
+        var calcChangeCompensateArea = $("input[name='calcChangeCompensateArea']").eq(0).val() || 0;
+        //单价
+        var calcChangeCompensatePrice = $("input[name='calcChangeCompensatePrice']").eq(0).val() || 0;
+        //获取评估的单价
+        var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
+        //公式：面积*(单价-评估单价)
+        var calcChangeCompensate = calcChangeCompensateArea + "*" + "(" + calcChangeCompensatePrice + "-" + assessPrice + ")";
+        console.log("住改商计算公式: " + calcChangeCompensate);
+        $("input[name='calcChangeCompensate']").eq(0).val(calcChangeCompensate).change();
     }
 
 };
