@@ -138,7 +138,7 @@
                 <dl>
                     <dt>5、临时安置补偿(过渡费):</dt>
                     <dd>
-                        <input type="text" name="interimArea" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>&nbsp;&nbsp;×&nbsp;&nbsp;
+                        <input type="text" name="interimArea" maxlength="50" value="${swapHouse.interimArea}" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>&nbsp;&nbsp;×&nbsp;&nbsp;
                         <input type="text" name="interimPrice" maxlength="50" value="${swapHouse.interimPrice}" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;元/月&nbsp;&nbsp;×&nbsp;&nbsp;
                         <input type="text" name="interimMonth" maxlength="50" value="${swapHouse.interimMonth}" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;个月
                         &nbsp;&nbsp;=&nbsp;&nbsp;<input type="text" name="interimFee" maxlength="50" value="${swapHouse.interimFee}" class="required" style="clear: both;float: none;"/>&nbsp;&nbsp;元

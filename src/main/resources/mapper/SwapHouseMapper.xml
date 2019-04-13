@@ -33,6 +33,7 @@
     <result column="hot_water_compensate" jdbcType="DECIMAL" property="hotWaterCompensate" />
     <result column="subtotal" jdbcType="DECIMAL" property="subtotal" />
     <result column="move_house_fee" jdbcType="DECIMAL" property="moveHouseFee" />
+    <result column="interim_area" jdbcType="DECIMAL" property="interimArea" />
     <result column="interim_price" jdbcType="DECIMAL" property="interimPrice" />
     <result column="interim_month" jdbcType="INTEGER" property="interimMonth" />
     <result column="interim_fee" jdbcType="DECIMAL" property="interimFee" />
@@ -71,7 +72,7 @@
     id,card_no,mng_office,company,house_owner,recompense_plan,address,house_owner_number,public_owner_number,
   proportion,useing,check_in_area,residence_area,operate_area,office_area,produce_area,other_area,no_check_area,
   value_compensate,decoration_compensate,structure_compensate,move_phone_fee,tv_fee,move_ammeter_fee,move_water_meter_fee,
-  wifi_fee,move_air_conditioning_fee,gas_fee,hot_water_compensate,subtotal,move_house_fee,interim_price,interim_month,
+  wifi_fee,move_air_conditioning_fee,gas_fee,hot_water_compensate,subtotal,move_house_fee,interim_area,interim_price,interim_month,
   interim_fee,suspend_business_fee,life_compensate,change_compensate,move_reward,close_balcony,no_check_compensate,
   other_fee,sum_rbm,upper_rmb,new_house_address,seat,unit,floors,house_number,covered_area,price,total_price,upper_total_price,
   years,months,difference,upper_difference,less_difference,upper_less_difference,move_month,other_terms_one,
@@ -113,7 +114,7 @@
       structure_compensate, move_phone_fee, tv_fee, 
       move_ammeter_fee, move_water_meter_fee, wifi_fee,
       move_air_conditioning_fee, gas_fee, hot_water_compensate, 
-      subtotal, move_house_fee, interim_price, 
+      subtotal, move_house_fee, interim_area,interim_price,
       interim_month, interim_fee, suspend_business_fee, 
       life_compensate, change_compensate, move_reward, 
       close_balcony, no_check_compensate, other_fee,
@@ -135,7 +136,7 @@
       #{structureCompensate,jdbcType=DECIMAL}, #{movePhoneFee,jdbcType=DECIMAL}, #{tvFee,jdbcType=DECIMAL}, 
       #{moveAmmeterFee,jdbcType=DECIMAL}, #{moveWaterMeterFee,jdbcType=DECIMAL}, #{wifiFee,jdbcType=DECIMAL}, 
       #{moveAirConditioningFee,jdbcType=DECIMAL}, #{gasFee,jdbcType=DECIMAL}, #{hotWaterCompensate,jdbcType=DECIMAL}, 
-      #{subtotal,jdbcType=DECIMAL}, #{moveHouseFee,jdbcType=DECIMAL}, #{interimPrice,jdbcType=DECIMAL}, 
+      #{subtotal,jdbcType=DECIMAL}, #{moveHouseFee,jdbcType=DECIMAL}, #{interimArea}, #{interimPrice,jdbcType=DECIMAL},
       #{interimMonth,jdbcType=INTEGER}, #{interimFee,jdbcType=DECIMAL}, #{suspendBusinessFee,jdbcType=DECIMAL}, 
       #{lifeCompensate,jdbcType=DECIMAL}, #{changeCompensate,jdbcType=DECIMAL}, #{moveReward,jdbcType=DECIMAL}, 
       #{closeBalcony,jdbcType=DECIMAL}, #{noCheckCompensate,jdbcType=DECIMAL}, #{otherFee,jdbcType=DECIMAL}, 
@@ -240,6 +241,9 @@
       </if>
       <if test="moveHouseFee != null">
         move_house_fee,
+      </if>
+      <if test="interimArea != null">
+        interim_area,
       </if>
       <if test="interimPrice != null">
         interim_price,
@@ -434,6 +438,9 @@
       </if>
       <if test="moveHouseFee != null">
         #{moveHouseFee,jdbcType=DECIMAL},
+      </if>
+      <if test="interimArea != null">
+        #{interimArea},
       </if>
       <if test="interimPrice != null">
         #{interimPrice,jdbcType=DECIMAL},
@@ -631,6 +638,9 @@
       </if>
       <if test="moveHouseFee != null">
         move_house_fee = #{moveHouseFee,jdbcType=DECIMAL},
+      </if>
+      <if test="interimArea != null">
+        interim_area = #{interimArea,jdbcType=DECIMAL},
       </if>
       <if test="interimPrice != null">
         interim_price = #{interimPrice,jdbcType=DECIMAL},

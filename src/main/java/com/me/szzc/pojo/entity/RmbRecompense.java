@@ -69,6 +69,8 @@ public class RmbRecompense {
 
     private BigDecimal moveHouseFee;
 
+    private BigDecimal interimArea;
+
     private BigDecimal interimPrice;
 
     private Integer interimMonth;

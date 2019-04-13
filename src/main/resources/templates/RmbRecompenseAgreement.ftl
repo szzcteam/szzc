@@ -1281,6 +1281,29 @@
                             <w:t>5、临时安置补偿（过度费）：</w:t>
                         </w:r>
                         <w:bookmarkStart w:id="1" w:name="_Hlk535937741"/>
+                        <w:r w:rsidR="00644877" w:rsidRPr="0047652F">
+                            <w:rPr>
+                                <w:spacing w:val="10"/>
+                                <w:u w:val="single"/>
+                            </w:rPr>
+                            <w:t>${interimarea}</w:t>
+                        </w:r>
+                        <w:r>
+                            <w:rPr>
+                                <w:rFonts w:hint="eastAsia"/>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                            </w:rPr>
+                            <w:t>m</w:t>
+                        </w:r>
+                        <w:r>
+                            <w:rPr>
+                                <w:sz w:val="18"/>
+                                <w:szCs w:val="18"/>
+                                <w:vertAlign w:val="superscript"/>
+                            </w:rPr>
+                            <w:t>2 ×</w:t>
+                        </w:r>
                         <w:r w:rsidR="0047652F" w:rsidRPr="0047652F">
                             <w:rPr>
                                 <w:spacing w:val="10"/>
