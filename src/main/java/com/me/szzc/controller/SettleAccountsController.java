@@ -90,12 +90,19 @@ public class SettleAccountsController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
-
-        this.settleAccountsService.update(settleAccounts);
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message","修改成功");
-        modelAndView.addObject("callbackType","closeCurrent");
-        return modelAndView;
+        String str = settleAccountsTerm(settleAccounts);
+        if(str.equals("true")){
+            this.settleAccountsService.update(settleAccounts);
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message","修改成功");
+            modelAndView.addObject("callbackType","closeCurrent");
+            return modelAndView;
+        }else{
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message","数据校验失败"+str);
+            modelAndView.addObject("callbackType","closeCurrent");
+            return modelAndView;
+        }
     }
 
     @RequestMapping("ssadmin/settleAccounts/query")
