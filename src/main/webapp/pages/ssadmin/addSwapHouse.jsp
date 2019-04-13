@@ -235,7 +235,7 @@
                 <dl>
                     <dt>过渡月份:</dt>
                     <dd>
-                        <input type="text" name="moveMonth" maxlength="10"  class="required"   size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;元
+                        <input type="text" name="moveMonth" maxlength="10"  class="required"   size="20"/>&nbsp;&nbsp;&nbsp;&nbsp;个月
                     </dd>
                 </dl>
             </fieldset>
@@ -244,7 +244,7 @@
                 <dl>
                     <dt>约定明细:</dt>
                     <dd>
-                        <input type="text" name="otherTermsOne" maxlength="255"    size="40"/>&nbsp;&nbsp;&nbsp;&nbsp;元
+                        <input type="text" name="otherTermsOne" maxlength="255"    size="40"/>&nbsp;&nbsp;&nbsp;&nbsp;
                     </dd>
                 </dl>
             </fieldset>

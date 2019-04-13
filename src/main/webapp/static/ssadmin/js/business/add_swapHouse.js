@@ -28,8 +28,30 @@ $(document).ready(function () {
 
 
     //13项之和，转大写
-    $("#rmbRecompenseDiv input[name='sumRbm']").eq(0).on("blur change", function () {
+    $("#swapHouseDiv input[name='sumRbm']").eq(0).on("blur change", function () {
         swapHouseObj.sumRmbToUpper();
+    });
+
+    //支付期限，差额
+    $("#swapHouseDiv  input[name='difference']").eq(0).on("blur change", function () {
+        swapHouseObj.differenceToUpper();
+    });
+
+    $("#swapHouseDiv  input[name='lessDifference']").eq(0).on("blur change", function () {
+        swapHouseObj.lessDifferenceToUpper();
+    });
+
+    //调换房金额
+    $("#swapHouseDiv  input[name='totalPrice']").eq(0).on("blur change", function () {
+        swapHouseObj.totalPriceToUpper();
+    });
+
+    //调换房面积、金额触发事件
+    $("#swapHouseDiv  input[name='coveredArea']").eq(0).on("blur change", function () {
+        swapHouseObj.calcNewHouseMoney();
+    });
+    $("#swapHouseDiv  input[name='price']").eq(0).on("blur change", function () {
+        swapHouseObj.calcNewHouseMoney();
     });
 
 
@@ -114,9 +136,41 @@ var swapHouseObj = {
 
     //统计13项，人民币之和转大写
     sumRmbToUpper:function () {
-        var rmb = $("#rmbRecompenseDiv input[name='sumRbm']").eq(0).val() || 0;
+        var rmb = $("#swapHouseDiv input[name='sumRbm']").eq(0).val() || 0;
         var rmb_upper = Araia_To_Chinese(rmb);
-        $("#rmbRecompenseDiv input[name='upperRmb']").eq(0).val(rmb_upper);
+        $("#swapHouseDiv input[name='upperRmb']").eq(0).val(rmb_upper);
+    },
+
+    //支付期限，差额大写
+    differenceToUpper: function () {
+        var difference = $("#swapHouseDiv  input[name='difference']").eq(0).val();
+        var rmb_upper = Araia_To_Chinese(difference);
+        $("#swapHouseDiv input[name='upperDifference']").eq(0).val(rmb_upper);
+    },
+
+    //支付期限，差额2
+    lessDifferenceToUpper:function () {
+        var lessDifference = $("#swapHouseDiv  input[name='lessDifference']").eq(0).val();
+        var rmb_upper = Araia_To_Chinese(lessDifference);
+        $("#swapHouseDiv input[name='upperLessDifference']").eq(0).val(rmb_upper);
+    },
+
+    //调换房，金额
+    totalPriceToUpper:function () {
+        var totalPrice = $("#swapHouseDiv  input[name='totalPrice']").eq(0).val();
+        var rmb_upper = Araia_To_Chinese(totalPrice);
+        $("#swapHouseDiv input[name='upperTotalPrice']").eq(0).val(rmb_upper);
+    },
+
+    //调换房金额计算
+    calcNewHouseMoney:function () {
+        var coveredArea = $("#swapHouseDiv  input[name='coveredArea']").eq(0).val() || 0;
+        var price = $("#swapHouseDiv  input[name='price']").eq(0).val() || 0;
+        var money = coveredArea + "*" + price;
+        money = eval(money);
+        $("#swapHouseDiv  input[name='totalPrice']").eq(0).val(money).change();
+
     }
+
 
 }
