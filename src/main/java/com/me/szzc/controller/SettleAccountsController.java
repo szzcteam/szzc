@@ -178,19 +178,19 @@ public class SettleAccountsController extends BaseController {
         if (StringUtils.isEmpty(settleAccounts.getUseing())) {
             return "房屋用途未填";//房屋用途
         }
-        if (settleAccounts.getCheckInArea().equals(null) || settleAccounts.getCheckInArea().equals(BigDecimal.ZERO)) {
+        if (settleAccounts.getCheckInArea()==null || settleAccounts.getCheckInArea().compareTo(BigDecimal.ZERO)<=0) {
             return "建筑面积未填";//建筑面积
         }
-        if (settleAccounts.getInArea().equals(null) || settleAccounts.getInArea().equals(BigDecimal.ZERO)) {
+        if (settleAccounts.getInArea()==null || settleAccounts.getInArea().compareTo(BigDecimal.ZERO)<=0) {
             return "内套面积未填";//内套面积
         }
-        if (settleAccounts.getAssessPrice().equals(null) || settleAccounts.getAssessPrice().equals(BigDecimal.ZERO)) {
+        if (settleAccounts.getAssessPrice()==null || settleAccounts.getAssessPrice().compareTo(BigDecimal.ZERO)<=0) {
             return "房屋估价未填";//房屋估价
         }
         if (StringUtils.isEmpty(settleAccounts.getAddress())) {
             return "房房地址未填";//房房地址
         }
-        if(settleAccounts.getValueCompensate().equals(null)||settleAccounts.getValueCompensate().equals(BigDecimal.ZERO)){
+        if(settleAccounts.getValueCompensate()==null||settleAccounts.getValueCompensate().compareTo(BigDecimal.ZERO)<=0){
             return "被征收房屋价值补偿金额未填";//被征收房屋价值补偿金额
         }
         if(StringUtils.isEmpty((settleAccounts.getCalcValueCompensate()))){
@@ -209,7 +209,7 @@ public class SettleAccountsController extends BaseController {
 
 
 
-        if(settleAccounts.getDecorationCompensate().equals(null)||settleAccounts.getDecorationCompensate().equals(0)){
+        if(settleAccounts.getDecorationCompensate()==null||settleAccounts.getDecorationCompensate().compareTo(BigDecimal.ZERO)<=0){
             return "装修折旧补偿金额未填";//装修折旧补偿金额
         }else{
             JexlEngine jexlEngine = new JexlBuilder().create();
