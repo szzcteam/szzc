@@ -46,7 +46,6 @@ public class RmbRecompenseController extends BaseController {
             modelAndView.addObject("callbackType","closeCurrent");
             return modelAndView;
         }else{
-            this.rmbRecompenseService.add(rmbRecompense);
             modelAndView.addObject("statusCode",300);
             modelAndView.addObject("message","数据校验错误"+str);
             modelAndView.addObject("callbackType","closeCurrent");
@@ -183,22 +182,41 @@ public class RmbRecompenseController extends BaseController {
             return "房屋用途不能为空";
         }
 
+        //判断其他项是否为空，是赋值为0
+        if(rmbRecompense.getResidenceArea()==(null)){
+            rmbRecompense.setResidenceArea(BigDecimal.valueOf(0));
+        }
+
+        if(rmbRecompense.getOperateArea()==null){
+            rmbRecompense.setOperateArea(BigDecimal.valueOf(0));
+        }
+
+        if(rmbRecompense.getOfficeArea()==(null)){
+            rmbRecompense.setOfficeArea(BigDecimal.valueOf(0));
+        }
+
+        if(rmbRecompense.getProduceArea()==(null)){
+            rmbRecompense.setProduceArea(BigDecimal.valueOf(0));
+        }
+        if(rmbRecompense.getOtherArea()==(null)){
+            rmbRecompense.setOtherArea(BigDecimal.valueOf(0));
+        }
+        BigDecimal sum=rmbRecompense.getResidenceArea()
+                .add(rmbRecompense.getOperateArea())
+                .add(rmbRecompense.getOfficeArea())
+                .add(rmbRecompense.getProduceArea())
+                .add(rmbRecompense.getOtherArea());
+
+
         if(rmbRecompense.getCheckInArea().compareTo(BigDecimal.ZERO)<=0){
             return "登记建筑面积不能为小于0";
         }else{
-            if(rmbRecompense.getCheckInArea().compareTo(
-                    (rmbRecompense.getResidenceArea()
-                            .add(rmbRecompense.getOperateArea())
-                            .add(rmbRecompense.getOfficeArea())
-                            .add(rmbRecompense.getProduceArea())
-                            .add(rmbRecompense.getOtherArea())
-                    )
-            )!=0
-                    ){
-                return "登记面积中某一项面积出错";
+            if(sum.compareTo(BigDecimal.ZERO)>0){
+                if(rmbRecompense.getCheckInArea().compareTo(sum)!=0){
+                    return "登记面积中某一项面积出错";
+                }
             }
         }
-
        /* if(rmbRecompense.getNoCheckArea().compareTo(BigDecimal.ZERO)<0){
             return "未登记面积不能小于0";
         }
@@ -249,38 +267,41 @@ public class RmbRecompenseController extends BaseController {
 
 
 
-       /* if(rmbRecompense.getSuspendBusinessFee().compareTo(BigDecimal.ZERO)<=0){
-            return "停产停业损失补偿大于0";
+        if(rmbRecompense.getSuspendBusinessFee()==null){
+            rmbRecompense.setSuspendBusinessFee(BigDecimal.valueOf(0));
         }
 
-        if(rmbRecompense.getRmbCompensate().compareTo(BigDecimal.ZERO)<=0){
-            return "货币补偿大于0";
+        if(rmbRecompense.getRmbCompensate()==null){
+            rmbRecompense.setRmbCompensate(BigDecimal.valueOf(0));
         }
 
-        if(rmbRecompense.getLifeCompensate().compareTo(BigDecimal.ZERO)<=0){
-            return "生活困难补助大于0";
+        if(rmbRecompense.getLifeCompensate()==null){
+            rmbRecompense.setLifeCompensate(BigDecimal.valueOf(0));
         }
-        if(rmbRecompense.getChangeCompensate().compareTo(BigDecimal.ZERO)<=0){
-            return "住改商补助大于0";
-        }*/
+        if(rmbRecompense.getChangeCompensate()==null){
+            rmbRecompense.setChangeCompensate(BigDecimal.valueOf(0));
+        }
+       if(rmbRecompense.getSubtotal()==null){
+           rmbRecompense.setSubtotal(BigDecimal.valueOf(0));
+       }
 
         if(rmbRecompense.getMoveReward().compareTo(BigDecimal.ZERO)<0){
             return "搬迁奖励不能小于0";
         }
-/*
-        if(rmbRecompense.getCloseBalcony().compareTo(BigDecimal.ZERO)<0){
-            return "封闭阳台补助不能小于0";
+
+        if(rmbRecompense.getCloseBalcony()==null){
+            rmbRecompense.setCloseBalcony(BigDecimal.valueOf(0));
         }
 
-        if(rmbRecompense.getNoCheckCompensate().compareTo(BigDecimal.ZERO)<0){
-            return "未登记补助不能小于0";
+        if(rmbRecompense.getNoCheckCompensate()==null){
+            rmbRecompense.setNoCheckCompensate(BigDecimal.valueOf(0));
         }
 
-        if(rmbRecompense.getOtherFee().compareTo(BigDecimal.ZERO)<0){
-            return "其他补助不能小于0";
-        }*/
+        if(rmbRecompense.getOtherFee()==null){
+           rmbRecompense.setOtherFee(BigDecimal.valueOf(0));
+        }
 
-        if( rmbRecompense.getSumRbm()!= ( rmbRecompense.getValueCompensate()
+        BigDecimal sum1 =  rmbRecompense.getValueCompensate()
                 .add(rmbRecompense.getDecorationCompensate())
                 .add(rmbRecompense.getSubtotal())
                 .add(rmbRecompense.getMoveHouseFee())
@@ -292,12 +313,13 @@ public class RmbRecompenseController extends BaseController {
                 .add(rmbRecompense.getMoveReward())
                 .add(rmbRecompense.getCloseBalcony())
                 .add(rmbRecompense.getNoCheckCompensate())
-                .add(rmbRecompense.getOtherFee())
-        )
-                ){
-            return "以上1-13项统计错误";
-        }
+                .add(rmbRecompense.getOtherFee());
 
+        if(sum1.compareTo(BigDecimal.ZERO)>0){
+            if( rmbRecompense.getSumRbm().compareTo(sum1)!=0){
+                return "以上1-13项统计错误";
+            }
+        }
         return "true";
     }
 }
