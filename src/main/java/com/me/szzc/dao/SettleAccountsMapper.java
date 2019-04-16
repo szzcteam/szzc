@@ -18,6 +18,10 @@ public interface SettleAccountsMapper {
 
     SettleAccounts selectByHouseOwner(String houseOwner);
 
+    SettleAccounts selectByHouseOwnerAndAddr(@Param("houseOwner") String houseOwner,
+                                             @Param("address") String address);
+
+
     int delete(SettleAccounts record);
 
     List<SettleAccounts> list(@Param("firstResult") int firstResult, @Param("maxResults")int maxResults);

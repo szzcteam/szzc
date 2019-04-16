@@ -2250,29 +2250,11 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                                 <w:spacing w:val="10"/>
-                            </w:rPr>
-                            <w:t>_</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00D24506">
-                            <w:rPr>
-                                <w:spacing w:val="10"/>
-                            </w:rPr>
-                            <w:t>_</w:t>
-                        </w:r>
-                        <w:bookmarkStart w:id="13" w:name="_Hlk535937954"/>
-                        <w:r w:rsidR="0092061A">
-                            <w:rPr>
-                                <w:spacing w:val="10"/>
+                                <w:u w:val="single"/>
                             </w:rPr>
                             <w:t>${othertermsone}</w:t>
                         </w:r>
-                        <w:bookmarkEnd w:id="13"/>
-                        <w:r w:rsidR="00D24506">
-                            <w:rPr>
-                                <w:spacing w:val="10"/>
-                            </w:rPr>
-                            <w:t>____________________________________</w:t>
-                        </w:r>
+                        <w:bookmarkStart w:id="13" w:name="_Hlk535937954"/>
                         <w:r w:rsidRPr="005042B3">
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
@@ -2298,23 +2280,12 @@
                             </w:rPr>
                             <w:t>2、</w:t>
                         </w:r>
-                        <w:r w:rsidR="00921C7B" w:rsidRPr="00B37FCA">
-                            <w:rPr>
-                                <w:spacing w:val="10"/>
-                            </w:rPr>
-                            <w:t>__</w:t>
-                        </w:r>
                         <w:r w:rsidR="0092061A">
                             <w:rPr>
                                 <w:spacing w:val="10"/>
+                                <w:u w:val="single"/>
                             </w:rPr>
                             <w:t>${othertermstwo}</w:t>
-                        </w:r>
-                        <w:r w:rsidR="00921C7B" w:rsidRPr="00B37FCA">
-                            <w:rPr>
-                                <w:spacing w:val="10"/>
-                            </w:rPr>
-                            <w:t>_____________________________________</w:t>
                         </w:r>
                         <w:r w:rsidRPr="005042B3">
                             <w:rPr>

@@ -53,6 +53,11 @@ public class SettleAccountsService {
         return settleAccountsMapper.selectByHouseOwner(houseOwner);
     }
 
+    public SettleAccounts selectByHouseOwnerAndAddr(String houseOwner, String address) {
+        return settleAccountsMapper.selectByHouseOwnerAndAddr(houseOwner, address);
+    }
+
+
 
     public Map<String,String> list(int firstResult, int maxResults) {
 

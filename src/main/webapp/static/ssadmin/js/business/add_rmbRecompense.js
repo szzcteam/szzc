@@ -1,6 +1,14 @@
 $(document).ready(function () {
     $("#rmbRecompenseDiv input[name='houseOwner']").eq(0).blur(function () {
-        rmbRecompenseObj.houseNameSync($(this).val());
+        var houseOwner = $("#rmbRecompenseDiv input[name='houseOwner']").eq(0).val();
+        var address = $("#rmbRecompenseDiv input[name='address']").eq(0).val();
+        rmbRecompenseObj.houseNameSync(houseOwner, address);
+    });
+
+    $("#rmbRecompenseDiv input[name='address']").eq(0).blur(function () {
+        var houseOwner = $("#rmbRecompenseDiv input[name='houseOwner']").eq(0).val();
+        var address = $("#rmbRecompenseDiv input[name='address']").eq(0).val();
+        rmbRecompenseObj.houseNameSync(houseOwner, address);
     });
 
 
@@ -71,8 +79,12 @@ $(document).ready(function () {
 var rmbRecompenseObj = {
 
     //被征收人失去焦点，查询结算单
-    houseNameSync: function (houseName) {
+    houseNameSync: function (houseName, address) {
         if(!houseName){
+            return;
+        }
+
+        if(!address){
             return;
         }
 
@@ -80,7 +92,7 @@ var rmbRecompenseObj = {
         $.ajax({
             url: "ssadmin/settleAccounts/detail.html",
             type: "post",
-            data: {"houseOwner": houseName},
+            data: {"houseOwner": houseName, "address": address},
             dataType: "json",
             success: function (data) {
                 console.log(data);
@@ -88,7 +100,7 @@ var rmbRecompenseObj = {
                     console.log("查询结算单信息为空，姓名:" + houseName);
                     return;
                 }
-                alertMsg.confirm("检测到 "+houseName + " 有【结算单】，是否使用结算单数据进行填充？", {
+                alertMsg.confirm("检测到 "+houseName + ",地址: "+address+" 有【结算单】，是否使用结算单数据进行填充？", {
                     okCall: function(){
                         //被征收房屋地址
                         $("#rmbRecompenseDiv input[name='address']").eq(0).val(data.address);

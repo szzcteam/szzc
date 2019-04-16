@@ -147,8 +147,8 @@ public class SettleAccountsController extends BaseController {
 
     @RequestMapping("ssadmin/settleAccounts/detail")
     @ResponseBody
-    public SettleAccounts querySettleAccounts(String houseOwner) throws Exception {
-        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
+    public SettleAccounts detail(String houseOwner, String address) throws Exception {
+        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwnerAndAddr(houseOwner, address);
         return settleAccounts;
     }
 
