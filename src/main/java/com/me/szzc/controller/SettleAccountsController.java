@@ -40,7 +40,7 @@ public class SettleAccountsController extends BaseController {
         settleAccounts.setModifiedUserId(userId);
         //条件判断
 
-        String str = settleAccountsTerm(settleAccounts);
+        String str = "true";  //settleAccountsTerm(settleAccounts);
         if(str.equals("true")){
             this.settleAccountsService.add(settleAccounts);
             modelAndView.addObject("statusCode", 200);
@@ -90,7 +90,7 @@ public class SettleAccountsController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
-        String str = settleAccountsTerm(settleAccounts);
+        String str = "true";  //settleAccountsTerm(settleAccounts);
         if(str.equals("true")){
             this.settleAccountsService.update(settleAccounts);
             modelAndView.addObject("statusCode", 200);

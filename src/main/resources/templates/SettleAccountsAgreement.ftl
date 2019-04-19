@@ -412,7 +412,7 @@
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r w:rsidRPr="00F41757">
-                                        <w:t>${checkinarea}</w:t>
+                                        <w:t>${changearea}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1654,7 +1654,7 @@
                                 </w:tcPr>
                                 <w:p w:rsidR="00B7050B" w:rsidRDefault="00DF605C">
                                     <w:r>
-                                        <w:t>2.3*23000*0.12</w:t>
+                                        <w:t></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2343,7 +2343,7 @@
                                         <w:t>${calcsmallareareward}</w:t>
                                     </w:r>
                                     <w:r>
-                                        <w:t xml:space="preserve">300 </w:t>
+                                        <w:t xml:space="preserve"></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2356,7 +2356,7 @@
 					 <w:t>${smallareareward}</w:t>
 				    </w:r>
 				    <w:r>
-                                        <w:t xml:space="preserve">300 </w:t>
+                                        <w:t xml:space="preserve"></w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -2779,7 +2779,7 @@
                                         <w:jc w:val="center"/>
                                     </w:pPr>
                                     <w:r>
-                                        <w:t>${changearea}</w:t>
+                                        <w:t>${checkinarea}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>

@@ -38,7 +38,7 @@ public class RmbRecompenseController extends BaseController {
         //征收公司
         rmbRecompense.setCompany(constantMap.getValue(SystemArgsConstant.COMPANY));
 
-        String str = rmbRecompenseTerm(rmbRecompense);
+        String str = "true"; //rmbRecompenseTerm(rmbRecompense);
         if(str.equals("true")){
             this.rmbRecompenseService.add(rmbRecompense);
             modelAndView.addObject("statusCode",200);
@@ -86,7 +86,7 @@ public class RmbRecompenseController extends BaseController {
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setModifiedUserId(userId);
 
-        String str = rmbRecompenseTerm(rmbRecompense);
+        String str = "true";  //rmbRecompenseTerm(rmbRecompense);
         if(str.equals("true")){
             this.rmbRecompenseService.update(rmbRecompense);
             modelAndView.addObject("statusCode",200);

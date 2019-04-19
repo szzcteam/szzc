@@ -3,7 +3,12 @@ package com.me.szzc.pojo.vo;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.BigDecimalUtil;
 import lombok.Data;
+import org.apache.commons.jexl3.JexlBuilder;
+import org.apache.commons.jexl3.JexlEngine;
+import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.lang.StringUtils;
+
+import java.math.BigDecimal;
 
 /**
  * 结算单页面数据-字符串格式
@@ -334,13 +339,25 @@ public class SettleAccountsVO {
         vo.setCalcAffiliatedOther(entity.getCalcAffiliatedOther());
         vo.setAffiliatedOther(BigDecimalUtil.stripTrailingZeros(entity.getAffiliatedOther()));
         vo.setAffiliatedOtherBz(entity.getAffiliatedOtherBz());
-
-        vo.setCalcNoCheckCompensate(entity.getCalcNoCheckCompensate());
-        vo.setNoCheckCompensate(BigDecimalUtil.stripTrailingZeros(entity.getNoCheckCompensate()));
+        if(entity.getNoCheckCompensate()!=null&&entity.getNoCheckCompensate().compareTo(BigDecimal.ZERO)>0){
+            vo.setCalcNoCheckCompensate(entity.getCalcNoCheckCompensate());
+            vo.setNoCheckCompensate(BigDecimalUtil.stripTrailingZeros(entity.getNoCheckCompensate()));
+        }else{
+            vo.setCalcNoCheckCompensate("");
+            vo.setNoCheckCompensate("");
+        }
+        /*vo.setCalcNoCheckCompensate(entity.getCalcNoCheckCompensate());
+        vo.setNoCheckCompensate(BigDecimalUtil.stripTrailingZeros(entity.getNoCheckCompensate()));*/
         vo.setNoCheckCompensateBz(entity.getNoCheckCompensateBz());
-
-        vo.setCalcRmbCompensate(entity.getCalcRmbCompensate());
-        vo.setRmbCompensate(BigDecimalUtil.stripTrailingZeros(entity.getRmbCompensate()));
+        if(entity.getRmbCompensate()!=null&&entity.getRmbCompensate().compareTo(BigDecimal.ZERO)>0){
+            vo.setCalcRmbCompensate(entity.getCalcRmbCompensate());
+            vo.setRmbCompensate(BigDecimalUtil.stripTrailingZeros(entity.getRmbCompensate()));
+        }else{
+            vo.setCalcRmbCompensate("");
+            vo.setRmbCompensate("");
+        }
+        /*vo.setCalcRmbCompensate(entity.getCalcRmbCompensate());
+        vo.setRmbCompensate(BigDecimalUtil.stripTrailingZeros(entity.getRmbCompensate()));*/
         vo.setRmbCompensateBz(entity.getRmbCompensateBz());
 
         //生活困难补助
@@ -363,8 +380,16 @@ public class SettleAccountsVO {
         vo.setLifeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getLifeCompensate()));
         vo.setLifeCompensateBz(entity.getLifeCompensateBz());
 
-        vo.setCalcChangeCompensate(entity.getCalcChangeCompensate());
-        vo.setChangeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getChangeCompensate()));
+        if(entity.getChangeCompensate()!=null&&entity.getChangeCompensate().compareTo(BigDecimal.ZERO)>0){
+            vo.setCalcChangeCompensate(entity.getCalcChangeCompensate());
+            vo.setChangeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getChangeCompensate()));
+        }else{
+            vo.setCalcChangeCompensate("");
+            vo.setChangeCompensate("");
+        }
+
+        /*vo.setCalcChangeCompensate(entity.getCalcChangeCompensate());
+        vo.setChangeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getChangeCompensate()));*/
         vo.setChangeCompensateBz(entity.getChangeCompensateBz());
 
         vo.setCalcBuildingAreaFee(entity.getCalcBuildingAreaFee());
@@ -395,9 +420,16 @@ public class SettleAccountsVO {
         vo.setMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getMoveReward()));
         vo.setMoveRewardBz(entity.getMoveRewardBz());
 
+        if(entity.getRmbMoveReward()!=null&&entity.getRmbMoveReward().compareTo(BigDecimal.ZERO)>0){
+            vo.setCalcRmbMoveReward(entity.getCalcRmbMoveReward());
+            vo.setRmbMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getRmbMoveReward()));
+        }else{
+            vo.setCalcRmbMoveReward("");
+            vo.setRmbMoveReward("");
+        }
 
-        vo.setCalcRmbMoveReward(entity.getCalcRmbMoveReward());
-        vo.setRmbMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getRmbMoveReward()));
+        /*vo.setCalcRmbMoveReward(entity.getCalcRmbMoveReward());
+        vo.setRmbMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getRmbMoveReward()));*/
         vo.setRmbMoveRewardBz(entity.getRmbMoveRewardBz());
 
         vo.setCalcSmallAreaReward(BigDecimalUtil.stripTrailingZeros(entity.getSmallAreaReward()));
