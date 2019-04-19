@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.pojo.entity.Fsystemargs;
+import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.vo.ProtocolVO;
 import com.me.szzc.utils.Utils;
 import org.springframework.stereotype.Controller;
@@ -32,21 +33,19 @@ public class ProtocolController extends BaseController {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
 
-       // Map<String ,String>map= this.noticeService.list((currentPage - 1) * numPerPage, numPerPage);
-
-        Map<String ,String>map= this.settleAccountsService.list((currentPage - 1) * numPerPage, numPerPage);
+        List<SettleAccounts> dataList = this.settleAccountsService.list((currentPage - 1) * numPerPage, numPerPage);
 
 
         //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
 
-        for (Map.Entry<String,String> maps:map.entrySet()) {
+        for (SettleAccounts account : dataList) {
             ProtocolVO protocol = new ProtocolVO();
-            protocol.setName(maps.getKey());
-            protocol.setPhone(maps.getValue());
-            boolean swapHouse = this.swapHouseService.queryName(maps.getKey());
-            boolean rmbRecompense = this.rmbRecompenseService.queryName(maps.getKey());
-           // boolean settleAccounts = this.settleAccountsService.queryName(maps.getKey());
+            protocol.setName(account.getHouseOwner());
+            protocol.setAddress(account.getAddress());
+            protocol.setPhone(account.getPhone());
+            boolean swapHouse = this.swapHouseService.queryName(account.getHouseOwner());
+            boolean rmbRecompense = this.rmbRecompenseService.queryName(account.getHouseOwner());
             protocol.setSettleAccountsFlag(true);
             protocol.setSwapHouseFlag(swapHouse);
             protocol.setRmbRecompenseFlag(rmbRecompense);

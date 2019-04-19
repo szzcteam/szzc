@@ -26,7 +26,7 @@ alert("${error}") ;
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
-				<a href="/" style="font-size: 36px;">协议管理<%--<img src="${oss_url}/static/ssadmin/js/themes/default/images/login_logo.gif" />--%></a>
+				<a href="/" style="font-size: 36px;">易征收<%--<img src="${oss_url}/static/ssadmin/js/themes/default/images/login_logo.gif" />--%></a>
 			</h1>
 			<div class="login_headerContent">
 				<div class="navList">

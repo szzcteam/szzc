@@ -59,14 +59,9 @@ public class SettleAccountsService {
 
 
 
-    public Map<String,String> list(int firstResult, int maxResults) {
-
+    public List<SettleAccounts> list(int firstResult, int maxResults) {
         List<SettleAccounts> listSettleAccounts =  this.settleAccountsMapper.list(firstResult, maxResults);
-        Map<String, String> map = new HashMap<String, String>();
-        for (SettleAccounts settleAccounts:listSettleAccounts) {
-            map.put(settleAccounts.getHouseOwner(),settleAccounts.getPhone());
-        }
-        return map;
+        return listSettleAccounts;
     }
 
 }

@@ -124,6 +124,7 @@
         <tr>
             <th width="20">序号</th>
             <th width="60">被征收人</th>
+            <th width="60">地址</th>
             <th width="60">电话</th>
             <th width="60">状态</th>
             <%--<th width="60">付(收)款手续通知单</th>--%>
@@ -138,6 +139,7 @@
             <tr target="sid_user" rel="${protocol.name}">
                 <td>${num.index +1}</td>
                 <td>${protocol.name}</td>
+                <td>${protocol.address}</td>
                 <td>${protocol.phone}</td>
                 <td>${protocol.status}</td>
                <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>

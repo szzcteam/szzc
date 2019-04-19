@@ -7,6 +7,7 @@ import lombok.Data;
 public class ProtocolVO {
 
     private String name;
+    private String address;
     private String phone;
     private String status;
     private Boolean noticeFlag;
