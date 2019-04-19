@@ -30,7 +30,6 @@ public class CustomizedPropertyConfigurer extends PropertyPlaceholderConfigurer 
             String value = props.getProperty(keyStr);
             ctxPropertiesMap.put(keyStr, value);
         }
-        System.out.println("dafsf");
 
     }
 
