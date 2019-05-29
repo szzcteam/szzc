@@ -34,6 +34,15 @@ public class SettleAccountsController extends BaseController {
     public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+
+        //判断是否存在
+        SettleAccounts entity = settleAccountsService.getByHouseOwnerAddr(settleAccounts.getHouseOwner(), settleAccounts.getAddress());
+        if (entity != null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", getOwnerOnlyMsg(settleAccounts.getHouseOwner(), settleAccounts.getAddress()));
+            return modelAndView;
+        }
+
         //创建人
         Long userId = getAdminSession(request).getFid();
         settleAccounts.setCreateUserId(userId);

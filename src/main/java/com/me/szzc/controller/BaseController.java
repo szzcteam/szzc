@@ -162,4 +162,10 @@ public class BaseController extends BaseServiceCtrl{
     }
 
 
+    protected String getOwnerOnlyMsg(String houseOwner, String address) {
+        String message = "操作失败，用户:" + houseOwner + ",地址:" + address + " 记录已存在，请核对后再操作";
+        return message;
+    }
+
+
 }

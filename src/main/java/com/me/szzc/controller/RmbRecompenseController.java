@@ -3,6 +3,7 @@ package com.me.szzc.controller;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.RmbRecompense;
+import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
@@ -29,6 +30,13 @@ public class RmbRecompenseController extends BaseController {
     public ModelAndView saveRmbRecompense ( RmbRecompense rmbRecompense, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //判断是否存在
+        RmbRecompense entity = rmbRecompenseService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
+        if (entity != null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", getOwnerOnlyMsg(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress()));
+            return modelAndView;
+        }
         //创建人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setCreateUserId(userId);

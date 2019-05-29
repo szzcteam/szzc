@@ -4,6 +4,7 @@ import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
+import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
@@ -33,6 +34,13 @@ public class SwapHouseController extends BaseController {
     public ModelAndView addSwapHouse(SwapHouse swapHouse, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //判断是否存在
+        SwapHouse entity = swapHouseService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
+        if (entity != null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", getOwnerOnlyMsg(swapHouse.getHouseOwner(), swapHouse.getAddress()));
+            return modelAndView;
+        }
         //创建人
         Long userId = getAdminSession(request).getFid();
         swapHouse.setCreateUserId(userId);
