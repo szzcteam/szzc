@@ -492,9 +492,15 @@ var settleAccountObj = {
         //合计
         var sumCompensate = valueCompensate_num + decorationCompensate_num + moveHouseFee_num + interimFee_num +
             moveWaterMeterFee_num + moveAmmeterFee_num + moveAirConditioningFee_num + hotWaterCompensate_num +
-            gasFee_num + structureCompensate_num + affiliatedOther_num + noCheckCompensate_num + rmbCompensate_num
+            gasFee_num + structureCompensate_num + affiliatedOther_num + noCheckCompensate_num
             + lifeCompensate_num + changeCompensate_num + buildingAreaFee_num + suspendBusinessFee_num + noMoveCompensate_num
-            + moveReward_num + rmbMoveReward_num + smallAreaReward_num + otherRmb_num;
+            + moveReward_num  + smallAreaReward_num + otherRmb_num;
+
+        var text = $("select[name='calcMoveHouseFee']").eq(0).find("option:selected").text();
+        if (text == "货币补偿") {
+            sumCompensate += rmbCompensate_num;
+            sumCompensate += rmbMoveReward_num;
+        }
         $("input[name='sumCompensate']").eq(0).val(sumCompensate);
     },
 
