@@ -3,13 +3,11 @@ package com.me.szzc.controller;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.RmbRecompense;
-import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,10 +53,13 @@ public class RmbRecompenseController extends BaseController {
     }
 
     @RequestMapping("ssadmin/RmbRecompense/delete")
-    public ModelAndView deleteRmbRecompense (String houseOwner, HttpServletRequest request)throws Exception{
+    public ModelAndView deleteRmbRecompense (String idMore, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
-        RmbRecompense rmbRecompense =  this.rmbRecompenseService.selectByHouseOwner(houseOwner);
+        //获取条件
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[1]);
+        RmbRecompense rmbRecompense =  this.rmbRecompenseService.getById(id);
         if(rmbRecompense ==  null){
             modelAndView.addObject("statusCode",300);
             modelAndView.addObject("message","用户不存在此协议");
@@ -105,10 +106,13 @@ public class RmbRecompenseController extends BaseController {
     }
 
     @RequestMapping("ssadmin/RmbRecompense/query")
-    public ModelAndView queryRmbRecompense (String houseOwner, String url)throws Exception{
+    public ModelAndView queryRmbRecompense (String idMore, String url)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url);
-        RmbRecompense recompense = this.rmbRecompenseService.selectByHouseOwner(houseOwner);
+        //获取条件
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[1]);
+        RmbRecompense recompense = this.rmbRecompenseService.getById(id);
         if(recompense != null) {
             modelAndView.addObject("rmbRecom", recompense);
         }
@@ -118,11 +122,14 @@ public class RmbRecompenseController extends BaseController {
     }
 
     @RequestMapping("/ssadmin/exportRmbRecompense")
-    public ModelAndView exportRmbRecompense(@RequestParam String houseOwner, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView exportRmbRecompense(@RequestParam String idMore, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //获取条件
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[1]);
         //根据人名获取产权协议书数据
-        RmbRecompense rmbRecompense = this.rmbRecompenseService.selectByHouseOwner(houseOwner);
+        RmbRecompense rmbRecompense = this.rmbRecompenseService.getById(id);
         if(rmbRecompense == null) {
             rmbRecompense = new RmbRecompense();
         }
@@ -132,7 +139,7 @@ public class RmbRecompenseController extends BaseController {
         String protocol = ProtocolEnum.RMB_RECOMPENSE_AGREEMENT.getCode();
         //yyyyMMddHHmmssSSS的时间格式
         String date = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
-        String fileName = protocol + "_" + houseOwner + "_" + date + ".doc";
+        String fileName = protocol + "_" + rmbRecompense.getHouseOwner() + "_" + date + ".doc";
         //文件导出
         WordUtils.exportMillCertificateWord
                 (response, map, fileName, "RmbRecompenseAgreement.ftl");

@@ -211,4 +211,7 @@ public class SettleAccounts {
     private Long modifiedUserId;
 
     private Boolean deleted;
+
+    /**结算状态**/
+    private Integer signingStatus;
 }

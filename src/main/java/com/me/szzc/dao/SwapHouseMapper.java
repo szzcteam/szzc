@@ -1,6 +1,7 @@
 package com.me.szzc.dao;
 
 import com.me.szzc.pojo.entity.SwapHouse;
+import org.apache.ibatis.annotations.Param;
 
 public interface SwapHouseMapper {
     int deleteByPrimaryKey(Long id);
@@ -9,15 +10,14 @@ public interface SwapHouseMapper {
 
     int insertSelective(SwapHouse record);
 
-    SwapHouse selectByPrimaryKey(Long id);
+    SwapHouse getById(Long id);
 
     int updateByPrimaryKeySelective(SwapHouse record);
 
     int updateByPrimaryKey(SwapHouse record);
 
-    SwapHouse selectSwapHouseByHouseOwner(String houseOwner);
+    SwapHouse getByHouseOwnerAddr(@Param("houseOwner") String houseOwner, @Param("address") String address);
 
     int  delete(SwapHouse swapHouse);
 
-    int selectNmae(String houseOwner);
 }

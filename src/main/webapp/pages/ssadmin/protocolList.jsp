@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="comm/include.inc.jsp" %>
 <form id="pagerForm" method="post" action="ssadmin/protocolList.html">
-    <input type="hidden" name="status" value="${param.status}"> <input
-        type="hidden" name="keywords" value="${keywords}"/> <input
-        type="hidden" name="pageNum" value="${currentPage}"/> <input
-        type="hidden" name="numPerPage" value="${numPerPage}"/> <input
-        type="hidden" name="orderField" value="${param.orderField}"/>
+    <input type="hidden" name="signingStatus" value="${signingStatus}">
+    <input type="hidden" name="keywords" value="${keywords}"/>
+    <input type="hidden" name="pageNum" value="${currentPage}"/>
+    <input type="hidden" name="numPerPage" value="${numPerPage}"/>
+    <input type="hidden" name="orderField" value="${param.orderField}"/>
 </form>
 
 
@@ -16,8 +16,15 @@
 
             <table class="searchContent">
                 <tr>
-                    <td>KEY：<input type="text" name="keywords" value="${keywords}"
+                    <td>被征收人信息：<input type="text" name="keywords" value="${keywords}"
                                    size="60"/>
+                    </td>
+                    <td>签约状态：<select name="signingStatus" style="width: 100px;">
+                        <option value="">请选择</option>
+                        <c:forEach items="${signingStatusMap}" var="item">
+                            <option value="${item.key}">${item.value}</option>
+                        </c:forEach>
+                    </select>
                     </td>
                 </tr>
             </table>
@@ -64,11 +71,11 @@
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
-                       href="ssadmin/selectSwapHouseByHouseOwner.html?url=ssadmin/updateSwapHouse&houseOwner={sid_user}"
+                       href="ssadmin/selectSwapHouseByHouseOwner.html?url=ssadmin/updateSwapHouse&idMore={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSwapHouse"><span>修改产权调换</span>
                 </a></li>
                 <li><a class="edit"
-                       href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&houseOwner={sid_user}"
+                       href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&idMore={sid_user}"
                        height="400" width="800" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿</span>
                 </a></li>
                 <%--<li><a class="edit"
@@ -76,17 +83,17 @@
                        height="600" width="800" target="dialog" rel="updateNotice"><span>修改手续通知单</span>
                 </a></li>--%>
                 <li><a class="edit"
-                       href="ssadmin/settleAccounts/query.html?url=ssadmin/updateSettleAccounts&houseOwner={sid_user}"
+                       href="ssadmin/settleAccounts/query.html?url=ssadmin/updateSettleAccounts&idMore={sid_user}"
                        height="400" width="800" target="dialog" rel="updateSettleAccounts"><span>修改结算单</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="delete"
-                       href="ssadmin/deleteSwapHouse.html?houseOwner={sid_user}"
+                       href="ssadmin/deleteSwapHouse.html?idMore={sid_user}"
                        target="ajaxTodo" title="确定要删除产权调换协议吗?"><span>删除产权调换</span>
                 </a></li>
                 <li><a class="delete"
-                       href="ssadmin/RmbRecompense/delete.html?houseOwner={sid_user}"
+                       href="ssadmin/RmbRecompense/delete.html?idMore={sid_user}"
                        target="ajaxTodo" title="确定要删除货币补偿协议吗?"><span>删除货币补偿</span>
                 </a></li>
                 <%--<li><a class="delete"
@@ -94,18 +101,18 @@
                        target="ajaxTodo" title="确定要删除通知单吗?"><span>删除通知单</span>
                 </a></li>--%>
                 <li><a class="delete"
-                       href="ssadmin/settleAccounts/delete.html?houseOwner={sid_user}"
+                       href="ssadmin/settleAccounts/delete.html?idMore={sid_user}"
                        target="ajaxTodo" title="确定要删除结算单吗?"><span>删除结算单</span>
                 </a></li>
             </shiro:hasPermission>
 
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="icon"
-                       href="ssadmin/exportSwapHouse.html?houseOwner={sid_user}"
+                       href="ssadmin/exportSwapHouse.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出产权调换</span>
                 </a></li>
                 <li><a class="icon"
-                       href="ssadmin/exportRmbRecompense.html?houseOwner={sid_user}"
+                       href="ssadmin/exportRmbRecompense.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出货币补偿</span>
                 </a></li>
                 <%--<li><a class="icon"
@@ -113,7 +120,7 @@
                        target="dwzOnlyExport" targetType="navTab"><span>导出通知单</span>
                 </a></li>--%>
                 <li><a class="icon"
-                       href="ssadmin/exportSettleAccounts.html?houseOwner={sid_user}"
+                       href="ssadmin/exportSettleAccounts.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
                 </a></li>
             </shiro:hasPermission>
@@ -126,26 +133,40 @@
             <th width="60">被征收人</th>
             <th width="60">地址</th>
             <th width="60">电话</th>
-            <th width="60">状态</th>
+            <th width="50">签约状态</th>
             <%--<th width="60">付(收)款手续通知单</th>--%>
-            <th width="60">产权调换协议</th>
-            <th width="60">货币补偿协议</th>
-            <th width="60">补偿资金结算单</th>
+            <th width="50">产权调换协议</th>
+            <th width="50">货币补偿协议</th>
+            <th width="50">补偿资金结算单</th>
+            <th width="50">创建时间</th>
         </tr>
         </thead>
         <tbody>
 
         <c:forEach items="${protocolList}" var="protocol" varStatus="num">
-            <tr target="sid_user" rel="${protocol.name}">
+            <tr target="sid_user" rel="${protocol.settleAccountId},${protocol.rmbRecompenseId},${protocol.swapHouseId}">
                 <td>${num.index +1}</td>
                 <td>${protocol.name}</td>
                 <td>${protocol.address}</td>
                 <td>${protocol.phone}</td>
-                <td>${protocol.status}</td>
+                <!--签约状态开始-->
+                <c:choose>
+                    <c:when test="${protocol.signingStatus == 0}">
+                        <td style="color: red">${protocol.signingStatusDesc}</td>
+                    </c:when>
+                    <c:when test="${protocol.signingStatus == 1}">
+                        <td style="color: green"> ${protocol.signingStatusDesc}</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>${protocol.signingStatusDesc}</td>
+                    </c:otherwise>
+                </c:choose>
+                <!--签约状态结束-->
                <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>
-                <td><c:if test="${protocol.swapHouseFlag == true}">√</c:if></td>
-                <td><c:if test="${protocol.rmbRecompenseFlag == true}">√</c:if></td>
-                <td><c:if test="${protocol.settleAccountsFlag == true}">√</c:if></td>
+                <td><c:if test="${protocol.swapHouseId > 0 }">√</c:if></td>
+                <td><c:if test="${protocol.rmbRecompenseId > 0 }">√</c:if></td>
+                <td><c:if test="${protocol.settleAccountId >0 }">√</c:if></td>
+                <td>${protocol.createDateStr}</td>
             </tr>
         </c:forEach>
         </tbody>

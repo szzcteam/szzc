@@ -4,6 +4,7 @@ import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.pojo.entity.Notice;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.DateHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,32 +37,27 @@ public class SettleAccountsService {
         this.settleAccountsMapper.updateByPrimaryKeySelective(settleAccounts);
     }
 
-    public void query(SettleAccounts settleAccounts) {
-        this.settleAccountsMapper.selectByPrimaryKey(settleAccounts.getId());
+    public SettleAccounts query(SettleAccounts settleAccounts) {
+        return this.settleAccountsMapper.selectByPrimaryKey(settleAccounts.getId());
     }
 
-    public boolean queryName(String name) {
-        int i = this.settleAccountsMapper.selectNmae(name);
-        if (i == 0) {
-            return false;
-        } else {
-            return true;
-        }
+    public SettleAccounts getById(Long id){
+        return this.settleAccountsMapper.selectByPrimaryKey(id);
     }
 
-    public SettleAccounts selectByHouseOwner(String houseOwner) {
-        return settleAccountsMapper.selectByHouseOwner(houseOwner);
-    }
-
-    public SettleAccounts selectByHouseOwnerAndAddr(String houseOwner, String address) {
-        return settleAccountsMapper.selectByHouseOwnerAndAddr(houseOwner, address);
+    public SettleAccounts getByHouseOwnerAddr(String houseOwner, String address) {
+        return settleAccountsMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
 
-
-    public List<SettleAccounts> list(int firstResult, int maxResults) {
-        List<SettleAccounts> listSettleAccounts =  this.settleAccountsMapper.list(firstResult, maxResults);
+    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String keywords) {
+        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, keywords);
         return listSettleAccounts;
     }
+
+    public Integer getCount(Integer signingStatus, String keywords) {
+        return this.settleAccountsMapper.getCount(signingStatus, keywords);
+    }
+
 
 }

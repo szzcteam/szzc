@@ -66,11 +66,13 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("ssadmin/settleAccounts/delete")
-    public ModelAndView deleteSettleAccounts(String houseOwner, HttpServletRequest request) throws Exception {
+    public ModelAndView deleteSettleAccounts(String idMore, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
-        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[0]);
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
 
         if(settleAccounts == null){
             modelAndView.addObject("statusCode",200);
@@ -114,11 +116,13 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("ssadmin/settleAccounts/query")
-    public ModelAndView querySettleAccounts(String houseOwner, String url) throws Exception {
+    public ModelAndView querySettleAccounts(String idMore, String url) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url) ;
         //条件判断
-        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[0]);
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
         if(settleAccounts !=null){
             modelAndView.addObject("settleAccounts", settleAccounts);
         }
@@ -130,11 +134,14 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("/ssadmin/exportSettleAccounts")
-    public ModelAndView exportSettleAccounts(@RequestParam String houseOwner, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView exportSettleAccounts(@RequestParam String idMore, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //获取条件
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[0]);
         //根据人名获取产权协议书数据
-        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwner(houseOwner);
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
         SettleAccountsVO vo =  SettleAccountsVO.parse(settleAccounts);
         //对象转map
         Map<String, String> map = ObjTransMapUtils.obj2Map(vo);
@@ -142,7 +149,7 @@ public class SettleAccountsController extends BaseController {
         String protocol = ProtocolEnum.SETTLE_ACCOUNTS_AGREEMENT.getCode();
         //yyyyMMddHHmmssSSS的时间格式
         String date = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
-        String fileName = protocol + "_" + houseOwner + "_" + date + ".doc";
+        String fileName = protocol + "_" + settleAccounts.getHouseOwner() + "_" + date + ".doc";
         //文件导出
         WordUtils.exportMillCertificateWord
                 (response, map, fileName, "SettleAccountsAgreement.ftl");
@@ -156,7 +163,7 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping("ssadmin/settleAccounts/detail")
     @ResponseBody
     public SettleAccounts detail(String houseOwner, String address) throws Exception {
-        SettleAccounts settleAccounts = this.settleAccountsService.selectByHouseOwnerAndAddr(houseOwner, address);
+        SettleAccounts settleAccounts = this.settleAccountsService.getByHouseOwnerAddr(houseOwner, address);
         return settleAccounts;
     }
 

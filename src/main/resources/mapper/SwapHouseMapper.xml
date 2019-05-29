@@ -78,18 +78,19 @@
   years,months,difference,upper_difference,less_difference,upper_less_difference,move_month,other_terms_one,
   create_date,create_user_id,modified_date,modified_user_id,deleted
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_swap_house
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectSwapHouseByHouseOwner" parameterType="String" resultMap="BaseResultMap">
+  <select id="getByHouseOwnerAddr" parameterType="String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_swap_house
-    where house_owner = #{houseOwner,jdbcType=VARCHAR}
+    where house_owner = #{houseOwner}
+    and address = #{address}
     and deleted = 0
   </select>
 
@@ -815,10 +816,5 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer">
-    SELECT COUNT(1)
-    from t_swap_house
-     where house_owner = #{houseOwner,jdbcType=VARCHAR}  and deleted = 0
-  </select>
 
 </mapper>

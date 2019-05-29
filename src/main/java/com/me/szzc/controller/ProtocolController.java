@@ -1,15 +1,21 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.entity.Fsystemargs;
+import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
+import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.ProtocolVO;
+import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.Utils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +39,21 @@ public class ProtocolController extends BaseController {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
 
-        List<SettleAccounts> dataList = this.settleAccountsService.list((currentPage - 1) * numPerPage, numPerPage);
+        String signingStatusStr = request.getParameter("signingStatus");
+        Integer signingStatus = null;
+        if(StringUtils.isNotBlank(signingStatusStr)) {
+            signingStatus = Integer.valueOf(signingStatusStr);
+            view.addObject("signingStatus", signingStatus);
+        }
+        String keywords = request.getParameter("keywords");
+        if(keywords != null && keywords.trim().length() >0){
+            keywords = keywords.trim();
+            view.addObject("keywords", keywords);
+        }
+
+
+        int firstResult = (currentPage - 1) * numPerPage;
+        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, keywords);
 
 
         //Map<String ,String>map= this.noticeService.queryAll();
@@ -44,27 +64,26 @@ public class ProtocolController extends BaseController {
             protocol.setName(account.getHouseOwner());
             protocol.setAddress(account.getAddress());
             protocol.setPhone(account.getPhone());
-            boolean swapHouse = this.swapHouseService.queryName(account.getHouseOwner());
-            boolean rmbRecompense = this.rmbRecompenseService.queryName(account.getHouseOwner());
-            protocol.setSettleAccountsFlag(true);
-            protocol.setSwapHouseFlag(swapHouse);
-            protocol.setRmbRecompenseFlag(rmbRecompense);
-           // protocol.setSettleAccountsFlag(settleAccounts);
+            SwapHouse swapHouse = this.swapHouseService.getByHouseOwnerAddr(account.getHouseOwner(), account.getAddress());
+            RmbRecompense rmbRecompense = this.rmbRecompenseService.getByHouseOwnerAddr(account.getHouseOwner(), account.getAddress());
 
-            if(true&&swapHouse){
-                protocol.setStatus("已完成");
-            }else if(true&&rmbRecompense){
-                protocol.setStatus("已完成");
-            }else{
-                protocol.setStatus("未完成");
-            }
+            protocol.setSigningStatus(account.getSigningStatus());
+            protocol.setSigningStatusDesc(SigningStatusEnum.getDesc(account.getSigningStatus()));
+            protocol.setCreateDateStr(DateHelper.date2String(account.getCreateDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
+            protocol.setSettleAccountId(account.getId());
+            protocol.setSwapHouseId(swapHouse != null ? swapHouse.getId() : 0);
+            protocol.setRmbRecompenseId(rmbRecompense != null ? rmbRecompense.getId() : 0);
 
             list.add(protocol);
         }
 
         view.addObject("protocolList", list);
+        view.addObject("signingStatusMap", SigningStatusEnum.getDescMap());
         view.addObject("numPerPage", numPerPage);
         view.addObject("currentPage", currentPage);
+        view.addObject("rel", "protocolList");
+        //总数量
+        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, keywords));
         return view;
     }
 

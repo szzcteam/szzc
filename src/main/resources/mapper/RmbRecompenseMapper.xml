@@ -66,7 +66,7 @@
     other_fee, sum_rbm, upper_rmb, other_terms_one, other_terms_two, create_date, create_user_id, 
     modified_date, modified_user_id,deleted
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_rmb_recompense
@@ -643,24 +643,12 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectOne" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from t_rmb_recompense
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-
-  <select id="selectByHouseOwner" resultMap="BaseResultMap">
+  <select id="getByHouseOwnerAddr" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     from t_rmb_recompense
-    where house_owner = #{houseOwner} and deleted = 0
-  </select>
-
-
-  <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer" >
-    select COUNT(1)
-    from t_rmb_recompense
-    where house_owner = #{houseOwner}  and deleted = 0
+    where house_owner = #{houseOwner}
+    and address = #{address}
+    and deleted = 0
   </select>
 
 

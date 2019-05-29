@@ -35,19 +35,12 @@ public class SwapHouseService {
 
 
 
-    public SwapHouse selectByPrimaryKey(Long id) {
-        return swapHouseMapper.selectByPrimaryKey(id);
+    public SwapHouse getById(Long id) {
+        return swapHouseMapper.getById(id);
     }
 
-    public SwapHouse selectSwapHouseByHouseOwner(String houseOwner) {
-        return swapHouseMapper.selectSwapHouseByHouseOwner(houseOwner);
+    public SwapHouse getByHouseOwnerAddr(String houseOwner, String address) {
+        return swapHouseMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
-    public boolean queryName(String name) {
-        int i = this.swapHouseMapper.selectNmae(name);
-        if(i==0){
-            return false;
-        }
-        else return true;
-    }
 }

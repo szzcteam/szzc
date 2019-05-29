@@ -16,13 +16,15 @@ public interface SettleAccountsMapper {
 
     int selectNmae(String houseOwner);
 
-    SettleAccounts selectByHouseOwner(String houseOwner);
-
-    SettleAccounts selectByHouseOwnerAndAddr(@Param("houseOwner") String houseOwner,
+    SettleAccounts getByHouseOwnerAddr(@Param("houseOwner") String houseOwner,
                                              @Param("address") String address);
 
 
     int delete(SettleAccounts record);
 
-    List<SettleAccounts> list(@Param("firstResult") int firstResult, @Param("maxResults")int maxResults);
+    List<SettleAccounts> list(@Param("firstResult") int firstResult, @Param("maxResults") int maxResults,
+                              @Param("isFY") boolean isFY,
+                              @Param("signingStatus") Integer signingStatus, @Param("keywords") String keywords);
+
+    Integer getCount(@Param("signingStatus") Integer signingStatus, @Param("keywords") String keywords);
 }

@@ -9,11 +9,21 @@ public class ProtocolVO {
     private String name;
     private String address;
     private String phone;
-    private String status;
-    private Boolean noticeFlag;
-    private Boolean rmbRecompenseFlag;
-    private Boolean settleAccountsFlag;
-    private Boolean swapHouseFlag;
+
+    /**签约状态描述**/
+    private String signingStatusDesc;
+
+    /**签约状态**/
+    private Integer signingStatus;
+
+    /**创建时间**/
+    private String createDateStr;
+
+    private Long settleAccountId;
+
+    private Long swapHouseId;
+
+    private Long rmbRecompenseId;
 
 }
 

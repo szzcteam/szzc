@@ -33,23 +33,12 @@ public class RmbRecompenseService {
         this.rmbRecompenseMapper.updateByPrimaryKey(rmbRecompense);
     }
 
-    public void query(RmbRecompense rmbRecompense) {
-        this.rmbRecompenseMapper.selectByPrimaryKey(rmbRecompense.getId());
+    public RmbRecompense getById(Long id) {
+        return this.rmbRecompenseMapper.getById(id);
     }
 
-    public int queryOne(Long id) {
-        return this.rmbRecompenseMapper.selectOne(id);
+    public RmbRecompense getByHouseOwnerAddr(String houseOwner, String address) {
+        return this.rmbRecompenseMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
-    public RmbRecompense selectByHouseOwner(String houseOwner) {
-        return this.rmbRecompenseMapper.selectByHouseOwner(houseOwner);
-    }
-
-    public boolean queryName(String name) {
-        int i = this.rmbRecompenseMapper.selectNmae(name);
-        if(i==0){
-            return false;
-        }
-        else return true;
-    }
 }

@@ -5,13 +5,10 @@ import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.SwapHouse;
-import com.me.szzc.service.SwapHouseService;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,10 +63,13 @@ public class SwapHouseController extends BaseController {
 
     @RequestMapping("/ssadmin/deleteSwapHouse")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "删除产权调换协议")
-    public ModelAndView deleteSwapHouse(String houseOwner, HttpServletRequest request) {
+    public ModelAndView deleteSwapHouse(String idMore, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
-        SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
+        //获取条件
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[2]);
+        SwapHouse swapHouse = this.swapHouseService.getById(id);
         if(swapHouse == null) {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "参数错误，查询不到产权调换协议");
@@ -95,10 +95,13 @@ public class SwapHouseController extends BaseController {
 
 
     @RequestMapping("/ssadmin/selectSwapHouseByHouseOwner")
-    public ModelAndView selectSwapHouseByHouseOwner(String houseOwner, String url) {
+    public ModelAndView selectSwapHouseByHouseOwner(String idMore, String url) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url);
-        SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
+        //获取条件
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[2]);
+        SwapHouse swapHouse = this.swapHouseService.getById(id);
         if(swapHouse != null) {
             modelAndView.addObject("swapHouse", swapHouse);
         }
@@ -108,11 +111,14 @@ public class SwapHouseController extends BaseController {
     }
 
     @RequestMapping("/ssadmin/exportSwapHouse")
-    public ModelAndView exportSwapHouse(@RequestParam String houseOwner, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView exportSwapHouse(@RequestParam String idMore, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //获取条件
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[2]);
         //根据人名获取产权协议书数据
-        SwapHouse swapHouse = this.swapHouseService.selectSwapHouseByHouseOwner(houseOwner);
+        SwapHouse swapHouse = this.swapHouseService.getById(id);
         if(swapHouse == null) {
             swapHouse = new SwapHouse();
         }
@@ -122,7 +128,7 @@ public class SwapHouseController extends BaseController {
         String protocol = ProtocolEnum.HOUSING_PROPERTY_ECHANGE_AGREEMENT.getCode();
         //yyyyMMddHHmmssSSS的时间格式
         String date = DateHelper.date2String(new Date(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond_MESC);
-        String fileName = protocol + "_" + houseOwner + "_" + date +".doc";
+        String fileName = protocol + "_" + swapHouse.getHouseOwner() + "_" + date +".doc";
         //文件导出
         WordUtils.exportMillCertificateWord
                 (response, map, fileName, "HousingPropertyEchangeAgreement.ftl");
