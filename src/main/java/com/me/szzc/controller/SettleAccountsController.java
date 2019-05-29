@@ -40,6 +40,14 @@ public class SettleAccountsController extends BaseController {
         settleAccounts.setModifiedUserId(userId);
         //条件判断
 
+        BigDecimal moveHous = new BigDecimal(2000);
+        if(settleAccounts.getMoveHouseFee()!=null&&settleAccounts.getMoveHouseFee().compareTo(moveHous)==0){
+            settleAccounts.setCalcRmbCompensate("");
+            settleAccounts.setRmbCompensate(null);
+            settleAccounts.setCalcRmbMoveReward("");
+            settleAccounts.setRmbMoveReward(null);
+        }
+
         String str = "true";  //settleAccountsTerm(settleAccounts);
         if(str.equals("true")){
             this.settleAccountsService.add(settleAccounts);

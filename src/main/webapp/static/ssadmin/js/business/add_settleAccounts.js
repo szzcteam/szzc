@@ -392,6 +392,10 @@ $(document).ready(function(){
         settleAccountObj.calcChangeCompensates();
     });
 
+    $("input[name='calcChangeCompensateProportion']").eq(0).on("blur change", function () {
+        settleAccountObj.calcChangeCompensates();
+    });
+
 
 });
 
@@ -653,10 +657,12 @@ var settleAccountObj = {
         var calcChangeCompensateArea = $("input[name='calcChangeCompensateArea']").eq(0).val() || 0;
         //单价
         var calcChangeCompensatePrice = $("input[name='calcChangeCompensatePrice']").eq(0).val() || 0;
+        //比例
+        var calcChangeCompensateProportion = $("input[name='calcChangeCompensateProportion']").eq(0).val()||0;
         //获取评估的单价
         var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
-        //公式：面积*(单价-评估单价)
-        var calcChangeCompensate = calcChangeCompensateArea + "*" + "(" + calcChangeCompensatePrice + "-" + assessPrice + ")";
+        //公式：面积*(单价-评估单价)*比例
+        var calcChangeCompensate = calcChangeCompensateArea + "*" + "(" + calcChangeCompensatePrice + "-" + assessPrice + ")"+"*"+calcChangeCompensateProportion;
         console.log("住改商计算公式: " + calcChangeCompensate);
         $("input[name='calcChangeCompensate']").eq(0).val(calcChangeCompensate).change();
     }

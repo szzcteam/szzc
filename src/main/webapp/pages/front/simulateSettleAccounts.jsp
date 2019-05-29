@@ -366,6 +366,7 @@
                 <td colspan="3">
                     <input type="text" name="calcChangeCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <input type="text" name="calcChangeCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                    <input type="text" name="calcChangeCompensateProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                     <!--隐藏存储值-->
                     <input type="hidden" name="calcChangeCompensate" class="none_border width_220px">
                 </td>
