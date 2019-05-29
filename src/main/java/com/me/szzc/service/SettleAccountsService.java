@@ -59,5 +59,10 @@ public class SettleAccountsService {
         return this.settleAccountsMapper.getCount(signingStatus, keywords);
     }
 
+    /**变更签约状态**/
+    public Integer changeSignStatus(SettleAccounts settleAccounts){
+        return this.settleAccountsMapper.changeSignStatus(settleAccounts);
+    }
+
 
 }

@@ -27,4 +27,7 @@ public interface SettleAccountsMapper {
                               @Param("signingStatus") Integer signingStatus, @Param("keywords") String keywords);
 
     Integer getCount(@Param("signingStatus") Integer signingStatus, @Param("keywords") String keywords);
+
+
+    Integer changeSignStatus(SettleAccounts settleAccounts);
 }

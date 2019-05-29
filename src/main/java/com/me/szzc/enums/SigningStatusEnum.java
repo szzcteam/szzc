@@ -10,7 +10,7 @@ import java.util.Map;
 public enum SigningStatusEnum {
 
     NOT_SIGNED(0, "未签约"),
-    complete(1, "签约完成"),
+    COMPLETE(1, "签约完成"),
 
     ;
 

@@ -1095,7 +1095,7 @@
     from t_settle_accounts
     where deleted = 0
     <if test="signingStatus != null">
-      and signing_status = #{signing_status}
+      and signing_status = #{signingStatus}
     </if>
     <if test="keywords != null ">
       and (house_owner like concat('%',#{keywords} ,'%') or phone like concat('%',#{keywords} ,'%') or address like
@@ -1103,5 +1103,11 @@
     </if>
 
   </select>
+
+
+  <update id="changeSignStatus" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
+      update t_settle_accounts set signing_status = #{signingStatus} , modified_date = #{modifiedDate},
+      modified_user_id = #{modifiedUserId} where id = #{id}
+  </update>
 
 </mapper>

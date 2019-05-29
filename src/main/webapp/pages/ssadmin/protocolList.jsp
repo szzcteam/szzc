@@ -22,7 +22,7 @@
                     <td>签约状态：<select name="signingStatus" style="width: 100px;">
                         <option value="">请选择</option>
                         <c:forEach items="${signingStatusMap}" var="item">
-                            <option value="${item.key}">${item.value}</option>
+                            <option value="${item.key}" <c:if test="${signingStatus ==  item.key}">selected</c:if>>${item.value}</option>
                         </c:forEach>
                     </select>
                     </td>
@@ -122,6 +122,11 @@
                 <li><a class="icon"
                        href="ssadmin/exportSettleAccounts.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
+                </a></li>
+
+                <li><a class="edit"
+                       href="ssadmin/settleAccounts/signing.html?idMore={sid_user}"
+                       target="ajaxTodo" title="确定签约完成了吗?"><span>签约</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>

@@ -1,6 +1,9 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.aspect.SysLog;
+import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
+import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
@@ -103,6 +106,48 @@ public class SettleAccountsController extends BaseController {
         modelAndView.addObject("message","删除成功");
         return modelAndView;
     }
+
+
+    @RequestMapping("ssadmin/settleAccounts/signing")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "签约")
+    public ModelAndView signing(String idMore, HttpServletRequest request) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //条件判断
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[0]);
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
+
+        if(settleAccounts == null){
+            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("message","用户未签订此协议");
+            return modelAndView;
+        }
+
+        if(settleAccounts.getSigningStatus().intValue() == SigningStatusEnum.COMPLETE.getCode()) {
+            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("message", "状态为：" + SigningStatusEnum.COMPLETE.getDesc() + "，请勿重复操作");
+            return modelAndView;
+        }
+
+        if(settleAccounts.getDeleted()) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            return modelAndView;
+        }
+
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        settleAccounts.setModifiedUserId(userId);
+        settleAccounts.setModifiedDate(DateHelper.getTimestamp());
+        settleAccounts.setSigningStatus(SigningStatusEnum.COMPLETE.getCode());
+        this.settleAccountsService.changeSignStatus(settleAccounts);
+
+        modelAndView.addObject("statusCode",200);
+        modelAndView.addObject("message","签约成功");
+        return modelAndView;
+    }
+
 
     @RequestMapping("ssadmin/settleAccounts/update")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
