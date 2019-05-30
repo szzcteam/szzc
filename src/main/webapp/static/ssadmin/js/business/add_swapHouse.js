@@ -171,8 +171,17 @@ var swapHouseObj = {
                             $("#swapHouseDiv input[name='noCheckArea']").eq(0).val(calcNoCheckCompensateArr[0]);
                         }
 
+                        //应付
+                        $("#swapHouseDiv input[name='difference']").eq(0).val(data.payTotal);
+                        $("#swapHouseDiv input[name='upperDifference']").eq(0).val(data.payMoney);
+
+                        //应收
+                        $("#swapHouseDiv input[name='lessDifference']").eq(0).val(data.receiveTotal);
+                        $("#swapHouseDiv input[name='upperLessDifference']").eq(0).val(data.receiveMoney);
+
                         //触发一下求和
                         swapHouseObj.summary12Num();
+
                     }
                 });
             }
@@ -214,7 +223,7 @@ var swapHouseObj = {
         var coveredArea = $("#swapHouseDiv  input[name='coveredArea']").eq(0).val() || 0;
         var price = $("#swapHouseDiv  input[name='price']").eq(0).val() || 0;
         var money = coveredArea + "*" + price;
-        money = eval(money);
+        money = Math.round(eval(money));
         $("#swapHouseDiv  input[name='totalPrice']").eq(0).val(money).change();
 
     },
