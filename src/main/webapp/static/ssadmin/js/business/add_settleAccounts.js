@@ -315,28 +315,9 @@ $(document).ready(function(){
         $("select[name='calcMoveHouseFee']").eq(0).val(value).change();
     });
 
-    //构建物补偿选择
-    $("#sel_structure").on("change", function () {
-        var structure = $(this).val();
-        if (structure == 0) {
-            $("#sel_stove").css("display", "none");
-            $("input[name='calcStructureCompensateArea']").eq(0).css("display", "none");
-            $("input[name='calcStructureCompensatePrice']").eq(0).css("display", "none");
-        } else if (structure == 1) {
-            $("#sel_stove").css("display", "inline-block").change();
-            $("input[name='calcStructureCompensateArea']").eq(0).css("display", "none");
-            $("input[name='calcStructureCompensatePrice']").eq(0).css("display", "none");
-        } else if (structure == 2) {
-            $("#sel_stove").css("display", "none");
-            $("input[name='calcStructureCompensateArea']").eq(0).css("display", "inline-block").change();
-            $("input[name='calcStructureCompensatePrice']").eq(0).css("display", "inline-block").change();
-        }
-    });
-
     //无烟灶台选择数量
     $("#sel_stove").on("change", function () {
-        var v = $(this).val() || 0;
-        $("input[name='calcStructureCompensate']").eq(0).val(v).change();
+        settleAccountObj.calcDarkBuilding();
     });
 
     //构建物：暗楼面积
@@ -641,11 +622,16 @@ var settleAccountObj = {
         $("input[name='calcRmbMoveReward']").eq(0).val(calcRmbMoveReward).change();
     },
 
-    //构建物：暗楼 补偿
+    //构建物：无烟灶台、暗楼 补偿
     calcDarkBuilding:function () {
+        //无烟灶台
+        var stove = $("select[id='sel_stove']").val();
+        //暗楼
         var calcStructureCompensateArea = $("input[name='calcStructureCompensateArea']").eq(0).val() || 0;
         var calcStructureCompensatePrice = $("input[name='calcStructureCompensatePrice']").eq(0).val() || 0;
-        var calcStructureCompensate = calcStructureCompensateArea + "*" + calcStructureCompensatePrice;
+        //计算公式，格式：1*500+20*1350，+前面的是无烟灶台，后面的是暗楼
+        var calcStructureCompensate = stove + "+" + calcStructureCompensateArea + "*" + calcStructureCompensatePrice;
+        console.log("构建物计算公式：" + calcStructureCompensate);
         $("input[name='calcStructureCompensate']").eq(0).val(calcStructureCompensate).change();
     },
 

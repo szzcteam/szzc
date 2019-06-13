@@ -124,19 +124,17 @@ $(document).ready(function () {
 
     //构建物下拉框选择：根据计算公式选择
     var calcStructureCompensate = $("input[name='calcStructureCompensate']").eq(0).val() || 0;
-    if(calcStructureCompensate != null && calcStructureCompensate != "" && calcStructureCompensate != 0 && calcStructureCompensate.indexOf("0*") == -1) {
-        var isExists = optionExistValue(calcStructureCompensate, "sel_stove");
+    if(calcStructureCompensate != null && calcStructureCompensate != "" && calcStructureCompensate != 0) {
+        var overArr = calcStructureCompensate.split("+");
+
         //灶台
-        if(isExists) {
-            $("#sel_stove").find("option[value='"+calcStructureCompensate+"']").attr("selected",true);
-            $("#sel_structure").val(1).change();
-        }else{
-            //暗楼
-            var arr = calcStructureCompensate.split("*");
-            $("input[name='calcStructureCompensateArea']").eq(0).val(arr[0]);
-            $("input[name='calcStructureCompensatePrice']").eq(0).val(arr[1]);
-            $("#sel_structure").val(2).change();
-        }
+        $("#sel_stove").find("option[value='" + overArr[0] + "']").attr("selected", true);
+
+        //暗楼
+        var arr = overArr[1].split("*");
+        $("input[name='calcStructureCompensateArea']").eq(0).val(arr[0]);
+        $("input[name='calcStructureCompensatePrice']").eq(0).val(arr[1]);
+
     }
 
 

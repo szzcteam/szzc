@@ -294,21 +294,18 @@
             <tr>
                 <td colspan="3" class="td_left">6、构建物补偿</td>
                 <td colspan="3">
-                    <select id="sel_structure" class="select_fix">
-                        <option value="0">请选择</option>
-                        <option value="1">无烟灶台</option>
-                        <option value="2">暗楼</option>
-                    </select>
                     <!--无烟灶台选择-->
-                    <select id="sel_stove" class="select_fix" style="display: none">
+                    <label style="width: 55px;margin-top: 3px;">无烟灶台: </label>
+                    <select id="sel_stove" class="select_fix" style="">
                         <option value="0*${smokeFreeStove}">请选择数量</option>
                         <c:forEach begin="1" end="5" var="idx">
                             <option value="${idx}*${smokeFreeStove}">${idx}&nbsp;个</option>
                         </c:forEach>
-                    </select>
+                    </select><br/>
                     <!--暗楼选择-->
-                    <input type="text" name="calcStructureCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;display: none"/>
-                    <input type="text" name="calcStructureCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;display: none"/>
+                    <label style="width: 55px;">暗&nbsp;&nbsp;&nbsp;&nbsp;楼: </label>
+                    <input type="text" name="calcStructureCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;margin-bottom: 3px;"/>
+                    <input type="text" name="calcStructureCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;margin-bottom: 3px;"/>
                     <!--隐藏存储表单提交值-->
                     <input type="hidden" name="calcStructureCompensate" class="none_border width_220px">
                 </td>
