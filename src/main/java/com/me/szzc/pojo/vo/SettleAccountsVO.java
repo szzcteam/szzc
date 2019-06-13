@@ -246,12 +246,13 @@ public class SettleAccountsVO {
 
         //搬迁补偿
         String calcMoveHouseFee = entity.getCalcMoveHouseFee();
-        if(StringUtils.isNotBlank(calcMoveHouseFee)) {
-            if(calcMoveHouseFee.equals("1000")) {
+        if (StringUtils.isNotBlank(calcMoveHouseFee)) {
+            vo.setCalcMoveHouseFee(calcMoveHouseFee);
+           /* if(calcMoveHouseFee.equals("1000")) {
                 vo.setCalcMoveHouseFee("货币补偿");
             }else if(calcMoveHouseFee.equals("2000")) {
                 vo.setCalcMoveHouseFee("产权调换");
-            }
+            }*/
         }
 
         vo.setMoveHouseFee(BigDecimalUtil.stripTrailingZeros(entity.getMoveHouseFee()));
@@ -441,13 +442,14 @@ public class SettleAccountsVO {
         //搬迁奖励
         String calcMoveReward = entity.getCalcMoveReward();
         if(StringUtils.isNotBlank(calcMoveReward)) {
-            if(calcMoveReward.equals("40000")) {
+            vo.setCalcMoveReward(calcMoveReward);
+           /* if(calcMoveReward.equals("40000")) {
                 vo.setCalcMoveReward("第一奖励期 " + calcMoveReward);
             }else if(calcMoveReward.equals("15000")) {
                 vo.setCalcMoveReward("第二奖励期 " + calcMoveReward);
             }else if(calcMoveReward.equals("5000")) {
                 vo.setCalcMoveReward("第三奖励期 " + calcMoveReward);
-            }
+            }*/
         }
         vo.setMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getMoveReward()));
         vo.setMoveRewardBz(entity.getMoveRewardBz());
