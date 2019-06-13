@@ -8,6 +8,8 @@ import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.lang.StringUtils;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.math.BigDecimal;
 
 /**
@@ -213,11 +215,16 @@ public class SettleAccountsVO {
 
     private String receiveMoney;
 
-    public static SettleAccountsVO parse(SettleAccounts entity) {
+    public static SettleAccountsVO parse(SettleAccounts entity) throws Exception{
         SettleAccountsVO vo = new SettleAccountsVO();
         if(entity == null) {
             return vo;
         }
+
+        //公式计算对象
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine se = manager.getEngineByName("js");
+
         vo.setId(entity.getId());
         vo.setCardNo(entity.getCardNo());
         vo.setProjectName(entity.getProjectName());
@@ -331,7 +338,32 @@ public class SettleAccountsVO {
         vo.setGasFee(BigDecimalUtil.stripTrailingZeros(entity.getGasFee()));
         vo.setGasFeeBz(entity.getGasFeeBz());
 
-        vo.setCalcStructureCompensate(entity.getCalcStructureCompensate());
+        //构建物补偿
+        String calcstructurecompensate = entity.getCalcStructureCompensate();
+        String structureTxt = "";
+        if (StringUtils.isNotBlank(calcstructurecompensate) && !calcstructurecompensate.equals("0")) {
+            //新版本，灶台+暗楼
+            if (calcstructurecompensate.indexOf("+") != -1) {
+                String[] overArr = calcstructurecompensate.split("\\+");
+                String zt = overArr[0];
+                if (zt.indexOf("0*") == -1) {
+                    String[] numArr = zt.split("\\*");
+                    structureTxt += "无烟灶台" + numArr[0] + "个 "+(Integer)se.eval(zt)+ "元 ";
+                }
+
+                String al = overArr[1];
+                if(al.indexOf("0*") == -1) {
+                    String[] numArr = al.split("\\*");
+                    long alMoney = Math.round(Double.valueOf(se.eval(al).toString()));
+                    structureTxt += "暗楼" + numArr[0] + ",单价" + numArr[1] + ",金额:" + alMoney + "元";
+                }
+            } else{
+                //老版本，灶台、暗楼二选一，不方便区分，公式是怎么样，就显示怎么样
+                structureTxt = calcstructurecompensate;
+            }
+
+        }
+        vo.setCalcStructureCompensate(structureTxt);
         vo.setStructureCompensate(BigDecimalUtil.stripTrailingZeros(entity.getStructureCompensate()));
         vo.setStructureCompensateBz(entity.getStructureCompensateBz());
 

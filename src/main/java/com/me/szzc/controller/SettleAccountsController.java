@@ -188,7 +188,7 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("/ssadmin/exportSettleAccounts")
-    public ModelAndView exportSettleAccounts(@RequestParam String idMore, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView exportSettleAccounts(@RequestParam String idMore, HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //获取条件
