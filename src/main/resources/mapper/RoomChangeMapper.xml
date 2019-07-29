@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbfang.springboot.dao.RoomChangeDao">
+    <insert id="insertRoomChange" parameterType="com.bbfang.springboot.po.RoomChange">
+        insert into r_change
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                r_name,
+            </if>
+            <if test="number != null">
+                r_number,
+            </if>
+            <if test="ridgepole != null">
+                r_ridgepole,
+            </if>
+            <if test="unit != null">
+                r_unit,
+            </if>
+            <if test="floor != null">
+                r_floor,
+            </if>
+            <if test="mark != null">
+                r_mark,
+            </if>
+            <if test="area != null">
+                r_area,
+            </if>
+            <if test="unitPrice != null">
+                r_unit_price,
+            </if>
+            <if test="totalPrice != null">
+                r_total_price,
+            </if>
+            <if test="choosePeople != null">
+                r_choose_people,
+            </if>
+            <if test="district != null">
+                r_district,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="ridgepole != null">
+                #{ridgepole,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null">
+                #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="mark != null">
+                #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="choosePeople != null">
+                #{choosePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null">
+                #{district,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+</mapper>
