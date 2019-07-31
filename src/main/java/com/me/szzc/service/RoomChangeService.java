@@ -7,10 +7,13 @@ import com.me.szzc.utils.excle.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bbfang on 2019/7/27.
@@ -61,5 +64,36 @@ public class RoomChangeService {
             }
         }
         return ResultVo.success("导入成功");
+    }
+
+    public Map<String, Object> queryPage(Integer pageSize, Integer pageNum, String name, String district) {
+        Integer count = roomChangeMapper.getCount(name, district);
+        Integer start = (pageNum - 1) * pageSize;
+        List<RoomChange> roomChanges = roomChangeMapper.queryPage(start, pageSize, name, district);
+        for (RoomChange roomChange : roomChanges) {
+            String choosePeople = roomChange.getChoosePeople();
+            if (!StringUtils.isEmpty(choosePeople)) {
+                roomChange.setChoosePeople(choosePeople.replace(",", " "));
+            }
+        }
+        Map<String, Object> map = new HashMap();
+        map.put("total", count);
+        map.put("datas", roomChanges);
+        return map;
+    }
+
+    public Integer deleteRoomChange(Integer id) {
+        return roomChangeMapper.deleteRoomChange(id);
+    }
+
+    public RoomChange getRoomChangeById(Integer id) {
+        RoomChange roomChange = roomChangeMapper.getRoomChangeById(id);
+        if (roomChange != null) {
+            String choosePeople = roomChange.getChoosePeople();
+            if (!StringUtils.isEmpty(choosePeople)) {
+                roomChange.setChoosePeople(choosePeople.replace(",", " "));
+            }
+        }
+        return roomChange;
     }
 }

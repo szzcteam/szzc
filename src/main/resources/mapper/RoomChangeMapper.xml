@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bbfang.springboot.dao.RoomChangeDao">
-    <insert id="insertRoomChange" parameterType="com.bbfang.springboot.po.RoomChange">
+<mapper namespace="com.me.szzc.dao.RoomChangeMapper">
+    <insert id="insertRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
         insert into r_change
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -80,4 +80,48 @@
             </if>
         </trim>
     </insert>
+
+    <select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM r_change
+        WHERE r_del = 0
+        <if test="name != null">
+            ,AND r_name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="district != null">
+            ,AND r_district = #{district,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="com.me.szzc.pojo.entity.RoomChange">
+        SELECT id,
+        r_name AS `NAME`,
+        r_number AS `number`,
+        r_area AS `AREA`,
+        r_unit_price AS unitPrice,
+        r_total_price AS totalPrice,r_choose_people AS choosePeople,r_district AS district
+        FROM r_change
+        WHERE r_del = 0
+        <if test="name != null">
+            ,AND r_name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="district != null">
+            ,AND r_district = #{district,jdbcType=INTEGER}
+        </if>
+        ORDER BY id
+        limit ${start},${pageSize}
+    </select>
+
+    <delete id="deleteRoomChange" parameterType="java.lang.Integer">
+        UPDATE r_change SET r_del = 1  WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="getRoomChangeById" parameterType="java.lang.Integer" resultType="com.me.szzc.pojo.entity.RoomChange">
+        SELECT id,r_name AS `name`,r_number AS `number`,
+               r_ridgepole AS ridgepole,r_unit AS unit,r_floor AS floor,r_mark AS mark,
+               r_area AS area ,r_unit_price AS unitPrice,r_total_price AS totalPrice,
+               r_choose_people AS choosePeople,r_district AS district
+          FROM r_change
+         WHERE id = #{id,jdbcType=INTEGER}
+    </select>
 </mapper>

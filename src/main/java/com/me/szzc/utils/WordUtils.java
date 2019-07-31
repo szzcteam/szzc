@@ -61,9 +61,15 @@ public class WordUtils {
                 out.write(buffer, 0, bytesToRead);
             }
         } finally {
-            if (fin != null) fin.close();
-            if (out != null) out.close();
-            if (file != null) file.delete(); // 删除临时文件
+            if (fin != null) {
+                fin.close();
+            }
+            if (out != null) {
+                out.close();
+            }
+            if (file != null) {
+                file.delete(); // 删除临时文件
+            }
         }
     }
 
