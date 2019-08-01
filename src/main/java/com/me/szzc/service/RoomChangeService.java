@@ -51,13 +51,16 @@ public class RoomChangeService {
                     if (strList.get(x).length() == 3 || strList.get(x).length() == 4) {
                         String str = String.format("%04d", Integer.parseInt(strList.get(x)));
                         roomChange.setFloor(str.substring(0, 2));
-                        roomChange.setMark((str.substring(2)));
+                        roomChange.setMark(str.substring(2));
                     } else {
                         return ResultVo.error(1004, "第" + i + "条数据房号格式异常");
                     }
                 }
             }
-
+            Integer integer = roomChangeMapper.selectRoomChangeByParam(roomChange);
+            if (integer > 0) {
+                return ResultVo.error(1004, "第" + i + "条数据房号格式异常");
+            }
             int x = roomChangeMapper.insertRoomChange(roomChange);
             if (x < 1) {
                 return ResultVo.error(1002, "第" + i + "条数据存储异常");
@@ -92,8 +95,16 @@ public class RoomChangeService {
             String choosePeople = roomChange.getChoosePeople();
             if (!StringUtils.isEmpty(choosePeople)) {
                 roomChange.setChoosePeople(choosePeople.replace(",", " "));
+                roomChange.setMark(Integer.parseInt(roomChange.getMark()) + "");
+                roomChange.setFloor(Integer.parseInt(roomChange.getFloor()) + "");
             }
         }
         return roomChange;
+    }
+
+    public boolean chooseRoom(String choosePeople, String name, String number) {
+        Integer integer = roomChangeMapper.updateChooseRoom(choosePeople, name, number);
+        return integer > 0 ? true : false;
+
     }
 }

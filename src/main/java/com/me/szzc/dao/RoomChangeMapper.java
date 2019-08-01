@@ -22,4 +22,10 @@ public interface RoomChangeMapper {
     Integer deleteRoomChange(Integer id);
 
     RoomChange getRoomChangeById(Integer id);
+
+    Integer selectRoomChangeByParam(RoomChange roomChange);
+
+    Integer updateChooseRoom(@Param("choosePeople")String choosePeople,
+                             @Param("name")String name,
+                             @Param("number")String number);
 }

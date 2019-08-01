@@ -103,10 +103,10 @@
         FROM r_change
         WHERE r_del = 0
         <if test="name != null">
-            ,AND r_name = #{name,jdbcType=VARCHAR}
+            AND r_name = #{name,jdbcType=VARCHAR}
         </if>
         <if test="district != null">
-            ,AND r_district = #{district,jdbcType=INTEGER}
+            AND r_district = #{district,jdbcType=INTEGER}
         </if>
         ORDER BY id
         limit ${start},${pageSize}
@@ -124,4 +124,18 @@
           FROM r_change
          WHERE id = #{id,jdbcType=INTEGER}
     </select>
+
+    <select id="selectRoomChangeByParam" parameterType="com.me.szzc.pojo.entity.RoomChange" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM r_change
+        WHERE r_name = #{name,jdbcType=VARCHAR} AND r_number = #{number,jdbcType=VARCHAR} AND r_del = 0
+    </select>
+
+    <update id="updateChooseRoom" >
+        UPDATE r_change
+           SET r_choose_people = #{choosePeople,jdbcType=VARCHAR}
+         WHERE r_del = 0
+           AND r_name = #{name,jdbcType=VARCHAR}
+           AND r_number = #{number,jdbcType=VARCHAR}
+    </update>
 </mapper>
