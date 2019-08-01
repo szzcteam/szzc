@@ -1,5 +1,6 @@
 package com.me.szzc.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.service.RoomChangeService;
@@ -31,20 +32,17 @@ public class RoomChangeController {
      */
     @RequestMapping("/importExcel")
     @ResponseBody
-    public ModelAndView importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
-        ModelAndView modelAndView = new ModelAndView();
+    public JSONObject importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
+        JSONObject jsonObject = new JSONObject();
         ResultVo resultVo = roomChangeService.importExcle(file);
         if (resultVo.getCode() == 0) {
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "修改成功");
-            modelAndView.addObject("callbackType", "closeCurrent");
+            jsonObject.put("statusCode", 200);
         } else {
-            modelAndView.addObject("statusCode", resultVo.getCode());
-            modelAndView.addObject("message", resultVo.getMsg());
-            modelAndView.addObject("callbackType", "closeCurrent");
+            jsonObject.put("statusCode", resultVo.getCode());
+            jsonObject.put("message", resultVo.getMsg());
         }
 
-        return modelAndView;
+        return jsonObject;
     }
 
     /**

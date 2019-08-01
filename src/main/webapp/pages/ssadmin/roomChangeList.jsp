@@ -40,8 +40,8 @@
             <!-- 新增 -->
             <shiro:hasPermission name="ssadmin/addProtocol.html">
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addHouseResource"
-                       height="350" width="700" target="dialog" rel="addProtocol"><span>新增</span>
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addRoomChange"
+                       height="300" width="700" target="dialog" rel="addProtocol"><span>上传房源</span>
                 </a></li>
             </shiro:hasPermission>
             <!-- 修改 -->
