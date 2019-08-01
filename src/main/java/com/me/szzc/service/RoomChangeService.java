@@ -40,7 +40,7 @@ public class RoomChangeService {
             String number = roomChange.getNumber();
             List<String> strList = Arrays.asList(number.split("-"));
             if (strList.size() != 3) {
-                return ResultVo.error(1003, "第" + i + "条数据房号格式异常");
+                throw new RuntimeException("第" + i + "条数据房号格式异常");
             }
             for (int x = 0; x < 3; x++) {
                 if (x == 0) {
@@ -53,17 +53,17 @@ public class RoomChangeService {
                         roomChange.setFloor(str.substring(0, 2));
                         roomChange.setMark(str.substring(2));
                     } else {
-                        return ResultVo.error(1004, "第" + i + "条数据房号格式异常");
+                        throw new RuntimeException("第" + i + "条数据房号格式异常");
                     }
                 }
             }
             Integer integer = roomChangeMapper.selectRoomChangeByParam(roomChange);
             if (integer > 0) {
-                return ResultVo.error(1004, "第" + i + "条数据房号格式异常");
+                throw new RuntimeException("第" + i + "条数据已存在");
             }
             int x = roomChangeMapper.insertRoomChange(roomChange);
             if (x < 1) {
-                return ResultVo.error(1002, "第" + i + "条数据存储异常");
+                throw new RuntimeException("第" + i + "条数据存储异常");
             }
         }
         return ResultVo.success("导入成功");

@@ -6,6 +6,7 @@ import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.service.RoomChangeService;
 import com.me.szzc.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTAbstractNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,19 +36,25 @@ public class RoomChangeController {
     @ResponseBody
     public JSONObject importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
         JSONObject jsonObject = new JSONObject();
-        ResultVo resultVo = roomChangeService.importExcle(file);
+        ResultVo resultVo = null;
+        try {
+            resultVo = roomChangeService.importExcle(file);
+        } catch (Exception e) {
+            jsonObject.put("statusCode", 300);
+            jsonObject.put("message", e.getMessage());
+            return jsonObject;
+        }
         if (resultVo.getCode() == 0) {
             jsonObject.put("statusCode", 200);
         } else {
             jsonObject.put("statusCode", resultVo.getCode());
             jsonObject.put("message", resultVo.getMsg());
         }
-
         return jsonObject;
     }
 
     /**
-     * @param keywords     片区项目名称
+     * @param keywords 片区项目名称
      * @param district 所属片区
      * @return
      */
@@ -55,7 +62,7 @@ public class RoomChangeController {
     public ModelAndView queryPage(HttpServletRequest request, String keywords, String district) {
         ModelAndView view = new ModelAndView();
 
-        if(keywords != null && keywords.trim().length() >0){
+        if (keywords != null && keywords.trim().length() > 0) {
             view.addObject("keywords", keywords);
         }
         int currentPage = 1;
@@ -75,14 +82,14 @@ public class RoomChangeController {
     @RequestMapping("/batchDelete")
     public ModelAndView deleteRoomChange(String ids) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/comm/ajaxDone") ;
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         int result = 0;
-        if(StringUtils.isNotBlank(ids)){
+        if (StringUtils.isNotBlank(ids)) {
             String[] idArr = ids.split(",");
-            for(String idStr : idArr) {
+            for (String idStr : idArr) {
                 int id = Integer.valueOf(idStr);
                 result = roomChangeService.deleteRoomChange(id);
-                if(result ==0 ) {
+                if (result == 0) {
                     break;
                 }
             }
@@ -97,8 +104,8 @@ public class RoomChangeController {
 
             return modelAndView;
         }
-        modelAndView.addObject("statusCode",300);
-        modelAndView.addObject("message","请选择需要删除的记录");
+        modelAndView.addObject("statusCode", 300);
+        modelAndView.addObject("message", "请选择需要删除的记录");
         return modelAndView;
     }
 
@@ -107,7 +114,7 @@ public class RoomChangeController {
     public ModelAndView getRoomChangeById(Integer id) {
         ModelAndView modelAndView = new ModelAndView();
         RoomChange roomChange = roomChangeService.getRoomChangeById(id);
-        if(roomChange != null) {
+        if (roomChange != null) {
             modelAndView.addObject("roomChange", roomChange);
         }
         modelAndView.addObject("statusCode", 200);
