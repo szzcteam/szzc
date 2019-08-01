@@ -53,9 +53,9 @@
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="delete"
-                       href="ssadmin/deleteSwapHouse.html?idMore={sid_user}"
+                       href="ssadmin/roomChange/batchDelete.html"
                        target="selectedTodo" rel="ids" postType="string"
-                       title="确定要删除吗?"><span>删除</span>
+                       title="确定要删除吗?"><span>批量删除</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>
@@ -76,8 +76,8 @@
         <tbody>
 
         <c:forEach items="${roomList}" var="room" varStatus="num">
-            <tr target="sid_user" rel="1">
-                <td><input name="ids" value="" type="checkbox"></td>
+            <tr target="sid_user" rel="${room.id}">
+                <td><input name="ids" value="${room.id}" type="checkbox"></td>
                 <td>${num.index +1}</td>
                 <td>${room.name}</td>
                 <td>${room.number}</td>

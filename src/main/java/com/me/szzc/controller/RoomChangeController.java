@@ -5,6 +5,7 @@ import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.service.RoomChangeService;
 import com.me.szzc.utils.Utils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,18 +72,33 @@ public class RoomChangeController {
         return view;
     }
 
-    @RequestMapping("/deleteRoomChangeById")
-    @ResponseBody
-    public ModelAndView deleteRoomChange(Integer id) {
+    @RequestMapping("/batchDelete")
+    public ModelAndView deleteRoomChange(String ids) {
         ModelAndView modelAndView = new ModelAndView();
-        Integer integer = roomChangeService.deleteRoomChange(id);
-        if (integer > 0) {
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "删除成功");
-        } else {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "删除失败");
+        modelAndView.setViewName("ssadmin/comm/ajaxDone") ;
+        int result = 0;
+        if(StringUtils.isNotBlank(ids)){
+            String[] idArr = ids.split(",");
+            for(String idStr : idArr) {
+                int id = Integer.valueOf(idStr);
+                result = roomChangeService.deleteRoomChange(id);
+                if(result ==0 ) {
+                    break;
+                }
+            }
+
+            if (result > 0) {
+                modelAndView.addObject("statusCode", 200);
+                modelAndView.addObject("message", "删除成功");
+            } else {
+                modelAndView.addObject("statusCode", 300);
+                modelAndView.addObject("message", "删除失败");
+            }
+
+            return modelAndView;
         }
+        modelAndView.addObject("statusCode",300);
+        modelAndView.addObject("message","请选择需要删除的记录");
         return modelAndView;
     }
 
