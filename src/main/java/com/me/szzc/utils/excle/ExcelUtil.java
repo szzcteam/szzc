@@ -162,8 +162,7 @@ public class ExcelUtil {
         InputStream inputStream;
         try {
             inputStream = excel.getInputStream();
-            return new ExcelReader(inputStream, excelTypeEnum,
-                    null, excelListener);
+            return new ExcelReader(inputStream, excelTypeEnum, excelListener);
         } catch (IOException e) {
             e.printStackTrace();
         }
