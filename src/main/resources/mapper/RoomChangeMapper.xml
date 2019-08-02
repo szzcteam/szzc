@@ -43,7 +43,7 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id,jdbcType=INTEGER},
+                #{id},
             </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
@@ -86,10 +86,10 @@
         FROM r_change
         WHERE r_del = 0
         <if test="name != null">
-            ,AND r_name = #{name,jdbcType=VARCHAR}
+            AND r_name = #{name,jdbcType=VARCHAR}
         </if>
         <if test="district != null">
-            ,AND r_district = #{district,jdbcType=INTEGER}
+            AND r_district = #{district,jdbcType=INTEGER}
         </if>
     </select>
 
@@ -112,17 +112,17 @@
         limit ${start},${pageSize}
     </select>
 
-    <delete id="deleteRoomChange" parameterType="java.lang.Integer">
-        UPDATE r_change SET r_del = 1  WHERE id = #{id,jdbcType=INTEGER}
+    <delete id="deleteRoomChange">
+        UPDATE r_change SET r_del = 1  WHERE id = #{id}
     </delete>
 
-    <select id="getRoomChangeById" parameterType="java.lang.Integer" resultType="com.me.szzc.pojo.entity.RoomChange">
+    <select id="getRoomChangeById" resultType="com.me.szzc.pojo.entity.RoomChange">
         SELECT id,r_name AS `name`,r_number AS `number`,
                r_ridgepole AS ridgepole,r_unit AS unit,r_floor AS floor,r_mark AS mark,
                r_area AS area ,r_unit_price AS unitPrice,r_total_price AS totalPrice,
                r_choose_people AS choosePeople,r_district AS district
           FROM r_change
-         WHERE id = #{id,jdbcType=INTEGER}
+         WHERE id = #{id}
     </select>
 
     <select id="selectRoomChangeByParam" parameterType="com.me.szzc.pojo.entity.RoomChange" resultType="java.lang.Integer">

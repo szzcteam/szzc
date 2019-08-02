@@ -87,7 +87,7 @@ public class RoomChangeController {
         if (StringUtils.isNotBlank(ids)) {
             String[] idArr = ids.split(",");
             for (String idStr : idArr) {
-                int id = Integer.valueOf(idStr);
+                Long id = Long.valueOf(idStr);
                 result = roomChangeService.deleteRoomChange(id);
                 if (result == 0) {
                     break;
@@ -111,7 +111,7 @@ public class RoomChangeController {
 
     @RequestMapping("/getRoomChangeById")
     @ResponseBody
-    public ModelAndView getRoomChangeById(Integer id) {
+    public ModelAndView getRoomChangeById(Long id) {
         ModelAndView modelAndView = new ModelAndView();
         RoomChange roomChange = roomChangeService.getRoomChangeById(id);
         if (roomChange != null) {

@@ -20,7 +20,7 @@ public class RoomChange extends BaseRowModel implements Serializable {
     /**
      * 主键自增长id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 项目名称

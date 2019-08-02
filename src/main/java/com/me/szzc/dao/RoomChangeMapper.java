@@ -19,9 +19,9 @@ public interface RoomChangeMapper {
                                @Param("name") String name,
                                @Param("district") String district);
 
-    Integer deleteRoomChange(Integer id);
+    Integer deleteRoomChange(Long id);
 
-    RoomChange getRoomChangeById(Integer id);
+    RoomChange getRoomChangeById(Long id);
 
     Integer selectRoomChangeByParam(RoomChange roomChange);
 

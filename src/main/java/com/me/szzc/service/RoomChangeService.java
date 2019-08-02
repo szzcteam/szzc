@@ -85,11 +85,11 @@ public class RoomChangeService {
         return map;
     }
 
-    public Integer deleteRoomChange(Integer id) {
+    public Integer deleteRoomChange(Long id) {
         return roomChangeMapper.deleteRoomChange(id);
     }
 
-    public RoomChange getRoomChangeById(Integer id) {
+    public RoomChange getRoomChangeById(Long id) {
         RoomChange roomChange = roomChangeMapper.getRoomChangeById(id);
         if (roomChange != null) {
             String choosePeople = roomChange.getChoosePeople();
