@@ -1,6 +1,8 @@
 package com.me.szzc.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.me.szzc.aspect.SysLog;
+import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.service.RoomChangeService;
@@ -35,6 +37,7 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/importExcel")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "上传房源")
     public ModelAndView importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
@@ -103,6 +106,7 @@ public class RoomChangeController {
     }
 
     @RequestMapping("/batchDelete")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "批量删除房源")
     public ModelAndView deleteRoomChange(String ids) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");

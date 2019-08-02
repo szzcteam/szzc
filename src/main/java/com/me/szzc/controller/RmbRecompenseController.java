@@ -1,6 +1,8 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
@@ -27,6 +29,7 @@ import java.util.Map;
 public class RmbRecompenseController extends BaseController {
 
     @RequestMapping("ssadmin/RmbRecompense/add")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增货币补偿协议")
     public ModelAndView saveRmbRecompense ( RmbRecompense rmbRecompense, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -61,6 +64,7 @@ public class RmbRecompenseController extends BaseController {
     }
 
     @RequestMapping("ssadmin/RmbRecompense/delete")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "删除货币补偿协议")
     public ModelAndView deleteRmbRecompense (String idMore, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -88,6 +92,7 @@ public class RmbRecompenseController extends BaseController {
     }
 
     @RequestMapping("ssadmin/RmbRecompense/update")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改货币补偿协议")
     public ModelAndView updateRmbRecompense (RmbRecompense rmbRecompense, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");

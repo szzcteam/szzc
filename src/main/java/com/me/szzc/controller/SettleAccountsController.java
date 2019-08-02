@@ -34,6 +34,7 @@ import java.util.Map;
 public class SettleAccountsController extends BaseController {
 
     @RequestMapping("ssadmin/settleAccounts/add")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增结算单")
     public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -78,6 +79,7 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("ssadmin/settleAccounts/delete")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "删除结算单")
     public ModelAndView deleteSettleAccounts(String idMore, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -150,6 +152,7 @@ public class SettleAccountsController extends BaseController {
 
 
     @RequestMapping("ssadmin/settleAccounts/update")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
