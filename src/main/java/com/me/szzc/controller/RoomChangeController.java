@@ -42,7 +42,6 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/importExcel")
-    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "上传房源")
     public ModelAndView importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
@@ -74,6 +73,8 @@ public class RoomChangeController {
         }
         if (resultVo.getCode() == 0) {
             view.addObject("statusCode", 200);
+            view.addObject("message", "上传成功");
+            view.addObject("callbackType", "closeCurrent");
         } else {
             view.addObject("statusCode", resultVo.getCode());
             view.addObject("message", resultVo.getMsg());
