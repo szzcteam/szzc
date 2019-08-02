@@ -1,6 +1,7 @@
 package com.me.szzc.service;
 
 import com.me.szzc.dao.RoomChangeMapper;
+import com.me.szzc.pojo.dto.ChooseHouseDTO;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.utils.excle.ExcelUtil;
@@ -102,8 +103,8 @@ public class RoomChangeService {
         return roomChange;
     }
 
-    public boolean chooseRoom(String choosePeople, String name, String number) {
-        Integer integer = roomChangeMapper.updateChooseRoom(choosePeople, name, number);
+    public boolean chooseRoom(ChooseHouseDTO dto) {
+        Integer integer = 0; //roomChangeMapper.updateChooseRoom(choosePeople, name, number);
         return integer > 0 ? true : false;
 
     }
