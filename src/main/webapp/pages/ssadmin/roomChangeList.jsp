@@ -45,12 +45,12 @@
                 </a></li>
             </shiro:hasPermission>
             <!-- 修改 -->
-            <shiro:hasPermission name="ssadmin/updateProtocol.html">
+           <%-- <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/updateHouseResource&idMore={sid_user}"
                        height="350" width="700" target="dialog" rel="updateHouseResource"><span>修改</span>
                 </a></li>
-            </shiro:hasPermission>
+            </shiro:hasPermission>--%>
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
                 <li><a class="delete"
                        href="ssadmin/roomChange/batchDelete.html"
