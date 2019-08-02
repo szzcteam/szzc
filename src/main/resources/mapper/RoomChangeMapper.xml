@@ -85,11 +85,11 @@
         SELECT COUNT(*)
         FROM r_change
         WHERE r_del = 0
-        <if test="name != null">
-            AND r_name = #{name,jdbcType=VARCHAR}
+        <if test="name != null and name != ''">
+            AND r_name LIKE  concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
-        <if test="district != null">
-            AND r_district = #{district,jdbcType=INTEGER}
+        <if test="district != null and district != ''">
+            AND r_district LIKE  concat(concat('%',#{district,jdbcType=INTEGER}),'%')
         </if>
     </select>
 
@@ -102,11 +102,11 @@
         r_total_price AS totalPrice,r_choose_people AS choosePeople,r_district AS district
         FROM r_change
         WHERE r_del = 0
-        <if test="name != null">
-            AND r_name = #{name,jdbcType=VARCHAR}
+        <if test="name != null and name != ''">
+            AND r_name LIKE  concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
-        <if test="district != null">
-            AND r_district = #{district,jdbcType=INTEGER}
+        <if test="district != null and district != ''">
+            AND r_district LIKE  concat(concat('%',#{district,jdbcType=INTEGER}),'%')
         </if>
         ORDER BY id
         limit ${start},${pageSize}
@@ -125,13 +125,14 @@
          WHERE id = #{id}
     </select>
 
-    <select id="selectRoomChangeByParam" parameterType="com.me.szzc.pojo.entity.RoomChange" resultType="java.lang.Integer">
+    <select id="selectRoomChangeByParam" parameterType="com.me.szzc.pojo.entity.RoomChange"
+            resultType="java.lang.Integer">
         SELECT count(*)
         FROM r_change
         WHERE r_name = #{name,jdbcType=VARCHAR} AND r_number = #{number,jdbcType=VARCHAR} AND r_del = 0
     </select>
 
-    <update id="updateChooseRoom" >
+    <update id="updateChooseRoom">
         UPDATE r_change
            SET r_choose_people = #{choosePeople,jdbcType=VARCHAR}
          WHERE r_del = 0

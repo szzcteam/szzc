@@ -61,10 +61,13 @@ public class RoomChangeController {
     @RequestMapping("/queryPage")
     public ModelAndView queryPage(HttpServletRequest request, String keywords, String district) {
         ModelAndView view = new ModelAndView();
-
-        if (keywords != null && keywords.trim().length() > 0) {
-            view.addObject("keywords", keywords);
+        if (keywords != null) {
+            keywords = keywords.trim();
+            if (keywords.length() > 0) {
+                view.addObject("keywords", keywords);
+            }
         }
+
         int currentPage = 1;
         if (request.getParameter("pageNum") != null) {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
