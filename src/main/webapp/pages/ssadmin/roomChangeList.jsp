@@ -58,6 +58,10 @@
                        title="确定要删除吗?"><span>批量删除</span>
                 </a></li>
             </shiro:hasPermission>
+            <li><a class="edit"
+                   href="ssadmin/roomChange/download.html"
+                   target="dwzExport" postType="navTab"><span>下载模板</span>
+            </a></li>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="138">
