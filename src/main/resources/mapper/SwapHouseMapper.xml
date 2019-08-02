@@ -817,4 +817,15 @@
   </update>
 
 
+  <select id="getChooseHouseListBySettleId" resultType="com.me.szzc.pojo.dto.ChooseHouseDTO">
+      select distinct a.address, b.house_owner as houseOwner,
+      b.new_house_address as newHouseAddress,
+      b.seat, b.unit, b.floors, b.house_number as houseNumber
+      from t_settle_accounts a
+      inner join t_swap_house b
+      where a.address = b.address
+      and a.deleted = 0 and b.deleted = 0
+      and a.id = #{settleId}
+  </select>
+
 </mapper>
