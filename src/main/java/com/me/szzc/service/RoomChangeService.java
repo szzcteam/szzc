@@ -103,9 +103,14 @@ public class RoomChangeService {
         return roomChange;
     }
 
-    public boolean chooseRoom(ChooseHouseDTO dto) {
-        Integer integer = 0; //roomChangeMapper.updateChooseRoom(choosePeople, name, number);
+    public boolean chooseRoom(ChooseHouseDTO chooseHouseDTO) {
+        String seat = chooseHouseDTO.getSeat() + "-";
+        String unit = chooseHouseDTO.getUnit() + "-";
+        String floors = chooseHouseDTO.getFloors() + "";
+        String houseNumber = String.format("%02d", chooseHouseDTO.getHouseNumber());
+        String number = "G" + seat + unit + floors + houseNumber;
+        Integer integer = roomChangeMapper.updateChooseRoom(chooseHouseDTO.getHouseOwner(),
+                chooseHouseDTO.getNewHouseAddress(), number);
         return integer > 0 ? true : false;
-
     }
 }
