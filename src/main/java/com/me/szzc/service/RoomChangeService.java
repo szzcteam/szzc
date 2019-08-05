@@ -41,7 +41,7 @@ public class RoomChangeService {
             String number = roomChange.getNumber();
             List<String> strList = Arrays.asList(number.split("-"));
             if (strList.size() != 3) {
-                throw new RuntimeException("第" + i + "条数据房号格式异常");
+                throw new RuntimeException("第" + i + "条数据房号(" + number + ")格式异常");
             }
             for (int x = 0; x < 3; x++) {
                 if (x == 0) {
@@ -50,11 +50,15 @@ public class RoomChangeService {
                     roomChange.setUnit(strList.get(x));
                 } else if (x == 2) {
                     if (strList.get(x).length() == 3 || strList.get(x).length() == 4) {
-                        String str = String.format("%04d", Integer.parseInt(strList.get(x)));
-                        roomChange.setFloor(str.substring(0, 2));
-                        roomChange.setMark(str.substring(2));
+                        try {
+                            String str = String.format("%04d", Integer.parseInt(strList.get(x)));
+                            roomChange.setFloor(str.substring(0, 2));
+                            roomChange.setMark(str.substring(2));
+                        } catch (Exception e) {
+                            throw new RuntimeException("第" + i + "条数据房号(" + number + ")格式异常");
+                        }
                     } else {
-                        throw new RuntimeException("第" + i + "条数据房号格式异常");
+                        throw new RuntimeException("第" + i + "条数据房号(" + number + ")格式异常");
                     }
                 }
             }
