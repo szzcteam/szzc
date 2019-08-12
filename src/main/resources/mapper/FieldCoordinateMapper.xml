@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.FieldCoordinateMapper">
+
+    <select id="getFieldCoordinateListByTableName" resultType="com.me.szzc.pojo.dto.FieldCoordinateDto">
+      SELECT id, `code`, abscissa, ordinate,font_name AS fontName,font_size AS fontSize
+        FROM field_coordinate
+       WHERE table_name = #{tableName,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
