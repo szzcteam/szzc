@@ -38,26 +38,30 @@
     <div class="panelBar" style="height: 30px;">
         <ul class="toolBar">
             <!-- 新增 -->
-            <shiro:hasPermission name="ssadmin/addProtocol.html">
+            <shiro:hasPermission name="ssadmin/roomChange/importExcel.html">
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addRoomChange"
                        height="300" width="700" target="dialog" rel="addProtocol"><span>上传房源</span>
                 </a></li>
             </shiro:hasPermission>
             <!-- 修改 -->
-            <shiro:hasPermission name="ssadmin/updateProtocol.html">
+           <%-- <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/updateHouseResource&idMore={sid_user}"
                        height="350" width="700" target="dialog" rel="updateHouseResource"><span>修改</span>
                 </a></li>
-            </shiro:hasPermission>
-            <shiro:hasPermission name="ssadmin/deleteProtocol.html">
+            </shiro:hasPermission>--%>
+            <shiro:hasPermission name="ssadmin/roomChange/batchDelete.html">
                 <li><a class="delete"
                        href="ssadmin/roomChange/batchDelete.html"
                        target="selectedTodo" rel="ids" postType="string"
                        title="确定要删除吗?"><span>批量删除</span>
                 </a></li>
             </shiro:hasPermission>
+            <li><a class="edit"
+                   href="ssadmin/roomChange/download.html"
+                   target="dwzExport" postType="navTab"><span>下载模板</span>
+            </a></li>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="138">

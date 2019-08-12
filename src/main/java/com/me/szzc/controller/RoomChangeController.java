@@ -1,10 +1,14 @@
 package com.me.szzc.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.me.szzc.aspect.SysLog;
+import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.service.RoomChangeService;
+import com.me.szzc.utils.CustomizedPropertyConfigurer;
 import com.me.szzc.utils.Utils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTAbstractNum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +19,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.Map;
 
 /**
  * 换房管理controller
  * Created by bbfang on 2019/7/27.
  */
+@Slf4j
 @Controller
 @RequestMapping("/ssadmin/roomChange")
 public class RoomChangeController {
@@ -33,24 +42,44 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/importExcel")
-    @ResponseBody
-    public JSONObject importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
-        JSONObject jsonObject = new JSONObject();
+    public ModelAndView importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("ssadmin/comm/ajaxDone");
         ResultVo resultVo = null;
         try {
+            //校验
+            if (file == null) {
+                view.addObject("statusCode", 300);
+                view.addObject("message", "请选择房源excel文件");
+                return view;
+            }
+
+            String fileName = file.getOriginalFilename();
+            int extStart = fileName.lastIndexOf(".");
+            String  ext = fileName.substring(extStart, fileName.length()).toLowerCase();
+            log.info("文件后缀:" + ext);
+            if (!ext.equals(".xls") && !ext.equals(".xlsx")) {
+                view.addObject("statusCode", 300);
+                view.addObject("message", "文件格式错误，只能是后缀为.xls 或 .xlsx 的excel文件");
+                return view;
+            }
+
+            //上传
             resultVo = roomChangeService.importExcle(file);
         } catch (Exception e) {
-            jsonObject.put("statusCode", 300);
-            jsonObject.put("message", e.getMessage());
-            return jsonObject;
+            view.addObject("statusCode", 300);
+            view.addObject("message", e.getMessage());
+            return view;
         }
         if (resultVo.getCode() == 0) {
-            jsonObject.put("statusCode", 200);
+            view.addObject("statusCode", 200);
+            view.addObject("message", "上传成功");
+            view.addObject("callbackType", "closeCurrent");
         } else {
-            jsonObject.put("statusCode", resultVo.getCode());
-            jsonObject.put("message", resultVo.getMsg());
+            view.addObject("statusCode", resultVo.getCode());
+            view.addObject("message", resultVo.getMsg());
         }
-        return jsonObject;
+        return view;
     }
 
     /**
@@ -83,6 +112,7 @@ public class RoomChangeController {
     }
 
     @RequestMapping("/batchDelete")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "批量删除房源")
     public ModelAndView deleteRoomChange(String ids) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -122,6 +152,59 @@ public class RoomChangeController {
         }
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "查询成功");
+        return modelAndView;
+    }
+
+    @RequestMapping("/download")
+    public ModelAndView download(HttpServletResponse response){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+
+        String templateFolder = CustomizedPropertyConfigurer.getValue("template.folder");
+        String fileName = "房源模板.xlsx";
+        String filePath = templateFolder+ File.separator + fileName;
+        File file = new File(filePath);
+        InputStream fin = null;
+        ServletOutputStream out = null;
+        try {
+            // 调用工具类的createDoc方法生成Word文档
+            fin = new FileInputStream(file);
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/msword");
+            // 设置浏览器以下载的方式处理该文件名
+            response.setHeader("Content-Disposition", "attachment;filename="
+                    .concat(String.valueOf(URLEncoder.encode(fileName, "UTF-8"))));
+            response.setCharacterEncoding("utf-8");
+            //您在这里稍微注意一下,中文在火狐下会出现乱码的现象
+            out = response.getOutputStream();
+            byte[] buffer = new byte[512];  // 缓冲区
+            int bytesToRead = -1;
+            // 通过循环将读入的Word文件的内容输出到浏览器中
+            while ((bytesToRead = fin.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesToRead);
+            }
+        }catch (FileNotFoundException ex){
+            log.error("文件异常", ex);
+        }catch (UnsupportedEncodingException ex) {
+            log.error("文件下载时，名称转码异常", ex);
+        }catch (IOException ex) {
+            log.error("文件下载时，流异常", ex);
+        }finally {
+            try{
+                if (fin != null) {
+                    fin.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            }catch (Exception e) {
+                log.error("流关闭异常" , e);
+            }
+        }
+        modelAndView.addObject("statusCode", 200);
+        modelAndView.addObject("message", "下载成功");
+        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 
