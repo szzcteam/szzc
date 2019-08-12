@@ -1,5 +1,6 @@
 package com.me.szzc.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
@@ -9,6 +10,7 @@ import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlExpression;
@@ -29,7 +31,7 @@ import java.util.Map;
 /**
  * 房屋征收补偿资金结算单
  */
-
+@Slf4j
 @Controller
 public class SettleAccountsController extends BaseController {
 
@@ -154,6 +156,7 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping("ssadmin/settleAccounts/update")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
+        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断

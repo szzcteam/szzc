@@ -108,8 +108,12 @@ public class BaseController extends BaseServiceCtrl{
         //查询电表
         String ammeterMain = systemArgsService.getValue(SystemArgsConstant.AMMETER_MAIN);
         String ammeterSub = systemArgsService.getValue(SystemArgsConstant.AMMETER_SUB);
+        String ammeterSa = systemArgsService.getValue(SystemArgsConstant.AMMETER_SA);
+        String ammeterTime = systemArgsService.getValue(SystemArgsConstant.AMMETER_TIME);
         modelAndView.addObject("ammeterMain", ammeterMain);
         modelAndView.addObject("ammeterSub", ammeterSub);
+        modelAndView.addObject("ammeterSa", ammeterSa);
+        modelAndView.addObject("ammeterTime", ammeterTime);
 
         //查询搬家费
         String moveHouseRmb = systemArgsService.getValue(SystemArgsConstant.MOVE_HOUSE_RMB);
@@ -121,9 +125,13 @@ public class BaseController extends BaseServiceCtrl{
         String diseaseSubsidy = systemArgsService.getValue(SystemArgsConstant.DISEASE_SUBSIDY);
         String disabilitySubsidy = systemArgsService.getValue(SystemArgsConstant.DISABILITY_SUBSIDY);
         String basicLivingSubsidy = systemArgsService.getValue(SystemArgsConstant.BASIC_LIVING_SUBSIDY);
+        String martyr = systemArgsService.getValue(SystemArgsConstant.MARTYR);
+        String noChild = systemArgsService.getValue(SystemArgsConstant.NO_CHILD);
         modelAndView.addObject("diseaseSubsidy", diseaseSubsidy);
         modelAndView.addObject("disabilitySubsidy", disabilitySubsidy);
         modelAndView.addObject("basicLivingSubsidy", basicLivingSubsidy);
+        modelAndView.addObject("martyr", martyr);
+        modelAndView.addObject("noChild", noChild);
 
         //搬迁奖励
         String oneMoveReward = systemArgsService.getValue(SystemArgsConstant.ONE_MOVE_REWARD);
@@ -158,6 +166,15 @@ public class BaseController extends BaseServiceCtrl{
         String solarWaterHeaters = systemArgsService.getValue(SystemArgsConstant.SOLAR_WATER_HEATERS);
         modelAndView.addObject("solarWaterHeaters", solarWaterHeaters);
 
+        /**奖励**/
+        String rewardRmbProportion = systemArgsService.getValue(SystemArgsConstant.REWARD_RMB_PROPORTION);
+        String rewardSwapProportion = systemArgsService.getValue(SystemArgsConstant.REWARD_SWAP_PROPORTION);
+        modelAndView.addObject("rewardRmbProportion", rewardRmbProportion);
+        modelAndView.addObject("rewardSwapProportion", rewardSwapProportion);
+
+        //保底补偿面积
+        String selGuarantee = systemArgsService.getValue(SystemArgsConstant.SEL_GUARANTEE);
+        modelAndView.addObject("selGuarantee", selGuarantee);
 
     }
 
