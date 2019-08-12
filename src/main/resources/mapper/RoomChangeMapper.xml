@@ -123,6 +123,7 @@
                r_choose_people AS choosePeople,r_district AS district
           FROM r_change
          WHERE id = #{id}
+           AND r_del = 0
     </select>
 
     <select id="selectRoomChangeByParam" parameterType="com.me.szzc.pojo.entity.RoomChange"

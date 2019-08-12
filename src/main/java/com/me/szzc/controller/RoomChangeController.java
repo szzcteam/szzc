@@ -208,4 +208,37 @@ public class RoomChangeController {
         return modelAndView;
     }
 
+    @RequestMapping("/updateRoomChangeById")
+    @ResponseBody
+    public ModelAndView updateRoomChangeById(RoomChange roomChange) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (roomChange == null || roomChange.getId() == null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "修改失败,入参为空");
+            return modelAndView;
+        }
+        RoomChange roomChangeById = roomChangeService.getRoomChangeById(roomChange.getId());
+        if (roomChangeById == null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "修改失败,数据为空");
+            return modelAndView;
+        }
+        Integer i = null;
+        try {
+            i = roomChangeService.updateRoomChangeById(roomChange);
+        } catch (Exception e) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", e.getMessage());
+            return modelAndView;
+        }
+
+        if (i > 0) {
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "查询成功");
+        } else {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "修改失败");
+        }
+        return modelAndView;
+    }
 }

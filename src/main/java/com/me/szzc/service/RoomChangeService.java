@@ -117,4 +117,33 @@ public class RoomChangeService {
                 chooseHouseDTO.getNewHouseAddress(), number);
         return integer > 0 ? true : false;
     }
+
+    public Integer updateRoomChangeById(RoomChange roomChange) {
+        String number = roomChange.getNumber();
+        List<String> strList = Arrays.asList(number.split("-"));
+        if (strList.size() != 3) {
+            throw new RuntimeException("数据房号(" + number + ")格式异常");
+        }
+        for (int i = 0; i < 3; i++) {
+            if (i == 0) {
+                roomChange.setRidgepole(strList.get(i));
+            } else if (i == 1) {
+                roomChange.setUnit(strList.get(i));
+            } else if (i == 2) {
+                if (strList.get(i).length() == 3 || strList.get(i).length() == 4) {
+                    try {
+                        String str = String.format("%04d", Integer.parseInt(strList.get(i)));
+                        roomChange.setFloor(str.substring(0, 2));
+                        roomChange.setMark(str.substring(2));
+                    } catch (Exception e) {
+                        throw new RuntimeException("数据房号(" + number + ")格式异常");
+                    }
+                } else {
+                    throw new RuntimeException("数据房号(" + number + ")格式异常");
+                }
+            }
+        }
+
+        return null;
+    }
 }
