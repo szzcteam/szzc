@@ -4,11 +4,11 @@ import com.me.szzc.dao.RoomChangeMapper;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
+import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.excle.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
@@ -80,7 +80,7 @@ public class RoomChangeService {
         List<RoomChange> roomChanges = roomChangeMapper.queryPage(start, pageSize, name, district);
         for (RoomChange roomChange : roomChanges) {
             String choosePeople = roomChange.getChoosePeople();
-            if (!StringUtils.isEmpty(choosePeople)) {
+            if (!StringUtils.isNullOrEmpty(choosePeople)) {
                 roomChange.setChoosePeople(choosePeople.replace(",", " "));
             }
         }
@@ -96,7 +96,7 @@ public class RoomChangeService {
 
     public RoomChange getRoomChangeById(Long id) {
         RoomChange roomChange = roomChangeMapper.getRoomChangeById(id);
-        if (roomChange != null) {
+        if (StringUtils.isNullOrEmpty(roomChange)) {
             String choosePeople = roomChange.getChoosePeople();
             if (!StringUtils.isEmpty(choosePeople)) {
                 roomChange.setChoosePeople(choosePeople.replace(",", " "));
@@ -118,7 +118,8 @@ public class RoomChangeService {
         return integer > 0 ? true : false;
     }
 
-    public Integer updateRoomChangeById(RoomChange roomChange) {
+    public boolean updateRoomChangeById(RoomChange roomChange) {
+        //获取房号全
         String number = roomChange.getNumber();
         List<String> strList = Arrays.asList(number.split("-"));
         if (strList.size() != 3) {
@@ -143,7 +144,12 @@ public class RoomChangeService {
                 }
             }
         }
-
-        return null;
+        //判断是否重复
+        List<RoomChange> roomChanges = roomChangeMapper.selectRoomChange(roomChange);
+        if (StringUtils.isNullOrEmpty(roomChanges) && roomChanges.size() > 0) {
+            throw new RuntimeException("片区项目(" + roomChange.getName() + "),房号(" + number + ")已存在");
+        }
+        Integer integer = roomChangeMapper.updateRoomChange(roomChange);
+        return integer > 0 ? true : false;
     }
 }

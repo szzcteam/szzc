@@ -81,4 +81,16 @@ public class RoomChange extends BaseRowModel implements Serializable {
      * 所属片区
      */
     private String district;
+
+    /**
+     * 分配房源
+     */
+    @ExcelProperty(value = "分配征收项目", index = 6)
+    private String assignedProject;
+
+    /**
+     * 房源平台
+     */
+    @ExcelProperty(value = "提供房源平台", index = 7)
+    private String housingPlatform;
 }

@@ -28,4 +28,8 @@ public interface RoomChangeMapper {
     Integer updateChooseRoom(@Param("choosePeople")String choosePeople,
                              @Param("name")String name,
                              @Param("number")String number);
+
+    Integer updateRoomChange(RoomChange roomChange);
+
+    List<RoomChange> selectRoomChange(RoomChange roomChange);
 }

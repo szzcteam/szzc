@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.me.szzc.dao.RoomChangeMapper">
+
+    <sql id="Base_Column_List">
+               id,r_name AS `name`,r_number AS `number`,
+               r_ridgepole AS ridgepole,r_unit AS unit,r_floor AS floor,r_mark AS mark,
+               r_area AS area ,r_unit_price AS unitPrice,r_total_price AS totalPrice,
+               r_choose_people AS choosePeople,r_district AS district,
+               assigned_project AS assignedProject,housing_platform AS housingPlatform
+    </sql>
+
     <insert id="insertRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
         insert into r_change
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -40,6 +49,12 @@
             <if test="district != null">
                 r_district,
             </if>
+            <if test="assignedProject != null">
+                assigned_project,
+            </if>
+            <if test="housingPlatform != null">
+                housing_platform,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -78,6 +93,12 @@
             <if test="district != null">
                 #{district,jdbcType=INTEGER},
             </if>
+            <if test="assignedProject != null">
+                #{assignedProject,jdbcType=INTEGER},
+            </if>
+            <if test="housingPlatform != null">
+                #{housingPlatform,jdbcType=INTEGER},
+            </if>
         </trim>
     </insert>
 
@@ -86,27 +107,23 @@
         FROM r_change
         WHERE r_del = 0
         <if test="name != null and name != ''">
-            AND r_name LIKE  concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
+            AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
         <if test="district != null and district != ''">
-            AND r_district LIKE  concat(concat('%',#{district,jdbcType=INTEGER}),'%')
+            AND r_district LIKE concat(concat('%',#{district,jdbcType=INTEGER}),'%')
         </if>
     </select>
 
     <select id="queryPage" resultType="com.me.szzc.pojo.entity.RoomChange">
-        SELECT id,
-        r_name AS `NAME`,
-        r_number AS `number`,
-        r_area AS `AREA`,
-        r_unit_price AS unitPrice,
-        r_total_price AS totalPrice,r_choose_people AS choosePeople,r_district AS district
+        SELECT
+        <include refid="Base_Column_List"/>
         FROM r_change
         WHERE r_del = 0
         <if test="name != null and name != ''">
-            AND r_name LIKE  concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
+            AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
         <if test="district != null and district != ''">
-            AND r_district LIKE  concat(concat('%',#{district,jdbcType=INTEGER}),'%')
+            AND r_district LIKE concat(concat('%',#{district,jdbcType=INTEGER}),'%')
         </if>
         ORDER BY id
         limit ${start},${pageSize}
@@ -117,13 +134,11 @@
     </delete>
 
     <select id="getRoomChangeById" resultType="com.me.szzc.pojo.entity.RoomChange">
-        SELECT id,r_name AS `name`,r_number AS `number`,
-               r_ridgepole AS ridgepole,r_unit AS unit,r_floor AS floor,r_mark AS mark,
-               r_area AS area ,r_unit_price AS unitPrice,r_total_price AS totalPrice,
-               r_choose_people AS choosePeople,r_district AS district
-          FROM r_change
-         WHERE id = #{id}
-           AND r_del = 0
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM r_change
+        WHERE id = #{id}
+        AND r_del = 0
     </select>
 
     <select id="selectRoomChangeByParam" parameterType="com.me.szzc.pojo.entity.RoomChange"
@@ -140,4 +155,62 @@
            AND r_name = #{name,jdbcType=VARCHAR}
            AND r_number = #{number,jdbcType=VARCHAR}
     </update>
+
+    <update id="updateRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
+        UPDATE r_change
+        <set>
+            <if test="name!=null and name !=''">
+                r_name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="number!=null and number !=''">
+                r_number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="ridgepole!=null and ridgepole !=''">
+                r_ridgepole = #{ridgepole,jdbcType=VARCHAR},
+            </if>
+            <if test="unit!=null and unit !=''">
+                r_unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="floor!=null and floor !=''">
+                r_floor = #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="mark!=null and mark !=''">
+                r_mark = #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="area!=null and area !=''">
+                r_area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice!=null and unitPrice !=''">
+                r_unit_price = #{unitPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice!=null and totalPrice !=''">
+                r_total_price = #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="choosePeople!=null and choosePeople !=''">
+                r_choose_people = #{choosePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="district!=null and district !=''">
+                r_district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedProject!=null and assignedProject !=''">
+                assigned_project = #{assignedProject,jdbcType=VARCHAR},
+            </if>
+            <if test="housingPlatform!=null and housingPlatform !=''">
+                housing_platform = #{housingPlatform,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE id != #{id}
+    </update>
+
+
+    <select id="selectRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange"
+            resultType="com.me.szzc.pojo.entity.RoomChange">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM r_change
+        WHERE id != #{id}
+        AND r_name = #{name,jdbcType=VARCHAR}
+        AND r_number = #{number,jdbcType=VARCHAR}
+        AND r_del = 0
+    </select>
 </mapper>

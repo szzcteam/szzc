@@ -7,9 +7,9 @@ import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.service.RoomChangeService;
 import com.me.szzc.utils.CustomizedPropertyConfigurer;
+import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTAbstractNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +56,7 @@ public class RoomChangeController {
 
             String fileName = file.getOriginalFilename();
             int extStart = fileName.lastIndexOf(".");
-            String  ext = fileName.substring(extStart, fileName.length()).toLowerCase();
+            String ext = fileName.substring(extStart, fileName.length()).toLowerCase();
             log.info("文件后缀:" + ext);
             if (!ext.equals(".xls") && !ext.equals(".xlsx")) {
                 view.addObject("statusCode", 300);
@@ -117,7 +117,7 @@ public class RoomChangeController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         int result = 0;
-        if (StringUtils.isNotBlank(ids)) {
+        if (StringUtils.isNullOrEmpty(ids)) {
             String[] idArr = ids.split(",");
             for (String idStr : idArr) {
                 Long id = Long.valueOf(idStr);
@@ -156,13 +156,13 @@ public class RoomChangeController {
     }
 
     @RequestMapping("/download")
-    public ModelAndView download(HttpServletResponse response){
+    public ModelAndView download(HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
 
         String templateFolder = CustomizedPropertyConfigurer.getValue("template.folder");
         String fileName = "房源模板.xlsx";
-        String filePath = templateFolder+ File.separator + fileName;
+        String filePath = templateFolder + File.separator + fileName;
         File file = new File(filePath);
         InputStream fin = null;
         ServletOutputStream out = null;
@@ -184,22 +184,22 @@ public class RoomChangeController {
             while ((bytesToRead = fin.read(buffer)) != -1) {
                 out.write(buffer, 0, bytesToRead);
             }
-        }catch (FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
             log.error("文件异常", ex);
-        }catch (UnsupportedEncodingException ex) {
+        } catch (UnsupportedEncodingException ex) {
             log.error("文件下载时，名称转码异常", ex);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             log.error("文件下载时，流异常", ex);
-        }finally {
-            try{
+        } finally {
+            try {
                 if (fin != null) {
                     fin.close();
                 }
                 if (out != null) {
                     out.close();
                 }
-            }catch (Exception e) {
-                log.error("流关闭异常" , e);
+            } catch (Exception e) {
+                log.error("流关闭异常", e);
             }
         }
         modelAndView.addObject("statusCode", 200);
@@ -212,29 +212,29 @@ public class RoomChangeController {
     @ResponseBody
     public ModelAndView updateRoomChangeById(RoomChange roomChange) {
         ModelAndView modelAndView = new ModelAndView();
-        if (roomChange == null || roomChange.getId() == null) {
+        if (StringUtils.isNullOrEmpty(roomChange) || StringUtils.isNullOrEmpty(roomChange.getId())) {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "修改失败,入参为空");
             return modelAndView;
         }
         RoomChange roomChangeById = roomChangeService.getRoomChangeById(roomChange.getId());
-        if (roomChangeById == null) {
+        if (StringUtils.isNullOrEmpty(roomChangeById)) {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "修改失败,数据为空");
             return modelAndView;
         }
-        Integer i = null;
+        Boolean status = null;
         try {
-            i = roomChangeService.updateRoomChangeById(roomChange);
+            status = roomChangeService.updateRoomChangeById(roomChange);
         } catch (Exception e) {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", e.getMessage());
             return modelAndView;
         }
 
-        if (i > 0) {
+        if (status) {
             modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "查询成功");
+            modelAndView.addObject("message", "修改成功");
         } else {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "修改失败");
