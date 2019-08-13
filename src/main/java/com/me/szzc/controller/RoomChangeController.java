@@ -38,6 +38,8 @@ public class RoomChangeController {
     private RoomChangeService roomChangeService;
 
     /**
+     * 房源信息excle导入
+     *
      * @param file excle文件
      * @return
      */
@@ -83,26 +85,27 @@ public class RoomChangeController {
     }
 
     /**
-     * @param keywords 片区项目名称
-     * @param district 所属片区
+     * 房源信息条件分页查询
+     *
+     * @param request
+     * @param name            房源項目
+     * @param number          房号
+     * @param choosePeople    点房人
+     * @param assignedProject 分配征收项目(片区)
+     * @param housingPlatform 提供房源平台
      * @return
      */
     @RequestMapping("/queryPage")
-    public ModelAndView queryPage(HttpServletRequest request, String keywords, String district) {
+    public ModelAndView queryPage(HttpServletRequest request, String name, String number,
+                                  String choosePeople, String assignedProject, String housingPlatform) {
         ModelAndView view = new ModelAndView();
-        if (keywords != null) {
-            keywords = keywords.trim();
-            if (keywords.length() > 0) {
-                view.addObject("keywords", keywords);
-            }
-        }
-
+        verify(name, number, choosePeople, assignedProject, housingPlatform, view);
         int currentPage = 1;
         if (request.getParameter("pageNum") != null) {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
         view.setViewName("ssadmin/roomChangeList");
-        Map<String, Object> map = roomChangeService.queryPage(Utils.getNumPerPage(), currentPage, keywords, district);
+        Map<String, Object> map = roomChangeService.queryPage(Utils.getNumPerPage(), currentPage, name, number, choosePeople, assignedProject, housingPlatform);
         view.addObject("roomList", map.get("datas"));
         view.addObject("numPerPage", Utils.getNumPerPage());
         view.addObject("currentPage", currentPage);
@@ -111,6 +114,12 @@ public class RoomChangeController {
         return view;
     }
 
+    /**
+     * 批量删除房源信息
+     *
+     * @param ids
+     * @return
+     */
     @RequestMapping("/batchDelete")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "批量删除房源")
     public ModelAndView deleteRoomChange(String ids) {
@@ -142,6 +151,12 @@ public class RoomChangeController {
         return modelAndView;
     }
 
+    /**
+     * 根据ID获取房源信息
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping("/getRoomChangeById")
     @ResponseBody
     public ModelAndView getRoomChangeById(Long id) {
@@ -208,15 +223,23 @@ public class RoomChangeController {
         return modelAndView;
     }
 
+    /**
+     * 修改单个房源信息
+     *
+     * @param roomChange
+     * @return
+     */
     @RequestMapping("/updateRoomChangeById")
     @ResponseBody
     public ModelAndView updateRoomChangeById(RoomChange roomChange) {
         ModelAndView modelAndView = new ModelAndView();
+        //数据不为空
         if (StringUtils.isNullOrEmpty(roomChange) || StringUtils.isNullOrEmpty(roomChange.getId())) {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "修改失败,入参为空");
             return modelAndView;
         }
+        //获取数据
         RoomChange roomChangeById = roomChangeService.getRoomChangeById(roomChange.getId());
         if (StringUtils.isNullOrEmpty(roomChangeById)) {
             modelAndView.addObject("statusCode", 300);
@@ -225,6 +248,7 @@ public class RoomChangeController {
         }
         Boolean status = null;
         try {
+            //修改
             status = roomChangeService.updateRoomChangeById(roomChange);
         } catch (Exception e) {
             modelAndView.addObject("statusCode", 300);
@@ -240,5 +264,49 @@ public class RoomChangeController {
             modelAndView.addObject("message", "修改失败");
         }
         return modelAndView;
+    }
+
+    /**
+     * 参数校验
+     *
+     * @param name
+     * @param number
+     * @param choosePeople
+     * @param assignedProject
+     * @param housingPlatform
+     * @param view
+     */
+    private void verify(String name, String number, String choosePeople,
+                        String assignedProject, String housingPlatform, ModelAndView view) {
+        if (StringUtils.isNullOrEmpty(name)) {
+            name = name.trim();
+            if (name.length() > 0) {
+                view.addObject("name", name);
+            }
+        }
+        if (StringUtils.isNullOrEmpty(number)) {
+            number = number.trim();
+            if (number.length() > 0) {
+                view.addObject("number", number);
+            }
+        }
+        if (StringUtils.isNullOrEmpty(choosePeople)) {
+            choosePeople = choosePeople.trim();
+            if (choosePeople.length() > 0) {
+                view.addObject("choosePeople", choosePeople);
+            }
+        }
+        if (StringUtils.isNullOrEmpty(assignedProject)) {
+            assignedProject = assignedProject.trim();
+            if (assignedProject.length() > 0) {
+                view.addObject("assignedProject", assignedProject);
+            }
+        }
+        if (StringUtils.isNullOrEmpty(housingPlatform)) {
+            housingPlatform = housingPlatform.trim();
+            if (housingPlatform.length() > 0) {
+                view.addObject("housingPlatform", housingPlatform);
+            }
+        }
     }
 }

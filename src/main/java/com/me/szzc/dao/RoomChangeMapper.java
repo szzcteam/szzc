@@ -12,12 +12,19 @@ public interface RoomChangeMapper {
 
     int insertRoomChange(RoomChange roomChange);
 
-    Integer getCount(@Param("name") String name, @Param("district") String district);
+    Integer getCount(@Param("name") String name,
+                     @Param("number") String number,
+                     @Param("choosePeople") String choosePeople,
+                     @Param("assignedProject") String assignedProject,
+                     @Param("housingPlatform") String housingPlatform);
 
     List<RoomChange> queryPage(@Param("start") Integer start,
                                @Param("pageSize") Integer pageSize,
                                @Param("name") String name,
-                               @Param("district") String district);
+                               @Param("number") String number,
+                               @Param("choosePeople") String choosePeople,
+                               @Param("assignedProject") String assignedProject,
+                               @Param("housingPlatform") String housingPlatform);
 
     Integer deleteRoomChange(Long id);
 
@@ -25,11 +32,12 @@ public interface RoomChangeMapper {
 
     Integer selectRoomChangeByParam(RoomChange roomChange);
 
-    Integer updateChooseRoom(@Param("choosePeople")String choosePeople,
-                             @Param("name")String name,
-                             @Param("number")String number);
+    Integer updateChooseRoom(@Param("choosePeople") String choosePeople,
+                             @Param("name") String name,
+                             @Param("number") String number);
 
     Integer updateRoomChange(RoomChange roomChange);
 
     List<RoomChange> selectRoomChange(RoomChange roomChange);
+
 }

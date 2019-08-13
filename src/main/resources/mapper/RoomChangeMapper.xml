@@ -6,7 +6,7 @@
                id,r_name AS `name`,r_number AS `number`,
                r_ridgepole AS ridgepole,r_unit AS unit,r_floor AS floor,r_mark AS mark,
                r_area AS area ,r_unit_price AS unitPrice,r_total_price AS totalPrice,
-               r_choose_people AS choosePeople,r_district AS district,
+               r_choose_people AS choosePeople,
                assigned_project AS assignedProject,housing_platform AS housingPlatform
     </sql>
 
@@ -45,9 +45,6 @@
             </if>
             <if test="choosePeople != null">
                 r_choose_people,
-            </if>
-            <if test="district != null">
-                r_district,
             </if>
             <if test="assignedProject != null">
                 assigned_project,
@@ -90,9 +87,6 @@
             <if test="choosePeople != null">
                 #{choosePeople,jdbcType=VARCHAR},
             </if>
-            <if test="district != null">
-                #{district,jdbcType=INTEGER},
-            </if>
             <if test="assignedProject != null">
                 #{assignedProject,jdbcType=INTEGER},
             </if>
@@ -109,8 +103,17 @@
         <if test="name != null and name != ''">
             AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
-        <if test="district != null and district != ''">
-            AND r_district LIKE concat(concat('%',#{district,jdbcType=INTEGER}),'%')
+        <if test="number != null and number != ''">
+            AND r_number LIKE concat(concat('%',#{number,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="choosePeople != null and choosePeople != ''">
+            AND r_choose_people LIKE concat(concat('%',#{choosePeople,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="assignedProject != null and assignedProject != ''">
+            AND assigned_project LIKE concat(concat('%',#{assignedProject,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="housingPlatform != null and housingPlatform != ''">
+            AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
         </if>
     </select>
 
@@ -122,8 +125,17 @@
         <if test="name != null and name != ''">
             AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
-        <if test="district != null and district != ''">
-            AND r_district LIKE concat(concat('%',#{district,jdbcType=INTEGER}),'%')
+        <if test="number != null and number != ''">
+            AND r_number LIKE concat(concat('%',#{number,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="choosePeople != null and choosePeople != ''">
+            AND r_choose_people LIKE concat(concat('%',#{choosePeople,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="assignedProject != null and assignedProject != ''">
+            AND assigned_project LIKE concat(concat('%',#{assignedProject,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="housingPlatform != null and housingPlatform != ''">
+            AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
         </if>
         ORDER BY id
         limit ${start},${pageSize}
@@ -188,9 +200,6 @@
             </if>
             <if test="choosePeople!=null and choosePeople !=''">
                 r_choose_people = #{choosePeople,jdbcType=VARCHAR},
-            </if>
-            <if test="district!=null and district !=''">
-                r_district = #{district,jdbcType=VARCHAR},
             </if>
             <if test="assignedProject!=null and assignedProject !=''">
                 assigned_project = #{assignedProject,jdbcType=VARCHAR},

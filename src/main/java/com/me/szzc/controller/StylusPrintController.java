@@ -44,7 +44,6 @@ public class StylusPrintController {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "打印失败");
         }
-
         return modelAndView;
     }
 }
