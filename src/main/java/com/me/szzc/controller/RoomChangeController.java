@@ -96,16 +96,45 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/queryPage")
-    public ModelAndView queryPage(HttpServletRequest request, String name, String number,
+    public ModelAndView queryPage(HttpServletRequest request, String keywords, String number,
                                   String choosePeople, String assignedProject, String housingPlatform) {
         ModelAndView view = new ModelAndView();
-        verify(name, number, choosePeople, assignedProject, housingPlatform, view);
+        if (!StringUtils.isNullOrEmpty(keywords)) {
+            keywords = keywords.trim();
+            if (keywords.length() > 0) {
+                view.addObject("name", keywords);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(number)) {
+            number = number.trim();
+            if (number.length() > 0) {
+                view.addObject("number", number);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(choosePeople)) {
+            choosePeople = choosePeople.trim();
+            if (choosePeople.length() > 0) {
+                view.addObject("choosePeople", choosePeople);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(assignedProject)) {
+            assignedProject = assignedProject.trim();
+            if (assignedProject.length() > 0) {
+                view.addObject("assignedProject", assignedProject);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(housingPlatform)) {
+            housingPlatform = housingPlatform.trim();
+            if (housingPlatform.length() > 0) {
+                view.addObject("housingPlatform", housingPlatform);
+            }
+        }
         int currentPage = 1;
         if (request.getParameter("pageNum") != null) {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
         view.setViewName("ssadmin/roomChangeList");
-        Map<String, Object> map = roomChangeService.queryPage(Utils.getNumPerPage(), currentPage, name, number, choosePeople, assignedProject, housingPlatform);
+        Map<String, Object> map = roomChangeService.queryPage(Utils.getNumPerPage(), currentPage, keywords, number, choosePeople, assignedProject, housingPlatform);
         view.addObject("roomList", map.get("datas"));
         view.addObject("numPerPage", Utils.getNumPerPage());
         view.addObject("currentPage", currentPage);
@@ -266,47 +295,4 @@ public class RoomChangeController {
         return modelAndView;
     }
 
-    /**
-     * 参数校验
-     *
-     * @param name
-     * @param number
-     * @param choosePeople
-     * @param assignedProject
-     * @param housingPlatform
-     * @param view
-     */
-    private void verify(String name, String number, String choosePeople,
-                        String assignedProject, String housingPlatform, ModelAndView view) {
-        if (StringUtils.isNullOrEmpty(name)) {
-            name = name.trim();
-            if (name.length() > 0) {
-                view.addObject("name", name);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(number)) {
-            number = number.trim();
-            if (number.length() > 0) {
-                view.addObject("number", number);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(choosePeople)) {
-            choosePeople = choosePeople.trim();
-            if (choosePeople.length() > 0) {
-                view.addObject("choosePeople", choosePeople);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(assignedProject)) {
-            assignedProject = assignedProject.trim();
-            if (assignedProject.length() > 0) {
-                view.addObject("assignedProject", assignedProject);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(housingPlatform)) {
-            housingPlatform = housingPlatform.trim();
-            if (housingPlatform.length() > 0) {
-                view.addObject("housingPlatform", housingPlatform);
-            }
-        }
-    }
 }
