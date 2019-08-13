@@ -22,8 +22,9 @@ public interface SystemArgsConstant {
 
     /**电表**/
     String AMMETER_MAIN = "ammeter_main";
-
     String AMMETER_SUB = "ammeter_sub";
+    String AMMETER_SA = "ammeter_sa";
+    String AMMETER_TIME = "ammeter_time";
 
     /**搬家费**/
     String MOVE_HOUSE_RMB = "move_house_rmb";
@@ -33,6 +34,9 @@ public interface SystemArgsConstant {
     String DISEASE_SUBSIDY = "disease_subsidy";
     String DISABILITY_SUBSIDY = "disability_subsidy";
     String BASIC_LIVING_SUBSIDY = "basic_living_subsidy";
+    String MARTYR = "martyr";
+    String NO_CHILD = "no_child";
+
 
     /**搬迁奖励**/
     String ONE_MOVE_REWARD = "one_move_reward";
@@ -57,4 +61,10 @@ public interface SystemArgsConstant {
     /**太阳能电热水器**/
     String SOLAR_WATER_HEATERS ="solar_water_heaters";
 
+    /**奖励**/
+    String REWARD_RMB_PROPORTION = "reward_rmb_proportion";
+    String REWARD_SWAP_PROPORTION = "reward_swap_proportion";
+
+    /**保底补偿面积**/
+    String SEL_GUARANTEE = "sel_guarantee";
 }

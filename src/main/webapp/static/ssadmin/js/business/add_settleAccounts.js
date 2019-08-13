@@ -2,41 +2,61 @@ $(document).ready(function(){
     //房屋评估单价失去焦点
     $("input[name='assessPrice']").eq(0).blur(function () {
         var assessPrice = $(this).val() || 0;
-        //价值补偿
+        //有证房屋价值补偿
         $("input[name='calcValueCompensatePrice']").val(assessPrice).change();
+        //未经登记的合法建筑补偿
+        $("input[name='calcNoRegisterLegalPrice']").val(assessPrice).change();
+        //历史遗留无证房补偿
+        $("input[name='calcHistoryLegacyPrice']").val(assessPrice).change();
         //货币补偿补助
         $("input[name='calcRmbCompensatePrice']").val(assessPrice).change();
         //货币搬迁奖励
         $("input[name='calcRmbMoveRewardPrice']").val(assessPrice).change();
+        //住改商：旧房单价
+        $("input[name='calcChangeCompensateOldPrice']").val(assessPrice).change();
         //住改商补助触发计算
         settleAccountObj.calcChangeCompensates();
     });
 
-    //建筑面积失去焦点
-    $("input[name='checkInArea']").eq(0).blur(function () {
-        var checkInArea = $(this).val() || 0;
-        //填充价值补偿的面积
-        $("input[name='calcValueCompensateArea']").val(checkInArea).change();
-        //填充装修折旧的面积
-        $("input[name='calcDecorationCompensateArea']").val(checkInArea).change();
-        //填充临时安置补偿过渡费的面积
-        $("input[name='calcInterimFeeArea']").val(checkInArea).change();
-        //货币补偿补助
-        $("input[name='calcRmbCompensateArea']").val(checkInArea).change();
-        //货币搬迁奖励
-        $("input[name='calcRmbMoveRewardArea']").val(checkInArea).change();
+    //建筑面积-有证房屋面积
+    $("input[name='certifiedArea']").eq(0).blur(function () {
+        var certifiedArea = $(this).val() || 0;
+        $("input[name='calcValueCompensateArea']").val(certifiedArea).change();
+        settleAccountObj.fullCheckInArea();
     });
 
+    //建筑面积-未经登记合法面积
+    $("input[name='noRegisterLegalArea']").eq(0).blur(function () {
+        var noRegisterLegalArea = $(this).val() || 0;
+        $("input[name='calcNoRegisterLegalArea']").val(noRegisterLegalArea).change();
+        settleAccountObj.fullNoCheckinArea();
+        settleAccountObj.fullCheckInArea();
+    });
+    //建筑面积-历史遗留无证面积
+    $("input[name='historyLegacyArea']").eq(0).blur(function () {
+        var historyLegacyArea = $(this).val() || 0;
+        $("input[name='calcHistoryLegacyArea']").val(historyLegacyArea).change();
+        settleAccountObj.fullNoCheckinArea();
+        settleAccountObj.fullCheckInArea();
+    });
+
+    //建筑面积失去焦点
+    /*    $("input[name='checkInArea']").eq(0).blur(function () {
+            var checkInArea = $(this).val() || 0;
+            //填充价值补偿的面积
+            $("input[name='calcValueCompensateArea']").val(checkInArea).change();
+            //填充临时安置补偿过渡费的面积
+            $("input[name='calcInterimFeeArea']").val(checkInArea).change();
+            //货币补偿补助
+            $("input[name='calcRmbCompensateArea']").val(checkInArea).change();
+            //货币搬迁奖励
+            $("input[name='calcRmbMoveRewardArea']").val(checkInArea).change();
+        });*/
+
     //货币补偿补助3小框，失去焦点，重新计算公式
-    $("input[name='calcRmbCompensateArea']").eq(0).on("blur change", function () {
+   /* $("input[name='calcRmbCompensateArea'],input[name='calcRmbCompensatePrice'],input[name='calcRmbCompensateProportion']").on("blur change", function () {
         settleAccountObj.fullCalcRmbCompensate();
-    });
-    $("input[name='calcRmbCompensatePrice']").eq(0).on("blur change", function () {
-        settleAccountObj.fullCalcRmbCompensate();
-    });
-    $("input[name='calcRmbCompensateProportion']").eq(0).on("blur change", function () {
-        settleAccountObj.fullCalcRmbCompensate();
-    });
+    });*/
 
     //货币搬迁奖励3小框，失去焦点，重新计算公式
     $("input[name='calcRmbMoveRewardArea']").eq(0).on("blur change", function () {
@@ -62,71 +82,87 @@ $(document).ready(function(){
     });
 
     //临时安置3小框，失去焦点，重新计算公式
-    $("input[name='calcInterimFeeArea']").eq(0).on("blur change", function () {
-        settleAccountObj.fullCalcInterimFee();
-    });
-    $("input[name='calcInterimFeePrice']").eq(0).on("blur change", function () {
-        settleAccountObj.fullCalcInterimFee();
-    });
-    $("input[name='calcInterimFeeMonth']").eq(0).on("blur change", function () {
+    $("input[name='calcInterimFeeArea'],input[name='calcInterimFeePrice'],input[name='calcInterimFeeMonth']").on("blur change", function () {
         settleAccountObj.fullCalcInterimFee();
     });
 
     //装修折旧 2小框，失去焦点，重新计算公式
-    $("input[name='calcDecorationCompensateArea']").eq(0).on("blur change", function () {
-        settleAccountObj.fullCalcDecoration();
-    });
-    $("input[name='calcDecorationCompensatePrice']").eq(0).on("blur change", function () {
+    $("input[name='calcDecorationCompensateArea'],input[name='calcDecorationCompensatePrice']").on("blur change", function () {
         settleAccountObj.fullCalcDecoration();
     });
 
-    //房屋价值补偿，3小框，失去焦点，重新计算公式
-    $("input[name='calcValueCompensateArea']").eq(0).on("blur change", function () {
+    //房屋价值补偿-有证房屋补偿，3小框，失去焦点，重新计算公式
+    $("input[name='calcValueCompensateArea'],input[name='calcValueCompensatePrice']").on("blur change", function () {
         settleAccountObj.fullCalcValueCompensate();
     });
-    $("input[name='calcValueCompensatePrice']").eq(0).on("blur change", function () {
-        settleAccountObj.fullCalcValueCompensate();
-    });
-    $("input[name='calcValueCompensateProportion']").eq(0).on("blur change", function () {
-        settleAccountObj.fullCalcValueCompensate();
-    });
+    /*    $("input[name='calcValueCompensateProportion']").eq(0).on("blur change", function () {
+            settleAccountObj.fullCalcValueCompensate();
+        });*/
 
-    //房屋价值补偿计算公式失去焦点
+    //计算公式失去焦点
     $("input[name='calcValueCompensate']").eq(0).on("blur change", function () {
         settleAccountObj.changeCalcValueCompensate();
     });
 
+    //房屋价值补偿-未经登记的合法建筑补偿
+    $("input[name='calcNoRegisterLegalArea'],input[name='calcNoRegisterLegalPrice']").on("blur change", function () {
+        settleAccountObj.fullCalcNoRegisterLegal();
+    });
+
+    //计算公式失去焦点
+    $("input[name='calcNoRegisterLegal']").eq(0).on("blur change", function () {
+        settleAccountObj.changeCalcNoRegisterLegal();
+    });
+
+    //房屋价值补偿-历史遗留无证房补偿
+    $("input[name='calcHistoryLegacyArea'],input[name='calcHistoryLegacyPrice']").on("blur change", function () {
+        settleAccountObj.fullCalcHistoryLegacy();
+    });
+
+    //计算公式失去焦点
+    $("input[name='calcHistoryLegacy']").eq(0).on("blur change", function () {
+        settleAccountObj.changeCalcHistoryLegacy();
+    });
+
+
+    //给所有参与求和的元素，绑定级联变动事件
     //参与被征收房屋补偿合计的金额框
     var sumCompensateNameArr = new Array();
-    sumCompensateNameArr[0] = "valueCompensate";   //证载房屋价值补偿
-    sumCompensateNameArr[1] = "decorationCompensate";  //装修折旧补偿
-    sumCompensateNameArr[2] = "moveHouseFee";  //搬家费
-    sumCompensateNameArr[3] = "interimFee";  //过渡费
-    sumCompensateNameArr[4] = "moveWaterMeterFee";  //水表迁移费
-    sumCompensateNameArr[5] = "moveAmmeterFee";   //电表迁移费
-    sumCompensateNameArr[6] = "moveAirConditioningFee";  //空调移机费
-    sumCompensateNameArr[7] = "hotWaterCompensate";  //热水器拆装费
-    sumCompensateNameArr[8] = "gasFee";  //管道煤气拆装费
-    sumCompensateNameArr[9] = "structureCompensate";   //构建物补偿
-    sumCompensateNameArr[10] = "affiliatedOther"; //房屋附属设施补偿-其他
-    sumCompensateNameArr[11] = "noCheckCompensate";   //未登记建筑房屋补偿
-    sumCompensateNameArr[12] = "rmbCompensate";   //货币补偿补助
-    sumCompensateNameArr[13] = "lifeCompensate";   //生活困难补助
-    sumCompensateNameArr[14] = "changeCompensate";   //住改商补助
-    sumCompensateNameArr[15] = "buildingAreaFee";  //建筑面积补助
-    sumCompensateNameArr[16] = "suspendBusinessFee";  //停产停业损失补偿
-    sumCompensateNameArr[17] = "noMoveCompensate";  //不可移动设备设施补偿
-    sumCompensateNameArr[18] = "moveReward";  //搬迁奖励
-    sumCompensateNameArr[19] = "rmbMoveReward";  //货币搬迁奖励
+    sumCompensateNameArr[0] = "valueCompensate";   //有证房屋补偿
+    sumCompensateNameArr[1] = "noRegisterLegal";   //未经登记的合法建筑补偿
+    sumCompensateNameArr[2] = "historyLegacy";   //历史遗留无证房补偿
+    sumCompensateNameArr[3] = "decorationCompensate";  //装修折旧补偿
+    sumCompensateNameArr[4] = "moveHouseFee";  //搬家费
+    sumCompensateNameArr[5] = "interimFee";  //过渡费
+    sumCompensateNameArr[6] = "guarantee";  //保底补偿
+    sumCompensateNameArr[7] = "suspendBusinessFee";  //停产停业损失补偿
+    sumCompensateNameArr[8] = "moveWaterMeterFee";  //水表迁移费
+    sumCompensateNameArr[9] = "moveAmmeterFee";   //电表迁移费
+    sumCompensateNameArr[10] = "moveAirConditioningFee";  //空调移机费
+    sumCompensateNameArr[11] = "hotWaterCompensate";  //热水器拆装费
+    sumCompensateNameArr[12] = "gasFee";  //管道煤气拆装费
+    sumCompensateNameArr[13] = "structureBalcony";   //结构内阳台
+    sumCompensateNameArr[14] = "structureBuild";   //外挑搭建
+    sumCompensateNameArr[15] = "structureDark";   //暗楼
+    sumCompensateNameArr[16] = "structureMezzanine";   //夹层
+    sumCompensateNameArr[17] = "structureRoof";   //楼顶搭建
+    sumCompensateNameArr[18] = "changeCompensate";   //住改商补助
+    sumCompensateNameArr[19] = "rmbCompensate";   //货币补偿补助
+    // sumCompensateNameArr[10] = "affiliatedOther"; //房屋附属设施补偿-其他
+    // sumCompensateNameArr[11] = "noCheckCompensate";   //未登记建筑房屋补偿
     sumCompensateNameArr[20] = "smallAreaReward";  //小面积住房搬迁奖励
-    sumCompensateNameArr[21] = "otherRmb";  //其他
-
+    sumCompensateNameArr[21] = "lifeCompensate";   //生活困难补助
+    sumCompensateNameArr[22] = "moveReward";  //货币搬迁奖励
+    sumCompensateNameArr[23] = "buildingAreaFee";  //建筑面积补助
+    // sumCompensateNameArr[17] = "noMoveCompensate";  //不可移动设备设施补偿
+    sumCompensateNameArr[24] = "otherRmb";  //其他
     for(var i=0;i<sumCompensateNameArr.length;i++){
         var nameText = sumCompensateNameArr[i];
         $("input[name='"+nameText+"']").eq(0).on("blur change", function () {
             settleAccountObj.fullSumCompensate();
         });
     }
+
 
     //旧房金额：被征收房屋补偿合计; 绑定失去焦点、变更事件
     $("input[name='sumCompensate']").eq(0).on("blur change", function () {
@@ -145,7 +181,7 @@ $(document).ready(function(){
     });
 
     //电表迁移计算绑定
-    $("#ammeter_main,#ammeter_sub").on("change", function () {
+    $("#ammeter_main,#ammeter_sub,#ammeter_sa,#ammeter_time").on("change", function () {
         settleAccountObj.fullAmmeter();
     });
 
@@ -159,6 +195,23 @@ $(document).ready(function(){
         settleAccountObj.calcDecorationCompensate();
     });
 
+    //保底补偿下拉框
+    $("select[name='sel_guarantee']").eq(0).change(function () {
+        var guarantee_area = $(this).val();
+        if(guarantee_area == 0){
+            $("input[name='calcGuarantee']").eq(0).val("0").change();
+        }else{
+            var checkInArea = $("input[name='checkInArea']").eq(0).val() || 0;
+            var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
+            if(checkInArea == 0 || assessPrice == 0){
+                alert("进行保底补偿之前，请先填写建筑面积、房屋评估单价");
+                $(this).val(0);
+                return;
+            }
+            var guarantee_money_calc = "(" + guarantee_area + "-" + checkInArea + ")" + "*" + assessPrice;
+            $("input[name='calcGuarantee']").eq(0).val(guarantee_money_calc).change();
+        }
+    });
 
     //停产停业损失下拉选择框
     $("select[name='sel_calcSuspendBusinessFee']").eq(0).change(function () {
@@ -186,10 +239,9 @@ $(document).ready(function(){
         }
     });
 
-    //搬迁奖励计算公式
-    $("select[name='calcMoveReward']").eq(0).change(function () {
-        var moveReward = $(this).val();
-        $("input[name='moveReward']").eq(0).val(moveReward).change();
+    //奖励计算公式
+    $("input[name='calcMoveReward']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcMoveReward", "moveReward");
     });
 
     //过渡费公式，绑定失去焦点、变更事件，计算金额
@@ -197,8 +249,17 @@ $(document).ready(function(){
         settleAccountObj.runCalc("calcInterimFee", "interimFee");
     });
 
-    //搬家费
-    $("select[name='calcMoveHouseFee']").eq(0).change(function () {
+    //搬家费 选择
+    $("select[name='sel_calcMoveHouseFee']").eq(0).change(function () {
+        settleAccountObj.fullCalcMoveHouseFee();
+    });
+    //搬家费计算公式
+    $("input[name='calcMoveHouseFee']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcMoveHouseFee", "moveHouseFee");
+    });
+
+
+    /*$("select[name='calcMoveHouseFee']").eq(0).change(function () {
         var moveHouseFee = $(this).val();
         $("input[name='moveHouseFee']").eq(0).val(moveHouseFee).change();
         //级联货币补偿补助、货币搬迁奖励，当被征收人选择产权调换时，这2项隐藏
@@ -226,7 +287,7 @@ $(document).ready(function(){
             $("#rmbMoveReward_td3 input[type='text']").css("display", "none");
             $("input[name='calcRmbMoveReward']").eq(0).val("0*0*0").change();
         }
-    });
+    });*/
     //热水器拆装费
     $("input[name='calcHotWaterCompensate']").eq(0).on("blur change", function () {
         settleAccountObj.runCalc("calcHotWaterCompensate", "hotWaterCompensate");
@@ -236,9 +297,24 @@ $(document).ready(function(){
         settleAccountObj.runCalc("calcGasFee", "gasFee");
     });
     //构建物补偿
-    $("input[name='calcStructureCompensate']").eq(0).on("blur change", function () {
-        settleAccountObj.runCalc("calcStructureCompensate", "structureCompensate");
+    $("input[name='calcStructureBalcony']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcStructureBalcony", "structureBalcony");
     });
+    $("input[name='calcStructureBuild']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcStructureBuild", "structureBuild");
+    });
+    $("input[name='calcStructureDark']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcStructureDark", "structureDark");
+    });
+    $("input[name='calcStructureMezzanine']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcStructureMezzanine", "structureMezzanine");
+    });
+    $("input[name='calcStructureRoof']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcStructureRoof", "structureRoof");
+    });
+    /* $("input[name='calcStructureCompensate']").eq(0).on("blur change", function () {
+         settleAccountObj.runCalc("calcStructureCompensate", "structureCompensate");
+     });*/
     //附属设施---其他
     $("input[name='calcAffiliatedOther']").eq(0).on("blur change", function () {
         settleAccountObj.runCalc("calcAffiliatedOther", "affiliatedOther");
@@ -260,8 +336,11 @@ $(document).ready(function(){
         var diseaseSubsidyFlag = $("input[name='diseaseSubsidy']").eq(0).prop("checked");
         var disabilitySubsidyFlag = $("input[name='disabilitySubsidy']").eq(0).prop("checked");
         var basicLivingSubsidyFlag = $("input[name='basicLivingSubsidy']").eq(0).prop("checked");
+        var martyrFlag = $("input[name='martyr']").eq(0).prop("checked");
+        var noChildFlag = $("input[name='noChild']").eq(0).prop("checked");
+
         var calcLifeCompensate = "";
-        console.log("生活困难补助选择："+diseaseSubsidyFlag + "  " + disabilitySubsidyFlag + " " + basicLivingSubsidyFlag);
+        console.log("生活困难补助选择：" + diseaseSubsidyFlag + "  " + disabilitySubsidyFlag + " " + basicLivingSubsidyFlag + "  " + martyrFlag + "  " + noChildFlag);
         if(diseaseSubsidyFlag) {
             calcLifeCompensate = $("input[name='diseaseSubsidy']").eq(0).val() || 0;
         }else{
@@ -277,6 +356,16 @@ $(document).ready(function(){
         }else{
             calcLifeCompensate =  calcLifeCompensate + "+" + 0;
         }
+        if(martyrFlag) {
+            calcLifeCompensate = calcLifeCompensate + "+" + $("input[name='martyr']").eq(0).val() || 0;
+        }else{
+            calcLifeCompensate =  calcLifeCompensate + "+" + 0;
+        }
+        if(noChildFlag) {
+            calcLifeCompensate = calcLifeCompensate + "+" + $("input[name='noChild']").eq(0).val() || 0;
+        }else{
+            calcLifeCompensate =  calcLifeCompensate + "+" + 0;
+        }
 
         $("input[name='calcLifeCompensate']").val(calcLifeCompensate).change();
     });
@@ -287,6 +376,10 @@ $(document).ready(function(){
     //建筑面积补助
     $("input[name='calcBuildingAreaFee']").eq(0).on("blur change", function () {
         settleAccountObj.runCalc("calcBuildingAreaFee", "buildingAreaFee");
+    });
+    //保底补偿
+    $("input[name='calcGuarantee']").eq(0).on("blur change", function () {
+        settleAccountObj.runCalc("calcGuarantee", "guarantee");
     });
     //停产停业损失补偿
     $("input[name='calcSuspendBusinessFee']").eq(0).on("blur change", function () {
@@ -309,49 +402,55 @@ $(document).ready(function(){
         settleAccountObj.runCalc("calcOther", "otherRmb");
     });
 
-    //左上角补偿方式选择，级联搬迁补偿(搬家费)
-    $("select[name='choose_type']").eq(0).on("change", function () {
-        var value = $(this).val();
-        $("select[name='calcMoveHouseFee']").eq(0).val(value).change();
+    //左上角补偿方式选择，级联 “奖励”的计算，切换选择时，公式不一样
+    $("input[name='compensateType']").on("click", function () {
+        settleAccountObj.calcMoveReward();
     });
 
-    //无烟灶台选择数量
-    $("#sel_stove").on("change", function () {
-        settleAccountObj.calcDarkBuilding();
+
+    //构建物补偿-阳台
+    $("input[name='structureBalconyArea'],input[name='structureBalconyPrice'],input[name='structureBalconyProportion']").on("blur change", function () {
+        settleAccountObj.calcStructureBalcony();
     });
 
-    //构建物：暗楼面积
-    $("input[name='calcStructureCompensateArea']").eq(0).on("blur change", function () {
-        settleAccountObj.calcDarkBuilding();
+    //构建物补偿-外挑搭建
+    $("input[name='structureBuildArea'],input[name='structureBuildPrice'],input[name='structureBuildProportion']").on("blur change", function () {
+        settleAccountObj.calcStructureBuild();
     });
 
-    //构建物：暗楼单价
-    $("input[name='calcStructureCompensatePrice']").eq(0).on("blur change", function () {
-        settleAccountObj.calcDarkBuilding();
+    //构建物补偿-暗楼
+    $("input[name='structureDarkArea'],input[name='structureDarkPrice'],input[name='structureDarkProportion']").on("blur change", function () {
+        settleAccountObj.calcStructureDark();
     });
 
-    //热水器拆装费
-    $("#water_heater_type").on("change", function () {
-        var water_heater_type = $(this).val();
-        if (water_heater_type == 0) {
-            $("#sel_water_heater").css("display", "none");
-            $("input[name='calcHotWaterCompensateMoney']").eq(0).css("display", "none");
-            $("input[name='calcHotWaterCompensateConvert']").eq(0).css("display", "none");
-        } else if (water_heater_type == 1) {
-            $("#sel_water_heater").css("display", "inline-block").change();
-            $("input[name='calcHotWaterCompensateMoney']").eq(0).css("display", "none");
-            $("input[name='calcHotWaterCompensateConvert']").eq(0).css("display", "none");
-        } else if (water_heater_type == 2) {
-            $("#sel_water_heater").css("display", "none");
-            $("input[name='calcHotWaterCompensateMoney']").eq(0).css("display", "inline-block").change();
-            $("input[name='calcHotWaterCompensateConvert']").eq(0).css("display", "inline-block").change();
-        }
+    //构建物补偿-夹层
+    $("input[name='structureMezzanineArea'],input[name='structureMezzaninePrice'],input[name='structureMezzanineProportion']").on("blur change", function () {
+        settleAccountObj.calcStructureMezzanine();
     });
+
+    //构建物补偿-楼顶搭建
+    $("input[name='structureRoofArea'],input[name='structureRoofPrice'],input[name='structureRoofProportion']").on("blur change", function () {
+        settleAccountObj.calcStructureRoof();
+    });
+
+    /* //无烟灶台选择数量
+     $("#sel_stove").on("change", function () {
+         settleAccountObj.calcDarkBuilding();
+     });
+
+     //构建物：暗楼面积
+     $("input[name='calcStructureCompensateArea']").eq(0).on("blur change", function () {
+         settleAccountObj.calcDarkBuilding();
+     });
+
+     //构建物：暗楼单价
+     $("input[name='calcStructureCompensatePrice']").eq(0).on("blur change", function () {
+         settleAccountObj.calcDarkBuilding();
+     });*/
 
     //电热水器选择数量
     $("#sel_water_heater").on("change", function () {
-        var v = $(this).val() || 0;
-        $("input[name='calcHotWaterCompensate']").eq(0).val(v).change();
+        settleAccountObj.calcHotWater();
     });
 
     //太阳能热水器：金额
@@ -365,16 +464,23 @@ $(document).ready(function(){
     });
 
     //住改商补助
-    $("input[name='calcChangeCompensateArea']").eq(0).on("blur change", function () {
+    $("input[name='calcChangeCompensateArea'],input[name='calcChangeCompensatePrice'],input[name='calcChangeCompensateProportion'],input[name='calcChangeCompensateOldPrice']").on("blur change", function () {
         settleAccountObj.calcChangeCompensates();
     });
 
-    $("input[name='calcChangeCompensatePrice']").eq(0).on("blur change", function () {
-        settleAccountObj.calcChangeCompensates();
+    //产权交换单价
+    $("input[name='swapPrice1'],input[name='swapPrice2'],input[name='swapPrice3'],input[name='swapPrice4'],input[name='swapPrice5']").on("blur change", function () {
+        settleAccountObj.calcSwapMoney();
     });
 
-    $("input[name='calcChangeCompensateProportion']").eq(0).on("blur change", function () {
-        settleAccountObj.calcChangeCompensates();
+    //产权交换面积
+    $("input[name='swapArea1'],input[name='swapArea2'],input[name='swapArea3'],input[name='swapArea4'],input[name='swapArea5']").on("blur change", function () {
+        settleAccountObj.calcSwapMoney();
+    });
+
+    //产权交换公式
+    $("input[name='swapMoney1'],input[name='swapMoney2'],input[name='swapMoney3'],input[name='swapMoney4'],input[name='swapMoney5']").on("blur change", function () {
+        settleAccountObj.calcHouseMoney();
     });
 
 
@@ -383,106 +489,110 @@ $(document).ready(function(){
 
 var settleAccountObj = {
 
-    //改变房屋单价、建筑面积时，填充房屋价值补偿计算公式
+    //汇总求合计的所有元素
+    getSumElementArr:function(){
+        //参与被征收房屋补偿合计的金额框
+        var sumCompensateNameArr = new Array();
+        sumCompensateNameArr[0] = "valueCompensate";   //有证房屋补偿
+        sumCompensateNameArr[1] = "noRegisterLegal";   //未经登记的合法建筑补偿
+        sumCompensateNameArr[2] = "historyLegacy";   //历史遗留无证房补偿
+        sumCompensateNameArr[3] = "decorationCompensate";  //装修折旧补偿
+        sumCompensateNameArr[4] = "moveHouseFee";  //搬家费
+        sumCompensateNameArr[5] = "interimFee";  //过渡费
+        sumCompensateNameArr[6] = "guarantee";  //保底补偿
+        sumCompensateNameArr[7] = "suspendBusinessFee";  //停产停业损失补偿
+        sumCompensateNameArr[8] = "moveWaterMeterFee";  //水表迁移费
+        sumCompensateNameArr[9] = "moveAmmeterFee";   //电表迁移费
+        sumCompensateNameArr[10] = "moveAirConditioningFee";  //空调移机费
+        sumCompensateNameArr[11] = "hotWaterCompensate";  //热水器拆装费
+        sumCompensateNameArr[12] = "gasFee";  //管道煤气拆装费
+        sumCompensateNameArr[13] = "structureBalcony";   //结构内阳台
+        sumCompensateNameArr[14] = "structureBuild";   //外挑搭建
+        sumCompensateNameArr[15] = "structureDark";   //暗楼
+        sumCompensateNameArr[16] = "structureMezzanine";   //夹层
+        sumCompensateNameArr[17] = "structureRoof";   //楼顶搭建
+        sumCompensateNameArr[18] = "changeCompensate";   //住改商补助
+        sumCompensateNameArr[19] = "rmbCompensate";   //货币补偿补助
+        // sumCompensateNameArr[10] = "affiliatedOther"; //房屋附属设施补偿-其他
+        // sumCompensateNameArr[11] = "noCheckCompensate";   //未登记建筑房屋补偿
+        sumCompensateNameArr[20] = "smallAreaReward";  //小面积住房搬迁奖励
+        sumCompensateNameArr[21] = "lifeCompensate";   //生活困难补助
+        sumCompensateNameArr[22] = "moveReward";  //货币搬迁奖励
+        sumCompensateNameArr[23] = "buildingAreaFee";  //建筑面积补助
+        // sumCompensateNameArr[17] = "noMoveCompensate";  //不可移动设备设施补偿
+        sumCompensateNameArr[24] = "otherRmb";  //其他
+        return sumCompensateNameArr;
+    },
+
+    //填充房屋价值补偿-有证计算公式
     fullCalcValueCompensate:function(){
 
         var checkInArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
         var assessPrice = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
-        var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
-        var calcValueCompensate = checkInArea + "*" + assessPrice + "*" + proportion;
+        // var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
+        var calcValueCompensate = checkInArea + "*" + assessPrice; // + "*" + proportion;
         //覆盖公式中的单价
         $("input[name='calcValueCompensate']").eq(0).val(calcValueCompensate).change();
     },
 
 
-    //改变房屋价值补偿计算公式
+    //改变房屋价值补偿-有证计算公式
     changeCalcValueCompensate:function () {
         var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
         var valueCompensate = Math.round(eval(calcValueCompensate));
         $("input[name='valueCompensate']").eq(0).val(valueCompensate).change();
+        settleAccountObj.calcMoveReward();
+    },
+
+    //填充房屋价值补偿-未经登记合法
+    fullCalcNoRegisterLegal:function(){
+
+        var area = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
+        var price = $("input[name='calcNoRegisterLegalPrice']").eq(0).val() || 0;
+        var money = area + "*" + price; // + "*" + proportion;
+        console.log("未经登记合法计算公式：" + money);
+        //覆盖公式中的单价
+        $("input[name='calcNoRegisterLegal']").eq(0).val(money).change();
+    },
+
+    //改变房屋价值补偿-未登记合法计算公式
+    changeCalcNoRegisterLegal:function () {
+        var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
+        var noRegisterLegal = Math.round(eval(calcNoRegisterLegal));
+        console.log("运行未登记合法计算公式: " + noRegisterLegal);
+        $("input[name='noRegisterLegal']").eq(0).val(noRegisterLegal).change();
+        settleAccountObj.calcMoveReward();
+    },
+
+
+    //填充房屋价值补偿-历史遗留
+    fullCalcHistoryLegacy:function(){
+        var area = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
+        var price = $("input[name='calcHistoryLegacyPrice']").eq(0).val() || 0;
+        // var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
+        var money = area + "*" + price; // + "*" + proportion;
+        //覆盖公式中的单价
+        $("input[name='calcHistoryLegacy']").eq(0).val(money).change();
+    },
+
+    //改变房屋价值补偿-历史遗留计算公式
+    changeCalcHistoryLegacy:function () {
+        var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
+        var historyLegacy = Math.round(eval(calcHistoryLegacy));
+        $("input[name='historyLegacy']").eq(0).val(historyLegacy).change();
+        settleAccountObj.calcMoveReward();
     },
 
     //填充被征收房屋补偿合计
     fullSumCompensate:function(){
-        //证载房屋价值补偿
-        var valueCompensate = $("input[name='valueCompensate']").eq(0).val() || 0;
-        var valueCompensate_num = new Number(valueCompensate);
-        //装修折旧补偿
-        var decorationCompensate = $("input[name='decorationCompensate']").eq(0).val() || 0;
-        var decorationCompensate_num = new Number(decorationCompensate);
-        //搬家费
-        var moveHouseFee = $("input[name='moveHouseFee']").eq(0).val() || 0;
-        var moveHouseFee_num = new Number(moveHouseFee);
-        //过渡费
-        var interimFee = $("input[name='interimFee']").eq(0).val() || 0;
-        var interimFee_num = new Number(interimFee);
-        //水表迁移费
-        var moveWaterMeterFee = $("input[name='moveWaterMeterFee']").eq(0).val() || 0;
-        var moveWaterMeterFee_num = new Number(moveWaterMeterFee);
-        //电表迁移费
-        var moveAmmeterFee = $("input[name='moveAmmeterFee']").eq(0).val() || 0;
-        var moveAmmeterFee_num = new Number(moveAmmeterFee);
-        //空调移机费
-        var moveAirConditioningFee = $("input[name='moveAirConditioningFee']").eq(0).val() || 0;
-        var moveAirConditioningFee_num = new Number(moveAirConditioningFee);
-        //热水器拆装费
-        var hotWaterCompensate = $("input[name='hotWaterCompensate']").eq(0).val() || 0;
-        var hotWaterCompensate_num = new Number(hotWaterCompensate);
-        //管道煤气拆装费
-        var gasFee = $("input[name='gasFee']").eq(0).val() || 0;
-        var gasFee_num = new Number(gasFee);
-        //构建物补偿
-        var structureCompensate = $("input[name='structureCompensate']").eq(0).val() || 0;
-        var structureCompensate_num = new Number(structureCompensate);
-        //房屋附属设施补偿-其他
-        var affiliatedOther = $("input[name='affiliatedOther']").eq(0).val() || 0;
-        var affiliatedOther_num = new Number(affiliatedOther);
-        //未登记建筑房屋补偿
-        var noCheckCompensate = $("input[name='noCheckCompensate']").eq(0).val() || 0;
-        var noCheckCompensate_num = new Number(noCheckCompensate);
-        //货币补偿补助
-        var rmbCompensate = $("input[name='rmbCompensate']").eq(0).val() || 0;
-        var rmbCompensate_num = new Number(rmbCompensate);
-        //生活困难补助
-        var lifeCompensate = $("input[name='lifeCompensate']").eq(0).val() || 0;
-        var lifeCompensate_num = new Number(lifeCompensate);
-        //住改商补助
-        var changeCompensate = $("input[name='changeCompensate']").eq(0).val() || 0;
-        var changeCompensate_num = new Number(changeCompensate);
-        //建筑面积补助
-        var buildingAreaFee = $("input[name='buildingAreaFee']").eq(0).val() || 0;
-        var buildingAreaFee_num = new Number(buildingAreaFee);
-        //停产停业损失补偿
-        var suspendBusinessFee = $("input[name='suspendBusinessFee']").eq(0).val() || 0;
-        var suspendBusinessFee_num = new Number(suspendBusinessFee);
-        //不可移动设备设施补偿
-        var noMoveCompensate = $("input[name='noMoveCompensate']").eq(0).val() || 0;
-        var noMoveCompensate_num = new Number(noMoveCompensate);
-        //搬迁奖励
-        var moveReward = $("input[name='moveReward']").eq(0).val() || 0;
-        var moveReward_num = new Number(moveReward);
-        //货币搬迁奖励
-        var rmbMoveReward = $("input[name='rmbMoveReward']").eq(0).val() || 0;
-        var rmbMoveReward_num = new Number(rmbMoveReward);
-        //小面积住房搬迁奖励
-        var smallAreaReward = $("input[name='smallAreaReward']").eq(0).val() || 0;
-        var smallAreaReward_num = new Number(smallAreaReward);
-        //其他
-        var otherRmb = $("input[name='otherRmb']").eq(0).val() || 0;
-        var otherRmb_num = new Number(otherRmb);
-        //合计
-        var sumCompensate = valueCompensate_num + decorationCompensate_num + moveHouseFee_num + interimFee_num +
-            moveWaterMeterFee_num + moveAmmeterFee_num + moveAirConditioningFee_num + hotWaterCompensate_num +
-            gasFee_num + structureCompensate_num + affiliatedOther_num + noCheckCompensate_num
-            + lifeCompensate_num + changeCompensate_num + buildingAreaFee_num + suspendBusinessFee_num + noMoveCompensate_num
-            + moveReward_num  + smallAreaReward_num + otherRmb_num;
-
-        var text = $("select[name='calcMoveHouseFee']").eq(0).find("option:selected").text();
-        if (text == "货币补偿") {
-            sumCompensate += rmbCompensate_num;
-            sumCompensate += rmbMoveReward_num;
+        var sumCompensateNameArr = settleAccountObj.getSumElementArr();
+        var sumCompensate = 0;
+        for(var i=0;i<sumCompensateNameArr.length;i++){
+            var nameText = sumCompensateNameArr[i];
+            var num = $("input[name='"+nameText+"']").eq(0).val();
+            sumCompensate += new Number(num);
         }
-        $("input[name='sumCompensate']").eq(0).val(sumCompensate);
+        $("input[name='sumCompensate']").eq(0).val(sumCompensate).change();
     },
 
     //填充应收、应付款
@@ -493,27 +603,22 @@ var settleAccountObj = {
         //新房金额
         var houseMoney =  $("input[name='houseMoney']").eq(0).val() || 0;
         houseMoney = new Number(houseMoney);
-        if(sumCompensate > houseMoney)  {
-            //应付合计填写差
-            var payTotal = sumCompensate - houseMoney;
-            $("input[name='payTotal']").eq(0).val(payTotal);
-            var payTotalChinese = Araia_To_Chinese(payTotal);
-            $("input[name='payMoney']").eq(0).val(payTotalChinese);
 
-            //应收合计填空
-            $("input[name='receiveTotal']").eq(0).val("");
-            $("input[name='receiveMoney']").eq(0).val("");
-        }else if(sumCompensate < houseMoney){
-            //应收合计填写差
-            var receiveTotal = houseMoney - sumCompensate;
-            $("input[name='receiveTotal']").eq(0).val(receiveTotal);
-            var receiveTotalChinese = Araia_To_Chinese(receiveTotal);
-            $("input[name='receiveMoney']").eq(0).val(receiveTotalChinese);
+        //已抵扣安置房款=新房金额
+        $("input[name='deduction']").eq(0).val(houseMoney);
 
-            //应付合计填写空
-            $("input[name='payTotal']").eq(0).val("");
-            $("input[name='payMoney']").eq(0).val("");
+        var money = 0;
+        if (sumCompensate > houseMoney) {
+            //应付
+            money = sumCompensate - houseMoney;
+        } else if (sumCompensate < houseMoney) {
+            //应收
+            money = houseMoney - sumCompensate;
         }
+
+        $("input[name='payTotal']").eq(0).val(money);
+        var payTotalChinese = Araia_To_Chinese(money);
+        $("input[name='payMoney']").eq(0).val(payTotalChinese);
 
     },
 
@@ -540,16 +645,22 @@ var settleAccountObj = {
         //获取副表
         var ammeterSub = $("#ammeter_sub").val() || 0;
         var ammeterSubFee = eval(ammeterSub);
-        var moveAmmeterFee = ammeterMainFee + ammeterSubFee;
+        //三相表
+        var ammeterSa = $("#ammeter_sa").val() || 0;
+        var ammeterSaFee = eval(ammeterSa);
+        //分时表
+        var ammeterTime = $("#ammeter_time").val() || 0;
+        var ammeterTimeFee = eval(ammeterTime);
+        var moveAmmeterFee = ammeterMainFee + ammeterSubFee + ammeterSaFee + ammeterTimeFee;
         //电表迁移费
         $("input[name='moveAmmeterFee']").eq(0).val(moveAmmeterFee).change();
         //电表迁移费计算公式
-        $("input[name='calcMoveAmmeterFee']").eq(0).val(ammeterMain + "+" + ammeterMain);
+        $("input[name='calcMoveAmmeterFee']").eq(0).val(ammeterMain + "+" + ammeterSub + "+" + ammeterSa + "+" + ammeterTime);
     },
     //计算空调移机费
     fullAirConditioner: function () {
         //获取窗机
-        var airConditionerShutter = $("#air_conditioner_cabinet").val() || 0;
+        var airConditionerShutter = $("#air_conditioner_shutter").val() || 0;
         var airConditionerShutterFee = eval(airConditionerShutter);
 
         //获取挂机
@@ -557,7 +668,7 @@ var settleAccountObj = {
         var airConditionerHangFee = eval(airConditionerHang);
 
         //获取柜机
-        var airConditionerCabinet = $("#air_conditioner_shutter").val() || 0;
+        var airConditionerCabinet = $("#air_conditioner_cabinet").val() || 0;
         var airConditionerCabinetFee = eval(airConditionerCabinet);
 
         var moveAirConditioningFee = airConditionerCabinetFee + airConditionerShutterFee + airConditionerHangFee;
@@ -581,7 +692,7 @@ var settleAccountObj = {
         var money = Math.round(eval(calcText));
         $("input[name='"+moneyObjName+"']").eq(0).val(money).change();
     },
-    //折旧补偿，利用2小框数字，得到计算公式
+    //装修折旧补偿，利用2小框数字，得到计算公式
     fullCalcDecoration:function () {
         var calcDecorationCompensateArea = $("input[name='calcDecorationCompensateArea']").eq(0).val() || 0;
         var calcDecorationCompensatePrice = $("input[name='calcDecorationCompensatePrice']").eq(0).val() || 0;
@@ -606,13 +717,13 @@ var settleAccountObj = {
         $("input[name='calcNoCheckCompensate']").eq(0).val(calcNoCheckCompensate).change();
     },
     //货币补偿补助，利用3小框，得到计算公式
-    fullCalcRmbCompensate:function () {
+    /*fullCalcRmbCompensate:function () {
         var calcRmbCompensateArea = $("input[name='calcRmbCompensateArea']").eq(0).val() || 0;
         var calcRmbCompensatePrice = $("input[name='calcRmbCompensatePrice']").eq(0).val() || 0;
         var calcRmbCompensateProportion = $("input[name='calcRmbCompensateProportion']").eq(0).val() || 0;
         var calcRmbCompensate = calcRmbCompensateArea + "*" + calcRmbCompensatePrice + "*" + calcRmbCompensateProportion;
         $("input[name='calcRmbCompensate']").eq(0).val(calcRmbCompensate).change();
-    },
+    },*/
     //货币搬迁奖励，利用3小框，得到计算公式
     fullCalcRmbMoveReward: function () {
         var calcRmbMoveRewardArea = $("input[name='calcRmbMoveRewardArea']").eq(0).val() || 0;
@@ -623,7 +734,7 @@ var settleAccountObj = {
     },
 
     //构建物：无烟灶台、暗楼 补偿
-    calcDarkBuilding:function () {
+    /*calcDarkBuilding:function () {
         //无烟灶台
         var stove = $("select[id='sel_stove']").val();
         //暗楼
@@ -633,30 +744,187 @@ var settleAccountObj = {
         var calcStructureCompensate = stove + "+" + calcStructureCompensateArea + "*" + calcStructureCompensatePrice;
         console.log("构建物计算公式：" + calcStructureCompensate);
         $("input[name='calcStructureCompensate']").eq(0).val(calcStructureCompensate).change();
-    },
+    },*/
 
-    //太阳能热水器计算
+    //热水器拆装费计算
     calcHotWater:function () {
+        //烧电  得到的格式：1*200
+        var water_heater_calc = $("select[name='sel_water_heater']").eq(0).val()
+
+        //太阳能
         var calcHotWaterCompensateMoney = $("input[name='calcHotWaterCompensateMoney']").eq(0).val() || 0;
         var calcHotWaterCompensateConvert = $("input[name='calcHotWaterCompensateConvert']").eq(0).val() || 0;
-        var calcHotWaterCompensate = calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert;
+        var calcHotWaterCompensate = water_heater_calc + "+" + calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert;
+        console.log("热水器拆装计算公式：" + calcHotWaterCompensate);
         $("input[name='calcHotWaterCompensate']").eq(0).val(calcHotWaterCompensate).change();
     },
-    
+
     //住改商补助计算
     calcChangeCompensates:function () {
         //面积
         var calcChangeCompensateArea = $("input[name='calcChangeCompensateArea']").eq(0).val() || 0;
-        //单价
+        //新房单价
         var calcChangeCompensatePrice = $("input[name='calcChangeCompensatePrice']").eq(0).val() || 0;
         //比例
         var calcChangeCompensateProportion = $("input[name='calcChangeCompensateProportion']").eq(0).val()||0;
-        //获取评估的单价
-        var assessPrice = $("input[name='assessPrice']").eq(0).val() || 0;
-        //公式：面积*(单价-评估单价)*比例
-        var calcChangeCompensate = calcChangeCompensateArea + "*" + "(" + calcChangeCompensatePrice + "-" + assessPrice + ")"+"*"+calcChangeCompensateProportion;
+        //获取旧房单价
+        var calcChangeCompensateOldPrice = $("input[name='calcChangeCompensateOldPrice']").eq(0).val() || 0;
+        //公式：面积*(新房单价-旧房单价)*比例
+        var calcChangeCompensate = calcChangeCompensateArea + "*" + "(" + calcChangeCompensatePrice + "-" + calcChangeCompensateOldPrice + ")"+"*"+calcChangeCompensateProportion;
         console.log("住改商计算公式: " + calcChangeCompensate);
         $("input[name='calcChangeCompensate']").eq(0).val(calcChangeCompensate).change();
+    },
+
+    //未经登记建筑面积=未经登记合法面积+历史遗留面积
+    fullNoCheckinArea:function () {
+        var noRegisterLegalArea = $("input[name='noRegisterLegalArea']").eq(0).val() || 0;
+        var historyLegacyArea = $("input[name='historyLegacyArea']").eq(0).val() || 0;
+        var area = new Number(noRegisterLegalArea) + new Number(historyLegacyArea);
+        $("input[name='noCheckinArea']").eq(0).val(area);
+    },
+    //套内面积=有证面积+未经登记合法面积+历史遗留面积
+    fullCheckInArea:function () {
+        var certifiedArea = $("input[name='certifiedArea']").eq(0).val() || 0;
+        var noRegisterLegalArea = $("input[name='noRegisterLegalArea']").eq(0).val() || 0;
+        var historyLegacyArea = $("input[name='historyLegacyArea']").eq(0).val() || 0;
+        var area = new Number(certifiedArea) + new Number(noRegisterLegalArea) + new Number(historyLegacyArea);
+        $("input[name='checkInArea']").eq(0).val(area);
+
+        //填充装修折旧的面积
+        $("input[name='calcDecorationCompensateArea']").val(area).change();
+    },
+    //搬家费：下拉框改变
+    fullCalcMoveHouseFee:function () {
+        var sel_calcMoveHouseFee = $("select[name='sel_calcMoveHouseFee']").eq(0).val();
+        if(sel_calcMoveHouseFee > 0){
+            $("input[name='calcMoveHouseFee']").eq(0).val(sel_calcMoveHouseFee).change();
+        }else{
+            $("input[name='calcMoveHouseFee']").eq(0).val("").change();
+            $("input[name='calcMoveHouseFee']").eq(0).prop("placeholder", "请输入搬家费");
+        }
+    },
+    //构建物计算公式-阳台
+    calcStructureBalcony:function () {
+        var area = $("input[name='structureBalconyArea']").eq(0).val() || 0;
+        var price = $("input[name='structureBalconyPrice']").eq(0).val() || 0;
+        var proportion = $("input[name='structureBalconyProportion']").eq(0).val() || 1;
+        var calc = area + "*" + price + "*" + proportion;
+        console.log("构建物补偿-阳台，公式：" + calc);
+        $("input[name='calcStructureBalcony']").eq(0).val(calc).change();
+
+    },
+    //构建物补偿-外挑搭建
+    calcStructureBuild:function () {
+        var area = $("input[name='structureBuildArea']").eq(0).val() || 0;
+        var price = $("input[name='structureBuildPrice']").eq(0).val() || 0;
+        var proportion = $("input[name='structureBuildProportion']").eq(0).val() || 1;
+        var calc = area + "*" + price + "*" + proportion;
+        console.log("构建物补偿-外挑搭建，公式：" + calc);
+        $("input[name='calcStructureBuild']").eq(0).val(calc).change();
+    },
+    //构建物补偿-暗楼
+    calcStructureDark:function () {
+        var area = $("input[name='structureDarkArea']").eq(0).val() || 0;
+        var price = $("input[name='structureDarkPrice']").eq(0).val() || 0;
+        var proportion = $("input[name='structureDarkProportion']").eq(0).val() || 1;
+        var calc = area + "*" + price + "*" + proportion;
+        console.log("构建物补偿-暗楼，公式：" + calc);
+        $("input[name='calcStructureDark']").eq(0).val(calc).change();
+    },
+    //构建物补偿-夹层
+    calcStructureMezzanine:function () {
+        var area = $("input[name='structureMezzanineArea']").eq(0).val() || 0;
+        var price = $("input[name='structureMezzaninePrice']").eq(0).val() || 0;
+        var proportion = $("input[name='structureMezzanineProportion']").eq(0).val() || 1;
+        var calc = area + "*" + price + "*" + proportion;
+        console.log("构建物补偿-夹层，公式：" + calc);
+        $("input[name='calcStructureMezzanine']").eq(0).val(calc).change();
+    },
+    //构建物补偿-楼顶搭建
+    calcStructureRoof:function () {
+        var area = $("input[name='structureRoofArea']").eq(0).val() || 0;
+        var price = $("input[name='structureRoofPrice']").eq(0).val() || 0;
+        var proportion = $("input[name='structureRoofProportion']").eq(0).val() || 1;
+        var calc = area + "*" + price + "*" + proportion;
+        console.log("构建物补偿-楼顶搭建，公式：" + calc);
+        $("input[name='calcStructureRoof']").eq(0).val(calc).change();
+    },
+    //奖励计算公式
+    calcMoveReward:function () {
+        var compensateType = $("input[name='compensateType']:checked").val();
+        //有证金额
+        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
+        //无证合法金额
+        var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
+        //历史遗留金额
+        var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
+        var proportion= 0;
+        if(compensateType == 0) {
+            proportion = $("input[name='rewardRmbProportion']").eq(0).val() || 0;
+        }else if(compensateType == 1){
+            proportion = $("input[name='rewardSwapProportion']").eq(0).val() || 0;
+        }
+
+        var calcMoveReward = "(" + calcValueCompensate + "+" + calcNoRegisterLegal + "+" + calcHistoryLegacy + ")" + "*" + proportion;
+        console.log("奖励计算公式：" + calcMoveReward);
+        $("input[name='calcMoveReward']").eq(0).val(calcMoveReward).change();
+
+    },
+    //根据产权交换的单价、面积， 拼计算公式
+    calcSwapMoney:function () {
+        var swap_price1 = $("input[name='swapPrice1']").eq(0).val() || 0;
+        var swap_price2 = $("input[name='swapPrice2']").eq(0).val() || 0;
+        var swap_price3 = $("input[name='swapPrice3']").eq(0).val() || 0;
+        var swap_price4 = $("input[name='swapPrice4']").eq(0).val() || 0;
+        var swap_price5 = $("input[name='swapPrice5']").eq(0).val() || 0;
+
+        var swap_area1 = $("input[name='swapArea1']").eq(0).val() || 0;
+        var swap_area2 = $("input[name='swapArea2']").eq(0).val() || 0;
+        var swap_area3 = $("input[name='swapArea3']").eq(0).val() || 0;
+        var swap_area4 = $("input[name='swapArea4']").eq(0).val() || 0;
+        var swap_area5 = $("input[name='swapArea5']").eq(0).val() || 0;
+
+        if(swap_price1 !=0 && swap_area1 !=0){
+            var swap_money1 = swap_price1 + "*" + swap_area1;
+            $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
+        }
+
+        if(swap_price2 !=0 && swap_area2 !=0){
+            var swap_money2 = swap_price2 + "*" + swap_area2;
+            $("input[name='swapMoney2']").eq(0).val(swap_money2).change();
+        }
+
+        if(swap_price3 !=0 && swap_area3 !=0){
+            var swap_money3 = swap_price3 + "*" + swap_area3;
+            $("input[name='swapMoney3']").eq(0).val(swap_money3).change();
+        }
+
+        if(swap_price4 !=0 && swap_area4 !=0){
+            var swap_money4 = swap_price4 + "*" + swap_area4;
+            $("input[name='swapMoney4']").eq(0).val(swap_money4).change();
+        }
+
+        if(swap_price5 !=0 && swap_area5 !=0){
+            var swap_money5 = swap_price5 + "*" + swap_area5;
+            $("input[name='swapMoney5']").eq(0).val(swap_money5).change();
+        }
+
+    },
+    //产权交换计算公式执行
+    calcHouseMoney:function () {
+        var swap_money1 = $("input[name='swapMoney1']").eq(0).val() || 0;
+        var swap_money2 = $("input[name='swapMoney2']").eq(0).val() || 0;
+        var swap_money3 = $("input[name='swapMoney3']").eq(0).val() || 0;
+        var swap_money4 = $("input[name='swapMoney4']").eq(0).val() || 0;
+        var swap_money5 = $("input[name='swapMoney5']").eq(0).val() || 0;
+
+        var houseMoney = Math.round(eval(swap_money1)) + Math.round(eval(swap_money2))
+            + Math.round(eval(swap_money3)) + Math.round(eval(swap_money4))
+            + Math.round(eval(swap_money5));
+        $("input[name='houseMoney']").eq(0).val(houseMoney).change();
+
     }
+
+
 
 };

@@ -490,9 +490,7 @@ public class SettleAccountsVO {
         vo.setDeduction(BigDecimalUtil.stripTrailingZeros(entity.getDeduction()));
         vo.setDeductionBz(entity.getDeductionBz());
 
-        vo.setCalcPayTotal(entity.getCalcPayTotal());
         vo.setPayTotal(BigDecimalUtil.stripTrailingZeros(entity.getPayTotal()));
-        vo.setPayTotalBz(entity.getPayTotalBz());
         vo.setReceiveTotal(BigDecimalUtil.stripTrailingZeros(entity.getReceiveTotal()));
         vo.setPayMoney(entity.getPayMoney());
         vo.setReceiveMoney(entity.getReceiveMoney());
