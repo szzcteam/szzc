@@ -1,10 +1,12 @@
 package com.me.szzc.service;
 
 import com.me.szzc.dao.FieldCoordinateMapper;
+import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.PrintTableEnum;
 import com.me.szzc.enums.PrintTypeEnum;
 import com.me.szzc.pojo.dto.FieldCoordinateDto;
+import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.utils.PrintUtil;
 import com.me.szzc.utils.StringUtils;
@@ -29,7 +31,7 @@ public class StylusPrintService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private SwapHouseMapper swapHouseMapper;
+    private SettleAccountsMapper settleAccountsMapper;
 
     @Autowired
     private FieldCoordinateMapper fieldCoordinateMapper;
@@ -44,8 +46,8 @@ public class StylusPrintService {
      */
     public boolean houseExpropriationCompensationPrint(Long id) throws NoSuchFieldException, IllegalAccessException {
         //根据ID获取数据
-        SwapHouse swapHouse = swapHouseMapper.getById(id);
-        if (StringUtils.isNullOrEmpty(swapHouse)) {
+        SettleAccounts settleAccounts = settleAccountsMapper.selectByPrimaryKey(id);
+        if (StringUtils.isNullOrEmpty(settleAccounts)) {
             logger.error("房屋征收补偿计算表打印获取数据为空,id(" + id + ")");
             return false;
         }
@@ -61,7 +63,7 @@ public class StylusPrintService {
         //打印数据封装
         for (FieldCoordinateDto fieldCoordinateDto : FieldCoordinateList) {
             map = new HashMap();
-            String value = getFieldValueByFieldName(fieldCoordinateDto.getCode(), swapHouse);
+            String value = getFieldValueByFieldName(fieldCoordinateDto.getCode(), settleAccounts);
             if (StringUtils.isNullOrEmpty(value)) {
                 continue;
             }

@@ -155,7 +155,7 @@ public class RoomChangeController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         int result = 0;
-        if (StringUtils.isNullOrEmpty(ids)) {
+        if (!StringUtils.isNullOrEmpty(ids)) {
             String[] idArr = ids.split(",");
             for (String idStr : idArr) {
                 Long id = Long.valueOf(idStr);

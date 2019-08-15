@@ -208,7 +208,7 @@
                 housing_platform = #{housingPlatform,jdbcType=VARCHAR}
             </if>
         </set>
-        WHERE id != #{id}
+        WHERE id = #{id}
     </update>
 
 
