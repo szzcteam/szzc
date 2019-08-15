@@ -107,22 +107,22 @@
             </shiro:hasPermission>
 
             <shiro:hasPermission name="ssadmin/deleteProtocol.html">
-                <li><a class="icon"
+                <%--<li><a class="icon"
                        href="ssadmin/exportSwapHouse.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出产权调换</span>
                 </a></li>
                 <li><a class="icon"
                        href="ssadmin/exportRmbRecompense.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出货币补偿</span>
-                </a></li>
+                </a></li>--%>
                 <%--<li><a class="icon"
                        href="ssadmin/exportNotice.html?houseOwner={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出通知单</span>
                 </a></li>--%>
-                <li><a class="icon"
+                <%--<li><a class="icon"
                        href="ssadmin/exportSettleAccounts.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
-                </a></li>
+                </a></li>--%>
 
                 <li><a class="edit"
                        href="ssadmin/settleAccounts/signing.html?idMore={sid_user}"
@@ -170,7 +170,7 @@
                <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>
                 <td><c:if test="${protocol.swapHouseId > 0 }">√</c:if></td>
                 <td><c:if test="${protocol.rmbRecompenseId > 0 }">√</c:if></td>
-                <td><c:if test="${protocol.settleAccountId >0 }">√</c:if></td>
+                <td><c:if test="${protocol.settleAccountId >0 }"><a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none">√</a></c:if></td>
                 <td>${protocol.createDateStr}</td>
             </tr>
         </c:forEach>

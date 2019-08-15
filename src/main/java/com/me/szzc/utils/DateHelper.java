@@ -38,6 +38,7 @@ public final class DateHelper {
         YearMonthDay_HourMinute("yyyy-MM-dd HH:mm"),
         YearMonthDay_Hour("yyyy-MM-dd HH"),
         YearMonthDay("yyyy-MM-dd"),
+        YearMonthDay_Chines("yyyy年MM月dd日"),
         YearMonthDay_Log("yyyyMMdd"),
         YearMonth("yyyy-MM"),
         Year("yyyy"),
@@ -277,6 +278,8 @@ public final class DateHelper {
 
 
         Date date1 = new Date();
+        SimpleDateFormat dae = new SimpleDateFormat("yyyy年MM月dd日");
+        System.out.println(dae.format(date1));
         Date date2 = string2Date("2017-01-19 12:00:00", DateFormatType.YearMonthDay_HourMinuteSecond);
 
         Long time = getDifferSecond(date1,date2);
