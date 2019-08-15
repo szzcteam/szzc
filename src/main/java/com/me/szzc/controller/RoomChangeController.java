@@ -96,13 +96,13 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/queryPage")
-    public ModelAndView queryPage(HttpServletRequest request, String keywords, String number,
+    public ModelAndView queryPage(HttpServletRequest request, String name, String number,
                                   String choosePeople, String assignedProject, String housingPlatform) {
         ModelAndView view = new ModelAndView();
-        if (!StringUtils.isNullOrEmpty(keywords)) {
-            keywords = keywords.trim();
-            if (keywords.length() > 0) {
-                view.addObject("name", keywords);
+        if (!StringUtils.isNullOrEmpty(name)) {
+            name = name.trim();
+            if (name.length() > 0) {
+                view.addObject("name", name);
             }
         }
         if (!StringUtils.isNullOrEmpty(number)) {
@@ -134,7 +134,7 @@ public class RoomChangeController {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
         view.setViewName("ssadmin/roomChangeList");
-        Map<String, Object> map = roomChangeService.queryPage(Utils.getNumPerPage(), currentPage, keywords, number, choosePeople, assignedProject, housingPlatform);
+        Map<String, Object> map = roomChangeService.queryPage(Utils.getNumPerPage(), currentPage, name, number, choosePeople, assignedProject, housingPlatform);
         view.addObject("roomList", map.get("datas"));
         view.addObject("numPerPage", Utils.getNumPerPage());
         view.addObject("currentPage", currentPage);

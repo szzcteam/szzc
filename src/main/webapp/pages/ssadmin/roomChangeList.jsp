@@ -1,7 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="comm/include.inc.jsp" %>
 <form id="pagerForm" method="post" action="ssadmin/roomChange/queryPage.html">
-    <input type="hidden" name="keywords" value="${keywords}"/>
+    <input type="hidden" name="name" value="${name}"/>
+    <input type="hidden" name="number" value="${number}"/>
+    <input type="hidden" name="choosePeople" value="${choosePeople}"/>
+    <input type="hidden" name="assignedProject" value="${assignedProject}"/>
+    <input type="hidden" name="housingPlatform" value="${housingPlatform}"/>
+
     <input type="hidden" name="pageNum" value="${currentPage}"/>
     <input type="hidden" name="numPerPage" value="${numPerPage}"/>
     <input type="hidden" name="orderField" value="${param.orderField}"/>
@@ -15,8 +20,20 @@
 
             <table class="searchContent">
                 <tr>
-                    <td>房源项目：<input type="text" name="keywords" value="${keywords}"
-                                   size="60"/>
+                    <td>房源项目：<input type="text" name="name" value="${name}"
+                                   size="20"/>
+                    </td>
+                    <td>房号：<input type="text" name="number" value="${number}"
+                                    size="10"/>
+                    </td>
+                    <td>点房人：<input type="text" name="choosePeople" value="${choosePeople}"
+                                    size="10"/>
+                    </td>
+                    <td>分配征收项目：<input type="text" name="assignedProject" value="${assignedProject}"
+                                      size="20"/>
+                    </td>
+                    <td>提供房源平台：<input type="text" name="housingPlatform" value="${housingPlatform}"
+                                      size="20"/>
                     </td>
                 </tr>
             </table>
@@ -67,8 +84,10 @@
     <table class="table" width="100%" layoutH="138">
         <thead>
         <tr>
-            <th width="22"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+            <th width="15"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
             <th width="20">序号</th>
+            <th width="80">分配征收项目</th>
+            <th width="80">提供房源平台</th>
             <th width="60">房源项目</th>
             <th width="60">房号</th>
             <th width="60">面积&nbsp;(M<sup>2</sup>)</th>
@@ -83,6 +102,8 @@
             <tr target="sid_user" rel="${room.id}">
                 <td><input name="ids" value="${room.id}" type="checkbox"></td>
                 <td>${num.index +1}</td>
+                <td>${room.assignedProject}</td>
+                <td>${room.housingPlatform}</td>
                 <td>${room.name}</td>
                 <td>${room.number}</td>
                 <td>${room.unitPrice}</td>
