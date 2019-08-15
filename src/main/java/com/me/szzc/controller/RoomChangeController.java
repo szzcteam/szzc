@@ -187,15 +187,14 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/getRoomChangeById")
-    @ResponseBody
-    public ModelAndView getRoomChangeById(Long id) {
+    public ModelAndView getRoomChangeById(Long id, String url) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(url);
+
         RoomChange roomChange = roomChangeService.getRoomChangeById(id);
         if (roomChange != null) {
             modelAndView.addObject("roomChange", roomChange);
         }
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "查询成功");
         return modelAndView;
     }
 
@@ -259,9 +258,9 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/updateRoomChangeById")
-    @ResponseBody
     public ModelAndView updateRoomChangeById(RoomChange roomChange) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //数据不为空
         if (StringUtils.isNullOrEmpty(roomChange) || StringUtils.isNullOrEmpty(roomChange.getId())) {
             modelAndView.addObject("statusCode", 300);
@@ -288,6 +287,7 @@ public class RoomChangeController {
         if (status) {
             modelAndView.addObject("statusCode", 200);
             modelAndView.addObject("message", "修改成功");
+            modelAndView.addObject("callbackType", "closeCurrent");
         } else {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "修改失败");
