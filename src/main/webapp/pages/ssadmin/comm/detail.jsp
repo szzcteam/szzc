@@ -20,7 +20,7 @@
 				</shiro:hasPermission>
 				<shiro:hasPermission name="/ssadmin/protocolList.html">
 					<li><a href="/ssadmin/protocolList.html" target="navTab"
-						   rel="coinSurveyList">农讲所片协议管理</a></li>
+						   rel="coinSurveyList">协议管理</a></li>
 				</shiro:hasPermission>
 			</ul>
 		</div>

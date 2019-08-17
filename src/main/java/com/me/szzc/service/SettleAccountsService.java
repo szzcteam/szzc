@@ -63,13 +63,13 @@ public class SettleAccountsService {
     }
 
 
-    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String keywords) {
-        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, keywords);
+    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address,String houseOwner, Long areaId) {
+        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId);
         return listSettleAccounts;
     }
 
-    public Integer getCount(Integer signingStatus, String keywords) {
-        return this.settleAccountsMapper.getCount(signingStatus, keywords);
+    public Integer getCount(Integer signingStatus, String address,String houseOwner, Long areaId) {
+        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId);
     }
 
     /**变更签约状态**/

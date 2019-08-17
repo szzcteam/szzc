@@ -2,7 +2,10 @@
 <%@ include file="comm/include.inc.jsp" %>
 <form id="pagerForm" method="post" action="ssadmin/protocolList.html">
     <input type="hidden" name="signingStatus" value="${signingStatus}">
-    <input type="hidden" name="keywords" value="${keywords}"/>
+    <input type="hidden" name="address" value="${address}"/>
+    <input type="hidden" name="houseOwner" value="${houseOwner}"/>
+    <input type="hidden" name="areaId" value="${areaId}"/>
+
     <input type="hidden" name="pageNum" value="${currentPage}"/>
     <input type="hidden" name="numPerPage" value="${numPerPage}"/>
     <input type="hidden" name="orderField" value="${param.orderField}"/>
@@ -16,9 +19,17 @@
 
             <table class="searchContent">
                 <tr>
-                    <td>被征收人信息：<input type="text" name="keywords" value="${keywords}"
-                                   size="60"/>
+                    <td>
+                        片区：
+                        <select name="areaId" style="width: 120px;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${areaList}" var="area" varStatus="num">
+                                <option value="${area.id}" <c:if test="${areaId==area.id }">selected="selected"</c:if>>${area.name}</option>
+                            </c:forEach>
+                        </select>
                     </td>
+                    <td>被征收人：<input type="text" name="houseOwner" value="${houseOwner}" size="20"/></td>
+                    <td>地址：<input type="text" name="address" value="${address}" size="40"/></td>
                     <td>签约状态：<select name="signingStatus" style="width: 100px;">
                         <option value="">请选择</option>
                         <c:forEach items="${signingStatusMap}" var="item">
@@ -26,19 +37,15 @@
                         </c:forEach>
                     </select>
                     </td>
-                </tr>
-            </table>
-            <div class="subBar">
-                <ul>
-                    <li>
+                    <td>
                         <div class="buttonActive">
                             <div class="buttonContent">
                                 <button type="submit">查询</button>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </form>
 </div>
@@ -135,6 +142,7 @@
         <thead>
         <tr>
             <th width="20">序号</th>
+            <th width="80">片区</th>
             <th width="60">被征收人</th>
             <th width="60">地址</th>
             <th width="60">电话</th>
@@ -142,7 +150,7 @@
             <%--<th width="60">付(收)款手续通知单</th>--%>
             <th width="50">产权调换协议</th>
             <th width="50">货币补偿协议</th>
-            <th width="50">补偿资金结算单</th>
+            <th width="50">结算单</th>
             <th width="50">创建时间</th>
         </tr>
         </thead>
@@ -151,6 +159,7 @@
         <c:forEach items="${protocolList}" var="protocol" varStatus="num">
             <tr target="sid_user" rel="${protocol.settleAccountId},${protocol.rmbRecompenseId},${protocol.swapHouseId}">
                 <td>${num.index +1}</td>
+                <td>${protocol.areaName}</td>
                 <td>${protocol.name}</td>
                 <td>${protocol.address}</td>
                 <td>${protocol.phone}</td>
@@ -168,9 +177,14 @@
                 </c:choose>
                 <!--签约状态结束-->
                <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>
-                <td><c:if test="${protocol.swapHouseId > 0 }">√</c:if></td>
-                <td><c:if test="${protocol.rmbRecompenseId > 0 }">√</c:if></td>
-                <td><c:if test="${protocol.settleAccountId >0 }"><a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none">√</a></c:if></td>
+                <td style="text-align: center;"><c:if test="${protocol.swapHouseId > 0 }">√</c:if></td>
+                <td style="text-align: center;"><c:if test="${protocol.rmbRecompenseId > 0 }">√</c:if></td>
+                <td style="text-align: center;">
+                    <c:if test="${protocol.settleAccountId >0 }">
+                        <a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="详情">
+                            √
+                        </a>
+                    </c:if></td>
                 <td>${protocol.createDateStr}</td>
             </tr>
         </c:forEach>

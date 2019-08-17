@@ -121,4 +121,9 @@ public class AreaService {
             areaRoleMapper.insert(areaRole);
         }
     }
+
+
+    public List<Area> listByUserId(Long userId) {
+        return areaMapper.listByUserId(userId);
+    }
 }

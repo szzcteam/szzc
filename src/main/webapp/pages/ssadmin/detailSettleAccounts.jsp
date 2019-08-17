@@ -102,12 +102,12 @@
                         项目房屋征收补偿资金结算单
                 </div>
             </dl>
-            <dl>
-                <dt style="width: 300px;">
+            <dl style="margin-bottom: -10px;">
+                <dt style="width: 450px;">
                     ${settleAccounts.createDate}
                 </dt>
                 <dt style="width: 40px;">编号：</dt>
-                <dt>
+                <dt style="width: 30px;margin-left: -20px;">
                     ${settleAccounts.cardNo}
                 </dt>
             </dl>
@@ -119,7 +119,7 @@
                         <td style="width: 60px;">电话</td>
                         <td style="width: 100px;">${settleAccounts.phone}</td>
                         <td style="width: 80px;">房屋用途</td>
-                        <td style="width: 170px;">建筑面积</td>
+                        <td style="width: 100px;">建筑面积</td>
                         <td colspan="2" style="width: 249px;">未经登记建筑面积</td>
                         <td style="width: 80px;">房屋评估单价</td>
                     </tr>
@@ -287,7 +287,7 @@
                         <td>${settleAccounts.structureDarkBz}</td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="td_left">（4）夹层（假层）</td>
+                        <td colspan="3" class="td_left" style="white-space:nowrap;">（4）夹层（假层）</td>
                         <td colspan="4">
                             ${settleAccounts.calcStructureMezzanine}
                         </td>
@@ -410,7 +410,9 @@
                         <%--  <td>应收合计</td>
                           <td colspan="3"><input type="text" name="receiveTotal" class="none_border" style="width: 170px;"></td>--%>
                         <td rowspan="2">经办人签字</td>
-                        <td rowspan="2" colspan="2"></td>
+                        <td rowspan="2" colspan="2" style="white-space:nowrap;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="11" class="td_left">实际支付金额(大写)：${settleAccounts.payMoney}</td>

@@ -611,7 +611,10 @@
                     <%--  <td>应收合计</td>
                       <td colspan="3"><input type="text" name="receiveTotal" class="none_border" style="width: 170px;"></td>--%>
                     <td rowspan="2">经办人签字</td>
-                    <td rowspan="2" colspan="2"></td>
+                    <td rowspan="2" colspan="2" style="white-space:nowrap;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="11" class="td_left">实际支付金额(大写)：<input type="text" name="payMoney" class="none_border" style="width: 320px;clear: both;float: none;"></td>

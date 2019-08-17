@@ -32,4 +32,6 @@ public interface AreaMapper {
     int existsByUpdateName(@Param("name") String name, @Param("id") Long id);
 
     int update(Area area);
+
+    List<Area> listByUserId(@Param("userId") Long userId);
 }

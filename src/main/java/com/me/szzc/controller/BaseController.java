@@ -1,12 +1,16 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.Fadmin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author luwei
@@ -93,6 +97,22 @@ public class BaseController extends BaseServiceCtrl{
         return fadmin;
     }
 
+    /***获取用户管理的片区**/
+    public List<Area> getUserManageArea(Long userId){
+        List<Area> list = areaService.listByUserId(userId);
+        return list;
+    }
+
+    public Map<Long, String> getUserManageAreaMap(Long userId) {
+        Map<Long, String> map = new HashMap<>();
+        List<Area> list = areaService.listByUserId(userId);
+        if(list != null && !list.isEmpty()) {
+            for(Area area : list) {
+                map.put(area.getId(), area.getName());
+            }
+        }
+        return map;
+    }
 
 
     /**初始化水电表参数**/

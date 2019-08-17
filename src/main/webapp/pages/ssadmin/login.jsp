@@ -40,11 +40,11 @@ alert("${error}") ;
 				<form action="/ssadmin/95afee23-e2ab-11e6-bddf-005056ab18e8.html" method="post">
 					<p>
 						<label>用户名：</label>
-						<input type="text" name="name" size="20" class="login_input" value="luwei"/>
+						<input type="text" name="name" size="20" class="login_input"/>
 					</p>
 					<p>
 						<label>密码：</label>
-						<input type="password" name="password" size="20" class="login_input" value="luwei"/>
+						<input type="password" name="password" size="20" class="login_input"/>
 					</p>
 					<p>
 						<label>验证码：</label>

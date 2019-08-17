@@ -10,6 +10,9 @@ public class ProtocolVO {
     private String address;
     private String phone;
 
+    /**片区名称**/
+    private String areaName;
+
     /**签约状态描述**/
     private String signingStatusDesc;
 

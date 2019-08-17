@@ -2,10 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.SigningStatusEnum;
-import com.me.szzc.pojo.entity.Fsystemargs;
-import com.me.szzc.pojo.entity.RmbRecompense;
-import com.me.szzc.pojo.entity.SettleAccounts;
-import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.ProtocolVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.Utils;
@@ -17,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,16 +43,33 @@ public class ProtocolController extends BaseController {
             signingStatus = Integer.valueOf(signingStatusStr);
             view.addObject("signingStatus", signingStatus);
         }
-        String keywords = request.getParameter("keywords");
-        if(keywords != null && keywords.trim().length() >0){
-            keywords = keywords.trim();
-            view.addObject("keywords", keywords);
+        String address = request.getParameter("address");
+        if(address != null && address.trim().length() >0){
+            address = address.trim();
+            view.addObject("address", address);
+        }
+
+        String houseOwner = request.getParameter("houseOwner");
+        if(houseOwner != null && houseOwner.trim().length() >0){
+            houseOwner = houseOwner.trim();
+            view.addObject("houseOwner", houseOwner);
+        }
+
+        String areaIdStr = request.getParameter("areaId");
+        Long areaId =  null;
+        if(areaIdStr != null && areaIdStr.trim().length() >0){
+            areaIdStr = areaIdStr.trim();
+            areaId =  Long.valueOf(areaIdStr);
+            view.addObject("areaId", areaId);
         }
 
 
         int firstResult = (currentPage - 1) * numPerPage;
-        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, keywords);
+        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, address, houseOwner, areaId);
 
+        //封装片区
+        Long userId = getAdminSession(request).getFid();
+        Map<Long, String> areaMap = getUserManageAreaMap(userId);
 
         //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
@@ -73,6 +88,7 @@ public class ProtocolController extends BaseController {
             protocol.setSettleAccountId(account.getId());
             protocol.setSwapHouseId(swapHouse != null ? swapHouse.getId() : 0);
             protocol.setRmbRecompenseId(rmbRecompense != null ? rmbRecompense.getId() : 0);
+            protocol.setAreaName(areaMap.get(account.getAreaId()));
 
             list.add(protocol);
         }
@@ -82,8 +98,12 @@ public class ProtocolController extends BaseController {
         view.addObject("numPerPage", numPerPage);
         view.addObject("currentPage", currentPage);
         view.addObject("rel", "protocolList");
+        //获取用户管理的片区
+        List<Area> areaList = getUserManageArea(userId);
+        view.addObject("areaList", areaList);
+
         //总数量
-        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, keywords));
+        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner, areaId));
         return view;
     }
 
@@ -95,6 +115,19 @@ public class ProtocolController extends BaseController {
         modelAndView.setViewName(url);
         //初始化水电空调参数
         initWaterAmmerParam(modelAndView);
+        //获取用户管理的片区
+        Long userId = getAdminSession(request).getFid();
+        List<Area> areaList = getUserManageArea(userId);
+        modelAndView.addObject("areaList", areaList);
+        return modelAndView;
+    }
+
+
+    @RequestMapping("/ssadmin/goPageJsp")
+    public ModelAndView goPageJsp(HttpServletRequest request) {
+        String url = request.getParameter("url");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(url);
         return modelAndView;
     }
 

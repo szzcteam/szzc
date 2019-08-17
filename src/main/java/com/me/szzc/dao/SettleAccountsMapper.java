@@ -24,9 +24,11 @@ public interface SettleAccountsMapper {
 
     List<SettleAccounts> list(@Param("firstResult") int firstResult, @Param("maxResults") int maxResults,
                               @Param("isFY") boolean isFY,
-                              @Param("signingStatus") Integer signingStatus, @Param("keywords") String keywords);
+                              @Param("signingStatus") Integer signingStatus, @Param("address") String address,
+                              @Param("houseOwner") String houseOwner, @Param("areaId") Long areaId);
 
-    Integer getCount(@Param("signingStatus") Integer signingStatus, @Param("keywords") String keywords);
+    Integer getCount(@Param("signingStatus") Integer signingStatus, @Param("address") String address,
+                     @Param("houseOwner") String houseOwner, @Param("areaId") Long areaId);
 
 
     Integer changeSignStatus(SettleAccounts settleAccounts);

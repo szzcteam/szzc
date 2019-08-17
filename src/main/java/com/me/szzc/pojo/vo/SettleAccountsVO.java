@@ -864,9 +864,12 @@ public class SettleAccountsVO {
         vo.setHotWaterCompensate(BigDecimalUtil.stripTrailingZeros(entity.getHotWaterCompensate()));
         vo.setHotWaterCompensateBz(entity.getHotWaterCompensateBz());
 
-        vo.setCalcGasFee(entity.getCalcGasFee());
-        vo.setGasFee(BigDecimalUtil.stripTrailingZeros(entity.getGasFee()));
-        vo.setGasFeeBz(entity.getGasFeeBz());
+        if (entity.getGasFee() != null && entity.getGasFee().compareTo(BigDecimal.ZERO) > 0) {
+            vo.setCalcGasFee(entity.getCalcGasFee());
+            vo.setGasFee(BigDecimalUtil.stripTrailingZeros(entity.getGasFee()));
+            vo.setGasFeeBz(entity.getGasFeeBz());
+        }
+
 
         //构建物补偿
         vo.setCalcStructureCompensate(entity.getCalcStructureCompensate());
@@ -874,25 +877,36 @@ public class SettleAccountsVO {
         vo.setStructureCompensateBz(entity.getStructureCompensateBz());
 
         //5大构建物
-        vo.setCalcStructureBalcony(entity.getCalcStructureBalcony());
-        vo.setStructureBalcony(BigDecimalUtil.stripTrailingZeros(entity.getStructureBalcony()));
-        vo.setStructureBalconyBz(entity.getStructureBalconyBz());
+        if (entity.getStructureBalcony() != null && entity.getStructureBalcony().compareTo(BigDecimal.ZERO) > 0) {
+            vo.setCalcStructureBalcony(entity.getCalcStructureBalcony());
+            vo.setStructureBalcony(BigDecimalUtil.stripTrailingZeros(entity.getStructureBalcony()));
+            vo.setStructureBalconyBz(entity.getStructureBalconyBz());
+        }
 
-        vo.setCalcStructureBuild(entity.getCalcStructureBuild());
-        vo.setStructureBuild(BigDecimalUtil.stripTrailingZeros(entity.getStructureBuild()));
-        vo.setStructureBuildBz(entity.getStructureBuildBz());
+        if (entity.getStructureBuild() != null && entity.getStructureBuild().compareTo(BigDecimal.ZERO) > 0) {
+            vo.setCalcStructureBuild(entity.getCalcStructureBuild());
+            vo.setStructureBuild(BigDecimalUtil.stripTrailingZeros(entity.getStructureBuild()));
+            vo.setStructureBuildBz(entity.getStructureBuildBz());
+        }
 
-        vo.setCalcStructureDark(entity.getCalcStructureDark());
-        vo.setStructureDark(BigDecimalUtil.stripTrailingZeros(entity.getStructureDark()));
-        vo.setStructureDarkBz(entity.getStructureDarkBz());
+        if (entity.getStructureDark() != null && entity.getStructureDark().compareTo(BigDecimal.ZERO) > 0) {
+            vo.setCalcStructureDark(entity.getCalcStructureDark());
+            vo.setStructureDark(BigDecimalUtil.stripTrailingZeros(entity.getStructureDark()));
+            vo.setStructureDarkBz(entity.getStructureDarkBz());
 
-        vo.setCalcStructureMezzanine(entity.getCalcStructureMezzanine());
-        vo.setStructureMezzanine(BigDecimalUtil.stripTrailingZeros(entity.getStructureMezzanine()));
-        vo.setStructureMezzanineBz(entity.getStructureMezzanineBz());
+        }
 
-        vo.setCalcStructureRoof(entity.getCalcStructureRoof());
-        vo.setStructureRoof(BigDecimalUtil.stripTrailingZeros(entity.getStructureRoof()));
-        vo.setStructureRoofBz(entity.getStructureRoofBz());
+        if (entity.getStructureMezzanine() != null && entity.getStructureMezzanine().compareTo(BigDecimal.ZERO) > 0) {
+            vo.setCalcStructureMezzanine(entity.getCalcStructureMezzanine());
+            vo.setStructureMezzanine(BigDecimalUtil.stripTrailingZeros(entity.getStructureMezzanine()));
+            vo.setStructureMezzanineBz(entity.getStructureMezzanineBz());
+        }
+
+        if (entity.getStructureRoof() != null && entity.getStructureRoof().compareTo(BigDecimal.ZERO) > 0) {
+            vo.setCalcStructureRoof(entity.getCalcStructureRoof());
+            vo.setStructureRoof(BigDecimalUtil.stripTrailingZeros(entity.getStructureRoof()));
+            vo.setStructureRoofBz(entity.getStructureRoofBz());
+        }
 
         //其他描述
         vo.setAffiliatedOtherDesc(entity.getAffiliatedOtherDesc());

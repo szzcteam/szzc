@@ -11,13 +11,13 @@ public class PasswordHelper {
 	private static int hashIterations = 2;
 
 	public static String encryString(String pwd, String salt) {
-	    String newPassword = new SimpleHash(algorithmName, Utils.getMD5_32_xx(pwd+"hello, 51SZZC"), ByteSource.Util.bytes(salt), hashIterations).toHex();
+	    String newPassword = new SimpleHash(algorithmName, Utils.getMD5_32_xx(pwd+"hello, YZS"), ByteSource.Util.bytes(salt), hashIterations).toHex();
 
 	    return newPassword;
 	}
 	
 	public static void main(String args[]) throws Exception {
-		String str = encryString("abc123","TEST");
+		String str = encryString("luwei@2019","26003658957127680");
 		System.out.println(str);
 		AesCipherService aesCipherService = new AesCipherService();
 		//decrypt(Hex.decode(encrptText),key.getEncoded()).getBytes()

@@ -5,6 +5,7 @@ import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.enums.SigningStatusEnum;
+import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -177,7 +179,7 @@ public class SettleAccountsController extends BaseController {
     }
 
     @RequestMapping("ssadmin/settleAccounts/query")
-    public ModelAndView querySettleAccounts(String idMore, String url) throws Exception {
+    public ModelAndView querySettleAccounts(String idMore, String url, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url) ;
         //条件判断
@@ -187,6 +189,12 @@ public class SettleAccountsController extends BaseController {
         if(settleAccounts !=null){
             modelAndView.addObject("settleAccounts", settleAccounts);
         }
+
+        //获取用户管理的片区
+        Long userId = getAdminSession(request).getFid();
+        List<Area> areaList = getUserManageArea(userId);
+        modelAndView.addObject("areaList", areaList);
+
         //初始化水电空调参数
         initWaterAmmerParam(modelAndView);
         modelAndView.addObject("statusCode",200);

@@ -75,4 +75,13 @@
     <update id="update" parameterType="com.me.szzc.pojo.entity.Area">
         update t_area set name = #{name}, modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId} where id = #{id}
     </update>
+
+    <select id="listByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select a.*
+        from t_area a
+        inner join t_area_role b on b.area_id = a.id
+        inner join f_admin c on c.froleid = b.role_id
+        where a.deleted = 0
+        and c.fid = #{userId}
+    </select>
 </mapper>

@@ -13,10 +13,19 @@
         <div class="pageFormContent nowrap" layoutH="97">
             <dl>
                 <dt style="width: 80px;">补偿方式：</dt>
-                <dd style="color: red;">
+                <dd style="color: red;width: 310px;">
                     <label><input type="radio" name="compensateType" value="0" checked="checked"/>&nbsp;货币补偿</label>
                     <label><input type="radio" name="compensateType" value="1"/>&nbsp;产权交换</label>
                 </dd>
+                <dt style="width: 80px;color: red;">所属片区:</dt>
+                <dt style="width: 120px;">
+                    <select name="areaId" style="width: 120px;">
+                        <option value="">请选择</option>
+                        <c:forEach items="${areaList}" var="area" varStatus="num">
+                            <option value="${area.id}" <c:if test="${num.index == 0 }">selected="selected"</c:if>>${area.name}</option>
+                        </c:forEach>
+                    </select>
+                </dt>
             </dl>
             <dl>
                 <dt style="width: 80px;">项目名称:</dt>
@@ -60,10 +69,10 @@
                         <td colspan="7">被征收房屋地址</td>
                         <td colspan="7"><input type="text" name="address" class="none_border" style="width: 400px;"></td>
                     </tr>
-                    <tr>
+                    <%--<tr>
                         <td colspan="7">被征收人身份证号</td>
                         <td colspan="7"><input type="text" name="identityNo" class="none_border" style="width: 400px;"></td>
-                    </tr>
+                    </tr>--%>
                     <tr>
                         <td style="width: 35px;">序号</td>
                         <td colspan="6">补偿内容</td>
@@ -88,8 +97,8 @@
                     <tr>
                         <td colspan="5" class="td_left">2、未经登记的合法建筑补偿</td>
                         <td colspan="4">
-                            <input type="text" name="calcNoRegisterLegalArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcNoRegisterLegalPrice" class="required none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcNoRegisterLegalArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcNoRegisterLegalPrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 1px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcNoRegisterLegal" class="none_border width_220px">
                         </td>
@@ -99,8 +108,8 @@
                     <tr>
                         <td colspan="5" class="td_left">3、历史遗留无证房补偿</td>
                         <td colspan="4">
-                            <input type="text" name="calcHistoryLegacyArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcHistoryLegacyPrice" class="required none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcHistoryLegacyArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcHistoryLegacyPrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 1px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcHistoryLegacy" class="none_border width_220px">
                         </td>
@@ -532,7 +541,10 @@
                         <%--  <td>应收合计</td>
                           <td colspan="3"><input type="text" name="receiveTotal" class="none_border" style="width: 170px;"></td>--%>
                         <td rowspan="2">经办人签字</td>
-                        <td rowspan="2" colspan="2"></td>
+                        <td rowspan="2" colspan="2" style="white-space:nowrap;">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="11" class="td_left">实际支付金额(大写)：<input type="text" name="payMoney" class="none_border" style="width: 320px;clear: both;float: none;"></td>

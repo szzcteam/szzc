@@ -1567,9 +1567,14 @@
     <if test="signingStatus != null">
       and signing_status = #{signingStatus}
     </if>
-    <if test="keywords != null ">
-      and (house_owner like concat('%',#{keywords} ,'%') or phone like concat('%',#{keywords} ,'%') or address like
-      concat('%',#{keywords} ,'%'))
+    <if test="address != null ">
+      and address like concat('%',#{address} ,'%')
+    </if>
+    <if test="houseOwner != null ">
+      and (house_owner like concat('%',#{houseOwner} ,'%') or lessee like concat('%',#{houseOwner} ,'%'))
+    </if>
+    <if test="areaId != null ">
+      and area_id = #{areaId}
     </if>
     order by create_date desc
     <if test="isFY != null and isFY = true ">
@@ -1586,9 +1591,14 @@
     <if test="signingStatus != null">
       and signing_status = #{signingStatus}
     </if>
-    <if test="keywords != null ">
-      and (house_owner like concat('%',#{keywords} ,'%') or phone like concat('%',#{keywords} ,'%') or address like
-      concat('%',#{keywords} ,'%'))
+    <if test="address != null ">
+      and address like concat('%',#{address} ,'%')
+    </if>
+    <if test="houseOwner != null ">
+      and (house_owner like concat('%',#{houseOwner} ,'%') or lessee like concat('%',#{houseOwner} ,'%'))
+    </if>
+    <if test="areaId != null ">
+      and area_id = #{areaId}
     </if>
 
   </select>
