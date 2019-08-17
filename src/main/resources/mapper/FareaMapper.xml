@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.me.szzc.dao.FareaMapper">
+<resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.Farea">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="area_name" property="areaname" jdbcType="VARCHAR"/>
+</resultMap>
+<select id="insert" useGeneratedKeys="true" resultType="BaseResultMap" keyProperty="id">
+    INSERT  INTO  f_area (id , area_name)
+    values (#{id , jdbcType="INTEGER} #{area_name,jdbcType=VARCHAR}
+    )
+</select>
+
+
+</mapper>

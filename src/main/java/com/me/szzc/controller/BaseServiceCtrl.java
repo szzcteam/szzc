@@ -47,4 +47,11 @@ public class BaseServiceCtrl {
     @Autowired
     protected SettleAccountsService settleAccountsService;
 
+    @Autowired
+    AreaService  areaService ;
+
+    @Autowired
+    FareaRodeService  fareaRodeService ;
+
+
 }
