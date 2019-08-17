@@ -17,6 +17,7 @@ import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,7 +36,7 @@ import java.util.Map;
 @Controller
 public class SettleAccountsController extends BaseController {
 
-    @RequestMapping("ssadmin/settleAccounts/add")
+    @RequestMapping(value = "ssadmin/settleAccounts/add", method = RequestMethod.POST)
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增结算单")
     public ModelAndView saveSettleAccounts(SettleAccounts settleAccounts, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
@@ -153,7 +154,7 @@ public class SettleAccountsController extends BaseController {
     }
 
 
-    @RequestMapping("ssadmin/settleAccounts/update")
+    @RequestMapping(value = "ssadmin/settleAccounts/update", method = RequestMethod.POST)
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
         log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
@@ -219,6 +220,18 @@ public class SettleAccountsController extends BaseController {
         return modelAndView;
     }
 
+
+    @RequestMapping("ssadmin/settleAccounts/preview")
+    public ModelAndView preview(Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/detailSettleAccounts");
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
+        if(settleAccounts != null) {
+            SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
+            modelAndView.addObject("settleAccounts", vo);
+        }
+        return modelAndView;
+    }
 
     @RequestMapping("ssadmin/settleAccounts/detail")
     @ResponseBody

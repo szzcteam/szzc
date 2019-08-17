@@ -449,7 +449,7 @@ $(document).ready(function(){
      });*/
 
     //电热水器选择数量
-    $("#sel_water_heater").on("change", function () {
+    $("select[name='sel_water_heater']").on("change", function () {
         settleAccountObj.calcHotWater();
     });
 

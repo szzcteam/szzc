@@ -99,7 +99,36 @@ public class RoomChangeController {
     public ModelAndView queryPage(HttpServletRequest request, String name, String number,
                                   String choosePeople, String assignedProject, String housingPlatform) {
         ModelAndView view = new ModelAndView();
-        verify(name, number, choosePeople, assignedProject, housingPlatform, view);
+        if (!StringUtils.isNullOrEmpty(name)) {
+            name = name.trim();
+            if (name.length() > 0) {
+                view.addObject("name", name);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(number)) {
+            number = number.trim();
+            if (number.length() > 0) {
+                view.addObject("number", number);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(choosePeople)) {
+            choosePeople = choosePeople.trim();
+            if (choosePeople.length() > 0) {
+                view.addObject("choosePeople", choosePeople);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(assignedProject)) {
+            assignedProject = assignedProject.trim();
+            if (assignedProject.length() > 0) {
+                view.addObject("assignedProject", assignedProject);
+            }
+        }
+        if (!StringUtils.isNullOrEmpty(housingPlatform)) {
+            housingPlatform = housingPlatform.trim();
+            if (housingPlatform.length() > 0) {
+                view.addObject("housingPlatform", housingPlatform);
+            }
+        }
         int currentPage = 1;
         if (request.getParameter("pageNum") != null) {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
@@ -126,7 +155,7 @@ public class RoomChangeController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         int result = 0;
-        if (StringUtils.isNullOrEmpty(ids)) {
+        if (!StringUtils.isNullOrEmpty(ids)) {
             String[] idArr = ids.split(",");
             for (String idStr : idArr) {
                 Long id = Long.valueOf(idStr);
@@ -158,15 +187,14 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/getRoomChangeById")
-    @ResponseBody
-    public ModelAndView getRoomChangeById(Long id) {
+    public ModelAndView getRoomChangeById(Long id, String url) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(url);
+
         RoomChange roomChange = roomChangeService.getRoomChangeById(id);
         if (roomChange != null) {
             modelAndView.addObject("roomChange", roomChange);
         }
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "查询成功");
         return modelAndView;
     }
 
@@ -230,9 +258,9 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/updateRoomChangeById")
-    @ResponseBody
     public ModelAndView updateRoomChangeById(RoomChange roomChange) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //数据不为空
         if (StringUtils.isNullOrEmpty(roomChange) || StringUtils.isNullOrEmpty(roomChange.getId())) {
             modelAndView.addObject("statusCode", 300);
@@ -259,6 +287,7 @@ public class RoomChangeController {
         if (status) {
             modelAndView.addObject("statusCode", 200);
             modelAndView.addObject("message", "修改成功");
+            modelAndView.addObject("callbackType", "closeCurrent");
         } else {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "修改失败");
@@ -266,47 +295,4 @@ public class RoomChangeController {
         return modelAndView;
     }
 
-    /**
-     * 参数校验
-     *
-     * @param name
-     * @param number
-     * @param choosePeople
-     * @param assignedProject
-     * @param housingPlatform
-     * @param view
-     */
-    private void verify(String name, String number, String choosePeople,
-                        String assignedProject, String housingPlatform, ModelAndView view) {
-        if (StringUtils.isNullOrEmpty(name)) {
-            name = name.trim();
-            if (name.length() > 0) {
-                view.addObject("name", name);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(number)) {
-            number = number.trim();
-            if (number.length() > 0) {
-                view.addObject("number", number);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(choosePeople)) {
-            choosePeople = choosePeople.trim();
-            if (choosePeople.length() > 0) {
-                view.addObject("choosePeople", choosePeople);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(assignedProject)) {
-            assignedProject = assignedProject.trim();
-            if (assignedProject.length() > 0) {
-                view.addObject("assignedProject", assignedProject);
-            }
-        }
-        if (StringUtils.isNullOrEmpty(housingPlatform)) {
-            housingPlatform = housingPlatform.trim();
-            if (housingPlatform.length() > 0) {
-                view.addObject("housingPlatform", housingPlatform);
-            }
-        }
-    }
 }

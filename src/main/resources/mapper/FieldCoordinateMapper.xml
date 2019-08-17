@@ -6,6 +6,7 @@
       SELECT id, `code`, abscissa, ordinate,font_name AS fontName,font_size AS fontSize
         FROM field_coordinate
        WHERE table_name = #{tableName,jdbcType=VARCHAR}
+         AND del = 0
   </select>
 
 </mapper>
