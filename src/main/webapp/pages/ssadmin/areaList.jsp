@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="comm/include.inc.jsp" %>
-<form id="pagerForm" method="post" action="ssadmin/roomChange/queryPage.html">
+<form id="pagerForm" method="post" action="ssadmin/area/queryPage.html">
     <input type="hidden" name="name" value="${name}"/>
 
     <input type="hidden" name="pageNum" value="${currentPage}"/>
@@ -11,13 +11,13 @@
 
 <div class="pageHeader">
     <form onsubmit="return navTabSearch(this);"
-          action="ssadmin/roomChange/queryPage.html" method="post">
+          action="ssadmin/area/queryPage.html" method="post">
         <div class="searchBar">
 
             <table class="searchContent">
                 <tr>
                     <td>片区名称：<input type="text" name="name" value="${name}"
-                                   size="20"/>
+                                   size="40"/>
                     </td>
                     <td>
                         <div class="buttonActive">
@@ -37,8 +37,8 @@
             <!-- 新增 -->
             <shiro:hasPermission name="ssadmin/area/add.html">
                 <li><a class="add"
-                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addArea"
-                       height="300" width="700" target="dialog" rel="addProtocol"><span>新增</span>
+                       href="ssadmin/area/initAdd.html?url=ssadmin/addArea"
+                       height="400" width="700" target="dialog" rel="addProtocol"><span>新增</span>
                 </a></li>
             </shiro:hasPermission>
             <!-- 修改 -->
@@ -66,8 +66,9 @@
         <thead>
         <tr>
             <th width="20">序号</th>
-            <th width="80">片区名称</th>
-            <th width="80">片区状态</th>
+            <th>片区名称</th>
+            <th>片区状态</th>
+            <th>最后一次操作时间</th>
         </tr>
         </thead>
         <tbody>
@@ -77,6 +78,7 @@
                 <td>${num.index +1}</td>
                 <td>${area.name}</td>
                 <td>${area.statusDesc}</td>
+                <td>${area.modifiedDateStr}</td>
             </tr>
         </c:forEach>
 

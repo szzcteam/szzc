@@ -7,8 +7,8 @@
         <result column="role_id" jdbcType="BIGINT" property="roleId" />
     </resultMap>
     <insert id="insert" parameterType="com.me.szzc.pojo.entity.AreaRole">
-    insert into t_area_role (id, area_id, role_id)
-    values (#{id,jdbcType=BIGINT}, #{areaId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+    insert into t_area_role (area_id, role_id)
+    values (#{areaId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
   </insert>
 
   <update id="update" parameterType="com.me.szzc.pojo.entity.AreaRole">

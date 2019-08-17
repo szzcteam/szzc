@@ -1,7 +1,10 @@
 package com.me.szzc.pojo.entity;
 
 import com.me.szzc.enums.AreaStatusEnum;
+import com.me.szzc.utils.DateHelper;
 import lombok.Data;
+
+import java.util.Date;
 
 @Data
 public class Area {
@@ -28,6 +31,30 @@ public class Area {
      */
     private Boolean deleted;
 
+    /**
+     * 创建时间
+     */
+    private Date createDate;
+
+    /**
+     * 创建人id
+     */
+    private Long createUserId;
+
+    /**
+     * 修改时间
+     */
+    private Date modifiedDate;
+
+    /**修改时间字符串格式**/
+    private String modifiedDateStr;
+
+
+    /**
+     * 修改人员id
+     */
+    private Long modifiedUserId;
+
     public String getStatusDesc() {
         if(this.status == AreaStatusEnum.ENABLE.getCode()) {
             statusDesc = AreaStatusEnum.ENABLE.getDesc();
@@ -35,5 +62,10 @@ public class Area {
             statusDesc = AreaStatusEnum.DISABLE.getDesc();
         }
         return statusDesc;
+    }
+
+    public String getModifiedDateStr() {
+        modifiedDateStr = DateHelper.date2String(modifiedDate, DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond);
+        return modifiedDateStr;
     }
 }

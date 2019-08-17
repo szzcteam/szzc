@@ -16,6 +16,8 @@ public interface AreaMapper {
 
     Integer getCount(@Param("name") String name);
 
+    Area getByName(@Param("name") String name);
+
     List<Area> queryPage(@Param("start") Integer start,
                          @Param("pageSize") Integer pageSize,
                          @Param("name") String name);

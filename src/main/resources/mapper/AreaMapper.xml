@@ -5,31 +5,48 @@
         <result column="id" jdbcType="BIGINT" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+        <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
+        <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
         <result column="deleted" jdbcType="TINYINT" property="deleted" />
     </resultMap>
-    <insert id="insert" parameterType="com.me.szzc.pojo.entity.Area">
-    insert into t_area (id, `name`, status,
-      deleted)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
-      #{deleted,jdbcType=TINYINT})
+
+    <sql id="Base_Column_List">
+            id, `name`, status,deleted,create_date,create_user_id, modified_date,modified_user_id
+    </sql>
+    <insert id="insert" parameterType="com.me.szzc.pojo.entity.Area" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into t_area (`name`, status,deleted,create_date,create_user_id, modified_date,modified_user_id)
+    values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{deleted,jdbcType=TINYINT}, #{createDate},#{createUserId},#{modifiedDate},#{modifiedUserId})
   </insert>
 
     <select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(1) from t_area
         where deleted = 0
         <if test="name != null ">
-            AND `name` LIKE concat(concat('%',#{name},'%')
+            AND `name` LIKE concat('%',#{name},'%')
         </if>
     </select>
 
-    <select id="queryPage" resultType="com.me.szzc.pojo.entity.Area">
-        select * from t_area
+    <select id="queryPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_area
         where deleted = 0
         <if test="name != null ">
-            AND `name` LIKE concat(concat('%',#{name},'%')
+            AND `name` LIKE concat('%',#{name},'%')
         </if>
         order by id desc
         limit ${start},${pageSize}
     </select>
 
+
+    <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_area
+        where deleted = 0
+        and `name` = #{name}
+    </select>
 </mapper>

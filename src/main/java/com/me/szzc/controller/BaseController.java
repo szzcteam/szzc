@@ -14,6 +14,12 @@ import javax.servlet.http.HttpSession;
  */
 public class BaseController extends BaseServiceCtrl{
 
+    protected static final String STATUS_CODE_KEY = "statusCode";
+    protected static final String MESSAGE_KEY = "message";
+
+    protected static final Integer ERROR_CODE_NUM = 300;
+    protected static final Integer SUCCESS_CODE_NUM = 200;
+
 
 
     public static String getIpAddr(HttpServletRequest request) {
