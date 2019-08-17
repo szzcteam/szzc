@@ -51,7 +51,7 @@ public class BaseServiceCtrl {
     AreaService  areaService ;
 
     @Autowired
-    FareaRodeService  fareaRodeService ;
+    AreaRoleService areaRoleService ;
 
 
 }

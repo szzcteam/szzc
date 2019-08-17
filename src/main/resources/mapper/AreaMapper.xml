@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.AreaMapper">
+    <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.Area">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    </resultMap>
+    <insert id="insert" parameterType="com.me.szzc.pojo.entity.Area">
+    insert into t_area (id, name, status,
+      deleted)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{deleted,jdbcType=TINYINT})
+  </insert>
+
+</mapper>
