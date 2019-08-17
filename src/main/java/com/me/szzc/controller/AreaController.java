@@ -3,7 +3,9 @@ package com.me.szzc.controller;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.AreaStatusEnum;
 import com.me.szzc.enums.ModuleConstont;
+import com.me.szzc.pojo.dto.AreaRoleSelDTO;
 import com.me.szzc.pojo.entity.Area;
+import com.me.szzc.pojo.entity.AreaRole;
 import com.me.szzc.pojo.entity.Frole;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.Utils;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -157,6 +160,73 @@ public class AreaController extends BaseController {
 
         view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
         view.addObject(MESSAGE_KEY, "删除成功");
+        return view;
+    }
+
+
+    @RequestMapping("initUpdate")
+    public ModelAndView initUpdate(String url, Long id) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName(url);
+        //查询所有的角色
+        List<Frole> roleList = roleService.findAll();
+        //查询该片区关联的角色
+        List<AreaRole> areaRoleList = areaService.areaRoleListByAreaId(id);
+        List<AreaRoleSelDTO> dtoList = new ArrayList<>();
+        StringBuilder roleIdsSb = new StringBuilder();
+        for(Frole role : roleList) {
+            AreaRoleSelDTO dto  = new AreaRoleSelDTO();
+            dto.setFid(role.getFid());
+            dto.setFname(role.getFname());
+            if(areaRoleList != null && !areaRoleList.isEmpty()){
+                for(AreaRole areaRole : areaRoleList) {
+                    if(role.getFid().equals(areaRole.getRoleId())) {
+                        dto.setSelFlag(true);
+                        roleIdsSb.append(role.getFid()+",");
+                        break;
+                    }
+                }
+            }
+
+            dtoList.add(dto);
+        }
+
+        String roleIds = roleIdsSb.toString();
+        if(StringUtils.isNotBlank(roleIds) && roleIds.substring(roleIdsSb.length()-1, roleIdsSb.length()).equals(",")) {
+            roleIds = roleIds.substring(0, roleIds.length()-1);
+            view.addObject("roleIds", roleIds);
+        }
+        //查询片区
+        Area area = areaService.getById(id);
+        view.addObject("area", area);
+        view.addObject("roleList", dtoList);
+        return view;
+    }
+
+    @RequestMapping("update")
+    public ModelAndView update(String roleIds, String name, Long id, HttpServletRequest request){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("ssadmin/comm/ajaxDone");
+        name = name.trim();
+
+        if (StringUtils.isBlank(roleIds)) {
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "片区权限不能为空");
+            return view;
+        }
+
+        Integer existsNum = areaService.existsByUpdateName(name, id);
+        if(existsNum > 0) {
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "该片区已存在，不能重复添加");
+            return view;
+        }
+        Long userId = getAdminSession(request).getFid();
+        areaService.update(roleIds, name, id, userId);
+
+        view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        view.addObject(MESSAGE_KEY, "修改成功");
+        view.addObject("callbackType","closeCurrent");
         return view;
     }
 

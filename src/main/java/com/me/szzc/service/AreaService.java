@@ -89,4 +89,36 @@ public class AreaService {
         areaRoleMapper.deleteByAreaId(area.getId());
     }
 
+
+    public List<AreaRole> areaRoleListByAreaId(Long areaId) {
+        return areaRoleMapper.listByAreaId(areaId);
+    }
+
+    public int existsByUpdateName(String name, Long id) {
+        return areaMapper.existsByUpdateName(name, id);
+    }
+
+    public void update(String roleIds, String name, Long id, Long userId){
+        Area area = areaMapper.getById(id);
+        area.setModifiedUserId(userId);
+        area.setModifiedDate(DateHelper.getTimestamp());
+        area.setName(name);
+        //更新片区
+        areaMapper.update(area);
+        //删除权限
+        areaRoleMapper.deleteByAreaId(area.getId());
+        //重新添加片区
+        String[] arr = roleIds.split(",");
+        for(String str : arr) {
+            str = str.trim();
+            if(StringUtils.isBlank(str)) {
+                continue;
+            }
+
+            AreaRole areaRole = new AreaRole();
+            areaRole.setAreaId(area.getId());
+            areaRole.setRoleId(Long.valueOf(str));
+            areaRoleMapper.insert(areaRole);
+        }
+    }
 }

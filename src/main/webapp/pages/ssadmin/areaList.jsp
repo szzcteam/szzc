@@ -44,7 +44,7 @@
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/area/update.html">
                 <li><a class="edit"
-                       href="ssadmin/area/getRoomChangeById.html?url=ssadmin/updateRoomChange&id={sid_user}"
+                       href="ssadmin/area/initUpdate.html?url=ssadmin/updateArea&id={sid_user}"
                        height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改</span>
                 </a></li>
             </shiro:hasPermission>

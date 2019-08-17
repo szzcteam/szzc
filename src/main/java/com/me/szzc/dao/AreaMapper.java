@@ -28,4 +28,8 @@ public interface AreaMapper {
     int updateStatus(Area area);
 
     int delete(Long id);
+
+    int existsByUpdateName(@Param("name") String name, @Param("id") Long id);
+
+    int update(Area area);
 }
