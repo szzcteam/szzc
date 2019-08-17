@@ -1,9 +1,11 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.aspect.SysLog;
+import com.me.szzc.enums.AreaStatusEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.Frole;
+import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -57,7 +59,7 @@ public class AreaController extends BaseController {
 
 
     @RequestMapping("add")
-    @SysLog(code = ModuleConstont.AREA_OPERATION, method = "片区管理")
+    @SysLog(code = ModuleConstont.AREA_OPERATION, method = "新增片区")
     public ModelAndView add(String roleIds, String name,HttpServletRequest request) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
@@ -99,5 +101,63 @@ public class AreaController extends BaseController {
         return view;
     }
 
+
+    @RequestMapping("updateStatus")
+    @SysLog(code = ModuleConstont.AREA_OPERATION, method = "修改片区状态")
+    public ModelAndView updateStatus(Long id, Integer status, HttpServletRequest request){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("ssadmin/comm/ajaxDone");
+
+        Area area = areaService.getById(id);
+        if(area == null) {
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "记录不存在");
+            return view;
+        }
+
+        if(status ==  area.getStatus()) {
+            if(status == AreaStatusEnum.ENABLE.getCode()){
+                view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+                view.addObject(MESSAGE_KEY, "不可重复启用");
+                return view;
+            }else{
+                view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+                view.addObject(MESSAGE_KEY, "不可重复禁用");
+                return view;
+            }
+        }
+
+        area.setStatus(status);
+        area.setModifiedDate(DateHelper.getTimestamp());
+
+        Long userId = getAdminSession(request).getFid();
+        area.setModifiedUserId(userId);
+        areaService.updateStatus(area);
+
+
+        view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        view.addObject(MESSAGE_KEY, "操作成功");
+        return view;
+    }
+
+    @RequestMapping("delete")
+    @SysLog(code = ModuleConstont.AREA_OPERATION, method = "删除片区")
+    public ModelAndView delete(Long id, HttpServletRequest request){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("ssadmin/comm/ajaxDone");
+
+        Area area = areaService.getById(id);
+        if(area == null) {
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "记录不存在");
+            return view;
+        }
+
+        areaService.delete(area);
+
+        view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        view.addObject(MESSAGE_KEY, "删除成功");
+        return view;
+    }
 
 }

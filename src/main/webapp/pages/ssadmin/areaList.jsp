@@ -49,15 +49,15 @@
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/area/enable.html">
-                <li><a class="edit" href="ssadmin/area/enable.html?id={sid_user}" target="ajaxTodo" title="确定要启用吗?"><span>启用</span>
+                <li><a class="edit" href="ssadmin/area/updateStatus.html?id={sid_user}&status=0" target="ajaxTodo" title="确定要启用吗?"><span>启用</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/area/disable.html">
-                <li><a class="edit" href="ssadmin/area/disable.html?id={sid_user}" target="ajaxTodo" title="确定要禁用吗?"><span>禁用</span>
+                <li><a class="edit" href="ssadmin/area/updateStatus.html?id={sid_user}&status=1" target="ajaxTodo" title="确定要禁用吗?"><span>禁用</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/area/delete.html">
-                <li><a class="delete" href="ssadmin/area/delete.html" target="ajaxTodo" title="确定要删除吗?"><span>删除</span>
+                <li><a class="delete" href="ssadmin/area/delete.html?id={sid_user}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>

@@ -61,6 +61,10 @@ public class AreaService {
         return areaMapper.getByName(name);
     }
 
+    public Area getById(Long id) {
+        return areaMapper.getById(id);
+    }
+
 
     public Map<String, Object> queryPage(int pageSize, int pageNum, String name) {
         int count = areaMapper.getCount(name);
@@ -70,6 +74,19 @@ public class AreaService {
         map.put("total", count);
         map.put("datas", list);
         return map;
+    }
+
+
+    public int updateStatus(Area area){
+        return areaMapper.updateStatus(area);
+    }
+
+    @Transactional
+    public void delete(Area area) {
+        //删除片区
+        areaMapper.delete(area.getId());
+        //删除片区对应的片区权限
+        areaRoleMapper.deleteByAreaId(area.getId());
     }
 
 }

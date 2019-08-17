@@ -49,4 +49,23 @@
         where deleted = 0
         and `name` = #{name}
     </select>
+
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_area
+        where deleted = 0
+        and id = #{id}
+    </select>
+
+
+    <update id="updateStatus" parameterType="com.me.szzc.pojo.entity.Area">
+        update t_area set status = #{status}, modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId} where id = #{id}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update t_area set deleted = 1 where id = #{id}
+    </update>
+
 </mapper>

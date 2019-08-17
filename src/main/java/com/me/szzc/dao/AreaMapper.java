@@ -18,7 +18,14 @@ public interface AreaMapper {
 
     Area getByName(@Param("name") String name);
 
+    Area getById(Long id);
+
     List<Area> queryPage(@Param("start") Integer start,
                          @Param("pageSize") Integer pageSize,
                          @Param("name") String name);
+
+
+    int updateStatus(Area area);
+
+    int delete(Long id);
 }

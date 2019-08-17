@@ -15,6 +15,13 @@
     update t_area_role set area_id = #{areaId}  , role_id = #{roleId} where id = #{id}
   </update>
 
+    <select id="listByAreaId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from t_area_role where area_id = #{areaId}
+    </select>
+
+    <delete id="deleteByAreaId" parameterType="java.lang.Long">
+        delete from t_area_role where area_id = #{areaId}
+    </delete>
 
 
 
