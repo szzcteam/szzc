@@ -65,7 +65,7 @@
     <table class="table" width="100%" layoutH="138">
         <thead>
         <tr>
-            <th width="20">序号</th>
+            <th width="30">序号</th>
             <th>片区名称</th>
             <th>片区状态</th>
             <th>最后一次操作时间</th>

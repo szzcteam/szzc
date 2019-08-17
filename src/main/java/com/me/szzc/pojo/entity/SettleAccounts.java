@@ -15,7 +15,7 @@ public class SettleAccounts {
     /**
      * 编报单位，x片区
      */
-    private String bbdw;
+    private Long areaId;
 
     /**
      * 协议编号

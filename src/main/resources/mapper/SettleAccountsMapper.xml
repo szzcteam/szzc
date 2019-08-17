@@ -3,7 +3,7 @@
 <mapper namespace="com.me.szzc.dao.SettleAccountsMapper">
   <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.SettleAccounts">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="bbdw" jdbcType="VARCHAR" property="bbdw" />
+    <result column="area_id" jdbcType="VARCHAR" property="areaId" />
     <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="house_owner" jdbcType="VARCHAR" property="houseOwner" />
@@ -152,7 +152,7 @@
     <result column="signing_status" jdbcType="INTEGER" property="signingStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, bbdw, card_no, project_name, house_owner, identity_no, compensate_type, lessee,
+    id, area_id, card_no, project_name, house_owner, identity_no, compensate_type, lessee,
     phone, lessee_phone, useing, certified_area, no_register_legal_area, history_legacy_area,
     check_in_area, no_checkin_area, in_area, assess_price, address, calc_value_compensate,
     value_compensate, value_compensate_bz, calc_no_register_legal, no_register_legal,
@@ -209,8 +209,8 @@
       <if test="id != null">
         id,
       </if>
-      <if test="bbdw != null">
-        bbdw,
+      <if test="areaId != null">
+        area_id,
       </if>
       <if test="cardNo != null">
         card_no,
@@ -655,8 +655,8 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="bbdw != null">
-        #{bbdw,jdbcType=VARCHAR},
+      <if test="areaId != null">
+        #{areaId,jdbcType=VARCHAR},
       </if>
       <if test="cardNo != null">
         #{cardNo,jdbcType=VARCHAR},
@@ -1102,8 +1102,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     update t_settle_accounts
     <set>
-      <if test="bbdw != null">
-        bbdw = #{bbdw,jdbcType=VARCHAR},
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=VARCHAR},
       </if>
       <if test="cardNo != null">
         card_no = #{cardNo,jdbcType=VARCHAR},
