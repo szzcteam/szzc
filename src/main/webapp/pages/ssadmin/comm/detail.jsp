@@ -10,13 +10,17 @@
 		</div>
 		<div class="accordionContent">
 			<ul class="tree treeFolder">
-				<shiro:hasPermission name="/ssadmin/protocolList.html">
-					<li><a href="/ssadmin/protocolList.html" target="navTab"
-						   rel="coinSurveyList">农讲所片协议管理</a></li>
+				<shiro:hasPermission name="/ssadmin/area/queryPage.html">
+					<li><a href="/ssadmin/area/queryPage.html" target="navTab"
+						   rel="area">片区管理</a></li>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="/ssadmin/roomChange/queryPage.html">
 					<li><a href="/ssadmin/roomChange/queryPage.html" target="navTab"
 						   rel="roomChange">房源管理</a></li>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="/ssadmin/protocolList.html">
+					<li><a href="/ssadmin/protocolList.html" target="navTab"
+						   rel="coinSurveyList">农讲所片协议管理</a></li>
 				</shiro:hasPermission>
 			</ul>
 		</div>

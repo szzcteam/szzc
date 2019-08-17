@@ -1,6 +1,9 @@
 package com.me.szzc.dao;
 
 import com.me.szzc.pojo.entity.Area;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author luwei
@@ -10,4 +13,10 @@ public interface AreaMapper {
 
 
     int insert(Area area);
+
+    Integer getCount(@Param("name") String name);
+
+    List<Area> queryPage(@Param("start") Integer start,
+                         @Param("pageSize") Integer pageSize,
+                         @Param("name") String name);
 }

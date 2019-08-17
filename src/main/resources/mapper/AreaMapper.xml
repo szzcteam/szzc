@@ -8,10 +8,28 @@
         <result column="deleted" jdbcType="TINYINT" property="deleted" />
     </resultMap>
     <insert id="insert" parameterType="com.me.szzc.pojo.entity.Area">
-    insert into t_area (id, name, status,
+    insert into t_area (id, `name`, status,
       deleted)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
       #{deleted,jdbcType=TINYINT})
   </insert>
+
+    <select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from t_area
+        where deleted = 0
+        <if test="name != null ">
+            AND `name` LIKE concat(concat('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="com.me.szzc.pojo.entity.Area">
+        select * from t_area
+        where deleted = 0
+        <if test="name != null ">
+            AND `name` LIKE concat(concat('%',#{name},'%')
+        </if>
+        order by id desc
+        limit ${start},${pageSize}
+    </select>
 
 </mapper>

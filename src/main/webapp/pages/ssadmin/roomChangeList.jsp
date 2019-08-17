@@ -35,19 +35,15 @@
                     <td>提供房源平台：<input type="text" name="housingPlatform" value="${housingPlatform}"
                                       size="20"/>
                     </td>
-                </tr>
-            </table>
-            <div class="subBar">
-                <ul>
-                    <li>
+                    <td>
                         <div class="buttonActive">
                             <div class="buttonContent">
                                 <button type="submit">查询</button>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </form>
 </div>

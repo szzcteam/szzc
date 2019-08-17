@@ -11,6 +11,8 @@ import java.util.Map;
 public enum ModuleEnum {
 
     PROTOCOL_OPERATION(ModuleConstont.PROTOCOL_OPERATION, "协议管理"),
+    ROOM_CHANGE_OPERATION(ModuleConstont.ROOM_CHANGE_OPERATION, "房源管理"),
+    AREA_OPERATION(ModuleConstont.AREA_OPERATION, "片区管理"),
     SYSTEM_OPERATION(ModuleConstont.SYSTEM_OPERATION,"系统管理");
 
     private String code;

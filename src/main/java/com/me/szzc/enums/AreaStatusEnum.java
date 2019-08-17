@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 签约状态
+ * 片区状态
  * @author luwei
  * @date 2019/5/29
  */
-public enum SigningStatusEnum {
+public enum AreaStatusEnum {
 
-    NOT_SIGNED(0, "未签约"),
-    COMPLETE(1, "签约完成"),
+    ENABLE(0, "启用"),
+    DISABLE(1, "禁用"),
 
     ;
 
@@ -19,7 +19,7 @@ public enum SigningStatusEnum {
     private static final Map<Integer, String> descMap = new HashMap<>();
 
     static {
-        for(SigningStatusEnum e : SigningStatusEnum.values()) {
+        for(AreaStatusEnum e : AreaStatusEnum.values()) {
             descMap.put(e.getCode(), e.getDesc());
         }
     }
@@ -29,7 +29,7 @@ public enum SigningStatusEnum {
     private String desc;
 
 
-    SigningStatusEnum(int code, String desc) {
+    AreaStatusEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }

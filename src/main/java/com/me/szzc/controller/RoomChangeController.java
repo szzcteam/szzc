@@ -150,7 +150,7 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/batchDelete")
-    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "批量删除房源")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "批量删除房源")
     public ModelAndView deleteRoomChange(String ids) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -258,6 +258,7 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/updateRoomChangeById")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "修改房源")
     public ModelAndView updateRoomChangeById(RoomChange roomChange) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
