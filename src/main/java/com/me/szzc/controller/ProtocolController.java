@@ -63,13 +63,20 @@ public class ProtocolController extends BaseController {
             view.addObject("areaId", areaId);
         }
 
+        Long userId = getAdminSession(request).getFid();
 
-        int firstResult = (currentPage - 1) * numPerPage;
-        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, address, houseOwner, areaId);
+        //获取用户管理的片区
+        List<Area> areaList = getUserArea(userId);
+        view.addObject("areaList", areaList);
+
+        //转换格式
+        List<Long> areaIdList = convertAreaIdList(areaList);
 
         //封装片区
-        Long userId = getAdminSession(request).getFid();
-        Map<Long, String> areaMap = getUserManageAreaMap(userId);
+        Map<Long, String> areaMap = convertUserAreaMap(areaList);
+
+        int firstResult = (currentPage - 1) * numPerPage;
+        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, address, houseOwner, areaId, areaIdList);
 
         //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
@@ -98,12 +105,9 @@ public class ProtocolController extends BaseController {
         view.addObject("numPerPage", numPerPage);
         view.addObject("currentPage", currentPage);
         view.addObject("rel", "protocolList");
-        //获取用户管理的片区
-        List<Area> areaList = getUserManageArea(userId);
-        view.addObject("areaList", areaList);
 
         //总数量
-        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner, areaId));
+        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner, areaId, areaIdList));
         return view;
     }
 
@@ -117,7 +121,7 @@ public class ProtocolController extends BaseController {
         initWaterAmmerParam(modelAndView);
         //获取用户管理的片区
         Long userId = getAdminSession(request).getFid();
-        List<Area> areaList = getUserManageArea(userId);
+        List<Area> areaList = getUserArea(userId);
         modelAndView.addObject("areaList", areaList);
         return modelAndView;
     }

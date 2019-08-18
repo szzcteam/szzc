@@ -1576,6 +1576,10 @@
     <if test="areaId != null ">
       and area_id = #{areaId}
     </if>
+      and area_id in
+    <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+      #{itemId}
+    </foreach>
     order by create_date desc
     <if test="isFY != null and isFY = true ">
       limit ${firstResult}, ${maxResults}
@@ -1600,7 +1604,10 @@
     <if test="areaId != null ">
       and area_id = #{areaId}
     </if>
-
+    and area_id in
+    <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+      #{itemId}
+    </foreach>
   </select>
 
 

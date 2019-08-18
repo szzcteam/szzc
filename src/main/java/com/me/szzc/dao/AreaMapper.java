@@ -34,4 +34,6 @@ public interface AreaMapper {
     int update(Area area);
 
     List<Area> listByUserId(@Param("userId") Long userId);
+
+    List<Area> listEnableByUserId(@Param("userId") Long userId, @Param("status") Integer status);
 }

@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,15 +98,44 @@ public class BaseController extends BaseServiceCtrl{
         return fadmin;
     }
 
-    /***获取用户管理的片区**/
-    public List<Area> getUserManageArea(Long userId){
+    /***获取用户管理的所有片区，返回list 格式**/
+    public List<Area> getUserArea(Long userId){
         List<Area> list = areaService.listByUserId(userId);
         return list;
     }
 
-    public Map<Long, String> getUserManageAreaMap(Long userId) {
+    /***获取用户管理的所有-启用-片区，返回list 格式**/
+    public List<Area> getUserEnableArea(Long userId){
+        List<Area> list = areaService.listEnableByUserId(userId);
+        return list;
+    }
+
+    /** List<Area> 转换为 List<Long> **/
+    public List<Long> convertAreaIdList(List<Area> list){
+        List<Long> idList = new ArrayList<>();
+        if (list != null && !list.isEmpty()) {
+            for (Area area : list) {
+                idList.add(area.getId());
+            }
+        }
+        return idList;
+    }
+
+    /***获取用户管理的所有片区，返回map 格式**/
+    public Map<Long, String> getUserAreaMap(Long userId) {
         Map<Long, String> map = new HashMap<>();
         List<Area> list = areaService.listByUserId(userId);
+        if(list != null && !list.isEmpty()) {
+            for(Area area : list) {
+                map.put(area.getId(), area.getName());
+            }
+        }
+        return map;
+    }
+
+    /** List<Area> 转换为 Map<Long, String> **/
+    public Map<Long, String> convertUserAreaMap(List<Area> list) {
+        Map<Long, String> map = new HashMap<>();
         if(list != null && !list.isEmpty()) {
             for(Area area : list) {
                 map.put(area.getId(), area.getName());

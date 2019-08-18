@@ -84,4 +84,14 @@
         where a.deleted = 0
         and c.fid = #{userId}
     </select>
+
+    <select id="listEnableByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select a.*
+        from t_area a
+        inner join t_area_role b on b.area_id = a.id
+        inner join f_admin c on c.froleid = b.role_id
+        where a.deleted = 0
+        and a.status = #{status}
+        and c.fid = #{userId}
+    </select>
 </mapper>

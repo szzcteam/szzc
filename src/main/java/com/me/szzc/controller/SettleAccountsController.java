@@ -192,7 +192,7 @@ public class SettleAccountsController extends BaseController {
 
         //获取用户管理的片区
         Long userId = getAdminSession(request).getFid();
-        List<Area> areaList = getUserManageArea(userId);
+        List<Area> areaList = getUserEnableArea(userId);
         modelAndView.addObject("areaList", areaList);
 
         //初始化水电空调参数

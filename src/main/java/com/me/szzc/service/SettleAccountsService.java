@@ -5,7 +5,6 @@ import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
-import com.me.szzc.pojo.entity.Notice;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.DateHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Slf4j
@@ -63,13 +63,13 @@ public class SettleAccountsService {
     }
 
 
-    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address,String houseOwner, Long areaId) {
-        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId);
+    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address,String houseOwner, Long areaId, List<Long> areaIdList) {
+        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId, areaIdList);
         return listSettleAccounts;
     }
 
-    public Integer getCount(Integer signingStatus, String address,String houseOwner, Long areaId) {
-        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId);
+    public Integer getCount(Integer signingStatus, String address,String houseOwner, Long areaId, List<Long> areaIdList) {
+        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId, areaIdList);
     }
 
     /**变更签约状态**/
