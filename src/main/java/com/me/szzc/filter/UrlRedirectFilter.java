@@ -40,7 +40,7 @@ public class UrlRedirectFilter implements Filter {
         }else{
             //需要登陆后才能访问
             if(uri.startsWith("/ssadmin/")){
-                //后台
+                //后台登录页面、登录请求，或者是登录状态的，才可自由访问后台资源
                 if(uri.startsWith("/ssadmin/2bcf8d4e-e2aa-11e6-bddf-005056ab18e8.html")
                         ||uri.startsWith("/ssadmin/95afee23-e2ab-11e6-bddf-005056ab18e8.html")
                         || req.getSession().getAttribute("login_admin")!=null){
@@ -50,7 +50,7 @@ public class UrlRedirectFilter implements Filter {
                 }
                 return ;
             }else if(uri.startsWith("/front/")){
-                //当前系统前端，是不需要登陆的
+                //当前系统前端，是不需要登陆的，直接释放即可
                 chain.doFilter(request, response) ;
             }
         }
