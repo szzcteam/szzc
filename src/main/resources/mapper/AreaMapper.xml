@@ -85,7 +85,7 @@
         and c.fid = #{userId}
     </select>
 
-    <select id="listEnableByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="listEnableByUserId" resultMap="BaseResultMap">
         select a.*
         from t_area a
         inner join t_area_role b on b.area_id = a.id

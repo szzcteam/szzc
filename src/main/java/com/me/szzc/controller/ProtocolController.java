@@ -83,7 +83,12 @@ public class ProtocolController extends BaseController {
 
         for (SettleAccounts account : dataList) {
             ProtocolVO protocol = new ProtocolVO();
-            protocol.setName(account.getHouseOwner());
+            if(StringUtils.isNotBlank(account.getHouseOwner())){
+                protocol.setName(account.getHouseOwner());
+            }else{
+                protocol.setName(account.getLessee());
+            }
+
             protocol.setAddress(account.getAddress());
             protocol.setPhone(account.getPhone());
             SwapHouse swapHouse = this.swapHouseService.getByHouseOwnerAddr(account.getHouseOwner(), account.getAddress());
