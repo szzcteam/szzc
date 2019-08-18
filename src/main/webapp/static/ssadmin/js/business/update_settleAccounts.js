@@ -110,7 +110,18 @@ $(document).ready(function () {
     //临时安置过渡费，利用计算公式，填充3小框
     var calcInterimFee = $("input[name='calcInterimFee']").eq(0).val();
     if(calcInterimFee) {
-        var arr = calcInterimFee.split("*");
+        var arr = "";
+        //如果有+号，就是2个公式
+        var two_calc_index = calcInterimFee.indexOf("+");
+        if(two_calc_index != -1){
+            //存在2中计算
+            var two_calc_split = calcInterimFee.split("+");
+            console.log("分割：" + two_calc_split[0]);
+            arr = two_calc_split[0].split("*");
+            $("input[name='calcInterimFeeOther']").val(two_calc_split[1]);
+        }else{
+            arr = calcInterimFee.split("*");
+        }
         $("input[name='calcInterimFeeArea']").val(arr[0]);
         $("input[name='calcInterimFeePrice']").val(arr[1]);
         $("input[name='calcInterimFeeMonth']").val(arr[2]);

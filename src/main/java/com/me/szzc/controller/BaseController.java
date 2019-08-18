@@ -202,11 +202,11 @@ public class BaseController extends BaseServiceCtrl{
         modelAndView.addObject("suspendBusinessProportion", suspendBusinessProportion);
 
 
-        //货币补偿补助
+        //货币补偿补助比例
         String rmbCompensateProportion = systemArgsService.getValue(SystemArgsConstant.RMB_COMPENSATE_PROPORTION);
         modelAndView.addObject("rmbCompensateProportion", rmbCompensateProportion);
 
-        //货币搬迁奖励
+        //货币搬迁奖励比例
         String rmbMoveRewardProportion = systemArgsService.getValue(SystemArgsConstant.RMB_MOVE_REWARD_PROPORTION);
         modelAndView.addObject("rmbMoveRewardProportion", rmbMoveRewardProportion);
 

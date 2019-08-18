@@ -82,7 +82,7 @@ $(document).ready(function(){
     });
 
     //临时安置3小框，失去焦点，重新计算公式
-    $("input[name='calcInterimFeeArea'],input[name='calcInterimFeePrice'],input[name='calcInterimFeeMonth']").on("blur change", function () {
+    $("input[name='calcInterimFeeArea'],input[name='calcInterimFeePrice'],input[name='calcInterimFeeMonth'],input[name='calcInterimFeeOther']").on("blur change", function () {
         settleAccountObj.fullCalcInterimFee();
     });
 
@@ -405,6 +405,7 @@ $(document).ready(function(){
     //左上角补偿方式选择，级联 “奖励”的计算，切换选择时，公式不一样
     $("input[name='compensateType']").on("click", function () {
         settleAccountObj.calcMoveReward();
+        settleAccountObj.calcRmbCompensate();
     });
 
 
@@ -542,6 +543,7 @@ var settleAccountObj = {
         var valueCompensate = Math.round(eval(calcValueCompensate));
         $("input[name='valueCompensate']").eq(0).val(valueCompensate).change();
         settleAccountObj.calcMoveReward();
+        settleAccountObj.calcRmbCompensate();
     },
 
     //填充房屋价值补偿-未经登记合法
@@ -562,6 +564,7 @@ var settleAccountObj = {
         console.log("运行未登记合法计算公式: " + noRegisterLegal);
         $("input[name='noRegisterLegal']").eq(0).val(noRegisterLegal).change();
         settleAccountObj.calcMoveReward();
+        settleAccountObj.calcRmbCompensate();
     },
 
 
@@ -581,6 +584,7 @@ var settleAccountObj = {
         var historyLegacy = Math.round(eval(calcHistoryLegacy));
         $("input[name='historyLegacy']").eq(0).val(historyLegacy).change();
         settleAccountObj.calcMoveReward();
+        settleAccountObj.calcRmbCompensate();
     },
 
     //填充被征收房屋补偿合计
@@ -705,7 +709,12 @@ var settleAccountObj = {
         var calcInterimFeeArea = $("input[name='calcInterimFeeArea']").eq(0).val() || 0;
         var calcInterimFeePrice = $("input[name='calcInterimFeePrice']").eq(0).val() || 0;
         var calcInterimFeeMonth = $("input[name='calcInterimFeeMonth']").eq(0).val() || 0;
+        //其它是个计算公式
+        var calcInterimFeeOther = $("input[name='calcInterimFeeOther']").eq(0).val() || 0;
         var calcInterimFee = calcInterimFeeArea + "*" + calcInterimFeePrice + "*" + calcInterimFeeMonth;
+        if (calcInterimFeeOther != 0) {
+            calcInterimFee = calcInterimFee + "+" + calcInterimFeeOther;
+        }
         $("input[name='calcInterimFee']").eq(0).val(calcInterimFee).change();
     },
     //未登记面积补偿，利用3小框，得到计算公式
@@ -869,6 +878,28 @@ var settleAccountObj = {
         console.log("奖励计算公式：" + calcMoveReward);
         $("input[name='calcMoveReward']").eq(0).val(calcMoveReward).change();
 
+    },
+
+    //货币补偿补助公式
+    calcRmbCompensate:function(){
+        var compensateType = $("input[name='compensateType']:checked").val();
+        //产权调换的，则让人工填写
+        if(compensateType == 1){
+            $("input[name='calcRmbCompensate']").eq(0).val("").change();
+            return;
+        }
+        //有证金额
+        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
+        //无证合法金额
+        var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
+        //历史遗留金额
+        var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
+        //比例
+        var proportion = $("input[name='rmbCompensateProportion']").eq(0).val() || 0;
+
+        var calcRmbCompensate = "(" + calcValueCompensate + "+" + calcNoRegisterLegal + "+" + calcHistoryLegacy + ")" + "*" + proportion;
+        console.log("货币补偿补助公式：" + calcRmbCompensate);
+        $("input[name='calcRmbCompensate']").eq(0).val(calcRmbCompensate).change();
     },
     //根据产权交换的单价、面积， 拼计算公式
     calcSwapMoney:function () {

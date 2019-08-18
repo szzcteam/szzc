@@ -219,6 +219,7 @@
                         <input type="text" name="calcInterimFeeArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcInterimFeePrice" class="required none_border" placeholder="金额" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcInterimFeeMonth" class="required none_border" placeholder="月数" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                        <input type="text" name="calcInterimFeeOther" class="none_border"  size="21" style="margin-top: 2px;margin-left: 5px;"/>
                         <!--隐藏计算公式-->
                         <input type="hidden" name="calcInterimFee" class="none_border width_220px">
                     </td>
@@ -451,7 +452,7 @@
                     <td colspan="6" class="td_left">改变房屋用途补助</td>
                     <td colspan="4">
                         <input type="text" name="calcChangeCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                        <input type="text" name="calcChangeCompensatePrice" class="none_border" placeholder="新房单价" size="6" style="margin-top: 2px;margin-left: 5px;"/>
+                        <input type="text" name="calcChangeCompensatePrice" class="none_border" placeholder="实际用途单价" size="8" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcChangeCompensateOldPrice" class="none_border" placeholder="旧房单价" size="6" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcChangeCompensateProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <!--隐藏存储值-->
@@ -464,6 +465,7 @@
                     <td>九</td>
                     <td colspan="6" class="td_left">货币补偿补助（或产权调换补助）</td>
                     <td colspan="4" id="rmbCompensate_td1">
+                        <input type="hidden" name="rmbCompensateProportion" value="${rmbCompensateProportion}"/>
                         <%--<input type="text" name="calcRmbCompensateArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcRmbCompensatePrice" class="none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcRmbCompensateProportion" class="none_border" placeholder="比例" value="${rmbCompensateProportion}" size="5" style="margin-top: 2px;margin-left: 5px;"/>--%>
