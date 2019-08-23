@@ -387,6 +387,7 @@
                             <input type="text" name="calcChangeCompensatePrice" class="none_border" placeholder="实际用途单价" size="8" style="margin-top: 2px;margin-left: 5px;"/>
                             <input type="text" name="calcChangeCompensateOldPrice" class="none_border" placeholder="旧房单价" size="6" style="margin-top: 2px;margin-left: 5px;"/>
                             <input type="text" name="calcChangeCompensateProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcChangeCompensateOther" class="none_border"  size="21" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏存储值-->
                             <input type="hidden" name="calcChangeCompensate" value="${settleAccounts.calcChangeCompensate}" class="none_border width_220px">
                         </td>

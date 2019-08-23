@@ -112,14 +112,13 @@ $(document).ready(function () {
     if(calcInterimFee) {
         var arr = "";
         //如果有+号，就是2个公式
-        var two_calc_index = calcInterimFee.indexOf("+");
-        if(two_calc_index != -1){
-            //存在2中计算
-            var two_calc_split = calcInterimFee.split("+");
-            console.log("分割：" + two_calc_split[0]);
-            arr = two_calc_split[0].split("*");
-            $("input[name='calcInterimFeeOther']").val(two_calc_split[1]);
-        }else{
+        var firstAddIndex = calcInterimFee.indexOf("+");
+        if (firstAddIndex != -1) {
+            arr = calcInterimFee.substring(0, firstAddIndex).split("*");
+            var two_calc = calcInterimFee.substring(firstAddIndex + 1, calcInterimFee.length);
+            console.log("临时安置过渡费分割：" + two_calc);
+            $("input[name='calcInterimFeeOther']").val(two_calc);
+        } else {
             arr = calcInterimFee.split("*");
         }
         $("input[name='calcInterimFeeArea']").val(arr[0]);
@@ -208,8 +207,19 @@ $(document).ready(function () {
     //住改商补助，利用计算公式，填充框
     var calcChangeCompensate = $("input[name='calcChangeCompensate']").eq(0).val() || "0";
     if(calcChangeCompensate != "0"){
-        //公式：面积*(单价-评估单价)*比例
-        var arr = calcChangeCompensate.split("*");
+        var arr = "";
+        //可能会有2个公式
+        var firstAddIndex = calcChangeCompensate.indexOf("+");
+        if (firstAddIndex != -1) {
+            arr = calcChangeCompensate.substring(0, firstAddIndex).split("*");
+            var two_calc = calcChangeCompensate.substring(firstAddIndex+1, calcChangeCompensate.length);
+            console.log("住改商补助分割：" + two_calc);
+            $("input[name='calcChangeCompensateOther']").val(two_calc);
+        }else{
+            //公式：面积*(单价-评估单价)*比例
+            arr = calcChangeCompensate.split("*");
+        }
+
         if(arr[0] != 0) {
             $("input[name='calcChangeCompensateArea']").eq(0).val(arr[0]);
             var price = arr[1].substring(1, arr[1].length - 1);
