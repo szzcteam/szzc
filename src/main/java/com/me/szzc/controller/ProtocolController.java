@@ -63,6 +63,16 @@ public class ProtocolController extends BaseController {
             view.addObject("areaId", areaId);
         }
 
+        String startDate = request.getParameter("startDate");
+        if(StringUtils.isNotBlank(startDate) && startDate.trim().length()>0){
+            view.addObject("startDate", startDate);
+        }
+
+        String endDate = request.getParameter("endDate");
+        if(StringUtils.isNotBlank(endDate) && endDate.trim().length()>0){
+            view.addObject("endDate", endDate);
+        }
+
         Long userId = getAdminSession(request).getFid();
 
         //获取用户管理的片区
@@ -76,7 +86,7 @@ public class ProtocolController extends BaseController {
         Map<Long, String> areaMap = convertUserAreaMap(areaList);
 
         int firstResult = (currentPage - 1) * numPerPage;
-        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, address, houseOwner, areaId, areaIdList);
+        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate);
 
         //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
@@ -112,7 +122,7 @@ public class ProtocolController extends BaseController {
         view.addObject("rel", "protocolList");
 
         //总数量
-        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner, areaId, areaIdList));
+        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate));
         return view;
     }
 
