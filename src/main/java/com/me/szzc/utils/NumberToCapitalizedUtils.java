@@ -1,9 +1,27 @@
 package com.me.szzc.utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by bbfang on 2019/2/18.
  */
 public class NumberToCapitalizedUtils {
+
+    public static final Map<Integer, String> CHINESE_NUM_MAP = new HashMap<>();
+    static {
+        CHINESE_NUM_MAP.put(0, "零");
+        CHINESE_NUM_MAP.put(1, "壹");
+        CHINESE_NUM_MAP.put(2, "贰");
+        CHINESE_NUM_MAP.put(3, "叁");
+        CHINESE_NUM_MAP.put(4, "肆");
+        CHINESE_NUM_MAP.put(5, "伍");
+        CHINESE_NUM_MAP.put(6, "陆");
+        CHINESE_NUM_MAP.put(7, "柒");
+        CHINESE_NUM_MAP.put(8, "捌");
+        CHINESE_NUM_MAP.put(9, "玖");
+    }
+
 
     public static void main(String[] args) {
         double a = 2365;
