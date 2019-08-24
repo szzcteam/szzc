@@ -11,6 +11,17 @@ $(document).ready(function () {
         rmbRecompenseObj.houseNameSync(houseOwner, address);
     });
 
+    //生活困难小计
+    $("#rmbRecompenseDiv input[name='basicLivingSubsidy'],#rmbRecompenseDiv input[name='disabilitySubsidy'],#rmbRecompenseDiv input[name='diseaseSubsidy']," +
+        "#rmbRecompenseDiv input[name='noChild'],#rmbRecompenseDiv input[name='martyr']").on("blur change", function () {
+        var basicLivingSubsidy = $("#rmbRecompenseDiv input[name='basicLivingSubsidy']").eq(0).val();
+        var disabilitySubsidy = $("#rmbRecompenseDiv input[name='disabilitySubsidy']").eq(0).val();
+        var diseaseSubsidy = $("#rmbRecompenseDiv input[name='diseaseSubsidy']").eq(0).val();
+        var noChild = $("#rmbRecompenseDiv input[name='noChild']").eq(0).val();
+        var martyr = $("#rmbRecompenseDiv input[name='martyr']").eq(0).val();
+        var calc_lifeCompensate = basicLivingSubsidy + "+" + disabilitySubsidy + "+" + diseaseSubsidy + "+" + noChild + "+" + martyr;
+        $("#rmbRecompenseDiv input[name='lifeCompensate']").eq(0).val(eval(calc_lifeCompensate)).change();
+    });
 
     //附属设施，小计
     $("#subsidiary_item input[type='text']").each(function (i, obj) {
@@ -41,35 +52,28 @@ $(document).ready(function () {
     //补偿款项绑定事件
     var compensateItem = new Array();
     compensateItem[0]= "valueCompensate";
-    compensateItem[1]= "decorationCompensate";
-    compensateItem[2]= "subtotal";
-    compensateItem[3]= "moveHouseFee";
-    compensateItem[4]= "interimFee";
-    compensateItem[5]= "suspendBusinessFee";
-    compensateItem[6]= "rmbCompensate";
-    compensateItem[7]= "lifeCompensate";
-    compensateItem[8]= "changeCompensate";
-    compensateItem[9]= "moveReward";
-    compensateItem[10]= "closeBalcony";
-    compensateItem[11]= "noCheckCompensate";
-    compensateItem[12]= "otherFee";
+    compensateItem[1]= "noRegisterLegal";
+    compensateItem[2]= "historyLegacy";
+    compensateItem[3]= "decorationCompensate";
+    compensateItem[4]= "moveHouseFee";
+    compensateItem[5]= "interimFee";
+    compensateItem[6]= "guarantee";
+    compensateItem[7]= "suspendBusinessFee";
+    compensateItem[8]= "subtotal";
+    compensateItem[9]= "changeCompensate";
+    compensateItem[10]= "lifeCompensate";
+    compensateItem[11]= "rmbCompensate";
+    compensateItem[12]= "smallAreaReward";
+    compensateItem[13]= "moveReward";
+    compensateItem[14]= "otherFee";
     for(var i=0;i<compensateItem.length;i++){
         var nameText = compensateItem[i];
         $("#rmbRecompenseDiv input[name='"+nameText+"']").eq(0).on("blur change", function () {
-            rmbRecompenseObj.summary13Num();
+            rmbRecompenseObj.summaryNum();
         });
     }
 
-    //临时安置过渡费3小框，绑定事件
-    $("#rmbRecompenseDiv input[name='interimArea']").eq(0).on("blur change", function () {
-        rmbRecompenseObj.fullInterimFee();
-    });
-    $("#rmbRecompenseDiv input[name='interimPrice']").eq(0).on("blur change", function () {
-        rmbRecompenseObj.fullInterimFee();
-    });
-    $("#rmbRecompenseDiv input[name='interimMonth']").eq(0).on("blur change", function () {
-        rmbRecompenseObj.fullInterimFee();
-    });
+
 
 
 });
@@ -104,53 +108,123 @@ var rmbRecompenseObj = {
                     okCall: function(){
                         //被征收房屋地址
                         $("#rmbRecompenseDiv input[name='address']").eq(0).val(data.address);
-                        //用途s
+                        //证载建筑面积
+                        $("#rmbRecompenseDiv input[name='certifiedArea']").eq(0).val(data.certifiedArea);
+                        //证载房屋用途
                         $("#rmbRecompenseDiv input[name='useing']").eq(0).val(data.useing);
-                        //建筑面积
-                        $("#rmbRecompenseDiv input[name='checkInArea']").eq(0).val(data.checkInArea);
-                        //评估机构评估的补偿金额
+                        //房屋价值评估单价
+                        var calcValueCompensateArr = data.calcValueCompensate.split("*");
+                        $("#rmbRecompenseDiv input[name='assessPrice']").eq(0).val(calcValueCompensateArr[1]);
+                        //用于经营的实际面积  == 对应结算单第8条的，住改商面积
+                        if(data.changeCompensate != null && data.changeCompensate > 0 ){
+                            var calcChangeCompensate = data.calcChangeCompensate.split("*");
+                            $("#rmbRecompenseDiv input[name='valueCompensateBusinessArea']").eq(0).val(calcChangeCompensate[0]);
+                            $("#rmbRecompenseDiv input[name='valueCompensateRate']").eq(0).val(eval(calcChangeCompensate[2]*100));
+                        }
+
+                        //未登记的合法建筑面积
+                        $("#rmbRecompenseDiv input[name='noRegisterLegalArea']").eq(0).val(data.noRegisterLegalArea);
+                        //评估单价
+                        if(data.noRegisterLegal != null && data.noRegisterLegal >0){
+                            var calcNoRegisterLegal = data.calcNoRegisterLegal.split("*");
+                            $("#rmbRecompenseDiv input[name='noRegisterAssessPrice']").eq(0).val(calcNoRegisterLegal[1]);
+                        }
+                        //补偿比例
+                        // $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val(data.assessPrice);
+
+                        //历史遗留建筑面积
+                        $("#rmbRecompenseDiv input[name='historyLegacyArea']").eq(0).val(data.historyLegacyArea);
+                        //评估单价
+                        if(data.historyLegacy != null && data.historyLegacy >0){
+                            var calcHistoryLegacy = data.calcHistoryLegacy.split("*");
+                            $("#rmbRecompenseDiv input[name='historyAssessPrice']").eq(0).val(calcHistoryLegacy[1]);
+                        }
+
+                        //补偿比例
+                        // $("#rmbRecompenseDiv input[name='historyProportion']").eq(0).val(data.assessPrice);
+
+                        //有证房屋补偿金额
                         $("#rmbRecompenseDiv input[name='valueCompensate']").eq(0).val(data.valueCompensate);
+                        $("#rmbRecompenseDiv input[name='noRegisterLegal']").eq(0).val(data.noRegisterLegal);
+                        $("#rmbRecompenseDiv input[name='historyLegacy']").eq(0).val(data.historyLegacy);
+
                         //室内装修补偿
-                        $("#rmbRecompenseDiv input[name='decorationCompensate']").eq(0).val(data.decorationCompensate);
-                        //构建物
-                        $("#rmbRecompenseDiv input[name='structureCompensate']").eq(0).val(data.structureCompensate).change();
-                        //电表迁移费
-                        $("#rmbRecompenseDiv input[name='moveAmmeterFee']").eq(0).val(data.moveAmmeterFee).change();
-                        //水表迁移费
-                        $("#rmbRecompenseDiv input[name='moveWaterMeterFee']").eq(0).val(data.moveWaterMeterFee).change();
-                        //空调移机费
-                        $("#rmbRecompenseDiv input[name='moveAirConditioningFee']").eq(0).val(data.moveAirConditioningFee).change();
-                        //管道煤气拆装补偿
-                        $("#rmbRecompenseDiv input[name='gasFee']").eq(0).val(data.gasFee).change();
-                        //热水器拆装补偿
-                        $("#rmbRecompenseDiv input[name='hotWaterCompensate']").eq(0).val(data.hotWaterCompensate).change();
+                        if(data.decorationCompensate != null && data.decorationCompensate > 0){
+                            var calcDecorationCompensate = data.calcDecorationCompensate.split("*");
+                            $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(calcDecorationCompensate[1]);
+                            $("#rmbRecompenseDiv input[name='decorationCompensate']").eq(0).val(data.decorationCompensate)
+                        }
+                        ;
                         //搬家费
                         $("#rmbRecompenseDiv input[name='moveHouseFee']").eq(0).val(data.moveHouseFee);
                         //临时安置补偿(过渡费)
                         var calcInterimFee = data.calcInterimFee;
                         var calcInterimFeeArr = calcInterimFee.split("*");
-                        $("#rmbRecompenseDiv input[name='interimArea']").eq(0).val(calcInterimFeeArr[0]);
+                        // $("#rmbRecompenseDiv input[name='interimArea']").eq(0).val(calcInterimFeeArr[0]);
                         $("#rmbRecompenseDiv input[name='interimPrice']").eq(0).val(calcInterimFeeArr[1]);
-                        $("#rmbRecompenseDiv input[name='interimMonth']").eq(0).val(calcInterimFeeArr[2]);
+                        // $("#rmbRecompenseDiv input[name='interimMonth']").eq(0).val(calcInterimFeeArr[2]);
                         $("#rmbRecompenseDiv input[name='interimFee']").eq(0).val(data.interimFee);
-                        //货币补偿补助
-                        $("#rmbRecompenseDiv input[name='rmbCompensate']").eq(0).val(data.rmbCompensate).change();
+
+                        //保底
+                        $("#rmbRecompenseDiv input[name='guarantee']").eq(0).val(data.guarantee);
+
                         //停产停业损失补偿
                         $("#rmbRecompenseDiv input[name='suspendBusinessFee']").eq(0).val(data.suspendBusinessFee);
-                        //生活困难补助
-                        $("#rmbRecompenseDiv input[name='lifeCompensate']").eq(0).val(data.lifeCompensate);
-                        //住改商补助
-                        $("#rmbRecompenseDiv input[name='changeCompensate']").eq(0).val(data.changeCompensate);
-                        //搬迁奖励
-                        $("#rmbRecompenseDiv input[name='moveReward']").eq(0).val(data.moveReward);
-                        //未登记建筑面积
-                        var calcNoCheckCompensate = data.calcNoCheckCompensate;
-                        if(calcNoCheckCompensate) {
-                            var calcNoCheckCompensateArr = calcNoCheckCompensate.split("*");
-                            $("#rmbRecompenseDiv input[name='noCheckArea']").eq(0).val(calcNoCheckCompensateArr[0]);
+
+                        //附属设施开始
+                        //水表迁移费
+                        $("#rmbRecompenseDiv input[name='moveWaterMeterFee']").eq(0).val(data.moveWaterMeterFee);
+                        //电表迁移费
+                        $("#rmbRecompenseDiv input[name='moveAmmeterFee']").eq(0).val(data.moveAmmeterFee);
+                        //空调移机费
+                        $("#rmbRecompenseDiv input[name='moveAirConditioningFee']").eq(0).val(data.moveAirConditioningFee);
+                        //热水器拆装补偿
+                        if(data.hotWaterCompensate != null && data.hotWaterCompensate > 0){
+                            var hot_water_index = data.calcHotWaterCompensate.indexOf("+");
+                            //太阳能热水器
+                            var hot_d_calc = data.calcHotWaterCompensate.substring(hot_water_index+1, data.calcHotWaterCompensate.length);
+                            $("#rmbRecompenseDiv input[name='solarHeater']").eq(0).val(eval(hot_d_calc));
+                            //其他  电热水器
+                            var hot_value = data.calcHotWaterCompensate.substring(0, hot_water_index);
+                            $("#rmbRecompenseDiv input[name='otherHeater']").eq(0).val(eval(hot_value));
                         }
 
-                        rmbRecompenseObj.summary13Num();
+                        //管道煤气拆装补偿
+                        $("#rmbRecompenseDiv input[name='gasFee']").eq(0).val(data.gasFee);
+                        //构建物
+                        $("#rmbRecompenseDiv input[name='structureBalcony']").eq(0).val(data.structureBalcony);
+                        $("#rmbRecompenseDiv input[name='structureBuild']").eq(0).val(data.structureBuild);
+                        $("#rmbRecompenseDiv input[name='structureDark']").eq(0).val(data.structureDark);
+                        $("#rmbRecompenseDiv input[name='structureMezzanine']").eq(0).val(data.structureMezzanine);
+                        $("#rmbRecompenseDiv input[name='structureRoof']").eq(0).val(data.structureRoof);
+                        $("#rmbRecompenseDiv input[name='affiliatedOther']").eq(0).val(data.affiliatedOther);
+                        //附属设施结束，触发一次小计求和
+                        $("#rmbRecompenseDiv input[name='moveWaterMeterFee']").eq(0).change();
+
+                        //住改商补助
+                        $("#rmbRecompenseDiv input[name='changeCompensate']").eq(0).val(data.changeCompensate);
+                        //生活困难补助
+                        if(data.lifeCompensate != null && data.lifeCompensate > 0){
+                            $("#rmbRecompenseDiv input[name='lifeCompensate']").eq(0).val(data.lifeCompensate);
+                            var lifeCompensateArr = data.calcLifeCompensate.split("+");
+                            $("#rmbRecompenseDiv input[name='diseaseSubsidy']").val(lifeCompensateArr[0]);
+                            $("#rmbRecompenseDiv input[name='disabilitySubsidy']").val(lifeCompensateArr[1]);
+                            $("#rmbRecompenseDiv input[name='basicLivingSubsidy']").val(lifeCompensateArr[2])
+                            $("#rmbRecompenseDiv input[name='martyr']").val(lifeCompensateArr[3]);
+                            $("#rmbRecompenseDiv input[name='noChild']").val(lifeCompensateArr[4]);
+                        }
+
+                        //货币补偿补助
+                        $("#rmbRecompenseDiv input[name='rmbCompensate']").eq(0).val(data.rmbCompensate);
+                        //小户型困难补助
+                        $("#rmbRecompenseDiv input[name='smallAreaReward']").eq(0).val(data.smallAreaReward);
+                        //按期签约搬迁奖励
+                        $("#rmbRecompenseDiv input[name='moveReward']").eq(0).val(data.moveReward);
+                        //其他
+                        $("#rmbRecompenseDiv input[name='otherFee']").eq(0).val(data.otherFee);
+
+                        //触发所有条款求和
+                        rmbRecompenseObj.summaryNum();
                     }
                 });
             }
@@ -165,63 +239,33 @@ var rmbRecompenseObj = {
         $("#rmbRecompenseDiv input[name='upperRmb']").eq(0).val(rmb_upper);
     },
 
-    //汇总13项之和
-    summary13Num:function () {
+    //所有条款求和
+    summaryNum:function () {
         var valueCompensate = $("#rmbRecompenseDiv  input[name='valueCompensate']").eq(0).val() || 0;
-        var valueCompensate_num = new Number(valueCompensate);
-
+        var noRegisterLegal = $("#rmbRecompenseDiv  input[name='noRegisterLegal']").eq(0).val() || 0;
+        var historyLegacy = $("#rmbRecompenseDiv  input[name='historyLegacy']").eq(0).val() || 0;
         var decorationCompensate = $("#rmbRecompenseDiv  input[name='decorationCompensate']").eq(0).val() || 0;
-        var decorationCompensate_num = new Number(decorationCompensate);
-
-        var subtotal = $("#rmbRecompenseDiv  input[name='subtotal']").eq(0).val() || 0;
-        var subtotal_num = new Number(subtotal);
-
         var moveHouseFee = $("#rmbRecompenseDiv  input[name='moveHouseFee']").eq(0).val() || 0;
-        var moveHouseFee_num = new Number(moveHouseFee);
-
         var interimFee = $("#rmbRecompenseDiv  input[name='interimFee']").eq(0).val() || 0;
-        var interimFee_num = new Number(interimFee);
-
+        var guarantee = $("#rmbRecompenseDiv  input[name='guarantee']").eq(0).val() || 0;
         var suspendBusinessFee = $("#rmbRecompenseDiv  input[name='suspendBusinessFee']").eq(0).val() || 0;
-        var suspendBusinessFee_num = new Number(suspendBusinessFee);
-
-        var rmbCompensate = $("#rmbRecompenseDiv  input[name='rmbCompensate']").eq(0).val() || 0;
-        var rmbCompensate_num = new Number(rmbCompensate);
-
-        var lifeCompensate = $("#rmbRecompenseDiv  input[name='lifeCompensate']").eq(0).val() || 0;
-        var lifeCompensate_num = new Number(lifeCompensate);
-
+        //附属设施，求和了
+        var subtotal = $("#rmbRecompenseDiv  input[name='subtotal']").eq(0).val() || 0;
         var changeCompensate = $("#rmbRecompenseDiv  input[name='changeCompensate']").eq(0).val() || 0;
-        var changeCompensate_num = new Number(changeCompensate);
-
+        //生活困难补助求和了
+        var lifeCompensate = $("#rmbRecompenseDiv  input[name='lifeCompensate']").eq(0).val() || 0;
+        var rmbCompensate = $("#rmbRecompenseDiv  input[name='rmbCompensate']").eq(0).val() || 0;
+        var smallAreaReward = $("#rmbRecompenseDiv  input[name='smallAreaReward']").eq(0).val() || 0;
         var moveReward = $("#rmbRecompenseDiv  input[name='moveReward']").eq(0).val() || 0;
-        var moveReward_num = new Number(moveReward);
-
-        var closeBalcony = $("#rmbRecompenseDiv  input[name='closeBalcony']").eq(0).val() || 0;
-        var closeBalcony_num = new Number(closeBalcony);
-
-        var noCheckCompensate = $("#rmbRecompenseDiv  input[name='noCheckCompensate']").eq(0).val() || 0;
-        var noCheckCompensate_num = new Number(noCheckCompensate);
-
         var otherFee = $("#rmbRecompenseDiv  input[name='otherFee']").eq(0).val() || 0;
-        var otherFee_num = new Number(otherFee);
 
-        var sumRbm = valueCompensate_num + decorationCompensate_num + subtotal_num +
-            moveHouseFee_num + interimFee_num + suspendBusinessFee_num +rmbCompensate_num+
-            lifeCompensate_num + changeCompensate_num + moveReward_num +
-            closeBalcony_num + noCheckCompensate_num + otherFee_num;
+        var sumRbm_calc = valueCompensate + "+" + noRegisterLegal + "+" + historyLegacy + "+" + decorationCompensate + "+" +
+            moveHouseFee + "+" + interimFee + "+" + guarantee + "+" + suspendBusinessFee + "+" + subtotal + "+" + changeCompensate + "+" +
+            lifeCompensate + "+" + rmbCompensate + "+" + smallAreaReward + "+" + moveReward + "+" + otherFee;
+        var sumRbm = eval(sumRbm_calc);
         $("#rmbRecompenseDiv  input[name='sumRbm']").eq(0).val(sumRbm).change();
-    },
+    }
 
-    //临时安置补偿，利用3小框，得到计算公式
-    fullInterimFee: function () {
-        var calcInterimFeeArea = $("#rmbRecompenseDiv input[name='interimArea']").eq(0).val() || 0;
-        var calcInterimFeePrice = $("#rmbRecompenseDiv input[name='interimPrice']").eq(0).val() || 0;
-        var calcInterimFeeMonth = $("#rmbRecompenseDiv input[name='interimMonth']").eq(0).val() || 0;
-        var calcInterimFee = calcInterimFeeArea + "*" + calcInterimFeePrice + "*" + calcInterimFeeMonth;
-        console.log("临时过渡费计算公式:" + calcInterimFee);
-        var interimFee = Math.round(eval(calcInterimFee));
-        $("#rmbRecompenseDiv input[name='interimFee']").eq(0).val(interimFee).change();
-    },
+
 
 }

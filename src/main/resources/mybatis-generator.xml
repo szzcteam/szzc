@@ -34,9 +34,9 @@
         </javaClientGenerator>
         <!--生成对应表及类名-->
 
-        <table tableName="t_area"
-               domainObjectName="Area"
-               mapperName="AreaMapper"
+        <table tableName="t_rmb_recompense"
+               domainObjectName="RmbRecompense"
+               mapperName="RmbRecompenseMapper"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

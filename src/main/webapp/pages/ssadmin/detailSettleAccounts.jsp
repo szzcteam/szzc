@@ -222,8 +222,8 @@
                         <td>${settleAccounts.suspendBusinessFeeBz}</td>
                     </tr>
                     <tr>
-                        <td rowspan="10">七</td>
-                        <td rowspan="10" style="width: 35px;">附属设施补偿</td>
+                        <td rowspan="11">七</td>
+                        <td rowspan="11" style="width: 35px;">附属设施补偿</td>
                         <td colspan="5" class="td_left">1、水表迁移费</td>
                         <td colspan="4">
                             ${settleAccounts.calcMoveWaterMeterFee}
@@ -262,7 +262,7 @@
                         <td>${settleAccounts.gasFeeBz}</td>
                     </tr>
                     <tr>
-                        <td colspan="2" rowspan="5" class="td_left">6、构建物补偿</td>
+                        <td colspan="2" rowspan="6" class="td_left">6、构建物补偿</td>
                         <td colspan="3" class="td_left">（1）结构内阳台</td>
                         <td colspan="4">
                             ${settleAccounts.calcStructureBalcony}
@@ -301,6 +301,14 @@
                         </td>
                         <td colspan="2">${settleAccounts.structureRoof}</td>
                         <td>${settleAccounts.structureRoofBz}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="td_left">（6）其他&nbsp;&nbsp;${settleAccounts.affiliatedOtherDesc}</td>
+                        <td colspan="4">
+                            ${settleAccounts.calcAffiliatedOther}
+                        </td>
+                        <td colspan="2">${settleAccounts.affiliatedOther}</td>
+                        <td>${settleAccounts.affiliatedOtherBz}</td>
                     </tr>
                     <tr>
                         <td>八</td>
