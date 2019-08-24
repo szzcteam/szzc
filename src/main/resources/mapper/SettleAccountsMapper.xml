@@ -195,7 +195,7 @@
     select
     <include refid="Base_Column_List" />
     from t_settle_accounts
-    where house_owner = #{houseOwner} and address = #{address} and deleted = 0
+    where (house_owner = #{houseOwner} or lessee = #{houseOwner}) and address = #{address} and deleted = 0
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

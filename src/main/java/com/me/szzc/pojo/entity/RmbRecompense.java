@@ -7,515 +7,439 @@ import java.util.Date;
 
 @Data
 public class RmbRecompense {
+    /**
+     * 
+     */
     private Long id;
 
+    /**
+     * 协议编号
+     */
     private String cardNo;
 
+    /**
+     * 征收部门
+     */
     private String mngOffice;
 
+    /**
+     * 代办单位
+     */
+    private String agencyCompany;
+
+    /**
+     * 实施公司
+     */
     private String company;
 
+    /**
+     * 被征收人
+     */
     private String houseOwner;
 
+    /**
+     * 身份证号
+     */
+    private String identityNo;
+
+    /**
+     * 补偿计划
+     */
     private String recompensePlan;
 
+    /**
+     * 房屋地址
+     */
     private String address;
 
+    /**
+     * 证载建筑面积
+     */
+    private BigDecimal certifiedArea;
+
+    /**
+     * 房屋所属权证号
+     */
     private String houseOwnerNumber;
 
+    /**
+     * 国有土地使用权证号
+     */
     private String publicOwnerNumber;
 
+    /**
+     * 房屋权属份额
+     */
     private BigDecimal proportion;
 
+    /**
+     * 房屋用途
+     */
     private String useing;
 
+    /**
+     * 证载房屋评估单价
+     */
+    private BigDecimal assessPrice;
+
+    /**
+     * 登记建筑面积
+     */
     private BigDecimal checkInArea;
 
+    /**
+     * 住宅面积
+     */
     private BigDecimal residenceArea;
 
+    /**
+     * 证载房屋用于经营的面积
+     */
+    private BigDecimal valueCompensateBusinessArea;
+
+    /**
+     * 证载房屋住宅改为门面补助系数
+     */
+    private BigDecimal valueCompensateRate;
+
+    /**
+     * 经营面积
+     */
     private BigDecimal operateArea;
 
+    /**
+     * 办公面积
+     */
     private BigDecimal officeArea;
 
+    /**
+     * 生产面积
+     */
     private BigDecimal produceArea;
 
+    /**
+     * 其他面积
+     */
     private BigDecimal otherArea;
 
+    /**
+     * 未登记面积
+     */
     private BigDecimal noCheckArea;
 
+    /**
+     * 未登记的合法建筑面积
+     */
+    private BigDecimal noRegisterLegalArea;
+
+    /**
+     * 未登记合法建筑房屋用途
+     */
+    private String noRegisterUseing;
+
+    /**
+     * 未登记房屋评估单价
+     */
+    private BigDecimal noRegisterAssessPrice;
+
+    /**
+     * 未登记房屋补偿比例
+     */
+    private BigDecimal noRegisterProportion;
+
+    /**
+     * 未登记房屋经营面积
+     */
+    private BigDecimal noRegisterBusinessArea;
+
+    /**
+     * 未登记房屋住宅改为门面补助系数
+     */
+    private BigDecimal noRegisterRate;
+
+    /**
+     * 历史遗留面积
+     */
+    private BigDecimal historyLegacyArea;
+
+    /**
+     * 历史房屋实际用途
+     */
+    private String historyUseing;
+
+    /**
+     * 历史遗留房屋评估单价
+     */
+    private BigDecimal historyAssessPrice;
+
+    /**
+     * 历史遗留房屋补偿比例
+     */
+    private BigDecimal historyProportion;
+
+    /**
+     * 历史遗留房屋门面经营面积
+     */
+    private BigDecimal historyBusinessArea;
+
+    /**
+     * 历史遗留房屋门面补助系数
+     */
+    private BigDecimal historyRate;
+
+    /**
+     * 有证房屋补偿金额
+     */
     private BigDecimal valueCompensate;
 
+    /**
+     * 未登记的合法建筑补偿金额
+     */
+    private BigDecimal noRegisterLegal;
+
+    /**
+     * 历史遗留无证房屋补偿金额
+     */
+    private BigDecimal historyLegacy;
+
+    /**
+     * 装修补偿每平米单价
+     */
+    private BigDecimal decorationCompensateUnitPrice;
+
+    /**
+     * 装饰装修补偿金额
+     */
     private BigDecimal decorationCompensate;
 
+    /**
+     * 构建物补偿
+     */
     private BigDecimal structureCompensate;
 
+    /**
+     * 电话移机费
+     */
     private BigDecimal movePhoneFee;
 
+    /**
+     * 有线电视复装费
+     */
     private BigDecimal tvFee;
 
+    /**
+     * 电表迁移费
+     */
     private BigDecimal moveAmmeterFee;
 
+    /**
+     * 水表迁移费
+     */
     private BigDecimal moveWaterMeterFee;
 
+    /**
+     * 宽带网补偿
+     */
     private BigDecimal wifiFee;
 
+    /**
+     * 空调移机费
+     */
     private BigDecimal moveAirConditioningFee;
 
+    /**
+     * 太阳能热水器移机费
+     */
+    private BigDecimal solarHeater;
+
+    /**
+     * 其他热水器移机费
+     */
+    private BigDecimal otherHeater;
+
+    /**
+     * 管道燃气拆装费
+     */
     private BigDecimal gasFee;
 
+    /**
+     * 热水器拆装补偿
+     */
     private BigDecimal hotWaterCompensate;
 
+    /**
+     * 附属设施小计
+     */
     private BigDecimal subtotal;
 
+    /**
+     * 搬家费
+     */
     private BigDecimal moveHouseFee;
 
+    /**
+     * 临时过渡面积
+     */
     private BigDecimal interimArea;
 
+    /**
+     * 过渡单价
+     */
     private BigDecimal interimPrice;
 
+    /**
+     * 过渡月数
+     */
     private Integer interimMonth;
 
+    /**
+     * 过渡费
+     */
     private BigDecimal interimFee;
 
+    /**
+     * 保底补偿金额
+     */
+    private BigDecimal guarantee;
+
+    /**
+     * 停产停业损失补偿
+     */
     private BigDecimal suspendBusinessFee;
 
+    /**
+     * 货币补偿补助
+     */
     private BigDecimal rmbCompensate;
 
+    /**
+     * 结构设计内封闭阳台补偿费
+     */
+    private BigDecimal structureBalcony;
+
+    /**
+     * 外挑搭建补偿费
+     */
+    private BigDecimal structureBuild;
+
+    /**
+     * 暗楼补偿费
+     */
+    private BigDecimal structureDark;
+
+    /**
+     * 夹层补偿费
+     */
+    private BigDecimal structureMezzanine;
+
+    /**
+     * 顶楼搭建补偿费
+     */
+    private BigDecimal structureRoof;
+
+    /**
+     * 构建物其他补偿费用
+     */
+    private BigDecimal affiliatedOther;
+
+    /**
+     * 低保补助
+     */
+    private BigDecimal basicLivingSubsidy;
+
+    /**
+     * 残疾补助
+     */
+    private BigDecimal disabilitySubsidy;
+
+    /**
+     * 重症
+     */
+    private BigDecimal diseaseSubsidy;
+
+    /**
+     * 失独
+     */
+    private BigDecimal noChild;
+
+    /**
+     * 烈士家庭补助
+     */
+    private BigDecimal martyr;
+
+    /**
+     * 生活困难补助
+     */
     private BigDecimal lifeCompensate;
 
+    /**
+     * 住改商补助
+     */
     private BigDecimal changeCompensate;
 
+    /**
+     * 小户型住房困难补助
+     */
+    private BigDecimal smallAreaReward;
+
+    /**
+     * 按期签约搬迁奖励
+     */
     private BigDecimal moveReward;
 
-    private BigDecimal closeBalcony;
-
-    private BigDecimal noCheckCompensate;
-
+    /**
+     * 其他费用
+     */
     private BigDecimal otherFee;
 
+    /**
+     * 总计人民币
+     */
     private BigDecimal sumRbm;
 
+    /**
+     * 大写人民币
+     */
     private String upperRmb;
 
+    /**
+     * 限N天搬迁
+     */
+    private Integer beforeDay;
+
+    /**
+     * 其他约定1
+     */
     private String otherTermsOne;
 
+    /**
+     * 其他约定2
+     */
     private String otherTermsTwo;
 
+    /**
+     * 创建时间
+     */
     private Date createDate;
 
+    /**
+     * 创建人id
+     */
     private Long createUserId;
 
+    /**
+     * 修改时间
+     */
     private Date modifiedDate;
 
+    /**
+     * 修改人id
+     */
     private Long modifiedUserId;
 
+    /**
+     * 逻辑删除
+     */
     private Boolean deleted;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCardNo() {
-        return cardNo;
-    }
-
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo;
-    }
-
-    public String getMngOffice() {
-        return mngOffice;
-    }
-
-    public void setMngOffice(String mngOffice) {
-        this.mngOffice = mngOffice;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public String getHouseOwner() {
-        return houseOwner;
-    }
-
-    public void setHouseOwner(String houseOwner) {
-        this.houseOwner = houseOwner;
-    }
-
-    public String getRecompensePlan() {
-        return recompensePlan;
-    }
-
-    public void setRecompensePlan(String recompensePlan) {
-        this.recompensePlan = recompensePlan;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getHouseOwnerNumber() {
-        return houseOwnerNumber;
-    }
-
-    public void setHouseOwnerNumber(String houseOwnerNumber) {
-        this.houseOwnerNumber = houseOwnerNumber;
-    }
-
-    public String getPublicOwnerNumber() {
-        return publicOwnerNumber;
-    }
-
-    public void setPublicOwnerNumber(String publicOwnerNumber) {
-        this.publicOwnerNumber = publicOwnerNumber;
-    }
-
-    public BigDecimal getProportion() {
-        return proportion;
-    }
-
-    public void setProportion(BigDecimal proportion) {
-        this.proportion = proportion;
-    }
-
-    public String getUseing() {
-        return useing;
-    }
-
-    public void setUseing(String useing) {
-        this.useing = useing;
-    }
-
-    public BigDecimal getCheckInArea() {
-        return checkInArea;
-    }
-
-    public void setCheckInArea(BigDecimal checkInArea) {
-        this.checkInArea = checkInArea;
-    }
-
-    public BigDecimal getResidenceArea() {
-        return residenceArea;
-    }
-
-    public void setResidenceArea(BigDecimal residenceArea) {
-        this.residenceArea = residenceArea;
-    }
-
-    public BigDecimal getOperateArea() {
-        return operateArea;
-    }
-
-    public void setOperateArea(BigDecimal operateArea) {
-        this.operateArea = operateArea;
-    }
-
-    public BigDecimal getOfficeArea() {
-        return officeArea;
-    }
-
-    public void setOfficeArea(BigDecimal officeArea) {
-        this.officeArea = officeArea;
-    }
-
-    public BigDecimal getProduceArea() {
-        return produceArea;
-    }
-
-    public void setProduceArea(BigDecimal produceArea) {
-        this.produceArea = produceArea;
-    }
-
-    public BigDecimal getOtherArea() {
-        return otherArea;
-    }
-
-    public void setOtherArea(BigDecimal otherArea) {
-        this.otherArea = otherArea;
-    }
-
-    public BigDecimal getNoCheckArea() {
-        return noCheckArea;
-    }
-
-    public void setNoCheckArea(BigDecimal noCheckArea) {
-        this.noCheckArea = noCheckArea;
-    }
-
-    public BigDecimal getValueCompensate() {
-        return valueCompensate;
-    }
-
-    public void setValueCompensate(BigDecimal valueCompensate) {
-        this.valueCompensate = valueCompensate;
-    }
-
-    public BigDecimal getDecorationCompensate() {
-        return decorationCompensate;
-    }
-
-    public void setDecorationCompensate(BigDecimal decorationCompensate) {
-        this.decorationCompensate = decorationCompensate;
-    }
-
-    public BigDecimal getStructureCompensate() {
-        return structureCompensate;
-    }
-
-    public void setStructureCompensate(BigDecimal structureCompensate) {
-        this.structureCompensate = structureCompensate;
-    }
-
-    public BigDecimal getMovePhoneFee() {
-        return movePhoneFee;
-    }
-
-    public void setMovePhoneFee(BigDecimal movePhoneFee) {
-        this.movePhoneFee = movePhoneFee;
-    }
-
-    public BigDecimal getTvFee() {
-        return tvFee;
-    }
-
-    public void setTvFee(BigDecimal tvFee) {
-        this.tvFee = tvFee;
-    }
-
-    public BigDecimal getMoveAmmeterFee() {
-        return moveAmmeterFee;
-    }
-
-    public void setMoveAmmeterFee(BigDecimal moveAmmeterFee) {
-        this.moveAmmeterFee = moveAmmeterFee;
-    }
-
-    public BigDecimal getMoveWaterMeterFee() {
-        return moveWaterMeterFee;
-    }
-
-    public void setMoveWaterMeterFee(BigDecimal moveWaterMeterFee) {
-        this.moveWaterMeterFee = moveWaterMeterFee;
-    }
-
-    public BigDecimal getWifiFee() {
-        return wifiFee;
-    }
-
-    public void setWifiFee(BigDecimal wifiFee) {
-        this.wifiFee = wifiFee;
-    }
-
-    public BigDecimal getMoveAirConditioningFee() {
-        return moveAirConditioningFee;
-    }
-
-    public void setMoveAirConditioningFee(BigDecimal moveAirConditioningFee) {
-        this.moveAirConditioningFee = moveAirConditioningFee;
-    }
-
-    public BigDecimal getGasFee() {
-        return gasFee;
-    }
-
-    public void setGasFee(BigDecimal gasFee) {
-        this.gasFee = gasFee;
-    }
-
-    public BigDecimal getHotWaterCompensate() {
-        return hotWaterCompensate;
-    }
-
-    public void setHotWaterCompensate(BigDecimal hotWaterCompensate) {
-        this.hotWaterCompensate = hotWaterCompensate;
-    }
-
-    public BigDecimal getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public BigDecimal getMoveHouseFee() {
-        return moveHouseFee;
-    }
-
-    public void setMoveHouseFee(BigDecimal moveHouseFee) {
-        this.moveHouseFee = moveHouseFee;
-    }
-
-    public BigDecimal getInterimPrice() {
-        return interimPrice;
-    }
-
-    public void setInterimPrice(BigDecimal interimPrice) {
-        this.interimPrice = interimPrice;
-    }
-
-    public Integer getInterimMonth() {
-        return interimMonth;
-    }
-
-    public void setInterimMonth(Integer interimMonth) {
-        this.interimMonth = interimMonth;
-    }
-
-    public BigDecimal getInterimFee() {
-        return interimFee;
-    }
-
-    public void setInterimFee(BigDecimal interimFee) {
-        this.interimFee = interimFee;
-    }
-
-    public BigDecimal getSuspendBusinessFee() {
-        return suspendBusinessFee;
-    }
-
-    public void setSuspendBusinessFee(BigDecimal suspendBusinessFee) {
-        this.suspendBusinessFee = suspendBusinessFee;
-    }
-
-    public BigDecimal getRmbCompensate() {
-        return rmbCompensate;
-    }
-
-    public void setRmbCompensate(BigDecimal rmbCompensate) {
-        this.rmbCompensate = rmbCompensate;
-    }
-
-    public BigDecimal getLifeCompensate() {
-        return lifeCompensate;
-    }
-
-    public void setLifeCompensate(BigDecimal lifeCompensate) {
-        this.lifeCompensate = lifeCompensate;
-    }
-
-    public BigDecimal getChangeCompensate() {
-        return changeCompensate;
-    }
-
-    public void setChangeCompensate(BigDecimal changeCompensate) {
-        this.changeCompensate = changeCompensate;
-    }
-
-    public BigDecimal getMoveReward() {
-        return moveReward;
-    }
-
-    public void setMoveReward(BigDecimal moveReward) {
-        this.moveReward = moveReward;
-    }
-
-    public BigDecimal getCloseBalcony() {
-        return closeBalcony;
-    }
-
-    public void setCloseBalcony(BigDecimal closeBalcony) {
-        this.closeBalcony = closeBalcony;
-    }
-
-    public BigDecimal getNoCheckCompensate() {
-        return noCheckCompensate;
-    }
-
-    public void setNoCheckCompensate(BigDecimal noCheckCompensate) {
-        this.noCheckCompensate = noCheckCompensate;
-    }
-
-    public BigDecimal getOtherFee() {
-        return otherFee;
-    }
-
-    public void setOtherFee(BigDecimal otherFee) {
-        this.otherFee = otherFee;
-    }
-
-    public BigDecimal getSumRbm() {
-        return sumRbm;
-    }
-
-    public void setSumRbm(BigDecimal sumRbm) {
-        this.sumRbm = sumRbm;
-    }
-
-    public String getUpperRmb() {
-        return upperRmb;
-    }
-
-    public void setUpperRmb(String upperRmb) {
-        this.upperRmb = upperRmb;
-    }
-
-    public String getOtherTermsOne() {
-        return otherTermsOne;
-    }
-
-    public void setOtherTermsOne(String otherTermsOne) {
-        this.otherTermsOne = otherTermsOne;
-    }
-
-    public String getOtherTermsTwo() {
-        return otherTermsTwo;
-    }
-
-    public void setOtherTermsTwo(String otherTermsTwo) {
-        this.otherTermsTwo = otherTermsTwo;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Long getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public Date getModifiedDate() {
-        return modifiedDate;
-    }
-
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
-    }
-
-    public Long getModifiedUserId() {
-        return modifiedUserId;
-    }
-
-    public void setModifiedUserId(Long modifiedUserId) {
-        this.modifiedUserId = modifiedUserId;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
 }

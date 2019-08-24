@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     //停产停业补偿，利用计算公式，选中下拉框
     var calcSuspendBusinessFee = $("input[name='calcSuspendBusinessFee']").eq(0).val();
-    if(calcSuspendBusinessFee) {
+    if(calcSuspendBusinessFee != 0) {
         $("select[name='sel_calcSuspendBusinessFee']").get(0).selectedIndex = 1;
     }
 

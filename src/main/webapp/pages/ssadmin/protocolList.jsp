@@ -92,11 +92,11 @@
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
                        href="ssadmin/selectSwapHouseByHouseOwner.html?url=ssadmin/updateSwapHouse&idMore={sid_user}"
-                       height="550" width="800" target="dialog" rel="updateSwapHouse"><span>修改产权调换</span>
+                       height="550" width="1000" target="dialog" rel="updateSwapHouse"><span>修改产权调换</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&idMore={sid_user}"
-                       height="550" width="800" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿</span>
+                       height="550" width="1000" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿</span>
                 </a></li>
                 <%--<li><a class="edit"
                        href="ssadmin/notice/query.html?url=ssadmin/updateNotice&houseOwner={sid_user}"
@@ -194,14 +194,29 @@
                     <c:when test="${protocol.signingStatus == 1}">
                         <td style="color: green"> ${protocol.signingStatusDesc}</td>
                     </c:when>
+                    <c:when test="${protocol.signingStatus == 2}">
+                        <td style="color: purple"> ${protocol.signingStatusDesc}</td>
+                    </c:when>
                     <c:otherwise>
                         <td>${protocol.signingStatusDesc}</td>
                     </c:otherwise>
                 </c:choose>
                 <!--签约状态结束-->
                <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>
-                <td style="text-align: center;"><c:if test="${protocol.swapHouseId > 0 }">√</c:if></td>
-                <td style="text-align: center;"><c:if test="${protocol.rmbRecompenseId > 0 }">√</c:if></td>
+                <td style="text-align: center;">
+                    <c:if test="${protocol.swapHouseId > 0 }">
+                        <a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">
+                            √
+                        </a>
+                    </c:if>
+                </td>
+                <td style="text-align: center;">
+                    <c:if test="${protocol.rmbRecompenseId > 0 }">
+                        <a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">
+                            √
+                        </a>
+                    </c:if>
+                </td>
                 <td style="text-align: center;">
                     <c:if test="${protocol.settleAccountId >0 }">
                         <a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">
