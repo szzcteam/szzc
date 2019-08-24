@@ -40,7 +40,7 @@ public class RmbRecompense {
     /**
      * 身份证号
      */
-    private String identityno;
+    private String identityNo;
 
     /**
      * 补偿计划

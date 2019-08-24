@@ -8,7 +8,7 @@
     <result column="agency_company" jdbcType="VARCHAR" property="agencyCompany" />
     <result column="company" jdbcType="VARCHAR" property="company" />
     <result column="house_owner" jdbcType="VARCHAR" property="houseOwner" />
-    <result column="identityNo" jdbcType="VARCHAR" property="identityno" />
+    <result column="identity_no" jdbcType="VARCHAR" property="identityNo" />
     <result column="recompense_plan" jdbcType="VARCHAR" property="recompensePlan" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="certified_area" jdbcType="DECIMAL" property="certifiedArea" />
@@ -91,7 +91,7 @@
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, card_no, mng_office, agency_company, company, house_owner, identityNo, recompense_plan,
+    id, card_no, mng_office, agency_company, company, house_owner, identity_no, recompense_plan,
     address, certified_area, house_owner_number, public_owner_number, proportion, useing,
     assess_price, check_in_area, residence_area, value_compensate_business_area, value_compensate_rate,
     operate_area, office_area, produce_area, other_area, no_check_area, no_register_legal_area,
@@ -121,7 +121,7 @@
   <insert id="insert" parameterType="com.me.szzc.pojo.entity.RmbRecompense">
     insert into t_rmb_recompense (id, card_no, mng_office, 
       agency_company, company, house_owner,
-      identityNo, recompense_plan, address,
+      identity_no, recompense_plan, address,
       certified_area, house_owner_number, public_owner_number,
       proportion, useing, assess_price,
       check_in_area, residence_area, value_compensate_business_area,
@@ -153,7 +153,7 @@
       )
     values (#{id,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{mngOffice,jdbcType=VARCHAR},
       #{agencyCompany,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR},
-      #{identityno,jdbcType=VARCHAR}, #{recompensePlan,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{identityNo,jdbcType=VARCHAR}, #{recompensePlan,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
       #{certifiedArea,jdbcType=DECIMAL}, #{houseOwnerNumber,jdbcType=VARCHAR}, #{publicOwnerNumber,jdbcType=VARCHAR},
       #{proportion,jdbcType=DECIMAL}, #{useing,jdbcType=VARCHAR}, #{assessPrice,jdbcType=DECIMAL},
       #{checkInArea,jdbcType=DECIMAL}, #{residenceArea,jdbcType=DECIMAL}, #{valueCompensateBusinessArea,jdbcType=DECIMAL},
@@ -205,8 +205,8 @@
       <if test="houseOwner != null">
         house_owner,
       </if>
-      <if test="identityno != null">
-        identityNo,
+      <if test="identityNo != null">
+        identity_no,
       </if>
       <if test="recompensePlan != null">
         recompense_plan,
@@ -468,8 +468,8 @@
       <if test="houseOwner != null">
         #{houseOwner,jdbcType=VARCHAR},
       </if>
-      <if test="identityno != null">
-        #{identityno,jdbcType=VARCHAR},
+      <if test="identityNo != null">
+        #{identityNo,jdbcType=VARCHAR},
       </if>
       <if test="recompensePlan != null">
         #{recompensePlan,jdbcType=VARCHAR},
@@ -731,8 +731,8 @@
       <if test="houseOwner != null">
         house_owner = #{houseOwner,jdbcType=VARCHAR},
       </if>
-      <if test="identityno != null">
-        identityNo = #{identityno,jdbcType=VARCHAR},
+      <if test="identityNo != null">
+        identity_no = #{identityNo,jdbcType=VARCHAR},
       </if>
       <if test="recompensePlan != null">
         recompense_plan = #{recompensePlan,jdbcType=VARCHAR},
@@ -984,7 +984,7 @@
       agency_company = #{agencyCompany,jdbcType=VARCHAR},
       company = #{company,jdbcType=VARCHAR},
       house_owner = #{houseOwner,jdbcType=VARCHAR},
-      identityNo = #{identityno,jdbcType=VARCHAR},
+      identity_no = #{identityNo,jdbcType=VARCHAR},
       recompense_plan = #{recompensePlan,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       certified_area = #{certifiedArea,jdbcType=DECIMAL},
@@ -1060,11 +1060,8 @@
       before_day = #{beforeDay,jdbcType=INTEGER},
       other_terms_one = #{otherTermsOne,jdbcType=VARCHAR},
       other_terms_two = #{otherTermsTwo,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
-      modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
-      deleted = #{deleted,jdbcType=BIT}
+      modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
