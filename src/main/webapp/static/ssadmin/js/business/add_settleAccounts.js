@@ -465,7 +465,8 @@ $(document).ready(function(){
     });
 
     //住改商补助
-    $("input[name='calcChangeCompensateArea'],input[name='calcChangeCompensatePrice'],input[name='calcChangeCompensateProportion'],input[name='calcChangeCompensateOldPrice']").on("blur change", function () {
+    $("input[name='calcChangeCompensateArea'],input[name='calcChangeCompensatePrice'],input[name='calcChangeCompensateProportion']," +
+        "input[name='calcChangeCompensateOldPrice'],input[name='calcChangeCompensateOther']").on("blur change", function () {
         settleAccountObj.calcChangeCompensates();
     });
 
@@ -778,8 +779,14 @@ var settleAccountObj = {
         var calcChangeCompensateProportion = $("input[name='calcChangeCompensateProportion']").eq(0).val()||0;
         //获取旧房单价
         var calcChangeCompensateOldPrice = $("input[name='calcChangeCompensateOldPrice']").eq(0).val() || 0;
+        //获取其他
+        var calcChangeCompensateOther =  $("input[name='calcChangeCompensateOther']").eq(0).val() || 0;
+
         //公式：面积*(新房单价-旧房单价)*比例
         var calcChangeCompensate = calcChangeCompensateArea + "*" + "(" + calcChangeCompensatePrice + "-" + calcChangeCompensateOldPrice + ")"+"*"+calcChangeCompensateProportion;
+        if(calcChangeCompensateOther != 0){
+            calcChangeCompensate = calcChangeCompensate +"+" + calcChangeCompensateOther
+        }
         console.log("住改商计算公式: " + calcChangeCompensate);
         $("input[name='calcChangeCompensate']").eq(0).val(calcChangeCompensate).change();
     },

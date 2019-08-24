@@ -116,8 +116,8 @@ public class SettleAccountsController extends BaseController {
 
 
     @RequestMapping("ssadmin/settleAccounts/signing")
-    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "签约")
-    public ModelAndView signing(String idMore, HttpServletRequest request) throws Exception {
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改签约状态")
+    public ModelAndView signing(String idMore, Integer status,  HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
@@ -126,14 +126,14 @@ public class SettleAccountsController extends BaseController {
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
 
         if(settleAccounts == null){
-            modelAndView.addObject("statusCode",200);
+            modelAndView.addObject("statusCode",300);
             modelAndView.addObject("message","用户未签订此协议");
             return modelAndView;
         }
 
-        if(settleAccounts.getSigningStatus().intValue() == SigningStatusEnum.COMPLETE.getCode()) {
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message", "状态为：" + SigningStatusEnum.COMPLETE.getDesc() + "，请勿重复操作");
+        if(settleAccounts.getSigningStatus().intValue() == status.intValue()) {
+            modelAndView.addObject("statusCode",300);
+            modelAndView.addObject("message", "状态为：" + SigningStatusEnum.getDesc(status) + "，请勿重复操作");
             return modelAndView;
         }
 
@@ -147,11 +147,11 @@ public class SettleAccountsController extends BaseController {
         Long userId = getAdminSession(request).getFid();
         settleAccounts.setModifiedUserId(userId);
         settleAccounts.setModifiedDate(DateHelper.getTimestamp());
-        settleAccounts.setSigningStatus(SigningStatusEnum.COMPLETE.getCode());
+        settleAccounts.setSigningStatus(status);
         this.settleAccountsService.changeSignStatus(settleAccounts);
 
         modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","签约成功");
+        modelAndView.addObject("message","操作成功");
         return modelAndView;
     }
 

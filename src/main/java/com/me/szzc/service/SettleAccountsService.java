@@ -63,20 +63,23 @@ public class SettleAccountsService {
     }
 
 
-    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address,String houseOwner, Long areaId, List<Long> areaIdList) {
-        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId, areaIdList);
+    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address,String houseOwner, Long areaId,
+                                     List<Long> areaIdList, String startDate, String endDate) {
+        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate);
         return listSettleAccounts;
     }
 
-    public Integer getCount(Integer signingStatus, String address,String houseOwner, Long areaId, List<Long> areaIdList) {
-        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId, areaIdList);
+    public Integer getCount(Integer signingStatus, String address,String houseOwner, Long areaId, List<Long> areaIdList,
+                            String startDate, String endDate) {
+        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate);
     }
 
     /**变更签约状态**/
     @Transactional
     public Integer changeSignStatus(SettleAccounts settleAccounts){
         int result = this.settleAccountsMapper.changeSignStatus(settleAccounts);
-        //签约完成，反向映射点房人
+        //2019-08-23号，注释，去掉自动点房映射的功能
+        /*//签约完成，反向映射点房人
         if (settleAccounts.getSigningStatus().intValue() == SigningStatusEnum.COMPLETE.getCode()) {
             //根据签约地址，获取点房人(仅限产权调换的)，同一个旧地址，可能对应多个新房点方人
             List<ChooseHouseDTO> list = swapHouseMapper.getChooseHouseListBySettleId(settleAccounts.getId());
@@ -119,7 +122,7 @@ public class SettleAccountsService {
                 log.info("点方信息dto:{}", JSONObject.toJSONString(dto));
                 roomChangeService.chooseRoom(dto);
             }
-        }
+        }*/
         return result;
     }
 

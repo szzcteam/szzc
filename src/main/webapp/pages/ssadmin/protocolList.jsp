@@ -5,6 +5,8 @@
     <input type="hidden" name="address" value="${address}"/>
     <input type="hidden" name="houseOwner" value="${houseOwner}"/>
     <input type="hidden" name="areaId" value="${areaId}"/>
+    <input type="hidden" name="startDate" value="${startDate}" />
+    <input type="hidden" name="endDate" value="${endDate}" />
 
     <input type="hidden" name="pageNum" value="${currentPage}"/>
     <input type="hidden" name="numPerPage" value="${numPerPage}"/>
@@ -20,8 +22,8 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        片区：
-                        <select name="areaId" style="width: 120px;">
+                        片&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
+                        <select name="areaId" style="width: 150px;">
                             <option value="">请选择</option>
                             <c:forEach items="${areaList}" var="area" varStatus="num">
                                 <option value="${area.id}" <c:if test="${areaId==area.id }">selected="selected"</c:if>>${area.name}</option>
@@ -30,12 +32,23 @@
                     </td>
                     <td>被征收人：<input type="text" name="houseOwner" value="${houseOwner}" size="20"/></td>
                     <td>地址：<input type="text" name="address" value="${address}" size="40"/></td>
-                    <td>签约状态：<select name="signingStatus" style="width: 100px;">
-                        <option value="">请选择</option>
-                        <c:forEach items="${signingStatusMap}" var="item">
-                            <option value="${item.key}" <c:if test="${signingStatus ==  item.key}">selected</c:if>>${item.value}</option>
-                        </c:forEach>
-                    </select>
+                    <td>签约状态：
+                        <select name="signingStatus" style="width: 100px;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${signingStatusMap}" var="item">
+                                <option value="${item.key}" <c:if test="${signingStatus ==  item.key}">selected</c:if>>${item.value}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>签约时间：<input type="text" name="startDate" class="date"
+                                    readonly="true" value="${startDate }"/>
+                    </td>
+                    <td>
+                        至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="endDate" class="date"
+                               readonly="true" value="${endDate }"/>
                     </td>
                     <td>
                         <div class="buttonActive">
@@ -113,7 +126,7 @@
                 </a></li>
             </shiro:hasPermission>
 
-            <shiro:hasPermission name="ssadmin/deleteProtocol.html">
+            <shiro:hasPermission name="ssadmin/exportProtocol.html">
                 <%--<li><a class="icon"
                        href="ssadmin/exportSwapHouse.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出产权调换</span>
@@ -130,10 +143,20 @@
                        href="ssadmin/exportSettleAccounts.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
                 </a></li>--%>
+            </shiro:hasPermission>
 
+            <shiro:hasPermission name="ssadmin/settleAccounts/signing.html">
                 <li><a class="edit"
-                       href="ssadmin/settleAccounts/signing.html?idMore={sid_user}"
-                       target="ajaxTodo" title="确定签约完成了吗?"><span>签约</span>
+                       href="ssadmin/settleAccounts/signing.html?idMore={sid_user}&status=0"
+                       target="ajaxTodo" title="确定将状态修改为“未签约”吗?"><span>未签约</span>
+                </a></li>
+                <li><a class="edit"
+                       href="ssadmin/settleAccounts/signing.html?idMore={sid_user}&status=1"
+                       target="ajaxTodo" title="确定签约完成了吗?"><span>已签约</span>
+                </a></li>
+                <li><a class="edit"
+                       href="ssadmin/settleAccounts/signing.html?idMore={sid_user}&status=2"
+                       target="ajaxTodo" title="确定已经过审核?"><span>已过审</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>
@@ -151,7 +174,7 @@
             <th width="50">产权调换协议</th>
             <th width="50">货币补偿协议</th>
             <th width="50">结算单</th>
-            <th width="50">创建时间</th>
+            <th width="50">签约时间</th>
         </tr>
         </thead>
         <tbody>

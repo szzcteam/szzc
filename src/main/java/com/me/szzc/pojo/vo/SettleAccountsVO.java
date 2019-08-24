@@ -1,10 +1,12 @@
 package com.me.szzc.pojo.vo;
 
+import com.me.szzc.constant.Constant;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
+import com.me.szzc.utils.NumberToCapitalizedUtils;
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -711,6 +713,23 @@ public class SettleAccountsVO {
      */
     private String payMoney;
 
+    /**应付-元**/
+    private String payParm1;
+    /**应付-拾**/
+    private String payParm2;
+    /**应付-佰**/
+    private String payParm3;
+    /**应付-仟**/
+    private String payParm4;
+    /**应付-万**/
+    private String payParm5;
+    /**应付-拾万**/
+    private String payParm6;
+    /**应付-佰万**/
+    private String payParm7;
+    /**应付-仟万**/
+    private String payParm8;
+
     /**创建日期**/
     private String createDate;
 
@@ -1064,6 +1083,31 @@ public class SettleAccountsVO {
 
         vo.setPayTotal(BigDecimalUtil.stripTrailingZeros(entity.getPayTotal()));
         vo.setPayMoney(entity.getPayMoney());
+        //金额大写拆分存储
+        String tempMoney =  vo.getPayTotal();
+        if(tempMoney.length()<8){
+            tempMoney = "00000000"+tempMoney;
+        }
+        tempMoney = tempMoney.substring(tempMoney.length()-8, tempMoney.length());
+        vo.setPayParm1(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-1, tempMoney.length()))));
+        vo.setPayParm2(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-2, tempMoney.length()-1))));
+        vo.setPayParm3(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-3, tempMoney.length()-2))));
+        vo.setPayParm4(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-4, tempMoney.length()-3))));
+        vo.setPayParm5(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-5, tempMoney.length()-4))));
+        vo.setPayParm6(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-6, tempMoney.length()-5))));
+        vo.setPayParm7(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-7, tempMoney.length()-6))));
+        vo.setPayParm8(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-8, tempMoney.length()-7))));
+
+        if(vo.getPayParm8().equals(Constant.CHINESE_ZERO)){
+            vo.setPayParm8("");
+        }
+        if(StringUtils.isBlank(vo.getPayParm8()) && vo.getPayParm7().equals(Constant.CHINESE_ZERO)){
+            vo.setPayParm7("");
+        }
+        if(StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7()) && vo.getPayParm6().equals(Constant.CHINESE_ZERO)){
+            vo.setPayParm6("");
+        }
+
         vo.setCreateDate(DateHelper.date2String(entity.getCreateDate(), DateHelper.DateFormatType.YearMonthDay_Chines));
 
         return vo;

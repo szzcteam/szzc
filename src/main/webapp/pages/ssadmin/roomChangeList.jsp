@@ -102,8 +102,8 @@
                 <td>${room.housingPlatform}</td>
                 <td>${room.name}</td>
                 <td>${room.number}</td>
-                <td>${room.unitPrice}</td>
                 <td>${room.area}</td>
+                <td>${room.unitPrice}</td>
                 <td>${room.totalPrice}</td>
                 <td>${room.choosePeople}</td>
             </tr>
