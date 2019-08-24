@@ -308,4 +308,77 @@ public class RoomChangeController {
         return modelAndView;
     }
 
+    /**
+     * 点房
+     *
+     * @param roomChange
+     * @return
+     */
+    @RequestMapping("/addChooseRoom")
+    public ModelAndView addChooseRoom(RoomChangeVo roomChangeVo) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //数据不为空
+        if (StringUtils.isNullOrEmpty(roomChangeVo) || StringUtils.isNullOrEmpty(roomChangeVo.getId())) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "点房失败,入参为空");
+            return modelAndView;
+        }
+        if (StringUtils.isNullOrEmpty(roomChangeVo.getStatus()) && roomChangeVo.getStatus() == 0) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "点房失败,状态错误");
+            return modelAndView;
+        }
+        if (StringUtils.isNullOrEmpty(roomChangeVo.getChooseDate())) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "点房时间为空");
+            return modelAndView;
+        }
+        if (StringUtils.isNullOrEmpty(roomChangeVo.getCommissionCompany())) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "代办公司为空");
+            return modelAndView;
+        }
+        if (StringUtils.isNullOrEmpty(roomChangeVo.getChoosePeople())) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "点房人为空");
+            return modelAndView;
+        }
+        ResultVo resultVo = roomChangeService.addChooseRoom(roomChangeVo);
+        if (resultVo.getCode() == 0) {
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "点房成功");
+        } else {
+            modelAndView.addObject("statusCode", resultVo.getCode());
+            modelAndView.addObject("message", resultVo.getMsg());
+        }
+        return modelAndView;
+    }
+
+    /**
+     * 点房修改
+     *
+     * @param roomChange
+     * @return
+     */
+    @RequestMapping("/updateChooseRoom")
+    public ModelAndView updateChooseRoom(RoomChangeVo roomChangeVo) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //数据不为空
+        if (StringUtils.isNullOrEmpty(roomChangeVo) || StringUtils.isNullOrEmpty(roomChangeVo.getId())) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "点房失败,入参为空");
+            return modelAndView;
+        }
+        ResultVo resultVo = roomChangeService.updateChooseRoom(roomChangeVo);
+        if (resultVo.getCode() == 0) {
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "修改点房信息成功");
+        } else {
+            modelAndView.addObject("statusCode", resultVo.getCode());
+            modelAndView.addObject("message", resultVo.getMsg());
+        }
+        return modelAndView;
+    }
 }

@@ -183,4 +183,31 @@ public class RoomChangeService {
         return map;
     }
 
+    public synchronized ResultVo addChooseRoom(RoomChangeVo roomChangeVo) {
+        RoomChange roomChange = roomChangeMapper.getRoomChangeById(roomChangeVo.getId());
+        if (StringUtils.isNullOrEmpty(roomChange)) {
+            return ResultVo.error(300, "无该房源信息");
+        }
+        if (roomChange.getStatus() != 0) {
+            return ResultVo.error(300, "该房源已签");
+        }
+        roomChangeMapper.addChooseRoom(roomChangeVo);
+        return ResultVo.success("点房成功");
+    }
+
+    public synchronized ResultVo updateChooseRoom(RoomChangeVo roomChangeVo) {
+        RoomChange roomChange = roomChangeMapper.getRoomChangeById(roomChangeVo.getId());
+        if (StringUtils.isNullOrEmpty(roomChange)) {
+            return ResultVo.error(300, "无该房源信息");
+        }
+        if (roomChange.getStatus() == 0) {
+            return ResultVo.error(300, "该房源未签,不允许修改");
+        }
+        if (StringUtils.isNullOrEmpty(roomChangeVo.getStatus()) && roomChangeVo.getStatus() == 0) {
+            roomChangeMapper.updateChooseRoomBy0(roomChangeVo);
+        } else {
+            roomChangeMapper.updateChooseRoomNot0(roomChangeVo);
+        }
+        return ResultVo.success("修改点房成功");
+    }
 }

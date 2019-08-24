@@ -31,4 +31,9 @@ public interface RoomChangeMapper {
 
     List<RoomChange> selectRoomChange(RoomChange roomChange);
 
+    void addChooseRoom(RoomChangeVo roomChangeVo);
+
+    void updateChooseRoomBy0(RoomChangeVo roomChangeVo);
+
+    void updateChooseRoomNot0(RoomChangeVo roomChangeVo);
 }

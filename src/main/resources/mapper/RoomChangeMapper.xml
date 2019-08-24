@@ -276,4 +276,44 @@
         AND r_number = #{number,jdbcType=VARCHAR}
         AND r_del = 0
     </select>
+
+    <update id="addChooseRoom" parameterType="com.me.szzc.pojo.vo.RoomChangeVo">
+        UPDATE r_change
+        SET
+        status = #{status},
+        choose_date = #{chooseDate},
+        commission_company = #{commissionCompany},
+        r_choose_people = #{choosePeople}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateChooseRoomBy0" parameterType="com.me.szzc.pojo.vo.RoomChangeVo">
+        UPDATE r_change
+        SET
+        status = 0,
+        choose_date = NULL ,
+        commission_company = NULL ,
+        r_choose_people = NULL
+        WHERE id = #{id}
+    </update>
+
+
+    <update id="updateChooseRoomNot0" parameterType="com.me.szzc.pojo.vo.RoomChangeVo">
+        UPDATE r_change
+        <set>
+            <if test="status!=null and status !=''">
+                status = #{status},
+            </if>
+            <if test="choosePeople!=null and choosePeople !=''">
+                r_choose_people = #{choosePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseDate!=null">
+                choose_date = #{chooseDate},
+            </if>
+            <if test="commissionCompany!=null and commissionCompany !=''">
+                commission_company = #{commissionCompany},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
 </mapper>

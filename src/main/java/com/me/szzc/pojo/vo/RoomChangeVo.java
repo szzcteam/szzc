@@ -15,6 +15,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomChangeVo implements Serializable {
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 片区项目名称
@@ -36,6 +40,11 @@ public class RoomChangeVo implements Serializable {
      * 提供房源平台
      */
     private String housingPlatform;
+    /**
+     * 点房时间
+     */
+    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
+    private Date chooseDate;
     /**
      * 开始时间
      */
