@@ -45,7 +45,7 @@ public class RmbRecompenseController extends BaseController {
         rmbRecompense.setCreateUserId(userId);
         rmbRecompense.setModifiedUserId(userId);
         //征收公司
-        rmbRecompense.setCompany(constantMap.getValue(SystemArgsConstant.COMPANY));
+        rmbRecompense.setCompany(rmbRecompense.getAgencyCompany());
 
         String str = "true"; //rmbRecompenseTerm(rmbRecompense);
         if(str.equals("true")){
@@ -309,19 +309,11 @@ public class RmbRecompenseController extends BaseController {
             return "搬迁奖励不能小于0";
         }
 
-        if(rmbRecompense.getCloseBalcony()==null){
-            rmbRecompense.setCloseBalcony(BigDecimal.valueOf(0));
-        }
-
-        if(rmbRecompense.getNoCheckCompensate()==null){
-            rmbRecompense.setNoCheckCompensate(BigDecimal.valueOf(0));
-        }
-
         if(rmbRecompense.getOtherFee()==null){
            rmbRecompense.setOtherFee(BigDecimal.valueOf(0));
         }
 
-        BigDecimal sum1 =  rmbRecompense.getValueCompensate()
+       /* BigDecimal sum1 =  rmbRecompense.getValueCompensate()
                 .add(rmbRecompense.getDecorationCompensate())
                 .add(rmbRecompense.getSubtotal())
                 .add(rmbRecompense.getMoveHouseFee())
@@ -331,15 +323,13 @@ public class RmbRecompenseController extends BaseController {
                 .add(rmbRecompense.getLifeCompensate())
                 .add(rmbRecompense.getChangeCompensate())
                 .add(rmbRecompense.getMoveReward())
-                .add(rmbRecompense.getCloseBalcony())
-                .add(rmbRecompense.getNoCheckCompensate())
                 .add(rmbRecompense.getOtherFee());
 
         if(sum1.compareTo(BigDecimal.ZERO)>0){
             if( rmbRecompense.getSumRbm().compareTo(sum1)!=0){
                 return "以上1-13项统计错误";
             }
-        }
+        }*/
         return "true";
     }
 }

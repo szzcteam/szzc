@@ -101,8 +101,8 @@ public class ProtocolController extends BaseController {
 
             protocol.setAddress(account.getAddress());
             protocol.setPhone(account.getPhone());
-            SwapHouse swapHouse = this.swapHouseService.getByHouseOwnerAddr(account.getHouseOwner(), account.getAddress());
-            RmbRecompense rmbRecompense = this.rmbRecompenseService.getByHouseOwnerAddr(account.getHouseOwner(), account.getAddress());
+            SwapHouse swapHouse = this.swapHouseService.getByHouseOwnerAddr(protocol.getName(), account.getAddress());
+            RmbRecompense rmbRecompense = this.rmbRecompenseService.getByHouseOwnerAddr(protocol.getName(), account.getAddress());
 
             protocol.setSigningStatus(account.getSigningStatus());
             protocol.setSigningStatusDesc(SigningStatusEnum.getDesc(account.getSigningStatus()));

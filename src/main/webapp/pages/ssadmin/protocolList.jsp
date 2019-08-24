@@ -92,11 +92,11 @@
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"
                        href="ssadmin/selectSwapHouseByHouseOwner.html?url=ssadmin/updateSwapHouse&idMore={sid_user}"
-                       height="550" width="800" target="dialog" rel="updateSwapHouse"><span>修改产权调换</span>
+                       height="550" width="1000" target="dialog" rel="updateSwapHouse"><span>修改产权调换</span>
                 </a></li>
                 <li><a class="edit"
                        href="ssadmin/RmbRecompense/query.html?url=ssadmin/updateRmbRecompense&idMore={sid_user}"
-                       height="550" width="800" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿</span>
+                       height="550" width="1000" target="dialog" rel="updateRmbRecompense"><span>修改货币补偿</span>
                 </a></li>
                 <%--<li><a class="edit"
                        href="ssadmin/notice/query.html?url=ssadmin/updateNotice&houseOwner={sid_user}"

@@ -42,7 +42,7 @@
                 <dl>
                     <dt>被征收人(乙方):</dt>
                     <dd>
-                        <input type="text" name="houseOwner" value="真香" maxlength="50" size="40" style="margin-left: 0px;"/>
+                        <input type="text" name="houseOwner" maxlength="50" size="40" style="margin-left: 0px;"/>
                     </dd>
                 </dl>
                 <dl>
@@ -63,7 +63,7 @@
                 <legend>被征收房屋情况</legend>
                 <dl style="width: 100%;height: 75px;">
                     <dd style="width: 95%;line-height: 26px;">
-                        1、被征收房屋地址：<input type="text" name="address" value="武昌区大型真香现场" maxlength="255"  size="40" style="margin-left: 0px;clear: both;float: none;"/>、
+                        1、被征收房屋地址：<input type="text" name="address"  maxlength="255"  size="40" style="margin-left: 0px;clear: both;float: none;"/>、
                         证载建筑面积：<input type="text" name="certifiedArea"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>、
                         房屋权属份额：<input type="text" name="proportion" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;%、
                         证载房屋用途：<input type="text" name="useing" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>、
