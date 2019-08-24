@@ -5,6 +5,7 @@ import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
+import com.me.szzc.pojo.vo.RoomChangeVo;
 import com.me.szzc.service.RoomChangeService;
 import com.me.szzc.utils.CustomizedPropertyConfigurer;
 import com.me.szzc.utils.StringUtils;
@@ -96,45 +97,56 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/queryPage")
-    public ModelAndView queryPage(HttpServletRequest request, String name, String number,
-                                  String choosePeople, String assignedProject, String housingPlatform) {
+    public ModelAndView queryPage(HttpServletRequest request, RoomChangeVo roomChangeVo) {
         ModelAndView view = new ModelAndView();
-        if (!StringUtils.isNullOrEmpty(name)) {
-            name = name.trim();
-            if (name.length() > 0) {
-                view.addObject("name", name);
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getName())) {
+            roomChangeVo.setName(roomChangeVo.getName().trim());
+            if (roomChangeVo.getName().length() > 0) {
+                view.addObject("name", roomChangeVo.getName());
             }
         }
-        if (!StringUtils.isNullOrEmpty(number)) {
-            number = number.trim();
-            if (number.length() > 0) {
-                view.addObject("number", number);
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getNumber())) {
+            roomChangeVo.setNumber(roomChangeVo.getNumber().trim());
+            if (roomChangeVo.getNumber().length() > 0) {
+                view.addObject("number", roomChangeVo.getNumber());
             }
         }
-        if (!StringUtils.isNullOrEmpty(choosePeople)) {
-            choosePeople = choosePeople.trim();
-            if (choosePeople.length() > 0) {
-                view.addObject("choosePeople", choosePeople);
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getChoosePeople())) {
+            roomChangeVo.setChoosePeople(roomChangeVo.getChoosePeople().trim());
+            if (roomChangeVo.getChoosePeople().length() > 0) {
+                view.addObject("choosePeople", roomChangeVo.getChoosePeople());
             }
         }
-        if (!StringUtils.isNullOrEmpty(assignedProject)) {
-            assignedProject = assignedProject.trim();
-            if (assignedProject.length() > 0) {
-                view.addObject("assignedProject", assignedProject);
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getAssignedProject())) {
+            roomChangeVo.setAssignedProject(roomChangeVo.getAssignedProject().trim());
+            if (roomChangeVo.getAssignedProject().length() > 0) {
+                view.addObject("assignedProject", roomChangeVo.getAssignedProject());
             }
         }
-        if (!StringUtils.isNullOrEmpty(housingPlatform)) {
-            housingPlatform = housingPlatform.trim();
-            if (housingPlatform.length() > 0) {
-                view.addObject("housingPlatform", housingPlatform);
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getHousingPlatform())) {
+            roomChangeVo.setHousingPlatform(roomChangeVo.getHousingPlatform().trim());
+            if (roomChangeVo.getHousingPlatform().length() > 0) {
+                view.addObject("housingPlatform", roomChangeVo.getHousingPlatform());
             }
         }
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getStatus())) {
+            view.addObject("status", roomChangeVo.getStatus());
+        }
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getCommissionCompany())) {
+            roomChangeVo.setCommissionCompany(roomChangeVo.getCommissionCompany().trim());
+            if (roomChangeVo.getCommissionCompany().length() > 0) {
+                view.addObject("commissionCompany", roomChangeVo.getCommissionCompany());
+            }
+        }
+
         int currentPage = 1;
         if (request.getParameter("pageNum") != null) {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
         view.setViewName("ssadmin/roomChangeList");
-        Map<String, Object> map = roomChangeService.queryPage(Utils.getNumPerPage(), currentPage, name, number, choosePeople, assignedProject, housingPlatform);
+        roomChangeVo.setPageSize(Utils.getNumPerPage());
+        roomChangeVo.setPageNum(currentPage);
+        Map<String, Object> map = roomChangeService.queryPage(roomChangeVo);
         view.addObject("roomList", map.get("datas"));
         view.addObject("numPerPage", Utils.getNumPerPage());
         view.addObject("currentPage", currentPage);

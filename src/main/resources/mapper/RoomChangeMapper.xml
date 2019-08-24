@@ -7,7 +7,9 @@
                r_ridgepole AS ridgepole,r_unit AS unit,r_floor AS floor,r_mark AS mark,
                r_area AS area ,r_unit_price AS unitPrice,r_total_price AS totalPrice,
                r_choose_people AS choosePeople,
-               assigned_project AS assignedProject,housing_platform AS housingPlatform
+               assigned_project AS assignedProject,housing_platform AS housingPlatform,
+               status,commission_company AS commissionCompany,
+               choose_date AS chooseDate
     </sql>
 
     <insert id="insertRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
@@ -96,7 +98,7 @@
         </trim>
     </insert>
 
-    <select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <select id="getCount" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM r_change
         WHERE r_del = 0
@@ -114,6 +116,32 @@
         </if>
         <if test="housingPlatform != null and housingPlatform != ''">
             AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+        <if test="commissionCompany != null and commissionCompany != ''">
+            AND commission_company LIKE concat(concat('%',#{commissionCompany,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="startDate != null and startDate != ''">
+            <![CDATA[
+            AND choose_date >= #{startDate}
+             ]]>
+        </if>
+        <if test="endDate != null and endDate != ''">
+            <![CDATA[
+            AND choose_date >= #{endDate}
+            ]]>
+        </if>
+        <if test="minArea != null and minArea != ''">
+            <![CDATA[
+            AND r_area + 0 >= #{minArea} + 0
+            ]]>
+        </if>
+        <if test="maxArea != null and maxArea != ''">
+            <![CDATA[
+            AND r_area + 0 <= #{maxArea} + 0
+            ]]>
         </if>
     </select>
 
@@ -136,6 +164,32 @@
         </if>
         <if test="housingPlatform != null and housingPlatform != ''">
             AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+        <if test="commissionCompany != null and commissionCompany != ''">
+            AND commission_company LIKE concat(concat('%',#{commissionCompany,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="startDate != null and startDate != ''">
+            <![CDATA[
+            AND choose_date >= #{startDate}
+             ]]>
+        </if>
+        <if test="endDate != null and endDate != ''">
+            <![CDATA[
+            AND choose_date >= #{endDate}
+            ]]>
+        </if>
+        <if test="minArea != null and minArea != ''">
+            <![CDATA[
+            AND r_area + 0 >= #{minArea} + 0
+            ]]>
+        </if>
+        <if test="maxArea != null and maxArea != ''">
+            <![CDATA[
+            AND r_area + 0 <= #{maxArea} + 0
+            ]]>
         </if>
         ORDER BY id
         limit ${start},${pageSize}

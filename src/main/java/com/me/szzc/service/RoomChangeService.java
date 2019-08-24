@@ -4,6 +4,7 @@ import com.me.szzc.dao.RoomChangeMapper;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
+import com.me.szzc.pojo.vo.RoomChangeVo;
 import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.excle.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,11 +166,11 @@ public class RoomChangeService {
      * @param housingPlatform 提供房源平台
      * @return
      */
-    public Map<String, Object> queryPage(int pageSize, int pageNum, String name, String number,
-                                         String choosePeople, String assignedProject, String housingPlatform) {
-        Integer count = roomChangeMapper.getCount(name, number, choosePeople, assignedProject, housingPlatform);
-        Integer start = (pageNum - 1) * pageSize;
-        List<RoomChange> roomChanges = roomChangeMapper.queryPage(start, pageSize, name, number, choosePeople, assignedProject, housingPlatform);
+    public Map<String, Object> queryPage(RoomChangeVo roomChangeVo) {
+        Integer count = roomChangeMapper.getCount(roomChangeVo);
+        Integer start = (roomChangeVo.getPageNum() - 1) * roomChangeVo.getPageSize();
+        roomChangeVo.setStart(start);
+        List<RoomChange> roomChanges = roomChangeMapper.queryPage(roomChangeVo);
         for (RoomChange roomChange : roomChanges) {
             String choosePeopleListStr = roomChange.getChoosePeople();
             if (!StringUtils.isNullOrEmpty(choosePeopleListStr)) {

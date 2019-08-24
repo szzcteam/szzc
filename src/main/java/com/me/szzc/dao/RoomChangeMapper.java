@@ -1,6 +1,7 @@
 package com.me.szzc.dao;
 
 import com.me.szzc.pojo.entity.RoomChange;
+import com.me.szzc.pojo.vo.RoomChangeVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,19 +13,9 @@ public interface RoomChangeMapper {
 
     int insertRoomChange(RoomChange roomChange);
 
-    Integer getCount(@Param("name") String name,
-                     @Param("number") String number,
-                     @Param("choosePeople") String choosePeople,
-                     @Param("assignedProject") String assignedProject,
-                     @Param("housingPlatform") String housingPlatform);
+    Integer getCount(RoomChangeVo roomChangeVo);
 
-    List<RoomChange> queryPage(@Param("start") Integer start,
-                               @Param("pageSize") Integer pageSize,
-                               @Param("name") String name,
-                               @Param("number") String number,
-                               @Param("choosePeople") String choosePeople,
-                               @Param("assignedProject") String assignedProject,
-                               @Param("housingPlatform") String housingPlatform);
+    List<RoomChange> queryPage(RoomChangeVo roomChangeVo);
 
     Integer deleteRoomChange(Long id);
 

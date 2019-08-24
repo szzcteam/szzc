@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 选房类
@@ -88,5 +89,19 @@ public class RoomChange extends BaseRowModel implements Serializable {
      * 点房人
      */
     private String choosePeople;
-    
+
+    /**
+     * 状态(0-空置 1-已签 2-预留)
+     */
+    private Integer status;
+
+    /**
+     * 代办公司
+     */
+    private String commissionCompany;
+
+    /**
+     * 点房时间
+     */
+    private Date chooseDate;
 }
