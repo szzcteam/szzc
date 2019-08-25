@@ -104,7 +104,7 @@
             </dl>
             <dl style="margin-bottom: -10px;">
                 <dt style="width: 450px;">
-                    ${settleAccounts.createDate}
+                   <%-- ${settleAccounts.createDate}--%>
                 </dt>
                 <dt style="width: 40px;">编号：</dt>
                 <dt style="width: 30px;margin-left: -20px;">
