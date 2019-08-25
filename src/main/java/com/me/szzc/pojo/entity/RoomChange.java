@@ -2,6 +2,8 @@ package com.me.szzc.pojo.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
+import com.me.szzc.enums.ChooseStatusEnum;
+import com.me.szzc.utils.DateHelper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -95,6 +97,8 @@ public class RoomChange extends BaseRowModel implements Serializable {
      */
     private Integer status;
 
+    private String statusDesc;
+
     /**
      * 代办公司
      */
@@ -104,4 +108,22 @@ public class RoomChange extends BaseRowModel implements Serializable {
      * 点房时间
      */
     private Date chooseDate;
+
+    /**点房时间-字符串格式**/
+    private String chooseDateStr;
+
+
+    public String getStatusDesc() {
+        if(status != null){
+            statusDesc = ChooseStatusEnum.getDescMap().get(status);
+        }
+        return statusDesc;
+    }
+
+    public String getChooseDateStr() {
+        if(chooseDate == null){
+            return "";
+        }
+        return DateHelper.date2String(chooseDate, DateHelper.DateFormatType.YearMonthDay);
+    }
 }

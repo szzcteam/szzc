@@ -5,6 +5,12 @@
     <input type="hidden" name="number" value="${number}"/>
     <input type="hidden" name="choosePeople" value="${choosePeople}"/>
     <input type="hidden" name="assignedProject" value="${assignedProject}"/>
+    <input type="hidden" name="status" value="${status}"/>
+    <input type="hidden" name="startDate" value="${startDate}"/>
+    <input type="hidden" name="endDate" value="${endDate}"/>
+    <input type="hidden" name="minArea" value="${minArea}"/>
+    <input type="hidden" name="maxArea" value="${maxArea}"/>
+
     <input type="hidden" name="housingPlatform" value="${housingPlatform}"/>
 
     <input type="hidden" name="pageNum" value="${currentPage}"/>
@@ -24,14 +30,41 @@
                                    size="20"/>
                     </td>
                     <td>房号：<input type="text" name="number" value="${number}"
-                                    size="10"/>
+                                    size="20"/>
                     </td>
                     <td>点房人：<input type="text" name="choosePeople" value="${choosePeople}"
-                                    size="10"/>
+                                    size="20"/>
                     </td>
                     <td>分配征收项目：<input type="text" name="assignedProject" value="${assignedProject}"
                                       size="20"/>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        点房状态：
+                        <select name="status" style="width: 150px;">
+                            <option value="">全部</option>
+                            <c:forEach items="${chooseStatusMap}" var="item">
+                                <option value="${item.key}" <c:if test="${status ==  item.key}">selected</c:if>>${item.value}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                    <td>点房时间：<input type="text" name="startDate" class="date"
+                                    readonly="true" value="${startDate }"/>
+                    </td>
+                    <td>
+                        至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="endDate" class="date"
+                               readonly="true" value="${endDate }"/>
+                    </td>
+                    <td>面积：<input type="text" name="minArea"
+                                 size="10"   value="${minArea }"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="maxArea"
+                               size="10"  value="${maxArea }"/>
+                    </td>
+                </tr>
+                <tr>
                     <td>提供房源平台：<input type="text" name="housingPlatform" value="${housingPlatform}"
                                       size="20"/>
                     </td>
@@ -65,7 +98,11 @@
             <shiro:hasPermission name="ssadmin/roomChange/updateRoomChangeById.html">
                 <li><a class="edit"
                        href="ssadmin/roomChange/getRoomChangeById.html?url=ssadmin/updateRoomChange&id={sid_user}"
-                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改</span>
+                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改信息</span>
+                </a></li>
+                <li><a class="edit"
+                       href="ssadmin/roomChange/toChooseRoomPage.html?url=ssadmin/updateChooseRoom&id={sid_user}"
+                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>点房</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/roomChange/batchDelete.html">
@@ -90,6 +127,9 @@
             <th width="50">单价&nbsp;(元/M<sup>2</sup>)</th>
             <th width="50">总价&nbsp;(元)</th>
             <th width="50">点房人</th>
+            <th width="50">点房时间</th>
+            <th width="50">代办公司</th>
+            <th width="50">状态</th>
         </tr>
         </thead>
         <tbody>
@@ -106,6 +146,9 @@
                 <td>${room.unitPrice}</td>
                 <td>${room.totalPrice}</td>
                 <td>${room.choosePeople}</td>
+                <td>${room.chooseDateStr}</td>
+                <td>${room.commissionCompany}</td>
+                <td>${room.statusDesc}</td>
             </tr>
         </c:forEach>
 

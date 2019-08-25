@@ -2,12 +2,14 @@ package com.me.szzc.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
+import com.me.szzc.enums.ChooseStatusEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.pojo.vo.RoomChangeVo;
 import com.me.szzc.service.RoomChangeService;
 import com.me.szzc.utils.CustomizedPropertyConfigurer;
+import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +30,7 @@ import java.net.URLEncoder;
 import java.util.Map;
 
 /**
- * 换房管理controller
+ * 换房管理controllerqueryPage
  * Created by bbfang on 2019/7/27.
  */
 @Slf4j
@@ -132,6 +134,23 @@ public class RoomChangeController {
         if (!StringUtils.isNullOrEmpty(roomChangeVo.getStatus())) {
             view.addObject("status", roomChangeVo.getStatus());
         }
+
+        if(!StringUtils.isNullOrEmpty(roomChangeVo.getStartDate())){
+            view.addObject("startDate", roomChangeVo.getStartDate());
+        }
+
+        if(!StringUtils.isNullOrEmpty(roomChangeVo.getEndDate())){
+            view.addObject("endDate", roomChangeVo.getEndDate());
+        }
+
+        if(!StringUtils.isNullOrEmpty(roomChangeVo.getMinArea())){
+            view.addObject("minArea", roomChangeVo.getMinArea());
+        }
+
+        if(!StringUtils.isNullOrEmpty(roomChangeVo.getMaxArea())){
+            view.addObject("maxArea", roomChangeVo.getMaxArea());
+        }
+
         if (!StringUtils.isNullOrEmpty(roomChangeVo.getCommissionCompany())) {
             roomChangeVo.setCommissionCompany(roomChangeVo.getCommissionCompany().trim());
             if (roomChangeVo.getCommissionCompany().length() > 0) {
@@ -152,6 +171,8 @@ public class RoomChangeController {
         view.addObject("currentPage", currentPage);
         view.addObject("rel", "roomChange");
         view.addObject("totalCount", map.get("total"));
+
+        view.addObject("chooseStatusMap", ChooseStatusEnum.getDescMap());
         return view;
     }
 
@@ -311,7 +332,7 @@ public class RoomChangeController {
     /**
      * 点房
      *
-     * @param roomChange
+     * @param roomChangeVo
      * @return
      */
     @RequestMapping("/addChooseRoom")
@@ -346,6 +367,7 @@ public class RoomChangeController {
         }
         ResultVo resultVo = roomChangeService.addChooseRoom(roomChangeVo);
         if (resultVo.getCode() == 0) {
+            modelAndView.addObject("callbackType", "closeCurrent");
             modelAndView.addObject("statusCode", 200);
             modelAndView.addObject("message", "点房成功");
         } else {
@@ -358,7 +380,7 @@ public class RoomChangeController {
     /**
      * 点房修改
      *
-     * @param roomChange
+     * @param roomChangeVo
      * @return
      */
     @RequestMapping("/updateChooseRoom")
@@ -373,6 +395,7 @@ public class RoomChangeController {
         }
         ResultVo resultVo = roomChangeService.updateChooseRoom(roomChangeVo);
         if (resultVo.getCode() == 0) {
+            modelAndView.addObject("callbackType", "closeCurrent");
             modelAndView.addObject("statusCode", 200);
             modelAndView.addObject("message", "修改点房信息成功");
         } else {
@@ -380,5 +403,22 @@ public class RoomChangeController {
             modelAndView.addObject("message", resultVo.getMsg());
         }
         return modelAndView;
+    }
+
+    @RequestMapping("/toChooseRoomPage")
+    public ModelAndView toChooseRoomPage(Long id,String url){
+        ModelAndView view = new ModelAndView();
+        view.setViewName(url);
+        RoomChange roomChange = roomChangeService.getRoomChangeById(id);
+        if (roomChange != null) {
+            view.addObject("roomChange", roomChange);
+            if(roomChange.getStatus().intValue() == ChooseStatusEnum.CHOOSE_STATUS_STATUS_0.getCode().intValue()){
+                view.addObject("postUrl", "addChooseRoom");
+            }else{
+                view.addObject("postUrl", "updateChooseRoom");
+            }
+        }
+        view.addObject("chooseStatusMap", ChooseStatusEnum.getDescMap());
+        return view;
     }
 }

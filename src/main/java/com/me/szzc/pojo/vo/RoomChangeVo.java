@@ -43,18 +43,19 @@ public class RoomChangeVo implements Serializable {
     /**
      * 点房时间
      */
-    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
-    private Date chooseDate;
+    private String chooseDate;
+
     /**
      * 开始时间
      */
-    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
-    private Date startDate;
+    private String startDate;
+
+
     /**
      * 结束时间
      */
-    @DateTimeFormat(pattern = "yyyyMMddHHmmss")
-    private Date endDate;
+    private String endDate;
+
     /**
      * 状态
      */

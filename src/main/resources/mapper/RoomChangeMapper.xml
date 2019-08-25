@@ -173,12 +173,12 @@
         </if>
         <if test="startDate != null and startDate != ''">
             <![CDATA[
-            AND choose_date >= #{startDate}
+            AND DATE_FORMAT(create_date,'%Y-%m-%d') >= #{startDate}
              ]]>
         </if>
         <if test="endDate != null and endDate != ''">
             <![CDATA[
-            AND choose_date >= #{endDate}
+            AND DATE_FORMAT(create_date,'%Y-%m-%d') <= #{endDate}
             ]]>
         </if>
         <if test="minArea != null and minArea != ''">

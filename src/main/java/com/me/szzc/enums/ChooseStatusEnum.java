@@ -17,6 +17,14 @@ public enum ChooseStatusEnum {
     private Integer code;
     private String text;
 
+    private static final Map<Integer, String> descMap = new HashMap<>();
+
+    static {
+        for(ChooseStatusEnum e : ChooseStatusEnum.values()) {
+            descMap.put(e.getCode(), e.getText());
+        }
+    }
+
     ChooseStatusEnum(Integer code, String text) {
         this.text = text;
         this.code = code;
@@ -69,4 +77,6 @@ public enum ChooseStatusEnum {
         this.text = text;
     }
 
-}
+    public static Map<Integer, String> getDescMap() {
+        return descMap;
+    }}

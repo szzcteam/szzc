@@ -100,7 +100,12 @@ public class ProtocolController extends BaseController {
             }
 
             protocol.setAddress(account.getAddress());
-            protocol.setPhone(account.getPhone());
+            if(StringUtils.isNotBlank(account.getPhone())){
+                protocol.setPhone(account.getPhone());
+            }else{
+                protocol.setPhone(account.getLesseePhone());
+            }
+
             SwapHouse swapHouse = this.swapHouseService.getByHouseOwnerAddr(protocol.getName(), account.getAddress());
             RmbRecompense rmbRecompense = this.rmbRecompenseService.getByHouseOwnerAddr(protocol.getName(), account.getAddress());
 
