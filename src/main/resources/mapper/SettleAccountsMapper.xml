@@ -1578,10 +1578,12 @@
     <if test="areaId != null ">
       and area_id = #{areaId}
     </if>
-    and area_id in
-    <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
-      #{itemId}
-    </foreach>
+    <if test="areaIdList != null and areaIdList.size >0 ">
+      and area_id in
+      <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+        #{itemId}
+      </foreach>
+    </if>
   </sql>
 
   <select id="list" resultMap="BaseResultMap">
