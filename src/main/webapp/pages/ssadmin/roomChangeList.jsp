@@ -12,6 +12,8 @@
     <input type="hidden" name="maxArea" value="${maxArea}"/>
 
     <input type="hidden" name="housingPlatform" value="${housingPlatform}"/>
+    <input type="hidden" name="commissionCompany" value="${commissionCompany}"/>
+
 
     <input type="hidden" name="pageNum" value="${currentPage}"/>
     <input type="hidden" name="numPerPage" value="${numPerPage}"/>
@@ -66,6 +68,9 @@
                 </tr>
                 <tr>
                     <td>提供房源平台：<input type="text" name="housingPlatform" value="${housingPlatform}"
+                                      size="20"/>
+                    </td>
+                    <td>代办公司：<input type="text" name="commissionCompany" value="${commissionCompany}"
                                       size="20"/>
                     </td>
                     <td>
