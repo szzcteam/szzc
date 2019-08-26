@@ -212,7 +212,7 @@
                 </td>
                 <td style="text-align: center;">
                     <c:if test="${protocol.rmbRecompenseId > 0 }">
-                        <a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">
+                        <a href="ssadmin/RmbRecompense/preview.html?id=${protocol.rmbRecompenseId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">
                             √
                         </a>
                     </c:if>

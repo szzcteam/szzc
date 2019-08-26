@@ -6,6 +6,8 @@ import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.vo.RmbRecompenseVO;
+import com.me.szzc.pojo.vo.SwapHouseVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
@@ -143,6 +145,18 @@ public class SwapHouseController extends BaseController {
 
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "导出成功");
+        return modelAndView;
+    }
+
+    @RequestMapping("ssadmin/swapHouse/preview")
+    public ModelAndView preview(Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/detailSwapHouse");
+        SwapHouse entity = this.swapHouseService.getById(id);
+        if(entity != null) {
+            SwapHouseVO vo = SwapHouseVO.parse(entity);
+            modelAndView.addObject("swapHouse", vo);
+        }
         return modelAndView;
     }
 }

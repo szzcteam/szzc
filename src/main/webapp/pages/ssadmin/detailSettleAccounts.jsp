@@ -15,13 +15,10 @@
 <head>
     <base href="<%=basePath%>" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>结算单详情</title>
+    <title>结算单预览</title>
 
     <link href="${oss_url}/static/ssadmin/js/themes/css/core.css" rel="stylesheet"
           type="text/css"/>
-
-    <script src="${oss_url}/static/ssadmin/js/js/jquery-1.7.2.js" type="text/javascript"></script>
-
 
     <style type="text/css">
         table input{
@@ -47,43 +44,6 @@
             text-align: left;
             padding-left: 5px;
         }
-
-        .samll_input_text {
-            width: 50px;
-            /*border: none;*/
-        }
-
-        .none_border {
-            /*border:none;
-            border-bottom: 1px solid #a2bac0;*/
-            border: 1px solid #a2bac0;
-            height: 17px;
-        }
-        .width_60px {
-            width: 60px;
-        }
-        .width_70px {
-            width: 70px;
-        }
-
-        .width_110px {
-            width: 110px;
-        }
-
-        .width_220px {
-            width: 220px;
-        }
-
-        .width_185px {
-            width: 185px;
-        }
-
-        .select_fix {
-            margin-top: 2px;
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-
         input {
             font-size: 12px;
         }

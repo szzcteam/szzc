@@ -6,6 +6,8 @@ import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
+import com.me.szzc.pojo.vo.RmbRecompenseVO;
+import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
@@ -162,6 +164,18 @@ public class RmbRecompenseController extends BaseController {
         return modelAndView;
     }
 
+
+    @RequestMapping("ssadmin/RmbRecompense/preview")
+    public ModelAndView preview(Long id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/detailRmbRecompense");
+        RmbRecompense entity = this.rmbRecompenseService.getById(id);
+        if(entity != null) {
+            RmbRecompenseVO vo = RmbRecompenseVO.parse(entity);
+            modelAndView.addObject("rmbRecom", vo);
+        }
+        return modelAndView;
+    }
 
     //条件判断
     public String rmbRecompenseTerm(RmbRecompense rmbRecompense){
