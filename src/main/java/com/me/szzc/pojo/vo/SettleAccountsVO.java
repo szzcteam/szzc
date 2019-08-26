@@ -756,10 +756,6 @@ public class SettleAccountsVO {
             return vo;
         }
 
-        //公式计算对象
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine se = manager.getEngineByName("js");
-
         vo.setId(entity.getId());
         vo.setCardNo(entity.getCardNo());
         vo.setProjectName(entity.getProjectName());

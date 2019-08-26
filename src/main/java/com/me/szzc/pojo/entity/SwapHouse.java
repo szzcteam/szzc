@@ -280,7 +280,7 @@ public class SwapHouse {
     /**
      * 过渡面积
      */
-    private Long interimArea;
+    private BigDecimal interimArea;
 
     /**
      * 过渡单价
