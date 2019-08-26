@@ -21,20 +21,18 @@
         <div class="pageFormContent" layoutH="97">
             <fieldset>
                 <legend>协议信息</legend>
-                <dl style="width: 100%;">
+                <dl>
                     <dt>编号：</dt>
                     <dd>
                         <input type="text" name="cardNo" value="${rmbRecom.cardNo}" maxlength="50" size="20" style="margin-left: 0px;"/>
                     </dd>
-                    <dt>&nbsp;</dt>
-                    <dd>&nbsp;</dd>
                 </dl>
-                <dl>
+                <%--<dl>
                     <dt>征收部门(甲方):</dt>
                     <dd>
                         <input type="text" name="mngOffice" value="${rmbRecom.mngOffice}" maxlength="255" size="40" style="margin-left: 0px;"/>
                     </dd>
-                </dl>
+                </dl>--%>
                 <dl>
                     <dt>代办单位:</dt>
                     <dd>

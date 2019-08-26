@@ -611,16 +611,18 @@ var settleAccountObj = {
         var houseMoney =  $("input[name='houseMoney']").eq(0).val() || 0;
         houseMoney = new Number(houseMoney);
 
-        //已抵扣安置房款=新房金额
-        $("input[name='deduction']").eq(0).val(houseMoney);
-
+        //已抵扣安置房款= 旧房金额<新房金额，则抵扣款是旧房金额，反之，就是新房金额
         var money = 0;
         if (sumCompensate > houseMoney) {
             //应付
             money = sumCompensate - houseMoney;
+            $("input[name='deduction']").eq(0).val(houseMoney);
         } else if (sumCompensate < houseMoney) {
             //应收
             money = houseMoney - sumCompensate;
+            $("input[name='deduction']").eq(0).val(sumCompensate);
+        }else if(sumCompensate == houseMoney){
+            $("input[name='deduction']").eq(0).val(sumCompensate);
         }
 
         $("input[name='payTotal']").eq(0).val(money);

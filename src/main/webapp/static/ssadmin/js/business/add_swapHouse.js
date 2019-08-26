@@ -251,6 +251,20 @@ var swapHouseObj = {
                         //触发所有条款求和
                         swapHouseObj.summaryNum();
 
+                        //调换房信息
+                        //新房金额
+                        $("#swapHouseDiv input[name='totalPrice']").eq(0).val(data.houseMoney).change();
+
+                        //应付  旧房金额>新房金额
+                        if(data.sumCompensate > data.houseMoney){
+                            $("#swapHouseDiv input[name='difference']").eq(0).val(data.payTotal);
+                            $("#swapHouseDiv input[name='upperDifference']").eq(0).val(data.payMoney);
+                        }else if(data.sumCompensate < data.houseMoney){
+                            //应收  旧房金额小于新房金额
+                            $("#swapHouseDiv input[name='lessDifference']").eq(0).val(data.payTotal);
+                            $("#swapHouseDiv input[name='upperLessDifference']").eq(0).val(data.payMoney);
+                        }
+
                     }
                 });
             }
