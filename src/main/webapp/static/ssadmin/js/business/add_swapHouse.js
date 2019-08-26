@@ -254,7 +254,8 @@ var swapHouseObj = {
                         //调换房信息
                         //新房金额
                         $("#swapHouseDiv input[name='totalPrice']").eq(0).val(data.houseMoney).change();
-
+                        //抵扣安置款
+                        $("#swapHouseDiv input[name='transferRmb']").eq(0).val(data.deduction);
                         //应付  旧房金额>新房金额
                         if(data.sumCompensate > data.houseMoney){
                             $("#swapHouseDiv input[name='difference']").eq(0).val(data.payTotal);
