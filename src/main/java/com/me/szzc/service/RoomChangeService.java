@@ -203,7 +203,7 @@ public class RoomChangeService {
         if (roomChange.getStatus() == 0) {
             return ResultVo.error(300, "该房源未签,不允许修改");
         }
-        if (StringUtils.isNullOrEmpty(roomChangeVo.getStatus()) && roomChangeVo.getStatus() == 0) {
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getStatus()) && roomChangeVo.getStatus() == 0) {
             roomChangeMapper.updateChooseRoomBy0(roomChangeVo);
         } else {
             roomChangeMapper.updateChooseRoomNot0(roomChangeVo);

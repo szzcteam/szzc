@@ -117,20 +117,20 @@
         <if test="housingPlatform != null and housingPlatform != ''">
             AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
         </if>
-        <if test="status != null and status != ''">
-            AND status = #{status}
+        <if test="status != null">
+            AND `status` = #{status}
         </if>
         <if test="commissionCompany != null and commissionCompany != ''">
             AND commission_company LIKE concat(concat('%',#{commissionCompany,jdbcType=VARCHAR}),'%')
         </if>
         <if test="startDate != null and startDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(create_date,'%Y-%m-%d') >= #{startDate}
+            AND DATE_FORMAT(choose_date,'%Y-%m-%d') >= #{startDate}
              ]]>
         </if>
         <if test="endDate != null and endDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(create_date,'%Y-%m-%d') <= #{endDate}
+            AND DATE_FORMAT(choose_date,'%Y-%m-%d') <= #{endDate}
             ]]>
         </if>
         <if test="minArea != null and minArea != ''">
@@ -165,20 +165,20 @@
         <if test="housingPlatform != null and housingPlatform != ''">
             AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
         </if>
-        <if test="status != null and status != ''">
-            AND status = #{status}
+        <if test="status != null">
+            AND `status` = #{status}
         </if>
         <if test="commissionCompany != null and commissionCompany != ''">
             AND commission_company LIKE concat(concat('%',#{commissionCompany,jdbcType=VARCHAR}),'%')
         </if>
         <if test="startDate != null and startDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(create_date,'%Y-%m-%d') >= #{startDate}
+            AND DATE_FORMAT(choose_date,'%Y-%m-%d') >= #{startDate}
              ]]>
         </if>
         <if test="endDate != null and endDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(create_date,'%Y-%m-%d') <= #{endDate}
+            AND DATE_FORMAT(choose_date,'%Y-%m-%d') <= #{endDate}
             ]]>
         </if>
         <if test="minArea != null and minArea != ''">
