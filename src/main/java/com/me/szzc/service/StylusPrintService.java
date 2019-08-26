@@ -8,6 +8,7 @@ import com.me.szzc.enums.PrintTypeEnum;
 import com.me.szzc.pojo.dto.FieldCoordinateDto;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.PrintUtil;
 import com.me.szzc.utils.StringUtils;
 import org.slf4j.Logger;
@@ -44,13 +45,17 @@ public class StylusPrintService {
      *
      * @param id
      */
-    public boolean houseExpropriationCompensationPrint(Long id) throws NoSuchFieldException, IllegalAccessException {
+    public boolean houseExpropriationCompensationPrint(Long id) throws Exception {
         //根据ID获取数据
         SettleAccounts settleAccounts = settleAccountsMapper.selectByPrimaryKey(id);
         if (StringUtils.isNullOrEmpty(settleAccounts)) {
             logger.error("房屋征收补偿计算表打印获取数据为空,id(" + id + ")");
             return false;
         }
+        SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
+        vo.setSwapPrice(vo.getSwapPrice1() + " " + vo.getSwapPrice2() + " " + vo.getSwapPrice3() + " " + vo.getSwapPrice4() + " " + vo.getSwapPrice5());
+        vo.setSwapArea(vo.getSwapArea1() + " " + vo.getSwapArea2() + " " + vo.getSwapArea3() + " " + vo.getSwapArea4() + " " + vo.getSwapArea5());
+        vo.setSwapMoney(vo.getSwapMoney1() + " " + vo.getSwapMoney2() + " " + vo.getSwapMoney3() + " " + vo.getSwapMoney4() + " " + vo.getSwapMoney5());
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
                 fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName());
@@ -63,7 +68,30 @@ public class StylusPrintService {
         //打印数据封装
         for (FieldCoordinateDto fieldCoordinateDto : FieldCoordinateList) {
             map = new HashMap();
-            String value = getFieldValueByFieldName(fieldCoordinateDto.getCode(), settleAccounts);
+            //结算方式：0货币补偿、1产权交换
+            if ("compensateType0".equals(fieldCoordinateDto.getCode())) {
+                if (vo.getCompensateType() == 0) {
+                    map.put("data", "✔");
+                    map.put("fontName", fieldCoordinateDto.getFontName());
+                    map.put("fontSize", fieldCoordinateDto.getFontSize());
+                    map.put("x", fieldCoordinateDto.getAbscissa());
+                    map.put("y", fieldCoordinateDto.getOrdinate());
+                    dataList.add(map);
+                }
+                continue;
+            }
+            if ("compensateType1".equals(fieldCoordinateDto.getCode())) {
+                if (vo.getCompensateType() == 1) {
+                    map.put("data", "✔");
+                    map.put("fontName", fieldCoordinateDto.getFontName());
+                    map.put("fontSize", fieldCoordinateDto.getFontSize());
+                    map.put("x", fieldCoordinateDto.getAbscissa());
+                    map.put("y", fieldCoordinateDto.getOrdinate());
+                    dataList.add(map);
+                }
+                continue;
+            }
+            String value = getFieldValueByFieldName(fieldCoordinateDto.getCode(), vo);
             if (StringUtils.isNullOrEmpty(value)) {
                 continue;
             }
@@ -97,6 +125,12 @@ public class StylusPrintService {
         Field field = object.getClass().getDeclaredField(fieldName);
         //对private的属性的访问
         field.setAccessible(true);
-        return field.get(object).toString();
+        Object objValue = field.get(object);
+        if (StringUtils.isNullOrEmpty(objValue)) {
+            return null;
+        } else {
+            return objValue.toString();
+        }
+
     }
 }

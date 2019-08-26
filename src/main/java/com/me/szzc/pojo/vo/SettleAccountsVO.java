@@ -628,6 +628,11 @@ public class SettleAccountsVO {
     private String deductionBz;
 
     /**
+     * 交换房单价
+     */
+    private String swapPrice;
+
+    /**
      * 交换房单价1
      */
     private String swapPrice1;
@@ -653,6 +658,11 @@ public class SettleAccountsVO {
     private String swapPrice5;
 
     /**
+     * 交换房面积
+     */
+    private String swapArea;
+
+    /**
      * 交换房面积1
      */
     private String swapArea1;
@@ -676,6 +686,11 @@ public class SettleAccountsVO {
      * 交换房面积5
      */
     private String swapArea5;
+
+    /**
+     * 交换房金额
+     */
+    private String swapMoney;
 
     /**
      * 交换房金额1
