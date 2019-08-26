@@ -98,11 +98,19 @@
             <shiro:hasPermission name="ssadmin/roomChange/updateRoomChangeById.html">
                 <li><a class="edit"
                        href="ssadmin/roomChange/getRoomChangeById.html?url=ssadmin/updateRoomChange&id={sid_user}"
-                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改信息</span>
+                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改房源信息</span>
                 </a></li>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/roomChange/addChooseRoom.html">
                 <li><a class="edit"
-                       href="ssadmin/roomChange/toChooseRoomPage.html?url=ssadmin/updateChooseRoom&id={sid_user}"
-                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>点房</span>
+                       href="ssadmin/roomChange/toChooseRoomPage.html?url=ssadmin/updateChooseRoom&id={sid_user}&postUrl=add"
+                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>新增点房</span>
+                </a></li>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/roomChange/updateChooseRoom.html">
+                <li><a class="edit"
+                       href="ssadmin/roomChange/toChooseRoomPage.html?url=ssadmin/updateChooseRoom&id={sid_user}&postUrl=update"
+                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改点房</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/roomChange/batchDelete.html">

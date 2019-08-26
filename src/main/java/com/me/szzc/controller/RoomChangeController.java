@@ -406,13 +406,13 @@ public class RoomChangeController {
     }
 
     @RequestMapping("/toChooseRoomPage")
-    public ModelAndView toChooseRoomPage(Long id,String url){
+    public ModelAndView toChooseRoomPage(Long id,String url,String postUrl){
         ModelAndView view = new ModelAndView();
         view.setViewName(url);
         RoomChange roomChange = roomChangeService.getRoomChangeById(id);
         if (roomChange != null) {
             view.addObject("roomChange", roomChange);
-            if(roomChange.getStatus().intValue() == ChooseStatusEnum.CHOOSE_STATUS_STATUS_0.getCode().intValue()){
+            if(postUrl.equals("add")){
                 view.addObject("postUrl", "addChooseRoom");
             }else{
                 view.addObject("postUrl", "updateChooseRoom");
