@@ -169,7 +169,7 @@
                     <td colspan="4">
                         <input type="text" name="calcNoRegisterLegalArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcNoRegisterLegalPrice" class="required none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                        <input type="text" name="calcNoRegisterLegalProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 1px;"/>
+                        <input type="text" name="calcNoRegisterLegalProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <!--隐藏计算公式-->
                         <input type="hidden" name="calcNoRegisterLegal" class="none_border width_220px">
                     </td>
@@ -181,7 +181,7 @@
                     <td colspan="4">
                         <input type="text" name="calcHistoryLegacyArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <input type="text" name="calcHistoryLegacyPrice" class="required none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                        <input type="text" name="calcHistoryLegacyProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 1px;"/>
+                        <input type="text" name="calcHistoryLegacyProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                         <!--隐藏计算公式-->
                         <input type="hidden" name="calcHistoryLegacy" class="none_border width_220px">
                     </td>

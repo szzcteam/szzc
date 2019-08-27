@@ -204,8 +204,9 @@ $(document).ready(function () {
             $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
             $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
         } else {
+            console.log("热水器只有1个" + calcHotWaterCompensate);
             //只有1个，判断是电热水器，还是太阳能
-            if(optionExistValue(calcHotWaterCompensate)){
+            if(optionExistValue(calcHotWaterCompensate, "sel_water_heater")){
                 //是电热水器
                 $("select[name='sel_water_heater']").find("option[value='" + calcHotWaterCompensate + "']").attr("selected", true);
             }else{
@@ -314,12 +315,12 @@ $(document).ready(function () {
 });
 
 //下拉框是否存在某个选项值
-function optionExistValue(value, selId) {
+function optionExistValue(value, selName) {
     var isExist = false;
-    var count = $('#' + selId).find('option').length;
+    var count = $("select[name='"+selName+"']").find('option').length;
 
     for (var i = 0; i < count; i++) {
-        if ($('#' + selId).get(0).options[i].value == value) {
+        if ($("select[name='"+selName+"']").get(0).options[i].value == value) {
             isExist = true;
             break;
         }
