@@ -1,6 +1,7 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.enums.CompensateTypeEnum;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.ProtocolVO;
@@ -73,6 +74,13 @@ public class ProtocolController extends BaseController {
             view.addObject("endDate", endDate);
         }
 
+        String compensateTypeStr = request.getParameter("compensateType");
+        Integer compensateType = null;
+        if(StringUtils.isNotBlank(compensateTypeStr)){
+            compensateType = Integer.valueOf(compensateTypeStr);
+            view.addObject("compensateType", compensateType);
+        }
+
         Long userId = getAdminSession(request).getFid();
 
         //获取用户管理的片区
@@ -86,7 +94,8 @@ public class ProtocolController extends BaseController {
         Map<Long, String> areaMap = convertUserAreaMap(areaList);
 
         int firstResult = (currentPage - 1) * numPerPage;
-        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true, signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate);
+        List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true,
+                signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType);
 
         //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
@@ -126,8 +135,11 @@ public class ProtocolController extends BaseController {
         view.addObject("currentPage", currentPage);
         view.addObject("rel", "protocolList");
 
+        view.addObject("compensateTypeMap", CompensateTypeEnum.getDescMap());
+
         //总数量
-        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate));
+        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner,
+                areaId, areaIdList, startDate, endDate, compensateType));
         return view;
     }
 

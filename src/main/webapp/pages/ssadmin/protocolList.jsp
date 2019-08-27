@@ -7,6 +7,7 @@
     <input type="hidden" name="areaId" value="${areaId}"/>
     <input type="hidden" name="startDate" value="${startDate}" />
     <input type="hidden" name="endDate" value="${endDate}" />
+    <input type="hidden" name="compensateType" value="${compensateType}" />
 
     <input type="hidden" name="pageNum" value="${currentPage}"/>
     <input type="hidden" name="numPerPage" value="${numPerPage}"/>
@@ -49,6 +50,15 @@
                         至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="text" name="endDate" class="date"
                                readonly="true" value="${endDate }"/>
+                    </td>
+                    <td>
+                        协议类型：
+                        <select name="compensateType" style="width: 100px;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${compensateTypeMap}" var="item">
+                                <option value="${item.key}" <c:if test="${compensateType ==  item.key}">selected</c:if>>${item.value}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                     <td>
                         <div class="buttonActive">

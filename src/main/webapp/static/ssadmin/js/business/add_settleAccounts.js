@@ -92,12 +92,9 @@ $(document).ready(function(){
     });
 
     //房屋价值补偿-有证房屋补偿，3小框，失去焦点，重新计算公式
-    $("input[name='calcValueCompensateArea'],input[name='calcValueCompensatePrice']").on("blur change", function () {
+    $("input[name='calcValueCompensateArea'],input[name='calcValueCompensatePrice'],input[name='calcValueCompensateProportion']").on("blur change", function () {
         settleAccountObj.fullCalcValueCompensate();
     });
-    /*    $("input[name='calcValueCompensateProportion']").eq(0).on("blur change", function () {
-            settleAccountObj.fullCalcValueCompensate();
-        });*/
 
     //计算公式失去焦点
     $("input[name='calcValueCompensate']").eq(0).on("blur change", function () {
@@ -105,7 +102,7 @@ $(document).ready(function(){
     });
 
     //房屋价值补偿-未经登记的合法建筑补偿
-    $("input[name='calcNoRegisterLegalArea'],input[name='calcNoRegisterLegalPrice']").on("blur change", function () {
+    $("input[name='calcNoRegisterLegalArea'],input[name='calcNoRegisterLegalPrice'],input[name='calcNoRegisterLegalProportion']").on("blur change", function () {
         settleAccountObj.fullCalcNoRegisterLegal();
     });
 
@@ -115,7 +112,7 @@ $(document).ready(function(){
     });
 
     //房屋价值补偿-历史遗留无证房补偿
-    $("input[name='calcHistoryLegacyArea'],input[name='calcHistoryLegacyPrice']").on("blur change", function () {
+    $("input[name='calcHistoryLegacyArea'],input[name='calcHistoryLegacyPrice'],input[name='calcHistoryLegacyProportion']").on("blur change", function () {
         settleAccountObj.fullCalcHistoryLegacy();
     });
 
@@ -531,10 +528,10 @@ var settleAccountObj = {
     //填充房屋价值补偿-有证计算公式
     fullCalcValueCompensate:function(){
 
-        var checkInArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
-        var assessPrice = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
-        // var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
-        var calcValueCompensate = checkInArea + "*" + assessPrice; // + "*" + proportion;
+        var area = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
+        var price = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
+        var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
+        var calcValueCompensate = area + "*" + price + "*" + proportion;
         //覆盖公式中的单价
         $("input[name='calcValueCompensate']").eq(0).val(calcValueCompensate).change();
     },
@@ -554,7 +551,8 @@ var settleAccountObj = {
 
         var area = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
         var price = $("input[name='calcNoRegisterLegalPrice']").eq(0).val() || 0;
-        var money = area + "*" + price; // + "*" + proportion;
+        var proportion = $("input[name='calcNoRegisterLegalProportion']").eq(0).val() || 0;
+        var money = area + "*" + price + "*" + proportion;
         console.log("未经登记合法计算公式：" + money);
         //覆盖公式中的单价
         $("input[name='calcNoRegisterLegal']").eq(0).val(money).change();
@@ -575,8 +573,8 @@ var settleAccountObj = {
     fullCalcHistoryLegacy:function(){
         var area = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
         var price = $("input[name='calcHistoryLegacyPrice']").eq(0).val() || 0;
-        // var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
-        var money = area + "*" + price; // + "*" + proportion;
+        var proportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 0;
+        var money = area + "*" + price + "*" + proportion;
         //覆盖公式中的单价
         $("input[name='calcHistoryLegacy']").eq(0).val(money).change();
     },
@@ -762,13 +760,20 @@ var settleAccountObj = {
 
     //热水器拆装费计算
     calcHotWater:function () {
+        var calcHotWaterCompensate = "";
         //烧电  得到的格式：1*200
         var water_heater_calc = $("select[name='sel_water_heater']").eq(0).val()
+        if (eval(water_heater_calc) > 0) {
+            calcHotWaterCompensate = water_heater_calc;
+        }
 
         //太阳能
         var calcHotWaterCompensateMoney = $("input[name='calcHotWaterCompensateMoney']").eq(0).val() || 0;
         var calcHotWaterCompensateConvert = $("input[name='calcHotWaterCompensateConvert']").eq(0).val() || 0;
-        var calcHotWaterCompensate = water_heater_calc + "+" + calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert;
+        if (calcHotWaterCompensateMoney != 0) {
+            calcHotWaterCompensate = calcHotWaterCompensate + "+" + calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert
+        }
+
         console.log("热水器拆装计算公式：" + calcHotWaterCompensate);
         $("input[name='calcHotWaterCompensate']").eq(0).val(calcHotWaterCompensate).change();
     },
@@ -800,6 +805,10 @@ var settleAccountObj = {
         var noRegisterLegalArea = $("input[name='noRegisterLegalArea']").eq(0).val() || 0;
         var historyLegacyArea = $("input[name='historyLegacyArea']").eq(0).val() || 0;
         var area = new Number(noRegisterLegalArea) + new Number(historyLegacyArea);
+        var tempArea = area + "";
+        if (tempArea.indexOf(".") != -1) {
+            area = area.toFixed(2);
+        }
         $("input[name='noCheckinArea']").eq(0).val(area);
     },
     //套内面积=有证面积+未经登记合法面积+历史遗留面积
@@ -808,6 +817,12 @@ var settleAccountObj = {
         var noRegisterLegalArea = $("input[name='noRegisterLegalArea']").eq(0).val() || 0;
         var historyLegacyArea = $("input[name='historyLegacyArea']").eq(0).val() || 0;
         var area = new Number(certifiedArea) + new Number(noRegisterLegalArea) + new Number(historyLegacyArea);
+        //做小数或整数处理
+        var tempArea = area + "";
+        if (tempArea.indexOf(".") != -1) {
+            //是有小数位的，则保留2位，防止有很多位小数
+            area = area.toFixed(2);
+        }
         $("input[name='checkInArea']").eq(0).val(area);
 
         //填充装修折旧的面积

@@ -1563,6 +1563,9 @@
     <if test="signingStatus != null">
       and signing_status = #{signingStatus}
     </if>
+    <if test="compensateType != null">
+      and compensate_type = #{compensateType}
+    </if>
     <if test="startDate != null and startDate !='' ">
       and DATE_FORMAT(create_date,'%Y-%m-%d') <![CDATA[ >= ]]> #{startDate}
     </if>
