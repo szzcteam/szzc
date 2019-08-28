@@ -58,8 +58,8 @@
             证载建筑面积为<div style="width: 80px;" class="rows_div">${rmbRecom.certifiedArea}</div>㎡，
             房屋权属份额<div style="width: 50px;" class="rows_div">${rmbRecom.proportion}</div>%，
             证载房屋用途<div style="width: 80px;" class="rows_div">${rmbRecom.useing}</div>，
-            房屋所有权证号证载房屋用途<div style="width: 80px;" class="rows_div">${rmbRecom.houseOwnerNumber}</div>，
-            国有土地使用证号<div style="width: 80px;" class="rows_div">${rmbRecom.publicOwnerNumber}</div>，
+            房屋所有权证号证载房屋用途<div style="width: 100px;" class="rows_div">${rmbRecom.houseOwnerNumber}</div>，
+            国有土地使用证号<div style="width: 150px;" class="rows_div">${rmbRecom.publicOwnerNumber}</div>，
             房屋价值评估单价为<div style="width: 80px;" class="rows_div">${rmbRecom.assessPrice}</div>元/㎡；
             其中：用于经营的实际面积<div style="width: 50px;" class="rows_div">${rmbRecom.valueCompensateBusinessArea}</div> ㎡，
             住宅改为经营门面的补助系数为<div style="width: 50px;" class="rows_div">${rmbRecom.valueCompensateRate}</div> %。
