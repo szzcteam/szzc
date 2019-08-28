@@ -215,7 +215,7 @@
                <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>
                 <td style="text-align: center;">
                     <c:if test="${protocol.swapHouseId > 0 }">
-                        <a href="ssadmin/settleAccounts/preview.html?id=${protocol.settleAccountId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">
+                        <a href="ssadmin/swapHouse/preview.html?id=${protocol.swapHouseId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">
                             √
                         </a>
                     </c:if>

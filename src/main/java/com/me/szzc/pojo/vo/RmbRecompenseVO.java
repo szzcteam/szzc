@@ -519,7 +519,9 @@ public class RmbRecompenseVO {
         vo.setLifeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getLifeCompensate()));
         vo.setChangeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getChangeCompensate()));
         vo.setSmallAreaReward(BigDecimalUtil.stripTrailingZeros(entity.getSmallAreaReward()));
-        vo.setMoveHouseFee(BigDecimalUtil.stripTrailingZeros(entity.getMoveHouseFee()));
+        vo.setMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getMoveReward()));
+
+
         vo.setOtherFee(BigDecimalUtil.stripTrailingZeros(entity.getOtherFee()));
         vo.setSumRbm(BigDecimalUtil.stripTrailingZeros(entity.getSumRbm()));
         vo.setUpperRmb(entity.getUpperRmb());
