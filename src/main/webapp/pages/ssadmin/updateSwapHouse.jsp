@@ -237,6 +237,17 @@
             </fieldset>
             <br/><br/>
             <fieldset>
+                <legend>过渡方式和过渡期限</legend>
+                <dl style="width: 100%;height: 52px">
+                    <dd style="width: 90%;line-height: 26px;margin-left: 5px;">
+                        乙方选择自行过渡，过渡期限自签订本协议并搬迁完毕之日起
+                        <input type="text" name="moveMonth" value="${swapHouse.moveMonth}" style="margin-left: 0px;width: 100px;clear: both;float: none;"/>个月;
+                        临时安置补偿费以实际搬迁过渡时间据实计算，逾期按增加50%的标准由甲方支付乙方；如点选多套房屋的，则按最先还建的安置房时间计算临时安置补偿费。
+                    </dd>
+                </dl>
+            </fieldset>
+            <br/><br/>
+            <fieldset>
                 <legend>签约、搬迁及付款</legend>
                 <dl style="width: 100%;">
                     <dd style="width: 90%;line-height: 26px;margin-left: 5px;">
@@ -249,7 +260,7 @@
                 <dl>
                     <dt>约定明细:</dt>
                     <dd>
-                        <input type="text" name="otherTermsOne" maxlength="255"  value="${swapHouse.otherTermsOne}"  size="40"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="otherTermsOne" maxlength="255"  value="${swapHouse.otherTermsOne}"  size="80"/>&nbsp;&nbsp;&nbsp;&nbsp;
                     </dd>
                 </dl>
             </fieldset>
