@@ -87,7 +87,7 @@ $(document).ready(function(){
     });
 
     //装修折旧 2小框，失去焦点，重新计算公式
-    $("input[name='calcDecorationCompensateArea'],input[name='calcDecorationCompensatePrice']").on("blur change", function () {
+    $("input[name='calcDecorationCompensateArea'],input[name='calcDecorationCompensatePrice'],input[name='calcDecorationCompensateOther']").on("blur change", function () {
         settleAccountObj.fullCalcDecoration();
     });
 
@@ -530,10 +530,13 @@ var settleAccountObj = {
 
         var area = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
         var price = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
-        var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val() || 0;
-        var calcValueCompensate = area + "*" + price + "*" + proportion;
+        var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val();
+        var calc = area + "*" + price;
+        if (proportion) {
+            calc += "*" + proportion;
+        }
         //覆盖公式中的单价
-        $("input[name='calcValueCompensate']").eq(0).val(calcValueCompensate).change();
+        $("input[name='calcValueCompensate']").eq(0).val(calc).change();
     },
 
 
@@ -551,11 +554,14 @@ var settleAccountObj = {
 
         var area = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
         var price = $("input[name='calcNoRegisterLegalPrice']").eq(0).val() || 0;
-        var proportion = $("input[name='calcNoRegisterLegalProportion']").eq(0).val() || 0;
-        var money = area + "*" + price + "*" + proportion;
-        console.log("未经登记合法计算公式：" + money);
+        var proportion = $("input[name='calcNoRegisterLegalProportion']").eq(0).val();
+        var calc = area + "*" + price;
+        if (proportion) {
+            calc += "*" + proportion;
+        }
+        console.log("未经登记合法计算公式：" + calc);
         //覆盖公式中的单价
-        $("input[name='calcNoRegisterLegal']").eq(0).val(money).change();
+        $("input[name='calcNoRegisterLegal']").eq(0).val(calc).change();
     },
 
     //改变房屋价值补偿-未登记合法计算公式
@@ -573,10 +579,13 @@ var settleAccountObj = {
     fullCalcHistoryLegacy:function(){
         var area = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
         var price = $("input[name='calcHistoryLegacyPrice']").eq(0).val() || 0;
-        var proportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 0;
-        var money = area + "*" + price + "*" + proportion;
+        var proportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val();
+        var calc = area + "*" + price;
+        if (proportion) {
+            calc += "*" + proportion;
+        }
         //覆盖公式中的单价
-        $("input[name='calcHistoryLegacy']").eq(0).val(money).change();
+        $("input[name='calcHistoryLegacy']").eq(0).val(calc).change();
     },
 
     //改变房屋价值补偿-历史遗留计算公式
@@ -703,8 +712,12 @@ var settleAccountObj = {
     fullCalcDecoration:function () {
         var calcDecorationCompensateArea = $("input[name='calcDecorationCompensateArea']").eq(0).val() || 0;
         var calcDecorationCompensatePrice = $("input[name='calcDecorationCompensatePrice']").eq(0).val() || 0;
-        var calcDecorationCompensate = calcDecorationCompensateArea + "*" + calcDecorationCompensatePrice;
-        $("input[name='calcDecorationCompensate']").eq(0).val(calcDecorationCompensate).change();
+        var calcDecorationCompensateOther = $("input[name='calcDecorationCompensateOther']").eq(0).val();
+        var calc = calcDecorationCompensateArea + "*" + calcDecorationCompensatePrice;
+        if (calcDecorationCompensateOther) {
+            calc = calc + "+" + calcDecorationCompensateOther;
+        }
+        $("input[name='calcDecorationCompensate']").eq(0).val(calc).change();
 
     },
     //临时安置补偿，利用3小框，得到计算公式
@@ -842,8 +855,11 @@ var settleAccountObj = {
     calcStructureBalcony:function () {
         var area = $("input[name='structureBalconyArea']").eq(0).val() || 0;
         var price = $("input[name='structureBalconyPrice']").eq(0).val() || 0;
-        var proportion = $("input[name='structureBalconyProportion']").eq(0).val() || 1;
-        var calc = area + "*" + price + "*" + proportion;
+        var proportion = $("input[name='structureBalconyProportion']").eq(0).val() || 0;
+        var calc = area + "*" + price;
+        if (proportion != 0) {
+            calc += "*" + proportion;
+        }
         console.log("构建物补偿-阳台，公式：" + calc);
         $("input[name='calcStructureBalcony']").eq(0).val(calc).change();
 
@@ -852,8 +868,11 @@ var settleAccountObj = {
     calcStructureBuild:function () {
         var area = $("input[name='structureBuildArea']").eq(0).val() || 0;
         var price = $("input[name='structureBuildPrice']").eq(0).val() || 0;
-        var proportion = $("input[name='structureBuildProportion']").eq(0).val() || 1;
-        var calc = area + "*" + price + "*" + proportion;
+        var proportion = $("input[name='structureBuildProportion']").eq(0).val() || 0;
+        var calc = area + "*" + price;
+        if (proportion != 0) {
+            calc += "*" + proportion;
+        }
         console.log("构建物补偿-外挑搭建，公式：" + calc);
         $("input[name='calcStructureBuild']").eq(0).val(calc).change();
     },
@@ -861,8 +880,11 @@ var settleAccountObj = {
     calcStructureDark:function () {
         var area = $("input[name='structureDarkArea']").eq(0).val() || 0;
         var price = $("input[name='structureDarkPrice']").eq(0).val() || 0;
-        var proportion = $("input[name='structureDarkProportion']").eq(0).val() || 1;
-        var calc = area + "*" + price + "*" + proportion;
+        var proportion = $("input[name='structureDarkProportion']").eq(0).val() || 0;
+        var calc = area + "*" + price;
+        if (proportion != 0) {
+            calc += "*" + proportion;
+        }
         console.log("构建物补偿-暗楼，公式：" + calc);
         $("input[name='calcStructureDark']").eq(0).val(calc).change();
     },
@@ -870,8 +892,11 @@ var settleAccountObj = {
     calcStructureMezzanine:function () {
         var area = $("input[name='structureMezzanineArea']").eq(0).val() || 0;
         var price = $("input[name='structureMezzaninePrice']").eq(0).val() || 0;
-        var proportion = $("input[name='structureMezzanineProportion']").eq(0).val() || 1;
-        var calc = area + "*" + price + "*" + proportion;
+        var proportion = $("input[name='structureMezzanineProportion']").eq(0).val() || 0;
+        var calc = area + "*" + price;
+        if (proportion != 0) {
+            calc += "*" + proportion;
+        }
         console.log("构建物补偿-夹层，公式：" + calc);
         $("input[name='calcStructureMezzanine']").eq(0).val(calc).change();
     },
@@ -879,8 +904,11 @@ var settleAccountObj = {
     calcStructureRoof:function () {
         var area = $("input[name='structureRoofArea']").eq(0).val() || 0;
         var price = $("input[name='structureRoofPrice']").eq(0).val() || 0;
-        var proportion = $("input[name='structureRoofProportion']").eq(0).val() || 1;
-        var calc = area + "*" + price + "*" + proportion;
+        var proportion = $("input[name='structureRoofProportion']").eq(0).val() || 0;
+        var calc = area + "*" + price;
+        if (proportion != 0) {
+            calc += "*" + proportion;
+        }
         console.log("构建物补偿-楼顶搭建，公式：" + calc);
         $("input[name='calcStructureRoof']").eq(0).val(calc).change();
     },

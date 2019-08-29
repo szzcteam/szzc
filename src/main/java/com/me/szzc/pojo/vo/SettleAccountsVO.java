@@ -792,8 +792,12 @@ public class SettleAccountsVO {
         }
         vo.setHistoryLegacyBz(entity.getHistoryLegacyBz());
 
-        vo.setCalcDecorationCompensate(entity.getCalcDecorationCompensate());
-        vo.setDecorationCompensate(BigDecimalUtil.stripTrailingZeros(entity.getDecorationCompensate()));
+        //装修补偿金额，存在2个公式，其中第一个可能为0*0
+        if(entity.getDecorationCompensate() != null && entity.getDecorationCompensate().compareTo(BigDecimal.ZERO) > 0){
+            vo.setCalcDecorationCompensate(entity.getCalcDecorationCompensate());
+            vo.setDecorationCompensate(BigDecimalUtil.stripTrailingZeros(entity.getDecorationCompensate()));
+            vo.setCalcDecorationCompensate(vo.getCalcDecorationCompensate().replace("0*0+", ""));
+        }
         vo.setDecorationCompensateBz(entity.getDecorationCompensateBz());
 
         //搬迁补偿
@@ -805,9 +809,11 @@ public class SettleAccountsVO {
         vo.setMoveHouseFee(BigDecimalUtil.stripTrailingZeros(entity.getMoveHouseFee()));
         vo.setMoveHouseFeeBz(entity.getMoveHouseFeeBz());
 
+        //临时过渡费
         if(entity.getInterimFee() != null && entity.getInterimFee().compareTo(BigDecimal.ZERO) > 0){
             vo.setCalcInterimFee(entity.getCalcInterimFee());
             vo.setInterimFee(BigDecimalUtil.stripTrailingZeros(entity.getInterimFee()));
+            vo.setCalcInterimFee(vo.getCalcInterimFee().replace("0*0*0+", ""));
         }
         vo.setInterimFeeBz(entity.getInterimFeeBz());
 
@@ -841,11 +847,11 @@ public class SettleAccountsVO {
                 String txt = "";
                 String num1 = arr[0].substring(0, arr[0].indexOf("*"));
                 if(Integer.valueOf(num1) > 0) {
-                    txt += num1 + " 主表 ";
+                    txt += num1 + " 民用独表 ";
                 }
                 String num2 = arr[1].substring(0, arr[1].indexOf("*"));
                 if(Integer.valueOf(num2) >0 ) {
-                    txt += num2 + " 副表";
+                    txt += num2 + " 分表";
                 }
                 if(arr.length == 4) {
                     String num3 = arr[2].substring(0, arr[2].indexOf("*"));
@@ -991,6 +997,7 @@ public class SettleAccountsVO {
         if (entity.getChangeCompensate() != null && entity.getChangeCompensate().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcChangeCompensate(entity.getCalcChangeCompensate());
             vo.setChangeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getChangeCompensate()));
+            vo.setCalcChangeCompensate(vo.getCalcChangeCompensate().replace("0*(0-0)*0+", ""));
         }
         vo.setChangeCompensateBz(entity.getChangeCompensateBz());
 

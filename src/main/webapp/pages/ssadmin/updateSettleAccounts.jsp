@@ -124,8 +124,9 @@
                         <td>二</td>
                         <td colspan="6" class="td_left">装修补偿</td>
                         <td colspan="4">
-                            <input type="text" name="calcDecorationCompensateArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcDecorationCompensatePrice" class="required none_border" placeholder="折旧单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcDecorationCompensateArea"  placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcDecorationCompensatePrice" placeholder="折旧单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcDecorationCompensateOther" placeholder="其他公式" size="21" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcDecorationCompensate" value="${settleAccounts.calcDecorationCompensate}" class="none_border width_220px">
                         </td>
@@ -150,10 +151,10 @@
                         <td>四</td>
                         <td colspan="6" class="td_left">临时安置补偿（过渡费）</td>
                         <td colspan="4">
-                            <input type="text" name="calcInterimFeeArea" class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcInterimFeePrice" class="required none_border" placeholder="金额" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcInterimFeeMonth" class="required none_border" placeholder="月数" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcInterimFeeOther" class="none_border"  size="21" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcInterimFeeArea"  placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcInterimFeePrice"  placeholder="金额" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcInterimFeeMonth"  placeholder="月数" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcInterimFeeOther" placeholder="其他公式" size="21" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcInterimFee" value="${settleAccounts.calcInterimFee}" class="none_border width_220px">
                         </td>

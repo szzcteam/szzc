@@ -55,7 +55,9 @@ $(document).ready(function () {
         var arr = calcValueCompensate.split("*");
         $("input[name='calcValueCompensateArea']").val(arr[0]);
         $("input[name='calcValueCompensatePrice']").val(arr[1]);
-        // $("input[name='calcValueCompensateProportion']").val(arr[2]);
+        if(arr.length == 3){
+            $("input[name='calcValueCompensateProportion']").val(arr[2]);
+        }
     }
 
     //房屋价值补偿-未登记，利用计算公式，填充框
@@ -64,6 +66,9 @@ $(document).ready(function () {
         var arr = calcNoRegisterLegal.split("*");
         $("input[name='calcNoRegisterLegalArea']").val(arr[0]);
         $("input[name='calcNoRegisterLegalPrice']").val(arr[1]);
+        if(arr.length == 3){
+            $("input[name='calcNoRegisterLegalProportion']").val(arr[2]);
+        }
     }
 
     //房屋价值补偿-历史遗留，利用计算公式，填充框
@@ -72,12 +77,24 @@ $(document).ready(function () {
         var arr = calcHistoryLegacy.split("*");
         $("input[name='calcHistoryLegacyArea']").val(arr[0]);
         $("input[name='calcHistoryLegacyPrice']").val(arr[1]);
+        if(arr.length == 3){
+            $("input[name='calcHistoryLegacyProportion']").val(arr[2]);
+        }
     }
 
     //装修折旧补偿，利用计算公式，填充2小框
     var calcDecorationCompensate = $("input[name='calcDecorationCompensate']").eq(0).val();
     if(calcDecorationCompensate) {
-        var arr = calcDecorationCompensate.split("*")
+        var firstAddIndex = calcDecorationCompensate.indexOf("+");
+        var arr = "";
+        if (firstAddIndex != -1) {
+            arr = calcDecorationCompensate.substring(0, firstAddIndex).split("*");
+            var two_calc = calcDecorationCompensate.substring(firstAddIndex + 1, calcDecorationCompensate.length);
+            console.log("装修折旧补偿分割：" + two_calc);
+            $("input[name='calcDecorationCompensateOther']").val(two_calc);
+        } else {
+            arr = calcDecorationCompensate.split("*");
+        }
         $("input[name='calcDecorationCompensateArea']").val(arr[0]);
         $("input[name='calcDecorationCompensatePrice']").val(arr[1]);
     }
