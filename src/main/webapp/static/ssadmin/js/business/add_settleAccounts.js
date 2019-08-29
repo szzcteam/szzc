@@ -92,7 +92,7 @@ $(document).ready(function(){
     });
 
     //房屋价值补偿-有证房屋补偿，3小框，失去焦点，重新计算公式
-    $("input[name='calcValueCompensateArea'],input[name='calcValueCompensatePrice'],input[name='calcValueCompensateProportion']").on("blur change", function () {
+    $("input[name='calcValueCompensateArea'],input[name='calcValueCompensatePrice'],input[name='calcValueCompensateProportion'],input[name='calcValueCompensateOther']").on("blur change", function () {
         settleAccountObj.fullCalcValueCompensate();
     });
 
@@ -102,7 +102,7 @@ $(document).ready(function(){
     });
 
     //房屋价值补偿-未经登记的合法建筑补偿
-    $("input[name='calcNoRegisterLegalArea'],input[name='calcNoRegisterLegalPrice'],input[name='calcNoRegisterLegalProportion']").on("blur change", function () {
+    $("input[name='calcNoRegisterLegalArea'],input[name='calcNoRegisterLegalPrice'],input[name='calcNoRegisterLegalProportion'],input[name='calcNoRegisterLegalOther']").on("blur change", function () {
         settleAccountObj.fullCalcNoRegisterLegal();
     });
 
@@ -112,7 +112,7 @@ $(document).ready(function(){
     });
 
     //房屋价值补偿-历史遗留无证房补偿
-    $("input[name='calcHistoryLegacyArea'],input[name='calcHistoryLegacyPrice'],input[name='calcHistoryLegacyProportion']").on("blur change", function () {
+    $("input[name='calcHistoryLegacyArea'],input[name='calcHistoryLegacyPrice'],input[name='calcHistoryLegacyProportion'],input[name='calcHistoryLegacyOther']").on("blur change", function () {
         settleAccountObj.fullCalcHistoryLegacy();
     });
 
@@ -531,9 +531,13 @@ var settleAccountObj = {
         var area = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
         var price = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
         var proportion = $("input[name='calcValueCompensateProportion']").eq(0).val();
+        var other = $("input[name='calcValueCompensateOther']").eq(0).val();
         var calc = area + "*" + price;
         if (proportion) {
             calc += "*" + proportion;
+        }
+        if (other) {
+            calc += "+" + other;
         }
         //覆盖公式中的单价
         $("input[name='calcValueCompensate']").eq(0).val(calc).change();
@@ -555,9 +559,13 @@ var settleAccountObj = {
         var area = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
         var price = $("input[name='calcNoRegisterLegalPrice']").eq(0).val() || 0;
         var proportion = $("input[name='calcNoRegisterLegalProportion']").eq(0).val();
+        var other = $("input[name='calcNoRegisterLegalOther']").eq(0).val();
         var calc = area + "*" + price;
         if (proportion) {
             calc += "*" + proportion;
+        }
+        if(other){
+            calc += "+"+other;
         }
         console.log("未经登记合法计算公式：" + calc);
         //覆盖公式中的单价
@@ -580,9 +588,13 @@ var settleAccountObj = {
         var area = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
         var price = $("input[name='calcHistoryLegacyPrice']").eq(0).val() || 0;
         var proportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val();
+        var other = $("input[name='calcHistoryLegacyOther']").eq(0).val();
         var calc = area + "*" + price;
         if (proportion) {
             calc += "*" + proportion;
+        }
+        if(other){
+            calc += "+"+other;
         }
         //覆盖公式中的单价
         $("input[name='calcHistoryLegacy']").eq(0).val(calc).change();

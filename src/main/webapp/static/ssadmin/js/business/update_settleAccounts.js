@@ -52,7 +52,17 @@ $(document).ready(function () {
     //房屋价值补偿-有证，利用计算公式，填充框
     var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val();
     if(calcValueCompensate) {
-        var arr = calcValueCompensate.split("*");
+        var firstAddIndex = calcValueCompensate.indexOf("+");
+        var arr = "";
+        if (firstAddIndex != -1) {
+            arr = calcValueCompensate.substring(0, firstAddIndex).split("*");
+            var two_calc = calcValueCompensate.substring(firstAddIndex + 1, calcValueCompensate.length);
+            console.log("有证分割：" + two_calc);
+            $("input[name='calcValueCompensateOther']").val(two_calc);
+        } else {
+            arr = calcValueCompensate.split("*");
+        }
+
         $("input[name='calcValueCompensateArea']").val(arr[0]);
         $("input[name='calcValueCompensatePrice']").val(arr[1]);
         if(arr.length == 3){
@@ -63,7 +73,17 @@ $(document).ready(function () {
     //房屋价值补偿-未登记，利用计算公式，填充框
     var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val();
     if(calcNoRegisterLegal) {
-        var arr = calcNoRegisterLegal.split("*");
+        var firstAddIndex = calcNoRegisterLegal.indexOf("+");
+        var arr = "";
+        if (firstAddIndex != -1) {
+            arr = calcNoRegisterLegal.substring(0, firstAddIndex).split("*");
+            var two_calc = calcNoRegisterLegal.substring(firstAddIndex + 1, calcNoRegisterLegal.length);
+            console.log("未登记分割：" + two_calc);
+            $("input[name='calcNoRegisterLegalOther']").val(two_calc);
+        } else {
+            arr = calcNoRegisterLegal.split("*");
+        }
+
         $("input[name='calcNoRegisterLegalArea']").val(arr[0]);
         $("input[name='calcNoRegisterLegalPrice']").val(arr[1]);
         if(arr.length == 3){
@@ -74,7 +94,17 @@ $(document).ready(function () {
     //房屋价值补偿-历史遗留，利用计算公式，填充框
     var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val();
     if(calcHistoryLegacy) {
-        var arr = calcHistoryLegacy.split("*");
+        var firstAddIndex = calcHistoryLegacy.indexOf("+");
+        var arr = "";
+        if (firstAddIndex != -1) {
+            arr = calcHistoryLegacy.substring(0, firstAddIndex).split("*");
+            var two_calc = calcHistoryLegacy.substring(firstAddIndex + 1, calcHistoryLegacy.length);
+            console.log("历史遗留分割：" + two_calc);
+            $("input[name='calcHistoryLegacyOther']").val(two_calc);
+        } else {
+            arr = calcValueCompensate.split("*");
+        }
+
         $("input[name='calcHistoryLegacyArea']").val(arr[0]);
         $("input[name='calcHistoryLegacyPrice']").val(arr[1]);
         if(arr.length == 3){

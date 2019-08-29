@@ -774,6 +774,8 @@ public class SettleAccountsVO {
         vo.setInArea(BigDecimalUtil.stripTrailingZeros(entity.getInArea()));
         vo.setAssessPrice(BigDecimalUtil.stripTrailingZeros(entity.getAssessPrice()));
         vo.setAddress(entity.getAddress());
+
+        //有证的
         vo.setCalcValueCompensate(entity.getCalcValueCompensate());
         vo.setValueCompensate(BigDecimalUtil.stripTrailingZeros(entity.getValueCompensate()));
         vo.setValueCompensateBz(entity.getValueCompensateBz());

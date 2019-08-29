@@ -87,9 +87,10 @@
                         <td rowspan="3">房屋价值补偿</td>
                         <td colspan="5" class="td_left">1、有证房屋补偿</td>
                         <td colspan="4">
-                            <input type="text" name="calcValueCompensateArea"  class="required none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcValueCompensatePrice"  class="required none_border" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcValueCompensateProportion" class="none_border" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcValueCompensateArea"  placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcValueCompensatePrice"  placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcValueCompensateProportion" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcValueCompensateOther" placeholder="其他公式" size="21" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcValueCompensate" value="${settleAccounts.calcValueCompensate}" class="none_border width_220px">
                         </td>
@@ -102,6 +103,7 @@
                             <input type="text" name="calcNoRegisterLegalArea" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                             <input type="text" name="calcNoRegisterLegalPrice" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                             <input type="text" name="calcNoRegisterLegalProportion" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcNoRegisterLegalOther" placeholder="其他公式" size="21" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcNoRegisterLegal" value="${settleAccounts.calcNoRegisterLegal}" class="none_border width_220px">
                         </td>
@@ -114,6 +116,7 @@
                             <input type="text" name="calcHistoryLegacyArea"  placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                             <input type="text" name="calcHistoryLegacyPrice" placeholder="单价" size="5" style="margin-top: 2px;margin-left: 5px;"/>
                             <input type="text" name="calcHistoryLegacyProportion" placeholder="比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcHistoryLegacyOther" placeholder="其他公式" size="21" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏计算公式-->
                             <input type="hidden" name="calcHistoryLegacy" value="${settleAccounts.calcHistoryLegacy}" class="none_border width_220px">
                         </td>
