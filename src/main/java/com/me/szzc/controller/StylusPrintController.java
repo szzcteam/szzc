@@ -23,7 +23,7 @@ public class StylusPrintController {
      * @param id
      * @return
      */
-    @RequestMapping("/houseExpropriationCompensationPrint")
+    @RequestMapping("/settleAccounts")
     @ResponseBody
     public ModelAndView houseExpropriationCompensationPrint(Long id) {
         ModelAndView modelAndView = new ModelAndView();

@@ -156,7 +156,7 @@
         <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产权调换房屋情况</b></div>
         <div style="text-align: left;line-height: 26px;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            乙方选定<div style="width: 60px;" class="rows_div">${swapHouse.newHouseAddress}</div>、
+            乙方选定<div style="width: 200px;" class="rows_div">${swapHouse.newHouseAddress}</div>、
             <div style="width: 60px;" class="rows_div">${swapHouse.seat}</div>栋
             <div style="width: 60px;" class="rows_div">${swapHouse.unit}</div>单元
             <div style="width: 60px;" class="rows_div">${swapHouse.floors}</div>层

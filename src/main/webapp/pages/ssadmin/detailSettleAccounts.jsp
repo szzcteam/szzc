@@ -17,6 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>结算单预览</title>
 
+    <script src="${oss_url}/static/ssadmin/js/js/jquery-1.7.2.js" type="text/javascript"></script>
     <link href="${oss_url}/static/ssadmin/js/themes/css/core.css" rel="stylesheet"
           type="text/css"/>
 
@@ -49,6 +50,23 @@
         }
 
     </style>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#print").click(function () {
+                var recordId = $("#recordId").val();
+                $.ajax({
+                    url: "ssadmin/stylusPrint/settleAccounts.html",
+                    type: "post",
+                    data: {"id": recordId},
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
+    </script>
 
 </head>
 
@@ -56,6 +74,12 @@
 <div class="pageContent" style="margin-left: 15%;width: 1000px;">
 
         <div class="pageFormContent nowrap" layoutH="97">
+            <dl>
+                <div style="text-align: right;margin-right: 13%;">
+                    <input type="hidden" value="${settleAccounts.id}" id="recordId">
+                    <button type="button" id="print" style="width: 70px;height: 26px;">打印</button>
+                </div>
+            </dl>
             <dl>
                 <div style="margin-top:10px; margin-left: 30px;font-size: 18px;">
                     ${settleAccounts.projectName}
