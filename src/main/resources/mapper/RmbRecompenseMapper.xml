@@ -16,7 +16,7 @@
     <result column="public_owner_number" jdbcType="VARCHAR" property="publicOwnerNumber" />
     <result column="proportion" jdbcType="DECIMAL" property="proportion" />
     <result column="useing" jdbcType="VARCHAR" property="useing" />
-    <result column="assess_price" jdbcType="DECIMAL" property="assessPrice" />
+    <result column="assess_price" jdbcType="VARCHAR" property="assessPrice" />
     <result column="check_in_area" jdbcType="DECIMAL" property="checkInArea" />
     <result column="residence_area" jdbcType="DECIMAL" property="residenceArea" />
     <result column="value_compensate_business_area" jdbcType="DECIMAL" property="valueCompensateBusinessArea" />
@@ -155,7 +155,7 @@
       #{agencyCompany,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR},
       #{identityNo,jdbcType=VARCHAR}, #{recompensePlan,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
       #{certifiedArea,jdbcType=DECIMAL}, #{houseOwnerNumber,jdbcType=VARCHAR}, #{publicOwnerNumber,jdbcType=VARCHAR},
-      #{proportion,jdbcType=DECIMAL}, #{useing,jdbcType=VARCHAR}, #{assessPrice,jdbcType=DECIMAL},
+      #{proportion,jdbcType=DECIMAL}, #{useing,jdbcType=VARCHAR}, #{assessPrice},
       #{checkInArea,jdbcType=DECIMAL}, #{residenceArea,jdbcType=DECIMAL}, #{valueCompensateBusinessArea,jdbcType=DECIMAL},
       #{valueCompensateRate,jdbcType=DECIMAL}, #{operateArea,jdbcType=DECIMAL}, #{officeArea,jdbcType=DECIMAL},
       #{produceArea,jdbcType=DECIMAL}, #{otherArea,jdbcType=DECIMAL}, #{noCheckArea,jdbcType=DECIMAL},
@@ -493,7 +493,7 @@
         #{useing,jdbcType=VARCHAR},
       </if>
       <if test="assessPrice != null">
-        #{assessPrice,jdbcType=DECIMAL},
+        #{assessPrice},
       </if>
       <if test="checkInArea != null">
         #{checkInArea,jdbcType=DECIMAL},
@@ -756,7 +756,7 @@
         useing = #{useing,jdbcType=VARCHAR},
       </if>
       <if test="assessPrice != null">
-        assess_price = #{assessPrice,jdbcType=DECIMAL},
+        assess_price = #{assessPrice},
       </if>
       <if test="checkInArea != null">
         check_in_area = #{checkInArea,jdbcType=DECIMAL},
@@ -992,7 +992,7 @@
       public_owner_number = #{publicOwnerNumber,jdbcType=VARCHAR},
       proportion = #{proportion,jdbcType=DECIMAL},
       useing = #{useing,jdbcType=VARCHAR},
-      assess_price = #{assessPrice,jdbcType=DECIMAL},
+      assess_price = #{assessPrice},
       check_in_area = #{checkInArea,jdbcType=DECIMAL},
       residence_area = #{residenceArea,jdbcType=DECIMAL},
       value_compensate_business_area = #{valueCompensateBusinessArea,jdbcType=DECIMAL},

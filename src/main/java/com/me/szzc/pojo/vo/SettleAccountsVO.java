@@ -1041,7 +1041,7 @@ public class SettleAccountsVO {
 
         //小面积住房搬迁奖励
         if(entity.getSmallAreaReward() != null && entity.getSmallAreaReward().compareTo(BigDecimal.ZERO) > 0){
-            vo.setCalcSmallAreaReward(BigDecimalUtil.stripTrailingZeros(entity.getSmallAreaReward()));
+            vo.setCalcSmallAreaReward(entity.getCalcSmallAreaReward());
             vo.setSmallAreaReward(BigDecimalUtil.stripTrailingZeros(entity.getSmallAreaReward()));
         }
         vo.setSmallAreaRewardBz(entity.getSmallAreaRewardBz());

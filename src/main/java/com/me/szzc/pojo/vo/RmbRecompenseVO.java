@@ -443,7 +443,7 @@ public class RmbRecompenseVO {
         vo.setPublicOwnerNumber(entity.getPublicOwnerNumber());
         vo.setProportion(BigDecimalUtil.stripTrailingZeros(entity.getProportion()));
         vo.setUseing(entity.getUseing());
-        vo.setAssessPrice(BigDecimalUtil.stripTrailingZeros(entity.getAssessPrice()));
+        vo.setAssessPrice(entity.getAssessPrice());
         vo.setCheckInArea(BigDecimalUtil.stripTrailingZeros(entity.getCheckInArea()));
         vo.setResidenceArea(BigDecimalUtil.stripTrailingZeros(entity.getResidenceArea()));
         vo.setValueCompensateBusinessArea(BigDecimalUtil.stripTrailingZeros(entity.getValueCompensateBusinessArea()));

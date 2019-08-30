@@ -80,7 +80,7 @@ public class RmbRecompense {
     /**
      * 证载房屋评估单价
      */
-    private BigDecimal assessPrice;
+    private String assessPrice;
 
     /**
      * 登记建筑面积
