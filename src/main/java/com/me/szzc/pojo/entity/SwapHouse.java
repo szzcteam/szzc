@@ -80,7 +80,7 @@ public class SwapHouse {
     /**
      * 证载房屋评估单价
      */
-    private BigDecimal assessPrice;
+    private String assessPrice;
 
     /**
      * 登记建筑面积
@@ -425,12 +425,12 @@ public class SwapHouse {
     /**
      * 单元
      */
-    private Integer unit;
+    private String unit;
 
     /**
      * 楼层
      */
-    private Integer floors;
+    private String floors;
 
     /**
      * 房号
@@ -445,7 +445,7 @@ public class SwapHouse {
     /**
      * 单价
      */
-    private BigDecimal price;
+    private String price;
 
     /**
      * 总价

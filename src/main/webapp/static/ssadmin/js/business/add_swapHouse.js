@@ -306,6 +306,11 @@ var swapHouseObj = {
     calcNewHouseMoney:function () {
         var coveredArea = $("#swapHouseDiv  input[name='coveredArea']").eq(0).val() || 0;
         var price = $("#swapHouseDiv  input[name='price']").eq(0).val() || 0;
+        if (isNaN(price)) {
+            console.log("调换房单价: " + price);
+            return;
+        }
+        //1个单价，自动计算
         var money = coveredArea + "*" + price;
         money = Math.round(eval(money));
         $("#swapHouseDiv  input[name='totalPrice']").eq(0).val(money).change();

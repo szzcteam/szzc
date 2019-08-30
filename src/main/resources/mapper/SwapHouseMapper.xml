@@ -16,7 +16,7 @@
     <result column="public_owner_number" jdbcType="VARCHAR" property="publicOwnerNumber" />
     <result column="proportion" jdbcType="DECIMAL" property="proportion" />
     <result column="useing" jdbcType="VARCHAR" property="useing" />
-    <result column="assess_price" jdbcType="DECIMAL" property="assessPrice" />
+    <result column="assess_price" jdbcType="VARCHAR" property="assessPrice" />
     <result column="check_in_area" jdbcType="DECIMAL" property="checkInArea" />
     <result column="residence_area" jdbcType="DECIMAL" property="residenceArea" />
     <result column="value_compensate_business_area" jdbcType="DECIMAL" property="valueCompensateBusinessArea" />
@@ -85,11 +85,11 @@
     <result column="before_day" jdbcType="INTEGER" property="beforeDay" />
     <result column="new_house_address" jdbcType="VARCHAR" property="newHouseAddress" />
     <result column="seat" jdbcType="VARCHAR" property="seat" />
-    <result column="unit" jdbcType="INTEGER" property="unit" />
-    <result column="floors" jdbcType="INTEGER" property="floors" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="floors" jdbcType="VARCHAR" property="floors" />
     <result column="house_number" jdbcType="VARCHAR" property="houseNumber" />
     <result column="covered_area" jdbcType="DECIMAL" property="coveredArea" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="total_price" jdbcType="DECIMAL" property="totalPrice" />
     <result column="upper_total_price" jdbcType="VARCHAR" property="upperTotalPrice" />
     <result column="years" jdbcType="VARCHAR" property="years" />
@@ -197,7 +197,7 @@
       #{agencyCompany,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR},
       #{identityNo,jdbcType=VARCHAR}, #{recompensePlan,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
       #{certifiedArea,jdbcType=DECIMAL}, #{houseOwnerNumber,jdbcType=VARCHAR}, #{publicOwnerNumber,jdbcType=VARCHAR},
-      #{proportion,jdbcType=DECIMAL}, #{useing,jdbcType=VARCHAR}, #{assessPrice,jdbcType=DECIMAL},
+      #{proportion,jdbcType=DECIMAL}, #{useing,jdbcType=VARCHAR}, #{assessPrice},
       #{checkInArea,jdbcType=DECIMAL}, #{residenceArea,jdbcType=DECIMAL}, #{valueCompensateBusinessArea,jdbcType=DECIMAL},
       #{valueCompensateRate,jdbcType=DECIMAL}, #{operateArea,jdbcType=DECIMAL}, #{officeArea,jdbcType=DECIMAL},
       #{produceArea,jdbcType=DECIMAL}, #{otherArea,jdbcType=DECIMAL}, #{noCheckArea,jdbcType=DECIMAL},
@@ -223,8 +223,8 @@
       #{rmbCompensate,jdbcType=DECIMAL}, #{smallAreaReward,jdbcType=DECIMAL}, #{moveReward,jdbcType=DECIMAL},
       #{otherFee,jdbcType=DECIMAL}, #{sumRbm,jdbcType=DECIMAL}, #{upperRmb,jdbcType=VARCHAR},
       #{beforeDay,jdbcType=INTEGER}, #{newHouseAddress,jdbcType=VARCHAR}, #{seat,jdbcType=VARCHAR},
-      #{unit,jdbcType=INTEGER}, #{floors,jdbcType=INTEGER}, #{houseNumber,jdbcType=VARCHAR},
-      #{coveredArea,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{totalPrice,jdbcType=DECIMAL},
+      #{unit}, #{floors}, #{houseNumber,jdbcType=VARCHAR},
+      #{coveredArea,jdbcType=DECIMAL}, #{price}, #{totalPrice,jdbcType=DECIMAL},
       #{upperTotalPrice,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR}, #{months,jdbcType=VARCHAR},
       #{transferRmb,jdbcType=DECIMAL}, #{difference,jdbcType=DECIMAL}, #{upperDifference,jdbcType=VARCHAR},
       #{lessDifference,jdbcType=DECIMAL}, #{upperLessDifference,jdbcType=VARCHAR}, #{moveMonth,jdbcType=INTEGER},
@@ -592,7 +592,7 @@
         #{useing,jdbcType=VARCHAR},
       </if>
       <if test="assessPrice != null">
-        #{assessPrice,jdbcType=DECIMAL},
+        #{assessPrice},
       </if>
       <if test="checkInArea != null">
         #{checkInArea,jdbcType=DECIMAL},
@@ -799,10 +799,10 @@
         #{seat,jdbcType=VARCHAR},
       </if>
       <if test="unit != null">
-        #{unit,jdbcType=INTEGER},
+        #{unit},
       </if>
       <if test="floors != null">
-        #{floors,jdbcType=INTEGER},
+        #{floors},
       </if>
       <if test="houseNumber != null">
         #{houseNumber,jdbcType=VARCHAR},
@@ -811,7 +811,7 @@
         #{coveredArea,jdbcType=DECIMAL},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DECIMAL},
+        #{price},
       </if>
       <if test="totalPrice != null">
         #{totalPrice,jdbcType=DECIMAL},
@@ -906,7 +906,7 @@
         useing = #{useing,jdbcType=VARCHAR},
       </if>
       <if test="assessPrice != null">
-        assess_price = #{assessPrice,jdbcType=DECIMAL},
+        assess_price = #{assessPrice},
       </if>
       <if test="checkInArea != null">
         check_in_area = #{checkInArea,jdbcType=DECIMAL},
@@ -1113,10 +1113,10 @@
         seat = #{seat,jdbcType=VARCHAR},
       </if>
       <if test="unit != null">
-        unit = #{unit,jdbcType=INTEGER},
+        unit = #{unit},
       </if>
       <if test="floors != null">
-        floors = #{floors,jdbcType=INTEGER},
+        floors = #{floors},
       </if>
       <if test="houseNumber != null">
         house_number = #{houseNumber,jdbcType=VARCHAR},
@@ -1125,7 +1125,7 @@
         covered_area = #{coveredArea,jdbcType=DECIMAL},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DECIMAL},
+        price = #{price},
       </if>
       <if test="totalPrice != null">
         total_price = #{totalPrice,jdbcType=DECIMAL},
@@ -1193,7 +1193,7 @@
       public_owner_number = #{publicOwnerNumber,jdbcType=VARCHAR},
       proportion = #{proportion,jdbcType=DECIMAL},
       useing = #{useing,jdbcType=VARCHAR},
-      assess_price = #{assessPrice,jdbcType=DECIMAL},
+      assess_price = #{assessPrice},
       check_in_area = #{checkInArea,jdbcType=DECIMAL},
       residence_area = #{residenceArea,jdbcType=DECIMAL},
       value_compensate_business_area = #{valueCompensateBusinessArea,jdbcType=DECIMAL},
@@ -1262,11 +1262,11 @@
       before_day = #{beforeDay,jdbcType=INTEGER},
       new_house_address = #{newHouseAddress,jdbcType=VARCHAR},
       seat = #{seat,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=INTEGER},
-      floors = #{floors,jdbcType=INTEGER},
+      unit = #{unit},
+      floors = #{floors},
       house_number = #{houseNumber,jdbcType=VARCHAR},
       covered_area = #{coveredArea,jdbcType=DECIMAL},
-      price = #{price,jdbcType=DECIMAL},
+      price = #{price},
       total_price = #{totalPrice,jdbcType=DECIMAL},
       upper_total_price = #{upperTotalPrice,jdbcType=VARCHAR},
       years = #{years,jdbcType=VARCHAR},
