@@ -27,11 +27,18 @@ public class UrlRedirectFilter implements Filter {
             return ;
         }
 
+        //下载控件的，可以直接访问
+        if(uri.indexOf("lodop_assets") != -1 ){
+            chain.doFilter(request, response) ;
+            return ;
+        }
+
         //只拦截.html结尾的请求
         if(!uri.endsWith(".html")){
             chain.doFilter(request, response) ;
             return ;
         }
+
 
         //免登陆可访问
         if(	uri.startsWith("/testa.html")){

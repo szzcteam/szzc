@@ -989,7 +989,7 @@ public class SettleAccountsVO {
                     txt+=" 失独 ";
                 }
             }
-            vo.setCalcLifeCompensate(txt);
+            vo.setCalcLifeCompensate(txt.trim());
         }
 
         vo.setLifeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getLifeCompensate()));
@@ -1073,6 +1073,7 @@ public class SettleAccountsVO {
         vo.setCalcm(BigDecimalUtil.stripTrailingZeros(entity.getCalcm()));
         vo.setPrice(BigDecimalUtil.stripTrailingZeros(entity.getPrice()));
         vo.setHouseMoney(BigDecimalUtil.stripTrailingZeros(entity.getHouseMoney()));
+        vo.setHouseMoneyBz(entity.getHouseMoneyBz());
 
         //已抵扣安置房款
         if(entity.getDeduction() != null && entity.getDeduction().compareTo(BigDecimal.ZERO) > 0){
@@ -1088,18 +1089,26 @@ public class SettleAccountsVO {
         vo.setSwapPrice3(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice3()));
         vo.setSwapPrice4(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice4()));
         vo.setSwapPrice5(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice5()));
+        vo.setSwapPrice(vo.getSwapPrice1()+" "+vo.getSwapPrice2()+" "+vo.getSwapPrice3()+" " + vo.getSwapPrice4() + vo.getSwapPrice5());
+        vo.setSwapPrice(vo.getSwapPrice().trim());
 
         vo.setSwapArea1(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea1()));
         vo.setSwapArea2(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea2()));
         vo.setSwapArea3(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea3()));
         vo.setSwapArea4(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea4()));
         vo.setSwapArea5(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea5()));
+        vo.setSwapArea(vo.getSwapArea1()+" "+vo.getSwapArea2()+" "+vo.getSwapArea3()+" " + vo.getSwapArea4() + vo.getSwapArea5());
+        vo.setSwapArea(vo.getSwapArea().trim());
+
 
         vo.setSwapMoney1(entity.getSwapMoney1());
         vo.setSwapMoney2(entity.getSwapMoney2());
         vo.setSwapMoney3(entity.getSwapMoney3());
         vo.setSwapMoney4(entity.getSwapMoney4());
         vo.setSwapMoney5(entity.getSwapMoney5());
+        vo.setSwapMoney(vo.getSwapMoney1()+" "+vo.getSwapMoney2()+" "+vo.getSwapMoney3()+" " + vo.getSwapMoney4() + vo.getSwapMoney5());
+        vo.setSwapMoney(vo.getSwapMoney().trim());
+
 
         vo.setPayTotal(BigDecimalUtil.stripTrailingZeros(entity.getPayTotal()));
         vo.setPayMoney(entity.getPayMoney());

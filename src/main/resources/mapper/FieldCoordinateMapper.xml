@@ -3,7 +3,7 @@
 <mapper namespace="com.me.szzc.dao.FieldCoordinateMapper">
 
     <select id="getFieldCoordinateListByTableName" resultType="com.me.szzc.pojo.dto.FieldCoordinateDto">
-      SELECT id, `code`, abscissa, ordinate,font_name AS fontName,font_size AS fontSize
+      SELECT id, `code`, abscissa, ordinate,width, height, font_name AS fontName,font_size AS fontSize
         FROM field_coordinate
        WHERE table_name = #{tableName,jdbcType=VARCHAR}
          AND del = 0

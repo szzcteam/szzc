@@ -1,16 +1,21 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.service.StylusPrintService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 针式打印controller
  * Created by bbfang on 2019/8/12.
  */
+@Slf4j
 @Controller
 @RequestMapping("/ssadmin/stylusPrint")
 public class StylusPrintController {
@@ -45,5 +50,13 @@ public class StylusPrintController {
             modelAndView.addObject("message", "打印失败");
         }
         return modelAndView;
+    }
+
+    @RequestMapping("/settleAccounts-print")
+    @ResponseBody
+    public List<Map<String, Object>> printSettleAccount(Long id) throws Exception {
+        List<Map<String, Object>> dataList = stylusPrintService.settleAccountsPrint(id);
+        log.info("打印结算单获取的数据：" + dataList);
+        return dataList;
     }
 }

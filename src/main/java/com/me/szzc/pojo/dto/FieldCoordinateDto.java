@@ -29,6 +29,10 @@ public class FieldCoordinateDto {
      */
     private Integer ordinate;
 
+    private Integer width;
+
+    private Integer height;
+
     /**
      * 字体类型名称
      */
