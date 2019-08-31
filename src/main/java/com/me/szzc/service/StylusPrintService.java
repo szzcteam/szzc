@@ -1,13 +1,16 @@
 package com.me.szzc.service;
 
 import com.me.szzc.dao.FieldCoordinateMapper;
+import com.me.szzc.dao.RmbRecompenseMapper;
 import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.PrintTableEnum;
 import com.me.szzc.enums.PrintTypeEnum;
 import com.me.szzc.pojo.dto.FieldCoordinateDto;
+import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.vo.RmbRecompenseVO;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.PrintUtil;
 import com.me.szzc.utils.StringUtils;
@@ -33,6 +36,9 @@ public class StylusPrintService {
 
     @Autowired
     private SettleAccountsMapper settleAccountsMapper;
+
+    @Autowired
+    private RmbRecompenseMapper rmbRecompenseMapper;
 
     @Autowired
     private FieldCoordinateMapper fieldCoordinateMapper;
@@ -111,6 +117,47 @@ public class StylusPrintService {
     }
 
 
+
+    public List<Map<String, Object>> rmbRecompensePrint(Long id) throws Exception {
+        //根据ID获取数据
+        RmbRecompense recompense = rmbRecompenseMapper.getById(id);
+        if (StringUtils.isNullOrEmpty(recompense)) {
+            logger.error("货币补偿补助打印获取数据为空,id(" + id + ")");
+            return null;
+        }
+        RmbRecompenseVO vo = RmbRecompenseVO.parse(recompense);
+        //获取打印数据坐标
+        List<FieldCoordinateDto> FieldCoordinateList =
+                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_RMB_RECOMPENSE.getName());
+        if (StringUtils.isNullOrEmpty(FieldCoordinateList)) {
+            logger.error("货币补偿补助打印获取坐标数据为空,tableName(" + PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName() + ")");
+            return null;
+        }
+        List<Map<String, Object>> dataList = new ArrayList();
+        Map<String, Object> map = null;
+        //打印数据封装
+        for (FieldCoordinateDto fieldCoordinateDto : FieldCoordinateList) {
+            map = new HashMap();
+            String value = getFieldValueByFieldName(fieldCoordinateDto.getCode(), vo);
+            if (StringUtils.isNullOrEmpty(value)) {
+                continue;
+            }
+            map.put("data", value);
+            map.put("fontName", fieldCoordinateDto.getFontName());
+            map.put("fontSize", fieldCoordinateDto.getFontSize());
+            map.put("x", fieldCoordinateDto.getAbscissa());
+            map.put("y", fieldCoordinateDto.getOrdinate());
+            map.put("width", fieldCoordinateDto.getWidth());
+            map.put("height", fieldCoordinateDto.getHeight());
+            dataList.add(map);
+        }
+        if (StringUtils.isNullOrEmpty(dataList)) {
+            logger.error("货币补偿补助打印获取数据为空");
+            return null;
+        }
+
+        return dataList;
+    }
 
     /**
      * 房屋征收补偿计算表打印实现

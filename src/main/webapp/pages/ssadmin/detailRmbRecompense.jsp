@@ -43,7 +43,7 @@
 <div style="width: 98%;height:842px;margin: 0px auto;padding-top: 20px;">
     <dl>
         <div style="text-align: right;margin-right: 13%;">
-            <input type="hidden" value="${settleAccounts.id}" id="recordId">
+            <input type="hidden" value="${rmbRecom.id}" id="recordId">
             <button type="button" id="print" style="width: 70px;height: 26px;" onclick="eventPrint()">打印</button>
         </div>
     </dl>
@@ -234,18 +234,18 @@
          **/
         // LODOP.SET_PRINT_PAGESIZE(0,"595in","841in", "A4");
         LODOP.SET_PRINT_PAGESIZE(1,0,0, "A3");
+        LODOP.SET_PRINT_STYLE("Angle",270);
         //设置纯文本打印的文字大小
         LODOP.SET_PRINT_STYLE("FontSize",11);
         var recordId = $("#recordId").val();
-        /*$.ajax({
-            url: "ssadmin/stylusPrint/settleAccounts-print.html",
+        $.ajax({
+            url: "ssadmin/stylusPrint/rmbRecompense-print.html",
             type: "post",
             data: {"id": recordId},
             async: false,
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                /!**data返回的是 List<Map<String, Object>> 格式**!/
                 for (var i = 0; i < data.length; i++) {
                     var map = data[i];
                     var top  = map["y"];
@@ -262,10 +262,11 @@
                 }
 
             }
-        });*/
-        LODOP.SET_PRINT_STYLE("Angle",90);
-        LODOP.ADD_PRINT_TEXT(1000, 300, 200, 26, "你好，我是测试账号-1000");
-        LODOP.ADD_PRINT_TEXT(800, 300, 200, 26, "你好，我是测试账号-800");
+        });
+
+
+
+
 
 
         //预览

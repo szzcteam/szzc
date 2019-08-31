@@ -6,7 +6,9 @@ package com.me.szzc.enums;
  */
 public enum PrintTableEnum {
 
-    HOUSE_EXPROPRIATION_COMPENSATION(1, "结算单");
+    HOUSE_EXPROPRIATION_COMPENSATION(1, "结算单"),
+    HOUSE_RMB_RECOMPENSE(2, "货币补偿"),
+    HOUSE_SWAP(3, "产权调换");
 
     private int code;
 

@@ -58,4 +58,11 @@ public class StylusPrintController {
         List<Map<String, Object>> dataList = stylusPrintService.settleAccountsPrint(id);
         return dataList;
     }
+
+    @RequestMapping("/rmbRecompense-print")
+    @ResponseBody
+    public List<Map<String, Object>> printRmbRecompense(Long id) throws Exception {
+        List<Map<String, Object>> dataList = stylusPrintService.rmbRecompensePrint(id);
+        return dataList;
+    }
 }
