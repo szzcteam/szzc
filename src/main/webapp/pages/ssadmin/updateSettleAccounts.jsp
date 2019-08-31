@@ -522,7 +522,7 @@
                     </tr>
                     <tr style="height: 30px;">
                         <td colspan="5">
-                            <label style="width: 7px;">1、</label><input type="text" name="swap_price1" value="${settleAccounts.swapPrice1}" class="none_border margin_top_2_buttom_2" placeholder="单价" style="width: 75px"/>
+                            <label style="width: 7px;">1、</label><input type="text" name="swapPrice1" value="${settleAccounts.swapPrice1}" class="none_border margin_top_2_buttom_2" placeholder="单价" style="width: 75px"/>
                             <label style="width: 7px;">2、</label><input type="text" name="swapPrice2" value="${settleAccounts.swapPrice2}" class="none_border margin_top_2_buttom_2" placeholder="选填" style="width: 75px"/>
                             <label style="width: 7px;">3、</label><input type="text" name="swapPrice3" value="${settleAccounts.swapPrice3}" class="none_border margin_top_2_buttom_2" placeholder="选填" style="width: 75px"/>
                             <label style="width: 7px;">4、</label><input type="text" name="swapPrice4" value="${settleAccounts.swapPrice4}" class="none_border margin_top_2_buttom_2" placeholder="选填" style="width: 75px"/>
