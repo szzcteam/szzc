@@ -56,7 +56,6 @@ public class StylusPrintController {
     @ResponseBody
     public List<Map<String, Object>> printSettleAccount(Long id) throws Exception {
         List<Map<String, Object>> dataList = stylusPrintService.settleAccountsPrint(id);
-        log.info("打印结算单获取的数据：" + dataList);
         return dataList;
     }
 }
