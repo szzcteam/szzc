@@ -462,18 +462,6 @@
 
     $(document).ready(function () {
 
-        /* $("#print").click(function () {
-             var recordId = $("#recordId").val();
-             $.ajax({
-                 url: "ssadmin/stylusPrint/settleAccounts.html",
-                 type: "post",
-                 data: {"id": recordId},
-                 dataType: "json",
-                 success: function (data) {
-                     console.log(data);
-                 }
-             });
-         });*/
     });
 </script>
 
