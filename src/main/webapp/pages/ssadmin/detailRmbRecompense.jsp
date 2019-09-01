@@ -54,12 +54,12 @@
         <div>
             <table style="height: 55px;margin-top: 20px;text-align: left;">
                 <tr>
-                    <td style="width: 350px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
-                    <td>代办单位：<div style="width: 160px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
+                    <td style="width: 330px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
+                    <td>代办单位：<div style="width: 200px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
                 </tr>
                 <tr>
                     <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${rmbRecom.houseOwner}</div></td>
-                    <td>身份证号：<div style="width: 160px;" class="rows_div">${rmbRecom.identityNo}</div></td>
+                    <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.identityNo}</div></td>
                 </tr>
             </table>
         </div>

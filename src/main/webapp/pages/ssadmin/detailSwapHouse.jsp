@@ -16,7 +16,10 @@
     <base href="<%=basePath%>" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>产权调换协议预览</title>
-
+    <script src="${oss_url}/static/ssadmin/js/js/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="${oss_url}/static/ssadmin/js/lodop_assets/layer/layer.js" type="text/javascript"></script>
+    <script src="${oss_url}/static/ssadmin/js/lodop_assets/my.js" type="text/javascript"></script>
+    <script src="${oss_url}/static/ssadmin/js/lodop_assets/lodop/LodopFuncs.js" type="text/javascript"></script>
 
     <style type="text/css">
         .rows_div {
@@ -28,8 +31,17 @@
 </head>
 
 <body style="overflow-y: auto;font-size: 13px;">
+<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+    <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+</object>
 <!--总的div-->
 <div style="width: 98%;height:842px;margin: 0px auto;padding-top: 20px;">
+    <dl>
+        <div style="text-align: right;margin-right: 13%;">
+            <input type="hidden" value="${swapHouse.id}" id="recordId">
+            <button type="button" id="print" style="width: 70px;height: 26px;" onclick="eventPrint()">打印</button>
+        </div>
+    </dl>
     <!--左侧页-->
     <div style="width:47%;height:100%;float: left;padding-right: 15px">
         <div style="text-align: left;">协议编号：<div style="width: 100px;" class="rows_div">${swapHouse.cardNo}</div></div>
@@ -37,12 +49,12 @@
         <div>
             <table style="height: 55px;margin-top: 20px;text-align: left;">
                 <tr>
-                    <td style="width: 350px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
-                    <td>代办单位：<div style="width: 160px;" class="rows_div">${swapHouse.agencyCompany}</div></td>
+                    <td style="width: 330px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
+                    <td>代办单位：<div style="width: 200px;" class="rows_div">${swapHouse.agencyCompany}</div></td>
                 </tr>
                 <tr>
                     <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${swapHouse.houseOwner}</div></td>
-                    <td>身份证号：<div style="width: 160px;" class="rows_div">${swapHouse.identityNo}</div></td>
+                    <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.identityNo}</div></td>
                 </tr>
             </table>
         </div>
@@ -230,6 +242,74 @@
 
     </div>
 </div>
+
+
+
+<script type="text/javascript">
+    //var LODOP = document.getElementById("LODOP_OB");
+    function eventPrint() {
+        var LODOP = getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));
+        //获取打印机
+        if (!LODOP) {
+            return false;
+        }
+
+        //初始化对象
+        LODOP.PRINT_INIT("");
+        /**
+         * 1---纵(正)向打印，固定纸张；
+         2---横向打印，固定纸张；
+         3---纵(正)向打印，宽度固定，高度按打印内容的高度自适应；
+         0(或其它)----打印方向由操作者自行选择或按打印机缺省设置；
+         **/
+        // LODOP.SET_PRINT_PAGESIZE(0,"595in","841in", "A4");
+        LODOP.SET_PRINT_PAGESIZE(1,0,0, "A3");
+        LODOP.SET_PRINT_STYLE("Angle",270);
+        //设置纯文本打印的文字大小
+        LODOP.SET_PRINT_STYLE("FontSize",11);
+        var recordId = $("#recordId").val();
+        $.ajax({
+            url: "ssadmin/stylusPrint/houseSwap-print.html",
+            type: "post",
+            data: {"id": recordId},
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    var map = data[i];
+                    var top  = map["y"];
+                    var left  = map["x"];
+                    var height =  map["height"];
+                    var width =  map["width"];
+                    var content = map["data"];
+                    top = new Number(top);
+                    left = new Number(left);
+                    height = new Number(height);
+                    width = new Number(width);
+
+                    LODOP.ADD_PRINT_TEXT(top,left,width,height,content);
+                }
+
+            }
+        });
+
+
+
+
+
+
+        //预览
+        LODOP.PREVIEW();
+    }
+
+    $(document).ready(function () {
+
+    });
+</script>
+
+
+
 </body>
 
 </html>
