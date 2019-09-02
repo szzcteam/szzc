@@ -1,13 +1,16 @@
 package com.me.szzc.pojo.vo;
 
+import com.me.szzc.constant.Constant;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.utils.BigDecimalUtil;
+import com.me.szzc.utils.NumberToCapitalizedUtils;
 import lombok.Getter;
 import lombok.Setter;
-
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 货币补偿预览数据-字符串格式
+ *
  * @author luwei
  * @date 2019/8/26
  */
@@ -408,6 +411,39 @@ public class RmbRecompenseVO {
     private String upperRmb;
 
     /**
+     * 应付-元
+     **/
+    private String payParm1;
+    /**
+     * 应付-拾
+     **/
+    private String payParm2;
+    /**
+     * 应付-佰
+     **/
+    private String payParm3;
+    /**
+     * 应付-仟
+     **/
+    private String payParm4;
+    /**
+     * 应付-万
+     **/
+    private String payParm5;
+    /**
+     * 应付-拾万
+     **/
+    private String payParm6;
+    /**
+     * 应付-佰万
+     **/
+    private String payParm7;
+    /**
+     * 应付-仟万
+     **/
+    private String payParm8;
+
+    /**
      * 限N天搬迁
      */
     private Integer beforeDay;
@@ -422,10 +458,9 @@ public class RmbRecompenseVO {
      */
     private String otherTermsTwo;
 
-
-    public static RmbRecompenseVO parse(RmbRecompense entity) throws Exception{
+    public static RmbRecompenseVO parse(RmbRecompense entity) throws Exception {
         RmbRecompenseVO vo = new RmbRecompenseVO();
-        if(entity == null){
+        if (entity == null) {
             return vo;
         }
 
@@ -461,15 +496,12 @@ public class RmbRecompenseVO {
         vo.setNoRegisterBusinessArea(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterBusinessArea()));
         vo.setNoRegisterRate(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterRate()));
 
-
-
         vo.setHistoryLegacyArea(BigDecimalUtil.stripTrailingZeros(entity.getHistoryLegacyArea()));
         vo.setHistoryUseing(entity.getHistoryUseing());
         vo.setHistoryAssessPrice(BigDecimalUtil.stripTrailingZeros(entity.getHistoryAssessPrice()));
         vo.setHistoryProportion(BigDecimalUtil.stripTrailingZeros(entity.getHistoryProportion()));
         vo.setHistoryBusinessArea(BigDecimalUtil.stripTrailingZeros(entity.getHistoryBusinessArea()));
         vo.setHistoryRate(BigDecimalUtil.stripTrailingZeros(entity.getHistoryRate()));
-
 
         vo.setValueCompensate(BigDecimalUtil.stripTrailingZeros(entity.getValueCompensate()));
         vo.setNoRegisterLegal(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterLegal()));
@@ -521,13 +553,37 @@ public class RmbRecompenseVO {
         vo.setSmallAreaReward(BigDecimalUtil.stripTrailingZeros(entity.getSmallAreaReward()));
         vo.setMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getMoveReward()));
 
-
         vo.setOtherFee(BigDecimalUtil.stripTrailingZeros(entity.getOtherFee()));
         vo.setSumRbm(BigDecimalUtil.stripTrailingZeros(entity.getSumRbm()));
         vo.setUpperRmb(entity.getUpperRmb());
         vo.setBeforeDay(entity.getBeforeDay());
         vo.setOtherTermsOne(entity.getOtherTermsOne());
         vo.setOtherTermsTwo(entity.getOtherTermsTwo());
+
+        //金额大写拆分存储
+        String tempMoney = vo.getSumRbm();
+        if (tempMoney.length() < 8) {
+            tempMoney = "00000000" + tempMoney;
+        }
+        tempMoney = tempMoney.substring(tempMoney.length() - 8, tempMoney.length());
+        vo.setPayParm1(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 1, tempMoney.length()))));
+        vo.setPayParm2(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 2, tempMoney.length() - 1))));
+        vo.setPayParm3(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 3, tempMoney.length() - 2))));
+        vo.setPayParm4(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 4, tempMoney.length() - 3))));
+        vo.setPayParm5(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 5, tempMoney.length() - 4))));
+        vo.setPayParm6(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 6, tempMoney.length() - 5))));
+        vo.setPayParm7(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 7, tempMoney.length() - 6))));
+        vo.setPayParm8(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 8, tempMoney.length() - 7))));
+
+        if (vo.getPayParm8().equals(Constant.CHINESE_ZERO)) {
+            vo.setPayParm8("");
+        }
+        if (StringUtils.isBlank(vo.getPayParm8()) && vo.getPayParm7().equals(Constant.CHINESE_ZERO)) {
+            vo.setPayParm7("");
+        }
+        if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7()) && vo.getPayParm6().equals(Constant.CHINESE_ZERO)) {
+            vo.setPayParm6("");
+        }
         return vo;
     }
 }

@@ -427,7 +427,7 @@
         // LODOP.SET_PRINT_PAGESIZE(0,"595in","841in", "A4");
         LODOP.SET_PRINT_PAGESIZE(1,0,0, "A4");
         //设置纯文本打印的文字大小
-        LODOP.SET_PRINT_STYLE("FontSize",11);
+        LODOP.SET_PRINT_STYLE("FontSize",10);
         var recordId = $("#recordId").val();
         $.ajax({
             url: "ssadmin/stylusPrint/settleAccounts-print.html",
