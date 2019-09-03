@@ -927,12 +927,37 @@ var settleAccountObj = {
     //奖励计算公式
     calcMoveReward:function () {
         var compensateType = $("input[name='compensateType']:checked").val();
+
+        //同时填了价格或面积才进行计算
+        var checkInArea =  $("input[name='checkInArea']").eq(0).val();
+        var assessPrice = $("input[name='assessPrice']").eq(0).val();
+        if(!checkInArea || !assessPrice){
+            $("input[name='calcMoveReward']").eq(0).val("").change();
+            return;
+        }
+
+        // 开始拼接公式
+        var calcMoveReward = "(";
         //有证金额
         var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
+        var valueCompensate =  $("input[name='valueCompensate']").eq(0).val();
+        if(valueCompensate && valueCompensate > 0){
+            calcMoveReward += calcValueCompensate;
+        }
         //无证合法金额
         var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
+        var noRegisterLegal = $("input[name='noRegisterLegal']").eq(0).val();
+        if(noRegisterLegal && noRegisterLegal >0){
+            calcMoveReward += "+" + calcNoRegisterLegal;
+        }
         //历史遗留金额
         var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
+        var historyLegacy = $("input[name='historyLegacy']").eq(0).val();
+        if(historyLegacy && historyLegacy >0){
+            calcMoveReward += "+" + calcHistoryLegacy;
+        }
+        calcMoveReward += ")";
+        //比例
         var proportion= 0;
         if(compensateType == 0) {
             proportion = $("input[name='rewardRmbProportion']").eq(0).val() || 0;
@@ -940,7 +965,7 @@ var settleAccountObj = {
             proportion = $("input[name='rewardSwapProportion']").eq(0).val() || 0;
         }
 
-        var calcMoveReward = "(" + calcValueCompensate + "+" + calcNoRegisterLegal + "+" + calcHistoryLegacy + ")" + "*" + proportion;
+        calcMoveReward += "*" + proportion;
         console.log("奖励计算公式：" + calcMoveReward);
         $("input[name='calcMoveReward']").eq(0).val(calcMoveReward).change();
 
@@ -954,16 +979,41 @@ var settleAccountObj = {
             $("input[name='calcRmbCompensate']").eq(0).val("").change();
             return;
         }
+        //同时填了价格或面积才进行计算
+        var checkInArea =  $("input[name='checkInArea']").eq(0).val();
+        var assessPrice = $("input[name='assessPrice']").eq(0).val();
+        if(!checkInArea || !assessPrice){
+            $("input[name='calcRmbCompensate']").eq(0).val("").change();
+            return;
+        }
+
+        //开始拼接公式
+        var calcRmbCompensate = "(";
         //有证金额
         var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
+        var valueCompensate =  $("input[name='valueCompensate']").eq(0).val();
+        if(valueCompensate && valueCompensate > 0){
+            calcRmbCompensate += calcValueCompensate;
+        }
+
         //无证合法金额
         var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
+        var noRegisterLegal = $("input[name='noRegisterLegal']").eq(0).val();
+        if(noRegisterLegal && noRegisterLegal >0){
+            calcRmbCompensate += "+" + calcNoRegisterLegal;
+        }
+
         //历史遗留金额
         var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
+        var historyLegacy = $("input[name='historyLegacy']").eq(0).val();
+        if(historyLegacy && historyLegacy >0){
+            calcRmbCompensate += "+" + calcHistoryLegacy;
+        }
+        calcRmbCompensate += ")";
         //比例
         var proportion = $("input[name='rmbCompensateProportion']").eq(0).val() || 0;
 
-        var calcRmbCompensate = "(" + calcValueCompensate + "+" + calcNoRegisterLegal + "+" + calcHistoryLegacy + ")" + "*" + proportion;
+        calcRmbCompensate += "*" + proportion;
         console.log("货币补偿补助公式：" + calcRmbCompensate);
         $("input[name='calcRmbCompensate']").eq(0).val(calcRmbCompensate).change();
     },
