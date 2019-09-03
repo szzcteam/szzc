@@ -9,11 +9,11 @@ import java.util.List;
 public interface SettleAccountsMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insertSelective(SettleAccounts record);
+    int insert(SettleAccounts record);
 
     SettleAccounts selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(SettleAccounts record);
+    int updateByPrimaryKey(SettleAccounts record);
 
     int selectNmae(String houseOwner);
 

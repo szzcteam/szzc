@@ -37,7 +37,7 @@ public class SettleAccountsService {
         settleAccounts.setCreateDate(date);
         settleAccounts.setModifiedDate(date);
         settleAccounts.setDeleted(false);
-        this.settleAccountsMapper.insertSelective(settleAccounts);
+        this.settleAccountsMapper.insert(settleAccounts);
     }
 
     public void delete(SettleAccounts settleAccounts) {
@@ -47,7 +47,7 @@ public class SettleAccountsService {
     }
 
     public void update(SettleAccounts settleAccounts) {
-        this.settleAccountsMapper.updateByPrimaryKeySelective(settleAccounts);
+        this.settleAccountsMapper.updateByPrimaryKey(settleAccounts);
     }
 
     public SettleAccounts query(SettleAccounts settleAccounts) {

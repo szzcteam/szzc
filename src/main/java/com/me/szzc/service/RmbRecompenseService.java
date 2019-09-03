@@ -20,7 +20,7 @@ public class RmbRecompenseService {
         rmbRecompense.setCreateDate(date);
         rmbRecompense.setModifiedDate(date);
         rmbRecompense.setDeleted(false);
-        this.rmbRecompenseMapper.insertSelective(rmbRecompense);
+        this.rmbRecompenseMapper.insert(rmbRecompense);
     }
 
     public void delete(RmbRecompense rmbRecompense) {
@@ -30,6 +30,7 @@ public class RmbRecompenseService {
     }
 
     public void update(RmbRecompense rmbRecompense) {
+        rmbRecompense.setModifiedDate(DateHelper.getTimestamp());
         this.rmbRecompenseMapper.updateByPrimaryKey(rmbRecompense);
     }
 

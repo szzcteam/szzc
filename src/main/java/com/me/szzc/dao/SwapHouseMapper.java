@@ -11,11 +11,7 @@ public interface SwapHouseMapper {
 
     int insert(SwapHouse record);
 
-    int insertSelective(SwapHouse record);
-
     SwapHouse getById(Long id);
-
-    int updateByPrimaryKeySelective(SwapHouse record);
 
     int updateByPrimaryKey(SwapHouse record);
 
