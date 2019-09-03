@@ -1034,26 +1034,36 @@ var settleAccountObj = {
         if(swap_price1 !=0 && swap_area1 !=0){
             var swap_money1 = swap_price1 + "*" + swap_area1;
             $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
+        }else{
+            $("input[name='swapMoney1']").eq(0).val("").change();
         }
 
         if(swap_price2 !=0 && swap_area2 !=0){
             var swap_money2 = swap_price2 + "*" + swap_area2;
             $("input[name='swapMoney2']").eq(0).val(swap_money2).change();
+        }else{
+            $("input[name='swapMoney2']").eq(0).val("").change();
         }
 
         if(swap_price3 !=0 && swap_area3 !=0){
             var swap_money3 = swap_price3 + "*" + swap_area3;
             $("input[name='swapMoney3']").eq(0).val(swap_money3).change();
+        }else{
+            $("input[name='swapMoney3']").eq(0).val("").change();
         }
 
         if(swap_price4 !=0 && swap_area4 !=0){
             var swap_money4 = swap_price4 + "*" + swap_area4;
             $("input[name='swapMoney4']").eq(0).val(swap_money4).change();
+        }else{
+            $("input[name='swapMoney4']").eq(0).val("").change();
         }
 
         if(swap_price5 !=0 && swap_area5 !=0){
             var swap_money5 = swap_price5 + "*" + swap_area5;
             $("input[name='swapMoney5']").eq(0).val(swap_money5).change();
+        }else{
+            $("input[name='swapMoney5']").eq(0).val("").change();
         }
 
     },

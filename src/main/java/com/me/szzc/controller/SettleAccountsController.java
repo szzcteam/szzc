@@ -159,7 +159,7 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping(value = "ssadmin/settleAccounts/update", method = RequestMethod.POST)
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
-        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
+//        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
