@@ -95,7 +95,7 @@ public class SettleAccounts {
     /**
      * 房屋评估单价
      */
-    private BigDecimal assessPrice;
+    private String assessPrice;
 
     /**
      * 被征收房屋地址

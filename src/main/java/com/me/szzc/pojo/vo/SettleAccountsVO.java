@@ -772,7 +772,7 @@ public class SettleAccountsVO {
         vo.setHistoryLegacyArea(BigDecimalUtil.stripTrailingZeros(entity.getHistoryLegacyArea()));
         vo.setNoCheckinArea(BigDecimalUtil.stripTrailingZeros(entity.getNoCheckinArea()));
         vo.setInArea(BigDecimalUtil.stripTrailingZeros(entity.getInArea()));
-        vo.setAssessPrice(BigDecimalUtil.stripTrailingZeros(entity.getAssessPrice()));
+        vo.setAssessPrice(entity.getAssessPrice());
         vo.setAddress(entity.getAddress());
 
         //有证的
