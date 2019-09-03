@@ -280,9 +280,7 @@ public class SettleAccountsController extends BaseController {
         if (settleAccounts.getInArea()==null || settleAccounts.getInArea().compareTo(BigDecimal.ZERO)<=0) {
             return "内套面积未填";//内套面积
         }
-        if (settleAccounts.getAssessPrice()==null || settleAccounts.getAssessPrice().compareTo(BigDecimal.ZERO)<=0) {
-            return "房屋估价未填";//房屋估价
-        }
+
         if (StringUtils.isEmpty(settleAccounts.getAddress())) {
             return "房房地址未填";//房房地址
         }

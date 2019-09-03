@@ -242,15 +242,7 @@ public class RmbRecompenseController extends BaseController {
                 .add(rmbRecompense.getOtherArea());
 
 
-        if(rmbRecompense.getCheckInArea().compareTo(BigDecimal.ZERO)<=0){
-            return "登记建筑面积不能为小于0";
-        }else{
-            if(sum.compareTo(BigDecimal.ZERO)>0){
-                if(rmbRecompense.getCheckInArea().compareTo(sum)!=0){
-                    return "登记面积中某一项面积出错";
-                }
-            }
-        }
+
        /* if(rmbRecompense.getNoCheckArea().compareTo(BigDecimal.ZERO)<0){
             return "未登记面积不能小于0";
         }
