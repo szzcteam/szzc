@@ -92,7 +92,7 @@
             其中：用于经营的面积<div style="width: 80px;" class="rows_div">${swapHouse.historyBusinessArea}</div>㎡，
             住宅改为经营门面的补助系数为<div style="width: 80px;" class="rows_div">${swapHouse.historyRate} </div>%。
         </div>
-        <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;征收补偿款项</b></div>
+        <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;征收补偿款项</b></div>
         <div style="text-align: left;line-height: 26px;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             1、房屋价值补偿：
