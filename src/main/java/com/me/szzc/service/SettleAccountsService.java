@@ -37,6 +37,7 @@ public class SettleAccountsService {
         settleAccounts.setCreateDate(date);
         settleAccounts.setModifiedDate(date);
         settleAccounts.setDeleted(false);
+        settleAccounts.setSigningStatus(SigningStatusEnum.NOT_SIGNED.getCode());
         this.settleAccountsMapper.insert(settleAccounts);
     }
 

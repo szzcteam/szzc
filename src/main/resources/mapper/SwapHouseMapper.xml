@@ -334,7 +334,7 @@
       move_month = #{moveMonth,jdbcType=INTEGER},
       other_terms_one = #{otherTermsOne,jdbcType=VARCHAR},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
-      modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
+      modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

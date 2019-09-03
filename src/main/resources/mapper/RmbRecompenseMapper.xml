@@ -269,7 +269,7 @@
       other_terms_one = #{otherTermsOne,jdbcType=VARCHAR},
       other_terms_two = #{otherTermsTwo,jdbcType=VARCHAR},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
-      modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
+      modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
