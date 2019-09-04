@@ -316,4 +316,11 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="selectAll" resultType="com.me.szzc.pojo.RoomChangeExport">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM r_change
+        WHERE r_del = 0
+    </select>
 </mapper>

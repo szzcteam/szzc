@@ -1,10 +1,13 @@
 package com.me.szzc.service;
 
 import com.me.szzc.dao.RoomChangeMapper;
+import com.me.szzc.enums.ChooseStatusEnum;
+import com.me.szzc.pojo.RoomChangeExport;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.pojo.vo.RoomChangeVo;
+import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.excle.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -207,5 +210,16 @@ public class RoomChangeService {
             roomChangeMapper.updateChooseRoomNot0(roomChangeVo);
         }
         return ResultVo.success("修改点房成功");
+    }
+
+    public List<RoomChangeExport> selectAll() {
+        List<RoomChangeExport> roomChangeExports = roomChangeMapper.selectAll();
+        for (RoomChangeExport roomChangeExport : roomChangeExports) {
+            roomChangeExport.setStatusName(ChooseStatusEnum.getText(roomChangeExport.getStatus()));
+            if (roomChangeExport.getChooseDate() != null) {
+                roomChangeExport.setChooseDateString(DateHelper.date2String(roomChangeExport.getChooseDate(), DateHelper.DateFormatType.YearMonthDay));
+            }
+        }
+        return roomChangeExports;
     }
 }

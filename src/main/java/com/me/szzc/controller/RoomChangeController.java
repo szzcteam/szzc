@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.ChooseStatusEnum;
 import com.me.szzc.enums.ModuleConstont;
+import com.me.szzc.pojo.RoomChangeExport;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.pojo.vo.RoomChangeVo;
@@ -12,8 +13,8 @@ import com.me.szzc.utils.CustomizedPropertyConfigurer;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.Utils;
+import com.me.szzc.utils.excle.ExcelUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTAbstractNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -135,19 +138,19 @@ public class RoomChangeController {
             view.addObject("status", roomChangeVo.getStatus());
         }
 
-        if(!StringUtils.isNullOrEmpty(roomChangeVo.getStartDate())){
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getStartDate())) {
             view.addObject("startDate", roomChangeVo.getStartDate());
         }
 
-        if(!StringUtils.isNullOrEmpty(roomChangeVo.getEndDate())){
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getEndDate())) {
             view.addObject("endDate", roomChangeVo.getEndDate());
         }
 
-        if(!StringUtils.isNullOrEmpty(roomChangeVo.getMinArea())){
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getMinArea())) {
             view.addObject("minArea", roomChangeVo.getMinArea());
         }
 
-        if(!StringUtils.isNullOrEmpty(roomChangeVo.getMaxArea())){
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getMaxArea())) {
             view.addObject("maxArea", roomChangeVo.getMaxArea());
         }
 
@@ -406,19 +409,27 @@ public class RoomChangeController {
     }
 
     @RequestMapping("/toChooseRoomPage")
-    public ModelAndView toChooseRoomPage(Long id,String url,String postUrl){
+    public ModelAndView toChooseRoomPage(Long id, String url, String postUrl) {
         ModelAndView view = new ModelAndView();
         view.setViewName(url);
         RoomChange roomChange = roomChangeService.getRoomChangeById(id);
         if (roomChange != null) {
             view.addObject("roomChange", roomChange);
-            if(postUrl.equals("add")){
+            if (postUrl.equals("add")) {
                 view.addObject("postUrl", "addChooseRoom");
-            }else{
+            } else {
                 view.addObject("postUrl", "updateChooseRoom");
             }
         }
         view.addObject("chooseStatusMap", ChooseStatusEnum.getDescMap());
         return view;
+    }
+
+    @RequestMapping("/exportExacle")
+    public void exportExacle(HttpServletResponse response) throws Exception {
+        List<RoomChangeExport> roomChanges = roomChangeService.selectAll();
+        ExcelUtil.writeExcel(response, roomChanges,
+                "表格导出-" + DateHelper.getCurrentDateYearMonthDayHourMinuteSecond() + ".xlsx",
+                "sheet1", new RoomChangeExport());
     }
 }

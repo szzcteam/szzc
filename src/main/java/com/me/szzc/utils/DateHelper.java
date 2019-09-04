@@ -249,6 +249,16 @@ public final class DateHelper {
         return date;
     }
 
+    /**
+     * 获取系统当天时间yyyy-mm-dd格式
+     * @return
+     */
+    public static String getCurrentDateYearMonthDayHourMinuteSecond() {
+        Calendar c = Calendar.getInstance();
+        String date = DateFormatType.YearMonthDayHourMinuteSecond.getDateFormat().format(c.getTime());
+        return date;
+    }
+
 
 
     public static Date subMonth(Date date,int temp){
