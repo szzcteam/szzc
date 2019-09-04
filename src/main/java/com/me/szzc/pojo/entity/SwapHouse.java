@@ -55,7 +55,7 @@ public class SwapHouse {
     /**
      * 证载建筑面积
      */
-    private BigDecimal certifiedArea;
+    private String certifiedArea;
 
     /**
      * 房屋所属权证号
@@ -85,7 +85,7 @@ public class SwapHouse {
     /**
      * 登记建筑面积
      */
-    private BigDecimal checkInArea;
+    private String checkInArea;
 
     /**
      * 住宅面积
@@ -130,7 +130,7 @@ public class SwapHouse {
     /**
      * 未登记的合法建筑面积
      */
-    private BigDecimal noRegisterLegalArea;
+    private String noRegisterLegalArea;
 
     /**
      * 未登记合法建筑房屋用途
@@ -140,7 +140,7 @@ public class SwapHouse {
     /**
      * 未登记房屋评估单价
      */
-    private BigDecimal noRegisterAssessPrice;
+    private String noRegisterAssessPrice;
 
     /**
      * 未登记房屋补偿比例
@@ -160,7 +160,7 @@ public class SwapHouse {
     /**
      * 历史遗留面积
      */
-    private BigDecimal historyLegacyArea;
+    private String historyLegacyArea;
 
     /**
      * 历史房屋实际用途
@@ -170,7 +170,7 @@ public class SwapHouse {
     /**
      * 历史遗留房屋评估单价
      */
-    private BigDecimal historyAssessPrice;
+    private String historyAssessPrice;
 
     /**
      * 历史遗留房屋补偿比例
@@ -440,7 +440,7 @@ public class SwapHouse {
     /**
      * 该房屋建筑面积
      */
-    private BigDecimal coveredArea;
+    private String coveredArea;
 
     /**
      * 单价

@@ -18,7 +18,7 @@ public class SwapHouseService {
         request.setCreateDate(DateHelper.getTimestamp());
         request.setModifiedDate(DateHelper.getTimestamp());
         request.setDeleted(false);
-        swapHouseMapper.insertSelective(request);
+        swapHouseMapper.insert(request);
     }
 
     public void delete(SwapHouse swapHouse) {
@@ -30,10 +30,8 @@ public class SwapHouseService {
 
     public void updateSwapHouse(SwapHouse request) {
         request.setModifiedDate(DateHelper.getTimestamp());
-        swapHouseMapper.updateByPrimaryKeySelective(request);
+        swapHouseMapper.updateByPrimaryKey(request);
     }
-
-
 
     public SwapHouse getById(Long id) {
         return swapHouseMapper.getById(id);

@@ -772,7 +772,7 @@ public class SettleAccountsVO {
         vo.setHistoryLegacyArea(BigDecimalUtil.stripTrailingZeros(entity.getHistoryLegacyArea()));
         vo.setNoCheckinArea(BigDecimalUtil.stripTrailingZeros(entity.getNoCheckinArea()));
         vo.setInArea(BigDecimalUtil.stripTrailingZeros(entity.getInArea()));
-        vo.setAssessPrice(BigDecimalUtil.stripTrailingZeros(entity.getAssessPrice()));
+        vo.setAssessPrice(entity.getAssessPrice());
         vo.setAddress(entity.getAddress());
 
         //有证的
@@ -1145,11 +1145,33 @@ public class SettleAccountsVO {
         vo.setSwapArea(vo.getSwapArea().trim());
 
 
-        vo.setSwapMoney1(entity.getSwapMoney1());
-        vo.setSwapMoney2(entity.getSwapMoney2());
-        vo.setSwapMoney3(entity.getSwapMoney3());
-        vo.setSwapMoney4(entity.getSwapMoney4());
-        vo.setSwapMoney5(entity.getSwapMoney5());
+        if(StringUtils.isNotBlank(entity.getSwapMoney1())){
+            vo.setSwapMoney1(entity.getSwapMoney1());
+        }else{
+            vo.setSwapMoney1("");
+        }
+
+        if(StringUtils.isNotBlank(entity.getSwapMoney2())){
+            vo.setSwapMoney2(entity.getSwapMoney2());
+        }else{
+            vo.setSwapMoney2("");
+        }
+        if(StringUtils.isNotBlank(entity.getSwapMoney3())){
+            vo.setSwapMoney3(entity.getSwapMoney3());
+        }else{
+            vo.setSwapMoney3("");
+        }
+        if(StringUtils.isNotBlank(entity.getSwapMoney4())){
+            vo.setSwapMoney4(entity.getSwapMoney4());
+        }else{
+            vo.setSwapMoney4("");
+        }
+        if(StringUtils.isNotBlank(entity.getSwapMoney5())){
+            vo.setSwapMoney5(entity.getSwapMoney5());
+        }else{
+            vo.setSwapMoney5("");
+        }
+
         vo.setSwapMoney(vo.getSwapMoney1()+" "+vo.getSwapMoney2()+" "+vo.getSwapMoney3()+" " + vo.getSwapMoney4() + vo.getSwapMoney5());
         vo.setSwapMoney(vo.getSwapMoney().trim());
 

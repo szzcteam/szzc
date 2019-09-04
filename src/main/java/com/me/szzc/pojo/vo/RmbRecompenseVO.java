@@ -473,13 +473,13 @@ public class RmbRecompenseVO {
         vo.setIdentityNo(entity.getIdentityNo());
         vo.setRecompensePlan(entity.getRecompensePlan());
         vo.setAddress(entity.getAddress());
-        vo.setCertifiedArea(BigDecimalUtil.stripTrailingZeros(entity.getCertifiedArea()));
+        vo.setCertifiedArea(entity.getCertifiedArea());
         vo.setHouseOwnerNumber(entity.getHouseOwnerNumber());
         vo.setPublicOwnerNumber(entity.getPublicOwnerNumber());
         vo.setProportion(BigDecimalUtil.stripTrailingZeros(entity.getProportion()));
         vo.setUseing(entity.getUseing());
         vo.setAssessPrice(entity.getAssessPrice());
-        vo.setCheckInArea(BigDecimalUtil.stripTrailingZeros(entity.getCheckInArea()));
+        vo.setCheckInArea(entity.getCheckInArea());
         vo.setResidenceArea(BigDecimalUtil.stripTrailingZeros(entity.getResidenceArea()));
         vo.setValueCompensateBusinessArea(BigDecimalUtil.stripTrailingZeros(entity.getValueCompensateBusinessArea()));
         vo.setValueCompensateRate(BigDecimalUtil.stripTrailingZeros(entity.getValueCompensateRate()));
@@ -489,16 +489,16 @@ public class RmbRecompenseVO {
         vo.setOtherArea(BigDecimalUtil.stripTrailingZeros(entity.getOtherArea()));
         vo.setNoCheckArea(BigDecimalUtil.stripTrailingZeros(entity.getNoCheckArea()));
 
-        vo.setNoRegisterLegalArea(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterLegalArea()));
+        vo.setNoRegisterLegalArea(entity.getNoRegisterLegalArea());
         vo.setNoRegisterUseing(entity.getNoRegisterUseing());
-        vo.setNoRegisterAssessPrice(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterAssessPrice()));
+        vo.setNoRegisterAssessPrice(entity.getNoRegisterAssessPrice());
         vo.setNoRegisterProportion(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterProportion()));
         vo.setNoRegisterBusinessArea(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterBusinessArea()));
         vo.setNoRegisterRate(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterRate()));
 
-        vo.setHistoryLegacyArea(BigDecimalUtil.stripTrailingZeros(entity.getHistoryLegacyArea()));
+        vo.setHistoryLegacyArea(entity.getHistoryLegacyArea());
         vo.setHistoryUseing(entity.getHistoryUseing());
-        vo.setHistoryAssessPrice(BigDecimalUtil.stripTrailingZeros(entity.getHistoryAssessPrice()));
+        vo.setHistoryAssessPrice(entity.getHistoryAssessPrice());
         vo.setHistoryProportion(BigDecimalUtil.stripTrailingZeros(entity.getHistoryProportion()));
         vo.setHistoryBusinessArea(BigDecimalUtil.stripTrailingZeros(entity.getHistoryBusinessArea()));
         vo.setHistoryRate(BigDecimalUtil.stripTrailingZeros(entity.getHistoryRate()));

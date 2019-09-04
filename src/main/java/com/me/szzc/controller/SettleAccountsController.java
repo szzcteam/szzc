@@ -159,7 +159,7 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping(value = "ssadmin/settleAccounts/update", method = RequestMethod.POST)
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
-        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
+//        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //条件判断
@@ -280,9 +280,7 @@ public class SettleAccountsController extends BaseController {
         if (settleAccounts.getInArea()==null || settleAccounts.getInArea().compareTo(BigDecimal.ZERO)<=0) {
             return "内套面积未填";//内套面积
         }
-        if (settleAccounts.getAssessPrice()==null || settleAccounts.getAssessPrice().compareTo(BigDecimal.ZERO)<=0) {
-            return "房屋估价未填";//房屋估价
-        }
+
         if (StringUtils.isEmpty(settleAccounts.getAddress())) {
             return "房房地址未填";//房房地址
         }
