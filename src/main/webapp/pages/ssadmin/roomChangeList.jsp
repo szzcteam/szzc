@@ -125,6 +125,12 @@
                        title="确定要删除吗?"><span>批量删除</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/roomChange/exportExacle.html">
+                <li><a class="icon"
+                       href="ssadmin/roomChange/exportExacle.html"
+                       target="dwzExport" targetType="navTab"><span>导出</span>
+                </a></li>
+            </shiro:hasPermission>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="138">
