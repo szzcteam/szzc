@@ -294,7 +294,7 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/updateRoomChangeById")
-    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "修改房源")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "修改房源信息")
     public ModelAndView updateRoomChangeById(RoomChange roomChange) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -339,6 +339,7 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/addChooseRoom")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "点选房源")
     public ModelAndView addChooseRoom(RoomChangeVo roomChangeVo) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
@@ -387,6 +388,7 @@ public class RoomChangeController {
      * @return
      */
     @RequestMapping("/updateChooseRoom")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "点选房源修改")
     public ModelAndView updateChooseRoom(RoomChangeVo roomChangeVo) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
