@@ -184,7 +184,7 @@ public class Utils {
 	}
 
 	public static int getNumPerPage() {
-		return 40;
+		return 20;
 	}
 
 	public static synchronized String UUID() {
