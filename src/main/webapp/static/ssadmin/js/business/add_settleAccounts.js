@@ -483,6 +483,11 @@ $(document).ready(function(){
         settleAccountObj.calcHouseMoney();
     });
 
+    //抵扣金额失去焦点
+    $("input[name='deduction']").on("blur change", function () {
+        settleAccountObj.changeDeduction();
+    });
+
 
 });
 
@@ -635,19 +640,32 @@ var settleAccountObj = {
         if (sumCompensate > houseMoney) {
             //应付
             money = sumCompensate - houseMoney;
-            $("input[name='deduction']").eq(0).val(houseMoney);
+            $("input[name='deduction']").eq(0).val(houseMoney).change();
         } else if (sumCompensate < houseMoney) {
             //应收
             money = houseMoney - sumCompensate;
-            $("input[name='deduction']").eq(0).val(sumCompensate);
+            $("input[name='deduction']").eq(0).val(sumCompensate).change();
         }else if(sumCompensate == houseMoney){
-            $("input[name='deduction']").eq(0).val(sumCompensate);
+            $("input[name='deduction']").eq(0).val(sumCompensate).change();
         }
 
         $("input[name='payTotal']").eq(0).val(money);
         var payTotalChinese = Araia_To_Chinese(money);
         $("input[name='payMoney']").eq(0).val(payTotalChinese);
 
+    },
+    //改变抵扣款时，重新计算应付应收
+    changeDeduction:function () {
+        //旧房金额
+        var sumCompensate = $("input[name='sumCompensate']").eq(0).val() || 0;
+        sumCompensate = new Number(sumCompensate);
+
+        var deduction = $("input[name='deduction']").eq(0).val() || 0;
+        deduction = new Number(deduction);
+        var money = Math.abs(sumCompensate - deduction)
+        $("input[name='payTotal']").eq(0).val(money);
+        var payTotalChinese = Araia_To_Chinese(money);
+        $("input[name='payMoney']").eq(0).val(payTotalChinese);
     },
 
 
