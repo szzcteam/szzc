@@ -545,7 +545,7 @@ public class RmbRecompenseVO {
 
         vo.setBasicLivingSubsidy(BigDecimalUtil.stripTrailingZeros(entity.getBasicLivingSubsidy()));
         vo.setDisabilitySubsidy(BigDecimalUtil.stripTrailingZeros(entity.getDisabilitySubsidy()));
-        vo.setDiseaseSubsidy(BigDecimalUtil.stripTrailingZeros(entity.getDisabilitySubsidy()));
+        vo.setDiseaseSubsidy(BigDecimalUtil.stripTrailingZeros(entity.getDiseaseSubsidy()));
         vo.setNoChild(BigDecimalUtil.stripTrailingZeros(entity.getNoChild()));
         vo.setMartyr(BigDecimalUtil.stripTrailingZeros(entity.getMartyr()));
         vo.setLifeCompensate(BigDecimalUtil.stripTrailingZeros(entity.getLifeCompensate()));
