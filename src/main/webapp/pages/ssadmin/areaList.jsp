@@ -75,7 +75,7 @@
 
         <c:forEach items="${areaList}" var="area" varStatus="num">
             <tr target="sid_user" rel="${area.id}">
-                <td>${num.index +1}</td>
+                <td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
                 <td>${area.name}</td>
                 <td>${area.statusDesc}</td>
                 <td>${area.modifiedDateStr}</td>

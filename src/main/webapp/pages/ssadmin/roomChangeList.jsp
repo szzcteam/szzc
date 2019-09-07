@@ -28,50 +28,50 @@
 
             <table class="searchContent">
                 <tr>
-                    <td>房源项目：<input type="text" name="name" value="${name}"
-                                   size="20"/>
+                    <td>点房时间：<input type="text" name="startDate" class="date" size="10"
+                                    readonly="true" value="${startDate }"/>
                     </td>
-                    <td>房号：<input type="text" name="number" value="${number}"
-                                    size="20"/>
+                    <td>
+                        至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="endDate" class="date" size="10"
+                               readonly="true" value="${endDate }"/>
                     </td>
-                    <td>点房人：<input type="text" name="choosePeople" value="${choosePeople}"
-                                    size="20"/>
-                    </td>
-                    <td>分配征收项目：<input type="text" name="assignedProject" value="${assignedProject}"
-                                      size="20"/>
-                    </td>
-                </tr>
-                <tr>
                     <td>
                         点房状态：
-                        <select name="status" style="width: 150px;">
+                        <select name="status" style="width: 89px;height: 22px;">
                             <option value="">全部</option>
                             <c:forEach items="${chooseStatusMap}" var="item">
                                 <option value="${item.key}" <c:if test="${status ==  item.key}">selected</c:if>>${item.value}</option>
                             </c:forEach>
                         </select>
                     </td>
-                    <td>点房时间：<input type="text" name="startDate" class="date"
-                                    readonly="true" value="${startDate }"/>
+                    <td>房号：<input type="text" name="number" value="${number}"
+                                    size="10"/>
                     </td>
-                    <td>
-                        至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="endDate" class="date"
-                               readonly="true" value="${endDate }"/>
+                    <td>点房人：<input type="text" name="choosePeople" value="${choosePeople}"
+                                    size="10"/>
                     </td>
-                    <td>面积：<input type="text" name="minArea"
-                                 size="10"   value="${minArea }"/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="maxArea"
-                               size="10"  value="${maxArea }"/>
+                    <td>提供房源平台：<input type="text" name="housingPlatform" value="${housingPlatform}"
+                                      size="10"/>
                     </td>
                 </tr>
                 <tr>
-                    <td>提供房源平台：<input type="text" name="housingPlatform" value="${housingPlatform}"
-                                      size="20"/>
+                    <td>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：<input type="text" name="minArea"
+                                 size="10"   value="${minArea }"/>
+                    </td>
+                    <td>
+                        至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="maxArea"
+                               size="10"  value="${maxArea }"/>
+                    </td>
+                    <td>房源项目：<input type="text" name="name" value="${name}"
+                                    size="10"/>
+                    </td>
+                    <td>分配征收项目：<input type="text" name="assignedProject" value="${assignedProject}"
+                                      size="10"/>
                     </td>
                     <td>代办公司：<input type="text" name="commissionCompany" value="${commissionCompany}"
-                                      size="20"/>
+                                    size="10"/>
                     </td>
                     <td>
                         <div class="buttonActive">
@@ -156,7 +156,7 @@
         <c:forEach items="${roomList}" var="room" varStatus="num">
             <tr target="sid_user" rel="${room.id}">
                 <td><input name="ids" value="${room.id}" type="checkbox"></td>
-                <td>${num.index +1}</td>
+                <td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
                 <td>${room.assignedProject}</td>
                 <td>${room.housingPlatform}</td>
                 <td>${room.name}</td>

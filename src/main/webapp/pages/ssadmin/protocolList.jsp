@@ -191,7 +191,7 @@
 
         <c:forEach items="${protocolList}" var="protocol" varStatus="num">
             <tr target="sid_user" rel="${protocol.settleAccountId},${protocol.rmbRecompenseId},${protocol.swapHouseId}">
-                <td>${num.index +1}</td>
+                <td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
                 <td>${protocol.areaName}</td>
                 <td>${protocol.name}</td>
                 <td>${protocol.address}</td>
