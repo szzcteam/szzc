@@ -281,6 +281,13 @@
     and deleted = 0
   </select>
 
+  <select id="listAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_rmb_recompense
+    where deleted = 0
+  </select>
+
 
   <update id="delete" parameterType="com.me.szzc.pojo.entity.RmbRecompense">
      update t_rmb_recompense set deleted  = 1 ,

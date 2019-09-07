@@ -36,13 +36,13 @@ public class BaseServiceCtrl {
     SystemArgsService systemArgsService;
 
     @Autowired
-    SwapHouseService swapHouseService;
+    protected SwapHouseService swapHouseService;
 
     @Autowired
     NoticeService noticeService;
 
     @Autowired
-    RmbRecompenseService rmbRecompenseService;
+    protected RmbRecompenseService rmbRecompenseService;
 
     @Autowired
     protected SettleAccountsService settleAccountsService;

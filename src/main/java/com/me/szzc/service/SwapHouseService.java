@@ -6,6 +6,8 @@ import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by bbfang on 2019/2/16.
  */
@@ -41,4 +43,7 @@ public class SwapHouseService {
         return swapHouseMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
+    public List<SwapHouse> listAll(){
+        return swapHouseMapper.listAll();
+    }
 }

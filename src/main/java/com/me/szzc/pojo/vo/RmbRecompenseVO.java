@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Date;
+
 /**
  * 货币补偿预览数据-字符串格式
  *
@@ -458,6 +460,9 @@ public class RmbRecompenseVO {
      */
     private String otherTermsTwo;
 
+    /**创建时间**/
+    private Date createDate;
+
     public static RmbRecompenseVO parse(RmbRecompense entity) throws Exception {
         RmbRecompenseVO vo = new RmbRecompenseVO();
         if (entity == null) {
@@ -584,6 +589,9 @@ public class RmbRecompenseVO {
         if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7()) && vo.getPayParm6().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm6("");
         }
+
+        vo.setCreateDate(entity.getCreateDate());
+
         return vo;
     }
 }

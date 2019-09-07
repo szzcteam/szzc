@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class RmbRecompenseService {
@@ -40,6 +41,10 @@ public class RmbRecompenseService {
 
     public RmbRecompense getByHouseOwnerAddr(String houseOwner, String address) {
         return this.rmbRecompenseMapper.getByHouseOwnerAddr(houseOwner, address);
+    }
+
+    public List<RmbRecompense> listAll(){
+        return rmbRecompenseMapper.listAll();
     }
 
 }

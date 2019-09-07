@@ -22,4 +22,6 @@ public interface SwapHouseMapper {
     /**通过结算单id获取选房信息**/
     List<ChooseHouseDTO> getChooseHouseListBySettleId(@Param("settleId") Long settleId);
 
+    List<SwapHouse> listAll();
+
 }

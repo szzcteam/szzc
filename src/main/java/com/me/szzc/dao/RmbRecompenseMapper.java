@@ -3,6 +3,8 @@ package com.me.szzc.dao;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface RmbRecompenseMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -16,5 +18,7 @@ public interface RmbRecompenseMapper {
     int updateByPrimaryKey(RmbRecompense record);
 
     RmbRecompense getByHouseOwnerAddr(@Param("houseOwner") String houseOwner, @Param("address") String address);
+
+    List<RmbRecompense> listAll();
 
 }

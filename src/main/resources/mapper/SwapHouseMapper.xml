@@ -350,4 +350,11 @@
       and a.id = #{settleId}
   </select>
 
+  <select id="listAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_swap_house
+    where deleted = 0
+  </select>
+
 </mapper>

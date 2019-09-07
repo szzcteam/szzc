@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Date;
+
 /**
  * 产权调换预览数据-字符串格式
  * @author luwei
@@ -542,6 +544,9 @@ public class SwapHouseVO {
      */
     private String otherTermsOne;
 
+    /**创建时间**/
+    private Date createDate;
+
     public static SwapHouseVO parse(SwapHouse entity) throws Exception{
         SwapHouseVO vo = new SwapHouseVO();
         if(entity == null) {
@@ -689,6 +694,8 @@ public class SwapHouseVO {
         if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7()) && vo.getPayParm6().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm6("");
         }
+
+        vo.setCreateDate(entity.getCreateDate());
 
         return vo;
     }

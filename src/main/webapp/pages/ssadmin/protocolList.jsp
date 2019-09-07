@@ -153,6 +153,10 @@
                        href="ssadmin/exportSettleAccounts.html?idMore={sid_user}"
                        target="dwzOnlyExport" targetType="navTab"><span>导出结算单</span>
                 </a></li>--%>
+                <li><a class="icon"
+                       href="ssadmin/protocol/export/excel.html"
+                       target="dwzExport" targetType="navTab"><span>导出台账</span>
+                </a></li>
             </shiro:hasPermission>
 
             <shiro:hasPermission name="ssadmin/settleAccounts/signing.html">

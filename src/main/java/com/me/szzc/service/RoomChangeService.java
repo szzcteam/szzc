@@ -217,7 +217,7 @@ public class RoomChangeService {
         for (RoomChangeExport roomChangeExport : roomChangeExports) {
             roomChangeExport.setStatusName(ChooseStatusEnum.getText(roomChangeExport.getStatus()));
             if (roomChangeExport.getChooseDate() != null) {
-                roomChangeExport.setChooseDateString(DateHelper.date2String(roomChangeExport.getChooseDate(), DateHelper.DateFormatType.YearMonthDay));
+                roomChangeExport.setChooseDateString(DateHelper.date2String(roomChangeExport.getChooseDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
             }
         }
         return roomChangeExports;
