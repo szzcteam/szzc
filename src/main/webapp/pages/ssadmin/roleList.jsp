@@ -61,7 +61,7 @@
 		<tbody>
 			<c:forEach items="${roleList}" var="role" varStatus="num">
 				<tr target="sid_user" rel="${role.fid}">
-					<td>${num.index +1}</td>
+					<td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
 					<td>${role.fname}</td>
 					<td>${role.fdescription}</td>
 				</tr>

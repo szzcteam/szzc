@@ -69,7 +69,7 @@
 		<tbody>
 			<c:forEach items="${syslogList}" var="syslog" varStatus="num">
 				<tr target="sid_user" rel="${syslog.id}">
-					<td>${num.index +1}</td>
+					<td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
 					<td>${syslog.loginName}</td>
 					<td>${syslog.operatorDateStr}</td>
 					<td>${syslog.module}</td>

@@ -124,6 +124,6 @@ public class RoomChange extends BaseRowModel implements Serializable {
         if(chooseDate == null){
             return "";
         }
-        return DateHelper.date2String(chooseDate, DateHelper.DateFormatType.YearMonthDay);
+        return DateHelper.date2String(chooseDate, DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond);
     }
 }

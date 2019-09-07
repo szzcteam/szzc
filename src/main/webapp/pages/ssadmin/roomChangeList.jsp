@@ -28,13 +28,13 @@
 
             <table class="searchContent">
                 <tr>
-                    <td>点房时间：<input type="text" name="startDate" class="date" size="10"
-                                    readonly="true" value="${startDate }"/>
+                    <td>点房时间：<input type="text" name="startDate" class="date" size="16"
+                                    readonly="true" value="${startDate }" dateFmt="yyyy-MM-dd HH:mm:ss"/>
                     </td>
                     <td>
                         至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="text" name="endDate" class="date" size="10"
-                               readonly="true" value="${endDate }"/>
+                        <input type="text" name="endDate" class="date" size="16"
+                               readonly="true" value="${endDate }" dateFmt="yyyy-MM-dd HH:mm:ss"/>
                     </td>
                     <td>
                         点房状态：
@@ -45,10 +45,10 @@
                             </c:forEach>
                         </select>
                     </td>
-                    <td>房号：<input type="text" name="number" value="${number}"
+                    <td>房&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：<input type="text" name="number" value="${number}"
                                     size="10"/>
                     </td>
-                    <td>点房人：<input type="text" name="choosePeople" value="${choosePeople}"
+                    <td>点&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;房&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;人：<input type="text" name="choosePeople" value="${choosePeople}"
                                     size="10"/>
                     </td>
                     <td>提供房源平台：<input type="text" name="housingPlatform" value="${housingPlatform}"
@@ -57,21 +57,21 @@
                 </tr>
                 <tr>
                     <td>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：<input type="text" name="minArea"
-                                 size="10"   value="${minArea }"/>
+                                 size="16"   value="${minArea }"/>
                     </td>
                     <td>
                         至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="text" name="maxArea"
-                               size="10"  value="${maxArea }"/>
+                               size="16"  value="${maxArea }"/>
                     </td>
                     <td>房源项目：<input type="text" name="name" value="${name}"
                                     size="10"/>
                     </td>
-                    <td>分配征收项目：<input type="text" name="assignedProject" value="${assignedProject}"
-                                      size="10"/>
-                    </td>
                     <td>代办公司：<input type="text" name="commissionCompany" value="${commissionCompany}"
                                     size="10"/>
+                    </td>
+                    <td>分配征收项目：<input type="text" name="assignedProject" value="${assignedProject}"
+                                      size="10"/>
                     </td>
                     <td>
                         <div class="buttonActive">
@@ -138,15 +138,15 @@
         <tr>
             <th width="15"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
             <th width="20">序号</th>
-            <th width="80">分配征收项目</th>
-            <th width="80">提供房源平台</th>
+            <th width="60">分配征收项目</th>
+            <th width="60">提供房源平台</th>
             <th width="60">房源项目</th>
             <th width="60">房号</th>
             <th width="60">面积&nbsp;(M<sup>2</sup>)</th>
             <th width="50">单价&nbsp;(元/M<sup>2</sup>)</th>
             <th width="50">总价&nbsp;(元)</th>
             <th width="50">点房人</th>
-            <th width="50">点房时间</th>
+            <th width="60">点房时间</th>
             <th width="50">代办公司</th>
             <th width="50">状态</th>
         </tr>

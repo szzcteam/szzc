@@ -62,7 +62,7 @@
 		<tbody>
 			<c:forEach items="${systemArgsList}" var="systemArgs" varStatus="num">
 				<tr target="sid_user" rel="${systemArgs.fid}">
-					<td>${num.index +1}</td>
+					<td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
 					<td>${systemArgs.fkey}</td>
 					<td>${systemArgs.fvalue_s}</td>
 					<td>${systemArgs.fdescription}</td>

@@ -82,7 +82,7 @@
 		<tbody>
 			<c:forEach items="${adminList}" var="admin" varStatus="num">
 				<tr target="sid_user" rel="${admin.fid}">
-					<td>${num.index +1}</td>
+					<td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
 					<td>${admin.fname}</td>
 					<td>${admin.fstatus_s}</td>
 					<td>${admin.froleName}</td>

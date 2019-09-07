@@ -125,12 +125,12 @@
         </if>
         <if test="startDate != null and startDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(choose_date,'%Y-%m-%d') >= #{startDate}
+            AND choose_date >= #{startDate}
              ]]>
         </if>
         <if test="endDate != null and endDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(choose_date,'%Y-%m-%d') <= #{endDate}
+            AND choose_date <= #{endDate}
             ]]>
         </if>
         <if test="minArea != null and minArea != ''">
@@ -173,12 +173,12 @@
         </if>
         <if test="startDate != null and startDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(choose_date,'%Y-%m-%d') >= #{startDate}
+            AND choose_date >= #{startDate}
              ]]>
         </if>
         <if test="endDate != null and endDate != ''">
             <![CDATA[
-            AND DATE_FORMAT(choose_date,'%Y-%m-%d') <= #{endDate}
+            AND choose_date <= #{endDate}
             ]]>
         </if>
         <if test="minArea != null and minArea != ''">

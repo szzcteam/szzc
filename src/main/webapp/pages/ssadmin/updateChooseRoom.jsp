@@ -54,7 +54,7 @@
 			<dl>
 				<dt>点房时间：</dt>
 				<dd>
-					<input type="text" name="chooseDate" class="date" value="${roomChange.chooseDateStr}" readonly="true"/>
+					<input type="text" name="chooseDate" class="date" value="${roomChange.chooseDateStr}" readonly="true" dateFmt="yyyy-MM-dd HH:mm:ss"/>
 				</dd>
 			</dl>
 			<dl>
