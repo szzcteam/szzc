@@ -176,7 +176,8 @@ var swapHouseObj = {
                         //室内装修补偿
                         if(data.decorationCompensate != null && data.decorationCompensate > 0){
                             var calcDecorationCompensate = data.calcDecorationCompensate.split("*");
-                            $("#swapHouseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(calcDecorationCompensate[1]);
+                            //默认最后一个乘以的就是单价
+                            $("#swapHouseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(calcDecorationCompensate[calcDecorationCompensate.length-1]);
                             $("#swapHouseDiv input[name='decorationCompensate']").eq(0).val(data.decorationCompensate)
                         }
                         ;

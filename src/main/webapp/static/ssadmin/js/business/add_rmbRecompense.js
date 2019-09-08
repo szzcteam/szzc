@@ -153,7 +153,8 @@ var rmbRecompenseObj = {
                         //室内装修补偿
                         if(data.decorationCompensate != null && data.decorationCompensate > 0){
                             var calcDecorationCompensate = data.calcDecorationCompensate.split("*");
-                            $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(calcDecorationCompensate[1]);
+                            //默认最后一个乘以的就是单价
+                            $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(calcDecorationCompensate[calcDecorationCompensate.length-1]);
                             $("#rmbRecompenseDiv input[name='decorationCompensate']").eq(0).val(data.decorationCompensate)
                         }
                         ;
