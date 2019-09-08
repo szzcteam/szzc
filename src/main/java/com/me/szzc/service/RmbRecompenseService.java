@@ -43,8 +43,8 @@ public class RmbRecompenseService {
         return this.rmbRecompenseMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
-    public List<RmbRecompense> listAll(){
-        return rmbRecompenseMapper.listAll();
+    public List<RmbRecompense> listAll(List<Long> areaIdList){
+        return rmbRecompenseMapper.listAll(areaIdList);
     }
 
 }

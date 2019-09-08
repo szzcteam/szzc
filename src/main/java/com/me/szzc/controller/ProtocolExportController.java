@@ -1,5 +1,6 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.ProtocolExportVO;
@@ -14,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,10 +30,16 @@ import java.util.List;
 public class ProtocolExportController extends BaseController {
 
     @RequestMapping("/ssadmin/protocol/export/excel")
-    public void export(HttpServletResponse response) {
+    public void export(HttpServletRequest request, HttpServletResponse response) {
+
+        //获取用户管理的片区
+        Long userId = getAdminSession(request).getFid();
+        List<Area> areaList = getUserEnableArea(userId);
+        //转换格式
+        List<Long> areaIdList = convertAreaIdList(areaList);
 
         //查询产权调换
-        List<SwapHouse> swapHouseList = swapHouseService.listAll();
+        List<SwapHouse> swapHouseList = swapHouseService.listAll(areaIdList);
         List<SwapHouseVO> swapHouseVOList = new ArrayList<>();
         try {
             if (swapHouseList != null && swapHouseList.size() > 0) {
@@ -45,7 +53,7 @@ public class ProtocolExportController extends BaseController {
         }
 
         //查询货币补偿
-        List<RmbRecompense> rmbRecompenseList = rmbRecompenseService.listAll();
+        List<RmbRecompense> rmbRecompenseList = rmbRecompenseService.listAll(areaIdList);
         List<RmbRecompenseVO> rmbRecompenseVOList = new ArrayList<>();
         try {
             if (rmbRecompenseList != null && rmbRecompenseList.size() > 0) {

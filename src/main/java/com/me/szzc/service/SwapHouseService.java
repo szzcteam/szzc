@@ -43,7 +43,7 @@ public class SwapHouseService {
         return swapHouseMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
-    public List<SwapHouse> listAll(){
-        return swapHouseMapper.listAll();
+    public List<SwapHouse> listAll(List<Long> areaIdList){
+        return swapHouseMapper.listAll(areaIdList);
     }
 }

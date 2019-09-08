@@ -19,6 +19,6 @@ public interface RmbRecompenseMapper {
 
     RmbRecompense getByHouseOwnerAddr(@Param("houseOwner") String houseOwner, @Param("address") String address);
 
-    List<RmbRecompense> listAll();
+    List<RmbRecompense> listAll(@Param("areaIdList") List<Long> areaIdList);
 
 }

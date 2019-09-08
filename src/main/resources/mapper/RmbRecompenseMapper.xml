@@ -288,6 +288,12 @@
     <include refid="Base_Column_List"/>
     from t_rmb_recompense
     where deleted = 0
+    <if test="areaIdList != null and areaIdList.size >0 ">
+      and area_id in
+      <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+        #{itemId}
+      </foreach>
+    </if>
   </select>
 
 
