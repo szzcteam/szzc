@@ -16,8 +16,8 @@
             <dl>
                 <dt style="width: 80px;">补偿方式：</dt>
                 <dd style="color: red;width: 310px;">
-                    <label><input type="radio" name="compensateType" value="0" checked="checked"/>&nbsp;货币补偿</label>
-                    <label><input type="radio" name="compensateType" value="1"/>&nbsp;产权交换</label>
+                    <label><input type="radio" name="compensateType" value="0" <c:if test="${settleAccounts.compensateType == 0}"> checked="checked"</c:if>/>&nbsp;货币补偿</label>
+                    <label><input type="radio" name="compensateType" value="1" <c:if test="${settleAccounts.compensateType == 1}"> checked="checked"</c:if>/>&nbsp;产权交换</label>
                 </dd>
                 <dt style="width: 80px;color: red;">所属片区:</dt>
                 <dt>

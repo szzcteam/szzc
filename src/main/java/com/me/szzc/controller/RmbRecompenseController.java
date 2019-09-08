@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.enums.CompensateTypeEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.Area;
@@ -43,6 +44,12 @@ public class RmbRecompenseController extends BaseController {
         if (settleAccounts == null) {
             modelAndView.addObject("statusCode", 300);
             modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
+            return modelAndView;
+        }
+
+        if(!settleAccounts.getCompensateType().equals(CompensateTypeEnum.RMB_TYPE.getCode())){
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "不能增加货币补偿协议，结算单中选择的类型是：产权调换协议，请前后保持一致。");
             return modelAndView;
         }
 

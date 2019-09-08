@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.enums.CompensateTypeEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.pojo.entity.Area;
@@ -46,6 +47,13 @@ public class SwapHouseController extends BaseController {
             modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
             return modelAndView;
         }
+
+        if(!settleAccounts.getCompensateType().equals(CompensateTypeEnum.SWAP_TYPE.getCode())){
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "不能增加调换协议，结算单中选择的类型是：货币补偿协议，请前后保持一致。");
+            return modelAndView;
+        }
+
         //判断是否存在
         SwapHouse entity = swapHouseService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
         if (entity != null) {
