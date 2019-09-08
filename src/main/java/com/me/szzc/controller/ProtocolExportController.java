@@ -1,9 +1,5 @@
 package com.me.szzc.controller;
 
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.support.ExcelTypeEnum;
-import com.me.szzc.pojo.RoomChangeExport;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.ProtocolExportVO;
@@ -13,14 +9,12 @@ import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.excle.ExcelUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +69,30 @@ public class ProtocolExportController extends BaseController {
         for(SwapHouseVO vo : swapHouseVOList){
             ProtocolExportVO exportVO = new ProtocolExportVO();
             BeanUtils.copyProperties(vo, exportVO);
+
+            //拼接房号
+            String newHouseAddress = "";
+            if(StringUtils.isNotBlank(vo.getSeat())){
+                newHouseAddress += vo.getSeat()+"栋";
+            }
+            if(StringUtils.isNotBlank(vo.getUnit())){
+                newHouseAddress += vo.getUnit() +"单元";
+            }
+            if(StringUtils.isNotBlank(vo.getFloors())){
+                newHouseAddress += vo.getFloors() + "层";
+            }
+            if(StringUtils.isNotBlank(vo.getHouseNumber())){
+                newHouseAddress += vo.getHouseNumber() +"号房";
+            }
+
+            exportVO.setNewHouseNumber(newHouseAddress);
+
+            //计算热水器
+            BigDecimal heater = new BigDecimal(StringUtils.isNotBlank(vo.getSolarHeater()) ? vo.getSolarHeater() : "0")
+                    .add(new BigDecimal(StringUtils.isNotBlank(vo.getOtherHeater()) ? vo.getOtherHeater() : "0"));
+            if (heater.compareTo(BigDecimal.ZERO) > 0) {
+                exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
+            }
             list.add(exportVO);
         }
 

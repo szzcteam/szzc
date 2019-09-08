@@ -437,26 +437,7 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
         return this.getCertifiedArea();
     }
 
-    public String getHeater() {
-        BigDecimal heater = new BigDecimal(org.apache.commons.lang3.StringUtils.isNotBlank(this.getSolarHeater()) ? this.getSolarHeater() : "0")
-                .add(new BigDecimal(org.apache.commons.lang3.StringUtils.isNotBlank(this.getOtherHeater()) ? this.getOtherHeater() : "0"));
-        return BigDecimalUtil.stripTrailingZeros(heater);
-    }
 
-    public String getNewHouseNumber() {
-        newHouseAddress = "";
-        if(StringUtils.isNotBlank(this.getSeat())){
-            newHouseAddress += this.getSeat()+"栋";
-        }
-        if(StringUtils.isNotBlank(this.getUnit())){
-            newHouseAddress += this.getUnit() +"单元";
-        }
-        if(StringUtils.isNotBlank(this.getFloors())){
-            newHouseAddress += this.getFloors() + "层";
-        }
-        if(StringUtils.isNotBlank(this.getHouseNumber())){
-            newHouseAddress += this.getHouseNumber() +"号房";
-        }
-        return newHouseNumber;
-    }
+
+
 }

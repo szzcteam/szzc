@@ -76,7 +76,7 @@ public class RmbRecompenseController extends BaseController {
         RmbRecompense rmbRecompense =  this.rmbRecompenseService.getById(id);
         if(rmbRecompense ==  null){
             modelAndView.addObject("statusCode",300);
-            modelAndView.addObject("message","用户不存在此协议");
+            modelAndView.addObject("message","查询不到货币补偿协议");
             return modelAndView;
         }
         if(rmbRecompense.getDeleted()) {

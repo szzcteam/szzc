@@ -1,11 +1,14 @@
 package com.me.szzc.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.me.szzc.dao.RmbRecompenseMapper;
 import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
+import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
+import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.utils.DateHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +33,9 @@ public class SettleAccountsService {
     private SwapHouseMapper swapHouseMapper;
 
     @Autowired
+    private RmbRecompenseMapper rmbRecompenseMapper;
+
+    @Autowired
     private RoomChangeService roomChangeService;
 
     public void add(SettleAccounts settleAccounts) {
@@ -45,6 +51,31 @@ public class SettleAccountsService {
         settleAccounts.setModifiedDate(DateHelper.getTimestamp());
         settleAccounts.setDeleted(true);
         this.settleAccountsMapper.delete(settleAccounts);
+    }
+
+    @Transactional
+    public void deleteCase(Long userId, Long id, Long rmbId, Long swapId){
+        SettleAccounts settleAccounts = this.settleAccountsMapper.selectByPrimaryKey(id);
+        //修改人
+        settleAccounts.setModifiedUserId(userId);
+        //删除结算单
+        this.delete(settleAccounts);
+        //删除货币补偿协议
+        if(rmbId != null && rmbId > 0){
+            RmbRecompense recompense = rmbRecompenseMapper.getById(rmbId);
+            recompense.setModifiedUserId(userId);
+            recompense.setModifiedDate(DateHelper.getTimestamp());
+            rmbRecompenseMapper.delete(recompense);
+        }
+
+        //删除产权调换协议
+        if(swapId != null &&swapId > 0){
+            SwapHouse swapHouse = swapHouseMapper.getById(swapId);
+            swapHouse.setModifiedUserId(userId);
+            swapHouse.setModifiedDate(DateHelper.getTimestamp());
+            swapHouseMapper.delete(swapHouse);
+        }
+
     }
 
     public void update(SettleAccounts settleAccounts) {

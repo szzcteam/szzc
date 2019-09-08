@@ -82,7 +82,7 @@ public class SwapHouseController extends BaseController {
         SwapHouse swapHouse = this.swapHouseService.getById(id);
         if(swapHouse == null) {
             modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "参数错误，查询不到产权调换协议");
+            modelAndView.addObject("message", "查询不到产权调换协议");
             return modelAndView;
         }
 

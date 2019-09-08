@@ -91,6 +91,8 @@ public class SettleAccountsController extends BaseController {
         //条件判断
         String[] idArr = idMore.split(",");
         Long id = Long.valueOf(idArr[0]);
+        Long rmbId = Long.valueOf(idArr[1]);
+        Long swapId = Long.valueOf(idArr[2]);
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
 
         if(settleAccounts == null){
@@ -105,10 +107,9 @@ public class SettleAccountsController extends BaseController {
             return modelAndView;
         }
 
-        //修改人
         Long userId = getAdminSession(request).getFid();
-        settleAccounts.setModifiedUserId(userId);
-        this.settleAccountsService.delete(settleAccounts);
+        settleAccountsService.deleteCase(userId, id, rmbId, swapId);
+
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","删除成功");
         return modelAndView;

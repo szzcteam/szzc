@@ -132,7 +132,7 @@
                 </a></li>--%>
                 <li><a class="delete"
                        href="ssadmin/settleAccounts/delete.html?idMore={sid_user}"
-                       target="ajaxTodo" title="确定要删除结算单吗?"><span>删除结算单</span>
+                       target="ajaxTodo" title="删除结算单会联动删除该用户的协议，确定要删除吗?"><span>删除结算单</span>
                 </a></li>
             </shiro:hasPermission>
 
