@@ -129,6 +129,8 @@ var swapHouseObj = {
                 }
                 alertMsg.confirm("检测到 "+houseName + ",地址: "+address+" 有【结算单】，是否使用结算单数据进行填充？", {
                     okCall: function(){
+                        //片区
+                        $("#swapHouseDiv select[name='areaId']").eq(0).val(data.areaId);
                         //被征收房屋地址
                         $("#swapHouseDiv input[name='address']").eq(0).val(data.address);
                         //证载建筑面积

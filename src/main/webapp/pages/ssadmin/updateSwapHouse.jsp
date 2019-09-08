@@ -48,12 +48,17 @@
                         <input type="text" name="identityNo" value="${swapHouse.identityNo}" maxlength="255" size="40" style="margin-left: 0px;"/>
                     </dd>
                 </dl>
-                <%--<dl>
-                    <dt>补偿方案:</dt>
-                    <dd>
-                        <input type="text" name="recompensePlan" size="40"/>
-                    </dd>
-                </dl>--%>
+                <dl>
+                    <dt>所属片区:</dt>
+                    <dt>
+                        <select name="areaId" style="width: 170px;height: 21px;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${areaList}" var="area">
+                                <option value="${area.id}" <c:if test="${swapHouse.areaId==area.id }">selected="selected"</c:if>>${area.name}</option>
+                            </c:forEach>
+                        </select>
+                    </dt>
+                </dl>
             </fieldset>
             <br/><br/>
             <fieldset>
@@ -64,8 +69,8 @@
                         证载建筑面积：<input type="text" name="certifiedArea" value="${swapHouse.certifiedArea}" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>、
                         房屋权属份额：<input type="text" name="proportion" value="${swapHouse.proportion}" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;%、
                         证载房屋用途：<input type="text" name="useing" value="${swapHouse.useing}" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>、
-                        房屋所有权证号：<input type="text" name="houseOwnerNumber" value="${swapHouse.houseOwnerNumber}" style="margin-left: 0px;clear: both;float: none;width: 110px;"/>、
-                        国有土地使用权证号：<input type="text" name="publicOwnerNumber"  value="${swapHouse.publicOwnerNumber}" style="margin-left: 0px;clear: both;float: none;width: 110px;"/>、
+                        房屋所有权证号：<input type="text" name="houseOwnerNumber" value="${swapHouse.houseOwnerNumber}" style="margin-left: 0px;clear: both;float: none;width: 180px;"/>、
+                        国有土地使用权证号：<input type="text" name="publicOwnerNumber"  value="${swapHouse.publicOwnerNumber}" style="margin-left: 0px;clear: both;float: none;width: 180px;"/>、
                         房屋价值评估单价：<input type="text" name="assessPrice"   value="${swapHouse.assessPrice}" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>、
                         用于经营的实际面积：<input type="text" name="valueCompensateBusinessArea"  value="${swapHouse.valueCompensateBusinessArea}" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>、
                         住宅改为经营门面补助系数：<input type="text" name="valueCompensateRate"  value="${swapHouse.valueCompensateRate}" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;%
@@ -205,17 +210,17 @@
                 <legend>产权调换房屋基本信息</legend>
                 <dl style="width: 100%;height: 85px;">
                     <dd style="width: 90%;line-height: 26px;margin-left: 5px;">
-                        乙方选定&nbsp;&nbsp;<input type="text" name="newHouseAddress" maxlength="50" value="${swapHouse.newHouseAddress}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 200px;"/>、
-                        <input type="text" name="seat" maxlength="255" value="${swapHouse.seat}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;栋、
-                        <input type="text" name="unit" maxlength="255" value="${swapHouse.unit}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;单元、
-                        <input type="text" name="floors" maxlength="255" value="${swapHouse.floors}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;层、
-                        <input type="text" name="houseNumber" maxlength="255"  value="${swapHouse.houseNumber}"  class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;号房屋。
-                        该房屋面积&nbsp;&nbsp;<input type="text" name="coveredArea"  maxlength="50" value="${swapHouse.coveredArea}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;"/>&nbsp;&nbsp;平方米，
-                        单价&nbsp;&nbsp;<input type="text" name="price" maxlength="50" value="${swapHouse.price}"    class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;"/>&nbsp;&nbsp;元/平方米，
-                        预估房屋总价人民币&nbsp;&nbsp;<input type="text" name="totalPrice" maxlength="50" value="${swapHouse.totalPrice}"    class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>&nbsp;&nbsp;元
-                        （大写：&nbsp;&nbsp;<input type="text" name="upperTotalPrice" maxlength="50" value="${swapHouse.upperTotalPrice}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>），
-                        交房时间为&nbsp;&nbsp;<input type="text" name="years" maxlength="50" value="${swapHouse.years}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 60px;"/>&nbsp;&nbsp;年
-                        &nbsp;&nbsp;<input type="text" name="months" maxlength="50" value="${swapHouse.months}"   class="required bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 50px;"/>&nbsp;&nbsp;月。
+                        乙方选定&nbsp;&nbsp;<input type="text" name="newHouseAddress" maxlength="50" value="${swapHouse.newHouseAddress}"   class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 200px;"/>、
+                        <input type="text" name="seat" maxlength="255" value="${swapHouse.seat}"   class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;栋、
+                        <input type="text" name="unit" maxlength="255" value="${swapHouse.unit}"   class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;单元、
+                        <input type="text" name="floors" maxlength="255" value="${swapHouse.floors}"   class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;层、
+                        <input type="text" name="houseNumber" maxlength="255"  value="${swapHouse.houseNumber}"  class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;"/>&nbsp;&nbsp;号房屋。
+                        该房屋面积&nbsp;&nbsp;<input type="text" name="coveredArea"  maxlength="50" value="${swapHouse.coveredArea}"   class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;"/>&nbsp;&nbsp;平方米，
+                        单价&nbsp;&nbsp;<input type="text" name="price" maxlength="50" value="${swapHouse.price}"    class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;"/>&nbsp;&nbsp;元/平方米，
+                        预估房屋总价人民币&nbsp;&nbsp;<input type="text" name="totalPrice" maxlength="50" value="${swapHouse.totalPrice}"    class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>&nbsp;&nbsp;元
+                        （大写：&nbsp;&nbsp;<input type="text" name="upperTotalPrice" maxlength="50" value="${swapHouse.upperTotalPrice}"   class="bottom_border"  style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 180px;"/>），
+                        交房时间为&nbsp;&nbsp;<input type="text" name="years" maxlength="50" value="${swapHouse.years}"   class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 60px;"/>&nbsp;&nbsp;年
+                        &nbsp;&nbsp;<input type="text" name="months" maxlength="50" value="${swapHouse.months}"   class="bottom_border"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 50px;"/>&nbsp;&nbsp;月。
                     </dd>
                 </dl>
 

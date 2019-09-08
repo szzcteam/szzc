@@ -51,12 +51,17 @@
                         <input type="text" name="identityNo" value="${rmbRecom.identityNo}" maxlength="255" size="40" style="margin-left: 0px;"/>
                     </dd>
                 </dl>
-                <%--<dl>
-                    <dt>补偿方案:</dt>
-                    <dd>
-                        <input type="text" name="recompensePlan" size="40"/>
-                    </dd>
-                </dl>--%>
+                <dl>
+                    <dt>所属片区:</dt>
+                    <dt>
+                        <select name="areaId" style="width: 170px;height: 21px;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${areaList}" var="area">
+                                <option value="${area.id}" <c:if test="${rmbRecom.areaId==area.id }">selected="selected"</c:if>>${area.name}</option>
+                            </c:forEach>
+                        </select>
+                    </dt>
+                </dl>
             </fieldset>
             <br/><br/>
             <fieldset>

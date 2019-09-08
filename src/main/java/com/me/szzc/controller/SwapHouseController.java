@@ -4,6 +4,7 @@ import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
+import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.RmbRecompenseVO;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -105,7 +107,7 @@ public class SwapHouseController extends BaseController {
 
 
     @RequestMapping("/ssadmin/selectSwapHouseByHouseOwner")
-    public ModelAndView selectSwapHouseByHouseOwner(String idMore, String url) {
+    public ModelAndView selectSwapHouseByHouseOwner(String idMore, String url, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url);
         //获取条件
@@ -115,6 +117,11 @@ public class SwapHouseController extends BaseController {
         if(swapHouse != null) {
             modelAndView.addObject("swapHouse", swapHouse);
         }
+        //获取用户管理的片区
+        Long userId = getAdminSession(request).getFid();
+        List<Area> areaList = getUserEnableArea(userId);
+        modelAndView.addObject("areaList", areaList);
+
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "查询成功");
         return modelAndView;

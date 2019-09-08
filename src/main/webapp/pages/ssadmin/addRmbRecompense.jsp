@@ -49,12 +49,17 @@
                         <input type="text" name="identityNo" maxlength="255" size="40" style="margin-left: 0px;"/>
                     </dd>
                 </dl>
-                <%--<dl>
-                    <dt>补偿方案:</dt>
+                <dl>
+                    <dt>所属片区:</dt>
                     <dd>
-                        <input type="text" name="recompensePlan" size="40"/>
+                        <select name="areaId" style="width: 170px;height: 21px;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${areaList}" var="area" varStatus="num">
+                                <option value="${area.id}" <c:if test="${num.index == 0 }">selected="selected"</c:if>>${area.name}</option>
+                            </c:forEach>
+                        </select>
                     </dd>
-                </dl>--%>
+                </dl>
             </fieldset>
             <br/><br/>
             <fieldset>

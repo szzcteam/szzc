@@ -13,6 +13,11 @@ public class SwapHouse {
     private Long id;
 
     /**
+     * 编报单位，x片区
+     */
+    private Long areaId;
+
+    /**
      * 协议编号
      */
     private String cardNo;

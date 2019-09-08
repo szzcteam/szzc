@@ -20,8 +20,8 @@
                     <label><input type="radio" name="compensateType" value="1"/>&nbsp;产权交换</label>
                 </dd>
                 <dt style="width: 80px;color: red;">所属片区:</dt>
-                <dt style="width: 120px;">
-                    <select name="areaId" style="width: 120px;">
+                <dt>
+                    <select name="areaId" style="width: 170px;height: 21px;">
                         <option value="">请选择</option>
                         <c:forEach items="${areaList}" var="area">
                             <option value="${area.id}" <c:if test="${settleAccounts.areaId==area.id }">selected="selected"</c:if>>${area.name}</option>

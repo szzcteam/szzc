@@ -49,12 +49,17 @@
                         <input type="text" name="identityNo" maxlength="255" size="40" style="margin-left: 0px;"/>
                     </dd>
                 </dl>
-                <%--<dl>
-                    <dt>补偿方案:</dt>
+                <dl>
+                    <dt>所属片区:</dt>
                     <dd>
-                        <input type="text" name="recompensePlan" size="40"/>
+                        <select name="areaId" style="width: 170px;height: 21px;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${areaList}" var="area" varStatus="num">
+                                <option value="${area.id}" <c:if test="${num.index == 0 }">selected="selected"</c:if>>${area.name}</option>
+                            </c:forEach>
+                        </select>
                     </dd>
-                </dl>--%>
+                </dl>
             </fieldset>
             <br/><br/>
             <fieldset>
@@ -65,8 +70,8 @@
                         证载建筑面积：<input type="text" name="certifiedArea"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>、
                         房屋权属份额：<input type="text" name="proportion" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;%、
                         证载房屋用途：<input type="text" name="useing" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>、
-                        房屋所有权证号：<input type="text" name="houseOwnerNumber" style="margin-left: 0px;clear: both;float: none;width: 110px;"/>、
-                        国有土地使用权证号：<input type="text" name="publicOwnerNumber"  style="margin-left: 0px;clear: both;float: none;width: 110px;"/>、
+                        房屋所有权证号：<input type="text" name="houseOwnerNumber" style="margin-left: 0px;clear: both;float: none;width: 180px;"/>、
+                        国有土地使用权证号：<input type="text" name="publicOwnerNumber"  style="margin-left: 0px;clear: both;float: none;width: 180px;"/>、
                         房屋价值评估单价：<input type="text" name="assessPrice"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>、
                         用于经营的实际面积：<input type="text" name="valueCompensateBusinessArea"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>、
                         住宅改为经营门面补助系数：<input type="text" name="valueCompensateRate"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;%
@@ -213,7 +218,7 @@
                         <input type="text" name="houseNumber"   size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 40px;margin-left: 0px;"/>&nbsp;&nbsp;号房屋。
                         该房屋面积&nbsp;&nbsp;<input type="text" name="coveredArea"   size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;margin-left: 0px;"/>&nbsp;&nbsp;平方米，
                         单价&nbsp;&nbsp;<input type="text" name="price" maxlength="50"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 100px;margin-left: 0px;"/>&nbsp;&nbsp;元/平方米，
-                        预估房屋总价人民币&nbsp;&nbsp;<input type="text" name="totalPrice"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;margin-left: 0px;"/>&nbsp;&nbsp;元
+                        预估房屋总价人民币&nbsp;&nbsp;<input type="text" name="totalPrice"   style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 180px;margin-left: 0px;"/>&nbsp;&nbsp;元
                         （大写：&nbsp;&nbsp;<input type="text" name="upperTotalPrice"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;margin-left: 0px;"/>），
                         交房时间为&nbsp;&nbsp;<input type="text" name="years" size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 60px;margin-left: 0px;"/>&nbsp;&nbsp;年
                         &nbsp;&nbsp;<input type="text" name="months"   size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 50px;margin-left: 0px;"/>&nbsp;&nbsp;月。

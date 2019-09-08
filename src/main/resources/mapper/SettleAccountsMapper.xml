@@ -3,7 +3,7 @@
 <mapper namespace="com.me.szzc.dao.SettleAccountsMapper">
   <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.SettleAccounts">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="area_id" jdbcType="VARCHAR" property="areaId" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
     <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="house_owner" jdbcType="VARCHAR" property="houseOwner" />
