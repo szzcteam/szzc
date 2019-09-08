@@ -24,7 +24,7 @@
                 <tr>
                     <td>
                         片&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
-                        <select name="areaId" style="width: 150px;">
+                        <select name="areaId" style="width: 150px;height: 21px;">
                             <option value="">请选择</option>
                             <c:forEach items="${areaList}" var="area" varStatus="num">
                                 <option value="${area.id}" <c:if test="${areaId==area.id }">selected="selected"</c:if>>${area.name}</option>
@@ -34,7 +34,7 @@
                     <td>被征收人：<input type="text" name="houseOwner" value="${houseOwner}" size="20"/></td>
                     <td>地址：<input type="text" name="address" value="${address}" size="40"/></td>
                     <td>签约状态：
-                        <select name="signingStatus" style="width: 100px;">
+                        <select name="signingStatus" style="width: 100px;height: 21px;">
                             <option value="">请选择</option>
                             <c:forEach items="${signingStatusMap}" var="item">
                                 <option value="${item.key}" <c:if test="${signingStatus ==  item.key}">selected</c:if>>${item.value}</option>
@@ -53,7 +53,7 @@
                     </td>
                     <td>
                         协议类型：
-                        <select name="compensateType" style="width: 100px;">
+                        <select name="compensateType" style="width: 100px;height: 21px;">
                             <option value="">请选择</option>
                             <c:forEach items="${compensateTypeMap}" var="item">
                                 <option value="${item.key}" <c:if test="${compensateType ==  item.key}">selected</c:if>>${item.value}</option>
