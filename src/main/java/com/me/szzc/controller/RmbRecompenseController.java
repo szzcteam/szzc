@@ -37,6 +37,15 @@ public class RmbRecompenseController extends BaseController {
     public ModelAndView saveRmbRecompense ( RmbRecompense rmbRecompense, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+
+        //判断结算单是否存在
+        SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
+        if (settleAccounts == null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
+            return modelAndView;
+        }
+
         //判断是否存在
         RmbRecompense entity = rmbRecompenseService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
         if (entity != null) {
