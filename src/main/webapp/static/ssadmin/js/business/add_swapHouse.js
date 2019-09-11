@@ -249,7 +249,7 @@ var swapHouseObj = {
                         //按期签约搬迁奖励
                         $("#swapHouseDiv input[name='moveReward']").eq(0).val(data.moveReward);
                         //其他
-                        $("#swapHouseDiv input[name='otherFee']").eq(0).val(data.otherFee);
+                        $("#swapHouseDiv input[name='otherFee']").eq(0).val(data.otherRmb);
 
                         //触发所有条款求和
                         swapHouseObj.summaryNum();

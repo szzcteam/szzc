@@ -224,7 +224,7 @@ var rmbRecompenseObj = {
                         //按期签约搬迁奖励
                         $("#rmbRecompenseDiv input[name='moveReward']").eq(0).val(data.moveReward);
                         //其他
-                        $("#rmbRecompenseDiv input[name='otherFee']").eq(0).val(data.otherFee);
+                        $("#rmbRecompenseDiv input[name='otherFee']").eq(0).val(data.otherRmb);
 
                         //触发所有条款求和
                         rmbRecompenseObj.summaryNum();
