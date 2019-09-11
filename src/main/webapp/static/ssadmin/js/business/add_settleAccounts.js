@@ -803,19 +803,14 @@ var settleAccountObj = {
 
     //热水器拆装费计算
     calcHotWater:function () {
-        var calcHotWaterCompensate = "";
         //烧电  得到的格式：1*200
         var water_heater_calc = $("select[name='sel_water_heater']").eq(0).val()
-        if (eval(water_heater_calc) > 0) {
-            calcHotWaterCompensate = water_heater_calc;
-        }
 
         //太阳能
         var calcHotWaterCompensateMoney = $("input[name='calcHotWaterCompensateMoney']").eq(0).val() || 0;
         var calcHotWaterCompensateConvert = $("input[name='calcHotWaterCompensateConvert']").eq(0).val() || 0;
-        if (calcHotWaterCompensateMoney != 0) {
-            calcHotWaterCompensate = calcHotWaterCompensate + "+" + calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert
-        }
+
+        var calcHotWaterCompensate = water_heater_calc + "+" + calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert;
 
         console.log("热水器拆装计算公式：" + calcHotWaterCompensate);
         $("input[name='calcHotWaterCompensate']").eq(0).val(calcHotWaterCompensate).change();

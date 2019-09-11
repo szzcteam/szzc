@@ -238,31 +238,17 @@ $(document).ready(function () {
 
     //热水器拆装费
     var calcHotWaterCompensate = $("input[name='calcHotWaterCompensate']").eq(0).val() || 0;
-    if(calcHotWaterCompensate != null && calcHotWaterCompensate != "" && calcHotWaterCompensate != 0) {
+    if (calcHotWaterCompensate != null && calcHotWaterCompensate != "" && calcHotWaterCompensate != 0) {
         var hot_water_index = calcHotWaterCompensate.indexOf("+");
-        if (hot_water_index != -1) {
-            //是2个公式，分别处理
-            //电热水器
-            var hot_value = calcHotWaterCompensate.substring(0, hot_water_index);
-            $("select[name='sel_water_heater']").find("option[value='" + hot_value + "']").attr("selected", true);
-            //太阳能热水器
-            var hot_d_calc = calcHotWaterCompensate.substring(hot_water_index + 1, calcHotWaterCompensate.length);
-            var arr = hot_d_calc.split("*");
-            $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
-            $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
-        } else {
-            console.log("热水器只有1个" + calcHotWaterCompensate);
-            //只有1个，判断是电热水器，还是太阳能
-            if(optionExistValue(calcHotWaterCompensate, "sel_water_heater")){
-                //是电热水器
-                $("select[name='sel_water_heater']").find("option[value='" + calcHotWaterCompensate + "']").attr("selected", true);
-            }else{
-                //是太阳能热水器
-                var arr = calcHotWaterCompensate.split("*");
-                $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
-                $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
-            }
-        }
+        //是2个公式，分别处理
+        //电热水器
+        var hot_value = calcHotWaterCompensate.substring(0, hot_water_index);
+        $("select[name='sel_water_heater']").find("option[value='" + hot_value + "']").attr("selected", true);
+        //太阳能热水器
+        var hot_d_calc = calcHotWaterCompensate.substring(hot_water_index + 1, calcHotWaterCompensate.length);
+        var arr = hot_d_calc.split("*");
+        $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
+        $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
     }
     console.log("热水器拆装费结束");
 

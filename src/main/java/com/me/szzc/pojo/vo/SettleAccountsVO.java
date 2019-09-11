@@ -5,6 +5,7 @@ import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.NumberToCapitalizedUtils;
+import com.me.szzc.utils.ScriptEngineUtil;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -900,8 +901,24 @@ public class SettleAccountsVO {
         vo.setMoveAirConditioningFeeBz(entity.getMoveAirConditioningFeeBz());
 
         //热水器拆装费
-        vo.setCalcHotWaterCompensate(entity.getCalcHotWaterCompensate());
-        vo.setHotWaterCompensate(BigDecimalUtil.stripTrailingZeros(entity.getHotWaterCompensate()));
+
+        if (entity.getHotWaterCompensate() != null && entity.getHotWaterCompensate().compareTo(BigDecimal.ZERO) > 0) {
+            //有2个公式，如果电热水器是0*x，则去掉不显示
+            String calc = entity.getCalcHotWaterCompensate();
+            String[] calcArr = calc.split("\\+");
+            BigDecimal waterHeater = ScriptEngineUtil.runCalc(calcArr[0]);
+            BigDecimal hotHeater = ScriptEngineUtil.runCalc(calcArr[1]);
+            if (waterHeater.compareTo(BigDecimal.ZERO) > 0 && hotHeater.compareTo(BigDecimal.ZERO) > 0) {
+                vo.setCalcHotWaterCompensate(entity.getCalcHotWaterCompensate());
+            }else if(waterHeater.compareTo(BigDecimal.ZERO) > 0){
+                vo.setCalcHotWaterCompensate(calcArr[0]);
+            }else if(hotHeater.compareTo(BigDecimal.ZERO) > 0){
+                vo.setCalcHotWaterCompensate(calcArr[1]);
+            }
+
+            vo.setHotWaterCompensate(BigDecimalUtil.stripTrailingZeros(entity.getHotWaterCompensate()));
+        }
+
         vo.setHotWaterCompensateBz(entity.getHotWaterCompensateBz());
 
         if (entity.getGasFee() != null && entity.getGasFee().compareTo(BigDecimal.ZERO) > 0) {
