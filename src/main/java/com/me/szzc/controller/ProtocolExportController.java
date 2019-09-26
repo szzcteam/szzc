@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.RmbRecompense;
+import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.ProtocolExportVO;
 import com.me.szzc.pojo.vo.RmbRecompenseVO;
@@ -19,7 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author luwei
@@ -66,11 +69,32 @@ public class ProtocolExportController extends BaseController {
             log.error("导出协议时，货币补偿信息转换异常", e);
         }
 
+        //查询结算单
+        List<SettleAccounts> settleAccountsList = settleAccountsService.list(0, 0, false,
+                null, null, null, null,
+                areaIdList, null, null, null);
+        Map<String, SettleAccounts> settleMap = new HashMap<>();
+        for(SettleAccounts settle : settleAccountsList){
+            String houseOwner = StringUtils.isNotBlank(settle.getHouseOwner()) ? settle.getHouseOwner() : settle.getLessee();
+            String key = settle.getAddress() + "|" + houseOwner;
+            settleMap.put(key.trim(), settle);
+        }
+
         //将2个list合并到一个
         List<ProtocolExportVO> list = new ArrayList<>();
         for(RmbRecompenseVO vo : rmbRecompenseVOList){
             ProtocolExportVO exportVO = new ProtocolExportVO();
             BeanUtils.copyProperties(vo, exportVO);
+            exportVO.setDifference(vo.getSumRbm());
+            String key = vo.getAddress() + "|"+vo.getHouseOwner();
+            SettleAccounts po = settleMap.get(key.trim());
+            if(po != null){
+                if (StringUtils.isNotBlank(po.getHouseOwner())) {
+                    exportVO.setPhone(po.getPhone());
+                } else {
+                    exportVO.setPhone(po.getLesseePhone());
+                }
+            }
             list.add(exportVO);
         }
 
@@ -95,12 +119,23 @@ public class ProtocolExportController extends BaseController {
 
             exportVO.setNewHouseNumber(newHouseAddress);
 
-            //计算热水器
+            //计算热水器总和
             BigDecimal heater = new BigDecimal(StringUtils.isNotBlank(vo.getSolarHeater()) ? vo.getSolarHeater() : "0")
                     .add(new BigDecimal(StringUtils.isNotBlank(vo.getOtherHeater()) ? vo.getOtherHeater() : "0"));
             if (heater.compareTo(BigDecimal.ZERO) > 0) {
                 exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
             }
+
+            String key = vo.getAddress() + "|"+vo.getHouseOwner();
+            SettleAccounts po = settleMap.get(key.trim());
+            if(po != null){
+                if (StringUtils.isNotBlank(po.getHouseOwner())) {
+                    exportVO.setPhone(po.getPhone());
+                } else {
+                    exportVO.setPhone(po.getLesseePhone());
+                }
+            }
+
             list.add(exportVO);
         }
 
