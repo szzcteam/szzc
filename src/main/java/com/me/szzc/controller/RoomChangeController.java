@@ -3,8 +3,10 @@ package com.me.szzc.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.ChooseStatusEnum;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.RoomChangeExport;
+import com.me.szzc.pojo.entity.Frole;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVo;
 import com.me.szzc.pojo.vo.RoomChangeVo;
@@ -39,7 +41,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @RequestMapping("/ssadmin/roomChange")
-public class RoomChangeController {
+public class RoomChangeController  extends BaseController {
     @Autowired
     private RoomChangeService roomChangeService;
 
@@ -99,11 +101,7 @@ public class RoomChangeController {
      * 房源信息条件分页查询
      *
      * @param request
-     * @param name            房源項目
-     * @param number          房号
-     * @param choosePeople    点房人
-     * @param assignedProject 分配征收项目(片区)
-     * @param housingPlatform 提供房源平台
+     * @param roomChangeVo 条件
      * @return
      */
     @RequestMapping("/queryPage")
@@ -438,5 +436,16 @@ public class RoomChangeController {
         ExcelUtil.writeExcel(response, roomChanges,
                 "表格导出-" + DateHelper.getCurrentDateYearMonthDayHourMinuteSecond() + ".xlsx",
                 "sheet1", new RoomChangeExport());
+    }
+
+
+    @RequestMapping("initAdd")
+    public ModelAndView initAdd(String url, HttpServletRequest request) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName(url);
+        Long userId = getAdminSession(request).getFid();
+        Map<String, String> projectMap = getUserEnableProject(userId);
+        view.addObject("projectMap", projectMap);
+        return view;
     }
 }

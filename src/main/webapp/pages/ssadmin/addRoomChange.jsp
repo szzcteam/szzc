@@ -14,6 +14,16 @@
 					<input type="file" name="file" id="file" class="inputStyle" />
 				</dd>
 			</dl>
+			<dl>
+				<dt>项目信息：</dt>
+				<dd>
+					<select name="itemCode" style="width: 150px;height: 22px;">
+						<c:forEach items="${projectMap}" var="item">
+							<option value="${item.key}">${item.value}</option>
+						</c:forEach>
+					</select>
+				</dd>
+			</dl>
 		</div>
 		<div class="formBar">
 			<ul>

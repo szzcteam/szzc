@@ -95,7 +95,7 @@
                        target="dwzExport" postType="navTab"><span>下载模板</span>
                 </a></li>
                 <li><a class="add"
-                       href="ssadmin/goPageJsp.html?url=ssadmin/addRoomChange"
+                       href="ssadmin/roomChange/initAdd.html?url=ssadmin/addRoomChange"
                        height="300" width="700" target="dialog" rel="addProtocol"><span>上传房源</span>
                 </a></li>
             </shiro:hasPermission>

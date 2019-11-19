@@ -1,6 +1,7 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.constant.SystemArgsConstant;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.Fadmin;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -97,6 +98,44 @@ public class BaseController extends BaseServiceCtrl{
         }
         return fadmin;
     }
+
+    /***获取用户管理的所有项目 格式Map**/
+    public Map<String, String> getUserProject(Long userId){
+        Map<String, String> map =new HashMap<>();
+        List<Area> list = areaService.listByUserId(userId);
+        if (list != null && !list.isEmpty()) {
+            for (Area area : list) {
+                map.put(area.getProjectCode(), GovernmentEnum.getNameByCode(area.getProjectCode()));
+            }
+        }
+        return map;
+    }
+
+
+    /***获取用户管理的所有项目-启用-片区项目 格式Map**/
+    public Map<String, String> getUserEnableProject(Long userId){
+        Map<String, String> map =new HashMap<>();
+        List<Area> list = areaService.listEnableByUserId(userId);
+        if (list != null && !list.isEmpty()) {
+            for (Area area : list) {
+                map.put(area.getProjectCode(), GovernmentEnum.getNameByCode(area.getProjectCode()));
+            }
+        }
+        return map;
+    }
+
+    /**  Map<String, String> 转换为 List<String> **/
+    public List<String> convertProejctCode(Map<String, String> map){
+        List<String> codeList = new ArrayList<>();
+        if (map != null && !map.isEmpty()) {
+            for (Map.Entry entry : map.entrySet()) {
+                codeList.add(entry.getKey().toString());
+            }
+        }
+        return codeList;
+    }
+
+
 
     /***获取用户管理的所有片区，返回list 格式**/
     public List<Area> getUserArea(Long userId){
