@@ -28,7 +28,7 @@ public class RoomChangeService {
     private RoomChangeMapper roomChangeMapper;
 
     @Transactional
-    public ResultVo importExcle(MultipartFile file) {
+    public ResultVo importExcle(MultipartFile file, String itemCode) {
         List<Object> list = null;
         try {
             list = ExcelUtil.readExcel(file, new RoomChange(), 1);
@@ -40,40 +40,7 @@ public class RoomChangeService {
                 continue;
             }
             RoomChange roomChange = (RoomChange) list.get(i);
-
-//            String number = roomChange.getNumber();
-//            List<String> strList = Arrays.asList(number.split("-"));
-//            if (strList.size() != 3) {
-//                throw new RuntimeException("第" + i + "条数据房号(" + number + ")格式异常");
-//            }
-//            for (int x = 0; x < 3; x++) {
-//                if (x == 0) {
-//                    roomChange.setRidgepole(strList.get(x));
-//                } else if (x == 1) {
-//                    roomChange.setUnit(strList.get(x));
-//                } else if (x == 2) {
-//                    是否含有字母
-//                    if (Pattern.compile("[^a-z]*[a-z]+[^a-z]*x").matcher(strList.get(x)).matches()) {
-//                        try {
-//                            String str = strList.get(x);
-//                            roomChange.setFloor(str.substring(0, str.length() - 2));
-//                            roomChange.setMark(str.substring(str.length() - 2, str.length()));
-//                        } catch (Exception e) {
-//                            throw new RuntimeException("第" + i + "条数据房号(" + number + ")格式异常");
-//                        }
-//                    } else if (strList.get(x).length() == 3 || strList.get(x).length() == 4) {
-//                        try {
-//                            String str = String.format("%04d", Integer.parseInt(strList.get(x)));
-//                            roomChange.setFloor(str.substring(0, 2));
-//                            roomChange.setMark(str.substring(2));
-//                        } catch (Exception e) {
-//                            throw new RuntimeException("第" + i + "条数据房号(" + number + ")格式异常");
-//                        }
-//                    } else {
-//                        throw new RuntimeException("第" + i + "条数据房号(" + number + ")格式异常");
-//                    }
-//                }
-//            }
+            roomChange.setItemCode(itemCode);
             Integer integer = roomChangeMapper.selectRoomChangeByParam(roomChange);
             if (integer > 0) {
                 throw new RuntimeException("第" + i + "条数据已存在");
@@ -115,38 +82,6 @@ public class RoomChangeService {
     public boolean updateRoomChangeById(RoomChange roomChange) {
         //获取房号全
         String number = roomChange.getNumber();
-//        List<String> strList = Arrays.asList(number.split("-"));
-//        if (strList.size() != 3) {
-//            throw new RuntimeException("数据房号(" + number + ")格式异常");
-//        }
-//        for (int i = 0; i < 3; i++) {
-//            if (i == 0) {
-//                roomChange.setRidgepole(strList.get(i));
-//            } else if (i == 1) {
-//                roomChange.setUnit(strList.get(i));
-//            } else if (i == 2) {
-//                是否含有字母
-//                if (Pattern.compile("[^a-z]*[a-z]+[^a-z]*x").matcher(strList.get(i)).matches()) {
-//                    try {
-//                        String str = strList.get(i);
-//                        roomChange.setFloor(str.substring(0, str.length() - 2));
-//                        roomChange.setMark(str.substring(str.length() - 2, str.length()));
-//                    } catch (Exception e) {
-//                        throw new RuntimeException("数据房号(" + number + ")格式异常");
-//                    }
-//                } else if (strList.get(i).length() == 3 || strList.get(i).length() == 4) {
-//                    try {
-//                        String str = String.format("%04d", Integer.parseInt(strList.get(i)));
-//                        roomChange.setFloor(str.substring(0, 2));
-//                        roomChange.setMark(str.substring(2));
-//                    } catch (Exception e) {
-//                        throw new RuntimeException("数据房号(" + number + ")格式异常");
-//                    }
-//                } else {
-//                    throw new RuntimeException("数据房号(" + number + ")格式异常");
-//                }
-//            }
-//        }
         //判断是否重复
         List<RoomChange> roomChanges = roomChangeMapper.selectRoomChange(roomChange);
         if (StringUtils.isNullOrEmpty(roomChanges) && roomChanges.size() > 0) {

@@ -109,8 +109,15 @@ public class RoomChange extends BaseRowModel implements Serializable {
      */
     private Date chooseDate;
 
+    /**
+     * 项目编码
+     */
+    private String itemCode;
+
     /**点房时间-字符串格式**/
     private String chooseDateStr;
+
+
 
 
     public String getStatusDesc() {

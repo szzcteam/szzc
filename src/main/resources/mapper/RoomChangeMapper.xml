@@ -54,6 +54,9 @@
             <if test="housingPlatform != null">
                 housing_platform,
             </if>
+            <if test="itemCode != null">
+                item_code,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -94,6 +97,9 @@
             </if>
             <if test="housingPlatform != null">
                 #{housingPlatform,jdbcType=INTEGER},
+            </if>
+            <if test="itemCode != null">
+                #{itemCode,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

@@ -46,11 +46,12 @@ public class RoomChangeController {
     /**
      * 房源信息excle导入
      *
-     * @param file excle文件
+     * @param file     excle文件
+     * @param itemCode 项目编码
      * @return
      */
     @RequestMapping("/importExcel")
-    public ModelAndView importExcel(@RequestParam(value = "file", required = false) MultipartFile file) {
+    public ModelAndView importExcel(@RequestParam(value = "file", required = false) MultipartFile file, String itemCode) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
         ResultVo resultVo = null;
@@ -61,7 +62,11 @@ public class RoomChangeController {
                 view.addObject("message", "请选择房源excel文件");
                 return view;
             }
-
+            if (null == itemCode && itemCode.length() < 1) {
+                view.addObject("statusCode", 300);
+                view.addObject("message", "请选择房源所属项目");
+                return view;
+            }
             String fileName = file.getOriginalFilename();
             int extStart = fileName.lastIndexOf(".");
             String ext = fileName.substring(extStart, fileName.length()).toLowerCase();
@@ -73,7 +78,7 @@ public class RoomChangeController {
             }
 
             //上传
-            resultVo = roomChangeService.importExcle(file);
+            resultVo = roomChangeService.importExcle(file, itemCode);
         } catch (Exception e) {
             view.addObject("statusCode", 300);
             view.addObject("message", e.getMessage());
