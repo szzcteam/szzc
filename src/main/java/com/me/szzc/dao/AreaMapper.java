@@ -22,7 +22,8 @@ public interface AreaMapper {
 
     List<Area> queryPage(@Param("start") Integer start,
                          @Param("pageSize") Integer pageSize,
-                         @Param("name") String name);
+                         @Param("name") String name,
+                         @Param("projectCode") String projectCode);
 
 
     int updateStatus(Area area);

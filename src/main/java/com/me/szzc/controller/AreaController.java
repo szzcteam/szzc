@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.AreaStatusEnum;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.dto.AreaRoleSelDTO;
 import com.me.szzc.pojo.entity.Area;
@@ -27,25 +28,32 @@ import java.util.Map;
 public class AreaController extends BaseController {
 
     @RequestMapping("/queryPage")
-    public ModelAndView queryPage(HttpServletRequest request, String name) {
+    public ModelAndView queryPage(HttpServletRequest request, String name, String projectCode) {
         ModelAndView view = new ModelAndView();
-        if (!com.me.szzc.utils.StringUtils.isNullOrEmpty(name)) {
+        if (StringUtils.isNotBlank(name)) {
             name = name.trim();
             if (name.length() > 0) {
                 view.addObject("name", name);
             }
+        }
+        if(StringUtils.isNotBlank(projectCode)){
+            view.addObject("projectCode", projectCode);
         }
         int currentPage = 1;
         if (request.getParameter("pageNum") != null) {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
         view.setViewName("ssadmin/areaList");
-        Map<String, Object> map = areaService.queryPage(Utils.getNumPerPage(), currentPage, name);
+        Map<String, Object> map = areaService.queryPage(Utils.getNumPerPage(), currentPage, name, projectCode);
         view.addObject("areaList", map.get("datas"));
         view.addObject("numPerPage", Utils.getNumPerPage());
         view.addObject("currentPage", currentPage);
         view.addObject("rel", "area");
         view.addObject("totalCount", map.get("total"));
+
+        //查新项目信息
+        Map<String, String> projectMap = GovernmentEnum.getMap();
+        view.addObject("projectMap", projectMap);
         return view;
     }
 
@@ -57,13 +65,16 @@ public class AreaController extends BaseController {
         //查询所有的角色
         List<Frole> roleList = roleService.findAll();
         view.addObject("roleList", roleList);
+
+        Map<String, String> projectMap = GovernmentEnum.getProjectMap();
+        view.addObject("projectMap", projectMap);
         return view;
     }
 
 
     @RequestMapping("add")
     @SysLog(code = ModuleConstont.AREA_OPERATION, method = "新增片区")
-    public ModelAndView add(String roleIds, String name,HttpServletRequest request) {
+    public ModelAndView add(String roleIds, String name, String projectCode, HttpServletRequest request) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
         if (StringUtils.isBlank(name)) {
@@ -90,7 +101,7 @@ public class AreaController extends BaseController {
 
         //创建人
         Long userId = getAdminSession(request).getFid();
-        int resul = areaService.insert(name, roleIds, userId);
+        int resul = areaService.insert(name, projectCode, roleIds, userId);
         if(resul <= 0 ) {
             view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
             view.addObject(MESSAGE_KEY, "操作失败");
@@ -118,7 +129,7 @@ public class AreaController extends BaseController {
             return view;
         }
 
-        if(status ==  area.getStatus()) {
+        if(status.equals(area.getStatus())) {
             if(status == AreaStatusEnum.ENABLE.getCode()){
                 view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
                 view.addObject(MESSAGE_KEY, "不可重复启用");
@@ -168,6 +179,9 @@ public class AreaController extends BaseController {
     public ModelAndView initUpdate(String url, Long id) {
         ModelAndView view = new ModelAndView();
         view.setViewName(url);
+        //查询项目
+        Map<String, String> projectMap = GovernmentEnum.getProjectMap();
+        view.addObject("projectMap", projectMap);
         //查询所有的角色
         List<Frole> roleList = roleService.findAll();
         //查询该片区关联的角色
@@ -204,7 +218,7 @@ public class AreaController extends BaseController {
     }
 
     @RequestMapping("update")
-    public ModelAndView update(String roleIds, String name, Long id, HttpServletRequest request){
+    public ModelAndView update(String roleIds, String name, String projectCode, Long id, HttpServletRequest request){
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
         name = name.trim();
@@ -222,7 +236,7 @@ public class AreaController extends BaseController {
             return view;
         }
         Long userId = getAdminSession(request).getFid();
-        areaService.update(roleIds, name, id, userId);
+        areaService.update(roleIds, name, projectCode, id, userId);
 
         view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
         view.addObject(MESSAGE_KEY, "修改成功");

@@ -19,6 +19,16 @@ public class Area {
     private String name;
 
     /**
+     * 项目code
+     */
+    private String projectCode;
+
+    /**
+     * 项目名称
+     */
+    private String projectName;
+
+    /**
      * 状态：0启用、1禁用
      */
     private Integer status;

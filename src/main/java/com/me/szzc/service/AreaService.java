@@ -3,6 +3,7 @@ package com.me.szzc.service;
 import com.me.szzc.dao.AreaMapper;
 import com.me.szzc.dao.AreaRoleMapper;
 import com.me.szzc.enums.AreaStatusEnum;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.AreaRole;
 import com.me.szzc.pojo.entity.RoomChange;
@@ -26,11 +27,12 @@ public class AreaService {
     private AreaRoleMapper areaRoleMapper;
 
     @Transactional
-    public int insert(String name, String roleIds, Long createUserId) {
+    public int insert(String name, String projectCode,  String roleIds, Long createUserId) {
         //保存片区
         Area area = new Area();
         area.setStatus(AreaStatusEnum.ENABLE.getCode());
         area.setName(name);
+        area.setProjectCode(projectCode);
         area.setDeleted(false);
         area.setCreateDate(DateHelper.getTimestamp());
         area.setCreateUserId(createUserId);
@@ -66,10 +68,16 @@ public class AreaService {
     }
 
 
-    public Map<String, Object> queryPage(int pageSize, int pageNum, String name) {
+    public Map<String, Object> queryPage(int pageSize, int pageNum, String name, String projectCode) {
         int count = areaMapper.getCount(name);
         int start = (pageNum - 1) * pageSize;
-        List<Area> list = areaMapper.queryPage(start, pageSize, name);
+        List<Area> list = areaMapper.queryPage(start, pageSize, name, projectCode);
+        if(list != null && list.size() >0){
+            Map<String, String> projectMap = GovernmentEnum.getProjectMap();
+            for(Area area : list){
+                area.setProjectName(projectMap.get(area.getProjectCode()));
+            }
+        }
         Map<String, Object> map = new HashMap();
         map.put("total", count);
         map.put("datas", list);
@@ -98,11 +106,12 @@ public class AreaService {
         return areaMapper.existsByUpdateName(name, id);
     }
 
-    public void update(String roleIds, String name, Long id, Long userId){
+    public void update(String roleIds, String name, String projectCode, Long id, Long userId){
         Area area = areaMapper.getById(id);
         area.setModifiedUserId(userId);
         area.setModifiedDate(DateHelper.getTimestamp());
         area.setName(name);
+        area.setProjectCode(projectCode);
         //更新片区
         areaMapper.update(area);
         //删除权限

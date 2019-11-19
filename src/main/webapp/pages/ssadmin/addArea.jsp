@@ -18,10 +18,22 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>管辖项目：</dt>
+				<dd>
+					<select name="projectCode" style="width: 150px;height: 22px;">
+						<c:forEach items="${projectMap}" var="item">
+							<option value="${item.key}">${item.value}</option>
+						</c:forEach>
+					</select>
+				</dd>
+			</dl>
+			<dl>
 				<dt>片区下的角色：</dt>
 				<dd>
 					<c:forEach items="${roleList}" var="role">
-						<input type="checkbox" value="${role.fid}" name="roleCbx"/>${role.fname}&nbsp;&nbsp;&nbsp;&nbsp;
+						<div style="width: 200px;height: 26px;word-break: break-word; float:left;">
+							<input type="checkbox" value="${role.fid}" name="roleCbx"/>${role.fname}&nbsp;&nbsp;
+						</div>
 					</c:forEach>
 				</dd>
 			</dl>

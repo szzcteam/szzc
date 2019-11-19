@@ -2,6 +2,7 @@
 <%@ include file="comm/include.inc.jsp" %>
 <form id="pagerForm" method="post" action="ssadmin/area/queryPage.html">
     <input type="hidden" name="name" value="${name}"/>
+    <input type="hidden" name="projectCode" value="${projectCode}"/>
 
     <input type="hidden" name="pageNum" value="${currentPage}"/>
     <input type="hidden" name="numPerPage" value="${numPerPage}"/>
@@ -18,6 +19,15 @@
                 <tr>
                     <td>片区名称：<input type="text" name="name" value="${name}"
                                    size="40"/>
+                    </td>
+                    <td>
+                        管辖项目：
+                        <select name="projectCode" style="width: 150px;height: 22px;">
+                            <option value="">全部</option>
+                            <c:forEach items="${projectMap}" var="item">
+                                <option value="${item.key}" <c:if test="${item.key == projectCode }">selected="selected"</c:if>>${item.value}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                     <td>
                         <div class="buttonActive">
@@ -45,7 +55,7 @@
             <shiro:hasPermission name="ssadmin/area/update.html">
                 <li><a class="edit"
                        href="ssadmin/area/initUpdate.html?url=ssadmin/updateArea&id={sid_user}"
-                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改</span>
+                       height="400" width="800" target="dialog" rel="updateRoomChange"><span>修改</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/area/enable.html">
@@ -67,7 +77,8 @@
         <tr>
             <th width="30">序号</th>
             <th>片区名称</th>
-            <th>片区状态</th>
+            <th>管辖项目</th>
+            <th>状态</th>
             <th>最后一次操作时间</th>
         </tr>
         </thead>
@@ -77,6 +88,7 @@
             <tr target="sid_user" rel="${area.id}">
                 <td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
                 <td>${area.name}</td>
+                <td>${area.projectName}</td>
                 <td>${area.statusDesc}</td>
                 <td>${area.modifiedDateStr}</td>
             </tr>

@@ -24,16 +24,16 @@ public enum GovernmentEnum {
 
     private String name;
 
-    private static final Map<String, GovernmentEnum> map = new HashMap<>();
-    private static final Map<String, GovernmentEnum> projectMap = new HashMap<>();
+    private static final Map<String, String> map = new HashMap<>();
+    private static final Map<String, String> projectMap = new HashMap<>();
 
 
     static {
         for(GovernmentEnum governmentEnum : GovernmentEnum.values()){
-            map.put(governmentEnum.getCode(), governmentEnum);
+            map.put(governmentEnum.getCode(), governmentEnum.getName());
 
             if(governmentEnum.getCode().length() > 4){
-                projectMap.put(governmentEnum.getCode(), governmentEnum);
+                projectMap.put(governmentEnum.getCode(), governmentEnum.getName());
             }
         }
     }
@@ -52,19 +52,15 @@ public enum GovernmentEnum {
     }
 
     public static String getNameByCode(String code) {
-        String desc = "";
-        GovernmentEnum governmentEnum = map.get(code);
-        if(governmentEnum != null){
-            desc = governmentEnum.getName();
-        }
+        String desc = map.get(code);
         return desc;
     }
 
-    public static Map<String, GovernmentEnum> getMap() {
+    public static Map<String, String> getMap() {
         return map;
     }
 
-    public static Map<String, GovernmentEnum> getProjectMap() {
+    public static Map<String, String> getProjectMap() {
         return projectMap;
     }
 
