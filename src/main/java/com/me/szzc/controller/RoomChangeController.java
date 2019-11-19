@@ -41,7 +41,7 @@ import java.util.Map;
 @Slf4j
 @Controller
 @RequestMapping("/ssadmin/roomChange")
-public class RoomChangeController  extends BaseController {
+public class RoomChangeController extends BaseController {
     @Autowired
     private RoomChangeService roomChangeService;
 
@@ -171,7 +171,23 @@ public class RoomChangeController  extends BaseController {
         view.setViewName("ssadmin/roomChangeList");
         roomChangeVo.setPageSize(Utils.getNumPerPage());
         roomChangeVo.setPageNum(currentPage);
-        Map<String, Object> map = roomChangeService.queryPage(roomChangeVo);
+
+        //获取登录人房源项目权限
+        Long userId = getAdminSession(request).getFid();
+        if (null == userId) {
+            view.addObject("statusCode", 300);
+            view.addObject("message", "未获取用户信息,请先登陆");
+            return view;
+        }
+        Map<String, String> projectMap = getUserEnableProject(userId);
+        List<String> list = convertProejctCode(projectMap);
+        if (null == list && list.size() < 1) {
+            view.addObject("statusCode", 300);
+            view.addObject("message", "用户未分配房源项目权限");
+            return view;
+        }
+
+        Map<String, Object> map = roomChangeService.queryPage(roomChangeVo, list);
         view.addObject("roomList", map.get("datas"));
         view.addObject("numPerPage", Utils.getNumPerPage());
         view.addObject("currentPage", currentPage);
@@ -437,7 +453,6 @@ public class RoomChangeController  extends BaseController {
                 "表格导出-" + DateHelper.getCurrentDateYearMonthDayHourMinuteSecond() + ".xlsx",
                 "sheet1", new RoomChangeExport());
     }
-
 
     @RequestMapping("initAdd")
     public ModelAndView initAdd(String url, HttpServletRequest request) {

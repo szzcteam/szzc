@@ -102,7 +102,8 @@ public class RoomChangeService {
      * @param housingPlatform 提供房源平台
      * @return
      */
-    public Map<String, Object> queryPage(RoomChangeVo roomChangeVo) {
+    public Map<String, Object> queryPage(RoomChangeVo roomChangeVo, List<String> list) {
+        roomChangeVo.setItemCodeList(list);
         Integer count = roomChangeMapper.getCount(roomChangeVo);
         Integer start = (roomChangeVo.getPageNum() - 1) * roomChangeVo.getPageSize();
         roomChangeVo.setStart(start);

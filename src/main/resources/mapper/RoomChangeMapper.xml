@@ -108,6 +108,10 @@
         SELECT COUNT(*)
         FROM r_change
         WHERE r_del = 0
+        AND item_code in
+        <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
         <if test="name != null and name != ''">
             AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
@@ -156,6 +160,10 @@
         <include refid="Base_Column_List"/>
         FROM r_change
         WHERE r_del = 0
+        AND item_code in
+        <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
         <if test="name != null and name != ''">
             AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>

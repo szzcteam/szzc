@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by bbfang on 2019/8/24.
@@ -75,5 +76,10 @@ public class RoomChangeVo implements Serializable {
     private Integer pageSize;
     private Integer pageNum;
     private Integer start;
+
+    /**
+     * 项目权限
+     */
+    private List<String> itemCodeList;
 
 }
