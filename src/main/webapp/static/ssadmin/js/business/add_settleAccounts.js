@@ -849,7 +849,7 @@ var settleAccountObj = {
         }
         $("input[name='noCheckinArea']").eq(0).val(area);
     },
-    //套内面积=有证面积+未经登记合法面积+历史遗留面积
+    //建筑面积=有证面积+未经登记合法面积+历史遗留面积
     fullCheckInArea:function () {
         var certifiedArea = $("input[name='certifiedArea']").eq(0).val() || 0;
         var noRegisterLegalArea = $("input[name='noRegisterLegalArea']").eq(0).val() || 0;
