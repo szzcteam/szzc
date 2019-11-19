@@ -25,10 +25,16 @@ public enum GovernmentEnum {
     private String name;
 
     private static final Map<String, GovernmentEnum> map = new HashMap<>();
+    private static final Map<String, GovernmentEnum> projectMap = new HashMap<>();
+
 
     static {
         for(GovernmentEnum governmentEnum : GovernmentEnum.values()){
             map.put(governmentEnum.getCode(), governmentEnum);
+
+            if(governmentEnum.getCode().length() > 4){
+                projectMap.put(governmentEnum.getCode(), governmentEnum);
+            }
         }
     }
 
@@ -56,6 +62,10 @@ public enum GovernmentEnum {
 
     public static Map<String, GovernmentEnum> getMap() {
         return map;
+    }
+
+    public static Map<String, GovernmentEnum> getProjectMap() {
+        return projectMap;
     }
 
     public static List<Map<String, String>> queryAll() {
