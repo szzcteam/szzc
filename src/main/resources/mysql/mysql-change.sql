@@ -19,3 +19,7 @@ ALTER TABLE `field_coordinate`
     ADD COLUMN `item_code` VARCHAR(32) NOT NULL COMMENT '项目编码' AFTER `del`;
 
 UPDATE field_coordinate SET item_code = 'A001001';
+
+#结算单增加新房名称
+ALTER TABLE `t_settle_accounts`
+ADD COLUMN `new_house_name`  varchar(500) NULL COMMENT '新房名称' AFTER `address`;
