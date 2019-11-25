@@ -190,6 +190,8 @@ public class SwapHouseController extends BaseController {
         modelAndView.setViewName("ssadmin/detailSwapHouse");
         SwapHouse entity = this.swapHouseService.getById(id);
         if (entity != null) {
+            Area area = areaService.getById(entity.getAreaId());
+            entity.setProjectCode(area.getProjectCode());
             SwapHouseVO vo = SwapHouseVO.parse(entity);
             modelAndView.addObject("swapHouse", vo);
         }

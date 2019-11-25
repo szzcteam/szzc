@@ -40,6 +40,7 @@
                     <dt>被征收人(乙方):</dt>
                     <dd>
                         <input type="text" name="houseOwner" value="${swapHouse.houseOwner}" maxlength="50" size="40" style="margin-left: 0px;"/>
+                        <input type="hidden" name="isLesseeFlag" value="${swapHouse.isLesseeFlag}"/>
                     </dd>
                 </dl>
                 <dl>

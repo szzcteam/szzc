@@ -17,6 +17,11 @@ public class SwapHouse {
      */
     private Long areaId;
 
+    /***
+     * 片区所属项目
+     */
+    private String projectCode;
+
     /**
      * 协议编号
      */

@@ -2,6 +2,7 @@ package com.me.szzc.pojo.vo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.constant.Constant;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.utils.BigDecimalUtil;
@@ -556,6 +557,16 @@ public class SwapHouseVO extends Adjudication {
      */
     private Boolean isLesseeFlag;
 
+    /**
+     * 片区ID
+     */
+    private Long areaId;
+
+    /**
+     * 项目code
+     */
+    private String projectCode;
+
     /**创建时间**/
     private Date createDate;
 
@@ -707,6 +718,9 @@ public class SwapHouseVO extends Adjudication {
             vo.setPayParm6("");
         }
 
+        if(entity.getIsLesseeFlag() == null){
+            entity.setIsLesseeFlag(false);
+        }
         vo.setIsLesseeFlag(entity.getIsLesseeFlag());
         vo.setCreateDate(entity.getCreateDate());
 
@@ -716,6 +730,9 @@ public class SwapHouseVO extends Adjudication {
         }else{
             adjudication = Adjudication.getDefaultAdju();
         }
+
+        vo.setAreaId(entity.getAreaId());
+        vo.setProjectCode(entity.getProjectCode());
 
         vo.setGovYear(adjudication.getGovYear());
         vo.setGovMonth(adjudication.getGovMonth());

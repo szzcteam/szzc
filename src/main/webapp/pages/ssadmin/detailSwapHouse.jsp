@@ -52,10 +52,44 @@
                     <td style="width: 330px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
                     <td>代办单位：<div style="width: 200px;" class="rows_div">${swapHouse.agencyCompany}</div></td>
                 </tr>
-                <tr>
-                    <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${swapHouse.houseOwner}</div></td>
-                    <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.identityNo}</div></td>
-                </tr>
+                <c:choose>
+                    <c:when test="${swapHouse.projectCode == 'B001001'}">
+                        <tr>
+                            <td>被征收人（乙方）：
+                                <div style="width: 175px;" class="rows_div">
+                                    <c:if test="${swapHouse.isLesseeFlag == false}">
+                                        ${swapHouse.houseOwner}
+                                    </c:if>
+                                </div>
+                            </td>
+                            <td>身份证号：
+                                <div style="width: 200px;" class="rows_div">
+                                    <c:if test="${swapHouse.isLesseeFlag == false}">
+                                        ${swapHouse.identityNo}
+                                    </c:if>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">
+                                <c:if test="${swapHouse.isLesseeFlag == true}">
+                                    ${swapHouse.houseOwner}
+                                </c:if>
+                            </div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">
+                                <c:if test="${swapHouse.isLesseeFlag == true}">
+                                    ${swapHouse.identityNo}
+                                </c:if>
+                            </div></td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${swapHouse.houseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.identityNo}</div></td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
             </table>
         </div>
         <div style="line-height: 26px;text-align: left;">
