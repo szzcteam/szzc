@@ -109,6 +109,11 @@ public class SettleAccountsVO {
     private String address;
 
     /**
+     * 选择产权调换时，选择的新房名称
+     */
+    private String newHouseName;
+
+    /**
      * 被征收房屋价值补偿计算公式
      */
     private String calcValueCompensate;
@@ -775,6 +780,7 @@ public class SettleAccountsVO {
         vo.setInArea(BigDecimalUtil.stripTrailingZeros(entity.getInArea()));
         vo.setAssessPrice(entity.getAssessPrice());
         vo.setAddress(entity.getAddress());
+        vo.setNewHouseName(entity.getNewHouseName());
 
         //有证的
         vo.setCalcValueCompensate(entity.getCalcValueCompensate());

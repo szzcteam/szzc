@@ -103,6 +103,11 @@ public class SettleAccounts {
     private String address;
 
     /**
+     * 选择产权调换时，选择的新房名称
+     */
+    private String newHouseName;
+
+    /**
      * 被征收房屋价值补偿计算公式
      */
     private String calcValueCompensate;

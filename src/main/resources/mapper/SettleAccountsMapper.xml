@@ -21,6 +21,7 @@
     <result column="in_area" jdbcType="DECIMAL" property="inArea" />
     <result column="assess_price" jdbcType="VARCHAR" property="assessPrice" />
     <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="new_house_name" jdbcType="VARCHAR" property="newHouseName" />
     <result column="calc_value_compensate" jdbcType="VARCHAR" property="calcValueCompensate" />
     <result column="value_compensate" jdbcType="DECIMAL" property="valueCompensate" />
     <result column="value_compensate_bz" jdbcType="VARCHAR" property="valueCompensateBz" />
@@ -154,7 +155,7 @@
   <sql id="Base_Column_List">
     id, area_id, card_no, project_name, house_owner, identity_no, compensate_type, lessee,
     phone, lessee_phone, useing, certified_area, no_register_legal_area, history_legacy_area,
-    check_in_area, no_checkin_area, in_area, assess_price, address, calc_value_compensate,
+    check_in_area, no_checkin_area, in_area, assess_price, address, new_house_name, calc_value_compensate,
     value_compensate, value_compensate_bz, calc_no_register_legal, no_register_legal,
     no_register_legal_bz, calc_history_legacy, history_legacy, history_legacy_bz, calc_decoration_compensate,
     decoration_compensate, decoration_compensate_bz, calc_move_house_fee, move_house_fee,
@@ -210,7 +211,7 @@
       lessee_phone, useing, certified_area,
       no_register_legal_area, history_legacy_area,
       check_in_area, no_checkin_area, in_area,
-      assess_price, address, calc_value_compensate,
+      assess_price, address, new_house_name, calc_value_compensate,
       value_compensate, value_compensate_bz, calc_no_register_legal,
       no_register_legal, no_register_legal_bz, calc_history_legacy,
       history_legacy, history_legacy_bz, calc_decoration_compensate,
@@ -265,7 +266,7 @@
       #{lesseePhone,jdbcType=VARCHAR}, #{useing,jdbcType=VARCHAR}, #{certifiedArea,jdbcType=DECIMAL},
       #{noRegisterLegalArea,jdbcType=DECIMAL}, #{historyLegacyArea,jdbcType=DECIMAL},
       #{checkInArea,jdbcType=DECIMAL}, #{noCheckinArea,jdbcType=DECIMAL}, #{inArea,jdbcType=DECIMAL},
-      #{assessPrice,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{calcValueCompensate,jdbcType=VARCHAR},
+      #{assessPrice,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{newHouseName}, #{calcValueCompensate,jdbcType=VARCHAR},
       #{valueCompensate,jdbcType=DECIMAL}, #{valueCompensateBz,jdbcType=VARCHAR}, #{calcNoRegisterLegal,jdbcType=VARCHAR},
       #{noRegisterLegal,jdbcType=DECIMAL}, #{noRegisterLegalBz,jdbcType=VARCHAR}, #{calcHistoryLegacy,jdbcType=VARCHAR},
       #{historyLegacy,jdbcType=DECIMAL}, #{historyLegacyBz,jdbcType=VARCHAR}, #{calcDecorationCompensate,jdbcType=VARCHAR},
@@ -336,6 +337,7 @@
       in_area = #{inArea,jdbcType=DECIMAL},
       assess_price = #{assessPrice,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
+      new_house_name = #{newHouseName},
       calc_value_compensate = #{calcValueCompensate,jdbcType=VARCHAR},
       value_compensate = #{valueCompensate,jdbcType=DECIMAL},
       value_compensate_bz = #{valueCompensateBz,jdbcType=VARCHAR},

@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.me.szzc.aspect.SysLog;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.enums.SigningStatusEnum;
@@ -179,16 +180,23 @@ public class SettleAccountsController extends BaseController {
         }
     }
 
+    //初始化修改
     @RequestMapping("ssadmin/settleAccounts/query")
     public ModelAndView querySettleAccounts(String idMore, String url, HttpServletRequest request) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName(url) ;
+
         //条件判断
         String[] idArr = idMore.split(",");
         Long id = Long.valueOf(idArr[0]);
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
         if(settleAccounts !=null){
             modelAndView.addObject("settleAccounts", settleAccounts);
+
+            Area area =  areaService.getById(settleAccounts.getAreaId());
+            if(area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())){
+                modelAndView.setViewName(url+"_zyc") ;
+            }
         }
 
         //获取用户管理的片区
@@ -233,11 +241,17 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping("ssadmin/settleAccounts/preview")
     public ModelAndView preview(Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/detailSettleAccounts");
+        String url = "ssadmin/detailSettleAccounts";
+        modelAndView.setViewName(url);
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
         if(settleAccounts != null) {
             SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
             modelAndView.addObject("settleAccounts", vo);
+
+            Area area =  areaService.getById(settleAccounts.getAreaId());
+            if(area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())){
+                modelAndView.setViewName(url+"_zyc") ;
+            }
         }
         return modelAndView;
     }

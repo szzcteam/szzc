@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.CompensateTypeEnum;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.ProtocolVO;
@@ -146,9 +147,15 @@ public class ProtocolController extends BaseController {
 
     @RequestMapping("/ssadmin/goProtocolJSP")
     public ModelAndView toPage(HttpServletRequest request) {
-        String url = request.getParameter("url");
         ModelAndView modelAndView = new ModelAndView();
+        String url = request.getParameter("url");
         modelAndView.setViewName(url);
+
+        String projectCode = request.getParameter("projectCode");
+        if(StringUtils.isNotBlank(projectCode)){
+            modelAndView.addObject("projectCode", projectCode);
+        }
+
         //初始化水电空调参数
         initWaterAmmerParam(modelAndView);
         //获取用户管理的片区

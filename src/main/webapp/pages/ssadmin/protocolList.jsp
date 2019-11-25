@@ -98,6 +98,13 @@
                        height="400" width="800" target="dialog" rel="addSettleAccounts"><span>新增结算单</span>
                 </a></li>--%>
             </shiro:hasPermission>
+
+            <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=B001001">
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=B001001"
+                       height="550" width="1000" target="dialog" rel="addProtocol"><span>紫阳村新增</span>
+                </a></li>
+            </shiro:hasPermission>
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"

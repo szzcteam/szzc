@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="comm/include.inc.jsp" %>
 <div class="pageContent" style="overflow-x: hidden;">
     <div style="margin-bottom: 10px;padding-left: 10px;">
         协议类型：&nbsp;&nbsp;&nbsp;&nbsp;
@@ -10,7 +11,14 @@
         </select>
     </div>
     <div id="businessPage">
-        <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts.jsp" %></div>
+        <c:choose>
+            <c:when test="${projectCode != null && projectCode == 'B001001' }">
+                <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts_zyc.jsp" %></div>
+            </c:when>
+            <c:otherwise>
+                <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts.jsp" %></div>
+            </c:otherwise>
+        </c:choose>
         <div id="div_rmbRecompense" style="display: none;"><%@ include file="addRmbRecompense.jsp" %></div>
         <div id="div_swapHouse" style="display: none;"><%@ include file="addSwapHouse.jsp" %></div>
     </div>
