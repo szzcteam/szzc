@@ -102,6 +102,8 @@
     <result column="upper_less_difference" jdbcType="VARCHAR" property="upperLessDifference" />
     <result column="move_month" jdbcType="INTEGER" property="moveMonth" />
     <result column="other_terms_one" jdbcType="VARCHAR" property="otherTermsOne" />
+    <result column="is_lessee_flag" jdbcType="TINYINT" property="isLesseeFlag" />
+    <result column="adjudication_json" jdbcType="VARCHAR" property="adjudicationJson" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
@@ -126,7 +128,7 @@
     move_reward, other_fee, sum_rbm, upper_rmb, before_day, new_house_address, seat,
     unit, floors, house_number, covered_area, price, total_price, upper_total_price,
     years, months, transfer_rmb, difference, upper_difference, less_difference, upper_less_difference,
-    move_month, other_terms_one, create_date, create_user_id, modified_date, modified_user_id,
+    move_month, other_terms_one,is_lessee_flag, adjudication_json, create_date, create_user_id, modified_date, modified_user_id,
     deleted
   </sql>
   <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -134,6 +136,14 @@
     <include refid="Base_Column_List" />
     from t_swap_house
     where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="getLastByAreaId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_swap_house
+    where area_id = #{areaId}
+    order by id desc limit 0,1
   </select>
 
   <select id="getByHouseOwnerAddr" parameterType="String" resultMap="BaseResultMap">
@@ -191,7 +201,7 @@
       upper_total_price, years, months,
       transfer_rmb, difference, upper_difference,
       less_difference, upper_less_difference, move_month,
-      other_terms_one, create_date, create_user_id,
+      other_terms_one, is_lessee_flag, adjudication_json,  create_date, create_user_id,
       modified_date, modified_user_id, deleted
       )
     values (#{id,jdbcType=BIGINT}, #{areaId,jdbcType=BIGINT},#{cardNo,jdbcType=VARCHAR}, #{mngOffice,jdbcType=VARCHAR},
@@ -229,7 +239,8 @@
       #{upperTotalPrice,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR}, #{months,jdbcType=VARCHAR},
       #{transferRmb,jdbcType=DECIMAL}, #{difference,jdbcType=DECIMAL}, #{upperDifference,jdbcType=VARCHAR},
       #{lessDifference,jdbcType=DECIMAL}, #{upperLessDifference,jdbcType=VARCHAR}, #{moveMonth,jdbcType=INTEGER},
-      #{otherTermsOne,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
+      #{otherTermsOne,jdbcType=VARCHAR}, #{isLesseeFlag}, #{adjudicationJson},
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
       #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT}
       )
   </insert>
@@ -335,6 +346,8 @@
       upper_less_difference = #{upperLessDifference,jdbcType=VARCHAR},
       move_month = #{moveMonth,jdbcType=INTEGER},
       other_terms_one = #{otherTermsOne,jdbcType=VARCHAR},
+      is_lessee_flag = #{isLesseeFlag},
+      adjudication_json = #{adjudicationJson},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
       modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}

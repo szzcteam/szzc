@@ -43,6 +43,11 @@ public class SwapHouseService {
         return swapHouseMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
+
+    public SwapHouse getLastByAreaId(Long areaId){
+        return swapHouseMapper.getLastByAreaId(areaId);
+    }
+
     public List<SwapHouse> listAll(List<Long> areaIdList){
         return swapHouseMapper.listAll(areaIdList);
     }

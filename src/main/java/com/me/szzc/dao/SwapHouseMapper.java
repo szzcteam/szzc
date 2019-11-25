@@ -13,6 +13,9 @@ public interface SwapHouseMapper {
 
     SwapHouse getById(Long id);
 
+    /**根据片区获取上一次的裁决信息**/
+    SwapHouse getLastByAreaId(@Param("areaId") Long areaId);
+
     int updateByPrimaryKey(SwapHouse record);
 
     SwapHouse getByHouseOwnerAddr(@Param("houseOwner") String houseOwner, @Param("address") String address);

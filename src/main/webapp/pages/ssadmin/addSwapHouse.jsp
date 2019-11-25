@@ -41,6 +41,7 @@
                     <dt>被征收人(乙方):</dt>
                     <dd>
                         <input type="text" name="houseOwner" maxlength="50" size="40" style="margin-left: 0px;"/>
+                        <input type="hidden" name="isLesseeFlag"/>
                     </dd>
                 </dl>
                 <dl>
@@ -58,6 +59,23 @@
                                 <option value="${area.id}" <c:if test="${num.index == 0 }">selected="selected"</c:if>>${area.name}</option>
                             </c:forEach>
                         </select>
+                    </dd>
+                </dl>
+            </fieldset>
+            <br/><br/>
+            <fieldset>
+                <legend>诀字信息</legend>
+                <dl style="width: 100%;height: 26px;">
+                    <dd style="width: 95%;line-height: 26px;">
+                        人民政府于
+                        <input type="text" name="govYear"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>年
+                        <input type="text" name="govMonth"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>月
+                        <input type="text" name="govDay"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>日作出《房屋征收决定》
+                        （武昌征决字[<input type="text" name="adjuLetter"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>]
+                        第<input type="text" name="adjuNum"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>号），并于
+                        <input type="text" name="noticeYear"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>年
+                        <input type="text" name="noticeMonth"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>月
+                        <input type="text" name="noticeDay"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>日公告
                     </dd>
                 </dl>
             </fieldset>
@@ -233,7 +251,7 @@
                         乙方同意将房屋征收补偿款&nbsp;<input type="text" name="transferRmb" style="margin-left: 0px;clear: both;float: none;width: 80px;margin-left: 0px;"/>元由甲方支付给产权调换房建设单位，
                         如房屋征收补偿款总额大于预购房款，其差额部分&nbsp;&nbsp;<input type="text" name="difference"  size="20" style="border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 120px;margin-left: 0px;"/>&nbsp;&nbsp;元
                         （大写：&nbsp;&nbsp;<input type="text" name="upperDifference"  size="20" style="margin-left: 0px;border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>&nbsp;&nbsp;）
-                        经会计机构审核出具审计报告后7个工作日内，由甲方一次性支付给乙方；如房屋征收补偿总额小于预购房款，其差额部分&nbsp;&nbsp;
+                        经会计机构审核出具审计报告后，由甲方一次性支付给乙方；如房屋征收补偿总额小于预购房款，其差额部分&nbsp;&nbsp;
                         <input type="text" name="lessDifference"   size="20" style="margin-left: 0px;border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 120px;"/>&nbsp;&nbsp;元
                         （大写：&nbsp;&nbsp;<input type="text" name="upperLessDifference"  size="20"  style="margin-left: 0px;border-left: none;border-right: none;border-top: none;clear: both;float: none;width: 160px;"/>&nbsp;&nbsp;）
                         待办理入住手续时，据实结算由乙方一次性支付给甲方。

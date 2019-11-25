@@ -532,5 +532,14 @@ public class SwapHouse {
      */
     private Boolean deleted;
 
+    /**
+     * 字诀信息
+     */
+    private String adjudicationJson;
+
+    /**
+     * 是否承租人标识
+     */
+    private Boolean isLesseeFlag;
 
 }

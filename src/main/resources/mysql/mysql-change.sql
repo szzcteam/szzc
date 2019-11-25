@@ -23,3 +23,14 @@ UPDATE field_coordinate SET item_code = 'A001001';
 #结算单增加新房名称
 ALTER TABLE `t_settle_accounts`
 ADD COLUMN `new_house_name`  varchar(500) NULL COMMENT '新房名称' AFTER `address`;
+
+#产权调换增加 承租人标识
+ALTER TABLE `t_swap_house`
+ADD COLUMN `is_lessee_flag`  tinyint NULL COMMENT '是否是承租人，0否，1是，默认是0' AFTER `other_terms_one`,
+ADD COLUMN `adjudication_json`  varchar(1000) NULL COMMENT '字诀信息，json串格式' AFTER `is_lessee_flag`;
+
+#货币补偿增加 承租人标识
+ALTER TABLE `t_rmb_recompense`
+ADD COLUMN `is_lessee_flag`  tinyint NULL COMMENT '是否是承租人，0否，1是，默认是0' AFTER `other_terms_two`,
+ADD COLUMN `adjudication_json`  varchar(1000) NULL COMMENT '字诀信息，json串格式' AFTER `is_lessee_flag`;
+

@@ -85,6 +85,8 @@
     <result column="before_day" jdbcType="INTEGER" property="beforeDay" />
     <result column="other_terms_one" jdbcType="VARCHAR" property="otherTermsOne" />
     <result column="other_terms_two" jdbcType="VARCHAR" property="otherTermsTwo" />
+    <result column="is_lessee_flag" jdbcType="TINYINT" property="isLesseeFlag" />
+    <result column="adjudication_json" jdbcType="VARCHAR" property="adjudicationJson" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
     <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
@@ -106,7 +108,7 @@
     rmb_compensate, structure_balcony, structure_build, structure_dark, structure_mezzanine,
     structure_roof, affiliated_other, basic_living_subsidy, disability_subsidy, disease_subsidy,
     no_child, martyr, life_compensate, change_compensate, small_area_reward, move_reward,
-    other_fee, sum_rbm, upper_rmb, before_day, other_terms_one, other_terms_two, create_date,
+    other_fee, sum_rbm, upper_rmb, before_day, other_terms_one, other_terms_two, is_lessee_flag, adjudication_json, create_date,
     create_user_id, modified_date, modified_user_id, deleted
   </sql>
   <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">

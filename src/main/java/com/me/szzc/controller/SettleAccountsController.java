@@ -1,13 +1,16 @@
 package com.me.szzc.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.enums.SigningStatusEnum;
+import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.SettleAccounts;
+import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
@@ -17,6 +20,7 @@ import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlExpression;
 import org.apache.commons.lang3.StringUtils;
+import org.codehaus.jackson.JsonNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -259,7 +263,22 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping("ssadmin/settleAccounts/detail")
     @ResponseBody
     public SettleAccounts detail(String houseOwner, String address) throws Exception {
+        //查询结算单信息
         SettleAccounts settleAccounts = this.settleAccountsService.getByHouseOwnerAddr(houseOwner, address);
+        if(settleAccounts != null){
+            Area area =  areaService.getById(settleAccounts.getAreaId());
+            //使用默认的决字信息
+            if(area != null && area.getProjectCode().equals(GovernmentEnum.MLJ.getCode())){
+                settleAccounts.setAdjudication(Adjudication.getDefaultAdju());
+            }else{
+                //查询上一次的产权调换信息，默认使用上次的决字，避免每次都重新输入
+                SwapHouse swapHouse = this.swapHouseService.getLastByAreaId(settleAccounts.getAreaId());
+                if(swapHouse != null){
+                    Adjudication adjudication = JSONObject.parseObject(swapHouse.getAdjudicationJson(), Adjudication.class);
+                    settleAccounts.setAdjudication(adjudication);
+                }
+            }
+        }
         return settleAccounts;
     }
 

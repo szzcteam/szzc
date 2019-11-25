@@ -1,6 +1,8 @@
 package com.me.szzc.pojo.vo;
 
+import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.constant.Constant;
+import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.NumberToCapitalizedUtils;
@@ -17,7 +19,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class SwapHouseVO {
+public class SwapHouseVO extends Adjudication {
 
     private Long id;
 
@@ -544,6 +546,16 @@ public class SwapHouseVO {
      */
     private String otherTermsOne;
 
+    /**
+     * 字诀信息
+     */
+    private String adjudicationJson;
+
+    /**
+     * 是否承租人标识
+     */
+    private Boolean isLesseeFlag;
+
     /**创建时间**/
     private Date createDate;
 
@@ -695,7 +707,24 @@ public class SwapHouseVO {
             vo.setPayParm6("");
         }
 
+        vo.setIsLesseeFlag(entity.getIsLesseeFlag());
         vo.setCreateDate(entity.getCreateDate());
+
+        Adjudication adjudication = null;
+        if(StringUtils.isNotBlank(entity.getAdjudicationJson())){
+            adjudication = JSONObject.parseObject(entity.getAdjudicationJson(), Adjudication.class);
+        }else{
+            adjudication = Adjudication.getDefaultAdju();
+        }
+
+        vo.setGovYear(adjudication.getGovYear());
+        vo.setGovMonth(adjudication.getGovMonth());
+        vo.setGovDay(adjudication.getGovDay());
+        vo.setAdjuLetter(adjudication.getAdjuLetter());
+        vo.setAdjuNum(adjudication.getAdjuNum());
+        vo.setNoticeYear(adjudication.getNoticeYear());
+        vo.setNoticeMonth(adjudication.getNoticeMonth());
+        vo.setNoticeDay(adjudication.getNoticeDay());
 
         return vo;
     }

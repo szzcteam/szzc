@@ -129,6 +129,12 @@ var swapHouseObj = {
                 }
                 alertMsg.confirm("检测到 "+houseName + ",地址: "+address+" 有【结算单】，是否使用结算单数据进行填充？", {
                     okCall: function(){
+                        //承租人标识
+                        if (data.houseOwner != null && data.houseOwner != "") {
+                            $("#swapHouseDiv input[name='isLesseeFlag']").eq(0).val(false);
+                        } else if (data.lessee != null && data.lessee != "") {
+                            $("#swapHouseDiv input[name='isLesseeFlag']").eq(0).val(true);
+                        }
                         //片区
                         $("#swapHouseDiv select[name='areaId']").eq(0).val(data.areaId);
                         //被征收房屋地址
@@ -267,6 +273,18 @@ var swapHouseObj = {
                             //应收  旧房金额小于新房金额
                             $("#swapHouseDiv input[name='lessDifference']").eq(0).val(data.payTotal);
                             $("#swapHouseDiv input[name='upperLessDifference']").eq(0).val(data.payMoney);
+                        }
+
+                        //决字信息
+                        if (data.adjudication != null) {
+                            $("#swapHouseDiv input[name='govYear']").eq(0).val(data.adjudication.govYear);
+                            $("#swapHouseDiv input[name='govMonth']").eq(0).val(data.adjudication.govMonth);
+                            $("#swapHouseDiv input[name='govDay']").eq(0).val(data.adjudication.govDay);
+                            $("#swapHouseDiv input[name='adjuLetter']").eq(0).val(data.adjudication.adjuLetter);
+                            $("#swapHouseDiv input[name='adjuNum']").eq(0).val(data.adjudication.adjuNum);
+                            $("#swapHouseDiv input[name='noticeYear']").eq(0).val(data.adjudication.noticeYear);
+                            $("#swapHouseDiv input[name='noticeMonth']").eq(0).val(data.adjudication.noticeMonth);
+                            $("#swapHouseDiv input[name='noticeDay']").eq(0).val(data.adjudication.noticeDay);
                         }
 
                     }

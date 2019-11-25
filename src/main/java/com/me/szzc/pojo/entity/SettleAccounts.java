@@ -2,6 +2,7 @@ package com.me.szzc.pojo.entity;
 
 import lombok.Data;
 
+import java.beans.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -751,6 +752,11 @@ public class SettleAccounts {
      * 签约状态：0未签约、1签约完成
      */
     private Integer signingStatus;
+
+    /**
+     * 决字信息，结算单数据库忽略该字段
+     */
+    private Adjudication adjudication;
 
 
 

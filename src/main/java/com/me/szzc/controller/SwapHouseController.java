@@ -1,19 +1,18 @@
 package com.me.szzc.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.CompensateTypeEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
-import com.me.szzc.pojo.entity.Area;
-import com.me.szzc.pojo.entity.RmbRecompense;
-import com.me.szzc.pojo.entity.SettleAccounts;
-import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.RmbRecompenseVO;
 import com.me.szzc.pojo.vo.SwapHouseVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
 import com.me.szzc.utils.WordUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +36,7 @@ public class SwapHouseController extends BaseController {
 
     @RequestMapping("/ssadmin/addSwapHouse")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增产权调换协议")
-    public ModelAndView addSwapHouse(SwapHouse swapHouse, HttpServletRequest request) {
+    public ModelAndView addSwapHouse(SwapHouse swapHouse, Adjudication adjudication,  HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //判断结算单是否存在
@@ -61,6 +60,12 @@ public class SwapHouseController extends BaseController {
             modelAndView.addObject("message", getOwnerOnlyMsg(swapHouse.getHouseOwner(), swapHouse.getAddress()));
             return modelAndView;
         }
+
+        //将决字信息转换成json串
+        if(adjudication != null){
+            swapHouse.setAdjudicationJson(JSONObject.toJSONString(adjudication));
+        }
+
         //创建人
         Long userId = getAdminSession(request).getFid();
         swapHouse.setCreateUserId(userId);
@@ -76,12 +81,15 @@ public class SwapHouseController extends BaseController {
 
     @RequestMapping("/ssadmin/updateSwapHouse")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改产权调换协议")
-    public ModelAndView updateSwapHouse(SwapHouse swapHouse, HttpServletRequest request) {
+    public ModelAndView updateSwapHouse(SwapHouse swapHouse,  Adjudication adjudication, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //修改人
         Long userId = getAdminSession(request).getFid();
         swapHouse.setModifiedUserId(userId);
+        if(adjudication != null){
+            swapHouse.setAdjudicationJson(JSONObject.toJSONString(adjudication));
+        }
         this.swapHouseService.updateSwapHouse(swapHouse);
         modelAndView.addObject("statusCode", 200);
         modelAndView.addObject("message", "修改成功");
@@ -129,6 +137,13 @@ public class SwapHouseController extends BaseController {
         Long id = Long.valueOf(idArr[2]);
         SwapHouse swapHouse = this.swapHouseService.getById(id);
         if (swapHouse != null) {
+            if (StringUtils.isNotBlank(swapHouse.getAdjudicationJson())) {
+                Adjudication adjudication = JSONObject.parseObject(swapHouse.getAdjudicationJson(), Adjudication.class);
+                modelAndView.addObject("adjudication", adjudication);
+            } else {
+                //为了兼容历史数据而处理
+                modelAndView.addObject("adjudication", Adjudication.getDefaultAdju());
+            }
             modelAndView.addObject("swapHouse", swapHouse);
         }
         //获取用户管理的片区
