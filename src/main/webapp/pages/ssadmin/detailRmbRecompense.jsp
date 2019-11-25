@@ -57,14 +57,49 @@
                     <td style="width: 330px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
                     <td>代办单位：<div style="width: 200px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
                 </tr>
-                <tr>
-                    <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${rmbRecom.houseOwner}</div></td>
-                    <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.identityNo}</div></td>
-                </tr>
+                <c:choose>
+                    <c:when test="${rmbRecom.projectCode == 'B001001'}">
+                        <tr>
+                            <td>被征收人（乙方）：
+                                <div style="width: 175px;" class="rows_div">
+                                    <c:if test="${rmbRecom.isLesseeFlag == false}">
+                                        ${rmbRecom.houseOwner}
+                                    </c:if>
+                                </div>
+                            </td>
+                            <td>身份证号：
+                                <div style="width: 200px;" class="rows_div">
+                                    <c:if test="${rmbRecom.isLesseeFlag == false}">
+                                        ${rmbRecom.identityNo}
+                                    </c:if>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">
+                                <c:if test="${rmbRecom.isLesseeFlag == true}">
+                                    ${rmbRecom.houseOwner}
+                                </c:if>
+                            </div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">
+                                <c:if test="${rmbRecom.isLesseeFlag == true}">
+                                    ${rmbRecom.identityNo}
+                                </c:if>
+                            </div></td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${rmbRecom.houseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.identityNo}</div></td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
             </table>
         </div>
         <div style="line-height: 26px;text-align: left;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;武汉市武昌区人民政府于2019年7月19日作出《房屋征收决定》（武昌征决字[2019] 4号），并于2019年7月19日在房屋征收范围内公告，
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;武汉市武昌区人民政府于${swapHouse.govYear}年${swapHouse.govMonth}月${swapHouse.govDay}日作出《房屋征收决定》（武昌征决字[${swapHouse.adjuLetter}] ${swapHouse.adjuNum}号），
+            并于${swapHouse.noticeYear}年${swapHouse.noticeMonth}月${swapHouse.noticeDay}日在房屋征收范围内公告，
             乙方房屋在征收范围内。依据《国有土地上房屋征收与补偿条例》等相关规定，按照房屋征收补偿方案，甲、乙双方经平等协商，
             就房屋征收补偿事宜达成协议如下：
         </div>
@@ -170,45 +205,94 @@
             <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             大写人民币：<div style="width: 300px;" class="rows_div">${rmbRecom.upperRmb}</div>
         </div>
-        <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签约、搬迁及付款</b></div>
-        <div style="text-align: left;line-height: 26px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1、甲、乙双方签订本协议时，乙方应提交被征收房屋所有权证、国有土地使用证以及其他相关资料给甲方，甲方应于本协议签订之日起，经会计机构审核出具审计报告并完成征收工作相关手续后15个工作日内，将房屋征收补偿的总金额支付给乙方，支付方式为甲方将补偿款存入甲方在银行设定的乙方名下的储蓄账户。
-            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            2、乙方保证向甲方所提供的所有产权书证及其他相关资料真实、合法；乙方未隐瞒被征收房屋的产权纠纷或抵押担保等状况，如因隐瞒或提供资料不实产生的一切责任由乙方承担。
-            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            3、乙方应于<div style="width: 60px;" class="rows_div">${rmbRecom.beforeDay}</div>日内搬迁腾空房屋内物品，并结清房屋水、电等费用后移交给甲方。
-        </div>
-        <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其它约定</b></div>
-        <div style="text-align: left;line-height: 26px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1、约定：<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsOne}</div>
-            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            2、约定：<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsTwo}</div>
-        </div>
-        <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;争议的处理</b></div>
-        <div style="text-align: left;line-height: 26px;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            因履行本协议发生争议时，由甲、乙双方协商解决；协商不成的，可依法申请行政复议或提起行政诉讼。
-        </div>
-        <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第六条</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议经乙方签字按手印、甲方签字加盖公章之后生效。</div>
-        <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第七条</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议一式陆份，甲方执伍份，乙方执壹份。</div>
-        <div>
-            <table style="height: 100px;width: 80%;margin-top: 20px;text-align: right;">
-                <tr>
-                    <td style="width: 50%;">甲    方（盖章）：  </td>
-                    <td style="width: 50%;">乙      方（签字）：</td>
-                </tr>
-                <tr>
-                    <td>代办单位（签字盖章）：</td>
-                    <td>乙方委托代理人（签字）： </td>
-                </tr>
-                <tr>
-                    <td>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    <td>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                </tr>
-            </table>
-        </div>
+
+        <c:choose>
+            <c:when test="${rmbRecom.projectCode == 'B001001'}">
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签约、搬迁及付款</b></div>
+                <div style="text-align: left;line-height: 26px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    1、甲、乙（丙方）双方签订本协议时，乙方（丙方）应提交被征收房屋所有权证、国有土地使用证以及其他相关资料给甲方，甲方应于本协议签订之日起，
+                    经会计机构审核出具审计报告?个工作日并在乙方完成被征收房屋的注销登记后，
+                    将房屋征收补偿的总金额支付给乙方（丙方），支付方式将补偿款存入甲方在银行设定的乙方（丙方）名下的储蓄账户。
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    2、乙方（丙方）保证向甲方所提供的所有产权书证及其他相关资料真实、合法；乙方（丙方）未隐瞒被征收房屋的产权纠纷或抵押担保等状况，如因隐瞒或提供资料不实产生的一切责任由乙方（丙方）承担。
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    3、乙方（丙方）应于<div style="width: 60px;" class="rows_div">${rmbRecom.beforeDay}</div>日内搬迁腾空房屋内物品，并结清房屋水、电等费用后移交给甲方。
+                </div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其它约定</b></div>
+                <div style="text-align: left;line-height: 26px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    1、<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsOne}</div>
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    2、<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsTwo}</div>
+                </div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;争议的处理</b></div>
+                <div style="text-align: left;line-height: 26px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    因履行本协议发生争议时，由甲、乙（丙方）双方协商解决；协商不成的，可依法申请行政复议、行政诉讼。
+                </div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第六条</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议经乙方（丙方）签字按手印、甲方签字加盖公章之后生效。</div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第七条</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议一式六份，甲方执五份，乙方（丙方）执一份。</div>
+                <div>
+                    <table style="height: 100px;width: 80%;margin-top: 20px;text-align: right;">
+                        <tr>
+                            <td style="width: 50%;">甲    方（盖章）：  </td>
+                            <td style="width: 50%;">乙      方（签字）：</td>
+                        </tr>
+                        <tr>
+                            <td>代办单位（签字盖章）：</td>
+                            <td>乙方委托代理人（签字）： </td>
+                        </tr>
+                        <tr>
+                            <td>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签约、搬迁及付款</b></div>
+                <div style="text-align: left;line-height: 26px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    1、甲、乙双方签订本协议时，乙方应提交被征收房屋所有权证、国有土地使用证以及其他相关资料给甲方，甲方应于本协议签订之日起，经会计机构审核出具审计报告并完成征收工作相关手续后15个工作日内，将房屋征收补偿的总金额支付给乙方，支付方式为甲方将补偿款存入甲方在银行设定的乙方名下的储蓄账户。
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    2、乙方保证向甲方所提供的所有产权书证及其他相关资料真实、合法；乙方未隐瞒被征收房屋的产权纠纷或抵押担保等状况，如因隐瞒或提供资料不实产生的一切责任由乙方承担。
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    3、乙方应于<div style="width: 60px;" class="rows_div">${rmbRecom.beforeDay}</div>日内搬迁腾空房屋内物品，并结清房屋水、电等费用后移交给甲方。
+                </div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其它约定</b></div>
+                <div style="text-align: left;line-height: 26px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    1、约定：<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsOne}</div>
+                    <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    2、约定：<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsTwo}</div>
+                </div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;争议的处理</b></div>
+                <div style="text-align: left;line-height: 26px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    因履行本协议发生争议时，由甲、乙双方协商解决；协商不成的，可依法申请行政复议或提起行政诉讼。
+                </div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第六条</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议经乙方签字按手印、甲方签字加盖公章之后生效。</div>
+                <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第七条</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议一式陆份，甲方执伍份，乙方执壹份。</div>
+                <div>
+                    <table style="height: 100px;width: 80%;margin-top: 20px;text-align: right;">
+                        <tr>
+                            <td style="width: 50%;">甲    方（盖章）：  </td>
+                            <td style="width: 50%;">乙      方（签字）：</td>
+                        </tr>
+                        <tr>
+                            <td>代办单位（签字盖章）：</td>
+                            <td>乙方委托代理人（签字）： </td>
+                        </tr>
+                        <tr>
+                            <td>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </c:otherwise>
+        </c:choose>
+
 
     </div>
 </div>

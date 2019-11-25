@@ -1072,7 +1072,7 @@ var settleAccountObj = {
         var calcValueCompensateArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
         var calcNoRegisterLegalArea = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
         var calcHistoryLegacyArea = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
-        var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 0;
+        var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
         var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea) + (new Number(calcHistoryLegacyArea) * new Number(calcHistoryLegacyProportion));
         $("input[name='calcDecorationCompensateArea']").eq(0).val(sumArea).change();
     }

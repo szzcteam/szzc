@@ -151,7 +151,7 @@
       life_compensate, change_compensate, small_area_reward,
       move_reward, other_fee, sum_rbm,
       upper_rmb, before_day, other_terms_one,
-      other_terms_two, create_date, create_user_id,
+      other_terms_two, is_lessee_flag, adjudication_json, create_date, create_user_id,
       modified_date, modified_user_id, deleted
       )
     values (#{id,jdbcType=BIGINT},#{areaId,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{mngOffice,jdbcType=VARCHAR},
@@ -183,7 +183,8 @@
       #{lifeCompensate,jdbcType=DECIMAL}, #{changeCompensate,jdbcType=DECIMAL}, #{smallAreaReward,jdbcType=DECIMAL},
       #{moveReward,jdbcType=DECIMAL}, #{otherFee,jdbcType=DECIMAL}, #{sumRbm,jdbcType=DECIMAL},
       #{upperRmb,jdbcType=VARCHAR}, #{beforeDay,jdbcType=INTEGER}, #{otherTermsOne,jdbcType=VARCHAR},
-      #{otherTermsTwo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
+      #{otherTermsTwo,jdbcType=VARCHAR}, #{isLesseeFlag}, #{adjudicationJson},
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
       #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT}
       )
   </insert>
@@ -272,6 +273,8 @@
       before_day = #{beforeDay,jdbcType=INTEGER},
       other_terms_one = #{otherTermsOne,jdbcType=VARCHAR},
       other_terms_two = #{otherTermsTwo,jdbcType=VARCHAR},
+      is_lessee_flag = #{isLesseeFlag},
+      adjudication_json = #{adjudicationJson},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
       modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}

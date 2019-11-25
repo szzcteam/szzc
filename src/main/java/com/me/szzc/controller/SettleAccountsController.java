@@ -57,6 +57,9 @@ public class SettleAccountsController extends BaseController {
             return modelAndView;
         }
 
+        //处理面积
+        processArea(settleAccounts);
+
         //创建人
         Long userId = getAdminSession(request).getFid();
         settleAccounts.setCreateUserId(userId);
@@ -168,6 +171,10 @@ public class SettleAccountsController extends BaseController {
 //        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+
+        //处理面积
+        processArea(settleAccounts);
+
         //条件判断
         String str = "true";  //settleAccountsTerm(settleAccounts);
         if(str.equals("true")){
@@ -714,4 +721,20 @@ public class SettleAccountsController extends BaseController {
         return "true";
     }
 
+
+    //处理面积，当价值补偿：有证面积非空，但第一行的有证为空时，做自动填充
+    private void processArea(SettleAccounts settleAccounts){
+        if(settleAccounts.getCertifiedArea() == null && StringUtils.isNotBlank(settleAccounts.getCalcValueCompensate())){
+            String[] arr = settleAccounts.getCalcValueCompensate().split("\\*");
+            settleAccounts.setCertifiedArea(new BigDecimal(arr[0]));
+        }
+        if(settleAccounts.getNoRegisterLegalArea() == null && StringUtils.isNotBlank(settleAccounts.getCalcNoRegisterLegal())){
+            String[] arr = settleAccounts.getCalcNoRegisterLegal().split("\\*");
+            settleAccounts.setNoRegisterLegalArea(new BigDecimal(arr[0]));
+        }
+        if(settleAccounts.getHistoryLegacyArea() == null && StringUtils.isNotBlank(settleAccounts.getCalcHistoryLegacy())){
+            String[] arr = settleAccounts.getCalcHistoryLegacy().split("\\*");
+            settleAccounts.setHistoryLegacyArea(new BigDecimal(arr[0]));
+        }
+    }
 }

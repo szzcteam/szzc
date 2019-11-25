@@ -106,6 +106,12 @@ var rmbRecompenseObj = {
                 }
                 alertMsg.confirm("检测到 "+houseName + ",地址: "+address+" 有【结算单】，是否使用结算单数据进行填充？", {
                     okCall: function(){
+                        //承租人标识
+                        if (data.houseOwner != null && data.houseOwner != "") {
+                            $("#rmbRecompenseDiv input[name='isLesseeFlag']").eq(0).val(false);
+                        } else if (data.lessee != null && data.lessee != "") {
+                            $("#rmbRecompenseDiv input[name='isLesseeFlag']").eq(0).val(true);
+                        }
                         //片区
                         $("#rmbRecompenseDiv select[name='areaId']").eq(0).val(data.areaId);
                         //被征收房屋地址
@@ -228,6 +234,20 @@ var rmbRecompenseObj = {
 
                         //触发所有条款求和
                         rmbRecompenseObj.summaryNum();
+
+                        //决字信息
+                        if (data.adjudication != null) {
+                            $("#rmbRecompenseDiv input[name='govYear']").eq(0).val(data.adjudication.govYear);
+                            $("#rmbRecompenseDiv input[name='govMonth']").eq(0).val(data.adjudication.govMonth);
+                            $("#rmbRecompenseDiv input[name='govDay']").eq(0).val(data.adjudication.govDay);
+                            $("#rmbRecompenseDiv input[name='adjuLetter']").eq(0).val(data.adjudication.adjuLetter);
+                            $("#rmbRecompenseDiv input[name='adjuNum']").eq(0).val(data.adjudication.adjuNum);
+                            $("#rmbRecompenseDiv input[name='noticeYear']").eq(0).val(data.adjudication.noticeYear);
+                            $("#rmbRecompenseDiv input[name='noticeMonth']").eq(0).val(data.adjudication.noticeMonth);
+                            $("#rmbRecompenseDiv input[name='noticeDay']").eq(0).val(data.adjudication.noticeDay);
+                        }
+
+
                     }
                 });
             }

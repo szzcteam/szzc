@@ -1,6 +1,8 @@
 package com.me.szzc.pojo.vo;
 
+import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.constant.Constant;
+import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.NumberToCapitalizedUtils;
@@ -18,7 +20,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class RmbRecompenseVO {
+public class RmbRecompenseVO extends Adjudication {
 
     private Long id;
 
@@ -460,6 +462,26 @@ public class RmbRecompenseVO {
      */
     private String otherTermsTwo;
 
+    /**
+     * 字诀信息
+     */
+    private String adjudicationJson;
+
+    /**
+     * 是否承租人标识
+     */
+    private Boolean isLesseeFlag;
+
+    /**
+     * 片区ID
+     */
+    private Long areaId;
+
+    /**
+     * 项目code
+     */
+    private String projectCode;
+
     /**创建时间**/
     private Date createDate;
 
@@ -590,7 +612,32 @@ public class RmbRecompenseVO {
             vo.setPayParm6("");
         }
 
+        if(entity.getIsLesseeFlag() == null){
+            entity.setIsLesseeFlag(false);
+        }
+        vo.setIsLesseeFlag(entity.getIsLesseeFlag());
         vo.setCreateDate(entity.getCreateDate());
+
+
+
+        Adjudication adjudication = null;
+        if(StringUtils.isNotBlank(entity.getAdjudicationJson())){
+            adjudication = JSONObject.parseObject(entity.getAdjudicationJson(), Adjudication.class);
+        }else{
+            adjudication = Adjudication.getDefaultAdju();
+        }
+
+        vo.setAreaId(entity.getAreaId());
+        vo.setProjectCode(entity.getProjectCode());
+
+        vo.setGovYear(adjudication.getGovYear());
+        vo.setGovMonth(adjudication.getGovMonth());
+        vo.setGovDay(adjudication.getGovDay());
+        vo.setAdjuLetter(adjudication.getAdjuLetter());
+        vo.setAdjuNum(adjudication.getAdjuNum());
+        vo.setNoticeYear(adjudication.getNoticeYear());
+        vo.setNoticeMonth(adjudication.getNoticeMonth());
+        vo.setNoticeDay(adjudication.getNoticeDay());
 
         return vo;
     }

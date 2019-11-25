@@ -41,6 +41,7 @@
                     <dt>被征收人(乙方):</dt>
                     <dd>
                         <input type="text" name="houseOwner" maxlength="50" size="40" style="margin-left: 0px;"/>
+                        <input type="hidden" name="isLesseeFlag"/>
                     </dd>
                 </dl>
                 <dl>
@@ -58,6 +59,23 @@
                                 <option value="${area.id}" <c:if test="${num.index == 0 }">selected="selected"</c:if>>${area.name}</option>
                             </c:forEach>
                         </select>
+                    </dd>
+                </dl>
+            </fieldset>
+            <br/><br/>
+            <fieldset>
+                <legend>诀字信息</legend>
+                <dl style="width: 100%;height: 26px;">
+                    <dd style="width: 95%;line-height: 26px;">
+                        人民政府于
+                        <input type="text" name="govYear"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>年
+                        <input type="text" name="govMonth"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>月
+                        <input type="text" name="govDay"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>日作出《房屋征收决定》
+                        （武昌征决字[<input type="text" name="adjuLetter"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>]
+                        第<input type="text" name="adjuNum"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>号），并于
+                        <input type="text" name="noticeYear"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>年
+                        <input type="text" name="noticeMonth"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>月
+                        <input type="text" name="noticeDay"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>日公告
                     </dd>
                 </dl>
             </fieldset>

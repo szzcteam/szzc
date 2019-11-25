@@ -1,10 +1,12 @@
 package com.me.szzc.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.CompensateTypeEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
+import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
@@ -35,7 +37,7 @@ public class RmbRecompenseController extends BaseController {
 
     @RequestMapping("ssadmin/RmbRecompense/add")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增货币补偿协议")
-    public ModelAndView saveRmbRecompense ( RmbRecompense rmbRecompense, HttpServletRequest request)throws Exception{
+    public ModelAndView saveRmbRecompense (RmbRecompense rmbRecompense, Adjudication adjudication, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
 
@@ -60,6 +62,11 @@ public class RmbRecompenseController extends BaseController {
             modelAndView.addObject("message", getOwnerOnlyMsg(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress()));
             return modelAndView;
         }
+
+        if(adjudication != null){
+            rmbRecompense.setAdjudicationJson(JSONObject.toJSONString(adjudication));
+        }
+
         //创建人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setCreateUserId(userId);
@@ -113,13 +120,15 @@ public class RmbRecompenseController extends BaseController {
 
     @RequestMapping("ssadmin/RmbRecompense/update")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改货币补偿协议")
-    public ModelAndView updateRmbRecompense (RmbRecompense rmbRecompense, HttpServletRequest request)throws Exception{
+    public ModelAndView updateRmbRecompense (RmbRecompense rmbRecompense,Adjudication adjudication, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //修改人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setModifiedUserId(userId);
-
+        if(adjudication != null){
+            rmbRecompense.setAdjudicationJson(JSONObject.toJSONString(adjudication));
+        }
         String str = "true";  //rmbRecompenseTerm(rmbRecompense);
         if(str.equals("true")){
             this.rmbRecompenseService.update(rmbRecompense);
@@ -147,6 +156,13 @@ public class RmbRecompenseController extends BaseController {
         Long id = Long.valueOf(idArr[1]);
         RmbRecompense recompense = this.rmbRecompenseService.getById(id);
         if(recompense != null) {
+            if (StringUtils.isNotBlank(recompense.getAdjudicationJson())) {
+                Adjudication adjudication = JSONObject.parseObject(recompense.getAdjudicationJson(), Adjudication.class);
+                modelAndView.addObject("adjudication", adjudication);
+            } else {
+                //为了兼容历史数据而处理
+                modelAndView.addObject("adjudication", Adjudication.getDefaultAdju());
+            }
             modelAndView.addObject("rmbRecom", recompense);
         }
         //获取用户管理的片区
@@ -194,6 +210,8 @@ public class RmbRecompenseController extends BaseController {
         modelAndView.setViewName("ssadmin/detailRmbRecompense");
         RmbRecompense entity = this.rmbRecompenseService.getById(id);
         if(entity != null) {
+            Area area = areaService.getById(entity.getAreaId());
+            entity.setProjectCode(area.getProjectCode());
             RmbRecompenseVO vo = RmbRecompenseVO.parse(entity);
             modelAndView.addObject("rmbRecom", vo);
         }
