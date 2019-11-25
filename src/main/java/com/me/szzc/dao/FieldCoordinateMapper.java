@@ -11,5 +11,6 @@ import java.util.List;
  */
 public interface FieldCoordinateMapper {
 
-    List<FieldCoordinateDto> getFieldCoordinateListByTableName(@Param("tableName")String tableNamesss);
+    List<FieldCoordinateDto> getFieldCoordinateListByTableName(@Param("tableName") String tableNamesss,
+                                                               @Param("itemCode") String projectCode);
 }

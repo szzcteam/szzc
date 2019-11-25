@@ -7,6 +7,7 @@ import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.PrintTableEnum;
 import com.me.szzc.enums.PrintTypeEnum;
 import com.me.szzc.pojo.dto.FieldCoordinateDto;
+import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
@@ -48,10 +49,12 @@ public class StylusPrintService {
     private FieldCoordinateMapper fieldCoordinateMapper;
 
     @Autowired
+    private AreaService areaService;
+
+    @Autowired
     private PrintUtil printUtil;
 
-
-    public  List<Map<String, Object>> settleAccountsPrint(Long id) throws Exception {
+    public List<Map<String, Object>> settleAccountsPrint(Long id) throws Exception {
         //根据ID获取数据
         SettleAccounts settleAccounts = settleAccountsMapper.selectByPrimaryKey(id);
         if (StringUtils.isNullOrEmpty(settleAccounts)) {
@@ -59,9 +62,12 @@ public class StylusPrintService {
             return null;
         }
         SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
+        //获取项目编码
+        Area area = areaService.getById(settleAccounts.getAreaId());
+        String projectCode = area.getProjectCode();
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
-                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName());
+                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName(), projectCode);
         if (StringUtils.isNullOrEmpty(FieldCoordinateList)) {
             logger.error("房屋征收补偿计算表打印获取坐标数据为空,tableName(" + PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName() + ")");
             return null;
@@ -120,8 +126,6 @@ public class StylusPrintService {
 
     }
 
-
-
     public List<Map<String, Object>> houseSwapPrint(Long id) throws Exception {
         //根据ID获取数据
         SwapHouse swapHouse = swapHouseMapper.getById(id);
@@ -130,9 +134,12 @@ public class StylusPrintService {
             return null;
         }
         SwapHouseVO vo = SwapHouseVO.parse(swapHouse);
+        //获取项目编码
+        Area area = areaService.getById(swapHouse.getAreaId());
+        String projectCode = area.getProjectCode();
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
-                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_SWAP.getName());
+                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_SWAP.getName(), projectCode);
         if (StringUtils.isNullOrEmpty(FieldCoordinateList)) {
             logger.error("产权调换打印获取坐标数据为空,tableName(" + PrintTableEnum.HOUSE_SWAP.getName() + ")");
             return null;
@@ -171,9 +178,12 @@ public class StylusPrintService {
             return null;
         }
         RmbRecompenseVO vo = RmbRecompenseVO.parse(recompense);
+        //获取项目编码
+        Area area = areaService.getById(recompense.getAreaId());
+        String projectCode = area.getProjectCode();
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
-                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_RMB_RECOMPENSE.getName());
+                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_RMB_RECOMPENSE.getName(), projectCode);
         if (StringUtils.isNullOrEmpty(FieldCoordinateList)) {
             logger.error("货币补偿补助打印获取坐标数据为空,tableName(" + PrintTableEnum.HOUSE_RMB_RECOMPENSE.getName() + ")");
             return null;
@@ -200,7 +210,6 @@ public class StylusPrintService {
             logger.error("货币补偿补助打印获取数据为空");
             return null;
         }
-
         return dataList;
     }
 
@@ -220,9 +229,12 @@ public class StylusPrintService {
         vo.setSwapPrice(vo.getSwapPrice1() + " " + vo.getSwapPrice2() + " " + vo.getSwapPrice3() + " " + vo.getSwapPrice4() + " " + vo.getSwapPrice5());
         vo.setSwapArea(vo.getSwapArea1() + " " + vo.getSwapArea2() + " " + vo.getSwapArea3() + " " + vo.getSwapArea4() + " " + vo.getSwapArea5());
         vo.setSwapMoney(vo.getSwapMoney1() + " " + vo.getSwapMoney2() + " " + vo.getSwapMoney3() + " " + vo.getSwapMoney4() + " " + vo.getSwapMoney5());
+        //获取项目编码
+        Area area = areaService.getById(settleAccounts.getAreaId());
+        String projectCode = area.getProjectCode();
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
-                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName());
+                fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName(), projectCode);
         if (StringUtils.isNullOrEmpty(FieldCoordinateList)) {
             logger.error("房屋征收补偿计算表打印获取坐标数据为空,tableName(" + PrintTableEnum.HOUSE_EXPROPRIATION_COMPENSATION.getName() + ")");
             return false;
