@@ -82,6 +82,7 @@
     <result column="other_fee" jdbcType="DECIMAL" property="otherFee" />
     <result column="sum_rbm" jdbcType="DECIMAL" property="sumRbm" />
     <result column="upper_rmb" jdbcType="VARCHAR" property="upperRmb" />
+    <result column="after_day_audit" jdbcType="INTEGER" property="afterDayAudit" />
     <result column="before_day" jdbcType="INTEGER" property="beforeDay" />
     <result column="other_terms_one" jdbcType="VARCHAR" property="otherTermsOne" />
     <result column="other_terms_two" jdbcType="VARCHAR" property="otherTermsTwo" />
@@ -108,7 +109,7 @@
     rmb_compensate, structure_balcony, structure_build, structure_dark, structure_mezzanine,
     structure_roof, affiliated_other, basic_living_subsidy, disability_subsidy, disease_subsidy,
     no_child, martyr, life_compensate, change_compensate, small_area_reward, move_reward,
-    other_fee, sum_rbm, upper_rmb, before_day, other_terms_one, other_terms_two, is_lessee_flag, adjudication_json, create_date,
+    other_fee, sum_rbm, upper_rmb, after_day_audit, before_day, other_terms_one, other_terms_two, is_lessee_flag, adjudication_json, create_date,
     create_user_id, modified_date, modified_user_id, deleted
   </sql>
   <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -150,7 +151,7 @@
       disease_subsidy, no_child, martyr,
       life_compensate, change_compensate, small_area_reward,
       move_reward, other_fee, sum_rbm,
-      upper_rmb, before_day, other_terms_one,
+      upper_rmb, after_day_audit, before_day, other_terms_one,
       other_terms_two, is_lessee_flag, adjudication_json, create_date, create_user_id,
       modified_date, modified_user_id, deleted
       )
@@ -182,7 +183,7 @@
       #{diseaseSubsidy,jdbcType=DECIMAL}, #{noChild,jdbcType=DECIMAL}, #{martyr,jdbcType=DECIMAL},
       #{lifeCompensate,jdbcType=DECIMAL}, #{changeCompensate,jdbcType=DECIMAL}, #{smallAreaReward,jdbcType=DECIMAL},
       #{moveReward,jdbcType=DECIMAL}, #{otherFee,jdbcType=DECIMAL}, #{sumRbm,jdbcType=DECIMAL},
-      #{upperRmb,jdbcType=VARCHAR}, #{beforeDay,jdbcType=INTEGER}, #{otherTermsOne,jdbcType=VARCHAR},
+      #{upperRmb,jdbcType=VARCHAR}, #{afterDayAudit}, #{beforeDay,jdbcType=INTEGER}, #{otherTermsOne,jdbcType=VARCHAR},
       #{otherTermsTwo,jdbcType=VARCHAR}, #{isLesseeFlag}, #{adjudicationJson},
       #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
       #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT}
@@ -270,6 +271,7 @@
       other_fee = #{otherFee,jdbcType=DECIMAL},
       sum_rbm = #{sumRbm,jdbcType=DECIMAL},
       upper_rmb = #{upperRmb,jdbcType=VARCHAR},
+      after_day_audit = #{afterDayAudit},
       before_day = #{beforeDay,jdbcType=INTEGER},
       other_terms_one = #{otherTermsOne,jdbcType=VARCHAR},
       other_terms_two = #{otherTermsTwo,jdbcType=VARCHAR},

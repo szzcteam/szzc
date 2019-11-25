@@ -67,4 +67,7 @@ public interface SystemArgsConstant {
 
     /**保底补偿面积**/
     String SEL_GUARANTEE = "sel_guarantee";
+
+    /**会计机构审核出具报告N天后，甲方付款给乙方**/
+    String RMB_AFTER_DAY_AUDIT = "rmb_after_day_audit";
 }

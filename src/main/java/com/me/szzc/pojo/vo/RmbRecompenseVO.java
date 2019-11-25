@@ -410,6 +410,11 @@ public class RmbRecompenseVO extends Adjudication {
     private String sumRbm;
 
     /**
+     * 审计N天后，甲方付款给乙方
+     */
+    private Integer afterDayAudit;
+
+    /**
      * 大写人民币
      */
     private String upperRmb;
@@ -582,6 +587,7 @@ public class RmbRecompenseVO extends Adjudication {
 
         vo.setOtherFee(BigDecimalUtil.stripTrailingZeros(entity.getOtherFee()));
         vo.setSumRbm(BigDecimalUtil.stripTrailingZeros(entity.getSumRbm()));
+        vo.setAfterDayAudit(entity.getAfterDayAudit());
         vo.setUpperRmb(entity.getUpperRmb());
         vo.setBeforeDay(entity.getBeforeDay());
         vo.setOtherTermsOne(entity.getOtherTermsOne());
