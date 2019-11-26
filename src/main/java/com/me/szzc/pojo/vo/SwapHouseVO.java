@@ -570,6 +570,20 @@ public class SwapHouseVO extends Adjudication {
     /**创建时间**/
     private Date createDate;
 
+    /**乙方名称**/
+    private String bHouseOwner;
+
+    /**乙方身份证号**/
+    private String bIdentityNo;
+
+    /**丙方名称**/
+    private String cHouseOwner;
+
+    /**丙方身份证号**/
+    private String cIdentityNo;
+
+
+
     public static SwapHouseVO parse(SwapHouse entity) throws Exception{
         SwapHouseVO vo = new SwapHouseVO();
         if(entity == null) {
@@ -742,6 +756,18 @@ public class SwapHouseVO extends Adjudication {
         vo.setNoticeYear(adjudication.getNoticeYear());
         vo.setNoticeMonth(adjudication.getNoticeMonth());
         vo.setNoticeDay(adjudication.getNoticeDay());
+
+        if(entity.getIsLesseeFlag()){
+            vo.setBHouseOwner("");
+            vo.setBIdentityNo("");
+            vo.setCHouseOwner(entity.getHouseOwner());
+            vo.setCIdentityNo(entity.getIdentityNo());
+        }else{
+            vo.setBHouseOwner(entity.getHouseOwner());
+            vo.setBIdentityNo(entity.getIdentityNo());
+            vo.setCHouseOwner("");
+            vo.setCIdentityNo("");
+        }
 
         return vo;
     }

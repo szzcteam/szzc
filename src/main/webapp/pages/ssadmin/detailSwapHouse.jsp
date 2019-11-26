@@ -55,32 +55,12 @@
                 <c:choose>
                     <c:when test="${swapHouse.projectCode == 'B001001'}">
                         <tr>
-                            <td>被征收人（乙方）：
-                                <div style="width: 175px;" class="rows_div">
-                                    <c:if test="${swapHouse.isLesseeFlag == false}">
-                                        ${swapHouse.houseOwner}
-                                    </c:if>
-                                </div>
-                            </td>
-                            <td>身份证号：
-                                <div style="width: 200px;" class="rows_div">
-                                    <c:if test="${swapHouse.isLesseeFlag == false}">
-                                        ${swapHouse.identityNo}
-                                    </c:if>
-                                </div>
-                            </td>
+                            <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${swapHouse.bHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.bIdentityNo}</div></td>
                         </tr>
                         <tr>
-                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">
-                                <c:if test="${swapHouse.isLesseeFlag == true}">
-                                    ${swapHouse.houseOwner}
-                                </c:if>
-                            </div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">
-                                <c:if test="${swapHouse.isLesseeFlag == true}">
-                                    ${swapHouse.identityNo}
-                                </c:if>
-                            </div></td>
+                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${swapHouse.cHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.cIdentityNo}</div></td>
                         </tr>
                     </c:when>
                     <c:otherwise>

@@ -58,34 +58,14 @@
                     <td>代办单位：<div style="width: 200px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
                 </tr>
                 <c:choose>
-                    <c:when test="${rmbRecom.projectCode == 'B001001'}">
+                    <c:when test="${swapHouse.projectCode == 'B001001'}">
                         <tr>
-                            <td>被征收人（乙方）：
-                                <div style="width: 175px;" class="rows_div">
-                                    <c:if test="${rmbRecom.isLesseeFlag == false}">
-                                        ${rmbRecom.houseOwner}
-                                    </c:if>
-                                </div>
-                            </td>
-                            <td>身份证号：
-                                <div style="width: 200px;" class="rows_div">
-                                    <c:if test="${rmbRecom.isLesseeFlag == false}">
-                                        ${rmbRecom.identityNo}
-                                    </c:if>
-                                </div>
-                            </td>
+                            <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.bHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.bIdentityNo}</div></td>
                         </tr>
                         <tr>
-                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">
-                                <c:if test="${rmbRecom.isLesseeFlag == true}">
-                                    ${rmbRecom.houseOwner}
-                                </c:if>
-                            </div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">
-                                <c:if test="${rmbRecom.isLesseeFlag == true}">
-                                    ${rmbRecom.identityNo}
-                                </c:if>
-                            </div></td>
+                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.cHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.cIdentityNo}</div></td>
                         </tr>
                     </c:when>
                     <c:otherwise>
