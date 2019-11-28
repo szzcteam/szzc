@@ -913,10 +913,9 @@ var settleAccountObj = {
     calcMoveReward: function () {
         var compensateType = $("input[name='compensateType']:checked").val();
 
-        //同时填了价格或面积才进行计算
-        var checkInArea = $("input[name='checkInArea']").eq(0).val();
-        var assessPrice = $("input[name='assessPrice']").eq(0).val();
-        if (!checkInArea || !assessPrice) {
+        //有证计算公式不为空时，进行计算
+        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
+        if (eval(calcValueCompensate) == 0) {
             $("input[name='calcMoveReward']").eq(0).val("").change();
             return;
         }
@@ -964,10 +963,10 @@ var settleAccountObj = {
             $("input[name='calcRmbCompensate']").eq(0).val("").change();
             return;
         }
-        //同时填了价格或面积才进行计算
-        var checkInArea = $("input[name='checkInArea']").eq(0).val();
-        var assessPrice = $("input[name='assessPrice']").eq(0).val();
-        if (!checkInArea || !assessPrice) {
+
+        //有证计算公式不为空时，进行计算
+        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
+        if (eval(calcValueCompensate) == 0) {
             $("input[name='calcRmbCompensate']").eq(0).val("").change();
             return;
         }
