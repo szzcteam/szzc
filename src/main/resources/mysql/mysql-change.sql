@@ -49,3 +49,16 @@ update t_rmb_recompense set after_day_audit = 15 where after_day_audit is null;
 #增加系统参数
 insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
 values('rmb_after_day_audit',1,'会计机构审核出具报告N天后，甲方付款给乙方','15',0);
+
+
+#菜单修改
+update f_security set fdescription = '明伦街新增', fname='明伦街新增' where furl = 'ssadmin/addProtocol.html';
+
+-- 插入紫阳村的菜单信息
+insert into f_security(fdescription,fname, fpriority, fparentid, furl)
+values('紫阳村新增','紫阳村新增',4,3,'ssadmin/addProtocol.html?projectCode=B001001');
+
+
+-- 插入按钮权限
+insert into f_role_security(fsecurityid, froleid)
+values(41,1);
