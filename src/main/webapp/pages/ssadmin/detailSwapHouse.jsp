@@ -55,12 +55,12 @@
                 <c:choose>
                     <c:when test="${swapHouse.projectCode == 'B001001'}">
                         <tr>
-                            <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${swapHouse.bHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.bIdentityNo}</div></td>
+                            <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${swapHouse.twoHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.twoIdentityNo}</div></td>
                         </tr>
                         <tr>
-                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${swapHouse.cHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.cIdentityNo}</div></td>
+                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${swapHouse.thireHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.thireIdentityNo}</div></td>
                         </tr>
                     </c:when>
                     <c:otherwise>

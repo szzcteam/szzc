@@ -354,10 +354,10 @@
                 <tr style="height: 30px;">
                     <td colspan="2">安置房面积、单价、总价</td>
                     <td colspan="4">
-                        ${settleAccounts.swapArea1}
+                        ${settleAccounts.swapArea}
                         &nbsp;M<sup>2</sup>×&nbsp;&nbsp;
-                        ${settleAccounts.swapPrice1}&nbsp;&nbsp;元/M<sup>2</sup>
-                        ＝${settleAccounts.swapMoney1}&nbsp;&nbsp;元
+                        ${settleAccounts.swapPrice}&nbsp;&nbsp;元/M<sup>2</sup>
+                        ＝${settleAccounts.swapMoney}&nbsp;&nbsp;元
                     </td>
                 </tr>
                 <tr>

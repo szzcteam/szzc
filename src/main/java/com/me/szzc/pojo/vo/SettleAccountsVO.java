@@ -1134,7 +1134,7 @@ public class SettleAccountsVO {
             vo.setSwapPrice5("");
         }
 
-        vo.setSwapPrice(vo.getSwapPrice1()+" "+vo.getSwapPrice2()+" "+vo.getSwapPrice3()+" " + vo.getSwapPrice4() + vo.getSwapPrice5());
+        vo.setSwapPrice(vo.getSwapPrice1()+" "+vo.getSwapPrice2()+" "+vo.getSwapPrice3()+" " + vo.getSwapPrice4() + " "+ vo.getSwapPrice5());
         vo.setSwapPrice(vo.getSwapPrice().trim());
 
         if(entity.getSwapArea1() != null && entity.getSwapArea1().compareTo(BigDecimal.ZERO) > 0){
@@ -1164,7 +1164,7 @@ public class SettleAccountsVO {
             vo.setSwapArea5("");
         }
 
-        vo.setSwapArea(vo.getSwapArea1()+" "+vo.getSwapArea2()+" "+vo.getSwapArea3()+" " + vo.getSwapArea4() + vo.getSwapArea5());
+        vo.setSwapArea(vo.getSwapArea1()+" "+vo.getSwapArea2()+" "+vo.getSwapArea3()+" " + vo.getSwapArea4() + " "+vo.getSwapArea5());
         vo.setSwapArea(vo.getSwapArea().trim());
 
 
@@ -1195,7 +1195,7 @@ public class SettleAccountsVO {
             vo.setSwapMoney5("");
         }
 
-        vo.setSwapMoney(vo.getSwapMoney1()+" "+vo.getSwapMoney2()+" "+vo.getSwapMoney3()+" " + vo.getSwapMoney4() + vo.getSwapMoney5());
+        vo.setSwapMoney(vo.getSwapMoney1()+" "+vo.getSwapMoney2()+" "+vo.getSwapMoney3()+" " + vo.getSwapMoney4() + " "+vo.getSwapMoney5());
         vo.setSwapMoney(vo.getSwapMoney().trim());
 
 

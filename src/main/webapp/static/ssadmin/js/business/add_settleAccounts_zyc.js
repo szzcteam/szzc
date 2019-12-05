@@ -171,14 +171,19 @@ $(document).ready(function(){
         if(guarantee_area == 0){
             $("input[name='calcGuarantee']").eq(0).val("0").change();
         }else{
-            var checkInArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
+            var calcValueCompensateArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
             var assessPrice = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
-            if(checkInArea == 0 || assessPrice == 0){
+
+            var calcNoRegisterLegalArea = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
+            var calcHistoryLegacyArea = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
+            var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
+
+            if(calcValueCompensateArea == 0 || assessPrice == 0){
                 alert("进行保底补偿之前，请先填写有证房屋建筑面积、单价");
                 $(this).val(0);
                 return;
             }
-            var guarantee_money_calc = "(" + guarantee_area + "-" + checkInArea + ")" + "*" + assessPrice;
+            var guarantee_money_calc = "(" + guarantee_area + "-" + calcValueCompensateArea + "-" + calcNoRegisterLegalArea + "-" + calcHistoryLegacyArea + "*" + calcHistoryLegacyProportion + ")" + "*" + assessPrice;
             $("input[name='calcGuarantee']").eq(0).val(guarantee_money_calc).change();
         }
     });
@@ -1024,28 +1029,28 @@ var settleAccountObj = {
         }
 
         if (swap_price2 != 0 && swap_area2 != 0) {
-            var swap_money2 = swap_price2 + "*" + swap_area2;
+            var swap_money2 = new Number(swap_price2) * new Number(swap_area2);
             $("input[name='swapMoney2']").eq(0).val(swap_money2).change();
         } else {
             $("input[name='swapMoney2']").eq(0).val("").change();
         }
 
         if (swap_price3 != 0 && swap_area3 != 0) {
-            var swap_money3 = swap_price3 + "*" + swap_area3;
+            var swap_money3 = new Number(swap_price3) * new Number(swap_area3);
             $("input[name='swapMoney3']").eq(0).val(swap_money3).change();
         } else {
             $("input[name='swapMoney3']").eq(0).val("").change();
         }
 
         if (swap_price4 != 0 && swap_area4 != 0) {
-            var swap_money4 = swap_price4 + "*" + swap_area4;
+            var swap_money4 = new Number(swap_price4) * new Number(swap_area4);
             $("input[name='swapMoney4']").eq(0).val(swap_money4).change();
         } else {
             $("input[name='swapMoney4']").eq(0).val("").change();
         }
 
         if (swap_price5 != 0 && swap_area5 != 0) {
-            var swap_money5 = swap_price5 + "*" + swap_area5;
+            var swap_money5 = new Number(swap_price5) * new Number(swap_area5);
             $("input[name='swapMoney5']").eq(0).val(swap_money5).change();
         } else {
             $("input[name='swapMoney5']").eq(0).val("").change();
@@ -1074,6 +1079,8 @@ var settleAccountObj = {
         var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
         var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea) + (new Number(calcHistoryLegacyArea) * new Number(calcHistoryLegacyProportion));
         $("input[name='calcDecorationCompensateArea']").eq(0).val(sumArea).change();
+        $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
+
     }
 
 

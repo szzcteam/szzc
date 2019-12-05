@@ -90,7 +90,8 @@ function getLodop(oOBJECT, oEMBED) {
                 document.body.innerHTML = strCLodopInstall_1 + (CLodopIsLocal ? strCLodopInstall_2 : "") + strCLodopInstall_3 + document.body.innerHTML;
                 return;
             } else {
-                if (CLODOP.CVERSION < "3.0.9.0") {
+                console.log("当前打印版本号" +CLODOP.CVERSION );
+                if (CLODOP.CVERSION < "2.0.9.0") {
                     document.body.innerHTML = strCLodopUpdate + document.body.innerHTML;
                 }
                 if (oEMBED && oEMBED.parentNode)

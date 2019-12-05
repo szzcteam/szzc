@@ -491,16 +491,16 @@ public class RmbRecompenseVO extends Adjudication {
     private Date createDate;
 
     /**乙方名称**/
-    private String bHouseOwner;
+    private String twoHouseOwner;
 
     /**乙方身份证号**/
-    private String bIdentityNo;
+    private String twoIdentityNo;
 
     /**丙方名称**/
-    private String cHouseOwner;
+    private String thireHouseOwner;
 
     /**丙方身份证号**/
-    private String cIdentityNo;
+    private String thireIdentityNo;
 
     public static RmbRecompenseVO parse(RmbRecompense entity) throws Exception {
         RmbRecompenseVO vo = new RmbRecompenseVO();
@@ -658,15 +658,15 @@ public class RmbRecompenseVO extends Adjudication {
         vo.setNoticeDay(adjudication.getNoticeDay());
 
         if(entity.getIsLesseeFlag()){
-            vo.setBHouseOwner("");
-            vo.setBIdentityNo("");
-            vo.setCHouseOwner(entity.getHouseOwner());
-            vo.setCIdentityNo(entity.getIdentityNo());
+            vo.setTwoHouseOwner("");
+            vo.setTwoIdentityNo("");
+            vo.setThireHouseOwner(entity.getHouseOwner());
+            vo.setThireIdentityNo(entity.getIdentityNo());
         }else{
-            vo.setBHouseOwner(entity.getHouseOwner());
-            vo.setBIdentityNo(entity.getIdentityNo());
-            vo.setCHouseOwner("");
-            vo.setCIdentityNo("");
+            vo.setTwoHouseOwner(entity.getHouseOwner());
+            vo.setTwoIdentityNo(entity.getIdentityNo());
+            vo.setThireHouseOwner("");
+            vo.setThireIdentityNo("");
         }
 
         return vo;

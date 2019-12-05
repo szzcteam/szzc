@@ -58,14 +58,14 @@
                     <td>代办单位：<div style="width: 200px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
                 </tr>
                 <c:choose>
-                    <c:when test="${swapHouse.projectCode == 'B001001'}">
+                    <c:when test="${rmbRecom.projectCode == 'B001001'}">
                         <tr>
-                            <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.bHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.bIdentityNo}</div></td>
+                            <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.twoHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.twoIdentityNo}</div></td>
                         </tr>
                         <tr>
-                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.cHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.cIdentityNo}</div></td>
+                            <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.thireHouseOwner}</div></td>
+                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.thireIdentityNo}</div></td>
                         </tr>
                     </c:when>
                     <c:otherwise>

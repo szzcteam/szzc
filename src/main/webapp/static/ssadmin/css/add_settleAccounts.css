@@ -28,6 +28,9 @@ input.focus, input.required {
     margin-left: 5px;
 }
 
+.width_50px {
+    width: 50px;
+}
 .width_60px {
     width: 60px;
 }
