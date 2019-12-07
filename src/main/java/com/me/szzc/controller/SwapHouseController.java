@@ -84,6 +84,14 @@ public class SwapHouseController extends BaseController {
     public ModelAndView updateSwapHouse(SwapHouse swapHouse,  Adjudication adjudication, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //防止修改后，名字、地址错乱
+        SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
+        if (settleAccounts == null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请核对后再操作。");
+            return modelAndView;
+        }
+
         //修改人
         Long userId = getAdminSession(request).getFid();
         swapHouse.setModifiedUserId(userId);

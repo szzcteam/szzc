@@ -123,6 +123,14 @@ public class RmbRecompenseController extends BaseController {
     public ModelAndView updateRmbRecompense (RmbRecompense rmbRecompense,Adjudication adjudication, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //防止修改后，名字、地址错乱
+        SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
+        if (settleAccounts == null) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
+            return modelAndView;
+        }
+
         //修改人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setModifiedUserId(userId);
