@@ -20,7 +20,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class RmbRecompenseVO extends Adjudication {
+public class RmbRecompenseVO {
 
     private Long id;
 
@@ -501,6 +501,47 @@ public class RmbRecompenseVO extends Adjudication {
 
     /**丙方身份证号**/
     private String thireIdentityNo;
+
+    /**
+     * 政府征诀字：年
+     */
+    private String govYear;
+
+    /**
+     * 政府征诀字：月
+     */
+    private String govMonth;
+
+    /**
+     * 政府征诀字：日
+     */
+    private String govDay;
+
+    /**
+     * 政府征诀字：文件年号
+     */
+    private String adjuLetter;
+
+    /**
+     * 政府征诀字：文件字号
+     */
+    private String adjuNum;
+
+    /**
+     * 政府公告：年
+     */
+    private String noticeYear;
+
+    /**
+     * 政府公告：月
+     */
+    private String noticeMonth;
+
+    /**
+     * 政府公告：日
+     */
+    private String noticeDay;
+
 
     public static RmbRecompenseVO parse(RmbRecompense entity) throws Exception {
         RmbRecompenseVO vo = new RmbRecompenseVO();

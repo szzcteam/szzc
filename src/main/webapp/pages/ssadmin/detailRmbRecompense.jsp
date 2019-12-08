@@ -78,8 +78,8 @@
             </table>
         </div>
         <div style="line-height: 26px;text-align: left;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;武汉市武昌区人民政府于${swapHouse.govYear}年${swapHouse.govMonth}月${swapHouse.govDay}日作出《房屋征收决定》（武昌征决字[${swapHouse.adjuLetter}] ${swapHouse.adjuNum}号），
-            并于${swapHouse.noticeYear}年${swapHouse.noticeMonth}月${swapHouse.noticeDay}日在房屋征收范围内公告，
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;武汉市武昌区人民政府于${rmbRecom.govYear}年${rmbRecom.govMonth}月${rmbRecom.govDay}日作出《房屋征收决定》（武昌征决字[${rmbRecom.adjuLetter}] ${rmbRecom.adjuNum}号），
+            并于${rmbRecom.noticeYear}年${rmbRecom.noticeMonth}月${rmbRecom.noticeDay}日在房屋征收范围内公告，
             乙方房屋在征收范围内。依据《国有土地上房屋征收与补偿条例》等相关规定，按照房屋征收补偿方案，甲、乙双方经平等协商，
             就房屋征收补偿事宜达成协议如下：
         </div>
