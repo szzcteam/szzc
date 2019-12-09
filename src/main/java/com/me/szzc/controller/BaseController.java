@@ -271,7 +271,7 @@ public class BaseController extends BaseServiceCtrl{
         String selGuarantee = systemArgsService.getValue(SystemArgsConstant.SEL_GUARANTEE);
         modelAndView.addObject("selGuarantee", selGuarantee);
 
-        //货币补偿时，会计机构出具报告N天后，甲方付款给乙方
+        //会计机构出具报告N天后，甲方付款给乙方
         String rmbAfterDayAudit= systemArgsService.getValue(SystemArgsConstant.RMB_AFTER_DAY_AUDIT);
         modelAndView.addObject("rmbAfterDayAudit", rmbAfterDayAudit);
 

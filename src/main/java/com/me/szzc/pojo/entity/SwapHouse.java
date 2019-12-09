@@ -418,6 +418,11 @@ public class SwapHouse {
     private String upperRmb;
 
     /**
+     * 审计N天后，甲方付款给乙方
+     */
+    private Integer afterDayAudit;
+
+    /**
      * 限N天搬迁
      */
     private Integer beforeDay;

@@ -419,6 +419,12 @@ public class SwapHouseVO {
      */
     private String upperRmb;
 
+
+    /**
+     * 审计N天后，甲方付款给乙方
+     */
+    private Integer afterDayAudit;
+
     /**
      * 应付-元
      **/
@@ -723,6 +729,7 @@ public class SwapHouseVO {
         vo.setMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getMoveReward()));
         vo.setOtherFee(BigDecimalUtil.stripTrailingZeros(entity.getOtherFee()));
         vo.setSumRbm(BigDecimalUtil.stripTrailingZeros(entity.getSumRbm()));
+        vo.setAfterDayAudit(entity.getAfterDayAudit());
         vo.setUpperRmb(entity.getUpperRmb());
         vo.setBeforeDay(entity.getBeforeDay());
         vo.setOtherTermsOne(entity.getOtherTermsOne());

@@ -46,6 +46,13 @@ ADD COLUMN `after_day_audit`  int NULL COMMENT '审计N天后，甲方付款给�
 #将以前的历史记录，明伦街的天数固定为15
 update t_rmb_recompense set after_day_audit = 15 where after_day_audit is null;
 
+#产权调换增加标识，审计N天后，甲方付款给乙方
+ALTER TABLE `t_swap_house`
+ADD COLUMN `after_day_audit`  int NULL COMMENT '审计N天后，甲方付款给乙方' AFTER `upper_rmb`;
+
+#将以前的历史记录，明伦街的天数固定为15
+update t_swap_house set after_day_audit = 15 where after_day_audit is null;
+
 #增加系统参数
 insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
 values('rmb_after_day_audit',1,'会计机构审核出具报告N天后，甲方付款给乙方','15',0);

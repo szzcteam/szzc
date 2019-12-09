@@ -83,6 +83,7 @@
     <result column="other_fee" jdbcType="DECIMAL" property="otherFee" />
     <result column="sum_rbm" jdbcType="DECIMAL" property="sumRbm" />
     <result column="upper_rmb" jdbcType="VARCHAR" property="upperRmb" />
+    <result column="after_day_audit" jdbcType="INTEGER" property="afterDayAudit" />
     <result column="before_day" jdbcType="INTEGER" property="beforeDay" />
     <result column="new_house_address" jdbcType="VARCHAR" property="newHouseAddress" />
     <result column="seat" jdbcType="VARCHAR" property="seat" />
@@ -125,7 +126,7 @@
     structure_balcony, structure_build, structure_dark, structure_mezzanine, structure_roof,
     affiliated_other, basic_living_subsidy, disability_subsidy, disease_subsidy, no_child,
     martyr, life_compensate, change_compensate, building_area_fee, rmb_compensate, small_area_reward,
-    move_reward, other_fee, sum_rbm, upper_rmb, before_day, new_house_address, seat,
+    move_reward, other_fee, sum_rbm, upper_rmb, after_day_audit, before_day, new_house_address, seat,
     unit, floors, house_number, covered_area, price, total_price, upper_total_price,
     years, months, transfer_rmb, difference, upper_difference, less_difference, upper_less_difference,
     move_month, other_terms_one,is_lessee_flag, adjudication_json, create_date, create_user_id, modified_date, modified_user_id,
@@ -194,7 +195,7 @@
       disease_subsidy, no_child, martyr,
       life_compensate, change_compensate, building_area_fee,
       rmb_compensate, small_area_reward, move_reward,
-      other_fee, sum_rbm, upper_rmb,
+      other_fee, sum_rbm, upper_rmb,after_day_audit,
       before_day, new_house_address, seat,
       unit, floors, house_number,
       covered_area, price, total_price,
@@ -233,6 +234,7 @@
       #{lifeCompensate,jdbcType=DECIMAL}, #{changeCompensate,jdbcType=DECIMAL}, #{buildingAreaFee,jdbcType=DECIMAL},
       #{rmbCompensate,jdbcType=DECIMAL}, #{smallAreaReward,jdbcType=DECIMAL}, #{moveReward,jdbcType=DECIMAL},
       #{otherFee,jdbcType=DECIMAL}, #{sumRbm,jdbcType=DECIMAL}, #{upperRmb,jdbcType=VARCHAR},
+      #{afterDayAudit},
       #{beforeDay,jdbcType=INTEGER}, #{newHouseAddress,jdbcType=VARCHAR}, #{seat,jdbcType=VARCHAR},
       #{unit,jdbcType=VARCHAR}, #{floors,jdbcType=VARCHAR}, #{houseNumber,jdbcType=VARCHAR},
       #{coveredArea,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{totalPrice,jdbcType=DECIMAL},
@@ -327,6 +329,7 @@
       other_fee = #{otherFee,jdbcType=DECIMAL},
       sum_rbm = #{sumRbm,jdbcType=DECIMAL},
       upper_rmb = #{upperRmb,jdbcType=VARCHAR},
+      after_day_audit = #{afterDayAudit},
       before_day = #{beforeDay,jdbcType=INTEGER},
       new_house_address = #{newHouseAddress,jdbcType=VARCHAR},
       seat = #{seat,jdbcType=VARCHAR},

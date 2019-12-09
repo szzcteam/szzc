@@ -270,11 +270,14 @@
                 </dl>
             </fieldset>
             <br/><br/>
-            <fieldset>
+            <fieldset style="height: 85px;">
                 <legend>签约、搬迁及付款</legend>
                 <dl style="width: 100%;">
                     <dd style="width: 90%;line-height: 26px;margin-left: 5px;">
-                        乙方应于<input type="text" name="beforeDay" value="${swapHouse.beforeDay}" style="margin-left: 0px;width: 20px;clear: both;float: none;"/>日内搬迁腾空房屋内物品，并结清房屋水、电等费用后移交给甲方
+                        1、会计机构审核出具审计报告<input type="text" name="afterDayAudit" value="${swapHouse.afterDayAudit}"  style="margin-left: 0px;width: 20px;clear: both;float: none;"/>个工作日后，甲方将房屋征收补偿的总金额支付给乙方
+                    </dd>
+                    <dd style="width: 90%;line-height: 26px;margin-left: 5px;">
+                        2、乙方应于<input type="text" name="beforeDay" value="${swapHouse.beforeDay}" style="margin-left: 0px;width: 20px;clear: both;float: none;"/>日内搬迁腾空房屋内物品，并结清房屋水、电等费用后移交给甲方
                     </dd>
                 </dl>
             </fieldset>

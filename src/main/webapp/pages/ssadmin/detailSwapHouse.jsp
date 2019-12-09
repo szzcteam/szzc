@@ -220,7 +220,7 @@
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第六条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签约、搬迁及付款</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    1、甲、乙（丙方）双方签订本协议时，乙方（丙方）应提交被征收房屋所有权证、国有土地使用权证以及其他相关资料给甲方，甲方应于本协议签订之日起，经会计机构审核出具审计报告    个工作日并在乙方完成被征收房屋的注销登记后，将征收补偿款或房屋结算差价支付给乙方（丙方），支付方式将补偿款存入甲方在银行设定的乙方（丙方）名下的储蓄账户。
+                    1、甲、乙（丙方）双方签订本协议时，乙方（丙方）应提交被征收房屋所有权证、国有土地使用权证以及其他相关资料给甲方，甲方应于本协议签订之日起，经会计机构审核出具审计报告${swapHouse.afterDayAudit}个工作日并在乙方完成被征收房屋的注销登记后，将征收补偿款或房屋结算差价支付给乙方（丙方），支付方式将补偿款存入甲方在银行设定的乙方（丙方）名下的储蓄账户。
                     <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     2、乙方（丙方）保证向甲方所提供的所有产权书证及其他相关资料真实、合法；乙方（丙方）未隐瞒被征收房屋的产权纠纷或抵押担保等状况，如因隐瞒或提供资料不实产生的一切责任由乙方（丙方）承担。
                     <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
