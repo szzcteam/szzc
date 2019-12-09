@@ -129,6 +129,9 @@ var swapHouseObj = {
                 }
                 alertMsg.confirm("检测到 "+houseName + ",地址: "+address+" 有【结算单】，是否使用结算单数据进行填充？", {
                     okCall: function(){
+                        //其它公式，特殊提醒
+                        var noticeFlag = false;
+                        var noticeMsg = "";
                         //承租人标识
                         if (data.houseOwner != null && data.houseOwner != "") {
                             $("#swapHouseDiv input[name='isLesseeFlag']").eq(0).val(false);
@@ -157,8 +160,17 @@ var swapHouseObj = {
                         $("#swapHouseDiv input[name='noRegisterLegalArea']").eq(0).val(data.noRegisterLegalArea);
                         //评估单价
                         if(data.noRegisterLegal != null && data.noRegisterLegal >0){
+                            console.log("未登记的合法建筑公式:" + data.calcNoRegisterLegal);
                             var calcNoRegisterLegal = data.calcNoRegisterLegal.split("*");
-                            $("#swapHouseDiv input[name='noRegisterAssessPrice']").eq(0).val(calcNoRegisterLegal[1]);
+                            var price = calcNoRegisterLegal[1];
+                            if (isNaN(price)) {
+                                noticeFlag = true;
+                                noticeMsg = noticeMsg + "<br/>未登记建筑补偿有独立公式计算";
+                                price = price.substring(0, price.indexOf("+"));
+                            }
+
+                            $("#swapHouseDiv input[name='noRegisterAssessPrice']").eq(0).val(price);
+
                         }
                         //补偿比例
                         // $("#swapHouseDiv input[name='noRegisterProportion']").eq(0).val(data.assessPrice);
@@ -167,8 +179,15 @@ var swapHouseObj = {
                         $("#swapHouseDiv input[name='historyLegacyArea']").eq(0).val(data.historyLegacyArea);
                         //评估单价
                         if(data.historyLegacy != null && data.historyLegacy >0){
+                            console.log("未登记的合法建筑公式:" + data.calcHistoryLegacy);
                             var calcHistoryLegacy = data.calcHistoryLegacy.split("*");
-                            $("#swapHouseDiv input[name='historyAssessPrice']").eq(0).val(calcHistoryLegacy[1]);
+                            var price = calcHistoryLegacy[1];
+                            if (isNaN(price)) {
+                                noticeFlag = true;
+                                noticeMsg = noticeMsg + "<br/>历史遗留建筑补偿有独立公式计算";
+                                price = price.substring(0, price.indexOf("+"));
+                            }
+                            $("#swapHouseDiv input[name='historyAssessPrice']").eq(0).val(price);
                         }
 
                         //补偿比例
@@ -183,7 +202,20 @@ var swapHouseObj = {
                         if(data.decorationCompensate != null && data.decorationCompensate > 0){
                             var calcDecorationCompensate = data.calcDecorationCompensate.split("*");
                             //默认最后一个乘以的就是单价
-                            $("#swapHouseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(calcDecorationCompensate[calcDecorationCompensate.length-1]);
+                            var price = calcDecorationCompensate[calcDecorationCompensate.length-1];
+                            console.log("装修补偿单价:"+price + "  ，公式:" + data.calcDecorationCompensate);
+                            if(isNaN(price)){
+                                noticeFlag = true;
+                                noticeMsg = noticeMsg + "<br/>室内装修补偿有独立公式计算";
+                                //有其它公式, 格式：10*10+其它公式
+                                var otherCalc = price.substring(price.indexOf("+")+1, price.length);
+                                var otherCalcArr = otherCalc.split("*");
+                                $("#swapHouseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(otherCalcArr[otherCalcArr.length - 1]);
+                            }else{
+                                //是个数字，没有其它公式
+                                $("#swapHouseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(price);
+                            }
+                            //总价
                             $("#swapHouseDiv input[name='decorationCompensate']").eq(0).val(data.decorationCompensate)
                         }
                         ;
@@ -287,6 +319,10 @@ var swapHouseObj = {
                             $("#swapHouseDiv input[name='noticeDay']").eq(0).val(data.adjudication.noticeDay);
                         }
 
+                        noticeMsg = noticeMsg + "<br/>请人工核对!";
+                        if(noticeFlag){
+                            alertMsg.warn(noticeMsg);
+                        }
                     }
                 });
             }

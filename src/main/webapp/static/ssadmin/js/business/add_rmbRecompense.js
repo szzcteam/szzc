@@ -106,6 +106,9 @@ var rmbRecompenseObj = {
                 }
                 alertMsg.confirm("检测到 "+houseName + ",地址: "+address+" 有【结算单】，是否使用结算单数据进行填充？", {
                     okCall: function(){
+                        //其它公式，特殊提醒
+                        var noticeFlag = false;
+                        var noticeMsg = "";
                         //承租人标识
                         if (data.houseOwner != null && data.houseOwner != "") {
                             $("#rmbRecompenseDiv input[name='isLesseeFlag']").eq(0).val(false);
@@ -135,7 +138,13 @@ var rmbRecompenseObj = {
                         //评估单价
                         if(data.noRegisterLegal != null && data.noRegisterLegal >0){
                             var calcNoRegisterLegal = data.calcNoRegisterLegal.split("*");
-                            $("#rmbRecompenseDiv input[name='noRegisterAssessPrice']").eq(0).val(calcNoRegisterLegal[1]);
+                            var price = calcNoRegisterLegal[1];
+                            if (isNaN(price)) {
+                                noticeFlag = true;
+                                noticeMsg = noticeMsg + "<br/>未登记建筑补偿有独立公式计算";
+                                price = price.substring(0, price.indexOf("+"));
+                            }
+                            $("#rmbRecompenseDiv input[name='noRegisterAssessPrice']").eq(0).val(price);
                         }
                         //补偿比例
                         // $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val(data.assessPrice);
@@ -145,7 +154,13 @@ var rmbRecompenseObj = {
                         //评估单价
                         if(data.historyLegacy != null && data.historyLegacy >0){
                             var calcHistoryLegacy = data.calcHistoryLegacy.split("*");
-                            $("#rmbRecompenseDiv input[name='historyAssessPrice']").eq(0).val(calcHistoryLegacy[1]);
+                            var price = calcHistoryLegacy[1];
+                            if (isNaN(price)) {
+                                noticeFlag = true;
+                                noticeMsg = noticeMsg + "<br/>历史遗留建筑补偿有独立公式计算";
+                                price = price.substring(0, price.indexOf("+"));
+                            }
+                            $("#rmbRecompenseDiv input[name='historyAssessPrice']").eq(0).val(price);
                         }
 
                         //补偿比例
@@ -160,7 +175,19 @@ var rmbRecompenseObj = {
                         if(data.decorationCompensate != null && data.decorationCompensate > 0){
                             var calcDecorationCompensate = data.calcDecorationCompensate.split("*");
                             //默认最后一个乘以的就是单价
-                            $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(calcDecorationCompensate[calcDecorationCompensate.length-1]);
+                            var price = calcDecorationCompensate[calcDecorationCompensate.length-1];
+                            console.log("装修补偿单价:"+price + "  ，公式:" + data.calcDecorationCompensate);
+                            if(isNaN(price)){
+                                noticeFlag = true;
+                                noticeMsg = noticeMsg + "<br/>室内装修补偿有独立公式计算";
+                                //有其它公式, 格式：10*10+其它公式
+                                var otherCalc = price.substring(price.indexOf("+")+1, price.length);
+                                var otherCalcArr = otherCalc.split("*");
+                                $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(otherCalcArr[otherCalcArr.length - 1]);
+                            }else{
+                                //是个数字，没有其它公式
+                                $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(price);
+                            }
                             $("#rmbRecompenseDiv input[name='decorationCompensate']").eq(0).val(data.decorationCompensate)
                         }
                         ;
@@ -247,6 +274,10 @@ var rmbRecompenseObj = {
                             $("#rmbRecompenseDiv input[name='noticeDay']").eq(0).val(data.adjudication.noticeDay);
                         }
 
+                        noticeMsg = noticeMsg + "<br/>请人工核对!";
+                        if(noticeFlag){
+                            alertMsg.warn(noticeMsg);
+                        }
 
                     }
                 });
