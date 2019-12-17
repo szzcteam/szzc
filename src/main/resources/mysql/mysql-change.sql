@@ -93,5 +93,19 @@ CREATE TABLE `field_coordinate` (
 
 #2019/12/17 bbfang 新增字段备注
 ALTER TABLE `szzc`.`r_change`
-   ADD COLUMN `r_remark` VARCHAR(255) NULL COMMENT '备注' AFTER `item_code`;
+   ADD COLUMN `r_remark` VARCHAR(2000) NULL COMMENT '备注' AFTER `item_code`;
 
+-- 2019-12-17 增加编辑房源按钮
+
+
+
+insert into f_security(fdescription,fname, fpriority, fparentid, furl)
+values('修改点房','修改点房',4,27,'ssadmin/roomChange/updateRemark.html');
+
+
+insert into f_role_security(fsecurityid, froleid)
+values(42,1);
+
+-- 操作内容加打
+ALTER TABLE `f_system_operator_log`
+MODIFY COLUMN `operator_content`  varchar(5000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作内容' AFTER `request_parameters`;
