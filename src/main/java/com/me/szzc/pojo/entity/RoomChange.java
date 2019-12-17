@@ -114,11 +114,14 @@ public class RoomChange extends BaseRowModel implements Serializable {
      */
     private String itemCode;
 
+    /**
+     * TODO 2019/12/17 bbfang 新增字段
+     * 备注
+     */
+    private String remark;
+
     /**点房时间-字符串格式**/
     private String chooseDateStr;
-
-
-
 
     public String getStatusDesc() {
         if(status != null){

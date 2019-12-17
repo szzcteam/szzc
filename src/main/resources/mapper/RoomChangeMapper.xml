@@ -9,7 +9,7 @@
                r_choose_people AS choosePeople,
                assigned_project AS assignedProject,housing_platform AS housingPlatform,
                status,commission_company AS commissionCompany,
-               choose_date AS chooseDate
+               choose_date AS chooseDate,r_remark as remark
     </sql>
 
     <insert id="insertRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
@@ -112,6 +112,10 @@
         <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
+        --TODO 2019/12/17 bbfang 新增字段备注
+        <if test="remark != null and remark != ''">
+            AND r_remark LIKE concat(concat('%',#{remark,jdbcType=VARCHAR}),'%')
+        </if>
         <if test="name != null and name != ''">
             AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
@@ -164,6 +168,10 @@
         <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
+        --TODO 2019/12/17 bbfang 新增字段备注
+        <if test="remark != null and remark != ''">
+            AND r_remark LIKE concat(concat('%',#{remark,jdbcType=VARCHAR}),'%')
+        </if>
         <if test="name != null and name != ''">
             AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
         </if>
@@ -239,6 +247,10 @@
     <update id="updateRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
         UPDATE r_change
         <set>
+            --TODO 2019/12/17 bbfang 新增字段备注
+            <if test="remark!=null and remark !=''">
+                r_remark = #{remark,jdbcType=VARCHAR},
+            </if>
             <if test="name!=null and name !=''">
                 r_name = #{name,jdbcType=VARCHAR},
             </if>

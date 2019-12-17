@@ -107,6 +107,13 @@ public class RoomChangeController extends BaseController {
     @RequestMapping("/queryPage")
     public ModelAndView queryPage(HttpServletRequest request, RoomChangeVo roomChangeVo) {
         ModelAndView view = new ModelAndView();
+        // TODO 2019/12/17 新增字段备注
+        if (!StringUtils.isNullOrEmpty(roomChangeVo.getRemark())) {
+            roomChangeVo.setRemark(roomChangeVo.getRemark().trim());
+            if (roomChangeVo.getRemark().length() > 0) {
+                view.addObject("remark", roomChangeVo.getRemark());
+            }
+        }
         if (!StringUtils.isNullOrEmpty(roomChangeVo.getName())) {
             roomChangeVo.setName(roomChangeVo.getName().trim());
             if (roomChangeVo.getName().length() > 0) {

@@ -17,7 +17,7 @@ public class PasswordHelper {
 	}
 	
 	public static void main(String args[]) throws Exception {
-		String str = encryString("luwei@2019","26003658957127680");
+		String str = encryString("abc123","26003658957127684");
 		System.out.println(str);
 		AesCipherService aesCipherService = new AesCipherService();
 		//decrypt(Hex.decode(encrptText),key.getEncoded()).getBytes()

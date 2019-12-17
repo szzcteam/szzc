@@ -82,4 +82,10 @@ public class RoomChangeVo implements Serializable {
      */
     private List<String> itemCodeList;
 
+    /**
+     * 2019/12/17 bbfang 新增字段
+     * 备注
+     */
+    private String remark;
+
 }
