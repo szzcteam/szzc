@@ -194,6 +194,14 @@ public class BaseController extends BaseServiceCtrl{
         modelAndView.addObject("airConditionerHang", airConditionerHang);
         modelAndView.addObject("airConditionerShutter", airConditionerShutter);
 
+        //紫阳村查询空调
+        String zycAirConditionerCabinet = systemArgsService.getValue(SystemArgsConstant.ZYC_AIR_CONDITIONER_CABINET);
+        String zycAirConditionerHang = systemArgsService.getValue(SystemArgsConstant.ZYC_AIR_CONDITIONER_HANG);
+        String zycAirConditionerShutter = systemArgsService.getValue(SystemArgsConstant.ZYC_AIR_CONDITIONER_SHUTTER);
+        modelAndView.addObject("zycAirConditionerCabinet", zycAirConditionerCabinet);
+        modelAndView.addObject("zycAirConditionerHang", zycAirConditionerHang);
+        modelAndView.addObject("zycAirConditionerShutter", zycAirConditionerShutter);
+
         //查询水表
         String waterMeterMain = systemArgsService.getValue(SystemArgsConstant.WATER_METER_MAIN);
         String waterMeterSub = systemArgsService.getValue(SystemArgsConstant.WATER_METER_SUB);
@@ -256,6 +264,11 @@ public class BaseController extends BaseServiceCtrl{
         /**电热水器**/
         String waterHeater = systemArgsService.getValue(SystemArgsConstant.WATER_HEATER);
         modelAndView.addObject("waterHeater", waterHeater);
+
+        String zycWaterHeater = systemArgsService.getValue(SystemArgsConstant.ZYC_WATER_HEATER);
+        modelAndView.addObject("zycWaterHeater", zycWaterHeater);
+
+
 
         /**太阳能热水器**/
         String solarWaterHeaters = systemArgsService.getValue(SystemArgsConstant.SOLAR_WATER_HEATERS);

@@ -244,21 +244,21 @@
                         <td colspan="5" class="td_left">3、空调移机费</td>
                         <td colspan="4">
                             <select id="air_conditioner_shutter" class="select_fix">
-                                <option value="0*${airConditionerShutter}">窗机选择</option>
+                                <option value="0*${zycAirConditionerShutter}">窗机选择</option>
                                 <c:forEach begin="1" end="10" var="idx">
-                                    <option value="${idx}*${airConditionerShutter}">${idx}&nbsp;窗机</option>
+                                    <option value="${idx}*${zycAirConditionerShutter}">${idx}&nbsp;窗机</option>
                                 </c:forEach>
                             </select>
                             <select id="air_conditioner_hang" class="select_fix">
-                                <option value="0*${airConditionerHang}">挂机选择</option>
+                                <option value="0*${zycAirConditionerHang}">挂机选择</option>
                                 <c:forEach begin="1" end="10" var="idx">
-                                    <option value="${idx}*${airConditionerHang}">${idx}&nbsp;挂机</option>
+                                    <option value="${idx}*${zycAirConditionerHang}">${idx}&nbsp;挂机</option>
                                 </c:forEach>
                             </select>
                             <select id="air_conditioner_cabinet" class="select_fix">
-                                <option value="0*${airConditionerCabinet}">柜机选择</option>
+                                <option value="0*${zycAirConditionerCabinet}">柜机选择</option>
                                 <c:forEach begin="1" end="10" var="idx">
-                                    <option value="${idx}*${airConditionerCabinet}">${idx}&nbsp;柜机</option>
+                                    <option value="${idx}*${zycAirConditionerCabinet}">${idx}&nbsp;柜机</option>
                                 </c:forEach>
                             </select>
                             <!--隐藏存储表单提交值-->
@@ -272,9 +272,9 @@
                         <td colspan="4">
                             <!--电热水器选择-->
                             <select name="sel_water_heater" class="select_fix" style="width: 155px">
-                                <option value="0*${waterHeater}">请选择电热水器数量</option>
+                                <option value="0*${zycWaterHeater}">请选择电热水器数量</option>
                                 <c:forEach begin="1" end="10" var="idx">
-                                    <option value="${idx}*${waterHeater}">${idx}&nbsp;个</option>
+                                    <option value="${idx}*${zycWaterHeater}">${idx}&nbsp;个</option>
                                 </c:forEach>
                             </select>
 

@@ -15,6 +15,13 @@ public interface SystemArgsConstant {
     String AIR_CONDITIONER_CABINET = "air_conditioner_cabinet";
 
     /**
+     * 紫阳村空调
+     **/
+    String ZYC_AIR_CONDITIONER_SHUTTER = "zyc_air_conditioner_shutter";
+    String ZYC_AIR_CONDITIONER_HANG = "zyc_air_conditioner_hang";
+    String ZYC_AIR_CONDITIONER_CABINET = "zyc_air_conditioner_cabinet";
+
+    /**
      * 水表
      **/
     String WATER_METER_MAIN = "water_meter_main";
@@ -58,7 +65,10 @@ public interface SystemArgsConstant {
     /**电热水器**/
     String WATER_HEATER ="water_heater";
 
-    /**太阳能电热水器**/
+    /**紫阳村电热水器**/
+    String ZYC_WATER_HEATER ="zyc_water_heater";
+
+    /**太阳能热水器**/
     String SOLAR_WATER_HEATERS ="solar_water_heaters";
 
     /**紫阳村太阳能热水器补偿价格**/
