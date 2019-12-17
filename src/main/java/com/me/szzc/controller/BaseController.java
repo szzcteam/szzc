@@ -261,6 +261,9 @@ public class BaseController extends BaseServiceCtrl{
         String solarWaterHeaters = systemArgsService.getValue(SystemArgsConstant.SOLAR_WATER_HEATERS);
         modelAndView.addObject("solarWaterHeaters", solarWaterHeaters);
 
+        String zycSolarWaterHeaters = systemArgsService.getValue(SystemArgsConstant.ZYC_SOLAR_WATER_HEATERS);
+        modelAndView.addObject("zycSolarWaterHeaters", zycSolarWaterHeaters);
+
         /**奖励**/
         String rewardRmbProportion = systemArgsService.getValue(SystemArgsConstant.REWARD_RMB_PROPORTION);
         String rewardSwapProportion = systemArgsService.getValue(SystemArgsConstant.REWARD_SWAP_PROPORTION);

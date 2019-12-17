@@ -784,10 +784,13 @@ var settleAccountObj = {
         var water_heater_calc = $("select[name='sel_water_heater']").eq(0).val()
 
         //太阳能
-        var calcHotWaterCompensateMoney = $("input[name='calcHotWaterCompensateMoney']").eq(0).val() || 0;
-        var calcHotWaterCompensateConvert = $("input[name='calcHotWaterCompensateConvert']").eq(0).val() || 0;
+        var calcHotWaterCompensateMoney = 0;
+        var hotWaterFlag = $("input[name='calcHotWaterCompensateMoney']").eq(0).prop('checked');
+        if(hotWaterFlag){
+            calcHotWaterCompensateMoney =  $("input[name='calcHotWaterCompensateMoney']").eq(0).val();
+        }
 
-        var calcHotWaterCompensate = water_heater_calc + "+" + calcHotWaterCompensateMoney + "*" + calcHotWaterCompensateConvert;
+        var calcHotWaterCompensate = water_heater_calc + "+" + calcHotWaterCompensateMoney;
 
         console.log("热水器拆装计算公式：" + calcHotWaterCompensate);
         $("input[name='calcHotWaterCompensate']").eq(0).val(calcHotWaterCompensate).change();

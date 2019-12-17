@@ -247,8 +247,20 @@ $(document).ready(function () {
         //太阳能热水器
         var hot_d_calc = calcHotWaterCompensate.substring(hot_water_index + 1, calcHotWaterCompensate.length);
         var arr = hot_d_calc.split("*");
-        $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
-        $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
+        if(arr.length == 2){
+            //明伦街的公式：金额*比例
+            $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
+            $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
+        }else if(arr.length == 1){
+            //紫阳村的：固定价格
+            if(arr[0] == "0"){
+                $("input[name='calcHotWaterCompensateMoney']").eq(0).prop('checked', false);
+            }else{
+                $("input[name='calcHotWaterCompensateMoney']").eq(0).prop('checked', true);
+            }
+
+        }
+
     }
     console.log("热水器拆装费结束");
 

@@ -61,6 +61,9 @@ public interface SystemArgsConstant {
     /**太阳能电热水器**/
     String SOLAR_WATER_HEATERS ="solar_water_heaters";
 
+    /**紫阳村太阳能热水器补偿价格**/
+    String ZYC_SOLAR_WATER_HEATERS = "zyc_solar_water_heaters";
+
     /**奖励**/
     String REWARD_RMB_PROPORTION = "reward_rmb_proportion";
     String REWARD_SWAP_PROPORTION = "reward_swap_proportion";
