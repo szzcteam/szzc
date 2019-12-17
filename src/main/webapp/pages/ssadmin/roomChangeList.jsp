@@ -107,6 +107,13 @@
                        height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改房源信息</span>
                 </a></li>
             </shiro:hasPermission>
+            <!-- 编辑备注 -->
+            <shiro:hasPermission name="ssadmin/roomChange/updateRemark.html">
+                <li><a class="edit"
+                       href="ssadmin/roomChange/getRoomChangeById.html?url=ssadmin/updateRoomRemark&id={sid_user}"
+                       height="450" width="800" target="dialog" rel="updateRemark"><span>编辑备注</span>
+                </a></li>
+            </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/roomChange/addChooseRoom.html">
                 <li><a class="edit"
                        href="ssadmin/roomChange/toChooseRoomPage.html?url=ssadmin/updateChooseRoom&id={sid_user}&postUrl=add"

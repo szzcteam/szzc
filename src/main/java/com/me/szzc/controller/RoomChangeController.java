@@ -358,6 +358,39 @@ public class RoomChangeController extends BaseController {
         return modelAndView;
     }
 
+
+    @RequestMapping("/updateRemark")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "修改房源信息")
+    public ModelAndView updateRemark(RoomChange roomChange) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //数据不为空
+        if (StringUtils.isNullOrEmpty(roomChange) || StringUtils.isNullOrEmpty(roomChange.getId())) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "修改失败,入参为空");
+            return modelAndView;
+        }
+
+        Boolean status = null;
+        try {
+            status = roomChangeService.updateRemark(roomChange.getRemark(), roomChange.getId());
+        } catch (Exception e) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", e.getMessage());
+            return modelAndView;
+        }
+
+        if (status) {
+            modelAndView.addObject("statusCode", 200);
+            modelAndView.addObject("message", "编辑成功");
+            modelAndView.addObject("callbackType", "closeCurrent");
+        } else {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "编辑失败");
+        }
+        return modelAndView;
+    }
+
     /**
      * 点房
      *

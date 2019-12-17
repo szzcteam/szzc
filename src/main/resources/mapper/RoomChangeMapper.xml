@@ -245,8 +245,8 @@
     <update id="updateRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
         UPDATE r_change
         <set>
-            <if test="remark!=null and remark !=''">
-                r_remark = #{remark,jdbcType=VARCHAR},
+            <if test="remark!=null ">
+                r_remark = #{remark},
             </if>
             <if test="name!=null and name !=''">
                 r_name = #{name,jdbcType=VARCHAR},

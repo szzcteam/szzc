@@ -92,6 +92,22 @@ public class RoomChangeService {
         return roomChangeMapper.updateRoomChange(roomChange) > 0 ? true : false;
     }
 
+    public boolean updateRemark(String remark, Long id) {
+        RoomChange roomChangeById = roomChangeMapper.getRoomChangeById(id);
+        if (roomChangeById == null) {
+            return false;
+        }
+
+        //重置备注值
+        if (StringUtils.isNullOrEmpty(remark)) {
+            roomChangeById.setRemark("");
+        } else {
+            roomChangeById.setRemark(remark);
+        }
+
+        return roomChangeMapper.updateRoomChange(roomChangeById) > 0 ? true : false;
+    }
+
     /**
      * 房源信息条件分页查询
      *
