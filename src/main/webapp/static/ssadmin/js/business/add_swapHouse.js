@@ -170,16 +170,20 @@ var swapHouseObj = {
                             }
 
                             $("#swapHouseDiv input[name='noRegisterAssessPrice']").eq(0).val(price);
+                            //补偿比例
+                            var proportion = calcNoRegisterLegal[2];
+                            if(proportion != undefined){
+                                $("#swapHouseDiv input[name='noRegisterProportion']").eq(0).val(proportion);
+                            }
 
                         }
-                        //补偿比例
-                        // $("#swapHouseDiv input[name='noRegisterProportion']").eq(0).val(data.assessPrice);
+
 
                         //历史遗留建筑面积
                         $("#swapHouseDiv input[name='historyLegacyArea']").eq(0).val(data.historyLegacyArea);
                         //评估单价
                         if(data.historyLegacy != null && data.historyLegacy >0){
-                            console.log("未登记的合法建筑公式:" + data.calcHistoryLegacy);
+                            console.log("历史遗留的建筑公式:" + data.calcHistoryLegacy);
                             var calcHistoryLegacy = data.calcHistoryLegacy.split("*");
                             var price = calcHistoryLegacy[1];
                             if (isNaN(price)) {
@@ -188,10 +192,14 @@ var swapHouseObj = {
                                 price = price.substring(0, price.indexOf("+"));
                             }
                             $("#swapHouseDiv input[name='historyAssessPrice']").eq(0).val(price);
+                            //补偿比例
+                            var proportion = calcHistoryLegacy[2];
+                            if(proportion != undefined){
+                                $("#swapHouseDiv input[name='historyProportion']").eq(0).val(proportion);
+                            }
+
                         }
 
-                        //补偿比例
-                        // $("#swapHouseDiv input[name='historyProportion']").eq(0).val(data.assessPrice);
 
                         //有证房屋补偿金额
                         $("#swapHouseDiv input[name='valueCompensate']").eq(0).val(data.valueCompensate);

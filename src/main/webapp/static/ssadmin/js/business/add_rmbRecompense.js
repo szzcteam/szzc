@@ -145,9 +145,13 @@ var rmbRecompenseObj = {
                                 price = price.substring(0, price.indexOf("+"));
                             }
                             $("#rmbRecompenseDiv input[name='noRegisterAssessPrice']").eq(0).val(price);
+                            //补偿比例
+                            var proportion = calcNoRegisterLegal[2];
+                            if(proportion != undefined){
+                                $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val(proportion);
+                            }
                         }
-                        //补偿比例
-                        // $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val(data.assessPrice);
+
 
                         //历史遗留建筑面积
                         $("#rmbRecompenseDiv input[name='historyLegacyArea']").eq(0).val(data.historyLegacyArea);
@@ -161,10 +165,13 @@ var rmbRecompenseObj = {
                                 price = price.substring(0, price.indexOf("+"));
                             }
                             $("#rmbRecompenseDiv input[name='historyAssessPrice']").eq(0).val(price);
+                            //补偿比例
+                            var proportion = calcHistoryLegacy[2];
+                            if(proportion != undefined){
+                                $("#rmbRecompenseDiv input[name='historyProportion']").eq(0).val(proportion);
+                            }
                         }
 
-                        //补偿比例
-                        // $("#rmbRecompenseDiv input[name='historyProportion']").eq(0).val(data.assessPrice);
 
                         //有证房屋补偿金额
                         $("#rmbRecompenseDiv input[name='valueCompensate']").eq(0).val(data.valueCompensate);

@@ -102,7 +102,7 @@ $(document).ready(function () {
             console.log("历史遗留分割：" + two_calc);
             $("input[name='calcHistoryLegacyOther']").val(two_calc);
         } else {
-            arr = calcValueCompensate.split("*");
+            arr = calcHistoryLegacy.split("*");
         }
 
         $("input[name='calcHistoryLegacyArea']").val(arr[0]);
