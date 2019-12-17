@@ -82,10 +82,12 @@ public class RoomChangeService {
     public boolean updateRoomChangeById(RoomChange roomChange) {
         //获取房号全
         String number = roomChange.getNumber();
-        //判断是否重复
-        List<RoomChange> roomChanges = roomChangeMapper.selectRoomChange(roomChange);
-        if (StringUtils.isNullOrEmpty(roomChanges) && roomChanges.size() > 0) {
-            throw new RuntimeException("片区项目(" + roomChange.getName() + "),房号(" + number + ")已存在");
+        if (!StringUtils.isNullOrEmpty(number)) {
+            //判断是否重复
+            List<RoomChange> roomChanges = roomChangeMapper.selectRoomChange(roomChange);
+            if (StringUtils.isNullOrEmpty(roomChanges) && roomChanges.size() > 0) {
+                throw new RuntimeException("片区项目(" + roomChange.getName() + "),房号(" + number + ")已存在");
+            }
         }
         return roomChangeMapper.updateRoomChange(roomChange) > 0 ? true : false;
     }
