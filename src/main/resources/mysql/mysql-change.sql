@@ -96,9 +96,6 @@ ALTER TABLE `szzc`.`r_change`
    ADD COLUMN `r_remark` VARCHAR(2000) NULL COMMENT '备注' AFTER `item_code`;
 
 -- 2019-12-17 增加编辑房源按钮
-
-
-
 insert into f_security(fdescription,fname, fpriority, fparentid, furl)
 values('编辑备注','编辑备注',4,27,'ssadmin/roomChange/updateRemark.html');
 
@@ -106,6 +103,26 @@ values('编辑备注','编辑备注',4,27,'ssadmin/roomChange/updateRemark.html'
 insert into f_role_security(fsecurityid, froleid)
 values(42,1);
 
--- 操作内容加打
+-- 操作内容加大
 ALTER TABLE `f_system_operator_log`
 MODIFY COLUMN `operator_content`  varchar(5000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作内容' AFTER `request_parameters`;
+
+
+-- 新增紫阳村的太阳能热水器补偿
+insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
+values('zyc_solar_water_heaters', '1', '紫阳村太阳能热水器补偿价格', 2000, 0);
+
+
+
+-- 紫阳村空调价格
+insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
+values('zyc_air_conditioner_shutter', '1', '紫阳村窗机(单元：元)', 200, 0);
+
+insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
+values('zyc_air_conditioner_hang', '1', '紫阳村挂机(单元：元)', 300, 0);
+
+insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
+values('zyc_air_conditioner_cabinet', '1', '紫阳村柜机(单元：元)', 500, 0);
+
+insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
+values('zyc_water_heater', '1', '紫阳村电热水器迁移费', 300, 0);
