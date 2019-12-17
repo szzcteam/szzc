@@ -100,7 +100,7 @@ ALTER TABLE `szzc`.`r_change`
 
 
 insert into f_security(fdescription,fname, fpriority, fparentid, furl)
-values('修改点房','修改点房',4,27,'ssadmin/roomChange/updateRemark.html');
+values('编辑备注','编辑备注',4,27,'ssadmin/roomChange/updateRemark.html');
 
 
 insert into f_role_security(fsecurityid, froleid)
