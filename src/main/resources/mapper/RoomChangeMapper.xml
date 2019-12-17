@@ -112,7 +112,6 @@
         <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
-        --TODO 2019/12/17 bbfang 新增字段备注
         <if test="remark != null and remark != ''">
             AND r_remark LIKE concat(concat('%',#{remark,jdbcType=VARCHAR}),'%')
         </if>
@@ -168,7 +167,6 @@
         <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
             #{id}
         </foreach>
-        --TODO 2019/12/17 bbfang 新增字段备注
         <if test="remark != null and remark != ''">
             AND r_remark LIKE concat(concat('%',#{remark,jdbcType=VARCHAR}),'%')
         </if>
@@ -247,7 +245,6 @@
     <update id="updateRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
         UPDATE r_change
         <set>
-            --TODO 2019/12/17 bbfang 新增字段备注
             <if test="remark!=null and remark !=''">
                 r_remark = #{remark,jdbcType=VARCHAR},
             </if>
