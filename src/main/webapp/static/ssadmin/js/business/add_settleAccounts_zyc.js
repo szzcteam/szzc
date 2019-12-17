@@ -465,6 +465,21 @@ $(document).ready(function(){
         settleAccountObj.changeDeduction();
     });
 
+    //新房名称失去焦点
+    /*$("input[name='newHouseName']").on("blur", function () {
+        var newHouseAddress =  $(this).val();
+        if(!newHouseAddress){
+            return;
+        }
+        console.log("安置房地址："+newHouseAddress);
+        var reg = /^.+[0-9]+栋[0-9]+单元[0-9]+层[0-9]+号$/;
+        if(!reg.test(newHouseAddress)){
+            alertMsg.error("安置房名称、房号错误，请按标准格式填写，示例:金地太阳城8栋1单元9层1号");
+            $(this).val("");
+        }
+
+    });*/
+
 
 });
 

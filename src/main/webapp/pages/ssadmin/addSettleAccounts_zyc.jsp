@@ -496,7 +496,7 @@
                         <td colspan="4" rowspan="2">产权调换房屋情况</td>
                         <td colspan="2" style="width: 100px;">安置房名称、房号</td>
                         <td colspan="4">
-                            <input type="text" name="newHouseName" class="none_border" style="width: 400px;">
+                            <input type="text" name="newHouseName" class="none_border" placeholder="示例：金地太阳城8栋1单元9层1号，多个地址用英文逗号隔开" style="width: 400px;">
                         </td>
                         <%--<td colspan="3" style="font-size: xx-small;">其中<input type="text" name="calcm" class="none_border" style="clear: both;float:none;width: 40px;"> m<sup>2</sup>
                             与被征收房屋(<input type="text" name="price" class="none_border" style="clear: both;float:none;width: 50px;">元)置换互不补差价</td>--%>
