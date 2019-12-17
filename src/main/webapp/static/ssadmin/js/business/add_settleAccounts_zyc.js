@@ -1011,18 +1011,19 @@ var settleAccountObj = {
         var swap_price1 = $("input[name='swapPrice1']").eq(0).val() || 0;
         var swap_price2 = $("input[name='swapPrice2']").eq(0).val() || 0;
         var swap_price3 = $("input[name='swapPrice3']").eq(0).val() || 0;
-        var swap_price4 = $("input[name='swapPrice4']").eq(0).val() || 0;
-        var swap_price5 = $("input[name='swapPrice5']").eq(0).val() || 0;
+      /*  var swap_price4 = $("input[name='swapPrice4']").eq(0).val() || 0;
+        var swap_price5 = $("input[name='swapPrice5']").eq(0).val() || 0;*/
 
         var swap_area1 = $("input[name='swapArea1']").eq(0).val() || 0;
         var swap_area2 = $("input[name='swapArea2']").eq(0).val() || 0;
         var swap_area3 = $("input[name='swapArea3']").eq(0).val() || 0;
-        var swap_area4 = $("input[name='swapArea4']").eq(0).val() || 0;
-        var swap_area5 = $("input[name='swapArea5']").eq(0).val() || 0;
+       /* var swap_area4 = $("input[name='swapArea4']").eq(0).val() || 0;
+        var swap_area5 = $("input[name='swapArea5']").eq(0).val() || 0;*/
 
         if (swap_price1 != 0 && swap_area1 != 0) {
             var swap_money1 = new Number(swap_price1) * new Number(swap_area1);
             // $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
+            swap_money1 = Math.round(swap_money1);
             $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
         } else {
             $("input[name='swapMoney1']").eq(0).val("").change();
@@ -1030,6 +1031,7 @@ var settleAccountObj = {
 
         if (swap_price2 != 0 && swap_area2 != 0) {
             var swap_money2 = new Number(swap_price2) * new Number(swap_area2);
+            swap_money2 = Math.round(swap_money2);
             $("input[name='swapMoney2']").eq(0).val(swap_money2).change();
         } else {
             $("input[name='swapMoney2']").eq(0).val("").change();
@@ -1037,12 +1039,13 @@ var settleAccountObj = {
 
         if (swap_price3 != 0 && swap_area3 != 0) {
             var swap_money3 = new Number(swap_price3) * new Number(swap_area3);
+            swap_money3 = Math.round(swap_money3);
             $("input[name='swapMoney3']").eq(0).val(swap_money3).change();
         } else {
             $("input[name='swapMoney3']").eq(0).val("").change();
         }
 
-        if (swap_price4 != 0 && swap_area4 != 0) {
+      /*  if (swap_price4 != 0 && swap_area4 != 0) {
             var swap_money4 = new Number(swap_price4) * new Number(swap_area4);
             $("input[name='swapMoney4']").eq(0).val(swap_money4).change();
         } else {
@@ -1054,7 +1057,7 @@ var settleAccountObj = {
             $("input[name='swapMoney5']").eq(0).val(swap_money5).change();
         } else {
             $("input[name='swapMoney5']").eq(0).val("").change();
-        }
+        }*/
 
     },
     //产权交换计算公式执行

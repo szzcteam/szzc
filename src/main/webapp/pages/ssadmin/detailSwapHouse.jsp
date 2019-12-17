@@ -191,8 +191,8 @@
                     <div style="width: 60px;" class="rows_div">${swapHouse.unit}</div>单元
                     <div style="width: 60px;" class="rows_div">${swapHouse.floors}</div>层
                     <div style="width: 60px;" class="rows_div">${swapHouse.houseNumber}</div>号产权调换房屋，
-                    该房屋预测建筑面积<div style="width: 60px;" class="rows_div">${swapHouse.coveredArea}</div>㎡（最终以不动产登记机构确认的实测面积为准），
-                    房屋预估单价<div style="width: 60px;" class="rows_div">${swapHouse.price}</div>元/㎡(最终价格以政府批准文件或以乙方（丙方）与建设单位签定合同约定为准），
+                    该房屋预测建筑面积<div style="width: 120px;" class="rows_div">${swapHouse.coveredArea}</div>㎡（最终以不动产登记机构确认的实测面积为准），
+                    房屋预估单价<div style="width: 120px;" class="rows_div">${swapHouse.price}</div>元/㎡(最终价格以政府批准文件或以乙方（丙方）与建设单位签定合同约定为准），
                     预估房屋总价计人民币<div style="width: 60px;" class="rows_div">${swapHouse.totalPrice}</div>元，
                     由于建筑面积变化引起房屋总价变动的，双方同意随之调整房屋价款，多退少补。
                     预计交房时间为<div style="width: 60px;" class="rows_div">${swapHouse.years}</div>年<div style="width: 60px;" class="rows_div">${swapHouse.months}</div>月（具体以甲方通知时间为准），

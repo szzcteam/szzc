@@ -531,7 +531,7 @@
                                 <input type="text" name="swapPrice3" value="${settleAccounts.swapPrice3}" class=" width_60px" style="float: none;margin-left: 5px;">元/M<sup>2</sup>
                                 ＝<input type="text" name="swapMoney3" value="${settleAccounts.swapMoney3}" style="float: none;margin-left: 5px;width: 85px;">元
                             </div>
-                            <div style="height:26px;margin-bottom:2px;margin-top: 2px;">
+                           <%-- <div style="height:26px;margin-bottom:2px;margin-top: 2px;">
                                 4、面积<input type="text" name="swapArea4" value="${settleAccounts.swapArea4}" class="width_50px" style="float: none;margin-left: 5px;">
                                 &nbsp;M<sup>2</sup>×单价
                                 <input type="text" name="swapPrice4" value="${settleAccounts.swapPrice4}" class=" width_60px" style="float: none;margin-left: 5px;">元/M<sup>2</sup>
@@ -542,7 +542,7 @@
                                 &nbsp;M<sup>2</sup>×单价
                                 <input type="text" name="swapPrice5" value="${settleAccounts.swapPrice5}" class=" width_60px" style="float: none;margin-left: 5px;">元/M<sup>2</sup>
                                 ＝<input type="text" name="swapMoney5" value="${settleAccounts.swapMoney5}" style="float: none;margin-left: 5px;width: 85px;">元
-                            </div>
+                            </div>--%>
                         </td>
                     </tr>
                     <%-- <tr>

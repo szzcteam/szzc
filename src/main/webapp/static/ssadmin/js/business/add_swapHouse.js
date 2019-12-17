@@ -301,6 +301,28 @@ var swapHouseObj = {
                         swapHouseObj.summaryNum();
 
                         //调换房信息
+                        //新房面积
+                        var coveredArea = data.swapArea1;
+                        if(data.swapArea2){
+                            coveredArea+="," + data.swapArea2;
+                        }
+
+                        if(data.swapArea3){
+                            coveredArea+="," + data.swapArea3;
+                        }
+                        $("#swapHouseDiv input[name='coveredArea']").eq(0).val(coveredArea);
+
+                        //新房单价
+                        var newHousePrice = data.swapPrice1;
+                        if(data.swapPrice2){
+                            newHousePrice+="," + data.swapPrice2;
+                        }
+
+                        if(data.swapPrice3){
+                            newHousePrice+="," + data.swapPrice3;
+                        }
+                        $("#swapHouseDiv input[name='price']").eq(0).val(newHousePrice);
+
                         //新房金额
                         $("#swapHouseDiv input[name='totalPrice']").eq(0).val(data.houseMoney).change();
                         //抵扣安置款
