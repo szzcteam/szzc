@@ -148,6 +148,7 @@ var rmbRecompenseObj = {
                             //补偿比例
                             var proportion = calcNoRegisterLegal[2];
                             if(proportion != undefined){
+                                proportion = new Number(proportion) * 100;
                                 $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val(proportion);
                             }
                         }
@@ -168,6 +169,7 @@ var rmbRecompenseObj = {
                             //补偿比例
                             var proportion = calcHistoryLegacy[2];
                             if(proportion != undefined){
+                                proportion = new Number(proportion) * 100;
                                 $("#rmbRecompenseDiv input[name='historyProportion']").eq(0).val(proportion);
                             }
                         }
