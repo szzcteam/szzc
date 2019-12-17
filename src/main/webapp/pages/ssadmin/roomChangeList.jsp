@@ -6,6 +6,7 @@
     <input type="hidden" name="choosePeople" value="${choosePeople}"/>
     <input type="hidden" name="assignedProject" value="${assignedProject}"/>
     <input type="hidden" name="status" value="${status}"/>
+    <input type="hidden" name="remark" value="${remark}"/>
     <input type="hidden" name="startDate" value="${startDate}"/>
     <input type="hidden" name="endDate" value="${endDate}"/>
     <input type="hidden" name="minArea" value="${minArea}"/>
@@ -136,19 +137,20 @@
     <table class="table" width="100%" layoutH="138">
         <thead>
         <tr>
-            <th width="15"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
-            <th width="20">序号</th>
-            <th width="60">分配征收项目</th>
-            <th width="60">提供房源平台</th>
-            <th width="60">房源项目</th>
+            <th width="30"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+            <th width="30">序号</th>
+            <th width="100">分配征收项目</th>
+            <th width="100">提供房源平台</th>
+            <th width="100">房源项目</th>
             <th width="60">房号</th>
-            <th width="60">面积&nbsp;(M<sup>2</sup>)</th>
-            <th width="50">单价&nbsp;(元/M<sup>2</sup>)</th>
-            <th width="50">总价&nbsp;(元)</th>
-            <th width="50">点房人</th>
-            <th width="60">点房时间</th>
-            <th width="50">代办公司</th>
-            <th width="50">状态</th>
+            <th width="70">面积&nbsp;(M<sup>2</sup>)</th>
+            <th width="80">单价&nbsp;(元/M<sup>2</sup>)</th>
+            <th width="70">总价&nbsp;(元)</th>
+            <th width="100">点房人</th>
+            <th width="150">点房时间</th>
+            <th width="100">代办公司</th>
+            <th width="80">状态</th>
+            <th>备注</th>
         </tr>
         </thead>
         <tbody>
@@ -168,6 +170,7 @@
                 <td>${room.chooseDateStr}</td>
                 <td>${room.commissionCompany}</td>
                 <td>${room.statusDesc}</td>
+                <td>${room.remark}</td>
             </tr>
         </c:forEach>
 
