@@ -188,7 +188,7 @@ public class RoomChangeController extends BaseController {
         }
         Map<String, String> projectMap = getUserEnableProject(userId);
         List<String> list = convertProejctCode(projectMap);
-        if (null == list && list.size() < 1) {
+        if (null == list || list.isEmpty()) {
             view.addObject("statusCode", 300);
             view.addObject("message", "用户未分配房源项目权限");
             return view;
