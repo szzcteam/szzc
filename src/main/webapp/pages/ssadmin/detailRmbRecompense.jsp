@@ -55,23 +55,23 @@
             <table style="height: 55px;margin-top: 20px;text-align: left;">
                 <tr>
                     <td style="width: 330px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
-                    <td>代办单位：<div style="width: 200px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
+                    <td>代办单位：<div style="width: 208px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
                 </tr>
                 <c:choose>
                     <c:when test="${rmbRecom.projectCode == 'B001001'}">
                         <tr>
                             <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.twoHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.twoIdentityNo}</div></td>
+                            <td>身份证号：<div style="width: 208px;" class="rows_div">${rmbRecom.twoIdentityNo}</div></td>
                         </tr>
                         <tr>
                             <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.thireHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.thireIdentityNo}</div></td>
+                            <td>身份证号：<div style="width: 208px;" class="rows_div">${rmbRecom.thireIdentityNo}</div></td>
                         </tr>
                     </c:when>
                     <c:otherwise>
                         <tr>
                             <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${rmbRecom.houseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${rmbRecom.identityNo}</div></td>
+                            <td>身份证号：<div style="width: 208px;" class="rows_div">${rmbRecom.identityNo}</div></td>
                         </tr>
                     </c:otherwise>
                 </c:choose>
@@ -86,12 +86,12 @@
         <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;被征收房屋情况</b></div>
         <div style="text-align: left;line-height: 26px;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1、乙方被征收房屋位于<div style="width: 200px;" class="rows_div">${rmbRecom.address}</div>，
+            1、乙方被征收房屋位于<div style="width: 220px;" class="rows_div">${rmbRecom.address}</div>，
             证载建筑面积为<div style="width: 80px;" class="rows_div">${rmbRecom.certifiedArea}</div>㎡，
             房屋权属份额<div style="width: 50px;" class="rows_div">${rmbRecom.proportion}</div>%，
             证载房屋用途<div style="width: 80px;" class="rows_div">${rmbRecom.useing}</div>，
-            房屋所有权证号证载房屋用途<div style="width: 100px;" class="rows_div">${rmbRecom.houseOwnerNumber}</div>，
-            国有土地使用证号<div style="width: 150px;" class="rows_div">${rmbRecom.publicOwnerNumber}</div>，
+            房屋所有权证号证载房屋用途<div style="width: 180px;" class="rows_div">${rmbRecom.houseOwnerNumber}</div>，
+            国有土地使用证号<div style="width: 220px;" class="rows_div">${rmbRecom.publicOwnerNumber}</div>，
             房屋价值评估单价为<div style="width: 80px;" class="rows_div">${rmbRecom.assessPrice}</div>元/㎡；
             其中：用于经营的实际面积<div style="width: 50px;" class="rows_div">${rmbRecom.valueCompensateBusinessArea}</div> ㎡，
             住宅改为经营门面的补助系数为<div style="width: 50px;" class="rows_div">${rmbRecom.valueCompensateRate}</div> %。

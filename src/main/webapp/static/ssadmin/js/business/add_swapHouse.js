@@ -149,6 +149,15 @@ var swapHouseObj = {
                         //房屋价值评估单价
                         var calcValueCompensateArr = data.calcValueCompensate.split("*");
                         $("#swapHouseDiv input[name='assessPrice']").eq(0).val(calcValueCompensateArr[1]);
+                        //证载补偿比例
+                        var valueProportion = calcValueCompensateArr[2];
+                        if(valueProportion != undefined){
+                            valueProportion = new Number(valueProportion) * 100;
+                            $("#swapHouseDiv input[name='proportion']").eq(0).val(valueProportion);
+                        }else{
+                            $("#swapHouseDiv input[name='proportion']").eq(0).val("100");
+                        }
+
                         //用于经营的实际面积  == 对应结算单第8条的，住改商面积
                         if(data.changeCompensate != null && data.changeCompensate > 0 ){
                             var calcChangeCompensate = data.calcChangeCompensate.split("*");

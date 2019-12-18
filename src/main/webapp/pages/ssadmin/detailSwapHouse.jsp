@@ -50,23 +50,23 @@
             <table style="height: 55px;margin-top: 20px;text-align: left;">
                 <tr>
                     <td style="width: 330px;">征收部门（甲方）：武汉市武昌区城区改造更新局</td>
-                    <td>代办单位：<div style="width: 200px;" class="rows_div">${swapHouse.agencyCompany}</div></td>
+                    <td>代办单位：<div style="width: 208px;" class="rows_div">${swapHouse.agencyCompany}</div></td>
                 </tr>
                 <c:choose>
                     <c:when test="${swapHouse.projectCode == 'B001001'}">
                         <tr>
                             <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${swapHouse.twoHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.twoIdentityNo}</div></td>
+                            <td>身份证号：<div style="width: 208px;" class="rows_div">${swapHouse.twoIdentityNo}</div></td>
                         </tr>
                         <tr>
                             <td>承 租 人（丙方）：<div style="width: 175px;" class="rows_div">${swapHouse.thireHouseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.thireIdentityNo}</div></td>
+                            <td>身份证号：<div style="width: 208px;" class="rows_div">${swapHouse.thireIdentityNo}</div></td>
                         </tr>
                     </c:when>
                     <c:otherwise>
                         <tr>
                             <td>被征收人、公有房屋承租人（乙方）：<div style="width: 90px;" class="rows_div">${swapHouse.houseOwner}</div></td>
-                            <td>身份证号：<div style="width: 200px;" class="rows_div">${swapHouse.identityNo}</div></td>
+                            <td>身份证号：<div style="width: 208px;" class="rows_div">${swapHouse.identityNo}</div></td>
                         </tr>
                     </c:otherwise>
                 </c:choose>
@@ -81,12 +81,12 @@
         <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;被征收房屋情况</b></div>
         <div style="text-align: left;line-height: 26px;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1、乙方被征收房屋位于<div style="width: 200px;" class="rows_div">${swapHouse.address}</div>，
+            1、乙方被征收房屋位于<div style="width: 220px;" class="rows_div">${swapHouse.address}</div>，
             证载建筑面积为<div style="width: 80px;" class="rows_div">${swapHouse.certifiedArea}</div>㎡，
             房屋权属份额<div style="width: 50px;" class="rows_div">${swapHouse.proportion}</div>%，
             证载房屋用途<div style="width: 80px;" class="rows_div">${swapHouse.useing}</div>，
-            房屋所有权证号证载房屋用途<div style="width: 100px;" class="rows_div">${swapHouse.houseOwnerNumber}</div>，
-            国有土地使用证号<div style="width: 150px;" class="rows_div">${swapHouse.publicOwnerNumber}</div>，
+            房屋所有权证号证载房屋用途<div style="width: 180px;" class="rows_div">${swapHouse.houseOwnerNumber}</div>，
+            国有土地使用证号<div style="width: 220px;" class="rows_div">${swapHouse.publicOwnerNumber}</div>，
             房屋价值评估单价为<div style="width: 80px;" class="rows_div">${swapHouse.assessPrice}</div>元/㎡；
             其中：用于经营的实际面积<div style="width: 50px;" class="rows_div">${swapHouse.valueCompensateBusinessArea}</div> ㎡，
             住宅改为经营门面的补助系数为<div style="width: 50px;" class="rows_div">${swapHouse.valueCompensateRate}</div> %。
@@ -267,9 +267,9 @@
                     <div style="width: 60px;" class="rows_div">${swapHouse.unit}</div>单元
                     <div style="width: 60px;" class="rows_div">${swapHouse.floors}</div>层
                     <div style="width: 60px;" class="rows_div">${swapHouse.houseNumber}</div>号（暂定编号，以实际交房时编号为准）产权调换房屋，
-                    该房屋预测建筑面积<div style="width: 60px;" class="rows_div">${swapHouse.coveredArea}</div>㎡（最终以不动产登记机构确认的实测面积为准），
-                    房屋预估单价<div style="width: 60px;" class="rows_div">${swapHouse.price}</div>元/㎡(最终价格以政府批准文件或以乙方与建设单位签定合同约定为准），
-                    预估房屋总价计人民币<div style="width: 60px;" class="rows_div">${swapHouse.totalPrice}</div>元，
+                    该房屋预测建筑面积<div style="width: 120px;" class="rows_div">${swapHouse.coveredArea}</div>㎡（最终以不动产登记机构确认的实测面积为准），
+                    房屋预估单价<div style="width: 120px;" class="rows_div">${swapHouse.price}</div>元/㎡(最终价格以政府批准文件或以乙方与建设单位签定合同约定为准），
+                    预估房屋总价计人民币<div style="width: 80px;" class="rows_div">${swapHouse.totalPrice}</div>元，
                     由于建筑面积变化引起房屋总价变动的，双方同意随之调整房屋价款，多退少补。
                     预计交房时间为<div style="width: 60px;" class="rows_div">${swapHouse.years}</div>年<div style="width: 60px;" class="rows_div">${swapHouse.months}</div>月（具体以甲方通知时间为准），
                     购房合同由乙方与产权调换房建设单位签订，房屋购销双方权利义务以合同为准。
