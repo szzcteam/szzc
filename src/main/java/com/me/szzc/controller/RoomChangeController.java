@@ -358,7 +358,6 @@ public class RoomChangeController extends BaseController {
         return modelAndView;
     }
 
-
     @RequestMapping("/updateRemark")
     @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "修改房源信息")
     public ModelAndView updateRemark(RoomChange roomChange) {
@@ -487,8 +486,18 @@ public class RoomChangeController extends BaseController {
     }
 
     @RequestMapping("/exportExacle")
-    public void exportExacle(HttpServletResponse response) throws Exception {
-        List<RoomChangeExport> roomChanges = roomChangeService.selectAll();
+    public void exportExacle(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        //获取登录人房源项目权限
+        Long userId = getAdminSession(request).getFid();
+        if (null == userId) {
+            throw new Exception("未登录,获取不到用户信息");
+        }
+        Map<String, String> projectMap = getUserEnableProject(userId);
+        List<String> list = convertProejctCode(projectMap);
+        if (null == list && list.size() < 1) {
+            throw new Exception("用户未分配房源项目权限");
+        }
+        List<RoomChangeExport> roomChanges = roomChangeService.selectAll(list);
         ExcelUtil.writeExcel(response, roomChanges,
                 "表格导出-" + DateHelper.getCurrentDateYearMonthDayHourMinuteSecond() + ".xlsx",
                 "sheet1", new RoomChangeExport());

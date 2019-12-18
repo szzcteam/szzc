@@ -38,5 +38,5 @@ public interface RoomChangeMapper {
 
     void updateChooseRoomNot0(RoomChangeVo roomChangeVo);
 
-    List<RoomChangeExport> selectAll();
+    List<RoomChangeExport> selectAll(@Param("list") List<String> list);
 }

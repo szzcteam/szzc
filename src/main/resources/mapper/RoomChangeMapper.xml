@@ -345,5 +345,9 @@
         <include refid="Base_Column_List"/>
         FROM r_change
         WHERE r_del = 0
+        AND item_code in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
     </select>
 </mapper>

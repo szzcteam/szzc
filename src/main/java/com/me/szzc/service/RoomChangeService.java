@@ -166,8 +166,8 @@ public class RoomChangeService {
         return ResultVo.success("修改点房成功");
     }
 
-    public List<RoomChangeExport> selectAll() {
-        List<RoomChangeExport> roomChangeExports = roomChangeMapper.selectAll();
+    public List<RoomChangeExport> selectAll(List<String> list) {
+        List<RoomChangeExport> roomChangeExports = roomChangeMapper.selectAll(list);
         for (RoomChangeExport roomChangeExport : roomChangeExports) {
             roomChangeExport.setStatusName(ChooseStatusEnum.getText(roomChangeExport.getStatus()));
             if (roomChangeExport.getChooseDate() != null) {
