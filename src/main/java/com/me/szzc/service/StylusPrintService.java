@@ -4,6 +4,7 @@ import com.me.szzc.dao.FieldCoordinateMapper;
 import com.me.szzc.dao.RmbRecompenseMapper;
 import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.PrintTableEnum;
 import com.me.szzc.enums.PrintTypeEnum;
 import com.me.szzc.pojo.dto.FieldCoordinateDto;
@@ -137,6 +138,10 @@ public class StylusPrintService {
         //获取项目编码
         Area area = areaService.getById(swapHouse.getAreaId());
         String projectCode = area.getProjectCode();
+        //数据特殊处理：紫阳村模板少打印一个百分号
+        if(area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())){
+            vo.setHistoryProportion(vo.getHistoryProportion()+"%");
+        }
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
                 fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_SWAP.getName(), projectCode);
@@ -181,6 +186,10 @@ public class StylusPrintService {
         //获取项目编码
         Area area = areaService.getById(recompense.getAreaId());
         String projectCode = area.getProjectCode();
+        //数据特殊处理：紫阳村模板少打印一个百分号
+        if(area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())){
+            vo.setHistoryProportion(vo.getHistoryProportion()+"%");
+        }
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
                 fieldCoordinateMapper.getFieldCoordinateListByTableName(PrintTableEnum.HOUSE_RMB_RECOMPENSE.getName(), projectCode);
