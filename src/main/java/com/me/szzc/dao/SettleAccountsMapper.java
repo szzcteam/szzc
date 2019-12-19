@@ -37,4 +37,7 @@ public interface SettleAccountsMapper {
 
 
     Integer changeSignStatus(SettleAccounts settleAccounts);
+
+
+    Integer updateSignDate(SettleAccounts settleAccounts);
 }

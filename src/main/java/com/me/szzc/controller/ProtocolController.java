@@ -121,7 +121,7 @@ public class ProtocolController extends BaseController {
 
             protocol.setSigningStatus(account.getSigningStatus());
             protocol.setSigningStatusDesc(SigningStatusEnum.getDesc(account.getSigningStatus()));
-            protocol.setCreateDateStr(DateHelper.date2String(account.getCreateDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
+            protocol.setSigningDateStr(DateHelper.date2String(account.getSigningDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
             protocol.setSettleAccountId(account.getId());
             protocol.setSwapHouseId(swapHouse != null ? swapHouse.getId() : 0);
             protocol.setRmbRecompenseId(rmbRecompense != null ? rmbRecompense.getId() : 0);

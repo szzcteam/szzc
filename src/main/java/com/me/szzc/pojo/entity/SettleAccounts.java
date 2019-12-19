@@ -758,6 +758,9 @@ public class SettleAccounts {
      */
     private Adjudication adjudication;
 
+    /**签约时间**/
+    private Date signingDate;
+
 
 
 

@@ -42,6 +42,7 @@ public class SettleAccountsService {
         Timestamp date = DateHelper.getTimestamp();
         settleAccounts.setCreateDate(date);
         settleAccounts.setModifiedDate(date);
+        settleAccounts.setSigningDate(date);
         settleAccounts.setDeleted(false);
         settleAccounts.setSigningStatus(SigningStatusEnum.NOT_SIGNED.getCode());
         this.settleAccountsMapper.insert(settleAccounts);
@@ -109,6 +110,10 @@ public class SettleAccountsService {
     /**变更签约状态**/
     @Transactional
     public Integer changeSignStatus(SettleAccounts settleAccounts){
+        //如果是已签约的，则修改签约时间
+        if(settleAccounts.getSigningStatus().equals(SigningStatusEnum.COMPLETE.getCode())){
+            settleAccounts.setSigningDate(DateHelper.getTimestamp());
+        }
         int result = this.settleAccountsMapper.changeSignStatus(settleAccounts);
         //2019-08-23号，注释，去掉自动点房映射的功能
         /*//签约完成，反向映射点房人
@@ -155,6 +160,11 @@ public class SettleAccountsService {
                 roomChangeService.chooseRoom(dto);
             }
         }*/
+        return result;
+    }
+
+    public Integer updateSignDate(SettleAccounts settleAccounts) {
+        int result = this.settleAccountsMapper.updateSignDate(settleAccounts);
         return result;
     }
 

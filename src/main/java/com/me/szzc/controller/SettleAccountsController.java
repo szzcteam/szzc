@@ -7,10 +7,7 @@ import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
 import com.me.szzc.enums.SigningStatusEnum;
-import com.me.szzc.pojo.entity.Adjudication;
-import com.me.szzc.pojo.entity.Area;
-import com.me.szzc.pojo.entity.SettleAccounts;
-import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
@@ -161,6 +158,63 @@ public class SettleAccountsController extends BaseController {
 
         modelAndView.addObject("statusCode",200);
         modelAndView.addObject("message","操作成功");
+        return modelAndView;
+    }
+
+    /**去修改签约时间界面**/
+    @RequestMapping("ssadmin/settleAccounts/to-sign-date-page")
+    public ModelAndView toUpdateSignDatePage(String idMore, String url){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(url);
+        //条件判断
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[0]);
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
+        if (settleAccounts != null) {
+            modelAndView.addObject("settleAccounts", settleAccounts);
+            String houseOwner = "";
+            if(StringUtils.isNotBlank(settleAccounts.getHouseOwner())){
+                houseOwner = settleAccounts.getHouseOwner();
+            }else{
+                houseOwner = settleAccounts.getLessee();
+            }
+
+            modelAndView.addObject("houseOwner", houseOwner);
+            modelAndView.addObject("signDate", DateHelper.date2String(settleAccounts.getSigningDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
+        }
+        return  modelAndView;
+    }
+
+    @RequestMapping("ssadmin/settleAccounts/update-sign-date")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改签约时间")
+    public ModelAndView updateSignDate(Long id, String dateStr,  HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //条件判断
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
+
+        if(settleAccounts == null){
+            modelAndView.addObject("statusCode",300);
+            modelAndView.addObject("message","用户未签订此协议");
+            return modelAndView;
+        }
+
+        if(settleAccounts.getDeleted()) {
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            return modelAndView;
+        }
+
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        settleAccounts.setModifiedUserId(userId);
+        settleAccounts.setModifiedDate(DateHelper.getTimestamp());
+        settleAccounts.setSigningDate(DateHelper.string2Date(dateStr, DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
+        this.settleAccountsService.updateSignDate(settleAccounts);
+
+        modelAndView.addObject("statusCode",200);
+        modelAndView.addObject("message","操作成功");
+        modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }
 

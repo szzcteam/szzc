@@ -19,8 +19,8 @@ public class ProtocolVO {
     /**签约状态**/
     private Integer signingStatus;
 
-    /**创建时间**/
-    private String createDateStr;
+    /**签约时间**/
+    private String signingDateStr;
 
     private Long settleAccountId;
 

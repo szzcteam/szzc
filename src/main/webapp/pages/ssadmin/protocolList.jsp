@@ -180,6 +180,12 @@
                        target="ajaxTodo" title="确定已经过审核?"><span>已过审</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/settleAccounts/update-sign-date.html">
+                <li><a class="edit"
+                       href="ssadmin/settleAccounts/to-sign-date-page.html?idMore={sid_user}&url=ssadmin/updateSettleSignDate"
+                       height="300" width="800" target="dialog"><span>修改签约时间</span>
+                </a></li>
+            </shiro:hasPermission>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="138">
@@ -244,7 +250,7 @@
                             √
                         </a>
                     </c:if></td>
-                <td>${protocol.createDateStr}</td>
+                <td>${protocol.signingDateStr}</td>
             </tr>
         </c:forEach>
         </tbody>

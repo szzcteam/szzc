@@ -151,6 +151,7 @@
     <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
     <result column="deleted" jdbcType="TINYINT" property="deleted" />
     <result column="signing_status" jdbcType="INTEGER" property="signingStatus" />
+    <result column="signing_date" jdbcType="TIMESTAMP" property="signingDate" />
   </resultMap>
   <sql id="Base_Column_List">
     id, area_id, card_no, project_name, house_owner, identity_no, compensate_type, lessee,
@@ -182,7 +183,7 @@
     swap_area3, swap_area4, swap_area5, swap_money_1, swap_money_2, swap_money_3, swap_money_4,
     swap_money_5,
     pay_total, receive_total, pay_money, receive_money, create_date, create_user_id,
-    modified_date, modified_user_id, deleted, signing_status
+    modified_date, modified_user_id, deleted, signing_status,signing_date
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -258,7 +259,8 @@
       swap_money_4, swap_money_5, pay_total,
       receive_total, pay_money, receive_money,
       create_date, create_user_id, modified_date,
-      modified_user_id, deleted, signing_status
+      modified_user_id, deleted, signing_status,
+      signing_date
       )
     values (#{id,jdbcType=BIGINT}, #{areaId,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR},
       #{projectName,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR}, #{identityNo,jdbcType=VARCHAR},
@@ -313,7 +315,8 @@
       #{swapMoney4,jdbcType=VARCHAR}, #{swapMoney5,jdbcType=VARCHAR}, #{payTotal,jdbcType=DECIMAL},
       #{receiveTotal,jdbcType=DECIMAL}, #{payMoney,jdbcType=VARCHAR}, #{receiveMoney,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP},
-      #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT}, #{signingStatus,jdbcType=INTEGER}
+      #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT}, #{signingStatus,jdbcType=INTEGER},
+      #{signingDate}
       )
   </insert>
 
@@ -486,10 +489,10 @@
       and compensate_type = #{compensateType}
     </if>
     <if test="startDate != null and startDate !='' ">
-      and DATE_FORMAT(create_date,'%Y-%m-%d') <![CDATA[ >= ]]> #{startDate}
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ >= ]]> #{startDate}
     </if>
     <if test="endDate != null and endDate !='' ">
-      and DATE_FORMAT(create_date,'%Y-%m-%d') <![CDATA[ <= ]]> #{endDate}
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ <= ]]> #{endDate}
     </if>
     <if test="address != null and address !='' ">
       and address like concat('%',#{address} ,'%')
@@ -531,8 +534,18 @@
 
 
   <update id="changeSignStatus" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
-      update t_settle_accounts set signing_status = #{signingStatus} , modified_date = #{modifiedDate},
+    update t_settle_accounts set signing_status = #{signingStatus} , modified_date = #{modifiedDate},
+    <if test="signingStatus != null and signingStatus == 1 ">
+      signing_date = #{signingDate},
+    </if>
+    modified_user_id = #{modifiedUserId} where id = #{id}
+  </update>
+
+
+  <update id="updateSignDate" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
+      update t_settle_accounts set signing_date = #{signingDate} , modified_date = #{modifiedDate},
       modified_user_id = #{modifiedUserId} where id = #{id}
   </update>
+
 
 </mapper>

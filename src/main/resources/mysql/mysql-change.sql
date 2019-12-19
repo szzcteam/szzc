@@ -126,3 +126,23 @@ values('zyc_air_conditioner_cabinet', '1', '紫阳村柜机(单元：元)', 500,
 
 insert into f_systemargs(fkey, ftype, fdescription, fvalue, version)
 values('zyc_water_heater', '1', '紫阳村电热水器迁移费', 300, 0);
+
+
+-- 2019-12-19 之前脚本 分割线 -----------------------------------------------------------------------------
+
+-- 结算单增加签约时间字段
+ALTER TABLE `t_settle_accounts`
+ADD COLUMN `signing_date`  timestamp NULL COMMENT '签约时间' AFTER `signing_status`;
+
+-- 与之前的数据保持一直，签约时间 = 创建时间
+update t_settle_accounts set signing_date = create_date;
+
+-- 增加签约时间按钮
+insert into f_security(fdescription,fname, fpriority, fparentid, furl)
+values('修改签约时间','修改签约时间',4,3,'ssadmin/settleAccounts/update-sign-date.html');
+
+
+insert into f_role_security(fsecurityid, froleid)
+values(43,1);
+
+
