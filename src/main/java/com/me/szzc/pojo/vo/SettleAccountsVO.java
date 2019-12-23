@@ -912,14 +912,18 @@ public class SettleAccountsVO {
             //有2个公式，如果电热水器是0*x，则去掉不显示
             String calc = entity.getCalcHotWaterCompensate();
             String[] calcArr = calc.split("\\+");
+            //电热水器
             BigDecimal waterHeater = ScriptEngineUtil.runCalc(calcArr[0]);
+            //太阳能热水器
             BigDecimal hotHeater = ScriptEngineUtil.runCalc(calcArr[1]);
+
+
             if (waterHeater.compareTo(BigDecimal.ZERO) > 0 && hotHeater.compareTo(BigDecimal.ZERO) > 0) {
-                vo.setCalcHotWaterCompensate(entity.getCalcHotWaterCompensate());
-            }else if(waterHeater.compareTo(BigDecimal.ZERO) > 0){
-                vo.setCalcHotWaterCompensate(calcArr[0]);
-            }else if(hotHeater.compareTo(BigDecimal.ZERO) > 0){
-                vo.setCalcHotWaterCompensate(calcArr[1]);
+                vo.setCalcHotWaterCompensate("用电 " + calcArr[0] + " , " + "太阳能 " + calcArr[1]);
+            } else if (waterHeater.compareTo(BigDecimal.ZERO) > 0) {
+                vo.setCalcHotWaterCompensate("用电 " + calcArr[0]);
+            } else if (hotHeater.compareTo(BigDecimal.ZERO) > 0) {
+                vo.setCalcHotWaterCompensate("太阳能 " + calcArr[1]);
             }
 
             vo.setHotWaterCompensate(BigDecimalUtil.stripTrailingZeros(entity.getHotWaterCompensate()));
