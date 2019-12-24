@@ -919,9 +919,9 @@ public class SettleAccountsVO {
 
 
             if (waterHeater.compareTo(BigDecimal.ZERO) > 0 && hotHeater.compareTo(BigDecimal.ZERO) > 0) {
-                vo.setCalcHotWaterCompensate("用电 " + calcArr[0] + " , " + "太阳能 " + calcArr[1]);
+                vo.setCalcHotWaterCompensate("电 " + calcArr[0] + " , " + "太阳能 " + calcArr[1]);
             } else if (waterHeater.compareTo(BigDecimal.ZERO) > 0) {
-                vo.setCalcHotWaterCompensate("用电 " + calcArr[0]);
+                vo.setCalcHotWaterCompensate("电 " + calcArr[0]);
             } else if (hotHeater.compareTo(BigDecimal.ZERO) > 0) {
                 vo.setCalcHotWaterCompensate("太阳能 " + calcArr[1]);
             }
