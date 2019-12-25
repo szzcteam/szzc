@@ -81,20 +81,20 @@
         <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;被征收房屋情况</b></div>
         <div style="text-align: left;line-height: 26px;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1、乙方被征收房屋位于<div style="width: 220px;" class="rows_div">${swapHouse.address}</div>，
+            1、乙方被征收房屋位于<div style="width: 320px;" class="rows_div">${swapHouse.address}</div>，
             证载建筑面积为<div style="width: 80px;" class="rows_div">${swapHouse.certifiedArea}</div>㎡，
             房屋权属份额<div style="width: 50px;" class="rows_div">${swapHouse.proportion}</div>%，
             证载房屋用途<div style="width: 80px;" class="rows_div">${swapHouse.useing}</div>，
-            房屋所有权证号证载房屋用途<div style="width: 180px;" class="rows_div">${swapHouse.houseOwnerNumber}</div>，
+            房屋所有权证号证载房屋用途<div style="width: 250px;" class="rows_div">${swapHouse.houseOwnerNumber}</div>，
             国有土地使用证号<div style="width: 220px;" class="rows_div">${swapHouse.publicOwnerNumber}</div>，
-            房屋价值评估单价为<div style="width: 80px;" class="rows_div">${swapHouse.assessPrice}</div>元/㎡；
+            房屋价值评估单价为<div style="width: 120px;" class="rows_div">${swapHouse.assessPrice}</div>元/㎡；
             其中：用于经营的实际面积<div style="width: 50px;" class="rows_div">${swapHouse.valueCompensateBusinessArea}</div> ㎡，
             住宅改为经营门面的补助系数为<div style="width: 50px;" class="rows_div">${swapHouse.valueCompensateRate}</div> %。
             <br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             2、未经登记的合法建筑面积<div style="width: 80px;" class="rows_div">${swapHouse.noRegisterLegalArea}</div>㎡，
             房屋用途为<div style="width: 80px;" class="rows_div">${swapHouse.noRegisterUseing}</div>，
-            房屋价值评估单价为<div style="width: 80px;" class="rows_div">${swapHouse.noRegisterAssessPrice}</div>元/㎡，
+            房屋价值评估单价为<div style="width: 120px;" class="rows_div">${swapHouse.noRegisterAssessPrice}</div>元/㎡，
             补偿比例为<div style="width: 80px;" class="rows_div">${swapHouse.noRegisterProportion}</div>%；
             其中：用于经营的面积<div style="width: 80px;" class="rows_div">${swapHouse.noRegisterBusinessArea}</div>㎡，
             住宅改为经营门面的补助系数为<div style="width: 80px;" class="rows_div">${swapHouse.noRegisterRate}</div>%。
@@ -102,7 +102,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             3、历史遗留无证房屋面积<div style="width: 80px;" class="rows_div">${swapHouse.historyLegacyArea}</div>㎡，
             实际用途为<div style="width: 80px;" class="rows_div">${swapHouse.historyUseing}</div>，
-            房屋价值评估单价为<div style="width: 80px;" class="rows_div">${swapHouse.historyAssessPrice}</div>元/㎡，
+            房屋价值评估单价为<div style="width: 120px;" class="rows_div">${swapHouse.historyAssessPrice}</div>元/㎡，
             补偿比例为<div style="width: 80px;" class="rows_div">${swapHouse.historyProportion}</div>%；
             其中：用于经营的面积<div style="width: 80px;" class="rows_div">${swapHouse.historyBusinessArea}</div>㎡，
             住宅改为经营门面的补助系数为<div style="width: 80px;" class="rows_div">${swapHouse.historyRate} </div>%。

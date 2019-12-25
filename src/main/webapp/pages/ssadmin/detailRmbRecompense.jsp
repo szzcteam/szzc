@@ -86,20 +86,20 @@
         <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;被征收房屋情况</b></div>
         <div style="text-align: left;line-height: 26px;">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            1、乙方被征收房屋位于<div style="width: 220px;" class="rows_div">${rmbRecom.address}</div>，
+            1、乙方被征收房屋位于<div style="width: 320px;" class="rows_div">${rmbRecom.address}</div>，
             证载建筑面积为<div style="width: 80px;" class="rows_div">${rmbRecom.certifiedArea}</div>㎡，
             房屋权属份额<div style="width: 50px;" class="rows_div">${rmbRecom.proportion}</div>%，
             证载房屋用途<div style="width: 80px;" class="rows_div">${rmbRecom.useing}</div>，
-            房屋所有权证号证载房屋用途<div style="width: 180px;" class="rows_div">${rmbRecom.houseOwnerNumber}</div>，
+            房屋所有权证号证载房屋用途<div style="width: 250px;" class="rows_div">${rmbRecom.houseOwnerNumber}</div>，
             国有土地使用证号<div style="width: 220px;" class="rows_div">${rmbRecom.publicOwnerNumber}</div>，
-            房屋价值评估单价为<div style="width: 80px;" class="rows_div">${rmbRecom.assessPrice}</div>元/㎡；
+            房屋价值评估单价为<div style="width: 120px;" class="rows_div">${rmbRecom.assessPrice}</div>元/㎡；
             其中：用于经营的实际面积<div style="width: 50px;" class="rows_div">${rmbRecom.valueCompensateBusinessArea}</div> ㎡，
             住宅改为经营门面的补助系数为<div style="width: 50px;" class="rows_div">${rmbRecom.valueCompensateRate}</div> %。
             <br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             2、未经登记的合法建筑面积<div style="width: 80px;" class="rows_div">${rmbRecom.noRegisterLegalArea}</div>㎡，
             房屋用途为<div style="width: 80px;" class="rows_div">${rmbRecom.noRegisterUseing}</div>，
-            房屋价值评估单价为<div style="width: 80px;" class="rows_div">${rmbRecom.noRegisterAssessPrice}</div>元/㎡，
+            房屋价值评估单价为<div style="width: 120px;" class="rows_div">${rmbRecom.noRegisterAssessPrice}</div>元/㎡，
             补偿比例为<div style="width: 80px;" class="rows_div">${rmbRecom.noRegisterProportion}</div>%；
             其中：用于经营的面积<div style="width: 80px;" class="rows_div">${rmbRecom.noRegisterBusinessArea}</div>㎡，
             住宅改为经营门面的补助系数为<div style="width: 80px;" class="rows_div">${rmbRecom.noRegisterRate}</div>%。
@@ -107,7 +107,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             3、历史遗留无证房屋面积<div style="width: 80px;" class="rows_div">${rmbRecom.historyLegacyArea}</div>㎡，
             实际用途为<div style="width: 80px;" class="rows_div">${rmbRecom.historyUseing}</div>，
-            房屋价值评估单价为<div style="width: 80px;" class="rows_div">${rmbRecom.historyAssessPrice}</div>元/㎡，
+            房屋价值评估单价为<div style="width: 120px;" class="rows_div">${rmbRecom.historyAssessPrice}</div>元/㎡，
             补偿比例为<div style="width: 80px;" class="rows_div">${rmbRecom.historyProportion}</div>%；
             其中：用于经营的面积<div style="width: 80px;" class="rows_div">${rmbRecom.historyBusinessArea}</div>㎡，
             住宅改为经营门面的补助系数为<div style="width: 80px;" class="rows_div">${rmbRecom.historyRate} </div>%。
@@ -202,9 +202,9 @@
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其它约定</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    1、<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsOne}</div>
+                    1、<div style="width: 500px;text-align: left;" class="rows_div">${rmbRecom.otherTermsOne}</div>
                     <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    2、<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsTwo}</div>
+                    2、<div style="width: 500px;text-align: left;" class="rows_div">${rmbRecom.otherTermsTwo}</div>
                 </div>
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;争议的处理</b></div>
                 <div style="text-align: left;line-height: 26px;">
@@ -243,9 +243,9 @@
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其它约定</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    1、约定：<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsOne}</div>
+                    1、约定：<div style="width: 500px;text-align: left;" class="rows_div">${rmbRecom.otherTermsOne}</div>
                     <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    2、约定：<div style="width: 400px;text-align: left;" class="rows_div">${rmbRecom.otherTermsTwo}</div>
+                    2、约定：<div style="width: 500px;text-align: left;" class="rows_div">${rmbRecom.otherTermsTwo}</div>
                 </div>
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第五条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;争议的处理</b></div>
                 <div style="text-align: left;line-height: 26px;">
