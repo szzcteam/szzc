@@ -119,7 +119,7 @@ var swapHouseObj = {
         $.ajax({
             url: "ssadmin/settleAccounts/detail.html",
             type: "post",
-            data: {"houseOwner": houseName, "address": address},
+            data: {"houseOwner": houseName, "address": address, "businessFlag": 3},
             dataType: "json",
             success: function (data) {
                 console.log(data);

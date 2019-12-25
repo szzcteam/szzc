@@ -96,7 +96,7 @@ var rmbRecompenseObj = {
         $.ajax({
             url: "ssadmin/settleAccounts/detail.html",
             type: "post",
-            data: {"houseOwner": houseName, "address": address},
+            data: {"houseOwner": houseName, "address": address, "businessFlag": 2},
             dataType: "json",
             success: function (data) {
                 console.log(data);

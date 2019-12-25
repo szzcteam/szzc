@@ -15,6 +15,9 @@ public interface RmbRecompenseMapper {
 
     RmbRecompense getById(Long id);
 
+    /**根据片区获取上一次的裁决信息**/
+    RmbRecompense getLastByAreaId(@Param("areaId") Long areaId);
+
     int updateByPrimaryKey(RmbRecompense record);
 
     RmbRecompense getByHouseOwnerAddr(@Param("houseOwner") String houseOwner, @Param("address") String address);

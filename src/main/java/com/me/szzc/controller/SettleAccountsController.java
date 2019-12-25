@@ -3,10 +3,7 @@ package com.me.szzc.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
-import com.me.szzc.enums.GovernmentEnum;
-import com.me.szzc.enums.ModuleConstont;
-import com.me.szzc.enums.ProtocolEnum;
-import com.me.szzc.enums.SigningStatusEnum;
+import com.me.szzc.enums.*;
 import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
@@ -321,23 +318,33 @@ public class SettleAccountsController extends BaseController {
         return modelAndView;
     }
 
+    //添加产权调换、货币补偿时，ajax请求读取结算单信息
     @RequestMapping("ssadmin/settleAccounts/detail")
     @ResponseBody
-    public SettleAccounts detail(String houseOwner, String address) throws Exception {
+    public SettleAccounts detail(String houseOwner, String address, String businessFlag) throws Exception {
         //查询结算单信息
         SettleAccounts settleAccounts = this.settleAccountsService.getByHouseOwnerAddr(houseOwner, address);
-        if(settleAccounts != null){
-            Area area =  areaService.getById(settleAccounts.getAreaId());
+        if (settleAccounts != null) {
+            Area area = areaService.getById(settleAccounts.getAreaId());
             //使用默认的决字信息
-            if(area != null && area.getProjectCode().equals(GovernmentEnum.MLJ.getCode())){
+            if (area != null && area.getProjectCode().equals(GovernmentEnum.MLJ.getCode())) {
                 settleAccounts.setAdjudication(Adjudication.getDefaultAdju());
-            }else{
-                //查询上一次的产权调换信息，默认使用上次的决字，避免每次都重新输入
-                SwapHouse swapHouse = this.swapHouseService.getLastByAreaId(settleAccounts.getAreaId());
-                if(swapHouse != null){
-                    Adjudication adjudication = JSONObject.parseObject(swapHouse.getAdjudicationJson(), Adjudication.class);
-                    settleAccounts.setAdjudication(adjudication);
+            } else {
+                //查询上一次的产权调换 | 货币补偿 信息，默认使用上次的决字，避免每次都重新输入
+                if (businessFlag !=null &&  businessFlag.equals(PrintTableEnum.HOUSE_RMB_RECOMPENSE.getCode()+"")) {
+                    RmbRecompense rmbRecompense = rmbRecompenseService.getLastByAreaId(settleAccounts.getAreaId());
+                    if (rmbRecompense != null) {
+                        Adjudication adjudication = JSONObject.parseObject(rmbRecompense.getAdjudicationJson(), Adjudication.class);
+                        settleAccounts.setAdjudication(adjudication);
+                    }
+                } else if (businessFlag !=null && businessFlag.equals(PrintTableEnum.HOUSE_SWAP.getCode()+"")) {
+                    SwapHouse swapHouse = this.swapHouseService.getLastByAreaId(settleAccounts.getAreaId());
+                    if (swapHouse != null) {
+                        Adjudication adjudication = JSONObject.parseObject(swapHouse.getAdjudicationJson(), Adjudication.class);
+                        settleAccounts.setAdjudication(adjudication);
+                    }
                 }
+
             }
         }
         return settleAccounts;

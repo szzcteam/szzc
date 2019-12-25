@@ -62,7 +62,7 @@ public class SwapHouseController extends BaseController {
         }
 
         //将决字信息转换成json串
-        if(adjudication != null){
+        if(adjudication != null && StringUtils.isNoneBlank(adjudication.getAdjuLetter())){
             swapHouse.setAdjudicationJson(JSONObject.toJSONString(adjudication));
         }
 
@@ -95,7 +95,7 @@ public class SwapHouseController extends BaseController {
         //修改人
         Long userId = getAdminSession(request).getFid();
         swapHouse.setModifiedUserId(userId);
-        if(adjudication != null){
+        if(adjudication != null && StringUtils.isNoneBlank(adjudication.getAdjuLetter())){
             swapHouse.setAdjudicationJson(JSONObject.toJSONString(adjudication));
         }
         this.swapHouseService.updateSwapHouse(swapHouse);

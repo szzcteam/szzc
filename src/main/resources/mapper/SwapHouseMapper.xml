@@ -144,6 +144,7 @@
     <include refid="Base_Column_List" />
     from t_swap_house
     where area_id = #{areaId}
+    and ifnull(adjudication_json, '')  <![CDATA[ <> ]]> ''
     order by id desc limit 0,1
   </select>
 

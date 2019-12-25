@@ -39,6 +39,10 @@ public class RmbRecompenseService {
         return this.rmbRecompenseMapper.getById(id);
     }
 
+    public RmbRecompense getLastByAreaId(Long areaId) {
+        return this.rmbRecompenseMapper.getLastByAreaId(areaId);
+    }
+
     public RmbRecompense getByHouseOwnerAddr(String houseOwner, String address) {
         return this.rmbRecompenseMapper.getByHouseOwnerAddr(houseOwner, address);
     }

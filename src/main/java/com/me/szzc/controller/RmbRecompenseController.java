@@ -63,7 +63,7 @@ public class RmbRecompenseController extends BaseController {
             return modelAndView;
         }
 
-        if(adjudication != null){
+        if(adjudication != null && StringUtils.isNoneBlank(adjudication.getAdjuLetter())){
             rmbRecompense.setAdjudicationJson(JSONObject.toJSONString(adjudication));
         }
 
@@ -134,7 +134,7 @@ public class RmbRecompenseController extends BaseController {
         //修改人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setModifiedUserId(userId);
-        if(adjudication != null){
+        if(adjudication != null && StringUtils.isNoneBlank(adjudication.getAdjuLetter())){
             rmbRecompense.setAdjudicationJson(JSONObject.toJSONString(adjudication));
         }
         String str = "true";  //rmbRecompenseTerm(rmbRecompense);
