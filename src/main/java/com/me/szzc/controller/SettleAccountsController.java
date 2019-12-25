@@ -47,7 +47,7 @@ public class SettleAccountsController extends BaseController {
         SettleAccounts entity = settleAccountsService.getByHouseOwnerAddr(settleAccounts.getHouseOwner(), settleAccounts.getAddress());
         if (entity != null) {
             modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", getOwnerOnlyMsg(settleAccounts.getHouseOwner(), settleAccounts.getAddress()));
+            modelAndView.addObject("message", getExistsOnlyMsg(settleAccounts.getHouseOwner(), settleAccounts.getAddress()));
             return modelAndView;
         }
 

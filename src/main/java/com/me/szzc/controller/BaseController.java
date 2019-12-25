@@ -4,6 +4,7 @@ import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.Fadmin;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -294,8 +295,15 @@ public class BaseController extends BaseServiceCtrl{
     }
 
 
-    protected String getOwnerOnlyMsg(String houseOwner, String address) {
-        String message = "操作失败，用户:" + houseOwner + ",地址:" + address + " 记录已存在，请核对后再操作";
+    protected String getExistsOnlyMsg(String houseOwner, String address) {
+        String message = "";
+        if (StringUtils.isBlank(houseOwner)) {
+            message = "操作失败，被征收人姓名不能为空";
+        } else if (StringUtils.isBlank(address)) {
+            message = "操作失败，被征收房屋地址不能为空";
+        } else {
+            message = "操作失败，用户:" + houseOwner + ",地址:" + address + " 记录已存在，请核对后再操作";
+        }
         return message;
     }
 

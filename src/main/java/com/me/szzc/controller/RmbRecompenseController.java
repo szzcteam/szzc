@@ -59,7 +59,7 @@ public class RmbRecompenseController extends BaseController {
         RmbRecompense entity = rmbRecompenseService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
         if (entity != null) {
             modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", getOwnerOnlyMsg(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress()));
+            modelAndView.addObject("message", getExistsOnlyMsg(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress()));
             return modelAndView;
         }
 

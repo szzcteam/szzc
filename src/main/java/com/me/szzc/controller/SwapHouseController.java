@@ -57,7 +57,7 @@ public class SwapHouseController extends BaseController {
         SwapHouse entity = swapHouseService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
         if (entity != null) {
             modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", getOwnerOnlyMsg(swapHouse.getHouseOwner(), swapHouse.getAddress()));
+            modelAndView.addObject("message", getExistsOnlyMsg(swapHouse.getHouseOwner(), swapHouse.getAddress()));
             return modelAndView;
         }
 
