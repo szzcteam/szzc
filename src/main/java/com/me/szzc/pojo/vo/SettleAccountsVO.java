@@ -784,6 +784,7 @@ public class SettleAccountsVO {
 
         //有证的
         vo.setCalcValueCompensate(entity.getCalcValueCompensate());
+        vo.setCalcValueCompensate(vo.getCalcValueCompensate().replace("0*0+", ""));
         vo.setValueCompensate(BigDecimalUtil.stripTrailingZeros(entity.getValueCompensate()));
         vo.setValueCompensateBz(entity.getValueCompensateBz());
 
@@ -791,6 +792,7 @@ public class SettleAccountsVO {
         if(entity.getNoRegisterLegal() != null && entity.getNoRegisterLegal().compareTo(BigDecimal.ZERO) > 0){
             vo.setCalcNoRegisterLegal(entity.getCalcNoRegisterLegal());
             vo.setNoRegisterLegal(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterLegal()));
+            vo.setCalcNoRegisterLegal(vo.getCalcNoRegisterLegal().replace("0*0+", ""));
         }
         vo.setNoRegisterLegalBz(entity.getNoRegisterLegalBz());
 
@@ -798,6 +800,7 @@ public class SettleAccountsVO {
         if(entity.getHistoryLegacy() != null && entity.getHistoryLegacy().compareTo(BigDecimal.ZERO) > 0){
             vo.setCalcHistoryLegacy(entity.getCalcHistoryLegacy());
             vo.setHistoryLegacy(BigDecimalUtil.stripTrailingZeros(entity.getHistoryLegacy()));
+            vo.setCalcHistoryLegacy(vo.getCalcHistoryLegacy().replace("0*0+", ""));
         }
         vo.setHistoryLegacyBz(entity.getHistoryLegacyBz());
 

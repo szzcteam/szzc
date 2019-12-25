@@ -51,19 +51,19 @@
 	<table class="table" width="100%" layoutH="138">
 		<thead>
 			<tr>
-				<th width="20">序号</th>
-				<th width="60">操作人</th>
-				<th width="60">操作时间</th>
-				<th width="60">模块</th>
-				<th width="60">IP地址</th>
-				<th width="60">操作代码</th>
-				<th width="60">操作名称</th>
-				<th width="60">执行类名</th>
-				<th width="60">执行方法名</th>
-				<th width="60">请求参数</th>
-				<th width="60">答应结果</th>
-				<th width="60">操作内容</th>
-				<th width="60">操作是否成功</th>
+				<th width="30px">序号</th>
+				<th width="60px">操作人</th>
+				<th width="120px">操作时间</th>
+				<th width="60px">模块</th>
+				<th width="120px">IP地址</th>
+				<%--<th width="60">操作代码</th>--%>
+				<th width="120px">操作名称</th>
+				<%--<th width="60">执行类名</th>--%>
+				<th width="120px">执行方法名</th>
+				<th>请求参数</th>
+				<th width="120px">答应结果</th>
+				<th width="120px">操作内容</th>
+				<th width="120px">操作是否成功</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -74,9 +74,9 @@
 					<td>${syslog.operatorDateStr}</td>
 					<td>${syslog.module}</td>
 					<td>${syslog.ip}</td>
-					<td>${syslog.operatorCode}</td>
+					<%--<td>${syslog.operatorCode}</td>--%>
 					<td>${syslog.operatorName}</td>
-					<td>${syslog.className}</td>
+					<%--<td>${syslog.className}</td>--%>
 					<td>${syslog.methodName}</td>
 					<td>${syslog.requestParameters}</td>
 					<td>${syslog.responseResult}</td>
