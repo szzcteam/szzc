@@ -43,11 +43,24 @@ public class SettleAccountsController extends BaseController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
 
+        String houseOwner = "";
+        if(StringUtils.isNoneBlank(settleAccounts.getHouseOwner())){
+            houseOwner = settleAccounts.getHouseOwner();
+        }else if(StringUtils.isNoneBlank(settleAccounts.getLessee())){
+            houseOwner = settleAccounts.getLessee();
+        }
+
+        if(StringUtils.isBlank(houseOwner)){
+            modelAndView.addObject("statusCode", 300);
+            modelAndView.addObject("message", "操作失败，被征收人或承租人姓名不能都为空，必须填写一项");
+            return modelAndView;
+        }
+
         //判断是否存在
-        SettleAccounts entity = settleAccountsService.getByHouseOwnerAddr(settleAccounts.getHouseOwner(), settleAccounts.getAddress());
+        SettleAccounts entity = settleAccountsService.getByHouseOwnerAddr(houseOwner, settleAccounts.getAddress());
         if (entity != null) {
             modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", getExistsOnlyMsg(settleAccounts.getHouseOwner(), settleAccounts.getAddress()));
+            modelAndView.addObject("message", getExistsOnlyMsg(houseOwner, settleAccounts.getAddress()));
             return modelAndView;
         }
 
