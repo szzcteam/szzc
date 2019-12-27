@@ -1080,6 +1080,7 @@ public class SettleAccountsVO {
         if(entity.getGuarantee() != null && entity.getGuarantee().compareTo(BigDecimal.ZERO) > 0){
             vo.setCalcGuarantee(entity.getCalcGuarantee());
             vo.setGuarantee(BigDecimalUtil.stripTrailingZeros(entity.getGuarantee()));
+            vo.setCalcGuarantee(vo.getCalcGuarantee().replace("-0-0*1", ""));
         }
         vo.setGuaranteeBz(entity.getGuaranteeBz());
 

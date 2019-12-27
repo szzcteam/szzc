@@ -183,7 +183,19 @@ $(document).ready(function(){
                 $(this).val(0);
                 return;
             }
-            var guarantee_money_calc = "(" + guarantee_area + "-" + calcValueCompensateArea + "-" + calcNoRegisterLegalArea + "-" + calcHistoryLegacyArea + "*" + calcHistoryLegacyProportion + ")" + "*" + assessPrice;
+            //var guarantee_money_calc = "(" + guarantee_area + "-" + calcValueCompensateArea + "-" + calcNoRegisterLegalArea + "-" + calcHistoryLegacyArea + "*" + calcHistoryLegacyProportion + ")" + "*" + assessPrice;
+            var guarantee_money_calc = "(" + guarantee_area;
+            if (calcValueCompensateArea > 0) {
+                guarantee_money_calc += "-" + calcValueCompensateArea;
+            }
+            if (calcNoRegisterLegalArea > 0) {
+                guarantee_money_calc += "-" + calcNoRegisterLegalArea;
+            }
+            if (calcHistoryLegacyArea > 0) {
+                guarantee_money_calc += "-" + calcHistoryLegacyArea + "*" + calcHistoryLegacyProportion;
+            }
+            guarantee_money_calc += ")" + "*" + assessPrice;
+            console.log("保底公式：" + guarantee_money_calc);
             $("input[name='calcGuarantee']").eq(0).val(guarantee_money_calc).change();
         }
     });
