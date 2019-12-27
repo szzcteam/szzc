@@ -20,7 +20,7 @@
 			<dl>
 				<dt>管辖项目：</dt>
 				<dd>
-					<select name="projectCode" style="width: 150px;height: 22px;">
+					<select name="projectCode" style="width: 200px;height: 22px;">
 						<c:forEach items="${projectMap}" var="item">
 							<option value="${item.key}" <c:if test="${item.key == area.projectCode }">selected="selected"</c:if>>${item.value}</option>
 						</c:forEach>
