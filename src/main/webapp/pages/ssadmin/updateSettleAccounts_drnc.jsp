@@ -281,7 +281,7 @@
                             <!--太阳能热水器-->
                             <label style="width: 82px;margin-top: 2px;margin-left: 20px;">太阳能热水器: </label>
                             <input type="text" name="calcHotWaterCompensateMoney" class="none_border" placeholder="金额" size="5" style="margin-top: 2px;margin-left: 5px;"/>
-                            <input type="text" name="calcHotWaterCompensateConvert" value="${solarWaterHeaters}" class="none_border" placeholder="折算比例" size="5" style="margin-top: 2px;margin-left: 5px;"/>
+                            <input type="text" name="calcHotWaterCompensateConvert" value="${solarWaterHeaters}" class="none_border" placeholder="折算比例" size="3" style="margin-top: 2px;margin-left: 5px;"/>
                             <!--隐藏存储表单提交值-->
                             <input type="hidden" name="calcHotWaterCompensate" value="${settleAccounts.calcHotWaterCompensate}" class="none_border width_220px">
                         </td>

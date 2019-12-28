@@ -273,7 +273,7 @@ public class RmbRecompense {
     private BigDecimal gasFee;
 
     /**
-     * 热水器拆装补偿
+     * 热水器拆装补偿(太阳能+电)
      */
     private BigDecimal hotWaterCompensate;
 

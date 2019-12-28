@@ -25,7 +25,14 @@
                 <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts.jsp" %></div>
             </c:otherwise>
         </c:choose>
-        <div id="div_rmbRecompense" style="display: none;"><%@ include file="addRmbRecompense.jsp" %></div>
+        <c:choose>
+            <c:when test="${projectCode != null && projectCode == 'C001001' }">
+                <div id="div_rmbRecompense" style="display: none;"><%@ include file="addRmbRecompense_drnc.jsp" %></div>
+            </c:when>
+            <c:otherwise>
+                <div id="div_rmbRecompense" style="display: none;"><%@ include file="addRmbRecompense.jsp" %></div>
+            </c:otherwise>
+        </c:choose>
         <div id="div_swapHouse" style="display: none;"><%@ include file="addSwapHouse.jsp" %></div>
     </div>
 </div>

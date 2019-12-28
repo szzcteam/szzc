@@ -327,9 +327,11 @@ public class SettleAccountsController extends BaseController {
             SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
             modelAndView.addObject("settleAccounts", vo);
 
-            Area area =  areaService.getById(settleAccounts.getAreaId());
-            if(area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())){
-                modelAndView.setViewName(url+"_zyc") ;
+            Area area = areaService.getById(settleAccounts.getAreaId());
+            if (area != null && (area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode()))) {
+                modelAndView.setViewName(url + "_zyc");
             }
         }
         return modelAndView;
