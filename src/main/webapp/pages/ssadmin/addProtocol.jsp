@@ -15,6 +15,12 @@
             <c:when test="${projectCode != null && projectCode == 'B001001' }">
                 <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts_zyc.jsp" %></div>
             </c:when>
+            <c:when test="${projectCode != null && projectCode == 'B001002' }">
+                <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts_xch.jsp" %></div>
+            </c:when>
+            <c:when test="${projectCode != null && projectCode == 'C001001' }">
+                <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts_drnc.jsp" %></div>
+            </c:when>
             <c:otherwise>
                 <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts.jsp" %></div>
             </c:otherwise>

@@ -270,7 +270,9 @@ public class SettleAccountsController extends BaseController {
 
             Area area =  areaService.getById(settleAccounts.getAreaId());
             if(area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())){
-                modelAndView.setViewName(url+"_zyc") ;
+                modelAndView.setViewName(url+"_zyc");
+            }else if(area != null && area.getProjectCode().equals(GovernmentEnum.XCH.getCode())){
+                modelAndView.setViewName(url+"_xch");
             }
         }
 
