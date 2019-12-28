@@ -79,6 +79,16 @@ $(document).ready(function () {
         }
     });
 
+    //修改时，进入初始化页面有值
+    var initIsBuy = $("#rmbRecompenseDiv input[name='isTradeHouse']:checked").val();
+    if(initIsBuy != undefined){
+        if(initIsBuy){
+            $("#rmbRecompenseDiv input[name='isTradeHouse']").eq(0).change();
+        }else if(!initIsBuy){
+            $("#rmbRecompenseDiv input[name='isTradeHouse']").eq(1).change();
+        }
+    }
+
 
 });
 
@@ -129,14 +139,14 @@ var rmbRecompenseObj = {
                         //房屋价值评估单价
                         var calcValueCompensateArr = data.calcValueCompensate.split("*");
                         $("#rmbRecompenseDiv input[name='assessPrice']").eq(0).val(calcValueCompensateArr[1]);
-                       /* //证载补偿比例
+                        //证载补偿比例
                         var valueProportion = calcValueCompensateArr[2];
                         if(valueProportion != undefined){
                             valueProportion = new Number(valueProportion) * 100;
                             $("#rmbRecompenseDiv input[name='proportion']").eq(0).val(valueProportion);
                         }else{
                             $("#rmbRecompenseDiv input[name='proportion']").eq(0).val("100");
-                        }*/
+                        }
 
                         //用于经营的实际面积  == 对应结算单第8条的，住改商面积
                         if(data.changeCompensate != null && data.changeCompensate > 0 ){
@@ -310,7 +320,7 @@ var rmbRecompenseObj = {
                         }
                         if(data.smallAreaReward > 0){
                             otherFee += data.smallAreaReward;
-                            otherFeeDetail += "小户型补偿:" + data.smallAreaReward + "  ";
+                            otherFeeDetail += "小户型:" + data.smallAreaReward + "  ";
                         }
                         if(data.historyLegacy > 0){
                             otherFee += data.historyLegacy;
@@ -355,15 +365,19 @@ var rmbRecompenseObj = {
                             $("#rmbRecompenseDiv input[name='isTradeHouse']").eq(1).prop("checked", "checked").change();
                         }
 
-                        var coveredArea = 0;
+                        var coveredArea = "";
                         if (data.swapArea1 > 0) {
-                            coveredArea += data.swapArea1;
+                            coveredArea += data.swapArea1 + ",";
                         }
                         if (data.swapArea2 > 0) {
-                            coveredArea += data.swapArea2;
+                            coveredArea += data.swapArea2 + ",";
                         }
                         if (data.swapArea3 > 0) {
-                            coveredArea += data.swapArea3;
+                            coveredArea += data.swapArea3 + ",";
+                        }
+                        //去掉最后一个逗号
+                        if (coveredArea.substring(coveredArea.length - 1, coveredArea.length) == ",") {
+                            coveredArea = coveredArea.substring(0, coveredArea.length - 1);
                         }
                         $("#rmbRecompenseDiv input[name='coveredArea']").eq(0).val(coveredArea);
 

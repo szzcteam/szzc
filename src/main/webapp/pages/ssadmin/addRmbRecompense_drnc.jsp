@@ -103,11 +103,11 @@
                         房屋用途：<input type="text" name="useing" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>、
                         登记建筑面积：<input type="text" name="certifiedArea"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
                         （其中：
-                        住宅面积&nbsp;&nbsp;<input type="text" name="residence_area"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
+                        住宅面积&nbsp;&nbsp;<input type="text" name="residenceArea"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
                         经营面积&nbsp;&nbsp;<input type="text" name="valueCompensateBusinessArea"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
-                        办公面积&nbsp;&nbsp;<input type="text" name="office_area"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
-                        生产面积&nbsp;&nbsp;<input type="text" name="produce_area"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
-                        其他面积&nbsp;&nbsp;<input type="text" name="other_area"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>），
+                        办公面积&nbsp;&nbsp;<input type="text" name="officeArea"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
+                        生产面积&nbsp;&nbsp;<input type="text" name="produceArea"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>，
+                        其他面积&nbsp;&nbsp;<input type="text" name="otherArea"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>），
                         未登记建筑面积：<input type="text" name="noRegisterLegalArea"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>、
                         房屋价值评估单价：<input type="text" name="assessPrice"   class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;。
                         <%--住宅改为经营门面补助系数：<input type="text" name="valueCompensateRate"  class="samll_input_text" style="margin-left: 0px;clear: both;float: none;"/>&nbsp;&nbsp;%--%>

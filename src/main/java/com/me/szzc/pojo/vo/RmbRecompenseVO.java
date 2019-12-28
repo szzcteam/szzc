@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.constant.Constant;
 import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.RmbRecompense;
+import com.me.szzc.pojo.entity.TradeHouse;
 import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.NumberToCapitalizedUtils;
 import lombok.Getter;
@@ -543,6 +544,25 @@ public class RmbRecompenseVO {
     private String noticeDay;
 
 
+    /**是否申购交换新房**/
+    private String buyHouse;
+    private String noBuyHouse;
+
+    /**其他费用信息描述**/
+    private String otherFeeDetail;
+
+    /**委托人姓名**/
+    private String consignName;
+
+    /**委托人身份证号**/
+    private String consignIdentityNo;
+
+    /**申购房面积**/
+    private String coveredArea;
+
+    /**申购序号**/
+    private String buySerialNumber;
+
     public static RmbRecompenseVO parse(RmbRecompense entity) throws Exception {
         RmbRecompenseVO vo = new RmbRecompenseVO();
         if (entity == null) {
@@ -643,8 +663,36 @@ public class RmbRecompenseVO {
         vo.setAfterDayAudit(entity.getAfterDayAudit());
         vo.setUpperRmb(entity.getUpperRmb());
         vo.setBeforeDay(entity.getBeforeDay());
+
+        //其它约定
         vo.setOtherTermsOne(entity.getOtherTermsOne());
         vo.setOtherTermsTwo(entity.getOtherTermsTwo());
+
+        vo.setOtherFeeDetail(entity.getOtherFeeDetail());
+        vo.setConsignName(entity.getConsignName());
+        vo.setConsignIdentityNo(entity.getConsignIdentityNo());
+
+        if (entity.getIsTradeHouse() != null && entity.getIsTradeHouse()) {
+            vo.setBuyHouse("√");
+            vo.setNoBuyHouse("×");
+            //申购了新房，约定改变
+            if (StringUtils.isNoneBlank(entity.getTradeHouseJson())) {
+                TradeHouse tradeHouse = JSONObject.parseObject(entity.getTradeHouseJson(), TradeHouse.class);
+                vo.setCoveredArea(tradeHouse.getCoveredArea() != null ? tradeHouse.getCoveredArea() : "");
+                vo.setBuySerialNumber(tradeHouse.getBuySerialNumber() != null ? tradeHouse.getBuySerialNumber() : "");
+                String transferRmb = tradeHouse.getTransferRmb() != null ? tradeHouse.getTransferRmb() : "";
+                String difference = tradeHouse.getDifference() != null ? tradeHouse.getDifference() : "";
+                String upperDifference = tradeHouse.getUpperDifference() != null ? tradeHouse.getUpperDifference() : "";
+                vo.setOtherTermsOne("乙方申请购买东龙世纪花园（暂定名）房屋，自愿将本协议第三条第1点“房屋价值补偿”金额中 " +
+                        transferRmb + " 元作为申购房款的对应价格予以抵扣，最终甲方向乙方支付的补偿款金额为人民币 " + difference +
+                        " （大写： " + upperDifference + " ）。");
+                vo.setOtherTermsTwo("接甲方通知后，乙方按第六条第1项确定的申购序号点选房屋并与甲方另行签订协议。");
+            }
+        } else if (entity.getIsTradeHouse() != null && !entity.getIsTradeHouse()) {
+            vo.setBuyHouse("×");
+            vo.setNoBuyHouse("√");
+            //不申够房，则约定是什么就显示什么
+        }
 
         //金额大写拆分存储
         String tempMoney = vo.getSumRbm();

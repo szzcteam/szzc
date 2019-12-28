@@ -93,6 +93,11 @@
     <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
     <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="is_trade_house" jdbcType="TINYINT" property="isTradeHouse" />
+    <result column="other_fee_detail" jdbcType="VARCHAR" property="otherFeeDetail" />
+    <result column="consign_name" jdbcType="VARCHAR" property="consignName" />
+    <result column="consign_identity_no" jdbcType="VARCHAR" property="consignIdentityNo" />
+    <result column="trade_house_json" jdbcType="VARCHAR" property="tradeHouseJson" />
   </resultMap>
   <sql id="Base_Column_List">
     id, area_id, card_no, mng_office, agency_company, company, house_owner, identity_no, recompense_plan,
@@ -110,7 +115,9 @@
     structure_roof, affiliated_other, basic_living_subsidy, disability_subsidy, disease_subsidy,
     no_child, martyr, life_compensate, change_compensate, small_area_reward, move_reward,
     other_fee, sum_rbm, upper_rmb, after_day_audit, before_day, other_terms_one, other_terms_two, is_lessee_flag, adjudication_json, create_date,
-    create_user_id, modified_date, modified_user_id, deleted
+    create_user_id, modified_date, modified_user_id, deleted,
+    is_trade_house,other_fee_detail,consign_name,consign_identity_no,
+    trade_house_json
   </sql>
   <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -163,7 +170,9 @@
       move_reward, other_fee, sum_rbm,
       upper_rmb, after_day_audit, before_day, other_terms_one,
       other_terms_two, is_lessee_flag, adjudication_json, create_date, create_user_id,
-      modified_date, modified_user_id, deleted
+      modified_date, modified_user_id, deleted,
+      is_trade_house,other_fee_detail,consign_name,
+      consign_identity_no,trade_house_json
       )
     values (#{id,jdbcType=BIGINT},#{areaId,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR}, #{mngOffice,jdbcType=VARCHAR},
       #{agencyCompany,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR},
@@ -196,7 +205,9 @@
       #{upperRmb,jdbcType=VARCHAR}, #{afterDayAudit}, #{beforeDay,jdbcType=INTEGER}, #{otherTermsOne,jdbcType=VARCHAR},
       #{otherTermsTwo,jdbcType=VARCHAR}, #{isLesseeFlag}, #{adjudicationJson},
       #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT},
-      #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT}
+      #{modifiedDate,jdbcType=TIMESTAMP}, #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=BIT},
+      #{isTradeHouse},#{otherFeeDetail},#{consignName},#{consignIdentityNo},
+      #{tradeHouseJson}
       )
   </insert>
 
@@ -288,7 +299,12 @@
       is_lessee_flag = #{isLesseeFlag},
       adjudication_json = #{adjudicationJson},
       modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
-      modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
+      modified_user_id = #{modifiedUserId,jdbcType=BIGINT},
+      is_trade_house = #{isTradeHouse},
+      other_fee_detail = #{otherFeeDetail},
+      consign_name = #{consignName},
+      consign_identity_no = #{consignIdentityNo},
+      trade_house_json = #{tradeHouseJson}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

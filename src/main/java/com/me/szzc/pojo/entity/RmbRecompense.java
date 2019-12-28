@@ -467,4 +467,19 @@ public class RmbRecompense {
      */
     private Boolean isLesseeFlag;
 
+    /**是否申购交换新房**/
+    private Boolean isTradeHouse;
+
+    /**其他费用信息描述**/
+    private String otherFeeDetail;
+
+    /**委托人姓名**/
+    private String consignName;
+
+    /**委托人身份证号**/
+    private String consignIdentityNo;
+
+    /**申购新房相关信息**/
+    private String tradeHouseJson;
+
 }

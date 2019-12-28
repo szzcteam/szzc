@@ -85,7 +85,7 @@
             证载建筑面积为<div style="width: 80px;" class="rows_div">${swapHouse.certifiedArea}</div>㎡，
             房屋权属份额<div style="width: 50px;" class="rows_div">${swapHouse.proportion}</div>%，
             证载房屋用途<div style="width: 80px;" class="rows_div">${swapHouse.useing}</div>，
-            房屋所有权证号证载房屋用途<div style="width: 250px;" class="rows_div">${swapHouse.houseOwnerNumber}</div>，
+            房屋所有权证号<div style="width: 250px;" class="rows_div">${swapHouse.houseOwnerNumber}</div>，
             国有土地使用证号<div style="width: 220px;" class="rows_div">${swapHouse.publicOwnerNumber}</div>，
             房屋价值评估单价为<div style="width: 120px;" class="rows_div">${swapHouse.assessPrice}</div>元/㎡；
             其中：用于经营的实际面积<div style="width: 50px;" class="rows_div">${swapHouse.valueCompensateBusinessArea}</div> ㎡，

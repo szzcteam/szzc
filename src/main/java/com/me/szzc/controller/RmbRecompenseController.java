@@ -4,12 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.CompensateTypeEnum;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
-import com.me.szzc.pojo.entity.Adjudication;
-import com.me.szzc.pojo.entity.Area;
-import com.me.szzc.pojo.entity.RmbRecompense;
-import com.me.szzc.pojo.entity.SettleAccounts;
+import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.RmbRecompenseVO;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
@@ -37,7 +35,8 @@ public class RmbRecompenseController extends BaseController {
 
     @RequestMapping("ssadmin/RmbRecompense/add")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "新增货币补偿协议")
-    public ModelAndView saveRmbRecompense (RmbRecompense rmbRecompense, Adjudication adjudication, HttpServletRequest request)throws Exception{
+    public ModelAndView saveRmbRecompense (RmbRecompense rmbRecompense, Adjudication adjudication,
+                                           TradeHouse tradeHouse, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
 
@@ -65,6 +64,15 @@ public class RmbRecompenseController extends BaseController {
 
         if(adjudication != null && StringUtils.isNoneBlank(adjudication.getAdjuLetter())){
             rmbRecompense.setAdjudicationJson(JSONObject.toJSONString(adjudication));
+        }
+
+        if (rmbRecompense.getIsTradeHouse() != null && rmbRecompense.getIsTradeHouse() && tradeHouse != null
+                && (StringUtils.isNoneBlank(tradeHouse.getCoveredArea()) ||
+                StringUtils.isNoneBlank(tradeHouse.getBuySerialNumber()) ||
+                StringUtils.isNoneBlank(tradeHouse.getTransferRmb()) ||
+                StringUtils.isNoneBlank(tradeHouse.getDifference()) ||
+                StringUtils.isNoneBlank(tradeHouse.getUpperDifference()))) {
+            rmbRecompense.setTradeHouseJson(JSONObject.toJSONString(tradeHouse));
         }
 
         //创建人
@@ -120,7 +128,8 @@ public class RmbRecompenseController extends BaseController {
 
     @RequestMapping("ssadmin/RmbRecompense/update")
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改货币补偿协议")
-    public ModelAndView updateRmbRecompense (RmbRecompense rmbRecompense,Adjudication adjudication, HttpServletRequest request)throws Exception{
+    public ModelAndView updateRmbRecompense (RmbRecompense rmbRecompense,Adjudication adjudication,
+                                             TradeHouse tradeHouse, HttpServletRequest request)throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //防止修改后，名字、地址错乱
@@ -137,6 +146,16 @@ public class RmbRecompenseController extends BaseController {
         if(adjudication != null && StringUtils.isNoneBlank(adjudication.getAdjuLetter())){
             rmbRecompense.setAdjudicationJson(JSONObject.toJSONString(adjudication));
         }
+
+        if (rmbRecompense.getIsTradeHouse() != null && rmbRecompense.getIsTradeHouse() && tradeHouse != null
+                && (StringUtils.isNoneBlank(tradeHouse.getCoveredArea()) ||
+                StringUtils.isNoneBlank(tradeHouse.getBuySerialNumber()) ||
+                StringUtils.isNoneBlank(tradeHouse.getTransferRmb()) ||
+                StringUtils.isNoneBlank(tradeHouse.getDifference()) ||
+                StringUtils.isNoneBlank(tradeHouse.getUpperDifference()))) {
+            rmbRecompense.setTradeHouseJson(JSONObject.toJSONString(tradeHouse));
+        }
+
         String str = "true";  //rmbRecompenseTerm(rmbRecompense);
         if(str.equals("true")){
             this.rmbRecompenseService.update(rmbRecompense);
@@ -164,6 +183,7 @@ public class RmbRecompenseController extends BaseController {
         Long id = Long.valueOf(idArr[1]);
         RmbRecompense recompense = this.rmbRecompenseService.getById(id);
         if(recompense != null) {
+            //诀字信息
             if (StringUtils.isNotBlank(recompense.getAdjudicationJson())) {
                 Adjudication adjudication = JSONObject.parseObject(recompense.getAdjudicationJson(), Adjudication.class);
                 modelAndView.addObject("adjudication", adjudication);
@@ -171,8 +191,23 @@ public class RmbRecompenseController extends BaseController {
                 //为了兼容历史数据而处理
                 modelAndView.addObject("adjudication", Adjudication.getDefaultAdju());
             }
+
+            //申购房屋信息
+            if(StringUtils.isNoneBlank(recompense.getTradeHouseJson())){
+                TradeHouse tradeHouse = JSONObject.parseObject(recompense.getTradeHouseJson(), TradeHouse.class);
+                modelAndView.addObject("tradeHouse", tradeHouse);
+            }
+
+
             modelAndView.addObject("rmbRecom", recompense);
+
+            Area area = areaService.getById(recompense.getAreaId());
+            //电二南侧项目独立
+            if (area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())) {
+                modelAndView.setViewName(url + "_drnc");
+            }
         }
+
         //获取用户管理的片区
         Long userId = getAdminSession(request).getFid();
         List<Area> areaList = getUserEnableArea(userId);
@@ -215,13 +250,18 @@ public class RmbRecompenseController extends BaseController {
     @RequestMapping("ssadmin/RmbRecompense/preview")
     public ModelAndView preview(Long id) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ssadmin/detailRmbRecompense");
+        String url = "ssadmin/detailRmbRecompense";
+        modelAndView.setViewName(url);
         RmbRecompense entity = this.rmbRecompenseService.getById(id);
         if(entity != null) {
             Area area = areaService.getById(entity.getAreaId());
             entity.setProjectCode(area.getProjectCode());
             RmbRecompenseVO vo = RmbRecompenseVO.parse(entity);
             modelAndView.addObject("rmbRecom", vo);
+            //电二南侧项目独立
+            if (area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())) {
+                modelAndView.setViewName(url + "_drnc");
+            }
         }
         return modelAndView;
     }
