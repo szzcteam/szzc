@@ -248,11 +248,11 @@ $(document).ready(function () {
         var hot_d_calc = calcHotWaterCompensate.substring(hot_water_index + 1, calcHotWaterCompensate.length);
         var arr = hot_d_calc.split("*");
         if(arr.length == 2){
-            //明伦街的公式：金额*比例
+            //明伦街、电车二公司 的公式：金额*比例
             $("input[name='calcHotWaterCompensateMoney']").eq(0).val(arr[0]);
             $("input[name='calcHotWaterCompensateConvert']").eq(0).val(arr[1]);
         }else if(arr.length == 1){
-            //紫阳村的：固定价格
+            //紫阳村、西城壕的：固定价格
             if(arr[0] == "0"){
                 $("input[name='calcHotWaterCompensateMoney']").eq(0).prop('checked', false);
             }else{

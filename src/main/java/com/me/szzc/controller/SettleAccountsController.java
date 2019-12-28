@@ -273,6 +273,8 @@ public class SettleAccountsController extends BaseController {
                 modelAndView.setViewName(url+"_zyc");
             }else if(area != null && area.getProjectCode().equals(GovernmentEnum.XCH.getCode())){
                 modelAndView.setViewName(url+"_xch");
+            }else if(area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())){
+                modelAndView.setViewName(url+"_drnc");
             }
         }
 
