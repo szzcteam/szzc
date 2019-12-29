@@ -155,8 +155,15 @@ var rmbRecompenseObj = {
                             /*$("#rmbRecompenseDiv input[name='valueCompensateRate']").eq(0).val(eval(calcChangeCompensate[2]*100));*/
                         }
 
-                        //未登记的合法建筑面积
-                        $("#rmbRecompenseDiv input[name='noRegisterLegalArea']").eq(0).val(data.noRegisterLegalArea);
+                        //未登记的合法建筑面积:电二公司=未登记+遗留的
+                        var noRegisterLegalArea = 0;
+                        if(data.noRegisterLegalArea > 0){
+                            noRegisterLegalArea += data.noRegisterLegalArea;
+                        }
+                        if(data.historyLegacyArea > 0){
+                            noRegisterLegalArea += data.historyLegacyArea;
+                        }
+                        $("#rmbRecompenseDiv input[name='noRegisterLegalArea']").eq(0).val(noRegisterLegalArea);
                         //评估单价
                        /* if(data.noRegisterLegal != null && data.noRegisterLegal >0){
                             var calcNoRegisterLegal = data.calcNoRegisterLegal.split("*");
@@ -199,7 +206,16 @@ var rmbRecompenseObj = {
 
                         //有证房屋补偿金额
                         $("#rmbRecompenseDiv input[name='valueCompensate']").eq(0).val(data.valueCompensate);
-                        $("#rmbRecompenseDiv input[name='noRegisterLegal']").eq(0).val(data.noRegisterLegal);
+
+                        //未登记补偿金额：电二公司=未登记金额+遗留金额
+                        var noRegisterLegal = 0;
+                        if(data.noRegisterLegal > 0 ){
+                            noRegisterLegal += data.noRegisterLegal;
+                        }
+                        if(data.historyLegacy > 0 ){
+                            noRegisterLegal += data.historyLegacy;
+                        }
+                        $("#rmbRecompenseDiv input[name='noRegisterLegal']").eq(0).val(noRegisterLegal);
                         /*$("#rmbRecompenseDiv input[name='historyLegacy']").eq(0).val(data.historyLegacy);*/
 
                         //室内装修补偿
@@ -322,10 +338,7 @@ var rmbRecompenseObj = {
                             otherFee += data.smallAreaReward;
                             otherFeeDetail += "小户型:" + data.smallAreaReward + "  ";
                         }
-                        if(data.historyLegacy > 0){
-                            otherFee += data.historyLegacy;
-                            otherFeeDetail += "历史遗留:" + data.historyLegacy + "  ";
-                        }
+
                         if(data.otherRmb > 0){
                             otherFee += data.otherRmb;
                             otherFeeDetail += data.otherDesc + ":" + data.otherRmb + "  ";
@@ -387,12 +400,7 @@ var rmbRecompenseObj = {
                         }
                         //应付  旧房金额>新房金额
                         console.log("旧房金额: " + data.sumCompensate + "  新房金额" +data.houseMoney );
-                        if(data.sumCompensate > data.houseMoney){
-                            $("#rmbRecompenseDiv input[name='difference']").eq(0).val(data.payTotal).blur();
-                        }else if(data.sumCompensate < data.houseMoney){
-                            //应收  旧房金额小于新房金额
-                            $("#rmbRecompenseDiv input[name='difference']").eq(0).val(0).blur();
-                        }
+                        $("#rmbRecompenseDiv input[name='difference']").eq(0).val(data.payTotal).blur();
 
                         noticeMsg = noticeMsg + "<br/>请人工核对!";
                         if(noticeFlag){
