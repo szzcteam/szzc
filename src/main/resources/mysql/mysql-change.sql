@@ -146,3 +146,52 @@ insert into f_role_security(fsecurityid, froleid)
 values(43,1);
 
 
+-------------- 12.28号脚本
+
+-- 插入西城壕的菜单信息
+insert into f_security(fdescription,fname, fpriority, fparentid, furl)
+values('西城壕新增','西城壕新增',4,3,'ssadmin/addProtocol.html?projectCode=B001002');
+
+
+
+-- 插入按钮权限
+insert into f_role_security(fsecurityid, froleid)
+values(44,1);
+
+
+
+
+-- 插入电二南侧的菜单信息
+insert into f_security(fdescription,fname, fpriority, fparentid, furl)
+values('电二南侧新增','电二南侧新增',4,3,'ssadmin/addProtocol.html?projectCode=C001001');
+
+
+
+-- 插入按钮权限
+insert into f_role_security(fsecurityid, froleid)
+values(45,1);
+
+
+
+-- 给系统参数加备注
+update f_systemargs set fdescription = concat(fdescription, "，明伦街、电车二公司南侧共用") where fkey  = 'air_conditioner_shutter';
+
+update f_systemargs set fdescription = concat(fdescription, "，明伦街、电车二公司南侧共用") where fkey  = 'air_conditioner_hang';
+
+update f_systemargs set fdescription = concat(fdescription, "，明伦街、电车二公司南侧共用") where fkey  = 'air_conditioner_cabinet';
+
+update f_systemargs set fdescription = concat(fdescription, "，明伦街、电车二公司南侧共用") where fkey  = 'solar_water_heaters';
+
+
+
+
+
+ALTER TABLE `t_rmb_recompense`
+ADD COLUMN `other_fee_detail`  varchar(1000) NULL COMMENT '其他费用信息描述' AFTER `other_fee`,
+ADD COLUMN `consign_name`  varchar(255) NULL COMMENT '委托人姓名' AFTER `deleted`,
+ADD COLUMN `consign_identity_no`  varchar(255) NULL COMMENT '委托人身份证号' AFTER `consign_name`,
+ADD COLUMN `is_trade_house`  tinyint(255) NULL COMMENT '是否申购交换新房,1是，0否' AFTER `consign_identity_no`,
+ADD COLUMN `trade_house_json`  varchar(3000) NULL COMMENT '申购新房的相关信息' AFTER `is_trade_house`;
+
+
+
