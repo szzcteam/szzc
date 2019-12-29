@@ -195,8 +195,12 @@ $(document).ready(function(){
                 guarantee_money_calc += "-" + calcHistoryLegacyArea + "*" + calcHistoryLegacyProportion;
             }
             guarantee_money_calc += ")" + "*" + assessPrice;
-            console.log("保底公式：" + guarantee_money_calc);
-            $("input[name='calcGuarantee']").eq(0).val(guarantee_money_calc).change();
+            if(eval(guarantee_money_calc) <= 0){
+                console.log("保底金额必须大于0，当前公式: " + guarantee_money_calc);
+                $("input[name='calcGuarantee']").eq(0).val("0").change();
+            }else{
+                $("input[name='calcGuarantee']").eq(0).val(guarantee_money_calc).change();
+            }
         }
     });
 
