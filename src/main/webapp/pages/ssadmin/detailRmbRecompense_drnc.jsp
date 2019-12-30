@@ -31,8 +31,12 @@
         }
 
         .span_underline{
-            text-decoration: underline;
             min-width: 40px;
+            display:inline-block;
+            text-align: center;
+            padding:0px 2px;
+            line-height: 19px;
+            border-bottom: 1px solid #000;
         }
     </style>
 
@@ -165,10 +169,9 @@
             （申购序号<span class="span_underline">${rmbRecom.buySerialNumber}</span>）。
             <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             ${rmbRecom.noBuyHouse}&nbsp;&nbsp;乙方不购买东龙世纪花园（暂定名） 商品房。
+            <span class="span_underline" style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、约定：${rmbRecom.otherTermsOne}</span>
             <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            2、约定：<span class="span_underline">${rmbRecom.otherTermsOne}</span>
-            <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            3、约定：<span class="span_underline">${rmbRecom.otherTermsTwo}</span>
+            <span class="span_underline">3、约定：${rmbRecom.otherTermsTwo}</span>
         </div>
         <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;七&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甲乙双方必须履行协议约定的义务， 如因不履行协议约定义务或履行协议发生争议， 由甲乙双方协商解决， 协商不成的， 任何一方均有权向有管辖权的人民法院提起诉讼。</b></div>
         <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;八&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本协议经甲、 乙双方签字盖章后生效。</b></div>
