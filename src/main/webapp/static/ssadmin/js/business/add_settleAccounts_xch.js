@@ -1117,7 +1117,7 @@ var settleAccountObj = {
         var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea) + (new Number(calcHistoryLegacyArea) * new Number(calcHistoryLegacyProportion));*/
         var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea);
         //将计算后得面积保留2位小数
-        sumArea = Math.floor(sumArea*100)/100;
+        sumArea = Math.round(sumArea*100)/100;
         console.log("西城壕装修补偿、临时安置面积" + sumArea);
         $("input[name='calcDecorationCompensateArea']").eq(0).val(sumArea).change();
         $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
