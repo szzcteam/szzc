@@ -170,7 +170,7 @@
                 <dl>
                     <dt>4、搬迁补偿(搬家费):</dt>
                     <dd>
-                        <input type="text" name="moveHouseFee" value="${rmbRecom.subtotal}" size="20" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;元
+                        <input type="text" name="moveHouseFee" value="${rmbRecom.moveHouseFee}" size="20" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;元
                     </dd>
                 </dl>
                 <dl>
@@ -290,13 +290,13 @@
                     <dl style="width: 100%">
                         <dt>约定明细1:</dt>
                         <dd>
-                            <input type="text" name="otherTermsOne" maxlength="255"    size="60" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" name="otherTermsOne" maxlength="255"  value="${rmbRecom.otherTermsOne}"   size="60" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
                         </dd>
                     </dl>
                     <dl style="width: 100%">
                         <dt>约定明细2:</dt>
                         <dd>
-                            <input type="text" name="otherTermsTwo" maxlength="255"    size="60" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" name="otherTermsTwo" maxlength="255"  value="${rmbRecom.otherTermsTwo}"  size="60" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
                         </dd>
                     </dl>
                 </div>
