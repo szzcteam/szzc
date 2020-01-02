@@ -8,4 +8,11 @@ public interface Constant {
 
     String CHINESE_ZERO = "零";
 
+    //失败code
+    Integer ERROR_CODE = 300;
+
+    //成功code
+    Integer SUCCESS_CODE = 200;
+
+
 }

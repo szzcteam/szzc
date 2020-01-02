@@ -1,5 +1,6 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.constant.Constant;
 import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.pojo.entity.Area;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,9 +25,10 @@ public class BaseController extends BaseServiceCtrl{
 
     protected static final String STATUS_CODE_KEY = "statusCode";
     protected static final String MESSAGE_KEY = "message";
+    protected static final String CALLBACK_TYPE_KEY = "callbackType";
 
-    protected static final Integer ERROR_CODE_NUM = 300;
-    protected static final Integer SUCCESS_CODE_NUM = 200;
+    protected static final Integer ERROR_CODE_NUM = Constant.ERROR_CODE;
+    protected static final Integer SUCCESS_CODE_NUM = Constant.SUCCESS_CODE;
 
 
 

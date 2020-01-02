@@ -18,8 +18,11 @@ public interface SettleAccountsMapper {
     int selectNmae(String houseOwner);
 
     SettleAccounts getByHouseOwnerAddr(@Param("houseOwner") String houseOwner,
-                                             @Param("address") String address);
+                                       @Param("address") String address);
 
+    SettleAccounts getByHouseOwnerAddrNeqId(@Param("houseOwner") String houseOwner,
+                                            @Param("address") String address,
+                                            @Param("id") Long id);
 
     int delete(SettleAccounts record);
 

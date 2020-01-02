@@ -3,8 +3,10 @@ package com.me.szzc.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
+import com.me.szzc.constant.Constant;
 import com.me.szzc.enums.*;
 import com.me.szzc.pojo.entity.*;
+import com.me.szzc.pojo.vo.ResultVO;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
@@ -51,16 +53,23 @@ public class SettleAccountsController extends BaseController {
         }
 
         if(StringUtils.isBlank(houseOwner)){
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "操作失败，被征收人或承租人姓名不能都为空，必须填写一项");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "操作失败，被征收人或承租人姓名不能都为空，必须填写一项");
+            return modelAndView;
+        }
+
+        ResultVO resultVO = checkSettle(settleAccounts);
+        if(!resultVO.getSuccess()){
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, resultVO.getMessage());
             return modelAndView;
         }
 
         //判断是否存在
         SettleAccounts entity = settleAccountsService.getByHouseOwnerAddr(houseOwner, settleAccounts.getAddress());
         if (entity != null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", getExistsOnlyMsg(houseOwner, settleAccounts.getAddress()));
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, getExistsOnlyMsg(houseOwner, settleAccounts.getAddress()));
             return modelAndView;
         }
 
@@ -84,14 +93,14 @@ public class SettleAccountsController extends BaseController {
         String str = "true";  //settleAccountsTerm(settleAccounts);
         if(str.equals("true")){
             this.settleAccountsService.add(settleAccounts);
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "新增成功");
-            modelAndView.addObject("callbackType", "closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "新增成功");
+            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
             return modelAndView;
         }else{
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "数据校验失败"+str);
-            modelAndView.addObject("callbackType", "closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "数据校验失败"+str);
+            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
             return modelAndView;
         }
 
@@ -111,22 +120,22 @@ public class SettleAccountsController extends BaseController {
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
 
         if(settleAccounts == null){
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message","用户未签订此协议");
+            modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"用户未签订此协议");
             return modelAndView;
         }
 
         if(settleAccounts.getDeleted()) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "数据已删除，请核查后再操作");
             return modelAndView;
         }
 
         Long userId = getAdminSession(request).getFid();
         settleAccountsService.deleteCase(userId, id, rmbId, swapId);
 
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","删除成功");
+        modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY,"删除成功");
         return modelAndView;
     }
 
@@ -142,20 +151,20 @@ public class SettleAccountsController extends BaseController {
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
 
         if(settleAccounts == null){
-            modelAndView.addObject("statusCode",300);
-            modelAndView.addObject("message","用户未签订此协议");
+            modelAndView.addObject(STATUS_CODE_KEY,ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"用户未签订此协议");
             return modelAndView;
         }
 
         if(settleAccounts.getSigningStatus().intValue() == status.intValue()) {
-            modelAndView.addObject("statusCode",300);
-            modelAndView.addObject("message", "状态为：" + SigningStatusEnum.getDesc(status) + "，请勿重复操作");
+            modelAndView.addObject(STATUS_CODE_KEY,ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "状态为：" + SigningStatusEnum.getDesc(status) + "，请勿重复操作");
             return modelAndView;
         }
 
         if(settleAccounts.getDeleted()) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "数据已删除，请核查后再操作");
             return modelAndView;
         }
 
@@ -166,8 +175,8 @@ public class SettleAccountsController extends BaseController {
         settleAccounts.setSigningStatus(status);
         this.settleAccountsService.changeSignStatus(settleAccounts);
 
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","操作成功");
+        modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY,"操作成功");
         return modelAndView;
     }
 
@@ -204,14 +213,14 @@ public class SettleAccountsController extends BaseController {
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
 
         if(settleAccounts == null){
-            modelAndView.addObject("statusCode",300);
-            modelAndView.addObject("message","用户未签订此协议");
+            modelAndView.addObject(STATUS_CODE_KEY,ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"用户未签订此协议");
             return modelAndView;
         }
 
         if(settleAccounts.getDeleted()) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "数据已删除，请核查后再操作");
             return modelAndView;
         }
 
@@ -222,9 +231,9 @@ public class SettleAccountsController extends BaseController {
         settleAccounts.setSigningDate(DateHelper.string2Date(dateStr, DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
         this.settleAccountsService.updateSignDate(settleAccounts);
 
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","操作成功");
-        modelAndView.addObject("callbackType", "closeCurrent");
+        modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY,"操作成功");
+        modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         return modelAndView;
     }
 
@@ -232,9 +241,37 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping(value = "ssadmin/settleAccounts/update", method = RequestMethod.POST)
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
-//        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+
+        String houseOwner = "";
+        if(StringUtils.isNoneBlank(settleAccounts.getHouseOwner())){
+            houseOwner = settleAccounts.getHouseOwner();
+        }else if(StringUtils.isNoneBlank(settleAccounts.getLessee())){
+            houseOwner = settleAccounts.getLessee();
+        }
+
+        if(StringUtils.isBlank(houseOwner)){
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "操作失败，被征收人或承租人姓名不能都为空，必须填写一项");
+            return modelAndView;
+        }
+
+
+        ResultVO resultVO = checkSettle(settleAccounts);
+        if(!resultVO.getSuccess()){
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, resultVO.getMessage());
+            return modelAndView;
+        }
+
+        //验证唯一性：修改时，不能将名字+地址，改成别人的
+        SettleAccounts entity = settleAccountsService.getByHouseOwnerAddrNeqId(houseOwner, settleAccounts.getAddress(), settleAccounts.getId());
+        if (entity != null) {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, getExistsOnlyMsg(houseOwner, settleAccounts.getAddress()));
+            return modelAndView;
+        }
 
         //处理面积
         processArea(settleAccounts);
@@ -243,14 +280,14 @@ public class SettleAccountsController extends BaseController {
         String str = "true";  //settleAccountsTerm(settleAccounts);
         if(str.equals("true")){
             this.settleAccountsService.update(settleAccounts);
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message","修改成功");
-            modelAndView.addObject("callbackType","closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"修改成功");
+            modelAndView.addObject(CALLBACK_TYPE_KEY,"closeCurrent");
             return modelAndView;
         }else{
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message","数据校验失败"+str);
-            modelAndView.addObject("callbackType","closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"数据校验失败"+str);
+            modelAndView.addObject(CALLBACK_TYPE_KEY,"closeCurrent");
             return modelAndView;
         }
     }
@@ -285,8 +322,8 @@ public class SettleAccountsController extends BaseController {
 
         //初始化水电空调参数
         initWaterAmmerParam(modelAndView);
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","查询成功");
+        modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY,"查询成功");
         return modelAndView;
     }
 
@@ -310,9 +347,9 @@ public class SettleAccountsController extends BaseController {
         //文件导出
         WordUtils.exportMillCertificateWord
                 (response, map, fileName, "SettleAccountsAgreement.ftl");
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "导出成功");
-        modelAndView.addObject("callbackType", "closeCurrent");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "导出成功");
+        modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         return modelAndView;
     }
 
@@ -816,5 +853,22 @@ public class SettleAccountsController extends BaseController {
             String[] arr = settleAccounts.getCalcHistoryLegacy().split("\\*");
             settleAccounts.setHistoryLegacyArea(new BigDecimal(arr[0]));
         }
+    }
+
+    private ResultVO checkSettle(SettleAccounts settleAccounts){
+
+        if(StringUtils.isBlank(settleAccounts.getCardNo())){
+            return new ResultVO(false, "协议编号不能为空");
+        }
+
+        if(StringUtils.isBlank(settleAccounts.getAddress())){
+            return new ResultVO(false, "被征收房屋地址不能为空");
+        }
+
+        if(StringUtils.isBlank(settleAccounts.getUseing())){
+            return new ResultVO(false, "用途不能为空");
+        }
+
+        return new ResultVO(true);
     }
 }

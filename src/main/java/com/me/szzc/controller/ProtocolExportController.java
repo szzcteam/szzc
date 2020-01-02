@@ -43,12 +43,13 @@ public class ProtocolExportController extends BaseController {
 
         //查询产权调换
         List<SwapHouse> swapHouseList = swapHouseService.listAll(areaIdList);
-        List<SwapHouseVO> swapHouseVOList = new ArrayList<>();
+        Map<String, SwapHouseVO> swapMap = new HashMap<>();
         try {
             if (swapHouseList != null && swapHouseList.size() > 0) {
                 for (SwapHouse po : swapHouseList) {
                     SwapHouseVO vo = SwapHouseVO.parse(po);
-                    swapHouseVOList.add(vo);
+                    String key = vo.getAddress().trim() + "|" + vo.getHouseOwner().trim();
+                    swapMap.put(key, vo);
                 }
             }
         } catch (Exception e) {
@@ -57,12 +58,13 @@ public class ProtocolExportController extends BaseController {
 
         //查询货币补偿
         List<RmbRecompense> rmbRecompenseList = rmbRecompenseService.listAll(areaIdList);
-        List<RmbRecompenseVO> rmbRecompenseVOList = new ArrayList<>();
+        Map<String, RmbRecompenseVO> rmbMap = new HashMap<>();
         try {
             if (rmbRecompenseList != null && rmbRecompenseList.size() > 0) {
                 for (RmbRecompense po : rmbRecompenseList) {
                     RmbRecompenseVO vo = RmbRecompenseVO.parse(po);
-                    rmbRecompenseVOList.add(vo);
+                    String key = vo.getAddress().trim() + "|" + vo.getHouseOwner().trim();
+                    rmbMap.put(key, vo);
                 }
             }
         } catch (Exception e) {
@@ -73,71 +75,70 @@ public class ProtocolExportController extends BaseController {
         List<SettleAccounts> settleAccountsList = settleAccountsService.list(0, 0, false,
                 null, null, null, null,
                 areaIdList, null, null, null);
-        Map<String, SettleAccounts> settleMap = new HashMap<>();
-        for(SettleAccounts settle : settleAccountsList){
-            String houseOwner = StringUtils.isNotBlank(settle.getHouseOwner()) ? settle.getHouseOwner() : settle.getLessee();
-            String key = settle.getAddress() + "|" + houseOwner;
-            settleMap.put(key.trim(), settle);
-        }
 
-        //将2个list合并到一个
+        //融合数据，生成excel vo
         List<ProtocolExportVO> list = new ArrayList<>();
-        for(RmbRecompenseVO vo : rmbRecompenseVOList){
-            ProtocolExportVO exportVO = new ProtocolExportVO();
-            BeanUtils.copyProperties(vo, exportVO);
-            exportVO.setDifference(vo.getSumRbm());
-            String key = vo.getAddress() + "|"+vo.getHouseOwner();
-            SettleAccounts po = settleMap.get(key.trim());
-            if(po != null){
-                if (StringUtils.isNotBlank(po.getHouseOwner())) {
-                    exportVO.setPhone(po.getPhone());
-                } else {
-                    exportVO.setPhone(po.getLesseePhone());
+        if(settleAccountsList != null && !settleAccountsList.isEmpty()) {
+            for (SettleAccounts settle : settleAccountsList) {
+                String houseOwner = StringUtils.isNotBlank(settle.getHouseOwner()) ? settle.getHouseOwner() : settle.getLessee();
+                String key = settle.getAddress().trim() + "|" + houseOwner.trim();
+                ProtocolExportVO exportVO = new ProtocolExportVO();
+
+                //取货币补偿
+                RmbRecompenseVO rmbVo = rmbMap.get(key);
+                //取产权调换
+                SwapHouseVO swapVo = swapMap.get(key);
+                if (rmbVo != null && swapVo != null) {
+                    log.error("异常，同一个客户，同时存在货币和调换协议，key:{}", key);
+                    continue;
                 }
+
+                if (rmbVo != null) {
+                    BeanUtils.copyProperties(rmbVo, exportVO);
+                    exportVO.setDifference(rmbVo.getSumRbm());
+                    //计算热水器总和
+                    BigDecimal heater = new BigDecimal(StringUtils.isNotBlank(rmbVo.getSolarHeater()) ? rmbVo.getSolarHeater() : "0")
+                            .add(new BigDecimal(StringUtils.isNotBlank(rmbVo.getOtherHeater()) ? rmbVo.getOtherHeater() : "0"));
+                    if (heater.compareTo(BigDecimal.ZERO) > 0) {
+                        exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
+                    }
+
+                } else if (swapVo != null) {
+                    BeanUtils.copyProperties(swapVo, exportVO);
+                    //拼接房号
+                    String newHouseAddress = "";
+                    if (StringUtils.isNotBlank(swapVo.getSeat())) {
+                        newHouseAddress += swapVo.getSeat() + "栋";
+                    }
+                    if (StringUtils.isNotBlank(swapVo.getUnit())) {
+                        newHouseAddress += swapVo.getUnit() + "单元";
+                    }
+                    if (StringUtils.isNotBlank(swapVo.getFloors())) {
+                        newHouseAddress += swapVo.getFloors() + "层";
+                    }
+                    if (StringUtils.isNotBlank(swapVo.getHouseNumber())) {
+                        newHouseAddress += swapVo.getHouseNumber() + "号房";
+                    }
+
+                    exportVO.setNewHouseNumber(newHouseAddress);
+
+                    //计算热水器总和
+                    BigDecimal heater = new BigDecimal(StringUtils.isNotBlank(swapVo.getSolarHeater()) ? swapVo.getSolarHeater() : "0")
+                            .add(new BigDecimal(StringUtils.isNotBlank(swapVo.getOtherHeater()) ? swapVo.getOtherHeater() : "0"));
+                    if (heater.compareTo(BigDecimal.ZERO) > 0) {
+                        exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
+                    }
+                }
+                if (StringUtils.isNotBlank(settle.getHouseOwner())) {
+                    exportVO.setPhone(settle.getPhone());
+                } else {
+                    exportVO.setPhone(settle.getLesseePhone());
+                }
+                list.add(exportVO);
+
             }
-            list.add(exportVO);
         }
 
-        for(SwapHouseVO vo : swapHouseVOList){
-            ProtocolExportVO exportVO = new ProtocolExportVO();
-            BeanUtils.copyProperties(vo, exportVO);
-
-            //拼接房号
-            String newHouseAddress = "";
-            if(StringUtils.isNotBlank(vo.getSeat())){
-                newHouseAddress += vo.getSeat()+"栋";
-            }
-            if(StringUtils.isNotBlank(vo.getUnit())){
-                newHouseAddress += vo.getUnit() +"单元";
-            }
-            if(StringUtils.isNotBlank(vo.getFloors())){
-                newHouseAddress += vo.getFloors() + "层";
-            }
-            if(StringUtils.isNotBlank(vo.getHouseNumber())){
-                newHouseAddress += vo.getHouseNumber() +"号房";
-            }
-
-            exportVO.setNewHouseNumber(newHouseAddress);
-
-            //计算热水器总和
-            BigDecimal heater = new BigDecimal(StringUtils.isNotBlank(vo.getSolarHeater()) ? vo.getSolarHeater() : "0")
-                    .add(new BigDecimal(StringUtils.isNotBlank(vo.getOtherHeater()) ? vo.getOtherHeater() : "0"));
-            if (heater.compareTo(BigDecimal.ZERO) > 0) {
-                exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
-            }
-
-            String key = vo.getAddress() + "|"+vo.getHouseOwner();
-            SettleAccounts po = settleMap.get(key.trim());
-            if(po != null){
-                if (StringUtils.isNotBlank(po.getHouseOwner())) {
-                    exportVO.setPhone(po.getPhone());
-                } else {
-                    exportVO.setPhone(po.getLesseePhone());
-                }
-            }
-
-            list.add(exportVO);
-        }
 
         //导出Excel
 
@@ -156,100 +157,6 @@ public class ProtocolExportController extends BaseController {
         } catch (Exception e) {
             log.error("导出征收补偿台账异常", e);
         }
-
-            /*
-            for(ProtocolExportVO vo : list){
-                List<Object> row = new ArrayList<>();
-                row.add(index+"");
-                row.add("");
-                row.add(vo.getCardNo());
-                row.add(vo.getHouseOwner());
-                row.add(vo.getAddress());
-                row.add(vo.getIdentityNo());
-                row.add(""); //产别
-                row.add(""); //联系电话
-                row.add(vo.getHouseOwnerNumber());
-                row.add(vo.getPublicOwnerNumber());
-                row.add(vo.getCertifiedArea());
-                row.add(vo.getProportion());
-                row.add(vo.getUseing());
-
-                row.add(vo.getCertifiedArea());
-                row.add(vo.getAssessPrice());
-                row.add(vo.getValueCompensate());
-
-                row.add(vo.getNoRegisterLegalArea());
-                row.add(vo.getNoRegisterAssessPrice());
-                row.add(vo.getNoRegisterLegal());
-
-                row.add(vo.getHistoryLegacyArea());
-                row.add(vo.getHistoryAssessPrice());
-                row.add(vo.getHistoryLegacy());
-
-                //装修折旧补偿
-                row.add(vo.getDecorationCompensate());
-                row.add(vo.getMoveHouseFee());
-                row.add(vo.getInterimFee());
-                row.add(vo.getGuarantee());
-                row.add(vo.getSuspendBusinessFee());
-                row.add(vo.getMoveWaterMeterFee());
-                row.add(vo.getMoveAmmeterFee());
-                row.add(vo.getMoveAirConditioningFee());
-                //热水器拆装费：太阳能+电热水器
-                BigDecimal heater = new BigDecimal(org.apache.commons.lang3.StringUtils.isNotBlank(vo.getSolarHeater()) ? vo.getSolarHeater() : "0")
-                        .add(new BigDecimal(org.apache.commons.lang3.StringUtils.isNotBlank(vo.getOtherHeater()) ? vo.getOtherHeater() : "0"));
-                row.add(BigDecimalUtil.stripTrailingZeros(heater));
-                row.add(vo.getGasFee());
-
-                //构筑物补偿
-                row.add(vo.getStructureBalcony());
-                row.add(vo.getStructureDark());
-                row.add(vo.getStructureMezzanine());
-                row.add(vo.getStructureBuild());
-                row.add(vo.getStructureRoof());
-
-                //住改商
-                row.add(vo.getChangeCompensate());
-                row.add(vo.getLifeCompensate());
-                row.add(vo.getRmbCompensate());
-                row.add(vo.getSmallAreaReward());
-                row.add(vo.getBuildingAreaFee());
-                row.add(vo.getMoveReward());
-                row.add(vo.getOtherFee());
-
-                //安置房屋情况
-                row.add(vo.getNewHouseAddress());
-                //房号
-                String houseNumber = vo.getSeat()+"栋"+vo.getUnit() +"单元" + vo.getFloors() + "层" + vo.getHouseNumber() +"号房";
-                row.add(houseNumber);
-                row.add(vo.getCoveredArea());
-                row.add(vo.getPrice());
-                row.add(vo.getTotalPrice());
-
-                //抵扣房款
-                row.add(vo.getTransferRmb());
-                //实际应付金额
-                row.add(vo.getDifference());
-                //实际应收金额
-                row.add(vo.getLessDifference());
-
-                //超级过渡费
-                row.add("");
-                row.add("");
-                row.add("");
-                row.add("");
-                //交房结算情况
-                row.add("");
-                row.add("");
-                row.add("");
-
-                index++;
-                dataList.add(row);
-            }
-
-            writer.write1(dataList, sheet);
-*/
-
 
     }
 }
