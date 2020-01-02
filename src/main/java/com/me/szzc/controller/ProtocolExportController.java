@@ -91,7 +91,11 @@ public class ProtocolExportController extends BaseController {
                 if (rmbVo != null && swapVo != null) {
                     log.error("异常，同一个客户，同时存在货币和调换协议，key:{}", key);
                     continue;
+                } else if (rmbVo == null && swapVo == null) {
+                    log.error("当前只有结算单信息，没有签订协议,key:{}", key);
+                    continue;
                 }
+
 
                 if (rmbVo != null) {
                     BeanUtils.copyProperties(rmbVo, exportVO);
