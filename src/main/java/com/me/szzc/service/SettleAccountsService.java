@@ -149,6 +149,10 @@ public class SettleAccountsService {
         return settleAccountsMapper.getByHouseOwnerAddr(houseOwner, address);
     }
 
+    public SettleAccounts getByHouseOwnerAddrNeqId(String houseOwner, String address, Long id){
+        return settleAccountsMapper.getByHouseOwnerAddrNeqId(houseOwner, address, id);
+    }
+
 
     public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address,String houseOwner, Long areaId,
                                      List<Long> areaIdList, String startDate, String endDate,Integer compensateType) {

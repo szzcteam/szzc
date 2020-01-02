@@ -200,6 +200,14 @@
     where (house_owner = #{houseOwner} or lessee = #{houseOwner}) and address = #{address} and deleted = 0
   </select>
 
+  <select id="getByHouseOwnerAddrNeqId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_settle_accounts
+    where (house_owner = #{houseOwner} or lessee = #{houseOwner}) and address = #{address} and deleted = 0
+    and id <![CDATA[ <> ]]> #{id}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_settle_accounts
     where id = #{id,jdbcType=BIGINT}

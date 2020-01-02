@@ -241,7 +241,6 @@ public class SettleAccountsController extends BaseController {
     @RequestMapping(value = "ssadmin/settleAccounts/update", method = RequestMethod.POST)
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {
-//        log.info("修改结算单settleAccounts:{}", JSON.toJSONString(settleAccounts));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
 
@@ -263,6 +262,14 @@ public class SettleAccountsController extends BaseController {
         if(!resultVO.getSuccess()){
             modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
             modelAndView.addObject(MESSAGE_KEY, resultVO.getMessage());
+            return modelAndView;
+        }
+
+        //验证唯一性：修改时，不能将名字+地址，改成别人的
+        SettleAccounts entity = settleAccountsService.getByHouseOwnerAddrNeqId(houseOwner, settleAccounts.getAddress(), settleAccounts.getId());
+        if (entity != null) {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, getExistsOnlyMsg(houseOwner, settleAccounts.getAddress()));
             return modelAndView;
         }
 
