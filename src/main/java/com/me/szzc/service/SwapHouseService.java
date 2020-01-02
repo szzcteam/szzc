@@ -2,6 +2,7 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class SwapHouseService {
         request.setCreateDate(DateHelper.getTimestamp());
         request.setModifiedDate(DateHelper.getTimestamp());
         request.setDeleted(false);
+        request.setHotWaterCompensate(BigDecimalUtil.toSum(request.getSolarHeater(), request.getOtherHeater()));
         swapHouseMapper.insert(request);
     }
 
@@ -32,6 +34,7 @@ public class SwapHouseService {
 
     public void updateSwapHouse(SwapHouse request) {
         request.setModifiedDate(DateHelper.getTimestamp());
+        request.setHotWaterCompensate(BigDecimalUtil.toSum(request.getSolarHeater(), request.getOtherHeater()));
         swapHouseMapper.updateByPrimaryKey(request);
     }
 

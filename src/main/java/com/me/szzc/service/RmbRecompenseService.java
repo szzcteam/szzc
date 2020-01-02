@@ -2,10 +2,12 @@ package com.me.szzc.service;
 
 import com.me.szzc.dao.RmbRecompenseMapper;
 import com.me.szzc.pojo.entity.RmbRecompense;
+import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
@@ -21,6 +23,7 @@ public class RmbRecompenseService {
         rmbRecompense.setCreateDate(date);
         rmbRecompense.setModifiedDate(date);
         rmbRecompense.setDeleted(false);
+        rmbRecompense.setHotWaterCompensate(BigDecimalUtil.toSum(rmbRecompense.getSolarHeater(), rmbRecompense.getOtherHeater()));
         this.rmbRecompenseMapper.insert(rmbRecompense);
     }
 
@@ -32,6 +35,7 @@ public class RmbRecompenseService {
 
     public void update(RmbRecompense rmbRecompense) {
         rmbRecompense.setModifiedDate(DateHelper.getTimestamp());
+        rmbRecompense.setHotWaterCompensate(BigDecimalUtil.toSum(rmbRecompense.getSolarHeater(), rmbRecompense.getOtherHeater()));
         this.rmbRecompenseMapper.updateByPrimaryKey(rmbRecompense);
     }
 

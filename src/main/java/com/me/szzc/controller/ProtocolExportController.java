@@ -96,6 +96,13 @@ public class ProtocolExportController extends BaseController {
                 if (rmbVo != null) {
                     BeanUtils.copyProperties(rmbVo, exportVO);
                     exportVO.setDifference(rmbVo.getSumRbm());
+                    //计算热水器总和
+                    BigDecimal heater = new BigDecimal(StringUtils.isNotBlank(rmbVo.getSolarHeater()) ? rmbVo.getSolarHeater() : "0")
+                            .add(new BigDecimal(StringUtils.isNotBlank(rmbVo.getOtherHeater()) ? rmbVo.getOtherHeater() : "0"));
+                    if (heater.compareTo(BigDecimal.ZERO) > 0) {
+                        exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
+                    }
+
                 } else if (swapVo != null) {
                     BeanUtils.copyProperties(swapVo, exportVO);
                     //拼接房号
