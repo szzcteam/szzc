@@ -1,14 +1,11 @@
 package com.me.szzc.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.ChooseStatusEnum;
-import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.RoomChangeExport;
-import com.me.szzc.pojo.entity.Frole;
 import com.me.szzc.pojo.entity.RoomChange;
-import com.me.szzc.pojo.vo.ResultVo;
+import com.me.szzc.pojo.vo.ResultVO;
 import com.me.szzc.pojo.vo.RoomChangeVo;
 import com.me.szzc.service.RoomChangeService;
 import com.me.szzc.utils.CustomizedPropertyConfigurer;
@@ -21,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,17 +51,17 @@ public class RoomChangeController extends BaseController {
     public ModelAndView importExcel(@RequestParam(value = "file", required = false) MultipartFile file, String itemCode) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
-        ResultVo resultVo = null;
+        ResultVO resultVo = null;
         try {
             //校验
             if (file == null) {
-                view.addObject("statusCode", 300);
-                view.addObject("message", "请选择房源excel文件");
+                view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+                view.addObject(MESSAGE_KEY, "请选择房源excel文件");
                 return view;
             }
             if (null == itemCode && itemCode.length() < 1) {
-                view.addObject("statusCode", 300);
-                view.addObject("message", "请选择房源所属项目");
+                view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+                view.addObject(MESSAGE_KEY, "请选择房源所属项目");
                 return view;
             }
             String fileName = file.getOriginalFilename();
@@ -74,25 +69,25 @@ public class RoomChangeController extends BaseController {
             String ext = fileName.substring(extStart, fileName.length()).toLowerCase();
             log.info("文件后缀:" + ext);
             if (!ext.equals(".xls") && !ext.equals(".xlsx")) {
-                view.addObject("statusCode", 300);
-                view.addObject("message", "文件格式错误，只能是后缀为.xls 或 .xlsx 的excel文件");
+                view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+                view.addObject(MESSAGE_KEY, "文件格式错误，只能是后缀为.xls 或 .xlsx 的excel文件");
                 return view;
             }
 
             //上传
             resultVo = roomChangeService.importExcle(file, itemCode);
         } catch (Exception e) {
-            view.addObject("statusCode", 300);
-            view.addObject("message", e.getMessage());
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, e.getMessage());
             return view;
         }
-        if (resultVo.getCode() == 0) {
-            view.addObject("statusCode", 200);
-            view.addObject("message", "上传成功");
-            view.addObject("callbackType", "closeCurrent");
+        if (resultVo.getSuccess()) {
+            view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "上传成功");
+            view.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         } else {
-            view.addObject("statusCode", resultVo.getCode());
-            view.addObject("message", resultVo.getMsg());
+            view.addObject(STATUS_CODE_KEY, resultVo.getCode());
+            view.addObject(MESSAGE_KEY, resultVo.getMessage());
         }
         return view;
     }
@@ -182,15 +177,15 @@ public class RoomChangeController extends BaseController {
         //获取登录人房源项目权限
         Long userId = getAdminSession(request).getFid();
         if (null == userId) {
-            view.addObject("statusCode", 300);
-            view.addObject("message", "未获取用户信息,请先登陆");
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "未获取用户信息,请先登陆");
             return view;
         }
         Map<String, String> projectMap = getUserEnableProject(userId);
         List<String> list = convertProejctCode(projectMap);
         if (null == list || list.isEmpty()) {
-            view.addObject("statusCode", 300);
-            view.addObject("message", "用户未分配房源项目权限");
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "用户未分配房源项目权限");
             return view;
         }
 
@@ -228,17 +223,17 @@ public class RoomChangeController extends BaseController {
             }
 
             if (result > 0) {
-                modelAndView.addObject("statusCode", 200);
-                modelAndView.addObject("message", "删除成功");
+                modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+                modelAndView.addObject(MESSAGE_KEY, "删除成功");
             } else {
-                modelAndView.addObject("statusCode", 300);
-                modelAndView.addObject("message", "删除失败");
+                modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+                modelAndView.addObject(MESSAGE_KEY, "删除失败");
             }
 
             return modelAndView;
         }
-        modelAndView.addObject("statusCode", 300);
-        modelAndView.addObject("message", "请选择需要删除的记录");
+        modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "请选择需要删除的记录");
         return modelAndView;
     }
 
@@ -307,9 +302,9 @@ public class RoomChangeController extends BaseController {
                 log.error("流关闭异常", e);
             }
         }
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "下载成功");
-        modelAndView.addObject("callbackType", "closeCurrent");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "下载成功");
+        modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         return modelAndView;
     }
 
@@ -326,15 +321,15 @@ public class RoomChangeController extends BaseController {
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //数据不为空
         if (StringUtils.isNullOrEmpty(roomChange) || StringUtils.isNullOrEmpty(roomChange.getId())) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "修改失败,入参为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "修改失败,入参为空");
             return modelAndView;
         }
         //获取数据
         RoomChange roomChangeById = roomChangeService.getRoomChangeById(roomChange.getId());
         if (StringUtils.isNullOrEmpty(roomChangeById)) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "修改失败,数据为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "修改失败,数据为空");
             return modelAndView;
         }
         Boolean status = null;
@@ -342,18 +337,18 @@ public class RoomChangeController extends BaseController {
             //修改
             status = roomChangeService.updateRoomChangeById(roomChange);
         } catch (Exception e) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", e.getMessage());
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, e.getMessage());
             return modelAndView;
         }
 
         if (status) {
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "修改成功");
-            modelAndView.addObject("callbackType", "closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "修改成功");
+            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         } else {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "修改失败");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "修改失败");
         }
         return modelAndView;
     }
@@ -365,8 +360,8 @@ public class RoomChangeController extends BaseController {
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //数据不为空
         if (StringUtils.isNullOrEmpty(roomChange) || StringUtils.isNullOrEmpty(roomChange.getId())) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "修改失败,入参为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "修改失败,入参为空");
             return modelAndView;
         }
 
@@ -374,18 +369,18 @@ public class RoomChangeController extends BaseController {
         try {
             status = roomChangeService.updateRemark(roomChange.getRemark(), roomChange.getId());
         } catch (Exception e) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", e.getMessage());
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, e.getMessage());
             return modelAndView;
         }
 
         if (status) {
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "编辑成功");
-            modelAndView.addObject("callbackType", "closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "编辑成功");
+            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         } else {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "编辑失败");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "编辑失败");
         }
         return modelAndView;
     }
@@ -403,38 +398,38 @@ public class RoomChangeController extends BaseController {
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //数据不为空
         if (StringUtils.isNullOrEmpty(roomChangeVo) || StringUtils.isNullOrEmpty(roomChangeVo.getId())) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "点房失败,入参为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "点房失败,入参为空");
             return modelAndView;
         }
         if (StringUtils.isNullOrEmpty(roomChangeVo.getStatus()) && roomChangeVo.getStatus() == 0) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "点房失败,状态错误");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "点房失败,状态错误");
             return modelAndView;
         }
         if (StringUtils.isNullOrEmpty(roomChangeVo.getChooseDate())) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "点房时间为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "点房时间为空");
             return modelAndView;
         }
         if (StringUtils.isNullOrEmpty(roomChangeVo.getCommissionCompany())) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "代办公司为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "代办公司为空");
             return modelAndView;
         }
         if (StringUtils.isNullOrEmpty(roomChangeVo.getChoosePeople())) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "点房人为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "点房人为空");
             return modelAndView;
         }
-        ResultVo resultVo = roomChangeService.addChooseRoom(roomChangeVo);
-        if (resultVo.getCode() == 0) {
-            modelAndView.addObject("callbackType", "closeCurrent");
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "点房成功");
+        ResultVO resultVo = roomChangeService.addChooseRoom(roomChangeVo);
+        if (resultVo.getSuccess()) {
+            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "点房成功");
         } else {
-            modelAndView.addObject("statusCode", resultVo.getCode());
-            modelAndView.addObject("message", resultVo.getMsg());
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, resultVo.getMessage());
         }
         return modelAndView;
     }
@@ -452,18 +447,18 @@ public class RoomChangeController extends BaseController {
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
         //数据不为空
         if (StringUtils.isNullOrEmpty(roomChangeVo) || StringUtils.isNullOrEmpty(roomChangeVo.getId())) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "点房失败,入参为空");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "点房失败,入参为空");
             return modelAndView;
         }
-        ResultVo resultVo = roomChangeService.updateChooseRoom(roomChangeVo);
-        if (resultVo.getCode() == 0) {
-            modelAndView.addObject("callbackType", "closeCurrent");
-            modelAndView.addObject("statusCode", 200);
-            modelAndView.addObject("message", "修改点房信息成功");
+        ResultVO resultVo = roomChangeService.updateChooseRoom(roomChangeVo);
+        if (resultVo.getSuccess()) {
+            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "修改点房信息成功");
         } else {
-            modelAndView.addObject("statusCode", resultVo.getCode());
-            modelAndView.addObject("message", resultVo.getMsg());
+            modelAndView.addObject(STATUS_CODE_KEY, resultVo.getCode());
+            modelAndView.addObject(MESSAGE_KEY, resultVo.getMessage());
         }
         return modelAndView;
     }

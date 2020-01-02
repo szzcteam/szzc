@@ -42,22 +42,22 @@ public class SwapHouseController extends BaseController {
         //判断结算单是否存在
         SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
         if (settleAccounts == null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
             return modelAndView;
         }
 
         if(!settleAccounts.getCompensateType().equals(CompensateTypeEnum.SWAP_TYPE.getCode())){
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "不能增加调换协议，结算单中选择的类型是：货币补偿协议，请前后保持一致。");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "不能增加调换协议，结算单中选择的类型是：货币补偿协议，请前后保持一致。");
             return modelAndView;
         }
 
         //判断是否存在
         SwapHouse entity = swapHouseService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
         if (entity != null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", getExistsOnlyMsg(swapHouse.getHouseOwner(), swapHouse.getAddress()));
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, getExistsOnlyMsg(swapHouse.getHouseOwner(), swapHouse.getAddress()));
             return modelAndView;
         }
 
@@ -73,9 +73,9 @@ public class SwapHouseController extends BaseController {
         //征收公司
         swapHouse.setCompany(constantMap.getValue(SystemArgsConstant.COMPANY));
         this.swapHouseService.addSwapHouse(swapHouse);
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "新增成功");
-        modelAndView.addObject("callbackType", "closeCurrent");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "新增成功");
+        modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         return modelAndView;
     }
 
@@ -87,8 +87,8 @@ public class SwapHouseController extends BaseController {
         //防止修改后，名字、地址错乱
         SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
         if (settleAccounts == null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请核对后再操作。");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址查找结算单失败，请核对后再操作。");
             return modelAndView;
         }
 
@@ -99,9 +99,9 @@ public class SwapHouseController extends BaseController {
             swapHouse.setAdjudicationJson(JSONObject.toJSONString(adjudication));
         }
         this.swapHouseService.updateSwapHouse(swapHouse);
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "修改成功");
-        modelAndView.addObject("callbackType", "closeCurrent");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "修改成功");
+        modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
         return modelAndView;
     }
 
@@ -115,14 +115,14 @@ public class SwapHouseController extends BaseController {
         Long id = Long.valueOf(idArr[2]);
         SwapHouse swapHouse = this.swapHouseService.getById(id);
         if (swapHouse == null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "查询不到产权调换协议");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "查询不到产权调换协议");
             return modelAndView;
         }
 
         if (swapHouse.getDeleted()) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "数据已删除，请核查后再操作");
             return modelAndView;
         }
 
@@ -130,8 +130,8 @@ public class SwapHouseController extends BaseController {
         Long userId = getAdminSession(request).getFid();
         swapHouse.setModifiedUserId(userId);
         this.swapHouseService.delete(swapHouse);
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "删除成功");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "删除成功");
         return modelAndView;
     }
 
@@ -159,8 +159,8 @@ public class SwapHouseController extends BaseController {
         List<Area> areaList = getUserEnableArea(userId);
         modelAndView.addObject("areaList", areaList);
 
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "查询成功");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "查询成功");
         return modelAndView;
     }
 
@@ -187,8 +187,8 @@ public class SwapHouseController extends BaseController {
         WordUtils.exportMillCertificateWord
                 (response, map, fileName, "HousingPropertyEchangeAgreement.ftl");
 
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "导出成功");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "导出成功");
         return modelAndView;
     }
 

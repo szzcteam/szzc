@@ -43,22 +43,22 @@ public class RmbRecompenseController extends BaseController {
         //判断结算单是否存在
         SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
         if (settleAccounts == null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
             return modelAndView;
         }
 
         if(!settleAccounts.getCompensateType().equals(CompensateTypeEnum.RMB_TYPE.getCode())){
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "不能增加货币补偿协议，结算单中选择的类型是：产权调换协议，请前后保持一致。");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "不能增加货币补偿协议，结算单中选择的类型是：产权调换协议，请前后保持一致。");
             return modelAndView;
         }
 
         //判断是否存在
         RmbRecompense entity = rmbRecompenseService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
         if (entity != null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", getExistsOnlyMsg(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress()));
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, getExistsOnlyMsg(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress()));
             return modelAndView;
         }
 
@@ -83,16 +83,16 @@ public class RmbRecompenseController extends BaseController {
         rmbRecompense.setCompany(rmbRecompense.getAgencyCompany());
 
         String str = "true"; //rmbRecompenseTerm(rmbRecompense);
-        if(str.equals("true")){
+        if (str.equals("true")) {
             this.rmbRecompenseService.add(rmbRecompense);
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message","新增成功");
-            modelAndView.addObject("callbackType","closeCurrent");
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "新增成功");
+            modelAndView.addObject("callbackType", "closeCurrent");
             return modelAndView;
-        }else{
-            modelAndView.addObject("statusCode",300);
-            modelAndView.addObject("message","数据校验错误"+str);
-            modelAndView.addObject("callbackType","closeCurrent");
+        } else {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "数据校验错误" + str);
+            modelAndView.addObject("callbackType", "closeCurrent");
             return modelAndView;
         }
 
@@ -108,21 +108,21 @@ public class RmbRecompenseController extends BaseController {
         Long id = Long.valueOf(idArr[1]);
         RmbRecompense rmbRecompense =  this.rmbRecompenseService.getById(id);
         if(rmbRecompense ==  null){
-            modelAndView.addObject("statusCode",300);
-            modelAndView.addObject("message","查询不到货币补偿协议");
+            modelAndView.addObject(STATUS_CODE_KEY,ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"查询不到货币补偿协议");
             return modelAndView;
         }
         if(rmbRecompense.getDeleted()) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "数据已删除，请核查后再操作");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "数据已删除，请核查后再操作");
             return modelAndView;
         }
         //修改人
         Long userId = getAdminSession(request).getFid();
         rmbRecompense.setModifiedUserId(userId);
         this.rmbRecompenseService.delete(rmbRecompense);
-        modelAndView.addObject("statusCode",200);
-        modelAndView.addObject("message","删除成功");
+        modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY,"删除成功");
         return modelAndView;
     }
 
@@ -135,8 +135,8 @@ public class RmbRecompenseController extends BaseController {
         //防止修改后，名字、地址错乱
         SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress());
         if (settleAccounts == null) {
-            modelAndView.addObject("statusCode", 300);
-            modelAndView.addObject("message", "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
             return modelAndView;
         }
 
@@ -159,14 +159,14 @@ public class RmbRecompenseController extends BaseController {
         String str = "true";  //rmbRecompenseTerm(rmbRecompense);
         if(str.equals("true")){
             this.rmbRecompenseService.update(rmbRecompense);
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message","修改成功");
+            modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"修改成功");
             modelAndView.addObject("callbackType","closeCurrent");
             return modelAndView;
         }else{
             this.rmbRecompenseService.update(rmbRecompense);
-            modelAndView.addObject("statusCode",200);
-            modelAndView.addObject("message","数据校验失败"+str);
+            modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY,"数据校验失败"+str);
             modelAndView.addObject("callbackType","closeCurrent");
             return modelAndView;
         }
@@ -213,8 +213,8 @@ public class RmbRecompenseController extends BaseController {
         List<Area> areaList = getUserEnableArea(userId);
         modelAndView.addObject("areaList", areaList);
 
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "查询成功");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "查询成功");
         return modelAndView;
     }
 
@@ -240,8 +240,8 @@ public class RmbRecompenseController extends BaseController {
         //文件导出
         WordUtils.exportMillCertificateWord
                 (response, map, fileName, "RmbRecompenseAgreement.ftl");
-        modelAndView.addObject("statusCode", 200);
-        modelAndView.addObject("message", "导出成功");
+        modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+        modelAndView.addObject(MESSAGE_KEY, "导出成功");
         modelAndView.addObject("callbackType", "closeCurrent");
         return modelAndView;
     }

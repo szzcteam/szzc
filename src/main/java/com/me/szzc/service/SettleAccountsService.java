@@ -54,7 +54,7 @@ public class SettleAccountsService {
         this.settleAccountsMapper.delete(settleAccounts);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void deleteCase(Long userId, Long id, Long rmbId, Long swapId){
         SettleAccounts settleAccounts = this.settleAccountsMapper.selectByPrimaryKey(id);
         //修改人
@@ -79,7 +79,61 @@ public class SettleAccountsService {
 
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void update(SettleAccounts settleAccounts) {
+        /**
+         * 2020-01-12 luwei修改
+         * 特殊情况，在新增了结算单、协议后，又修改结算单，并且修改了姓名或地址，导致之前增加的协议不显示，用于又开始新增协议
+         * 影响：老协议仍旧存在
+         * 修正：修改结算单时，修改了姓名或地址，关联修改协议
+         */
+        //根据结算单ID查询老结算单信息
+        SettleAccounts oldSettle = settleAccountsMapper.selectByPrimaryKey(settleAccounts.getId());
+        boolean isChangeFlag = false;
+        if (StringUtils.isNoneBlank(oldSettle.getAddress(), settleAccounts.getAddress()) && !oldSettle.getAddress().equals(settleAccounts.getAddress())) {
+            log.warn("修改结算单时，新旧地址不一样,oldAddress:{},newAddress:{}", oldSettle.getAddress(), settleAccounts.getAddress());
+            isChangeFlag = true;
+        }
+        //地址没变，继续判断被征收人姓名是否有改变
+        String oldHouseOwner = "";
+        String newHouseOwner = "";
+        if(!isChangeFlag) {
+            if (StringUtils.isNoneBlank(oldSettle.getHouseOwner())) {
+                oldHouseOwner = oldSettle.getHouseOwner();
+            } else if (StringUtils.isNoneBlank(oldSettle.getLessee())) {
+                oldHouseOwner = oldSettle.getLessee();
+            }
+
+            if (StringUtils.isNoneBlank(settleAccounts.getHouseOwner())) {
+                newHouseOwner = settleAccounts.getHouseOwner();
+            } else if (StringUtils.isNoneBlank(settleAccounts.getLessee())) {
+                newHouseOwner = settleAccounts.getLessee();
+            }
+
+            if (!oldHouseOwner.equals(newHouseOwner)) {
+                log.warn("修改结算单时，被征收人姓名不一样,oldHouseOwner:{},newHouseOwner:{}", oldHouseOwner, newHouseOwner);
+                isChangeFlag = true;
+            }
+
+        }
+
+        //有变动，要同时修改协议
+        if(isChangeFlag){
+            RmbRecompense rmbPO =  rmbRecompenseMapper.getByHouseOwnerAddr(oldHouseOwner, oldSettle.getAddress());
+            SwapHouse swapPO = swapHouseMapper.getByHouseOwnerAddr(oldHouseOwner, oldSettle.getAddress());
+            if(rmbPO != null){
+                rmbPO.setHouseOwner(newHouseOwner);
+                rmbPO.setAddress(settleAccounts.getAddress());
+                rmbRecompenseMapper.updateByPrimaryKey(rmbPO);
+            }
+
+            if(swapPO != null){
+                swapPO.setHouseOwner(newHouseOwner);
+                swapPO.setAddress(settleAccounts.getAddress());
+                swapHouseMapper.updateByPrimaryKey(swapPO);
+            }
+        }
+
         this.settleAccountsMapper.updateByPrimaryKey(settleAccounts);
     }
 
