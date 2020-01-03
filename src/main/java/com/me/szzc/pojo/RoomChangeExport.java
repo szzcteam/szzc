@@ -96,4 +96,10 @@ public class RoomChangeExport extends BaseRowModel implements Serializable {
     @ExcelProperty(value = "状态", index = 11)
     private String statusName;
 
+    /**
+     * 备注
+     */
+    @ExcelProperty(value = "备注", index = 12)
+    private String remark;
+
 }
