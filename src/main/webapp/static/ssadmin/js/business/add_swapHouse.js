@@ -132,6 +132,8 @@ var swapHouseObj = {
                         //其它公式，特殊提醒
                         var noticeFlag = false;
                         var noticeMsg = "";
+                        //编号
+                        $("#swapHouseDiv input[name='cardNo']").eq(0).val(data.cardNo);
                         //承租人标识
                         if (data.houseOwner != null && data.houseOwner != "") {
                             $("#swapHouseDiv input[name='isLesseeFlag']").eq(0).val(false);
