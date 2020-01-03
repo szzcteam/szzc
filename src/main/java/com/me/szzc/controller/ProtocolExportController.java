@@ -1,5 +1,7 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.enums.CompensateTypeEnum;
+import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
@@ -40,6 +42,9 @@ public class ProtocolExportController extends BaseController {
         List<Area> areaList = getUserEnableArea(userId);
         //转换格式
         List<Long> areaIdList = convertAreaIdList(areaList);
+
+        //查询权限下片区信息
+        Map<Long, String> areaMap = getUserAreaMap(userId);
 
         //查询产权调换
         List<SwapHouse> swapHouseList = swapHouseService.listAll(areaIdList);
@@ -99,6 +104,7 @@ public class ProtocolExportController extends BaseController {
 
                 if (rmbVo != null) {
                     BeanUtils.copyProperties(rmbVo, exportVO);
+                    exportVO.setProtocolType(CompensateTypeEnum.RMB_TYPE.getDesc());
                     exportVO.setDifference(rmbVo.getSumRbm());
                     //计算热水器总和
                     BigDecimal heater = new BigDecimal(StringUtils.isNotBlank(rmbVo.getSolarHeater()) ? rmbVo.getSolarHeater() : "0")
@@ -109,6 +115,7 @@ public class ProtocolExportController extends BaseController {
 
                 } else if (swapVo != null) {
                     BeanUtils.copyProperties(swapVo, exportVO);
+                    exportVO.setProtocolType(CompensateTypeEnum.SWAP_TYPE.getDesc());
                     //拼接房号
                     String newHouseAddress = "";
                     if (StringUtils.isNotBlank(swapVo.getSeat())) {
@@ -133,11 +140,23 @@ public class ProtocolExportController extends BaseController {
                         exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
                     }
                 }
+
+                //联系电话
                 if (StringUtils.isNotBlank(settle.getHouseOwner())) {
                     exportVO.setPhone(settle.getPhone());
                 } else {
                     exportVO.setPhone(settle.getLesseePhone());
                 }
+
+                //签约时间、状态
+                exportVO.setSigningStatusDesc(SigningStatusEnum.getDesc(settle.getSigningStatus()));
+                exportVO.setSigningDateStr(DateHelper.date2String(settle.getSigningDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
+
+                //片区
+                String areaName = areaMap.get(settle.getAreaId());
+                areaName = StringUtils.isNotBlank(areaName) ? areaName :"";
+                exportVO.setAreaName(areaName);
+
                 list.add(exportVO);
 
             }
