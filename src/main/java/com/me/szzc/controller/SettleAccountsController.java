@@ -370,6 +370,24 @@ public class SettleAccountsController extends BaseController {
                     || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode()))) {
                 modelAndView.setViewName(url + "_zyc");
             }
+
+            /**
+             * 紫阳、西城壕、电二的结算单一样
+             * 西城壕新增区别点：附属设备设施增加了其他，所以表格合并行列不一样
+             */
+            if (area != null && (area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode()))) {
+                modelAndView.addObject("adjunctRow", 10);
+                modelAndView.addObject("strustRow", 5);
+                //showAdjunctOther 是否显示附属项中的其它
+                modelAndView.addObject("showAdjunctOther", false);
+
+            } else if (area != null && area.getProjectCode().equals(GovernmentEnum.XCH.getCode())) {
+                modelAndView.addObject("adjunctRow", 11);
+                modelAndView.addObject("strustRow", 6);
+                modelAndView.addObject("showAdjunctOther", true);
+            }
+
         }
         return modelAndView;
     }
