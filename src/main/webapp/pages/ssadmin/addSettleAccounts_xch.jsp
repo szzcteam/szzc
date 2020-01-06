@@ -181,8 +181,8 @@
                         <td><input type="text" name="suspendBusinessFeeBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td rowspan="10">七</td>
-                        <td rowspan="10" style="width: 35px;">附属设施补偿</td>
+                        <td rowspan="11">七</td>
+                        <td rowspan="11" style="width: 35px;">附属设施补偿</td>
                         <td colspan="5" class="td_left">1、水表迁移费</td>
                         <td colspan="4">
                             <select id="water_meter_main" class="select_fix">
@@ -289,7 +289,7 @@
                         <td><input type="text" name="gasFeeBz" class="none_border width_70px"></td>
                     </tr>
                     <tr>
-                        <td colspan="2" rowspan="5" class="td_left">6、构建物补偿</td>
+                        <td colspan="2" rowspan="6" class="td_left">6、构建物补偿</td>
                         <td colspan="3" class="td_left">（1）结构内阳台</td>
                         <td colspan="4">
                             <input type="text" name="structureBalconyArea" class="none_border" placeholder="面积" size="5" style="margin-top: 2px;margin-left: 5px;"/>
@@ -367,12 +367,12 @@
                         <td colspan="2"><input type="text" name="structureRoof" class="none_border width_110px"></td>
                         <td><input type="text" name="structureRoofBz" class="none_border width_70px"></td>
                     </tr>
-                     <%--<tr>
+                     <tr>
                          <td colspan="3" class="td_left">（6）其他<input type="text" name="affiliatedOtherDesc" class="none_border" style="margin-top: 3px;width: 80px;float: none;">&nbsp;</td>
                          <td colspan="4"><input type="text" name="calcAffiliatedOther" class="none_border width_220px"></td>
                          <td colspan="2"><input type="text" name="affiliatedOther" class="none_border width_110px"></td>
                          <td><input type="text" name="affiliatedOtherBz" class="none_border width_70px"></td>
-                     </tr>--%>
+                     </tr>
                     <tr>
                         <td>八</td>
                         <td colspan="6" class="td_left">房屋改变用途补助</td>
