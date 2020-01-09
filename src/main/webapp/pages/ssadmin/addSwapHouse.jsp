@@ -282,12 +282,12 @@
                 </dl>
             </fieldset>
             <br/>
-            <fieldset>
+            <fieldset style="height: 120px;">
                 <legend>其它约定</legend>
                 <dl>
                     <dt>约定明细:</dt>
                     <dd>
-                        <input type="text" name="otherTermsOne" maxlength="255"    size="80" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <textarea name="otherTermsOne" maxlength="255"  rows="5" cols="40"></textarea>
                     </dd>
                 </dl>
                <%-- <dl>

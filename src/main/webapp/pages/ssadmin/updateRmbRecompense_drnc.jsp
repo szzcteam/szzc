@@ -267,7 +267,7 @@
                 </dl>
             </fieldset>
             <br/>--%>
-            <fieldset>
+            <fieldset style="height: 180px">
                 <legend>其它约定</legend>
                 <dl style="width: 100%;height: 52px;">
                     <div style="height: 26px;">&nbsp;&nbsp;&nbsp;<input type="radio" name="isTradeHouse" value="true" <c:if test="${rmbRecom.isTradeHouse == true }">checked="checked"</c:if> style="cursor: pointer;"/>&nbsp;
@@ -286,17 +286,17 @@
                         （大写<input type="text" name="upperDifference" value="${tradeHouse.upperDifference}" class="samll_input_text" style="margin-left: 0px;clear: both;float: none;width:220px;"/>）<br/>
                     </dl>
                 </div>
-                <div id="noBuyHouse" style="display: none;height: 52px;">
-                    <dl style="width: 100%">
+                <div id="noBuyHouse" style="display: none;height: 100px;">
+                    <dl style="width: 50%">
                         <dt>约定明细1:</dt>
                         <dd>
-                            <input type="text" name="otherTermsOne" maxlength="255"  value="${rmbRecom.otherTermsOne}"   size="60" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <textarea name="otherTermsOne" maxlength="255"  rows="5" cols="40">${rmbRecom.otherTermsOne}</textarea>&nbsp;&nbsp;&nbsp;
                         </dd>
                     </dl>
-                    <dl style="width: 100%">
+                    <dl style="width: 50%">
                         <dt>约定明细2:</dt>
                         <dd>
-                            <input type="text" name="otherTermsTwo" maxlength="255"  value="${rmbRecom.otherTermsTwo}"  size="60" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <textarea name="otherTermsTwo" maxlength="255"  rows="5" cols="40">${rmbRecom.otherTermsTwo}</textarea>&nbsp;&nbsp;
                         </dd>
                     </dl>
                 </div>

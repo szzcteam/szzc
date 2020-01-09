@@ -239,18 +239,18 @@
                 </dl>
             </fieldset>
             <br/>
-            <fieldset>
+            <fieldset style="height: 120px;">
                 <legend>其它约定</legend>
                 <dl>
                     <dt>约定明细1:</dt>
                     <dd>
-                        <input type="text" name="otherTermsOne" value="${rmbRecom.otherTermsOne}"  maxlength="255"    size="40" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <textarea name="otherTermsOne" maxlength="255"  rows="5" cols="40">${rmbRecom.otherTermsOne}</textarea>
                     </dd>
                 </dl>
                 <dl>
                     <dt>约定明细2:</dt>
                     <dd>
-                        <input type="text" name="otherTermsTwo" value="${rmbRecom.otherTermsTwo}" maxlength="255"    size="40" style="margin-left: 0px;"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <textarea name="otherTermsTwo" maxlength="255"  rows="5" cols="40">${rmbRecom.otherTermsTwo}</textarea>
                     </dd>
                 </dl>
             </fieldset>

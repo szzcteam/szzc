@@ -281,12 +281,12 @@
                     </dd>
                 </dl>
             </fieldset>
-            <fieldset>
+            <fieldset style="height: 120px;">
                 <legend>其它约定</legend>
                 <dl>
                     <dt>约定明细:</dt>
                     <dd>
-                        <input type="text" name="otherTermsOne" maxlength="255"  value="${swapHouse.otherTermsOne}"  size="80"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <textarea name="otherTermsOne" maxlength="255"  rows="5" cols="40">${swapHouse.otherTermsOne}</textarea>
                     </dd>
                 </dl>
             </fieldset>
