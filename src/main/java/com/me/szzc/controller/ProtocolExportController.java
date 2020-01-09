@@ -113,9 +113,14 @@ public class ProtocolExportController extends BaseController {
                         exportVO.setHeater(BigDecimalUtil.stripTrailingZeros(heater));
                     }
 
+                    //其他约定
+                    exportVO.setOtherTerms(rmbVo.getOtherTermsOne() +"\r\n" + rmbVo.getOtherTermsTwo());
+
                 } else if (swapVo != null) {
                     BeanUtils.copyProperties(swapVo, exportVO);
                     exportVO.setProtocolType(CompensateTypeEnum.SWAP_TYPE.getDesc());
+                    //其他约定
+                    exportVO.setOtherTerms(swapVo.getOtherTermsOne());
                     //拼接房号
                     String newHouseAddress = "";
                     if (StringUtils.isNotBlank(swapVo.getSeat())) {

@@ -382,6 +382,10 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     @ExcelProperty(value = {"房屋征收补偿明细表", "实际应收金额（元）", "实际应收金额（元）", "实际应收金额（元）"}, index = 54)
     private String lessDifference;
 
+
+    @ExcelProperty(value = {"房屋征收补偿明细表", "其它约定", "其它约定", "其它约定"}, index = 55)
+    private String otherTerms;
+
     /**
      * 大写差额
      */
@@ -392,10 +396,6 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
      */
     private Integer moveMonth;
 
-    /**
-     * 其他约定1
-     */
-    private String otherTermsOne;
 
     /**创建时间**/
     public Date createDate;
