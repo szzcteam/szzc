@@ -131,7 +131,8 @@
 
     <!-- 阿拉伯数字转中文大写 -->
     <script src="${oss_url}/static/ssadmin/js/business/numToChinese.js" type="text/javascript"></script>
-
+    <!-- 数字公式计算 -->
+    <script src="${oss_url}/static/ssadmin/js/business/numCalcUtils.js" type="text/javascript"></script>
     <!-- 可以用dwz.min.js替换前面全部dwz.*.js (注意：替换是下面dwz.regional.zh.js还需要引入)
     <script src="bin/dwz.min.js" type="text/javascript"></script>
     -->

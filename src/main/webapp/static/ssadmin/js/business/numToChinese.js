@@ -108,7 +108,7 @@ function Araia_To_Chinese(num){
 
 }
 
-
+//数字前面补0的，替换为大写的零
 function replaceFirstZero(str) {
     var tmpStr = str.substr(0,1);
     // console.log("首个字符是:" + tmpStr);
