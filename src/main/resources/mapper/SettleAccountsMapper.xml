@@ -131,11 +131,11 @@
     <result column="swap_price3" jdbcType="DECIMAL" property="swapPrice3" />
     <result column="swap_price4" jdbcType="DECIMAL" property="swapPrice4" />
     <result column="swap_price5" jdbcType="DECIMAL" property="swapPrice5" />
-    <result column="swap_area1" jdbcType="DECIMAL" property="swapArea1" />
-    <result column="swap_area2" jdbcType="DECIMAL" property="swapArea2" />
-    <result column="swap_area3" jdbcType="DECIMAL" property="swapArea3" />
-    <result column="swap_area4" jdbcType="DECIMAL" property="swapArea4" />
-    <result column="swap_area5" jdbcType="DECIMAL" property="swapArea5" />
+    <result column="swap_area1" jdbcType="VARCHAR" property="swapArea1" />
+    <result column="swap_area2" jdbcType="VARCHAR" property="swapArea2" />
+    <result column="swap_area3" jdbcType="VARCHAR" property="swapArea3" />
+    <result column="swap_area4" jdbcType="VARCHAR" property="swapArea4" />
+    <result column="swap_area5" jdbcType="VARCHAR" property="swapArea5" />
     <result column="swap_money_1" jdbcType="VARCHAR" property="swapMoney1" />
     <result column="swap_money_2" jdbcType="VARCHAR" property="swapMoney2" />
     <result column="swap_money_3" jdbcType="VARCHAR" property="swapMoney3" />
@@ -458,11 +458,11 @@
       swap_price3 = #{swapPrice3,jdbcType=DECIMAL},
       swap_price4 = #{swapPrice4,jdbcType=DECIMAL},
       swap_price5 = #{swapPrice5,jdbcType=DECIMAL},
-      swap_area1 = #{swapArea1,jdbcType=DECIMAL},
-      swap_area2 = #{swapArea2,jdbcType=DECIMAL},
-      swap_area3 = #{swapArea3,jdbcType=DECIMAL},
-      swap_area4 = #{swapArea4,jdbcType=DECIMAL},
-      swap_area5 = #{swapArea5,jdbcType=DECIMAL},
+      swap_area1 = #{swapArea1,jdbcType=VARCHAR},
+      swap_area2 = #{swapArea2,jdbcType=VARCHAR},
+      swap_area3 = #{swapArea3,jdbcType=VARCHAR},
+      swap_area4 = #{swapArea4,jdbcType=VARCHAR},
+      swap_area5 = #{swapArea5,jdbcType=VARCHAR},
       swap_money_1 = #{swapMoney1,jdbcType=VARCHAR},
       swap_money_2 = #{swapMoney2,jdbcType=VARCHAR},
       swap_money_3 = #{swapMoney3,jdbcType=VARCHAR},

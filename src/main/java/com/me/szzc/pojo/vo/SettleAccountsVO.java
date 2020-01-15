@@ -1145,29 +1145,29 @@ public class SettleAccountsVO {
         vo.setSwapPrice(vo.getSwapPrice1()+" "+vo.getSwapPrice2()+" "+vo.getSwapPrice3()+" " + vo.getSwapPrice4() + " "+ vo.getSwapPrice5());
         vo.setSwapPrice(vo.getSwapPrice().trim());
 
-        if(entity.getSwapArea1() != null && entity.getSwapArea1().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapArea1(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea1()));
+        if(StringUtils.isNotBlank(entity.getSwapArea1())){
+            vo.setSwapArea1(entity.getSwapArea1());
         }else{
             vo.setSwapArea1("");
         }
-        if(entity.getSwapArea2() != null && entity.getSwapArea2().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapArea2(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea2()));
+        if(StringUtils.isNotBlank(entity.getSwapArea2())){
+            vo.setSwapArea2(entity.getSwapArea2());
         }else{
             vo.setSwapArea2("");
         }
-        if(entity.getSwapArea3() != null && entity.getSwapArea3().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapArea3(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea3()));
+        if(StringUtils.isNotBlank(entity.getSwapArea3())){
+            vo.setSwapArea3(entity.getSwapArea3());
         }else{
             vo.setSwapArea3("");
         }
-        if(entity.getSwapArea4() != null && entity.getSwapArea4().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapArea4(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea4()));
+        if(StringUtils.isNotBlank(entity.getSwapArea4())){
+            vo.setSwapArea4(entity.getSwapArea4());
         }else{
             vo.setSwapArea4("");
         }
 
-        if(entity.getSwapArea5() != null && entity.getSwapArea5().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapArea5(BigDecimalUtil.stripTrailingZeros(entity.getSwapArea5()));
+        if(StringUtils.isNotBlank(entity.getSwapArea5())){
+            vo.setSwapArea5(entity.getSwapArea5());
         }else{
             vo.setSwapArea5("");
         }
