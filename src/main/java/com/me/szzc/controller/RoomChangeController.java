@@ -59,7 +59,7 @@ public class RoomChangeController extends BaseController {
                 view.addObject(MESSAGE_KEY, "请选择房源excel文件");
                 return view;
             }
-            if (null == itemCode && itemCode.length() < 1) {
+            if (null == itemCode || itemCode.length() < 1) {
                 view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
                 view.addObject(MESSAGE_KEY, "请选择房源所属项目");
                 return view;
@@ -489,7 +489,7 @@ public class RoomChangeController extends BaseController {
         }
         Map<String, String> projectMap = getUserEnableProject(userId);
         List<String> list = convertProejctCode(projectMap);
-        if (null == list && list.size() < 1) {
+        if (null == list || list.size() < 1) {
             throw new Exception("用户未分配房源项目权限");
         }
         List<RoomChangeExport> roomChanges = roomChangeService.selectAll(list);
