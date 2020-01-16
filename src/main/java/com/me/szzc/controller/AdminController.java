@@ -153,10 +153,10 @@ public class AdminController extends BaseController {
 //		this.adminService.updateAdminlog(sessionAdmin, getIpAddr(request), LogTypeEnum.Admin_UPDATE);
 		
 		modelAndView.addObject("statusCode",200);
-		if(status == 1){
-			modelAndView.addObject("message","禁用成功");	
-		}else if(status == 1){
-			modelAndView.addObject("message","解除禁用成功");	
+		if (status == AdminStatusEnum.FORBBIN_VALUE) {
+			modelAndView.addObject("message", "禁用成功");
+		} else if (status == AdminStatusEnum.NORMAL_VALUE) {
+			modelAndView.addObject("message", "解除禁用成功");
 		}
 		return modelAndView;
 	}
