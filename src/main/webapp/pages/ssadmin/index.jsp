@@ -66,15 +66,6 @@
     <script src="${oss_url}/static/ssadmin/js/uploadify/scripts/jquery.uploadify.js"
             type="text/javascript"></script>
 
-    <!-- svg图表  supports Firefox 3.0+, Safari 3.0+, Chrome 5.0+, Opera 9.5+ and Internet Explorer 6.0+ -->
-    <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/raphael.js"></script>
-    <script type="text/javascript"
-            src="${oss_url}/static/ssadmin/js/chart/g.raphael.js"></script>
-    <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.bar.js"></script>
-    <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.line.js"></script>
-    <script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.pie.js"></script>
-    <%--<script type="text/javascript" src="${oss_url}/static/ssadmin/js/chart/g.htmlt.js"></script>--%>
-
     <script src="${oss_url}/static/ssadmin/js/js/dwz.core.js" type="text/javascript"></script>
     <script src="${oss_url}/static/ssadmin/js/js/dwz.util.date.js"
             type="text/javascript"></script>
