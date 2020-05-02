@@ -63,4 +63,19 @@
 		</div>
 	</shiro:hasPermission>
 
+	<shiro:hasPermission name="report">
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>报表管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree treeFolder">
+				<shiro:hasPermission name="/ssadmin/report/chartList.html">
+					<li><a href="/ssadmin/report/chartList.html" target="navTab"
+						   rel="coinSurveyList">图形汇总</a></li>
+				</shiro:hasPermission>
+			</ul>
+		</div>
+	</shiro:hasPermission>
 </div>

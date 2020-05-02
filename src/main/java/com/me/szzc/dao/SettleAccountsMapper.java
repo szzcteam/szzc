@@ -43,4 +43,11 @@ public interface SettleAccountsMapper {
 
 
     Integer updateSignDate(SettleAccounts settleAccounts);
+
+
+    int getNoSigning(@Param("signingStatus") Integer signingStatus, @Param("areaIdList") List<Long> areaIdList, @Param("startDate") String startDate,
+                     @Param("endDate") String endDate);
+
+    List<SettleAccounts> getSigning(@Param("signingStatus") Integer signingStatus, @Param("areaIdList") List<Long> areaIdList, @Param("startDate") String startDate,
+                                    @Param("endDate") String endDate);
 }

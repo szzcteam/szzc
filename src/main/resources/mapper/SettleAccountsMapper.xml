@@ -519,6 +519,7 @@
     </if>
   </sql>
 
+
   <select id="list" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -543,7 +544,6 @@
     <include refid="listCommonCondition"/>
   </select>
 
-
   <update id="changeSignStatus" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
     update t_settle_accounts set signing_status = #{signingStatus} , modified_date = #{modifiedDate},
     <if test="signingStatus != null and signingStatus == 1 ">
@@ -558,5 +558,39 @@
       modified_user_id = #{modifiedUserId} where id = #{id}
   </update>
 
+
+  <sql id="listSigning">
+    <if test="startDate != null and startDate !='' ">
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ >= ]]> #{startDate}
+    </if>
+    <if test="endDate != null and endDate !='' ">
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ <= ]]> #{endDate}
+    </if>
+    <if test="areaIdList != null and areaIdList.size >0 ">
+      and area_id in
+      <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+        #{itemId}
+      </foreach>
+    </if>
+  </sql>
+
+  <select id="getNoSigning" resultType="java.lang.Integer">
+    select
+    count(1)
+    from t_settle_accounts
+    where deleted = 0
+    and signing_status = 0
+    <include refid="listSigning"/>
+  </select>
+
+  <select id="getSigning" resultMap="BaseResultMap">
+    select
+    compensate_type , count(1) as id
+    from t_settle_accounts
+    where deleted = 0
+    and signing_status > 0
+    <include refid="listSigning"/>
+    group by compensate_type
+  </select>
 
 </mapper>

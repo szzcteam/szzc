@@ -22,8 +22,6 @@ public enum GovernmentEnum {
     HZJRC("C001", "华中金融城"),
     DZRGS("C001001", "电车二公司南侧地块项目"),
 
-
-
     ;
 
     private String code;

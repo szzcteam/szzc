@@ -9,8 +9,8 @@ import java.util.Map;
  */
 public enum  CompensateTypeEnum {
 
-    RMB_TYPE(0, "货币补偿"),
-    SWAP_TYPE(1, "产权交换"),
+    RMB_TYPE(0, "货币补偿", "货币"),
+    SWAP_TYPE(1, "产权交换",  "交换"),
 
     ;
 
@@ -27,10 +27,18 @@ public enum  CompensateTypeEnum {
 
     private String desc;
 
+    private String shortName;
+
 
     CompensateTypeEnum(int code, String desc) {
         this.code = code;
         this.desc = desc;
+    }
+
+    CompensateTypeEnum(int code, String desc, String shortName) {
+        this.code = code;
+        this.desc = desc;
+        this.shortName = shortName;
     }
 
 
@@ -42,6 +50,10 @@ public enum  CompensateTypeEnum {
         return desc;
     }
 
+    public String getShortName() {
+        return shortName;
+    }
+
     public static String getDesc(int code) {
         return descMap.get(code);
     }
@@ -50,5 +62,6 @@ public enum  CompensateTypeEnum {
     public static Map<Integer, String> getDescMap() {
         return descMap;
     }
+
 
 }
