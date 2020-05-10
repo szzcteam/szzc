@@ -1117,8 +1117,8 @@ var settleAccountObj = {
         var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
         var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea) + (new Number(calcHistoryLegacyArea) * new Number(calcHistoryLegacyProportion));
         //将计算后得面积保留2位小数
-        console.log("临时安置面积保留2位小数，之前：" + sumArea);
-        sumArea = Math.round(sumArea*100)/100;
+        console.log("临时安置面积保留4位小数，之前：" + sumArea);
+        sumArea = Math.round(sumArea*10000)/10000;
         console.log("装修补偿、临时安置面积" + sumArea);
         $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
         //2020-05-10 修改，装修面积=有证面积
