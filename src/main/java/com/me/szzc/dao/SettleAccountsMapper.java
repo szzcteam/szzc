@@ -1,5 +1,6 @@
 package com.me.szzc.dao;
 
+import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import org.apache.ibatis.annotations.Param;
 
@@ -45,9 +46,15 @@ public interface SettleAccountsMapper {
     Integer updateSignDate(SettleAccounts settleAccounts);
 
 
+    /**获取指定时间段内的未签约数量**/
     int getNoSigning(@Param("signingStatus") Integer signingStatus, @Param("areaIdList") List<Long> areaIdList, @Param("startDate") String startDate,
                      @Param("endDate") String endDate);
 
+    /** 获取指定时间段内的已签约调换、货币数量***/
     List<SettleAccounts> getSigning(@Param("signingStatus") Integer signingStatus, @Param("areaIdList") List<Long> areaIdList, @Param("startDate") String startDate,
                                     @Param("endDate") String endDate);
+
+
+    /**获取总的签约情况**/
+    List<SettleAccountsLineDTO> getTotalSign(@Param("areaIdList") List<Long> areaIdList);
 }

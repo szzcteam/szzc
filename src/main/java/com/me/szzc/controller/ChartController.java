@@ -1,11 +1,9 @@
 package com.me.szzc.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.me.szzc.aspect.SysLog;
 import com.me.szzc.enums.CompensateTypeEnum;
-import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.SigningStatusEnum;
+import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
 import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.vo.ReportPieCriVO;
@@ -15,9 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 图形汇总
@@ -47,7 +48,7 @@ public class ChartController extends BaseController{
     }
 
 
-    @RequestMapping(value = "get-pie",method = RequestMethod.POST)
+    @RequestMapping(value = "get-pie", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject getPie(@RequestBody ReportPieCriVO criVO) {
         JSONObject resultJSON = new JSONObject();
@@ -87,6 +88,13 @@ public class ChartController extends BaseController{
 
         resultJSON.put("seriesData", seriesData);
         return resultJSON;
+    }
+
+    @RequestMapping(value = "get-settleAccount-line", method = RequestMethod.POST)
+    @ResponseBody
+    public List<SettleAccountsLineDTO> getLine(@RequestBody ReportPieCriVO criVO) {
+        List<SettleAccountsLineDTO> dataList = settleAccountsService.getTotalSign(criVO.getAreaIdList(), criVO.getStartDate(), criVO.getEndDate());
+        return dataList;
     }
 
 

@@ -50,10 +50,9 @@
         </div>
 
 </div>
-<div class="pageContent">
-
-<div style="width:300px;height:250px;float:left;" id="chartMain"></div>
+<div class="pageContent" style="width: 100%;height: 600px;">
 
 
+<div style="width:700px;height:450px;float:left;" id="chart-line"></div>
 </div>
 

@@ -6,6 +6,7 @@ import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
+import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
@@ -16,11 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -226,13 +225,84 @@ public class SettleAccountsService {
         return result;
     }
 
-    public Integer getNoSigning(List areaIdList,String startDate, String endDate) {
+    public Integer getNoSigning(List areaIdList, String startDate, String endDate) {
         int result = this.settleAccountsMapper.getNoSigning(SigningStatusEnum.NOT_SIGNED.getCode(), areaIdList, startDate, endDate);
         return result;
     }
-    public List<SettleAccounts> getSigning(List areaIdList,String startDate, String endDate){
+
+    public List<SettleAccounts> getSigning(List areaIdList, String startDate, String endDate) {
         List<SettleAccounts> list = this.settleAccountsMapper.getSigning(SigningStatusEnum.NOT_SIGNED.getCode(), areaIdList, startDate, endDate);
-        return  list;
+        return list;
+    }
+
+
+    public List<SettleAccountsLineDTO> getTotalSign(List areaIdList, String startDate, String endDate) {
+        List<SettleAccountsLineDTO> resultList = new ArrayList<>();
+
+        List<SettleAccountsLineDTO> dataList = settleAccountsMapper.getTotalSign(areaIdList);
+        if (dataList == null || dataList.isEmpty()) {
+            return resultList;
+        }
+
+        //计算后数据集合
+        List<SettleAccountsLineDTO> calcList = new ArrayList<>();
+
+        //针对每天的进行累加
+        Long upNum = 0l;
+        BigDecimal upArea = BigDecimal.ZERO;
+        BigDecimal upPayTotal = BigDecimal.ZERO;
+
+        BigDecimal tenYuan = new BigDecimal(100000000);
+        for (SettleAccountsLineDTO dto : dataList) {
+
+            upNum = upNum + dto.getNum();
+            upArea = upArea.add(dto.getArea());
+
+            upPayTotal = upPayTotal.add(dto.getPayTotal().divide(tenYuan, 2, BigDecimal.ROUND_DOWN));
+
+            SettleAccountsLineDTO lineDTO = new SettleAccountsLineDTO();
+            lineDTO.setDate(dto.getDate());
+            lineDTO.setDateTime(DateHelper.string2Date(dto.getDate(), DateHelper.DateFormatType.YearMonthDay));
+            lineDTO.setNum(upNum);
+            lineDTO.setArea(upArea);
+            lineDTO.setPayTotal(upPayTotal);
+            calcList.add(lineDTO);
+        }
+
+        //根据时间范围扣取符合条件的
+        if (StringUtils.isAllBlank(startDate, endDate)) {
+            //时间为空，返回所有的
+            resultList.addAll(calcList);
+            return resultList;
+        }
+
+        Long endDateTime = null;
+        //结束时间为空，则默认为系统时间
+        if (StringUtils.isBlank(endDate)) {
+            endDateTime = Calendar.getInstance().getTime().getTime();
+        } else {
+            endDateTime = DateHelper.string2Date(endDate, DateHelper.DateFormatType.YearMonthDay).getTime();
+        }
+
+        //开始时间为空，则默认为数据的第一条记录时间
+        Long startDateTime = null;
+        if (StringUtils.isBlank(startDate)) {
+            startDateTime = DateHelper.string2Date(dataList.get(0).getDate(), DateHelper.DateFormatType.YearMonthDay).getTime();
+        } else {
+            startDateTime = DateHelper.string2Date(startDate, DateHelper.DateFormatType.YearMonthDay).getTime();
+        }
+
+        log.info("折线图数据搜索的时间,startDate:{},endDate:{}", startDate, endDate);
+
+        for (SettleAccountsLineDTO dto : calcList) {
+            Long time = dto.getDateTime().getTime();
+            if (time >= startDateTime && time <= endDateTime) {
+                resultList.add(dto);
+            }
+        }
+
+
+        return resultList;
     }
 
 }
