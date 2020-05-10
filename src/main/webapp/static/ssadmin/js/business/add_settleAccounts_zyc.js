@@ -616,7 +616,7 @@ var settleAccountObj = {
 
     //改变房屋价值补偿-历史遗留计算公式
     changeCalcHistoryLegacy: function () {
-        var calcHistoryLegacy = settleAccountObj.getCalcHistoryLegacyByTwo();
+        var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
         var historyLegacy = Math.round(eval(calcHistoryLegacy));
         $("input[name='historyLegacy']").eq(0).val(historyLegacy).change();
         settleAccountObj.calcMoveReward();
@@ -949,32 +949,6 @@ var settleAccountObj = {
         console.log("构建物补偿-楼顶搭建，公式：" + calc);
         $("input[name='calcStructureRoof']").eq(0).val(calc).change();
     },
-    //获取计算后的 历史遗留无证房的面积
-    getHistoryLegalAreaByCalc:function(){
-        var calcHistoryLegacyArea = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
-        var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
-        var historyLegacyArea = funSumByRound(calcHistoryLegacyArea, calcHistoryLegacyProportion);
-        return historyLegacyArea;
-    },
-    //获取第二种情况的 历史遗留无证房补偿计算公式 面积*比例=积（保留2位小数，超出部分四舍五入） 积*单价=补偿金额
-    getCalcHistoryLegacyByTwo: function () {
-        var area = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
-        var price = $("input[name='calcHistoryLegacyPrice']").eq(0).val() || 0;
-        var proportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
-        var other = $("input[name='calcHistoryLegacyOther']").eq(0).val();
-        var calc = "";
-        if (proportion) {
-            var historyLegacyArea = funSumByRound(area, proportion);
-            calc = historyLegacyArea + "*" + price;
-        } else {
-            calc = area + "*" + price;
-        }
-        if (other) {
-            calc += "+" + other;
-        }
-        console.log("紫阳村：遗留无证房面积公式：" + calc);
-        return calc;
-    },
     //奖励计算公式
     calcMoveReward: function () {
         var compensateType = $("input[name='compensateType']:checked").val();
@@ -1001,9 +975,10 @@ var settleAccountObj = {
             calcMoveReward += "+" + calcNoRegisterLegal;
         }
         //历史遗留金额
+        var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
         var historyLegacy = $("input[name='historyLegacy']").eq(0).val();
         if (historyLegacy && historyLegacy > 0) {
-            calcMoveReward += "+" + settleAccountObj.getCalcHistoryLegacyByTwo();
+            calcMoveReward += "+" + calcHistoryLegacy;
         }
         calcMoveReward += ")";
         //比例
@@ -1053,9 +1028,10 @@ var settleAccountObj = {
         }
 
         //历史遗留金额
+        var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
         var historyLegacy = $("input[name='historyLegacy']").eq(0).val();
         if (historyLegacy && historyLegacy > 0) {
-            calcRmbCompensate += "+" + settleAccountObj.getCalcHistoryLegacyByTwo();
+            calcRmbCompensate += "+" + calcHistoryLegacy;
         }
         calcRmbCompensate += ")";
         //比例
@@ -1137,13 +1113,16 @@ var settleAccountObj = {
     fullDecorationArea: function () {
         var calcValueCompensateArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
         var calcNoRegisterLegalArea = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
-        var historyLegacyArea = settleAccountObj.getHistoryLegalAreaByCalc();
-        var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea) + historyLegacyArea;
+        var calcHistoryLegacyArea = $("input[name='calcHistoryLegacyArea']").eq(0).val() || 0;
+        var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
+        var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea) + (new Number(calcHistoryLegacyArea) * new Number(calcHistoryLegacyProportion));
         //将计算后得面积保留2位小数
+        console.log("临时安置面积保留2位小数，之前：" + sumArea);
         sumArea = Math.round(sumArea*100)/100;
         console.log("装修补偿、临时安置面积" + sumArea);
-        $("input[name='calcDecorationCompensateArea']").eq(0).val(sumArea).change();
         $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
+        //2020-05-10 修改，装修面积=有证面积
+        $("input[name='calcDecorationCompensateArea']").eq(0).val(calcValueCompensateArea).change();
 
     }
 
