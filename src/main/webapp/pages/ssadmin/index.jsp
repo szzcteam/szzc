@@ -4,7 +4,6 @@
     String path = request.getContextPath();
 
     String accessProtocol = CustomizedPropertyConfigurer.getContextProperty("access_protocol").toString();
-
     String basePath = accessProtocol + path;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM");
