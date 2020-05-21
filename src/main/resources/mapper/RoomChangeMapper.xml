@@ -350,4 +350,15 @@
             #{id}
         </foreach>
     </select>
+
+    <select id="countNum" resultType="com.me.szzc.pojo.dto.RoomChangeNumDTO">
+        select item_code as projectCode,count(1) as totalHouse,
+        sum(case status when 0 then 1 else 0 end) as emptys,
+        sum(case status when 1 then 1 else 0 end) as signed,
+        sum(case status when 2 then 1 else 0 end) as prior,
+        sum(case status when 3 then 1 else 0 end) as invalid
+        from r_change
+        where r_del = 0
+        group by item_code
+    </select>
 </mapper>

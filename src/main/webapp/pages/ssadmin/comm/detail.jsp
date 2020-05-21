@@ -75,6 +75,10 @@
 					<li><a href="/ssadmin/report/chartList.html" target="navTab"
 						   rel="coinSurveyList">图形汇总</a></li>
 				</shiro:hasPermission>
+				<shiro:hasPermission name="ssadmin/report/count/init.html">
+					<li><a href="ssadmin/report/count/init.html" target="navTab"
+						   rel="coinSurveyList">数据统计</a></li>
+				</shiro:hasPermission>
 			</ul>
 		</div>
 	</shiro:hasPermission>

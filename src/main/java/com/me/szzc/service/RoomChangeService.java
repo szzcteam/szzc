@@ -3,8 +3,10 @@ package com.me.szzc.service;
 import com.me.szzc.constant.Constant;
 import com.me.szzc.dao.RoomChangeMapper;
 import com.me.szzc.enums.ChooseStatusEnum;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.pojo.RoomChangeExport;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
+import com.me.szzc.pojo.dto.RoomChangeNumDTO;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVO;
 import com.me.szzc.pojo.vo.RoomChangeVo;
@@ -166,5 +168,17 @@ public class RoomChangeService {
             }
         }
         return roomChangeExports;
+    }
+
+    /**房源数量统计**/
+    public List<RoomChangeNumDTO> countRoomNum(){
+        List<RoomChangeNumDTO> list = roomChangeMapper.countNum();
+        if(list == null || list.isEmpty()){
+            return list;
+        }
+        for(RoomChangeNumDTO dto : list){
+            dto.setProjectName(GovernmentEnum.getNameByCode(dto.getProjectCode()));
+        }
+        return list;
     }
 }

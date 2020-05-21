@@ -1,5 +1,7 @@
 package com.me.szzc.dao;
 
+import com.me.szzc.pojo.dto.ProtocolCountMoneyDTO;
+import com.me.szzc.pojo.dto.ProtocolCountStatusDTO;
 import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import org.apache.ibatis.annotations.Param;
@@ -57,4 +59,10 @@ public interface SettleAccountsMapper {
 
     /**获取总的签约情况**/
     List<SettleAccountsLineDTO> getTotalSign(@Param("areaIdList") List<Long> areaIdList);
+
+    /**统计协议状态**/
+    List<ProtocolCountStatusDTO> countStatus();
+
+    /**统计协议金额**/
+    List<ProtocolCountMoneyDTO> countMoney();
 }

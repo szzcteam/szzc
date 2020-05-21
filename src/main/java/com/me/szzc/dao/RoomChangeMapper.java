@@ -1,6 +1,7 @@
 package com.me.szzc.dao;
 
 import com.me.szzc.pojo.RoomChangeExport;
+import com.me.szzc.pojo.dto.RoomChangeNumDTO;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.RoomChangeVo;
 import org.apache.ibatis.annotations.Param;
@@ -39,4 +40,7 @@ public interface RoomChangeMapper {
     void updateChooseRoomNot0(RoomChangeVo roomChangeVo);
 
     List<RoomChangeExport> selectAll(@Param("list") List<String> list);
+
+    /**统计房源数量**/
+    List<RoomChangeNumDTO> countNum();
 }

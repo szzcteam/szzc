@@ -612,4 +612,56 @@
     order by DATE_FORMAT(signing_date,'%Y-%m-%d') asc
   </select>
 
+
+  <select id="countStatus" resultType="com.me.szzc.pojo.dto.ProtocolCountStatusDTO">
+    select b.project_code as projectCode,b.name,
+    sum(case signing_status when 0 then 1 else 0 end) as noSigned,
+    sum(case signing_status when 1 then 1 else 0 end) as completer,
+    sum(case signing_status when 2 then 1 else 0 end) as audit
+    from t_settle_accounts a
+    inner join t_area b on a.area_id = b.id
+    where a.deleted = 0
+    group by project_code,b.name
+  </select>
+
+  <select id="countMoney" resultType="com.me.szzc.pojo.dto.ProtocolCountMoneyDTO">
+    select b.project_code as projectCode,b.name,
+    sum(ifnull(value_compensate,0))/10000 as valueCompensate,
+    sum(ifnull(no_register_legal,0))/10000 as noRegisterLegal,
+    sum(ifnull(history_legacy, 0))/10000 as historyLegacy,
+    sum(ifnull(decoration_compensate,0))/10000  as decorationCompensate,
+    sum(ifnull(move_house_fee,0))/10000  as moveHouseFee,
+
+    sum(ifnull(interim_fee,0))/10000  as interimFee,
+    sum(ifnull(move_water_meter_fee,0))/10000  as moveWaterMeterFee,
+    sum(ifnull(move_ammeter_fee,0))/10000  as moveAmmeterFee,
+    sum(ifnull(move_air_conditioning_fee,0))/10000  as moveAirConditioningFee,
+    sum(ifnull(hot_water_compensate,0))/10000  as hotWaterCompensate,
+    sum(ifnull(gas_fee,0))/10000  as gasFee,
+    sum(ifnull(structure_compensate,0))/10000  as structureCompensate,
+    sum(ifnull(suspend_business_fee,0))/10000  as suspendBusinessFee,
+    sum(ifnull(structure_balcony,0))/10000  as structureBalcony,
+
+    sum(ifnull(structure_build,0))/10000  as structureBuild,
+    sum(ifnull(structure_dark,0))/10000  as structureDark,
+    sum(ifnull(structure_mezzanine,0))/10000  as structureMezzanine,
+    sum(ifnull(structure_roof,0))/10000  as structureRoof,
+    sum(ifnull(affiliated_other,0))/10000  as affiliatedOther,
+    sum(ifnull(change_compensate,0))/10000  as changeCompensate,
+
+    sum(ifnull(rmb_compensate,0))/10000  as rmbCompensate,
+    sum(ifnull(small_area_reward,0))/10000  as smallAreaReward,
+    sum(ifnull(life_compensate,0))/10000  as lifeCompensate,
+    sum(ifnull(move_reward,0))/10000  as moveReward,
+    sum(ifnull(guarantee,0))/10000  as guarantee,
+    sum(ifnull(building_area_fee,0))/10000  as buildingAreaFee,
+    sum(ifnull(other_rmb,0))/10000  as otherRmb
+
+
+    from t_settle_accounts a
+    inner join t_area b on a.area_id = b.id
+    where a.deleted = 0
+    group by b.project_code, b.name
+  </select>
+
 </mapper>

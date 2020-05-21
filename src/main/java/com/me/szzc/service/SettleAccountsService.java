@@ -6,10 +6,13 @@ import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.dto.ChooseHouseDTO;
+import com.me.szzc.pojo.dto.ProtocolCountMoneyDTO;
+import com.me.szzc.pojo.dto.ProtocolCountStatusDTO;
 import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.vo.ProtocolCountMoneyVO;
 import com.me.szzc.utils.DateHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -303,6 +306,28 @@ public class SettleAccountsService {
 
 
         return resultList;
+    }
+
+
+    /**协议状态统计**/
+    public List<ProtocolCountStatusDTO> countStatus(){
+        List<ProtocolCountStatusDTO> list = settleAccountsMapper.countStatus();
+        return list;
+    }
+
+    public List<ProtocolCountMoneyVO> countMoney(){
+        List<ProtocolCountMoneyDTO> list = settleAccountsMapper.countMoney();
+        if(list == null || list.isEmpty()){
+            return Collections.emptyList();
+        }
+
+        List<ProtocolCountMoneyVO> voList = new ArrayList<>();
+        for(ProtocolCountMoneyDTO dto : list){
+            voList.add(dto.toVo());
+        }
+
+        return voList;
+
     }
 
 }

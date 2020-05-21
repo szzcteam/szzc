@@ -50,6 +50,9 @@ public class BaseServiceCtrl {
     @Autowired
     AreaService  areaService ;
 
+    @Autowired
+    RoomChangeService roomChangeService;
+
 
 
 }
