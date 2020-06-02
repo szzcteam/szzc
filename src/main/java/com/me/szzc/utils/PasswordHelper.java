@@ -37,7 +37,7 @@ public class PasswordHelper {
 	/**
 	 * 给字符串加密
 	 */
-	public static String encode(String text) {
+	public static String base64Encode(String text) {
 		byte[] textByte = new byte[0];
 		try {
 			textByte = text.getBytes("UTF-8");
@@ -51,7 +51,7 @@ public class PasswordHelper {
 	/**
 	 * 将加密后的字符串进行解密
 	 */
-	public static String decode(String encodedText) {
+	public static String base64Decode(String encodedText) {
 		String text = null;
 		try {
 			text = new String(decoder.decode(encodedText), "UTF-8");
@@ -72,15 +72,15 @@ public class PasswordHelper {
 		DefaultHashService hashService = new DefaultHashService();
 		//hashService.
 
-		String password = "古城区";
+		/*String password = "古城区";
 
 		// 加密
 		System.out.println("====  [加密后] 用户名/密码  =====");
-		System.out.println(PasswordHelper.encode(password));
+		System.out.println(PasswordHelper.base64Encode(password));
 
 		// 解密
 		System.out.println("\n====  [解密后] 用户名/密码  =====");
-		System.out.println(PasswordHelper.decode(PasswordHelper.encode(password)));
+		System.out.println(PasswordHelper.base64Decode(PasswordHelper.base64Encode(password)));*/
 
 		String user = "d7275e";
 		String time = System.currentTimeMillis()+"";

@@ -18,6 +18,9 @@ public class RequestEncodingFilter implements Filter {
 
     public static final String LOGIN_JSP = "/jsp/login/login.jsp";
 
+    //小程序的appID
+    public static final String APP_ID = "wx092abc62c110061e";
+
     @Override
     public void destroy() {
     }
@@ -31,8 +34,8 @@ public class RequestEncodingFilter implements Filter {
         String basePath = request1.getContextPath();
         String referer = request1.getHeader("Referer");
 
-        if (referer != null &&  !referer.trim().contains(request1.getServerName()) ) {
-            LOGGER.info("违规操作将被终止，记录并保留追溯权利！" + referer);
+        if (referer != null && !referer.contains(APP_ID) && !referer.trim().contains(request1.getServerName()) ) {
+            LOGGER.error("违规操作将被终止，记录并保留追溯权利！, referer:{}, serverName:{}", referer, request1.getServerName());
             response2.sendRedirect(request1.getContextPath() + LOGIN_JSP);
             return;
         }
@@ -40,7 +43,7 @@ public class RequestEncodingFilter implements Filter {
         //判断是否有注入攻击字符
         String inj = checkInputChar(request1);
         if (!inj.equals("")) {
-            LOGGER.info("非法请求,参数含有注入攻击字符");
+            LOGGER.error("非法请求,参数含有注入攻击字符");
             //含注入字符，跳转到登陆界面
             response2.sendRedirect(basePath + LOGIN_JSP);
             return;

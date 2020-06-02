@@ -37,16 +37,12 @@ public class WxChartController {
     /**获取权限范围下的项目**/
     @RequestMapping(value={"/{projectScope}/get-project"}, method= RequestMethod.POST)
     @ResponseBody
-    public ResultRO<List<String>> getProject(@PathVariable("projectScope") String projectScope) {
+    public ResultRO<List<String>> getProject(@PathVariable("projectScope") String projectScope) throws Exception{
         if (StringUtils.isBlank(projectScope)) {
             return new ResultRO<>(false, "参数不能为空");
         }
         log.info("权限标识,projectScope:{}", projectScope);
-        String mgtName = PasswordHelper.decode(projectScope);
-        if(StringUtils.isBlank(mgtName)){
-            log.error("参数错误，解密后返回空, projectScope:{}", projectScope);
-            return new ResultRO<>(false, "参数错误，请检查");
-        }
+        String mgtName = URLDecoder.decode(projectScope, Constant.UTF8);
         List<String> list = GovernmentEnum.getProjectByScope(mgtName);
         ResultRO<List<String>> resultRO = new ResultRO(true);
         resultRO.setData(list);
