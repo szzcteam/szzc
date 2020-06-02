@@ -1,5 +1,7 @@
 package com.me.szzc.filter;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,7 @@ import java.io.IOException;
  * @author luwei
  * @date 2019-03-17
  */
+@Slf4j
 public class UrlRedirectFilter implements Filter {
 
     @Override
@@ -31,6 +34,13 @@ public class UrlRedirectFilter implements Filter {
         if(uri.indexOf("lodop_assets") != -1 ){
             chain.doFilter(request, response) ;
             return ;
+        }
+
+        //微信小程序请求，可以直接访问
+        if (uri.indexOf("/wx/") != -1) {
+            log.info("微信接口请求,url:{}", uri);
+            chain.doFilter(request, response);
+            return;
         }
 
         //只拦截.html结尾的请求

@@ -14,5 +14,7 @@ public interface Constant {
     //成功code
     Integer SUCCESS_CODE = 200;
 
+    //admin 管理员
+    String ADMIN = "admin";
 
 }

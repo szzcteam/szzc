@@ -52,7 +52,7 @@ public class AreaController extends BaseController {
         view.addObject("totalCount", map.get("total"));
 
         //查新项目信息
-        Map<String, String> projectMap = GovernmentEnum.getMap();
+        Map<String, String> projectMap = GovernmentEnum.getMgtMap();
         view.addObject("projectMap", projectMap);
         return view;
     }
