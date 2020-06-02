@@ -43,4 +43,9 @@ public interface RoomChangeMapper {
 
     /**统计房源数量**/
     List<RoomChangeNumDTO> countNum();
+
+    /**统计房源-各面积套数**/
+    List<RoomChangeNumDTO> countAreaNumByProjectCode(@Param("projectCode") String projectCode);
+
+
 }

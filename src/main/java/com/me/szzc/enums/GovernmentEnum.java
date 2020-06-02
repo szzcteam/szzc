@@ -98,6 +98,17 @@ public enum GovernmentEnum {
         return desc;
     }
 
+    public static String getCodeByName(String name) {
+        String code = "";
+        for (GovernmentEnum gov : allList) {
+            if (gov.getName().equals(name)) {
+                code = gov.getCode();
+                break;
+            }
+        }
+        return code;
+    }
+
     public static Map<String, String> getMgtMap() {
         return mgtMap;
     }

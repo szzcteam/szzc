@@ -664,4 +664,20 @@
     group by b.project_code, b.name
   </select>
 
+  <select id="summaryList" resultType="com.me.szzc.pojo.dto.ProtocolSummaryDTO">
+      select DATE_FORMAT(a.signing_date,'%Y-%m-%d') as date,
+      ifnull(a.certified_area,0)+ifnull(a.no_register_legal_area,0)+ifnull(a.history_legacy_area,0) as area,
+      a.pay_total as payTotal,a.compensate_type as compensateType,
+      ifnull(c.new_house_address,'') as newHouseName, ifnull(c.covered_area,'')  as chooseArea
+
+      from t_settle_accounts a
+      inner join t_area b  on a.area_id = b.id and b.deleted = 0
+      left join t_swap_house c on c.address =  a.address and c.house_owner = ifnull(a.house_owner, a.lessee) and c.deleted = 0
+      where a.deleted = 0 and ifnull(a.pay_total, 0) > 0
+      <if test="projectCode != null and projectCode !='' ">
+        and b.project_code = #{projectCode}
+      </if>
+      order by a.signing_date desc
+
+  </select>
 </mapper>

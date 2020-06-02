@@ -32,4 +32,11 @@ public class RoomChangeNumDTO {
     private Long invalid;
 
 
+    /**面积，可能有中文**/
+    private String area;
+
+    /**套数**/
+    private Integer num;
+
+
 }

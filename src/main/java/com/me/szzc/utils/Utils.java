@@ -1,5 +1,6 @@
 package com.me.szzc.utils;
 
+import com.me.szzc.constant.Constant;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,14 +122,11 @@ public class Utils {
 		return path;
 	}
 
-	//
-	// public static String MD5(String content) throws Exception {
-	// MessageDigest md5 = MessageDigest.getInstance("MD5");
-	// sun.misc.BASE64Encoder baseEncoder = new sun.misc.BASE64Encoder();
-	// String retString = baseEncoder.encode(md5.digest(content.getBytes()));
-	// return retString;
-	// }
-
+	/**
+	 * md5加密
+	 * @param str  待加密内容
+	 * @return
+	 */
 	public static String getMD5_32_xx(String str) {
 		MessageDigest messageDigest = null;
 
@@ -160,6 +158,13 @@ public class Utils {
 		return md5StrBuff.toString();
 	}
 
+	/**
+	 * md5加密
+	 * @param content  待加密类容
+	 * @param salt  盐值
+	 * @return
+	 * @throws Exception
+	 */
 	public static String MD5(String content, String salt) throws Exception {
 		return PasswordHelper.encryString(content, salt);
 	}
@@ -628,7 +633,16 @@ public class Utils {
 
 	}
 
+	public static boolean expireURL(String timeStr){
+		Long cur = System.currentTimeMillis();
+		Long time = Long.valueOf(timeStr);
 
+		if((cur - time) > Constant.WX_EXPIRE_URL_TIME){
+			return true;
+		}
+
+		return false;
+	}
 
 
 //	//隐藏中介四位

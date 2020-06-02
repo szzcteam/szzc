@@ -1,18 +1,17 @@
 package com.me.szzc.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.me.szzc.constant.Constant;
 import com.me.szzc.dao.RmbRecompenseMapper;
 import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.dao.SwapHouseMapper;
 import com.me.szzc.enums.SigningStatusEnum;
-import com.me.szzc.pojo.dto.ChooseHouseDTO;
-import com.me.szzc.pojo.dto.ProtocolCountMoneyDTO;
-import com.me.szzc.pojo.dto.ProtocolCountStatusDTO;
-import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
+import com.me.szzc.pojo.dto.*;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.ProtocolCountMoneyVO;
+import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -330,4 +329,24 @@ public class SettleAccountsService {
 
     }
 
+
+    /**微信小程序 获取协议摘要**/
+    public List<List<Object>> summaryListByWx(String projectCode){
+        List<List<Object>> resultList = new ArrayList<>();
+        List<ProtocolSummaryDTO> list = settleAccountsMapper.summaryList(projectCode);
+        list.forEach(dto -> {
+            //金额转万元，保留2位小数
+            dto.setPayTotal(dto.getPayTotal().divide(Constant.ONE_W,2, BigDecimal.ROUND_DOWN));
+            //每一行是个数组
+            List<Object> row = new ArrayList<>();
+            row.add(dto.getDate());
+            row.add(dto.getArea());
+            row.add(dto.getPayTotal().stripTrailingZeros());
+            row.add(dto.getCompensateType());
+            row.add(dto.getNewHouseName());
+            row.add(dto.getChooseArea());
+            resultList.add(row);
+        });
+        return resultList;
+    }
 }

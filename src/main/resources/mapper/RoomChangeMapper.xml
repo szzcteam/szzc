@@ -361,4 +361,9 @@
         where r_del = 0
         group by item_code
     </select>
+
+    <select id="countAreaNumByProjectCode" resultType="com.me.szzc.pojo.dto.RoomChangeNumDTO">
+        select r_name as projectName,r_area as area, count(1) as num from r_change where item_code = #{projectCode} and r_del = 0
+        group by r_name, r_area
+    </select>
 </mapper>

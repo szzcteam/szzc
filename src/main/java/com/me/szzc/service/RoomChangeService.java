@@ -1,5 +1,9 @@
 package com.me.szzc.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import com.me.szzc.constant.Constant;
 import com.me.szzc.dao.RoomChangeMapper;
 import com.me.szzc.enums.ChooseStatusEnum;
@@ -11,6 +15,7 @@ import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.pojo.vo.ResultVO;
 import com.me.szzc.pojo.vo.RoomChangeVo;
 import com.me.szzc.utils.DateHelper;
+import com.me.szzc.utils.StringHelper;
 import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.excle.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -180,5 +186,59 @@ public class RoomChangeService {
             dto.setProjectName(GovernmentEnum.getNameByCode(dto.getProjectCode()));
         }
         return list;
+    }
+
+    /**统计各项目的房源套数信息**/
+    public JSONArray countAreaNumByProjectCode(String projectCode) {
+        List<RoomChangeNumDTO> list = roomChangeMapper.countAreaNumByProjectCode(projectCode);
+        //先以房源名称做拆分
+        Map<String, List<RoomChangeNumDTO>> houseNameMap = new HashMap<>();
+        list.forEach(dto -> {
+            String projectName = dto.getProjectName();
+            List<RoomChangeNumDTO> roomList = houseNameMap.get(projectName);
+            if (roomList == null || roomList.isEmpty()) {
+                roomList = new ArrayList<>();
+            }
+
+            //面积存在中文‘暂无’，临时将中文处理成1
+            if (!StringHelper.isDouble(dto.getArea()) && !StringHelper.isInteger(dto.getArea())) {
+                dto.setArea("1");
+            }
+
+            roomList.add(dto);
+            houseNameMap.put(projectName, roomList);
+        });
+
+        /**
+         * 循环每个房源名称，将面积归类
+         * '保利新武昌':{80:55,90:120,100:200,110:77}//,保利新武昌房源分配明细，面积（80表示面积80多，不到90），套数
+         * '明伦街':{n:350}//n表示没有面积的房屋
+         */
+        JSONArray jsonArray = new JSONArray();
+        for (Map.Entry<String, List<RoomChangeNumDTO>> entry : houseNameMap.entrySet()) {
+            String name = entry.getKey();
+            Map<Integer, Integer> areaMap = new HashMap();
+            List<RoomChangeNumDTO> dataList = entry.getValue();
+            dataList.forEach(dto -> {
+                //字符转整数
+                int area = new BigDecimal(dto.getArea()).intValue();
+                //归类 的值
+                area = area / 10 * 10;
+                //同类型的，套数相加
+                Integer num = areaMap.get(area);
+                if (num == null) {
+                    num = 0;
+                }
+                num = num + dto.getNum();
+                //重新覆盖
+                areaMap.put(area, num);
+            });
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put(name, areaMap);
+            jsonArray.add(jsonObject);
+        }
+
+        return jsonArray;
     }
 }

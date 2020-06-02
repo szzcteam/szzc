@@ -2,6 +2,7 @@ package com.me.szzc.dao;
 
 import com.me.szzc.pojo.dto.ProtocolCountMoneyDTO;
 import com.me.szzc.pojo.dto.ProtocolCountStatusDTO;
+import com.me.szzc.pojo.dto.ProtocolSummaryDTO;
 import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
 import com.me.szzc.pojo.entity.SettleAccounts;
 import org.apache.ibatis.annotations.Param;
@@ -65,4 +66,6 @@ public interface SettleAccountsMapper {
 
     /**统计协议金额**/
     List<ProtocolCountMoneyDTO> countMoney();
+
+    List<ProtocolSummaryDTO> summaryList(@Param("projectCode") String projectCode);
 }
