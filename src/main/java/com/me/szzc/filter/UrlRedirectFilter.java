@@ -38,7 +38,6 @@ public class UrlRedirectFilter implements Filter {
 
         //微信小程序请求，可以直接访问
         if (uri.indexOf("/wx/") != -1) {
-            log.info("微信接口请求,url:{}", uri);
             chain.doFilter(request, response);
             return;
         }

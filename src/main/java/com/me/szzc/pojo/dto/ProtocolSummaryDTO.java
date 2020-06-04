@@ -23,7 +23,13 @@ public class ProtocolSummaryDTO {
     /**面积**/
     private BigDecimal area;
 
-    /**总补偿 金额**/
+    /**拆迁房屋的总价值 **/
+    private BigDecimal sumCompensate;
+
+    /** 新房金额 **/
+    private BigDecimal houseMoney;
+
+    /**应付(收) 金额**/
     private BigDecimal payTotal;
 
     /**协议类型  0货币 1调换**/

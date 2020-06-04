@@ -331,17 +331,26 @@ public class SettleAccountsService {
 
 
     /**微信小程序 获取协议摘要**/
-    public List<List<Object>> summaryListByWx(String projectCode){
+    public List<List<Object>> summaryListByWx(String projectCode) {
         List<List<Object>> resultList = new ArrayList<>();
         List<ProtocolSummaryDTO> list = settleAccountsMapper.summaryList(projectCode);
         list.forEach(dto -> {
-            //金额转万元，保留2位小数
-            dto.setPayTotal(dto.getPayTotal().divide(Constant.ONE_W,2, BigDecimal.ROUND_DOWN));
+            //金额转亿元
+            BigDecimal sumCompensate = dto.getSumCompensate().divide(Constant.ONE_Y, 4, BigDecimal.ROUND_DOWN);
+            BigDecimal payTotal = dto.getPayTotal().divide(Constant.ONE_Y, 4, BigDecimal.ROUND_DOWN);
+
             //每一行是个数组
             List<Object> row = new ArrayList<>();
             row.add(dto.getDate());
-            row.add(dto.getArea());
-            row.add(dto.getPayTotal().stripTrailingZeros());
+            row.add(BigDecimalUtil.stripTrailingZeros(dto.getArea()));
+            row.add(BigDecimalUtil.stripTrailingZeros(sumCompensate));
+            //根据新房金额，加正负号
+            if (dto.getHouseMoney().compareTo(dto.getSumCompensate()) > 0) {
+                row.add("-" + BigDecimalUtil.stripTrailingZeros(payTotal));
+            } else {
+                row.add(BigDecimalUtil.stripTrailingZeros(payTotal));
+            }
+
             row.add(dto.getCompensateType());
             row.add(dto.getNewHouseName());
             row.add(dto.getChooseArea());

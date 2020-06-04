@@ -667,6 +667,7 @@
   <select id="summaryList" resultType="com.me.szzc.pojo.dto.ProtocolSummaryDTO">
       select DATE_FORMAT(a.signing_date,'%Y-%m-%d') as date,
       ifnull(a.certified_area,0)+ifnull(a.no_register_legal_area,0)+ifnull(a.history_legacy_area,0) as area,
+      sum_compensate as sumCompensate,ifnull(house_money, 0) as houseMoney,
       a.pay_total as payTotal,a.compensate_type as compensateType,
       ifnull(c.new_house_address,'') as newHouseName, ifnull(c.covered_area,'')  as chooseArea
 

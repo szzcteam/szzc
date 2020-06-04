@@ -10,6 +10,7 @@ import org.apache.shiro.util.ByteSource;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Base64;
 
 @Slf4j
@@ -85,7 +86,7 @@ public class PasswordHelper {
 		String user = "d7275e";
 		String time = System.currentTimeMillis()+"";
 //		String time = "1591070892695";
-		String projectName = "武昌区";
+		String projectName = "明伦街";
 
 		//用户标识+时间+项目名称+密钥 =  MD5加密字符串， 放到Url当中，顺序是：用户标识、时间、md5、项目名称
 		String md5Value = "d7275e15910708926958a6d1f40ed48ea46019f2af0b16fe087%E6%AD%A6%E6%98%8C%E5%8C%BA";
@@ -93,6 +94,8 @@ public class PasswordHelper {
 		System.out.println(pwd);
 		String md5 = Utils.getMD5_32_xx(user+time+projectName+Constant.WX_SALT);
 		System.out.println(md5);
+
+		System.out.println("生成入参" + URLEncoder.encode(user+time+md5+projectName, Constant.UTF8));
 
 
 		//将字符串进行url解码

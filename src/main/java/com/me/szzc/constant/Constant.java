@@ -22,6 +22,11 @@ public interface Constant {
     /**1W**/
     BigDecimal ONE_W = BigDecimal.valueOf(10000);
 
+    /**1亿**/
+    BigDecimal ONE_Y = BigDecimal.valueOf(100000000);
+
+
+
     /**微信小程序加密-密钥**/
     String WX_SALT = "Y3j_#xa8N";
 
