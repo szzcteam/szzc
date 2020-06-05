@@ -239,7 +239,7 @@ var rmbRecompenseObj = {
                             var hot_water_index = data.calcHotWaterCompensate.indexOf("+");
                             //太阳能热水器
                             var hot_d_calc = data.calcHotWaterCompensate.substring(hot_water_index+1, data.calcHotWaterCompensate.length);
-                            $("#rmbRecompenseDiv input[name='solarHeater']").eq(0).val(eval(hot_d_calc));
+                            $("#rmbRecompenseDiv input[name='solarHeater']").eq(0).val(Math.round(eval(hot_d_calc)));
                             //其他  电热水器
                             var hot_value = data.calcHotWaterCompensate.substring(0, hot_water_index);
                             $("#rmbRecompenseDiv input[name='otherHeater']").eq(0).val(eval(hot_value));
