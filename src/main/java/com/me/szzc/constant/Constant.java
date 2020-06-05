@@ -25,6 +25,9 @@ public interface Constant {
     /**1亿**/
     BigDecimal ONE_Y = BigDecimal.valueOf(100000000);
 
+    /**负一**/
+    BigDecimal NEGATIVE_ONE = BigDecimal.valueOf(-1);
+
 
 
     /**微信小程序加密-密钥**/

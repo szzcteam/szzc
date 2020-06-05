@@ -342,18 +342,38 @@ public class SettleAccountsService {
             //每一行是个数组
             List<Object> row = new ArrayList<>();
             row.add(dto.getDate());
-            row.add(BigDecimalUtil.stripTrailingZeros(dto.getArea()));
-            row.add(BigDecimalUtil.stripTrailingZeros(sumCompensate));
+            row.add(dto.getArea().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            row.add(sumCompensate);
             //根据新房金额，加正负号
             if (dto.getHouseMoney().compareTo(dto.getSumCompensate()) > 0) {
-                row.add("-" + BigDecimalUtil.stripTrailingZeros(payTotal));
+                row.add((payTotal.multiply(Constant.NEGATIVE_ONE)).stripTrailingZeros());
             } else {
-                row.add(BigDecimalUtil.stripTrailingZeros(payTotal));
+                row.add(payTotal.stripTrailingZeros());
             }
 
             row.add(dto.getCompensateType());
-            row.add(dto.getNewHouseName());
-            row.add(dto.getChooseArea());
+            row.add(dto.getDate());  //过审时间
+            row.add(dto.getDate());  //付款时间
+            row.add(StringUtils.isNotBlank(dto.getNewHouseName()) ? dto.getNewHouseName() : "");
+//            row.add(dto.getChooseArea());
+            if (dto.getSwapArea1() != null && dto.getSwapArea1().compareTo(BigDecimal.ZERO) > 0) {
+                row.add(dto.getSwapArea1().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            } else {
+                row.add(0);
+            }
+            //除第一套房外，其他的面积非必填项
+            if (dto.getSwapArea2() != null && dto.getSwapArea2().compareTo(BigDecimal.ZERO) > 0) {
+                row.add(dto.getSwapArea2().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            }
+            if (dto.getSwapArea3() != null && dto.getSwapArea3().compareTo(BigDecimal.ZERO) > 0) {
+                row.add(dto.getSwapArea3().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            }
+            if (dto.getSwapArea4() != null && dto.getSwapArea4().compareTo(BigDecimal.ZERO) > 0) {
+                row.add(dto.getSwapArea4().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            }
+            if (dto.getSwapArea5() != null && dto.getSwapArea5().compareTo(BigDecimal.ZERO) > 0) {
+                row.add(dto.getSwapArea5().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            }
             resultList.add(row);
         });
         return resultList;
