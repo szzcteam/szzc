@@ -2,8 +2,6 @@ package com.me.szzc.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import com.me.szzc.constant.Constant;
 import com.me.szzc.dao.RoomChangeMapper;
 import com.me.szzc.enums.ChooseStatusEnum;
@@ -24,7 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bbfang on 2019/7/27.
@@ -201,7 +202,7 @@ public class RoomChangeService {
             }
 
             //面积存在中文‘暂无’，临时将中文处理成1
-            if (!StringHelper.isDouble(dto.getArea()) && !StringHelper.isInteger(dto.getArea())) {
+            if (StringUtils.isBlank(dto.getArea()) || (!StringHelper.isDouble(dto.getArea()) && !StringHelper.isInteger(dto.getArea()))) {
                 dto.setArea("1");
             }
 
