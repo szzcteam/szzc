@@ -12,23 +12,21 @@
             <table class="searchContent">
                 <tr>
                     <td>
-                        片&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：
-                        <select name="areaId" id="areaId" style="width: 150px;height: 21px;">
+                        项目|片区：
+                        <select name="areaId" id="areaId" style="width: 180px;height: 21px;">
                             <option value="">全部</option>
-                            <c:forEach items="${areaList}" var="area" varStatus="num">
-                                <option value="${area.id}" <c:if test="${areaId==area.id }">selected="selected"</c:if>>${area.name}</option>
+                            <c:forEach items="${projectMap}" var="projectMap">
+                                <option value="${projectMap.key}">-----${projectMap.value}-----</option>
+                                <c:forEach items="${areaList}" var="area">
+                                    <c:if test="${area.projectCode == projectMap.key}">
+                                        <option value="${area.id}"
+                                                projectCode="${area.projectCode}">${area.name}</option>
+                                    </c:if>
+                                </c:forEach>
                             </c:forEach>
                         </select>
                     </td>
 
-                    <%--<td>签约状态：
-                        <select name="signingStatus" style="width: 100px;height: 21px;">
-                            <option value="">全部</option>
-                            <c:forEach items="${signingStatusMap}" var="item">
-                                <option value="${item.key}" <c:if test="${signingStatus ==  item.key}">selected</c:if>>${item.value}</option>
-                            </c:forEach>
-                        </select>
-                    </td>--%>
                     <td>签约时间：<input type="text" name="startDate" class="date"
                                     readonly="true" value="${startDate }"/>
                     </td>

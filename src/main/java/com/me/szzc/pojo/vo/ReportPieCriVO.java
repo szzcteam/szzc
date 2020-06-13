@@ -12,9 +12,12 @@ import java.util.List;
 @Data
 public class ReportPieCriVO {
 
+    //片区集合
     private List<Long> areaIdList;
 
+    //开始时间
     private String startDate;
 
+    //结束时间
     private String endDate;
 }

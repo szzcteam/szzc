@@ -593,26 +593,6 @@
     group by compensate_type
   </select>
 
-
-  <select id="getTotalSign" resultType="com.me.szzc.pojo.dto.SettleAccountsLineDTO">
-    select DATE_FORMAT(signing_date,'%Y-%m-%d') as date, count(1) as num,
-    sum(ifnull(certified_area,0)+ifnull(no_register_legal_area,0)+ifnull(history_legacy_area,0)) as area,
-    sum(ifnull(pay_total,0)) as payTotal
-
-    from t_settle_accounts
-    where deleted = 0
-    and signing_status >0
-    <if test="areaIdList != null and areaIdList.size >0 ">
-      and area_id in
-      <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
-        #{itemId}
-      </foreach>
-    </if>
-    group by DATE_FORMAT(signing_date,'%Y-%m-%d')
-    order by DATE_FORMAT(signing_date,'%Y-%m-%d') asc
-  </select>
-
-
   <select id="countStatus" resultType="com.me.szzc.pojo.dto.ProtocolCountStatusDTO">
     select b.project_code as projectCode,b.name,
     sum(case signing_status when 0 then 1 else 0 end) as noSigned,
@@ -681,6 +661,13 @@
       <if test="projectCode != null and projectCode !='' ">
         and b.project_code = #{projectCode}
       </if>
+      <if test="areaIdList != null and areaIdList.size >0 ">
+        and a.area_id in
+        <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+          #{itemId}
+        </foreach>
+      </if>
+
       order by a.signing_date desc
 
   </select>

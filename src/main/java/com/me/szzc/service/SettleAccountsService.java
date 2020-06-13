@@ -241,33 +241,113 @@ public class SettleAccountsService {
     public List<SettleAccountsLineDTO> getTotalSign(List areaIdList, String startDate, String endDate) {
         List<SettleAccountsLineDTO> resultList = new ArrayList<>();
 
-        List<SettleAccountsLineDTO> dataList = settleAccountsMapper.getTotalSign(areaIdList);
+        //获取协议摘要
+        List<ProtocolSummaryDTO> dataList = settleAccountsMapper.summaryList(null, areaIdList);
         if (dataList == null || dataList.isEmpty()) {
             return resultList;
         }
+
+        //将摘要进行汇总，分成按天的集合
+        Map<String, SettleAccountsLineDTO> map = new LinkedHashMap<>();
+        for (int i = dataList.size() - 1; i >= 0; i--) {
+            ProtocolSummaryDTO summaryDTO = dataList.get(i);
+            SettleAccountsLineDTO dto = map.get(summaryDTO.getDate());
+            if (dto == null) {
+                dto = new SettleAccountsLineDTO();
+            }
+            dto.setDate(summaryDTO.getDate());
+            //户数累加
+            dto.setNum(dto.getNum() != null ? dto.getNum() + 1 : 1);
+            //面积累加
+            dto.setArea(dto.getArea() != null ? dto.getArea().add(summaryDTO.getArea()) : summaryDTO.getArea());
+            //应付金额  根据新房金额，加正负号
+            BigDecimal payTotal = null;
+            if (summaryDTO.getHouseMoney().compareTo(summaryDTO.getSumCompensate()) > 0) {
+                payTotal = (summaryDTO.getPayTotal().multiply(Constant.NEGATIVE_ONE));
+            } else {
+                payTotal = summaryDTO.getPayTotal();
+            }
+
+            dto.setPayTotal(dto.getPayTotal() != null ? dto.getPayTotal().add(payTotal) : payTotal);
+
+            //用房数
+            long useHouseNum = 0;
+            //用房面积
+            BigDecimal useHouseArea = BigDecimal.ZERO;
+
+            if (summaryDTO.getSwapArea1() != null && summaryDTO.getSwapArea1().compareTo(summaryDTO.getSwapArea1()) > 0) {
+                useHouseNum++;
+                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea1());
+            }
+            if (summaryDTO.getSwapArea2() != null && summaryDTO.getSwapArea2().compareTo(summaryDTO.getSwapArea1()) > 0) {
+                useHouseNum++;
+                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea2());
+            }
+
+            if (summaryDTO.getSwapArea3() != null && summaryDTO.getSwapArea3().compareTo(summaryDTO.getSwapArea1()) > 0) {
+                useHouseNum++;
+                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea3());
+            }
+
+            if (summaryDTO.getSwapArea4() != null && summaryDTO.getSwapArea4().compareTo(summaryDTO.getSwapArea1()) > 0) {
+                useHouseNum++;
+                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea1());
+            }
+            if (summaryDTO.getSwapArea5() != null && summaryDTO.getSwapArea5().compareTo(summaryDTO.getSwapArea1()) > 0) {
+                useHouseNum++;
+                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea5());
+            }
+
+            dto.setUseHouseNum(dto.getUseHouseNum() != null ? dto.getUseHouseNum() + useHouseNum: useHouseNum);
+            dto.setUseHouseArea(dto.getUseHouseArea() != null ? dto.getUseHouseArea().add(useHouseArea) : useHouseArea);
+
+            //总补偿金额
+            dto.setSumCompensate(dto.getSumCompensate() != null ? dto.getSumCompensate().add(summaryDTO.getSumCompensate()) : summaryDTO.getSumCompensate());
+
+            map.put(summaryDTO.getDate(), dto);
+        }
+
+        //获取每天的数据
+        Collection<SettleAccountsLineDTO> dayDataList = map.values();
+
 
         //计算后数据集合
         List<SettleAccountsLineDTO> calcList = new ArrayList<>();
 
         //针对每天的进行累加
-        Long upNum = 0l;
+        Long upNum = 0L;
         BigDecimal upArea = BigDecimal.ZERO;
         BigDecimal upPayTotal = BigDecimal.ZERO;
+        BigDecimal upUseHouseArea = BigDecimal.ZERO;
+        BigDecimal upSumCompensate = BigDecimal.ZERO;
+        Long upUseHouseNum = 0L;
 
-        BigDecimal tenYuan = new BigDecimal(100000000);
-        for (SettleAccountsLineDTO dto : dataList) {
+        for (SettleAccountsLineDTO dto : dayDataList) {
 
             upNum = upNum + dto.getNum();
             upArea = upArea.add(dto.getArea());
+            upUseHouseNum = upUseHouseNum + dto.getUseHouseNum();
+            upUseHouseArea = upUseHouseArea.add(dto.getUseHouseArea());
+            upSumCompensate = upSumCompensate.add(dto.getSumCompensate().divide(Constant.ONE_Y, 4, BigDecimal.ROUND_DOWN));
 
-            upPayTotal = upPayTotal.add(dto.getPayTotal().divide(tenYuan, 2, BigDecimal.ROUND_DOWN));
+            //计算用房率：房源使用套数/总征收户数
+            BigDecimal useRate = new BigDecimal(upUseHouseNum).divide(new BigDecimal(upNum), 2);
+
+            //做累计的时候，按4位小数进行
+            upPayTotal = upPayTotal.add(dto.getPayTotal().divide(Constant.ONE_Y, 4, BigDecimal.ROUND_DOWN));
 
             SettleAccountsLineDTO lineDTO = new SettleAccountsLineDTO();
             lineDTO.setDate(dto.getDate());
             lineDTO.setDateTime(DateHelper.string2Date(dto.getDate(), DateHelper.DateFormatType.YearMonthDay));
             lineDTO.setNum(upNum);
             lineDTO.setArea(upArea);
-            lineDTO.setPayTotal(upPayTotal);
+            //页面显示 保留2位小数
+            lineDTO.setPayTotal(upPayTotal.setScale(2, BigDecimal.ROUND_DOWN));
+            lineDTO.setSumCompensate(upSumCompensate.setScale(2, BigDecimal.ROUND_DOWN));
+
+            lineDTO.setUseHouseNum(upUseHouseNum);
+            lineDTO.setUseHouseArea(upUseHouseArea);
+            lineDTO.setUseRate(useRate);
             calcList.add(lineDTO);
         }
 
@@ -333,7 +413,7 @@ public class SettleAccountsService {
     /**微信小程序 获取协议摘要**/
     public List<List<Object>> summaryListByWx(String projectCode) {
         List<List<Object>> resultList = new ArrayList<>();
-        List<ProtocolSummaryDTO> list = settleAccountsMapper.summaryList(projectCode);
+        List<ProtocolSummaryDTO> list = settleAccountsMapper.summaryList(projectCode, null);
         list.forEach(dto -> {
             //金额转亿元
             BigDecimal sumCompensate = dto.getSumCompensate().divide(Constant.ONE_Y, 4, BigDecimal.ROUND_DOWN);

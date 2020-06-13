@@ -57,15 +57,11 @@ public interface SettleAccountsMapper {
     List<SettleAccounts> getSigning(@Param("signingStatus") Integer signingStatus, @Param("areaIdList") List<Long> areaIdList, @Param("startDate") String startDate,
                                     @Param("endDate") String endDate);
 
-
-    /**获取总的签约情况**/
-    List<SettleAccountsLineDTO> getTotalSign(@Param("areaIdList") List<Long> areaIdList);
-
     /**统计协议状态**/
     List<ProtocolCountStatusDTO> countStatus();
 
     /**统计协议金额**/
     List<ProtocolCountMoneyDTO> countMoney();
 
-    List<ProtocolSummaryDTO> summaryList(@Param("projectCode") String projectCode);
+    List<ProtocolSummaryDTO> summaryList(@Param("projectCode") String projectCode, @Param("areaIdList") List<Long> areaIdList);
 }

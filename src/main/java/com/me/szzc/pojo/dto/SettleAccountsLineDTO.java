@@ -29,7 +29,19 @@ public class SettleAccountsLineDTO {
     /**面积**/
     private BigDecimal area;
 
-    /**金额**/
+    /**应付金额**/
     private BigDecimal payTotal;
+
+    /** 使用房源套数 **/
+    private Long useHouseNum;
+
+    /** 使用房源面积 **/
+    private BigDecimal useHouseArea;
+
+    /**用房率**/
+    private BigDecimal useRate;
+
+    /**总补偿金额**/
+    private BigDecimal sumCompensate;
 
 }

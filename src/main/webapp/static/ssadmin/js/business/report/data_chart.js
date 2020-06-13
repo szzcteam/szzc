@@ -1,7 +1,7 @@
 var chartOperation = {
 
     //获取曲线图数据
-    getLineData: function (areaIdArr, startDate, endDate) {
+    getLineData: function (title, areaIdArr, startDate, endDate) {
 
         //查询条件
         var pieParams = {
@@ -21,7 +21,7 @@ var chartOperation = {
             async: false,
             success: function (data) {
                 pieData = data;
-                console.log("data:" + JSON.stringify(data));
+                console.log("饼图data:" + JSON.stringify(data));
             }
         });
 
@@ -45,7 +45,7 @@ var chartOperation = {
         //设置模型参数
         var option_line = {
             title: {
-                text: "征收情况",
+                text: title + " 征收情况",
                 left: "center"
             },
             grid: {
@@ -213,14 +213,40 @@ $(document).ready(function () {
         //获取片区
         var areaId = $("#areaId").val();
         var areaIdArr = new Array();
+        var len = $("#areaId option").length;
+        var title = "";
         if (areaId) {
-            areaIdArr.push(areaId);
+            title =  $("#areaId option:selected").text();
+            //去掉分隔符：中横线
+            if(title.indexOf("-----") != -1){
+                title = title.substring(5, title.length-5);
+            }
+
+            //继续判断选择的是项目，还是具体的片区
+            if(isNaN(areaId)){
+                //选择的是项目，则根据项目筛选，得到项目下的片区
+                $("#areaId option").each(function(){  //遍历所有option
+                    var area_projectCode= $(this).attr("projectCode");
+                    if(area_projectCode != undefined && area_projectCode == areaId){
+                        var area_value = $(this).val();
+                        areaIdArr.push(new Number(area_value));
+                    }
+                });
+            }else{
+                //具体的片区
+                areaIdArr.push(areaId);
+            }
         } else {
+            title = "全部项目";
             //是空的，选择的是全部
-            var len = $("#areaId option").length;
             for (var i = 0; i < len; i++) {
                 var area_value = $("#areaId").get(0).options[i].value;
+                //空跳过
                 if (!area_value) {
+                    continue;
+                }
+                //项目跳过
+                if (isNaN(area_value)) {
                     continue;
                 }
 
@@ -234,7 +260,7 @@ $(document).ready(function () {
         var endDate = $("input[name='endDate']").eq(0).val();
 
         //获取折线图
-        chartOperation.getLineData(areaIdArr, startDate, endDate);
+        chartOperation.getLineData(title, areaIdArr, startDate, endDate);
 
     });
 

@@ -2,6 +2,7 @@ package com.me.szzc.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.enums.CompensateTypeEnum;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.dto.SettleAccountsLineDTO;
 import com.me.szzc.pojo.entity.Area;
@@ -15,10 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * 图形汇总
@@ -37,11 +35,19 @@ public class ChartController extends BaseController{
         view.setViewName("ssadmin/report/chartList");
         Long userId = getAdminSession(request).getFid();
 
-        //签约状态
-//        view.addObject("signingStatusMap", SigningStatusEnum.getDescMap());
-
         //片区
         List<Area> areaList = getUserArea(userId);
+
+        //通过片区：得到项目
+        Map<String, String> projectMap = new HashMap<>();
+        if (areaList != null && areaList.size() > 0) {
+            for (Area area : areaList) {
+                String proejctName = GovernmentEnum.getNameByCode(area.getProjectCode());
+                projectMap.put(area.getProjectCode(), proejctName);
+            }
+        }
+
+        view.addObject("projectMap", projectMap);
         view.addObject("areaList", areaList);
 
         return view;
