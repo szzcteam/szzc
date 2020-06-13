@@ -36,9 +36,16 @@ var chartOperation = {
             async: false,
             success: function (data) {
                 lineData = data;
-                console.log("data-line:" + JSON.stringify(data));
+                // console.log("data-line:" + JSON.stringify(data));
             }
         });
+
+        //最后一条数据，放在右下角，以文字方式，重点显示
+        var lastLineObj = null;
+        if(lineData.length > 0){
+            lastLineObj  = lineData[lineData.length-1];
+            console.log("最后一条记录, lastLineObj:" + JSON.stringify(lastLineObj));
+        }
 
         var chartMain = $("#chart-line").get(0);
 
@@ -191,6 +198,24 @@ var chartOperation = {
                                 show: true
                             }
                         }
+                    }
+                }
+            ],
+            graphic:[
+                {
+                    type: 'text',
+                    z: 100,
+                    left: '65%',
+                    top: '290px',
+                    style: {
+                        fill: '#333333',
+                        text: [
+                            '截至'+lastLineObj.date+'',
+                            '累计签约'+lastLineObj.num+'户'+lastLineObj.area+'㎡',
+                            '补偿款总额'+lastLineObj.sumCompensate+'亿元',
+                            '使用房源'+lastLineObj.useHouseNum+'套 ' + lastLineObj.useHouseArea + '㎡'
+                        ].join('\n'),
+                        font: '13px 宋体'
                     }
                 }
             ]

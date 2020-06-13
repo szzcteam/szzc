@@ -275,25 +275,25 @@ public class SettleAccountsService {
             //用房面积
             BigDecimal useHouseArea = BigDecimal.ZERO;
 
-            if (summaryDTO.getSwapArea1() != null && summaryDTO.getSwapArea1().compareTo(summaryDTO.getSwapArea1()) > 0) {
+            if (summaryDTO.getSwapArea1() != null && summaryDTO.getSwapArea1().compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
                 useHouseArea = useHouseArea.add(summaryDTO.getSwapArea1());
             }
-            if (summaryDTO.getSwapArea2() != null && summaryDTO.getSwapArea2().compareTo(summaryDTO.getSwapArea1()) > 0) {
+            if (summaryDTO.getSwapArea2() != null && summaryDTO.getSwapArea2().compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
                 useHouseArea = useHouseArea.add(summaryDTO.getSwapArea2());
             }
 
-            if (summaryDTO.getSwapArea3() != null && summaryDTO.getSwapArea3().compareTo(summaryDTO.getSwapArea1()) > 0) {
+            if (summaryDTO.getSwapArea3() != null && summaryDTO.getSwapArea3().compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
                 useHouseArea = useHouseArea.add(summaryDTO.getSwapArea3());
             }
 
-            if (summaryDTO.getSwapArea4() != null && summaryDTO.getSwapArea4().compareTo(summaryDTO.getSwapArea1()) > 0) {
+            if (summaryDTO.getSwapArea4() != null && summaryDTO.getSwapArea4().compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
                 useHouseArea = useHouseArea.add(summaryDTO.getSwapArea1());
             }
-            if (summaryDTO.getSwapArea5() != null && summaryDTO.getSwapArea5().compareTo(summaryDTO.getSwapArea1()) > 0) {
+            if (summaryDTO.getSwapArea5() != null && summaryDTO.getSwapArea5().compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
                 useHouseArea = useHouseArea.add(summaryDTO.getSwapArea5());
             }
