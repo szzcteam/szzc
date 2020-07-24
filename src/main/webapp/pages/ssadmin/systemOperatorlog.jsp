@@ -18,7 +18,7 @@
 
 			<table class="searchContent">
 				<tr>
-					<td>IP地址：<input type="text" name="keywords"
+					<td>IP地址|参数：<input type="text" name="keywords"
 						value="${keywords}" size="60" /></td>
 					<td>
 						操作模块：<select type="combox" name ="model">
