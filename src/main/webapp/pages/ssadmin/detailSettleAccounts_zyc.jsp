@@ -365,7 +365,7 @@
                 </tr>
                 <tr>
                     <td colspan="6">已抵扣安置房款</td>
-                    <td colspan="4"><%--<input type="text" name="calcDeduction" class="none_border width_220px">--%></td>
+                    <td colspan="4">${settleAccounts.calcDeduction}</td>
                     <td colspan="2">${settleAccounts.deduction}</td>
                     <td>${settleAccounts.deductionBz}</td>
                 </tr>

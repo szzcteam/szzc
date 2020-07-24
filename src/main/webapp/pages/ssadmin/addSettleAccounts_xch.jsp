@@ -544,7 +544,7 @@
                      </tr>--%>
                     <tr>
                         <td colspan="6">已抵扣安置房款</td>
-                        <td colspan="4"><%--<input type="text" name="calcDeduction" class="none_border width_220px">--%></td>
+                        <td colspan="4"><input type="text" name="calcDeduction" class="none_border" style="width: 400px;"></td>
                         <td colspan="2"><input type="text" name="deduction" class="none_border width_110px"></td>
                         <td><input type="text" name="deductionBz" class="none_border width_70px"></td>
                     </tr>

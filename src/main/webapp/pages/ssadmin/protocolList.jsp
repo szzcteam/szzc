@@ -117,6 +117,12 @@
                        height="550" width="1000" target="dialog" rel="addProtocol"><span>电二南侧新增</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=D001001">
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=D001001"
+                       height="550" width="1000" target="dialog" rel="addProtocol"><span>武船二厂新增</span>
+                </a></li>
+            </shiro:hasPermission>
             <!-- 修改 -->
             <shiro:hasPermission name="ssadmin/updateProtocol.html">
                 <li><a class="edit"

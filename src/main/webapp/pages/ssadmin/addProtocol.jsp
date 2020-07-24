@@ -15,7 +15,7 @@
             <c:when test="${projectCode != null && projectCode == 'B001001' }">
                 <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts_zyc.jsp" %></div>
             </c:when>
-            <c:when test="${projectCode != null && projectCode == 'B001002' }">
+            <c:when test="${projectCode != null && (projectCode == 'B001002' || projectCode == 'D001001') }">
                 <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts_xch.jsp" %></div>
             </c:when>
             <c:when test="${projectCode != null && projectCode == 'C001001' }">

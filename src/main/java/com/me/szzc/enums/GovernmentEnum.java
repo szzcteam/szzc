@@ -20,6 +20,7 @@ import java.util.Map;
 public enum GovernmentEnum {
 
     ROOT("root", "admin"),
+
     WCQ("wcq", "武昌区",  GovernmentEnum.ROOT.getCode()),
     BJSWQ("A001", "滨江商务区", GovernmentEnum.WCQ.getCode()),
     MLJ("A001001", "明伦街", GovernmentEnum.BJSWQ.getCode()),
@@ -31,6 +32,8 @@ public enum GovernmentEnum {
     HZJRC("C001", "华中金融城", GovernmentEnum.WCQ.getCode()),
     DZRGS("C001001", "电车二公司南侧地块", GovernmentEnum.HZJRC.getCode()),
 
+    WCJSJ("D001", "武昌区建设局", GovernmentEnum.WCQ.getCode()),
+    WCEFC("D001001", "武船二分厂宿舍", GovernmentEnum.WCJSJ.getCode()),
 
     QKQ("qkq", "硚口区", GovernmentEnum.ROOT.getCode()),
     ;

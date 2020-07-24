@@ -22,6 +22,18 @@ public class BigDecimalUtil {
         return num.stripTrailingZeros().toPlainString();
     }
 
+    /*
+     * 由于数据库字段从decimal(10,2) 类型 转换成varchar后，小数位还在
+     * 遇到是数字，且最后是.00的就需要格式化。
+     */
+    public static String stripTrailingZeros(String num){
+        if(StringHelper.isDouble(num) && num.endsWith(".00")){
+            BigDecimal bigDecimal = new BigDecimal(num);
+            return stripTrailingZeros(bigDecimal);
+        }
+        return num;
+    }
+
     //2个字符串求和，返回数字
     public static BigDecimal toSum(String num1, String num2){
         if (StringUtils.isBlank(num1)) {
@@ -47,8 +59,7 @@ public class BigDecimalUtil {
     }
 
     public static void main(String[] args) {
-        String num1 = "300";
-        String num2 = "";
-        System.out.println(toSum(num1, num2).toPlainString());
+        String num1 = "300.10";
+        System.out.println(stripTrailingZeros(num1));
     }
 }

@@ -1115,29 +1115,29 @@ public class SettleAccountsVO {
 
 
         //交换房
-        if(entity.getSwapPrice1() != null && entity.getSwapPrice1().compareTo(BigDecimal.ZERO) > 0){
+        if(StringUtils.isNotBlank(entity.getSwapPrice1())){
             vo.setSwapPrice1(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice1()));
         }else{
             vo.setSwapPrice1("");
         }
 
-        if(entity.getSwapPrice2() != null && entity.getSwapPrice2().compareTo(BigDecimal.ZERO) > 0){
+        if(StringUtils.isNotBlank(entity.getSwapPrice2())){
             vo.setSwapPrice2(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice2()));
         }else{
             vo.setSwapPrice2("");
         }
-        if(entity.getSwapPrice3() != null && entity.getSwapPrice3().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapPrice3(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice3()));
+        if(StringUtils.isNotBlank(entity.getSwapPrice3())){
+            vo.setSwapPrice3(entity.getSwapPrice3());
         }else{
             vo.setSwapPrice3("");
         }
-        if(entity.getSwapPrice4() != null && entity.getSwapPrice4().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapPrice4(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice4()));
+        if(StringUtils.isNotBlank(entity.getSwapPrice4())){
+            vo.setSwapPrice4(entity.getSwapPrice4());
         }else{
             vo.setSwapPrice4("");
         }
-        if(entity.getSwapPrice5() != null && entity.getSwapPrice5().compareTo(BigDecimal.ZERO) > 0){
-            vo.setSwapPrice5(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice5()));
+        if(StringUtils.isNotBlank(entity.getSwapPrice5())){
+            vo.setSwapPrice5(entity.getSwapPrice5());
         }else{
             vo.setSwapPrice5("");
         }

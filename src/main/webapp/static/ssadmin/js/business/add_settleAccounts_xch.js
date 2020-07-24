@@ -1052,7 +1052,7 @@ var settleAccountObj = {
         var swap_area5 = $("input[name='swapArea5']").eq(0).val() || 0;*/
 
         if (swap_price1 != 0 && swap_area1 != 0) {
-            var swap_money1 = new Number(swap_price1) * new Number(swap_area1);
+            var swap_money1 = new Number(eval(swap_price1)) * new Number(swap_area1);
             // $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
             swap_money1 = Math.round(swap_money1);
             $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
@@ -1061,7 +1061,7 @@ var settleAccountObj = {
         }
 
         if (swap_price2 != 0 && swap_area2 != 0) {
-            var swap_money2 = new Number(swap_price2) * new Number(swap_area2);
+            var swap_money2 = new Number(eval(swap_price2)) * new Number(swap_area2);
             swap_money2 = Math.round(swap_money2);
             $("input[name='swapMoney2']").eq(0).val(swap_money2).change();
         } else {
@@ -1069,7 +1069,7 @@ var settleAccountObj = {
         }
 
         if (swap_price3 != 0 && swap_area3 != 0) {
-            var swap_money3 = new Number(swap_price3) * new Number(swap_area3);
+            var swap_money3 = new Number(eval(swap_price3)) * new Number(swap_area3);
             swap_money3 = Math.round(swap_money3);
             $("input[name='swapMoney3']").eq(0).val(swap_money3).change();
         } else {

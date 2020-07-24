@@ -631,27 +631,27 @@ public class SettleAccounts {
     /**
      * 交换房单价1
      */
-    private BigDecimal swapPrice1;
+    private String swapPrice1;
 
     /**
      * 交换房单价2
      */
-    private BigDecimal swapPrice2;
+    private String swapPrice2;
 
     /**
      * 交换房单价3
      */
-    private BigDecimal swapPrice3;
+    private String swapPrice3;
 
     /**
      * 交换房单价4
      */
-    private BigDecimal swapPrice4;
+    private String swapPrice4;
 
     /**
      * 交换房单价5
      */
-    private BigDecimal swapPrice5;
+    private String swapPrice5;
 
     /**
      * 交换房面积1

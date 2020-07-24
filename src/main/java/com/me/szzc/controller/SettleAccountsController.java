@@ -302,16 +302,16 @@ public class SettleAccountsController extends BaseController {
         String[] idArr = idMore.split(",");
         Long id = Long.valueOf(idArr[0]);
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
-        if(settleAccounts !=null){
+        if (settleAccounts != null) {
             modelAndView.addObject("settleAccounts", settleAccounts);
 
-            Area area =  areaService.getById(settleAccounts.getAreaId());
-            if(area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())){
-                modelAndView.setViewName(url+"_zyc");
-            }else if(area != null && area.getProjectCode().equals(GovernmentEnum.XCH.getCode())){
-                modelAndView.setViewName(url+"_xch");
-            }else if(area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())){
-                modelAndView.setViewName(url+"_drnc");
+            Area area = areaService.getById(settleAccounts.getAreaId());
+            if (area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())) {
+                modelAndView.setViewName(url + "_zyc");
+            } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode()) || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode()))) {
+                modelAndView.setViewName(url + "_xch");
+            } else if (area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())) {
+                modelAndView.setViewName(url + "_drnc");
             }
         }
 
@@ -367,6 +367,7 @@ public class SettleAccountsController extends BaseController {
             Area area = areaService.getById(settleAccounts.getAreaId());
             if (area != null && (area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode()))) {
                 modelAndView.setViewName(url + "_zyc");
             }
@@ -382,7 +383,8 @@ public class SettleAccountsController extends BaseController {
                 //showAdjunctOther 是否显示附属项中的其它
                 modelAndView.addObject("showAdjunctOther", false);
 
-            } else if (area != null && area.getProjectCode().equals(GovernmentEnum.XCH.getCode())) {
+            } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode()))) {
                 modelAndView.addObject("adjunctRow", 11);
                 modelAndView.addObject("strustRow", 6);
                 modelAndView.addObject("showAdjunctOther", true);
