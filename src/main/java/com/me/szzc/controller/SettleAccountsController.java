@@ -309,7 +309,6 @@ public class SettleAccountsController extends BaseController {
             if (area == null) {
                 log.error("根据片区ID查询片区为空,areaId:" + settleAccounts.getAreaId());
             }
-            modelAndView.addObject("projectCode", area.getProjectCode());
 
             if (area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())) {
                 modelAndView.setViewName(url + "_zyc");

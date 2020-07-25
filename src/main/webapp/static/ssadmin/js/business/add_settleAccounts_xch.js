@@ -633,46 +633,6 @@ var settleAccountObj = {
 
     //填充应收、应付款
     fullPayReceive: function () {
-        var projectCode = $("input[name='projectCode']").eq(0).val() || 0;
-
-        var compensateType = $("input[name='compensateType']:checked").val();
-        if (projectCode == "D001001") {
-            //武船二分厂特殊处理
-            if (compensateType == 0) {
-                //选择货币补偿时，不填充抵扣金额，只有产权调换时才进行计算
-                return;
-            }
-            //1、固定填充抵扣房款  临时安置补偿、搬迁补偿、签约期内签约的奖励、附属设施补偿、装修补偿、生活困难补助
-            var interimFee = $("input[name='interimFee']").eq(0).val() || 0;
-            var moveHouseFee = $("input[name='moveHouseFee']").eq(0).val() || 0;
-            var moveReward = $("input[name='moveReward']").eq(0).val() || 0;
-            var lifeCompensate = $("input[name='lifeCompensate']").eq(0).val() || 0;
-            var decorationCompensate = $("input[name='decorationCompensate']").eq(0).val() || 0;
-
-            var moveWaterMeterFee = $("input[name='moveWaterMeterFee']").eq(0).val() || 0;
-            var moveAmmeterFee = $("input[name='moveAmmeterFee']").eq(0).val() || 0;
-            var moveAirConditioningFee = $("input[name='moveAirConditioningFee']").eq(0).val() || 0;var interimFee = $("input[name='interimFee']").eq(0).val() || 0;
-            var hotWaterCompensate = $("input[name='hotWaterCompensate']").eq(0).val() || 0;
-            var gasFee = $("input[name='gasFee']").eq(0).val() || 0;
-            var structureBalcony = $("input[name='structureBalcony']").eq(0).val() || 0;
-            var structureDark = $("input[name='structureDark']").eq(0).val() || 0;
-            var structureMezzanine = $("input[name='structureMezzanine']").eq(0).val() || 0;
-            var structureBuild = $("input[name='structureBuild']").eq(0).val() || 0;
-            var structureRoof = $("input[name='structureRoof']").eq(0).val() || 0;
-            var affiliatedOther = $("input[name='affiliatedOther']").eq(0).val() || 0;
-
-            var deduction = new Number(interimFee) + new Number(moveHouseFee) + new Number(moveReward)
-                + new Number(lifeCompensate) + new Number(decorationCompensate) + new Number(moveWaterMeterFee)
-                + new Number(moveAmmeterFee) + new Number(moveAirConditioningFee) + new Number(hotWaterCompensate)
-                + new Number(gasFee) + new Number(structureBalcony) + new Number(structureDark) + new Number(structureMezzanine)
-                + new Number(structureBuild) + new Number(structureRoof) + new Number(affiliatedOther);
-
-
-            $("input[name='deduction']").eq(0).val(deduction).change();
-
-            return;
-        }
-        //--------------------------默认按下列方式计算---------------------
         //旧房金额
         var sumCompensate = $("input[name='sumCompensate']").eq(0).val() || 0;
         sumCompensate = new Number(sumCompensate);

@@ -5,7 +5,7 @@
 <link href="${oss_url}/static/ssadmin/css/add_settleAccounts.css" rel="stylesheet" type="text/css" />
 
 <div class="pageContent">
-    <input type="hidden" name="projectCode" value="${projectCode}"/>
+
     <form method="post" action="ssadmin/settleAccounts/add.html"
           class="pageForm required-validate" enctype="multipart/form-data"
           onsubmit="return iframeCallback(this, dialogAjaxDone);">
