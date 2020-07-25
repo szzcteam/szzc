@@ -2,6 +2,7 @@ package com.me.szzc.pojo.vo;
 
 import com.alibaba.fastjson.JSONObject;
 import com.me.szzc.constant.Constant;
+import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.RmbRecompense;
 import com.me.szzc.pojo.entity.TradeHouse;
@@ -488,6 +489,9 @@ public class RmbRecompenseVO {
      */
     private String projectCode;
 
+    /**项目描述**/
+    private String projectDesc;
+
     /**创建时间**/
     private Date createDate;
 
@@ -736,6 +740,7 @@ public class RmbRecompenseVO {
 
         vo.setAreaId(entity.getAreaId());
         vo.setProjectCode(entity.getProjectCode());
+        vo.setProjectDesc(GovernmentEnum.getByCode(entity.getProjectCode()).getDesc());
 
         vo.setGovYear(adjudication.getGovYear());
         vo.setGovMonth(adjudication.getGovMonth());

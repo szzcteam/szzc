@@ -573,6 +573,9 @@ public class SwapHouseVO {
      */
     private String projectCode;
 
+    /**项目描述**/
+    private String projectDesc;
+
     /**创建时间**/
     private Date createDate;
 
@@ -793,6 +796,7 @@ public class SwapHouseVO {
 
         vo.setAreaId(entity.getAreaId());
         vo.setProjectCode(entity.getProjectCode());
+        vo.setProjectDesc(GovernmentEnum.getByCode(entity.getProjectCode()).getDesc());
 
         vo.setGovYear(adjudication.getGovYear());
         vo.setGovMonth(adjudication.getGovMonth());

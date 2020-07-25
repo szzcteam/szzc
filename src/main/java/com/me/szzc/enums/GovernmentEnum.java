@@ -33,7 +33,7 @@ public enum GovernmentEnum {
     DZRGS("C001001", "电车二公司南侧地块", GovernmentEnum.HZJRC.getCode()),
 
     WCJSJ("D001", "武昌区建设局", GovernmentEnum.WCQ.getCode()),
-    WCEFC("D001001", "武船二分厂宿舍", GovernmentEnum.WCJSJ.getCode()),
+    WCEFC("D001001", "武船二分厂宿舍", "武船二分厂宿舍区旧城改建", GovernmentEnum.WCJSJ.getCode()),
 
     QKQ("qkq", "硚口区", GovernmentEnum.ROOT.getCode()),
     ;
@@ -41,6 +41,9 @@ public enum GovernmentEnum {
     private String code;
 
     private String name;
+
+    /** 项目完整描述 **/
+    private String desc;
 
     private String parentCode;
 
@@ -83,6 +86,13 @@ public enum GovernmentEnum {
         this.parentCode = parentCode;
     }
 
+    GovernmentEnum(String code, String name, String desc , String parentCode) {
+        this.code = code;
+        this.name = name;
+        this.desc = desc;
+        this.parentCode = parentCode;
+    }
+
     public String getCode() {
         return code;
     }
@@ -91,6 +101,9 @@ public enum GovernmentEnum {
         return name;
     }
 
+    public String getDesc() {
+        return desc;
+    }
 
     public String getParentCode() {
         return parentCode;
@@ -112,6 +125,20 @@ public enum GovernmentEnum {
         return code;
     }
 
+    public static GovernmentEnum getByCode(String code) {
+        GovernmentEnum gov = null;
+        for (GovernmentEnum government : allList) {
+            if (government.getCode().equals(code)) {
+                gov = government;
+                break;
+            }
+        }
+        if (gov == null) {
+            gov = GovernmentEnum.WCEFC;
+        }
+        return gov;
+    }
+
     public static Map<String, String> getMgtMap() {
         return mgtMap;
     }
@@ -120,16 +147,6 @@ public enum GovernmentEnum {
         return projectMap;
     }
 
-    public static List<Map<String, String>> queryAll() {
-        List<Map<String, String>> list = new ArrayList<>();
-        for (GovernmentEnum t : GovernmentEnum.values()) {
-            Map<String, String> tempMap = new HashMap<>();
-            tempMap.put("code", t.getCode());
-            tempMap.put("test", t.getName());
-            list.add(tempMap);
-        }
-        return list;
-    }
 
 
     public static void main(String[] args) {
