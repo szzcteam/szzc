@@ -3,7 +3,7 @@
 <div class="pageContent" style="overflow-x: hidden;">
     <div style="margin-bottom: 10px;padding-left: 10px;">
         协议类型：&nbsp;&nbsp;&nbsp;&nbsp;
-        <select id="protocolType" onchange="changeProtocolType(this.value)">
+        <select id="protocolType" onchange="changeProtocolType(this.value)" style="width: 150px;height: 26px;">
             <option value="">请选择</option>
             <option value="1" selected>结算单</option>
             <option value="2">货币补偿协议</option>

@@ -306,6 +306,11 @@ public class SettleAccountsController extends BaseController {
             modelAndView.addObject("settleAccounts", settleAccounts);
 
             Area area = areaService.getById(settleAccounts.getAreaId());
+            if (area == null) {
+                log.error("根据片区ID查询片区为空,areaId:" + settleAccounts.getAreaId());
+            }
+            modelAndView.addObject("projectCode", area.getProjectCode());
+
             if (area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())) {
                 modelAndView.setViewName(url + "_zyc");
             } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode()) || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode()))) {
