@@ -126,6 +126,10 @@ var rmbRecompenseObj = {
                         //证载房屋用途
                         $("#rmbRecompenseDiv input[name='useing']").eq(0).val(data.useing);
                         //房屋价值评估单价
+                        var valueCompensateTwoIndex = data.calcValueCompensate.indexOf("+");
+                        if(valueCompensateTwoIndex != -1){
+                            data.calcValueCompensate = data.calcValueCompensate.substr(0, valueCompensateTwoIndex)
+                        }
                         var calcValueCompensateArr = data.calcValueCompensate.split("*");
                         $("#rmbRecompenseDiv input[name='assessPrice']").eq(0).val(calcValueCompensateArr[1]);
                         //证载补偿比例
@@ -153,41 +157,50 @@ var rmbRecompenseObj = {
                         //未登记的合法建筑面积
                         $("#rmbRecompenseDiv input[name='noRegisterLegalArea']").eq(0).val(data.noRegisterLegalArea);
                         //评估单价
-                        if(data.noRegisterLegal != null && data.noRegisterLegal >0){
-                            var calcNoRegisterLegal = data.calcNoRegisterLegal.split("*");
-                            var price = calcNoRegisterLegal[1];
-                            if (isNaN(price)) {
+                        if (data.noRegisterLegal != null && data.noRegisterLegal > 0) {
+                            var noRegisterTwoIndex = data.calcNoRegisterLegal.indexOf("+");
+                            if (noRegisterTwoIndex != -1) {
                                 noticeFlag = true;
                                 noticeMsg = noticeMsg + "<br/>未登记建筑补偿有独立公式计算";
-                                price = price.substring(0, price.indexOf("+"));
+                                data.calcNoRegisterLegal = data.calcNoRegisterLegal.substring(0, noRegisterTwoIndex);
                             }
+                            var calcNoRegisterLegalArr = data.calcNoRegisterLegal.split("*");
+                            var price = calcNoRegisterLegalArr[1];
                             $("#rmbRecompenseDiv input[name='noRegisterAssessPrice']").eq(0).val(price);
-                            //补偿比例
-                            var proportion = calcNoRegisterLegal[2];
-                            if(proportion != undefined){
-                                proportion = new Number(proportion) * 100;
-                                $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val(proportion);
+
+                            var noRegisterProp = calcNoRegisterLegalArr[2];
+                            if (noRegisterProp != undefined) {
+                                noRegisterProp = new Number(noRegisterProp) * 100;
+                                $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val(noRegisterProp);
+                            } else {
+                                $("#rmbRecompenseDiv input[name='noRegisterProportion']").eq(0).val("100");
                             }
+
                         }
 
 
                         //历史遗留建筑面积
                         $("#rmbRecompenseDiv input[name='historyLegacyArea']").eq(0).val(data.historyLegacyArea);
                         //评估单价
-                        if(data.historyLegacy != null && data.historyLegacy >0){
-                            var calcHistoryLegacy = data.calcHistoryLegacy.split("*");
-                            var price = calcHistoryLegacy[1];
-                            if (isNaN(price)) {
+                        if (data.historyLegacy != null && data.historyLegacy > 0) {
+                            var historyTwoIndex = data.calcHistoryLegacy.indexOf("+");
+                            if (historyTwoIndex != -1) {
                                 noticeFlag = true;
                                 noticeMsg = noticeMsg + "<br/>历史遗留建筑补偿有独立公式计算";
-                                price = price.substring(0, price.indexOf("+"));
+                                data.calcHistoryLegacy = data.calcHistoryLegacy.substring(0, historyTwoIndex);
                             }
+
+                            var calcHistoryLegacyArr = data.calcHistoryLegacy.split("*");
+                            var price = calcHistoryLegacyArr[1];
                             $("#rmbRecompenseDiv input[name='historyAssessPrice']").eq(0).val(price);
+
                             //补偿比例
-                            var proportion = calcHistoryLegacy[2];
-                            if(proportion != undefined){
-                                proportion = new Number(proportion) * 100;
-                                $("#rmbRecompenseDiv input[name='historyProportion']").eq(0).val(proportion);
+                            var historyProp = calcHistoryLegacyArr[2];
+                            if (historyProp != undefined) {
+                                historyProp = new Number(historyProp) * 100;
+                                $("#rmbRecompenseDiv input[name='historyProportion']").eq(0).val(historyProp);
+                            } else {
+                                $("#rmbRecompenseDiv input[name='historyProportion']").eq(0).val("100");
                             }
                         }
 
@@ -198,25 +211,21 @@ var rmbRecompenseObj = {
                         $("#rmbRecompenseDiv input[name='historyLegacy']").eq(0).val(data.historyLegacy);
 
                         //室内装修补偿
-                        if(data.decorationCompensate != null && data.decorationCompensate > 0){
+                        if (data.decorationCompensate != null && data.decorationCompensate > 0) {
+                            var decorationOtherFlag = data.calcDecorationCompensate.indexOf("+");
+                            if (decorationOtherFlag != -1) {
+                                //存在2个公式，取其中一个
+                                data.calcDecorationCompensate = data.calcDecorationCompensate.substring(0, decorationOtherFlag);
+                            }
+
                             var calcDecorationCompensate = data.calcDecorationCompensate.split("*");
                             //默认最后一个乘以的就是单价
-                            var price = calcDecorationCompensate[calcDecorationCompensate.length-1];
-                            console.log("装修补偿单价:"+price + "  ，公式:" + data.calcDecorationCompensate);
-                            if(isNaN(price)){
-                                noticeFlag = true;
-                                noticeMsg = noticeMsg + "<br/>室内装修补偿有独立公式计算";
-                                //有其它公式, 格式：10*10+其它公式
-                                var otherCalc = price.substring(price.indexOf("+")+1, price.length);
-                                var otherCalcArr = otherCalc.split("*");
-                                $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(otherCalcArr[otherCalcArr.length - 1]);
-                            }else{
-                                //是个数字，没有其它公式
-                                $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(price);
-                            }
+                            var price = calcDecorationCompensate[calcDecorationCompensate.length - 1];
+                            console.log("装修补偿单价:" + price + "  ，公式:" + data.calcDecorationCompensate);
+                            $("#rmbRecompenseDiv input[name='decorationCompensateUnitPrice']").eq(0).val(price);
                             $("#rmbRecompenseDiv input[name='decorationCompensate']").eq(0).val(data.decorationCompensate)
                         }
-                        ;
+
                         //搬家费
                         $("#rmbRecompenseDiv input[name='moveHouseFee']").eq(0).val(data.moveHouseFee);
                         //临时安置补偿(过渡费)
