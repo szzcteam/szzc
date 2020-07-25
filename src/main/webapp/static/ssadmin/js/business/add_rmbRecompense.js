@@ -139,6 +139,12 @@ var rmbRecompenseObj = {
 
                         //用于经营的实际面积  == 对应结算单第8条的，住改商面积
                         if(data.changeCompensate != null && data.changeCompensate > 0 ){
+                            //存在加号，就是2个公式，取第一个公式的比例即可
+                            var addFlagIndex = data.calcChangeCompensate.indexOf("+");
+                            if (addFlagIndex != -1) {
+                                data.calcChangeCompensate = data.calcChangeCompensate.substring(0, addFlagIndex);
+                                console.log("房屋改变用途补助存在其他公式，第一个公式是:" + data.calcChangeCompensate);
+                            }
                             var calcChangeCompensate = data.calcChangeCompensate.split("*");
                             $("#rmbRecompenseDiv input[name='valueCompensateBusinessArea']").eq(0).val(calcChangeCompensate[0]);
                             $("#rmbRecompenseDiv input[name='valueCompensateRate']").eq(0).val(eval(calcChangeCompensate[2]*100));
