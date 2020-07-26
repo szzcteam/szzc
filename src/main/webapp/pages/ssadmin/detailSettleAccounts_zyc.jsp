@@ -77,7 +77,7 @@
                 <%-- ${settleAccounts.createDate}--%>
             </dt>
             <dt style="width: 40px;">编号：</dt>
-            <dt style="width: 60px;margin-left: -20px;">
+            <dt style="width: 100px;margin-left: -20px;">
                 ${settleAccounts.cardNo}
             </dt>
         </dl>
