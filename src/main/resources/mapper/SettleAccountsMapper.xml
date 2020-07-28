@@ -505,6 +505,9 @@
     <if test="address != null and address !='' ">
       and address like concat('%',#{address} ,'%')
     </if>
+    <if test="cardNo != null and cardNo !='' ">
+      and card_no like concat('%',#{cardNo} ,'%')
+    </if>
     <if test="houseOwner != null and houseOwner !='' ">
       and (house_owner like concat('%',#{houseOwner} ,'%') or lessee like concat('%',#{houseOwner} ,'%'))
     </if>

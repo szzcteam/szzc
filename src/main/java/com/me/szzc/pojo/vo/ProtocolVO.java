@@ -7,6 +7,10 @@ import lombok.Data;
 public class ProtocolVO {
 
     private String name;
+
+    /** 编号 **/
+    private String cardNo;
+
     private String address;
     private String phone;
 

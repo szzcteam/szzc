@@ -51,6 +51,12 @@ public class ProtocolController extends BaseController {
             view.addObject("address", address);
         }
 
+        String cardNo = request.getParameter("cardNo");
+        if(StringUtils.isNotBlank(cardNo)){
+            cardNo = cardNo.trim();
+            view.addObject("cardNo", cardNo);
+        }
+
         String houseOwner = request.getParameter("houseOwner");
         if(houseOwner != null && houseOwner.trim().length() >0){
             houseOwner = houseOwner.trim();
@@ -96,7 +102,7 @@ public class ProtocolController extends BaseController {
 
         int firstResult = (currentPage - 1) * numPerPage;
         List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true,
-                signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType);
+                signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo);
 
         //Map<String ,String>map= this.noticeService.queryAll();
         List<ProtocolVO> list = new ArrayList<>();
@@ -109,6 +115,7 @@ public class ProtocolController extends BaseController {
                 protocol.setName(account.getLessee());
             }
 
+            protocol.setCardNo(account.getCardNo());
             protocol.setAddress(account.getAddress());
             if(StringUtils.isNotBlank(account.getPhone())){
                 protocol.setPhone(account.getPhone());
@@ -140,7 +147,7 @@ public class ProtocolController extends BaseController {
 
         //总数量
         view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner,
-                areaId, areaIdList, startDate, endDate, compensateType));
+                areaId, areaIdList, startDate, endDate, compensateType, cardNo));
         return view;
     }
 

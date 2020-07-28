@@ -3,6 +3,7 @@
 <form id="pagerForm" method="post" action="ssadmin/protocolList.html">
     <input type="hidden" name="signingStatus" value="${signingStatus}">
     <input type="hidden" name="address" value="${address}"/>
+    <input type="hidden" name="cardNo" value="${cardNo}"/>
     <input type="hidden" name="houseOwner" value="${houseOwner}"/>
     <input type="hidden" name="areaId" value="${areaId}"/>
     <input type="hidden" name="startDate" value="${startDate}" />
@@ -32,7 +33,7 @@
                         </select>
                     </td>
                     <td>被征收人：<input type="text" name="houseOwner" value="${houseOwner}" size="20"/></td>
-                    <td>地址：<input type="text" name="address" value="${address}" size="40"/></td>
+                    <td>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：<input type="text" name="address" value="${address}" size="20"/></td>
                     <td>签约状态：
                         <select name="signingStatus" style="width: 100px;height: 21px;">
                             <option value="">请选择</option>
@@ -50,6 +51,10 @@
                         至&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="text" name="endDate" class="date"
                                readonly="true" value="${endDate }"/>
+                    </td>
+                    <td>
+                        协议编号：
+                        <input type="text" name="cardNo" value="${cardNo}" size="20"/>
                     </td>
                     <td>
                         协议类型：
@@ -210,15 +215,16 @@
         <thead>
         <tr>
             <th width="20">序号</th>
-            <th width="80">片区</th>
+            <th width="70">片区</th>
+            <th width="35">协议编号</th>
             <th width="60">被征收人</th>
             <th width="60">地址</th>
-            <th width="60">电话</th>
+            <th width="40">电话</th>
             <th width="50">签约状态</th>
             <%--<th width="60">付(收)款手续通知单</th>--%>
             <th width="50">产权调换协议</th>
             <th width="50">货币补偿协议</th>
-            <th width="50">结算单</th>
+            <th width="30">结算单</th>
             <th width="50">签约时间</th>
         </tr>
         </thead>
@@ -228,6 +234,7 @@
             <tr target="sid_user" rel="${protocol.settleAccountId},${protocol.rmbRecompenseId},${protocol.swapHouseId}">
                 <td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
                 <td>${protocol.areaName}</td>
+                <td>${protocol.cardNo}</td>
                 <td>${protocol.name}</td>
                 <td>${protocol.address}</td>
                 <td>${protocol.phone}</td>

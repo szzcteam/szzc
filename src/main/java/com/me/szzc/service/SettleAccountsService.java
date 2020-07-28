@@ -15,6 +15,7 @@ import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -155,15 +156,16 @@ public class SettleAccountsService {
     }
 
 
-    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address,String houseOwner, Long areaId,
-                                     List<Long> areaIdList, String startDate, String endDate,Integer compensateType) {
-        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType);
+    public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address, String houseOwner, Long areaId,
+                                     List<Long> areaIdList, String startDate, String endDate, Integer compensateType, String cardNo) {
+        List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId,
+                areaIdList, startDate, endDate, compensateType, cardNo);
         return listSettleAccounts;
     }
 
-    public Integer getCount(Integer signingStatus, String address,String houseOwner, Long areaId, List<Long> areaIdList,
-                            String startDate, String endDate, Integer compensateType) {
-        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType);
+    public Integer getCount(Integer signingStatus, String address, String houseOwner, Long areaId, List<Long> areaIdList,
+                            String startDate, String endDate, Integer compensateType, String cardNo) {
+        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo);
     }
 
     /**变更签约状态**/

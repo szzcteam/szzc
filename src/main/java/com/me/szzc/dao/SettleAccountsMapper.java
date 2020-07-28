@@ -35,12 +35,14 @@ public interface SettleAccountsMapper {
                               @Param("signingStatus") Integer signingStatus, @Param("address") String address,
                               @Param("houseOwner") String houseOwner, @Param("areaId") Long areaId,
                               @Param("areaIdList") List<Long> areaIdList, @Param("startDate") String startDate,
-                              @Param("endDate") String endDate, @Param("compensateType") Integer compensateType);
+                              @Param("endDate") String endDate, @Param("compensateType") Integer compensateType,
+                              @Param("cardNo") String cardNo);
 
     Integer getCount(@Param("signingStatus") Integer signingStatus, @Param("address") String address,
                      @Param("houseOwner") String houseOwner, @Param("areaId") Long areaId,
                      @Param("areaIdList") List<Long> areaIdList, @Param("startDate") String startDate,
-                     @Param("endDate") String endDate, @Param("compensateType") Integer compensateType);
+                     @Param("endDate") String endDate, @Param("compensateType") Integer compensateType,
+                     @Param("cardNo") String cardNo);
 
 
     Integer changeSignStatus(SettleAccounts settleAccounts);
