@@ -38,32 +38,29 @@ public class ProtocolSummaryDTO {
     /**新房源名**/
     private String newHouseName;
 
-    /** 选房总面积 **/
-    private BigDecimal chooseArea;
-
     /**
      * 交换房面积1
      */
-    private BigDecimal swapArea1;
+    private String swapArea1;
 
     /**
      * 交换房面积2
      */
-    private BigDecimal swapArea2;
+    private String swapArea2;
 
     /**
      * 交换房面积3
      */
-    private BigDecimal swapArea3;
+    private String swapArea3;
 
     /**
      * 交换房面积4
      */
-    private BigDecimal swapArea4;
+    private String swapArea4;
 
     /**
      * 交换房面积5
      */
-    private BigDecimal swapArea5;
+    private String swapArea5;
 
 }

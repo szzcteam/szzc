@@ -13,6 +13,7 @@ import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.pojo.vo.ProtocolCountMoneyVO;
 import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.DateHelper;
+import com.me.szzc.utils.StringHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -277,27 +279,32 @@ public class SettleAccountsService {
             //用房面积
             BigDecimal useHouseArea = BigDecimal.ZERO;
 
-            if (summaryDTO.getSwapArea1() != null && summaryDTO.getSwapArea1().compareTo(BigDecimal.ZERO) > 0) {
+            BigDecimal swapArea1 = StringHelper.processChineseNum(summaryDTO.getSwapArea1());
+            BigDecimal swapArea2 = StringHelper.processChineseNum(summaryDTO.getSwapArea2());
+            BigDecimal swapArea3 = StringHelper.processChineseNum(summaryDTO.getSwapArea3());
+            BigDecimal swapArea4 = StringHelper.processChineseNum(summaryDTO.getSwapArea4());
+            BigDecimal swapArea5 = StringHelper.processChineseNum(summaryDTO.getSwapArea5());
+            if (swapArea1.compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
-                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea1());
+                useHouseArea = useHouseArea.add(swapArea1);
             }
-            if (summaryDTO.getSwapArea2() != null && summaryDTO.getSwapArea2().compareTo(BigDecimal.ZERO) > 0) {
+            if (swapArea2.compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
-                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea2());
+                useHouseArea = useHouseArea.add(swapArea2);
             }
 
-            if (summaryDTO.getSwapArea3() != null && summaryDTO.getSwapArea3().compareTo(BigDecimal.ZERO) > 0) {
+            if (swapArea3.compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
-                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea3());
+                useHouseArea = useHouseArea.add(swapArea3);
             }
 
-            if (summaryDTO.getSwapArea4() != null && summaryDTO.getSwapArea4().compareTo(BigDecimal.ZERO) > 0) {
+            if (swapArea4.compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
-                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea1());
+                useHouseArea = useHouseArea.add(swapArea4);
             }
-            if (summaryDTO.getSwapArea5() != null && summaryDTO.getSwapArea5().compareTo(BigDecimal.ZERO) > 0) {
+            if (swapArea5.compareTo(BigDecimal.ZERO) > 0) {
                 useHouseNum++;
-                useHouseArea = useHouseArea.add(summaryDTO.getSwapArea5());
+                useHouseArea = useHouseArea.add(swapArea5);
             }
 
             dto.setUseHouseNum(dto.getUseHouseNum() != null ? dto.getUseHouseNum() + useHouseNum: useHouseNum);
@@ -311,7 +318,6 @@ public class SettleAccountsService {
 
         //获取每天的数据
         Collection<SettleAccountsLineDTO> dayDataList = map.values();
-
 
         //计算后数据集合
         List<SettleAccountsLineDTO> calcList = new ArrayList<>();
@@ -437,27 +443,35 @@ public class SettleAccountsService {
             row.add(dto.getDate());  //过审时间
             row.add(dto.getDate());  //付款时间
             row.add(StringUtils.isNotBlank(dto.getNewHouseName()) ? dto.getNewHouseName() : "");
-//            row.add(dto.getChooseArea());
-            if (dto.getSwapArea1() != null && dto.getSwapArea1().compareTo(BigDecimal.ZERO) > 0) {
-                row.add(dto.getSwapArea1().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+
+            BigDecimal swapArea1 = StringHelper.processChineseNum(dto.getSwapArea1());
+            BigDecimal swapArea2 = StringHelper.processChineseNum(dto.getSwapArea2());
+            BigDecimal swapArea3 = StringHelper.processChineseNum(dto.getSwapArea3());
+            BigDecimal swapArea4 = StringHelper.processChineseNum(dto.getSwapArea4());
+            BigDecimal swapArea5 = StringHelper.processChineseNum(dto.getSwapArea5());
+
+            if (swapArea1.compareTo(BigDecimal.ZERO) > 0) {
+                row.add(swapArea1.setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
             } else {
                 row.add(0);
             }
             //除第一套房外，其他的面积非必填项
-            if (dto.getSwapArea2() != null && dto.getSwapArea2().compareTo(BigDecimal.ZERO) > 0) {
-                row.add(dto.getSwapArea2().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            if (swapArea2.compareTo(BigDecimal.ZERO) > 0) {
+                row.add(swapArea2.setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
             }
-            if (dto.getSwapArea3() != null && dto.getSwapArea3().compareTo(BigDecimal.ZERO) > 0) {
-                row.add(dto.getSwapArea3().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            if (swapArea3.compareTo(BigDecimal.ZERO) > 0) {
+                row.add(swapArea3.setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
             }
-            if (dto.getSwapArea4() != null && dto.getSwapArea4().compareTo(BigDecimal.ZERO) > 0) {
-                row.add(dto.getSwapArea4().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            if (swapArea4.compareTo(BigDecimal.ZERO) > 0) {
+                row.add(swapArea4.setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
             }
-            if (dto.getSwapArea5() != null && dto.getSwapArea5().compareTo(BigDecimal.ZERO) > 0) {
-                row.add(dto.getSwapArea5().setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
+            if (swapArea5.compareTo(BigDecimal.ZERO) > 0) {
+                row.add(swapArea5.setScale(2, BigDecimal.ROUND_DOWN).stripTrailingZeros());
             }
             resultList.add(row);
         });
         return resultList;
     }
+
+
 }

@@ -653,7 +653,6 @@
       sum_compensate as sumCompensate,ifnull(house_money, 0) as houseMoney,
       a.pay_total as payTotal,a.compensate_type as compensateType,
       ifnull(c.new_house_address,'') as newHouseName,
-      ifnull(a.swap_area1,0)+ifnull(a.swap_area2,0)+ifnull(a.swap_area3,0)+ifnull(a.swap_area4,0)+ifnull(a.swap_area5,0)  as chooseArea,
       a.swap_area1 as swapArea1,a.swap_area2 as swapArea2,
       a.swap_area3 as swapArea3,a.swap_area4 as swapArea4,
       a.swap_area5 as swapArea5

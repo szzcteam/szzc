@@ -3,6 +3,7 @@ package com.me.szzc.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
@@ -188,4 +189,26 @@ public class StringHelper {
         return nf.format(d);
     }
 
+    /**
+     * 去除字符中的非数字字符
+     * @param chineseNum  数字，可能会带中文
+     * @return
+     */
+    public static BigDecimal processChineseNum(String chineseNum) {
+        BigDecimal num = BigDecimal.ZERO;
+        //面积为空，默认为0
+        if (StringUtils.isBlank(chineseNum)) {
+            return num;
+        }
+        //判断是数字
+        if (StringHelper.isDouble(chineseNum) || StringHelper.isInteger(chineseNum)) {
+            num = new BigDecimal(chineseNum);
+            return num;
+        }
+
+        chineseNum = chineseNum.replaceAll("[^\\d|.]", "");
+
+        num = new BigDecimal(chineseNum);
+        return num;
+    }
 }
