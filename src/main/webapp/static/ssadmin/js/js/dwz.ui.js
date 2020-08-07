@@ -272,6 +272,7 @@ function initUI(_box){
 	// dwz.ajax.js
 	if ($.fn.ajaxTodo) $("a[target=ajaxTodo]", $p).ajaxTodo();
 	if ($.fn.dwzExport) $("a[target=dwzExport]", $p).dwzExport();
+	if ($.fn.dwzOnlyExport) $("a[target=dwzOnlyExport]", $p).dwzOnlyExport();
 
 	if ($.fn.lookup) $("a[lookupGroup]", $p).lookup();
 	if ($.fn.multLookup) $("[multLookup]:button", $p).multLookup();

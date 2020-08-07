@@ -36,7 +36,12 @@ public class ConstantMap {
 	public Map<String, Object> getMap(){
 		return this.map ;
 	}
-	
+
+	public String getValue(String key){
+		return map.get(key).toString() ;
+	}
+
+
 	public synchronized void put(String key,Object value){
 		log.info("ConstantMap put key:"+key+",value:"+value+".") ;
 		map.put(key, value) ;

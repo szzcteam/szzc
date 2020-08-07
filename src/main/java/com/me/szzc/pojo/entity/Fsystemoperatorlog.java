@@ -36,7 +36,7 @@ public class Fsystemoperatorlog {
     /**
      * 操作人,所属表字段为tbl_system_operator_log.user_id
      */
-    private int userId;
+    private Long userId;
 
     /**
      * 操作人登录名,所属表字段为tbl_system_operator_log.login_name

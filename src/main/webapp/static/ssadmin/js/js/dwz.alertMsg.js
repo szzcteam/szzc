@@ -1,10 +1,10 @@
 /**
  * @author ZhangHuihua@msn.com
  */
-$.setRegional("alertMsg", {
+/*$.setRegional("alertMsg", {
 	title:{error:"Error", info:"Information", warn:"Warning", correct:"Successful", confirm:"Confirmation"},
 	butMsg:{ok:"OK", yes:"Yes", no:"No", cancel:"Cancel"}
-});
+});*/
 var alertMsg = {
 	_boxId: "#alertMsgBox",
 	_bgId: "#alertBackground",

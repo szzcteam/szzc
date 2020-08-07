@@ -52,18 +52,24 @@
         select
         <include refid="Base_Column_List"/>
         from f_systemargs
+        where 1=1
         <if test="fkey != null">
-            fkey = #{fkey,jdbcType=VARCHAR},
+            and fkey = #{fkey}
         </if>
         <if test="ftype != null">
-            ftype = #{ftype,jdbcType=INTEGER},
+            and ftype = #{ftype}
         </if>
         <if test="fdescription != null">
-            fdescription = #{fdescription,jdbcType=VARCHAR},
+            and fdescription = #{fdescription}
         </if>
         <if test="fvalue != null">
-            fvalue = #{fvalue,jdbcType=VARCHAR},
+            and fvalue = #{fvalue}
         </if>
+    </select>
+
+
+    <select id="selectValue" parameterType="java.lang.String" resultType="java.lang.String">
+        select  fvalue from f_systemargs where fkey = #{fkey}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -161,4 +167,11 @@
       furl = #{furl,jdbcType=VARCHAR}
     where fid = #{fid,jdbcType=INTEGER}
   </update>
+
+    <!-- 模糊查询 -->
+    <select id="selectByLike" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from f_systemargs where fkey like concat('%',#{keywordFilter},'%')
+    </select>
 </mapper>

@@ -14,19 +14,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <c:if test="${error != null}">
 alert("${error}") ;
 </c:if>
+
 </script>
 </head>
 <body>
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
-				<a href="/"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_logo.gif" /></a>
+				<a href="/" style="font-size: 36px;"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_logo.gif" /></a>
 			</h1>
 			<div class="login_headerContent">
 				<div class="navList">
 
 				</div>
-				<h2 class="login_title"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_title.png" /></h2>
+				<h2 class="login_title" style="padding: 0px;text-align: center;"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_title.png" /></h2>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -39,11 +40,11 @@ alert("${error}") ;
 				<form action="/ssadmin/95afee23-e2ab-11e6-bddf-005056ab18e8.html" method="post">
 					<p>
 						<label>用户名：</label>
-						<input type="text" name="name" size="20" class="login_input" value="luwei"/>
+						<input type="text" name="name" size="20" class="login_input"/>
 					</p>
 					<p>
 						<label>密码：</label>
-						<input type="password" name="password" size="20" class="login_input" value="luwei"/>
+						<input type="password" name="password" size="20" class="login_input"/>
 					</p>
 					<p>
 						<label>验证码：</label>
@@ -55,14 +56,14 @@ alert("${error}") ;
 					</div>
 				</form>
 			</div>
-			<div class="login_banner"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_banner.jpg" /></div>
+			<div class="login_banner"><img src="${oss_url}/static/ssadmin/js/themes/default/images/login_banner.png" /></div>
 			<div class="login_main">
 				<ul class="helpList">
 
 				</ul>
 				<div class="login_inner">
-					<%--<p><a href="/new_user/register.html">注册</a></p>--%>
 					<p>HTTPS高级安全加密协议，客户资料全加密传输，防止通过网络泄漏 ……</p>
+					<p><a href="/front/simulate.html" target="_blank">模拟结算</a></p>
 				</div>
 			</div>
 		</div>

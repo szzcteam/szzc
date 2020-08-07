@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_HOME" value="/home/jcf/api/logs"/>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+    <property name="LOG_HOME" value="/home/luwei/logs"/>
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <charset>UTF-8</charset>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{100}[%M] - %msg%n
-            </pattern>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
         </encoder>
     </appender>
+    <!-- 自己打印的日志文件，用于记录重要日志信息 -->
     <appender name="DEFAULT_INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 设置过滤级别 -->
+            <level>INFO</level>
+            <!-- 用于配置符合过滤条件的操作 -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 用于配置不符合过滤条件的操作 -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
         <Encoding>UTF-8</Encoding>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/pay.log.%d{yyyy-MM-dd}.%i.gz</FileNamePattern>
-            <!-- <MaxHistory>30</MaxHistory> -->
+            <FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/yzs.log.%d{yyyy-MM-dd}.%i.gz</FileNamePattern>
+            <!-- 日志保留天数 -->
+            <MaxHistory>30</MaxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 100MB -->
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
@@ -30,11 +43,12 @@
     <logger name="jdbc.connection" level="OFF"/>
     <logger name="org.springframework" level="error"/>
     <logger name="org.mybatis.spring" level="info"/>
-    <logger name="com.zh" level="info"/>
+    <logger name="com.me.szzc" level="info"/>
+
     <root>
         <!-- DEBUG|INFO|WARN|ERROR -->
         <level value="INFO"/>
-	<appender-ref ref="STDOUT"/>
+	    <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DEFAULT_INFO_FILE"/>
     </root>
 

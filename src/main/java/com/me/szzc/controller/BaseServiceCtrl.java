@@ -35,4 +35,24 @@ public class BaseServiceCtrl {
     @Autowired
     SystemArgsService systemArgsService;
 
+    @Autowired
+    protected SwapHouseService swapHouseService;
+
+    @Autowired
+    NoticeService noticeService;
+
+    @Autowired
+    protected RmbRecompenseService rmbRecompenseService;
+
+    @Autowired
+    protected SettleAccountsService settleAccountsService;
+
+    @Autowired
+    AreaService  areaService ;
+
+    @Autowired
+    RoomChangeService roomChangeService;
+
+
+
 }

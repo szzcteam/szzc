@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.RoomChangeMapper">
+
+    <sql id="Base_Column_List">
+               id,r_name AS `name`,r_number AS `number`,
+               r_ridgepole AS ridgepole,r_unit AS unit,r_floor AS floor,r_mark AS mark,
+               r_area AS area ,r_unit_price AS unitPrice,r_total_price AS totalPrice,
+               r_choose_people AS choosePeople,
+               assigned_project AS assignedProject,housing_platform AS housingPlatform,
+               status,commission_company AS commissionCompany,
+               choose_date AS chooseDate,r_remark as remark
+    </sql>
+
+    <insert id="insertRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
+        insert into r_change
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                r_name,
+            </if>
+            <if test="number != null">
+                r_number,
+            </if>
+            <if test="ridgepole != null">
+                r_ridgepole,
+            </if>
+            <if test="unit != null">
+                r_unit,
+            </if>
+            <if test="floor != null">
+                r_floor,
+            </if>
+            <if test="mark != null">
+                r_mark,
+            </if>
+            <if test="area != null">
+                r_area,
+            </if>
+            <if test="unitPrice != null">
+                r_unit_price,
+            </if>
+            <if test="totalPrice != null">
+                r_total_price,
+            </if>
+            <if test="choosePeople != null">
+                r_choose_people,
+            </if>
+            <if test="assignedProject != null">
+                assigned_project,
+            </if>
+            <if test="housingPlatform != null">
+                housing_platform,
+            </if>
+            <if test="itemCode != null">
+                item_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="ridgepole != null">
+                #{ridgepole,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="floor != null">
+                #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="mark != null">
+                #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null">
+                #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="choosePeople != null">
+                #{choosePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedProject != null">
+                #{assignedProject,jdbcType=INTEGER},
+            </if>
+            <if test="housingPlatform != null">
+                #{housingPlatform,jdbcType=INTEGER},
+            </if>
+            <if test="itemCode != null">
+                #{itemCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="getCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM r_change
+        WHERE r_del = 0
+        AND item_code in
+        <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        <if test="remark != null and remark != ''">
+            AND r_remark LIKE concat(concat('%',#{remark,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="name != null and name != ''">
+            AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="number != null and number != ''">
+            AND r_number LIKE concat(concat('%',#{number,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="choosePeople != null and choosePeople != ''">
+            AND r_choose_people LIKE concat(concat('%',#{choosePeople,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="assignedProject != null and assignedProject != ''">
+            AND assigned_project LIKE concat(concat('%',#{assignedProject,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="housingPlatform != null and housingPlatform != ''">
+            AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="status != null">
+            AND `status` = #{status}
+        </if>
+        <if test="commissionCompany != null and commissionCompany != ''">
+            AND commission_company LIKE concat(concat('%',#{commissionCompany,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="startDate != null and startDate != ''">
+            <![CDATA[
+            AND choose_date >= #{startDate}
+             ]]>
+        </if>
+        <if test="endDate != null and endDate != ''">
+            <![CDATA[
+            AND choose_date <= #{endDate}
+            ]]>
+        </if>
+        <if test="minArea != null and minArea != ''">
+            <![CDATA[
+            AND r_area + 0 >= #{minArea} + 0
+            ]]>
+        </if>
+        <if test="maxArea != null and maxArea != ''">
+            <![CDATA[
+            AND r_area + 0 <= #{maxArea} + 0
+            ]]>
+        </if>
+    </select>
+
+    <select id="queryPage" resultType="com.me.szzc.pojo.entity.RoomChange">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM r_change
+        WHERE r_del = 0
+        AND item_code in
+        <foreach collection="itemCodeList" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        <if test="remark != null and remark != ''">
+            AND r_remark LIKE concat(concat('%',#{remark,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="name != null and name != ''">
+            AND r_name LIKE concat(concat('%',#{name,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="number != null and number != ''">
+            AND r_number LIKE concat(concat('%',#{number,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="choosePeople != null and choosePeople != ''">
+            AND r_choose_people LIKE concat(concat('%',#{choosePeople,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="assignedProject != null and assignedProject != ''">
+            AND assigned_project LIKE concat(concat('%',#{assignedProject,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="housingPlatform != null and housingPlatform != ''">
+            AND housing_platform LIKE concat(concat('%',#{housingPlatform,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="status != null">
+            AND `status` = #{status}
+        </if>
+        <if test="commissionCompany != null and commissionCompany != ''">
+            AND commission_company LIKE concat(concat('%',#{commissionCompany,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="startDate != null and startDate != ''">
+            <![CDATA[
+            AND choose_date >= #{startDate}
+             ]]>
+        </if>
+        <if test="endDate != null and endDate != ''">
+            <![CDATA[
+            AND choose_date <= #{endDate}
+            ]]>
+        </if>
+        <if test="minArea != null and minArea != ''">
+            <![CDATA[
+            AND r_area + 0 >= #{minArea} + 0
+            ]]>
+        </if>
+        <if test="maxArea != null and maxArea != ''">
+            <![CDATA[
+            AND r_area + 0 <= #{maxArea} + 0
+            ]]>
+        </if>
+        ORDER BY id
+        limit ${start},${pageSize}
+    </select>
+
+    <delete id="deleteRoomChange">
+        UPDATE r_change SET r_del = 1  WHERE id = #{id}
+    </delete>
+
+    <select id="getRoomChangeById" resultType="com.me.szzc.pojo.entity.RoomChange">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM r_change
+        WHERE id = #{id}
+        AND r_del = 0
+    </select>
+
+    <select id="selectRoomChangeByParam" parameterType="com.me.szzc.pojo.entity.RoomChange"
+            resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM r_change
+        WHERE r_name = #{name,jdbcType=VARCHAR} AND r_number = #{number,jdbcType=VARCHAR} AND r_del = 0
+    </select>
+
+    <update id="updateChooseRoom">
+        UPDATE r_change
+           SET r_choose_people = #{choosePeople,jdbcType=VARCHAR}
+         WHERE r_del = 0
+           AND r_name = #{name,jdbcType=VARCHAR}
+           AND r_number = #{number,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
+        UPDATE r_change
+        <set>
+            <if test="remark!=null ">
+                r_remark = #{remark},
+            </if>
+            <if test="name!=null and name !=''">
+                r_name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="number!=null and number !=''">
+                r_number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="ridgepole!=null and ridgepole !=''">
+                r_ridgepole = #{ridgepole,jdbcType=VARCHAR},
+            </if>
+            <if test="unit!=null and unit !=''">
+                r_unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="floor!=null and floor !=''">
+                r_floor = #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="mark!=null and mark !=''">
+                r_mark = #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="area!=null and area !=''">
+                r_area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice!=null and unitPrice !=''">
+                r_unit_price = #{unitPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice!=null and totalPrice !=''">
+                r_total_price = #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="choosePeople!=null and choosePeople !=''">
+                r_choose_people = #{choosePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedProject!=null and assignedProject !=''">
+                assigned_project = #{assignedProject,jdbcType=VARCHAR},
+            </if>
+            <if test="housingPlatform!=null and housingPlatform !=''">
+                housing_platform = #{housingPlatform,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="selectRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange"
+            resultType="com.me.szzc.pojo.entity.RoomChange">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM r_change
+        WHERE id != #{id}
+        AND r_name = #{name,jdbcType=VARCHAR}
+        AND r_number = #{number,jdbcType=VARCHAR}
+        AND r_del = 0
+    </select>
+
+    <update id="addChooseRoom" parameterType="com.me.szzc.pojo.vo.RoomChangeVo">
+        UPDATE r_change
+        SET
+        status = #{status},
+        choose_date = #{chooseDate},
+        commission_company = #{commissionCompany},
+        r_choose_people = #{choosePeople}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateChooseRoomBy0" parameterType="com.me.szzc.pojo.vo.RoomChangeVo">
+        UPDATE r_change
+        SET
+        status = 0,
+        choose_date = NULL ,
+        commission_company = NULL ,
+        r_choose_people = NULL
+        WHERE id = #{id}
+    </update>
+
+
+    <update id="updateChooseRoomNot0" parameterType="com.me.szzc.pojo.vo.RoomChangeVo">
+        UPDATE r_change
+        <set>
+            <if test="status!=null and status !=''">
+                status = #{status},
+            </if>
+            <if test="choosePeople!=null and choosePeople !=''">
+                r_choose_people = #{choosePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="chooseDate!=null">
+                choose_date = #{chooseDate},
+            </if>
+            <if test="commissionCompany!=null and commissionCompany !=''">
+                commission_company = #{commissionCompany},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectAll" resultType="com.me.szzc.pojo.RoomChangeExport">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM r_change
+        WHERE r_del = 0
+        AND item_code in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="countNum" resultType="com.me.szzc.pojo.dto.RoomChangeNumDTO">
+        select item_code as projectCode,count(1) as totalHouse,
+        sum(case status when 0 then 1 else 0 end) as emptys,
+        sum(case status when 1 then 1 else 0 end) as signed,
+        sum(case status when 2 then 1 else 0 end) as prior,
+        sum(case status when 3 then 1 else 0 end) as invalid
+        from r_change
+        where r_del = 0
+        group by item_code
+    </select>
+
+    <select id="countAreaNumByProjectCode" resultType="com.me.szzc.pojo.dto.RoomChangeNumDTO">
+        select r_name as projectName,r_area as area, count(1) as num from r_change where item_code = #{projectCode} and r_del = 0
+        group by r_name, r_area
+    </select>
+</mapper>

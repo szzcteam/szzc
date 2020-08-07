@@ -82,6 +82,16 @@
 		<property name="maxInMemorySize" value="1" />
 	</bean>
 
+	<bean id="rememberMeCookie"  class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="rememberMe"/>
+		<property name="httpOnly" value="true"/>
+		<property name="maxAge" value="2592000"/><!-- 30 days -->
+	</bean>
+
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"></property>
+		<property name="cookie" ref="rememberMeCookie"/>
+	</bean>
 
 	<bean id="constantMap" class="com.me.szzc.init.ConstantMap" scope="singleton" init-method="init"></bean>
 

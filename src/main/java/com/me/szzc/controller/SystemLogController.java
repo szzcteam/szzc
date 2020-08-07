@@ -40,7 +40,7 @@ public class SystemLogController extends BaseController{
         filter.append("where 1=1 ");
      //   filter.append("and (unix_timestamp(now())-unix_timestamp(fcreatetime)) <2*60*60 ");
         if(keyWord != null && keyWord.trim().length() >0){
-            filter.append("and ip like '%"+keyWord+"%' ");
+            filter.append("and (ip like '%"+keyWord+"%' or request_parameters like '%"+keyWord+"%' )");
             modelAndView.addObject("keywords", keyWord);
         }
         if(StringUtils.isNotEmpty(model) && !model.equals("全部")){

@@ -1,5 +1,6 @@
 package com.me.szzc.utils;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +14,10 @@ import java.util.Date;
  */
 public final class DateHelper {
     private DateHelper() {
+    }
+
+    public static Timestamp getTimestamp() {
+        return new Timestamp(System.currentTimeMillis());
     }
 
     /**
@@ -33,6 +38,7 @@ public final class DateHelper {
         YearMonthDay_HourMinute("yyyy-MM-dd HH:mm"),
         YearMonthDay_Hour("yyyy-MM-dd HH"),
         YearMonthDay("yyyy-MM-dd"),
+        YearMonthDay_Chines("yyyy年MM月dd日"),
         YearMonthDay_Log("yyyyMMdd"),
         YearMonth("yyyy-MM"),
         Year("yyyy"),
@@ -243,6 +249,16 @@ public final class DateHelper {
         return date;
     }
 
+    /**
+     * 获取系统当天时间yyyy-mm-dd格式
+     * @return
+     */
+    public static String getCurrentDateYearMonthDayHourMinuteSecond() {
+        Calendar c = Calendar.getInstance();
+        String date = DateFormatType.YearMonthDayHourMinuteSecond.getDateFormat().format(c.getTime());
+        return date;
+    }
+
 
 
     public static Date subMonth(Date date,int temp){
@@ -272,6 +288,8 @@ public final class DateHelper {
 
 
         Date date1 = new Date();
+        SimpleDateFormat dae = new SimpleDateFormat("yyyy年MM月dd日");
+        System.out.println(dae.format(date1));
         Date date2 = string2Date("2017-01-19 12:00:00", DateFormatType.YearMonthDay_HourMinuteSecond);
 
         Long time = getDifferSecond(date1,date2);

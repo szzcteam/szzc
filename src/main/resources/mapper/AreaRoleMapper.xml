@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.me.szzc.dao.AreaRoleMapper">
+    <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.AreaRole">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="area_id" jdbcType="BIGINT" property="areaId" />
+        <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    </resultMap>
+    <insert id="insert" parameterType="com.me.szzc.pojo.entity.AreaRole">
+    insert into t_area_role (area_id, role_id)
+    values (#{areaId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
+  </insert>
+
+  <update id="update" parameterType="com.me.szzc.pojo.entity.AreaRole">
+    update t_area_role set area_id = #{areaId}  , role_id = #{roleId} where id = #{id}
+  </update>
+
+    <select id="listByAreaId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from t_area_role where area_id = #{areaId}
+    </select>
+
+    <delete id="deleteByAreaId" parameterType="java.lang.Long">
+        delete from t_area_role where area_id = #{areaId}
+    </delete>
+
+
+
+
+</mapper>

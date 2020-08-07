@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.AreaMapper">
+    <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.Area">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="project_code" jdbcType="VARCHAR" property="projectCode" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+        <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
+        <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
+        <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+            id, `name`, project_code, status,deleted,create_date,create_user_id, modified_date,modified_user_id
+    </sql>
+    <insert id="insert" parameterType="com.me.szzc.pojo.entity.Area" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into t_area (`name`, project_code, status,deleted,create_date,create_user_id, modified_date,modified_user_id)
+    values (#{name,jdbcType=VARCHAR}, #{projectCode}, #{status,jdbcType=INTEGER},
+      #{deleted,jdbcType=TINYINT}, #{createDate},#{createUserId},#{modifiedDate},#{modifiedUserId})
+  </insert>
+
+    <select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from t_area
+        where deleted = 0
+        <if test="name != null ">
+            AND `name` LIKE concat('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="queryPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_area
+        where deleted = 0
+        <if test="name != null ">
+            AND `name` LIKE concat('%',#{name},'%')
+        </if>
+        <if test="projectCode != null ">
+            AND `project_code` LIKE concat('%',#{projectCode},'%')
+        </if>
+        order by id desc
+        limit ${start},${pageSize}
+    </select>
+
+
+    <select id="getByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_area
+        where deleted = 0
+        and `name` = #{name}
+    </select>
+
+
+    <select id="getById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_area
+        where deleted = 0
+        and id = #{id}
+    </select>
+
+
+    <update id="updateStatus" parameterType="com.me.szzc.pojo.entity.Area">
+        update t_area set status = #{status}, modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId} where id = #{id}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Long">
+        update t_area set deleted = 1 where id = #{id}
+    </update>
+
+    <select id="existsByUpdateName" resultType="java.lang.Integer">
+        select count(1) from t_area where name = #{name} and id != #{id} and deleted = 0
+    </select>
+
+    <update id="update" parameterType="com.me.szzc.pojo.entity.Area">
+        update t_area set name = #{name}, project_code = #{projectCode}, modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId} where id = #{id}
+    </update>
+
+    <select id="listByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select a.*
+        from t_area a
+        inner join t_area_role b on b.area_id = a.id
+        inner join f_admin c on c.froleid = b.role_id
+        where a.deleted = 0
+        and c.fid = #{userId}
+    </select>
+
+    <select id="listEnableByUserId" resultMap="BaseResultMap">
+        select a.*
+        from t_area a
+        inner join t_area_role b on b.area_id = a.id
+        inner join f_admin c on c.froleid = b.role_id
+        where a.deleted = 0
+        and a.status = #{status}
+        and c.fid = #{userId}
+    </select>
+</mapper>

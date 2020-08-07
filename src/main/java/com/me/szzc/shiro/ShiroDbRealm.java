@@ -8,6 +8,7 @@ import com.me.szzc.pojo.entity.Frole;
 import com.me.szzc.pojo.entity.FroleSecurity;
 import com.me.szzc.service.AdminService;
 import com.me.szzc.service.RoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -19,11 +20,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 public class ShiroDbRealm extends AuthorizingRealm {
 
     @Autowired
@@ -62,6 +63,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
                     info.addRole(roleName);
                     Set<FroleSecurity> set = role.getFroleSecurities(); //admin.getFrole().getFroleSecurities();
                     for (FroleSecurity froleSecurity : set) {
+                        if (froleSecurity.getFsecurity() == null) {
+                            log.warn("菜单权限数据异常, roleId:{}, securityId:{}", froleSecurity.getFroleid(), froleSecurity.getFsecurityid());
+                        }
                     	permissions.add(froleSecurity.getFsecurity().getFurl());
     				}
             	}

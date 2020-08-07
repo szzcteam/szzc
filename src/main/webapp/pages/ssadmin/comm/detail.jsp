@@ -10,6 +10,14 @@
 		</div>
 		<div class="accordionContent">
 			<ul class="tree treeFolder">
+				<shiro:hasPermission name="/ssadmin/area/queryPage.html">
+					<li><a href="/ssadmin/area/queryPage.html" target="navTab"
+						   rel="area">片区管理</a></li>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="/ssadmin/roomChange/queryPage.html">
+					<li><a href="/ssadmin/roomChange/queryPage.html" target="navTab"
+						   rel="roomChange">房源管理</a></li>
+				</shiro:hasPermission>
 				<shiro:hasPermission name="/ssadmin/protocolList.html">
 					<li><a href="/ssadmin/protocolList.html" target="navTab"
 						   rel="coinSurveyList">协议管理</a></li>
@@ -55,4 +63,23 @@
 		</div>
 	</shiro:hasPermission>
 
+	<shiro:hasPermission name="report">
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>报表管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree treeFolder">
+				<shiro:hasPermission name="/ssadmin/report/chartList.html">
+					<li><a href="/ssadmin/report/chartList.html" target="navTab"
+						   rel="coinSurveyList">图形汇总</a></li>
+				</shiro:hasPermission>
+				<shiro:hasPermission name="ssadmin/report/count/init.html">
+					<li><a href="ssadmin/report/count/init.html" target="navTab"
+						   rel="coinSurveyList">数据统计</a></li>
+				</shiro:hasPermission>
+			</ul>
+		</div>
+	</shiro:hasPermission>
 </div>

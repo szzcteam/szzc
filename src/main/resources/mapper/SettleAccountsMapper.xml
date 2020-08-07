@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.SettleAccountsMapper">
+  <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.SettleAccounts">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="area_id" jdbcType="BIGINT" property="areaId" />
+    <result column="card_no" jdbcType="VARCHAR" property="cardNo" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="house_owner" jdbcType="VARCHAR" property="houseOwner" />
+    <result column="identity_no" jdbcType="VARCHAR" property="identityNo" />
+    <result column="compensate_type" jdbcType="INTEGER" property="compensateType" />
+    <result column="lessee" jdbcType="VARCHAR" property="lessee" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="lessee_phone" jdbcType="VARCHAR" property="lesseePhone" />
+    <result column="useing" jdbcType="VARCHAR" property="useing" />
+    <result column="certified_area" jdbcType="DECIMAL" property="certifiedArea" />
+    <result column="no_register_legal_area" jdbcType="DECIMAL" property="noRegisterLegalArea" />
+    <result column="history_legacy_area" jdbcType="DECIMAL" property="historyLegacyArea" />
+    <result column="check_in_area" jdbcType="DECIMAL" property="checkInArea" />
+    <result column="no_checkin_area" jdbcType="DECIMAL" property="noCheckinArea" />
+    <result column="in_area" jdbcType="DECIMAL" property="inArea" />
+    <result column="assess_price" jdbcType="VARCHAR" property="assessPrice" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="new_house_name" jdbcType="VARCHAR" property="newHouseName" />
+    <result column="calc_value_compensate" jdbcType="VARCHAR" property="calcValueCompensate" />
+    <result column="value_compensate" jdbcType="DECIMAL" property="valueCompensate" />
+    <result column="value_compensate_bz" jdbcType="VARCHAR" property="valueCompensateBz" />
+    <result column="calc_no_register_legal" jdbcType="VARCHAR" property="calcNoRegisterLegal" />
+    <result column="no_register_legal" jdbcType="DECIMAL" property="noRegisterLegal" />
+    <result column="no_register_legal_bz" jdbcType="VARCHAR" property="noRegisterLegalBz" />
+    <result column="calc_history_legacy" jdbcType="VARCHAR" property="calcHistoryLegacy" />
+    <result column="history_legacy" jdbcType="DECIMAL" property="historyLegacy" />
+    <result column="history_legacy_bz" jdbcType="VARCHAR" property="historyLegacyBz" />
+    <result column="calc_decoration_compensate" jdbcType="VARCHAR" property="calcDecorationCompensate" />
+    <result column="decoration_compensate" jdbcType="DECIMAL" property="decorationCompensate" />
+    <result column="decoration_compensate_bz" jdbcType="VARCHAR" property="decorationCompensateBz" />
+    <result column="calc_move_house_fee" jdbcType="VARCHAR" property="calcMoveHouseFee" />
+    <result column="move_house_fee" jdbcType="DECIMAL" property="moveHouseFee" />
+    <result column="move_house_fee_bz" jdbcType="VARCHAR" property="moveHouseFeeBz" />
+    <result column="calc_interim_fee" jdbcType="VARCHAR" property="calcInterimFee" />
+    <result column="interim_fee" jdbcType="DECIMAL" property="interimFee" />
+    <result column="interim_fee_bz" jdbcType="VARCHAR" property="interimFeeBz" />
+    <result column="calc_move_water_meter_fee" jdbcType="VARCHAR" property="calcMoveWaterMeterFee" />
+    <result column="move_water_meter_fee" jdbcType="DECIMAL" property="moveWaterMeterFee" />
+    <result column="move_water_meter_fee_bz" jdbcType="VARCHAR" property="moveWaterMeterFeeBz" />
+    <result column="calc_move_ammeter_fee" jdbcType="VARCHAR" property="calcMoveAmmeterFee" />
+    <result column="move_ammeter_fee" jdbcType="DECIMAL" property="moveAmmeterFee" />
+    <result column="move_ammeter_fee_bz" jdbcType="VARCHAR" property="moveAmmeterFeeBz" />
+    <result column="calc_move_air_conditioning_fee" jdbcType="VARCHAR" property="calcMoveAirConditioningFee" />
+    <result column="move_air_conditioning_fee" jdbcType="DECIMAL" property="moveAirConditioningFee" />
+    <result column="move_air_conditioning_fee_bz" jdbcType="VARCHAR" property="moveAirConditioningFeeBz" />
+    <result column="calc_hot_water_compensate" jdbcType="VARCHAR" property="calcHotWaterCompensate" />
+    <result column="hot_water_compensate" jdbcType="DECIMAL" property="hotWaterCompensate" />
+    <result column="hot_water_compensate_bz" jdbcType="VARCHAR" property="hotWaterCompensateBz" />
+    <result column="calc_gas_fee" jdbcType="VARCHAR" property="calcGasFee" />
+    <result column="gas_fee" jdbcType="DECIMAL" property="gasFee" />
+    <result column="gas_fee_bz" jdbcType="VARCHAR" property="gasFeeBz" />
+    <result column="calc_structure_compensate" jdbcType="VARCHAR" property="calcStructureCompensate" />
+    <result column="structure_compensate" jdbcType="DECIMAL" property="structureCompensate" />
+    <result column="structure_compensate_bz" jdbcType="VARCHAR" property="structureCompensateBz" />
+    <result column="calc_structure_balcony" jdbcType="VARCHAR" property="calcStructureBalcony" />
+    <result column="structure_balcony" jdbcType="DECIMAL" property="structureBalcony" />
+    <result column="structure_balcony_bz" jdbcType="VARCHAR" property="structureBalconyBz" />
+    <result column="calc_structure_build" jdbcType="VARCHAR" property="calcStructureBuild" />
+    <result column="structure_build" jdbcType="DECIMAL" property="structureBuild" />
+    <result column="structure_build_bz" jdbcType="VARCHAR" property="structureBuildBz" />
+    <result column="calc_structure_dark" jdbcType="VARCHAR" property="calcStructureDark" />
+    <result column="structure_dark" jdbcType="DECIMAL" property="structureDark" />
+    <result column="structure_dark_bz" jdbcType="VARCHAR" property="structureDarkBz" />
+    <result column="calc_structure_mezzanine" jdbcType="VARCHAR" property="calcStructureMezzanine" />
+    <result column="structure_mezzanine" jdbcType="DECIMAL" property="structureMezzanine" />
+    <result column="structure_mezzanine_bz" jdbcType="VARCHAR" property="structureMezzanineBz" />
+    <result column="calc_structure_roof" jdbcType="VARCHAR" property="calcStructureRoof" />
+    <result column="structure_roof" jdbcType="DECIMAL" property="structureRoof" />
+    <result column="structure_roof_bz" jdbcType="VARCHAR" property="structureRoofBz" />
+    <result column="affiliated_other_desc" jdbcType="VARCHAR" property="affiliatedOtherDesc" />
+    <result column="calc_affiliated_other" jdbcType="VARCHAR" property="calcAffiliatedOther" />
+    <result column="affiliated_other" jdbcType="DECIMAL" property="affiliatedOther" />
+    <result column="affiliated_other_bz" jdbcType="VARCHAR" property="affiliatedOtherBz" />
+    <result column="calc_no_check_compensate" jdbcType="VARCHAR" property="calcNoCheckCompensate" />
+    <result column="no_check_compensate" jdbcType="DECIMAL" property="noCheckCompensate" />
+    <result column="no_check_compensate_bz" jdbcType="VARCHAR" property="noCheckCompensateBz" />
+    <result column="calc_rmb_compensate" jdbcType="VARCHAR" property="calcRmbCompensate" />
+    <result column="rmb_compensate" jdbcType="DECIMAL" property="rmbCompensate" />
+    <result column="rmb_compensate_bz" jdbcType="VARCHAR" property="rmbCompensateBz" />
+    <result column="calc_life_compensate" jdbcType="VARCHAR" property="calcLifeCompensate" />
+    <result column="life_compensate" jdbcType="DECIMAL" property="lifeCompensate" />
+    <result column="life_compensate_bz" jdbcType="VARCHAR" property="lifeCompensateBz" />
+    <result column="calc_change_compensate" jdbcType="VARCHAR" property="calcChangeCompensate" />
+    <result column="change_compensate" jdbcType="DECIMAL" property="changeCompensate" />
+    <result column="change_compensate_bz" jdbcType="VARCHAR" property="changeCompensateBz" />
+    <result column="calc_building_area_fee" jdbcType="VARCHAR" property="calcBuildingAreaFee" />
+    <result column="building_area_fee" jdbcType="DECIMAL" property="buildingAreaFee" />
+    <result column="building_area_fee_bz" jdbcType="VARCHAR" property="buildingAreaFeeBz" />
+    <result column="calc_suspend_business_fee" jdbcType="VARCHAR" property="calcSuspendBusinessFee" />
+    <result column="suspend_business_fee" jdbcType="DECIMAL" property="suspendBusinessFee" />
+    <result column="suspend_business_fee_bz" jdbcType="VARCHAR" property="suspendBusinessFeeBz" />
+    <result column="calc_no_move_compensate" jdbcType="VARCHAR" property="calcNoMoveCompensate" />
+    <result column="no_move_compensate" jdbcType="DECIMAL" property="noMoveCompensate" />
+    <result column="no_move_compensate_bz" jdbcType="VARCHAR" property="noMoveCompensateBz" />
+    <result column="calc_move_reward" jdbcType="VARCHAR" property="calcMoveReward" />
+    <result column="move_reward" jdbcType="DECIMAL" property="moveReward" />
+    <result column="move_reward_bz" jdbcType="VARCHAR" property="moveRewardBz" />
+    <result column="calc_rmb_move_reward" jdbcType="VARCHAR" property="calcRmbMoveReward" />
+    <result column="rmb_move_reward" jdbcType="DECIMAL" property="rmbMoveReward" />
+    <result column="rmb_move_reward_bz" jdbcType="VARCHAR" property="rmbMoveRewardBz" />
+    <result column="calc_small_area_reward" jdbcType="VARCHAR" property="calcSmallAreaReward" />
+    <result column="small_area_reward" jdbcType="DECIMAL" property="smallAreaReward" />
+    <result column="small_area_reward_bz" jdbcType="VARCHAR" property="smallAreaRewardBz" />
+    <result column="calc_guarantee" jdbcType="VARCHAR" property="calcGuarantee" />
+    <result column="guarantee" jdbcType="DECIMAL" property="guarantee" />
+    <result column="guarantee_bz" jdbcType="VARCHAR" property="guaranteeBz" />
+    <result column="other_desc" jdbcType="VARCHAR" property="otherDesc" />
+    <result column="calc_other" jdbcType="VARCHAR" property="calcOther" />
+    <result column="other_rmb" jdbcType="DECIMAL" property="otherRmb" />
+    <result column="other_bz" jdbcType="VARCHAR" property="otherBz" />
+    <result column="calc_sum_compensate" jdbcType="VARCHAR" property="calcSumCompensate" />
+    <result column="sum_compensate" jdbcType="DECIMAL" property="sumCompensate" />
+    <result column="sum_compensate_bz" jdbcType="VARCHAR" property="sumCompensateBz" />
+    <result column="change_area" jdbcType="DECIMAL" property="changeArea" />
+    <result column="calc_change_area" jdbcType="VARCHAR" property="calcChangeArea" />
+    <result column="calcm" jdbcType="DECIMAL" property="calcm" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="house_money" jdbcType="DECIMAL" property="houseMoney" />
+    <result column="house_money_bz" jdbcType="VARCHAR" property="houseMoneyBz" />
+    <result column="calc_deduction" jdbcType="VARCHAR" property="calcDeduction" />
+    <result column="deduction" jdbcType="DECIMAL" property="deduction" />
+    <result column="deduction_bz" jdbcType="VARCHAR" property="deductionBz" />
+    <result column="swap_price1" jdbcType="DECIMAL" property="swapPrice1" />
+    <result column="swap_price2" jdbcType="DECIMAL" property="swapPrice2" />
+    <result column="swap_price3" jdbcType="DECIMAL" property="swapPrice3" />
+    <result column="swap_price4" jdbcType="DECIMAL" property="swapPrice4" />
+    <result column="swap_price5" jdbcType="DECIMAL" property="swapPrice5" />
+    <result column="swap_area1" jdbcType="VARCHAR" property="swapArea1" />
+    <result column="swap_area2" jdbcType="VARCHAR" property="swapArea2" />
+    <result column="swap_area3" jdbcType="VARCHAR" property="swapArea3" />
+    <result column="swap_area4" jdbcType="VARCHAR" property="swapArea4" />
+    <result column="swap_area5" jdbcType="VARCHAR" property="swapArea5" />
+    <result column="swap_money_1" jdbcType="VARCHAR" property="swapMoney1" />
+    <result column="swap_money_2" jdbcType="VARCHAR" property="swapMoney2" />
+    <result column="swap_money_3" jdbcType="VARCHAR" property="swapMoney3" />
+    <result column="swap_money_4" jdbcType="VARCHAR" property="swapMoney4" />
+    <result column="swap_money_5" jdbcType="VARCHAR" property="swapMoney5" />
+    <result column="pay_total" jdbcType="DECIMAL" property="payTotal" />
+    <result column="receive_total" jdbcType="DECIMAL" property="receiveTotal" />
+    <result column="pay_money" jdbcType="VARCHAR" property="payMoney" />
+    <result column="receive_money" jdbcType="VARCHAR" property="receiveMoney" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
+    <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
+    <result column="deleted" jdbcType="TINYINT" property="deleted" />
+    <result column="signing_status" jdbcType="INTEGER" property="signingStatus" />
+    <result column="signing_date" jdbcType="TIMESTAMP" property="signingDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, area_id, card_no, project_name, house_owner, identity_no, compensate_type, lessee,
+    phone, lessee_phone, useing, certified_area, no_register_legal_area, history_legacy_area,
+    check_in_area, no_checkin_area, in_area, assess_price, address, new_house_name, calc_value_compensate,
+    value_compensate, value_compensate_bz, calc_no_register_legal, no_register_legal,
+    no_register_legal_bz, calc_history_legacy, history_legacy, history_legacy_bz, calc_decoration_compensate,
+    decoration_compensate, decoration_compensate_bz, calc_move_house_fee, move_house_fee,
+    move_house_fee_bz, calc_interim_fee, interim_fee, interim_fee_bz, calc_move_water_meter_fee,
+    move_water_meter_fee, move_water_meter_fee_bz, calc_move_ammeter_fee, move_ammeter_fee,
+    move_ammeter_fee_bz, calc_move_air_conditioning_fee, move_air_conditioning_fee, move_air_conditioning_fee_bz,
+    calc_hot_water_compensate, hot_water_compensate, hot_water_compensate_bz, calc_gas_fee,
+    gas_fee, gas_fee_bz, calc_structure_compensate, structure_compensate, structure_compensate_bz,
+    calc_structure_balcony, structure_balcony, structure_balcony_bz, calc_structure_build,
+    structure_build, structure_build_bz, calc_structure_dark, structure_dark, structure_dark_bz,
+    calc_structure_mezzanine, structure_mezzanine, structure_mezzanine_bz, calc_structure_roof,
+    structure_roof, structure_roof_bz, affiliated_other_desc, calc_affiliated_other,
+    affiliated_other, affiliated_other_bz, calc_no_check_compensate, no_check_compensate,
+    no_check_compensate_bz, calc_rmb_compensate, rmb_compensate, rmb_compensate_bz, calc_life_compensate,
+    life_compensate, life_compensate_bz, calc_change_compensate, change_compensate, change_compensate_bz,
+    calc_building_area_fee, building_area_fee, building_area_fee_bz, calc_suspend_business_fee,
+    suspend_business_fee, suspend_business_fee_bz, calc_no_move_compensate, no_move_compensate,
+    no_move_compensate_bz, calc_move_reward, move_reward, move_reward_bz, calc_rmb_move_reward,
+    rmb_move_reward, rmb_move_reward_bz, calc_small_area_reward, small_area_reward, small_area_reward_bz,
+    calc_guarantee, guarantee, guarantee_bz, other_desc, calc_other, other_rmb, other_bz,
+    calc_sum_compensate, sum_compensate, sum_compensate_bz, change_area, calc_change_area,
+    calcm, price, house_money, house_money_bz, calc_deduction, deduction, deduction_bz,
+    swap_price1, swap_price2, swap_price3, swap_price4, swap_price5, swap_area1, swap_area2,
+    swap_area3, swap_area4, swap_area5, swap_money_1, swap_money_2, swap_money_3, swap_money_4,
+    swap_money_5,
+    pay_total, receive_total, pay_money, receive_money, create_date, create_user_id,
+    modified_date, modified_user_id, deleted, signing_status,signing_date
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_settle_accounts
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="getByHouseOwnerAddr" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_settle_accounts
+    where (house_owner = #{houseOwner} or lessee = #{houseOwner}) and address = #{address} and deleted = 0
+  </select>
+
+  <select id="getByHouseOwnerAddrNeqId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_settle_accounts
+    where (house_owner = #{houseOwner} or lessee = #{houseOwner}) and address = #{address} and deleted = 0
+    and id <![CDATA[ <> ]]> #{id}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_settle_accounts
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
+    insert into t_settle_accounts (id, area_id, card_no,
+      project_name, house_owner, identity_no,
+      compensate_type, lessee, phone,
+      lessee_phone, useing, certified_area,
+      no_register_legal_area, history_legacy_area,
+      check_in_area, no_checkin_area, in_area,
+      assess_price, address, new_house_name, calc_value_compensate,
+      value_compensate, value_compensate_bz, calc_no_register_legal,
+      no_register_legal, no_register_legal_bz, calc_history_legacy,
+      history_legacy, history_legacy_bz, calc_decoration_compensate,
+      decoration_compensate, decoration_compensate_bz,
+      calc_move_house_fee, move_house_fee, move_house_fee_bz,
+      calc_interim_fee, interim_fee, interim_fee_bz,
+      calc_move_water_meter_fee, move_water_meter_fee,
+      move_water_meter_fee_bz, calc_move_ammeter_fee,
+      move_ammeter_fee, move_ammeter_fee_bz, calc_move_air_conditioning_fee,
+      move_air_conditioning_fee, move_air_conditioning_fee_bz,
+      calc_hot_water_compensate, hot_water_compensate,
+      hot_water_compensate_bz, calc_gas_fee, gas_fee,
+      gas_fee_bz, calc_structure_compensate, structure_compensate,
+      structure_compensate_bz, calc_structure_balcony,
+      structure_balcony, structure_balcony_bz, calc_structure_build,
+      structure_build, structure_build_bz, calc_structure_dark,
+      structure_dark, structure_dark_bz, calc_structure_mezzanine,
+      structure_mezzanine, structure_mezzanine_bz,
+      calc_structure_roof, structure_roof, structure_roof_bz,
+      affiliated_other_desc, calc_affiliated_other,
+      affiliated_other, affiliated_other_bz, calc_no_check_compensate,
+      no_check_compensate, no_check_compensate_bz,
+      calc_rmb_compensate, rmb_compensate, rmb_compensate_bz,
+      calc_life_compensate, life_compensate, life_compensate_bz,
+      calc_change_compensate, change_compensate,
+      change_compensate_bz, calc_building_area_fee,
+      building_area_fee, building_area_fee_bz, calc_suspend_business_fee,
+      suspend_business_fee, suspend_business_fee_bz,
+      calc_no_move_compensate, no_move_compensate,
+      no_move_compensate_bz, calc_move_reward, move_reward,
+      move_reward_bz, calc_rmb_move_reward, rmb_move_reward,
+      rmb_move_reward_bz, calc_small_area_reward, small_area_reward,
+      small_area_reward_bz, calc_guarantee, guarantee,
+      guarantee_bz, other_desc, calc_other,
+      other_rmb, other_bz, calc_sum_compensate,
+      sum_compensate, sum_compensate_bz, change_area,
+      calc_change_area, calcm, price,
+      house_money, house_money_bz, calc_deduction,
+      deduction, deduction_bz, swap_price1,
+      swap_price2, swap_price3, swap_price4,
+      swap_price5, swap_area1, swap_area2,
+      swap_area3, swap_area4, swap_area5,
+      swap_money_1, swap_money_2, swap_money_3,
+      swap_money_4, swap_money_5, pay_total,
+      receive_total, pay_money, receive_money,
+      create_date, create_user_id, modified_date,
+      modified_user_id, deleted, signing_status,
+      signing_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{areaId,jdbcType=BIGINT}, #{cardNo,jdbcType=VARCHAR},
+      #{projectName,jdbcType=VARCHAR}, #{houseOwner,jdbcType=VARCHAR}, #{identityNo,jdbcType=VARCHAR},
+      #{compensateType,jdbcType=INTEGER}, #{lessee,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+      #{lesseePhone,jdbcType=VARCHAR}, #{useing,jdbcType=VARCHAR}, #{certifiedArea,jdbcType=DECIMAL},
+      #{noRegisterLegalArea,jdbcType=DECIMAL}, #{historyLegacyArea,jdbcType=DECIMAL},
+      #{checkInArea,jdbcType=DECIMAL}, #{noCheckinArea,jdbcType=DECIMAL}, #{inArea,jdbcType=DECIMAL},
+      #{assessPrice,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{newHouseName}, #{calcValueCompensate,jdbcType=VARCHAR},
+      #{valueCompensate,jdbcType=DECIMAL}, #{valueCompensateBz,jdbcType=VARCHAR}, #{calcNoRegisterLegal,jdbcType=VARCHAR},
+      #{noRegisterLegal,jdbcType=DECIMAL}, #{noRegisterLegalBz,jdbcType=VARCHAR}, #{calcHistoryLegacy,jdbcType=VARCHAR},
+      #{historyLegacy,jdbcType=DECIMAL}, #{historyLegacyBz,jdbcType=VARCHAR}, #{calcDecorationCompensate,jdbcType=VARCHAR},
+      #{decorationCompensate,jdbcType=DECIMAL}, #{decorationCompensateBz,jdbcType=VARCHAR},
+      #{calcMoveHouseFee,jdbcType=VARCHAR}, #{moveHouseFee,jdbcType=DECIMAL}, #{moveHouseFeeBz,jdbcType=VARCHAR},
+      #{calcInterimFee,jdbcType=VARCHAR}, #{interimFee,jdbcType=DECIMAL}, #{interimFeeBz,jdbcType=VARCHAR},
+      #{calcMoveWaterMeterFee,jdbcType=VARCHAR}, #{moveWaterMeterFee,jdbcType=DECIMAL},
+      #{moveWaterMeterFeeBz,jdbcType=VARCHAR}, #{calcMoveAmmeterFee,jdbcType=VARCHAR},
+      #{moveAmmeterFee,jdbcType=DECIMAL}, #{moveAmmeterFeeBz,jdbcType=VARCHAR}, #{calcMoveAirConditioningFee,jdbcType=VARCHAR},
+      #{moveAirConditioningFee,jdbcType=DECIMAL}, #{moveAirConditioningFeeBz,jdbcType=VARCHAR},
+      #{calcHotWaterCompensate,jdbcType=VARCHAR}, #{hotWaterCompensate,jdbcType=DECIMAL},
+      #{hotWaterCompensateBz,jdbcType=VARCHAR}, #{calcGasFee,jdbcType=VARCHAR}, #{gasFee,jdbcType=DECIMAL},
+      #{gasFeeBz,jdbcType=VARCHAR}, #{calcStructureCompensate,jdbcType=VARCHAR}, #{structureCompensate,jdbcType=DECIMAL},
+      #{structureCompensateBz,jdbcType=VARCHAR}, #{calcStructureBalcony,jdbcType=VARCHAR},
+      #{structureBalcony,jdbcType=DECIMAL}, #{structureBalconyBz,jdbcType=VARCHAR}, #{calcStructureBuild,jdbcType=VARCHAR},
+      #{structureBuild,jdbcType=DECIMAL}, #{structureBuildBz,jdbcType=VARCHAR}, #{calcStructureDark,jdbcType=VARCHAR},
+      #{structureDark,jdbcType=DECIMAL}, #{structureDarkBz,jdbcType=VARCHAR}, #{calcStructureMezzanine,jdbcType=VARCHAR},
+      #{structureMezzanine,jdbcType=DECIMAL}, #{structureMezzanineBz,jdbcType=VARCHAR},
+      #{calcStructureRoof,jdbcType=VARCHAR}, #{structureRoof,jdbcType=DECIMAL}, #{structureRoofBz,jdbcType=VARCHAR},
+      #{affiliatedOtherDesc,jdbcType=VARCHAR}, #{calcAffiliatedOther,jdbcType=VARCHAR},
+      #{affiliatedOther,jdbcType=DECIMAL}, #{affiliatedOtherBz,jdbcType=VARCHAR}, #{calcNoCheckCompensate,jdbcType=VARCHAR},
+      #{noCheckCompensate,jdbcType=DECIMAL}, #{noCheckCompensateBz,jdbcType=VARCHAR},
+      #{calcRmbCompensate,jdbcType=VARCHAR}, #{rmbCompensate,jdbcType=DECIMAL}, #{rmbCompensateBz,jdbcType=VARCHAR},
+      #{calcLifeCompensate,jdbcType=VARCHAR}, #{lifeCompensate,jdbcType=DECIMAL}, #{lifeCompensateBz,jdbcType=VARCHAR},
+      #{calcChangeCompensate,jdbcType=VARCHAR}, #{changeCompensate,jdbcType=DECIMAL},
+      #{changeCompensateBz,jdbcType=VARCHAR}, #{calcBuildingAreaFee,jdbcType=VARCHAR},
+      #{buildingAreaFee,jdbcType=DECIMAL}, #{buildingAreaFeeBz,jdbcType=VARCHAR}, #{calcSuspendBusinessFee,jdbcType=VARCHAR},
+      #{suspendBusinessFee,jdbcType=DECIMAL}, #{suspendBusinessFeeBz,jdbcType=VARCHAR},
+      #{calcNoMoveCompensate,jdbcType=VARCHAR}, #{noMoveCompensate,jdbcType=DECIMAL},
+      #{noMoveCompensateBz,jdbcType=VARCHAR}, #{calcMoveReward,jdbcType=VARCHAR}, #{moveReward,jdbcType=DECIMAL},
+      #{moveRewardBz,jdbcType=VARCHAR}, #{calcRmbMoveReward,jdbcType=VARCHAR}, #{rmbMoveReward,jdbcType=DECIMAL},
+      #{rmbMoveRewardBz,jdbcType=VARCHAR}, #{calcSmallAreaReward,jdbcType=VARCHAR}, #{smallAreaReward,jdbcType=DECIMAL},
+      #{smallAreaRewardBz,jdbcType=VARCHAR}, #{calcGuarantee,jdbcType=VARCHAR}, #{guarantee,jdbcType=DECIMAL},
+      #{guaranteeBz,jdbcType=VARCHAR}, #{otherDesc,jdbcType=VARCHAR}, #{calcOther,jdbcType=VARCHAR},
+      #{otherRmb,jdbcType=DECIMAL}, #{otherBz,jdbcType=VARCHAR}, #{calcSumCompensate,jdbcType=VARCHAR},
+      #{sumCompensate,jdbcType=DECIMAL}, #{sumCompensateBz,jdbcType=VARCHAR}, #{changeArea,jdbcType=DECIMAL},
+      #{calcChangeArea,jdbcType=VARCHAR}, #{calcm,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL},
+      #{houseMoney,jdbcType=DECIMAL}, #{houseMoneyBz,jdbcType=VARCHAR}, #{calcDeduction,jdbcType=VARCHAR},
+      #{deduction,jdbcType=DECIMAL}, #{deductionBz,jdbcType=VARCHAR}, #{swapPrice1,jdbcType=DECIMAL},
+      #{swapPrice2,jdbcType=DECIMAL}, #{swapPrice3,jdbcType=DECIMAL}, #{swapPrice4,jdbcType=DECIMAL},
+      #{swapPrice5,jdbcType=DECIMAL}, #{swapArea1,jdbcType=DECIMAL}, #{swapArea2,jdbcType=DECIMAL},
+      #{swapArea3,jdbcType=DECIMAL}, #{swapArea4,jdbcType=DECIMAL}, #{swapArea5,jdbcType=DECIMAL},
+      #{swapMoney1,jdbcType=VARCHAR}, #{swapMoney2,jdbcType=VARCHAR}, #{swapMoney3,jdbcType=VARCHAR},
+      #{swapMoney4,jdbcType=VARCHAR}, #{swapMoney5,jdbcType=VARCHAR}, #{payTotal,jdbcType=DECIMAL},
+      #{receiveTotal,jdbcType=DECIMAL}, #{payMoney,jdbcType=VARCHAR}, #{receiveMoney,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP},
+      #{modifiedUserId,jdbcType=BIGINT}, #{deleted,jdbcType=TINYINT}, #{signingStatus,jdbcType=INTEGER},
+      #{signingDate}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
+    update t_settle_accounts
+    set area_id = #{areaId,jdbcType=BIGINT},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      house_owner = #{houseOwner,jdbcType=VARCHAR},
+      identity_no = #{identityNo,jdbcType=VARCHAR},
+      compensate_type = #{compensateType,jdbcType=INTEGER},
+      lessee = #{lessee,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      lessee_phone = #{lesseePhone,jdbcType=VARCHAR},
+      useing = #{useing,jdbcType=VARCHAR},
+      certified_area = #{certifiedArea,jdbcType=DECIMAL},
+      no_register_legal_area = #{noRegisterLegalArea,jdbcType=DECIMAL},
+      history_legacy_area = #{historyLegacyArea,jdbcType=DECIMAL},
+      check_in_area = #{checkInArea,jdbcType=DECIMAL},
+      no_checkin_area = #{noCheckinArea,jdbcType=DECIMAL},
+      in_area = #{inArea,jdbcType=DECIMAL},
+      assess_price = #{assessPrice,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      new_house_name = #{newHouseName},
+      calc_value_compensate = #{calcValueCompensate,jdbcType=VARCHAR},
+      value_compensate = #{valueCompensate,jdbcType=DECIMAL},
+      value_compensate_bz = #{valueCompensateBz,jdbcType=VARCHAR},
+      calc_no_register_legal = #{calcNoRegisterLegal,jdbcType=VARCHAR},
+      no_register_legal = #{noRegisterLegal,jdbcType=DECIMAL},
+      no_register_legal_bz = #{noRegisterLegalBz,jdbcType=VARCHAR},
+      calc_history_legacy = #{calcHistoryLegacy,jdbcType=VARCHAR},
+      history_legacy = #{historyLegacy,jdbcType=DECIMAL},
+      history_legacy_bz = #{historyLegacyBz,jdbcType=VARCHAR},
+      calc_decoration_compensate = #{calcDecorationCompensate,jdbcType=VARCHAR},
+      decoration_compensate = #{decorationCompensate,jdbcType=DECIMAL},
+      decoration_compensate_bz = #{decorationCompensateBz,jdbcType=VARCHAR},
+      calc_move_house_fee = #{calcMoveHouseFee,jdbcType=VARCHAR},
+      move_house_fee = #{moveHouseFee,jdbcType=DECIMAL},
+      move_house_fee_bz = #{moveHouseFeeBz,jdbcType=VARCHAR},
+      calc_interim_fee = #{calcInterimFee,jdbcType=VARCHAR},
+      interim_fee = #{interimFee,jdbcType=DECIMAL},
+      interim_fee_bz = #{interimFeeBz,jdbcType=VARCHAR},
+      calc_move_water_meter_fee = #{calcMoveWaterMeterFee,jdbcType=VARCHAR},
+      move_water_meter_fee = #{moveWaterMeterFee,jdbcType=DECIMAL},
+      move_water_meter_fee_bz = #{moveWaterMeterFeeBz,jdbcType=VARCHAR},
+      calc_move_ammeter_fee = #{calcMoveAmmeterFee,jdbcType=VARCHAR},
+      move_ammeter_fee = #{moveAmmeterFee,jdbcType=DECIMAL},
+      move_ammeter_fee_bz = #{moveAmmeterFeeBz,jdbcType=VARCHAR},
+      calc_move_air_conditioning_fee = #{calcMoveAirConditioningFee,jdbcType=VARCHAR},
+      move_air_conditioning_fee = #{moveAirConditioningFee,jdbcType=DECIMAL},
+      move_air_conditioning_fee_bz = #{moveAirConditioningFeeBz,jdbcType=VARCHAR},
+      calc_hot_water_compensate = #{calcHotWaterCompensate,jdbcType=VARCHAR},
+      hot_water_compensate = #{hotWaterCompensate,jdbcType=DECIMAL},
+      hot_water_compensate_bz = #{hotWaterCompensateBz,jdbcType=VARCHAR},
+      calc_gas_fee = #{calcGasFee,jdbcType=VARCHAR},
+      gas_fee = #{gasFee,jdbcType=DECIMAL},
+      gas_fee_bz = #{gasFeeBz,jdbcType=VARCHAR},
+      calc_structure_compensate = #{calcStructureCompensate,jdbcType=VARCHAR},
+      structure_compensate = #{structureCompensate,jdbcType=DECIMAL},
+      structure_compensate_bz = #{structureCompensateBz,jdbcType=VARCHAR},
+      calc_structure_balcony = #{calcStructureBalcony,jdbcType=VARCHAR},
+      structure_balcony = #{structureBalcony,jdbcType=DECIMAL},
+      structure_balcony_bz = #{structureBalconyBz,jdbcType=VARCHAR},
+      calc_structure_build = #{calcStructureBuild,jdbcType=VARCHAR},
+      structure_build = #{structureBuild,jdbcType=DECIMAL},
+      structure_build_bz = #{structureBuildBz,jdbcType=VARCHAR},
+      calc_structure_dark = #{calcStructureDark,jdbcType=VARCHAR},
+      structure_dark = #{structureDark,jdbcType=DECIMAL},
+      structure_dark_bz = #{structureDarkBz,jdbcType=VARCHAR},
+      calc_structure_mezzanine = #{calcStructureMezzanine,jdbcType=VARCHAR},
+      structure_mezzanine = #{structureMezzanine,jdbcType=DECIMAL},
+      structure_mezzanine_bz = #{structureMezzanineBz,jdbcType=VARCHAR},
+      calc_structure_roof = #{calcStructureRoof,jdbcType=VARCHAR},
+      structure_roof = #{structureRoof,jdbcType=DECIMAL},
+      structure_roof_bz = #{structureRoofBz,jdbcType=VARCHAR},
+      affiliated_other_desc = #{affiliatedOtherDesc,jdbcType=VARCHAR},
+      calc_affiliated_other = #{calcAffiliatedOther,jdbcType=VARCHAR},
+      affiliated_other = #{affiliatedOther,jdbcType=DECIMAL},
+      affiliated_other_bz = #{affiliatedOtherBz,jdbcType=VARCHAR},
+      calc_no_check_compensate = #{calcNoCheckCompensate,jdbcType=VARCHAR},
+      no_check_compensate = #{noCheckCompensate,jdbcType=DECIMAL},
+      no_check_compensate_bz = #{noCheckCompensateBz,jdbcType=VARCHAR},
+      calc_rmb_compensate = #{calcRmbCompensate,jdbcType=VARCHAR},
+      rmb_compensate = #{rmbCompensate,jdbcType=DECIMAL},
+      rmb_compensate_bz = #{rmbCompensateBz,jdbcType=VARCHAR},
+      calc_life_compensate = #{calcLifeCompensate,jdbcType=VARCHAR},
+      life_compensate = #{lifeCompensate,jdbcType=DECIMAL},
+      life_compensate_bz = #{lifeCompensateBz,jdbcType=VARCHAR},
+      calc_change_compensate = #{calcChangeCompensate,jdbcType=VARCHAR},
+      change_compensate = #{changeCompensate,jdbcType=DECIMAL},
+      change_compensate_bz = #{changeCompensateBz,jdbcType=VARCHAR},
+      calc_building_area_fee = #{calcBuildingAreaFee,jdbcType=VARCHAR},
+      building_area_fee = #{buildingAreaFee,jdbcType=DECIMAL},
+      building_area_fee_bz = #{buildingAreaFeeBz,jdbcType=VARCHAR},
+      calc_suspend_business_fee = #{calcSuspendBusinessFee,jdbcType=VARCHAR},
+      suspend_business_fee = #{suspendBusinessFee,jdbcType=DECIMAL},
+      suspend_business_fee_bz = #{suspendBusinessFeeBz,jdbcType=VARCHAR},
+      calc_no_move_compensate = #{calcNoMoveCompensate,jdbcType=VARCHAR},
+      no_move_compensate = #{noMoveCompensate,jdbcType=DECIMAL},
+      no_move_compensate_bz = #{noMoveCompensateBz,jdbcType=VARCHAR},
+      calc_move_reward = #{calcMoveReward,jdbcType=VARCHAR},
+      move_reward = #{moveReward,jdbcType=DECIMAL},
+      move_reward_bz = #{moveRewardBz,jdbcType=VARCHAR},
+      calc_rmb_move_reward = #{calcRmbMoveReward,jdbcType=VARCHAR},
+      rmb_move_reward = #{rmbMoveReward,jdbcType=DECIMAL},
+      rmb_move_reward_bz = #{rmbMoveRewardBz,jdbcType=VARCHAR},
+      calc_small_area_reward = #{calcSmallAreaReward,jdbcType=VARCHAR},
+      small_area_reward = #{smallAreaReward,jdbcType=DECIMAL},
+      small_area_reward_bz = #{smallAreaRewardBz,jdbcType=VARCHAR},
+      calc_guarantee = #{calcGuarantee,jdbcType=VARCHAR},
+      guarantee = #{guarantee,jdbcType=DECIMAL},
+      guarantee_bz = #{guaranteeBz,jdbcType=VARCHAR},
+      other_desc = #{otherDesc,jdbcType=VARCHAR},
+      calc_other = #{calcOther,jdbcType=VARCHAR},
+      other_rmb = #{otherRmb,jdbcType=DECIMAL},
+      other_bz = #{otherBz,jdbcType=VARCHAR},
+      calc_sum_compensate = #{calcSumCompensate,jdbcType=VARCHAR},
+      sum_compensate = #{sumCompensate,jdbcType=DECIMAL},
+      sum_compensate_bz = #{sumCompensateBz,jdbcType=VARCHAR},
+      change_area = #{changeArea,jdbcType=DECIMAL},
+      calc_change_area = #{calcChangeArea,jdbcType=VARCHAR},
+      calcm = #{calcm,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      house_money = #{houseMoney,jdbcType=DECIMAL},
+      house_money_bz = #{houseMoneyBz,jdbcType=VARCHAR},
+      calc_deduction = #{calcDeduction,jdbcType=VARCHAR},
+      deduction = #{deduction,jdbcType=DECIMAL},
+      deduction_bz = #{deductionBz,jdbcType=VARCHAR},
+      swap_price1 = #{swapPrice1,jdbcType=DECIMAL},
+      swap_price2 = #{swapPrice2,jdbcType=DECIMAL},
+      swap_price3 = #{swapPrice3,jdbcType=DECIMAL},
+      swap_price4 = #{swapPrice4,jdbcType=DECIMAL},
+      swap_price5 = #{swapPrice5,jdbcType=DECIMAL},
+      swap_area1 = #{swapArea1,jdbcType=VARCHAR},
+      swap_area2 = #{swapArea2,jdbcType=VARCHAR},
+      swap_area3 = #{swapArea3,jdbcType=VARCHAR},
+      swap_area4 = #{swapArea4,jdbcType=VARCHAR},
+      swap_area5 = #{swapArea5,jdbcType=VARCHAR},
+      swap_money_1 = #{swapMoney1,jdbcType=VARCHAR},
+      swap_money_2 = #{swapMoney2,jdbcType=VARCHAR},
+      swap_money_3 = #{swapMoney3,jdbcType=VARCHAR},
+      swap_money_4 = #{swapMoney4,jdbcType=VARCHAR},
+      swap_money_5 = #{swapMoney5,jdbcType=VARCHAR},
+      pay_total = #{payTotal,jdbcType=DECIMAL},
+      receive_total = #{receiveTotal,jdbcType=DECIMAL},
+      pay_money = #{payMoney,jdbcType=VARCHAR},
+      receive_money = #{receiveMoney,jdbcType=VARCHAR},
+      modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      modified_user_id = #{modifiedUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectNmae" parameterType="java.lang.String" resultType="java.lang.Integer" >
+    select COUNT(1)
+    from t_settle_accounts
+    where house_owner = #{houseOwner , jdbcType=VARCHAR}  and deleted = 0
+  </select>
+
+  <update id="delete" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
+    update t_settle_accounts set deleted  = 1 ,
+      modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId}
+      where id = #{id}
+  </update>
+
+  <sql id="listCommonCondition">
+    <if test="signingStatus != null">
+      and signing_status = #{signingStatus}
+    </if>
+    <if test="compensateType != null">
+      and compensate_type = #{compensateType}
+    </if>
+    <if test="startDate != null and startDate !='' ">
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ >= ]]> #{startDate}
+    </if>
+    <if test="endDate != null and endDate !='' ">
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ <= ]]> #{endDate}
+    </if>
+    <if test="address != null and address !='' ">
+      and address like concat('%',#{address} ,'%')
+    </if>
+    <if test="cardNo != null and cardNo !='' ">
+      and card_no like concat('%',#{cardNo} ,'%')
+    </if>
+    <if test="houseOwner != null and houseOwner !='' ">
+      and (house_owner like concat('%',#{houseOwner} ,'%') or lessee like concat('%',#{houseOwner} ,'%'))
+    </if>
+    <if test="areaId != null ">
+      and area_id = #{areaId}
+    </if>
+    <if test="areaIdList != null and areaIdList.size >0 ">
+      and area_id in
+      <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+        #{itemId}
+      </foreach>
+    </if>
+  </sql>
+
+
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_settle_accounts
+    where deleted = 0
+    <include refid="listCommonCondition"/>
+    <if test="isFY != null and isFY == true ">
+      order by create_date asc
+      limit ${firstResult}, ${maxResults}
+    </if>
+    <if test="isFY != null and isFY == false ">
+      order by area_id, create_date asc
+    </if>
+  </select>
+
+
+  <select id="getCount" resultType="java.lang.Integer">
+    select
+    count(1)
+    from t_settle_accounts
+    where deleted = 0
+    <include refid="listCommonCondition"/>
+  </select>
+
+  <update id="changeSignStatus" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
+    update t_settle_accounts set signing_status = #{signingStatus} , modified_date = #{modifiedDate},
+    <if test="signingStatus != null and signingStatus == 1 ">
+      signing_date = #{signingDate},
+    </if>
+    modified_user_id = #{modifiedUserId} where id = #{id}
+  </update>
+
+
+  <update id="updateSignDate" parameterType="com.me.szzc.pojo.entity.SettleAccounts">
+      update t_settle_accounts set signing_date = #{signingDate} , modified_date = #{modifiedDate},
+      modified_user_id = #{modifiedUserId} where id = #{id}
+  </update>
+
+
+  <sql id="listSigning">
+    <if test="startDate != null and startDate !='' ">
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ >= ]]> #{startDate}
+    </if>
+    <if test="endDate != null and endDate !='' ">
+      and DATE_FORMAT(signing_date,'%Y-%m-%d') <![CDATA[ <= ]]> #{endDate}
+    </if>
+    <if test="areaIdList != null and areaIdList.size >0 ">
+      and area_id in
+      <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+        #{itemId}
+      </foreach>
+    </if>
+  </sql>
+
+  <select id="getNoSigning" resultType="java.lang.Integer">
+    select
+    count(1)
+    from t_settle_accounts
+    where deleted = 0
+    and signing_status = 0
+    <include refid="listSigning"/>
+  </select>
+
+  <select id="getSigning" resultMap="BaseResultMap">
+    select
+    compensate_type , count(1) as id
+    from t_settle_accounts
+    where deleted = 0
+    and signing_status > 0
+    <include refid="listSigning"/>
+    group by compensate_type
+  </select>
+
+  <select id="countStatus" resultType="com.me.szzc.pojo.dto.ProtocolCountStatusDTO">
+    select b.project_code as projectCode,b.name,
+    sum(case signing_status when 0 then 1 else 0 end) as noSigned,
+    sum(case signing_status when 1 then 1 else 0 end) as completer,
+    sum(case signing_status when 2 then 1 else 0 end) as audit
+    from t_settle_accounts a
+    inner join t_area b on a.area_id = b.id
+    where a.deleted = 0
+    group by project_code,b.name
+  </select>
+
+  <select id="countMoney" resultType="com.me.szzc.pojo.dto.ProtocolCountMoneyDTO">
+    select b.project_code as projectCode,b.name,
+    sum(ifnull(value_compensate,0))/10000 as valueCompensate,
+    sum(ifnull(no_register_legal,0))/10000 as noRegisterLegal,
+    sum(ifnull(history_legacy, 0))/10000 as historyLegacy,
+    sum(ifnull(decoration_compensate,0))/10000  as decorationCompensate,
+    sum(ifnull(move_house_fee,0))/10000  as moveHouseFee,
+
+    sum(ifnull(interim_fee,0))/10000  as interimFee,
+    sum(ifnull(move_water_meter_fee,0))/10000  as moveWaterMeterFee,
+    sum(ifnull(move_ammeter_fee,0))/10000  as moveAmmeterFee,
+    sum(ifnull(move_air_conditioning_fee,0))/10000  as moveAirConditioningFee,
+    sum(ifnull(hot_water_compensate,0))/10000  as hotWaterCompensate,
+    sum(ifnull(gas_fee,0))/10000  as gasFee,
+    sum(ifnull(structure_compensate,0))/10000  as structureCompensate,
+    sum(ifnull(suspend_business_fee,0))/10000  as suspendBusinessFee,
+    sum(ifnull(structure_balcony,0))/10000  as structureBalcony,
+
+    sum(ifnull(structure_build,0))/10000  as structureBuild,
+    sum(ifnull(structure_dark,0))/10000  as structureDark,
+    sum(ifnull(structure_mezzanine,0))/10000  as structureMezzanine,
+    sum(ifnull(structure_roof,0))/10000  as structureRoof,
+    sum(ifnull(affiliated_other,0))/10000  as affiliatedOther,
+    sum(ifnull(change_compensate,0))/10000  as changeCompensate,
+
+    sum(ifnull(rmb_compensate,0))/10000  as rmbCompensate,
+    sum(ifnull(small_area_reward,0))/10000  as smallAreaReward,
+    sum(ifnull(life_compensate,0))/10000  as lifeCompensate,
+    sum(ifnull(move_reward,0))/10000  as moveReward,
+    sum(ifnull(guarantee,0))/10000  as guarantee,
+    sum(ifnull(building_area_fee,0))/10000  as buildingAreaFee,
+    sum(ifnull(other_rmb,0))/10000  as otherRmb
+
+
+    from t_settle_accounts a
+    inner join t_area b on a.area_id = b.id
+    where a.deleted = 0
+    group by b.project_code, b.name
+  </select>
+
+  <select id="summaryList" resultType="com.me.szzc.pojo.dto.ProtocolSummaryDTO">
+      select DATE_FORMAT(a.signing_date,'%Y-%m-%d') as date,
+      ifnull(a.certified_area,0)+ifnull(a.no_register_legal_area,0)+ifnull(a.history_legacy_area,0) as area,
+      sum_compensate as sumCompensate,ifnull(house_money, 0) as houseMoney,
+      a.pay_total as payTotal,a.compensate_type as compensateType,
+      ifnull(c.new_house_address,'') as newHouseName,
+      a.swap_area1 as swapArea1,a.swap_area2 as swapArea2,
+      a.swap_area3 as swapArea3,a.swap_area4 as swapArea4,
+      a.swap_area5 as swapArea5
+      from t_settle_accounts a
+      inner join t_area b  on a.area_id = b.id and b.deleted = 0
+      left join t_swap_house c on c.address =  a.address and c.house_owner = ifnull(a.house_owner, a.lessee) and c.deleted = 0
+      where a.deleted = 0 and ifnull(a.pay_total, 0) > 0
+      <if test="projectCode != null and projectCode !='' ">
+        and b.project_code = #{projectCode}
+      </if>
+      <if test="areaIdList != null and areaIdList.size >0 ">
+        and a.area_id in
+        <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+          #{itemId}
+        </foreach>
+      </if>
+
+      order by a.signing_date desc
+
+  </select>
+</mapper>

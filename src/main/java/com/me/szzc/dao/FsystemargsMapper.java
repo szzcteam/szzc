@@ -24,7 +24,12 @@ public interface FsystemargsMapper {
 
     List<Fsystemargs> selectByProperty(Fsystemargs record);
 
+    String selectValue(@Param("fkey") String fkey);
+
     int updateByPrimaryKeySelective(Fsystemargs record);
 
     int updateByPrimaryKey(Fsystemargs record);
+
+    List<Fsystemargs> selectByLike(@Param("keywordFilter") String keywordFilter);
+
 }

@@ -6,6 +6,7 @@ import com.me.szzc.enums.FilePostfixEnum;
 import com.me.szzc.enums.FileUploadTypeEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.entity.Fsystemargs;
+import com.me.szzc.utils.Utils;
 import com.me.szzc.utils.fileUpload.client.AliyunFileUploadUtils;
 import com.me.szzc.utils.fileUpload.facade.AliyunFileUploadFacade;
 import org.apache.commons.lang.StringUtils;
@@ -23,7 +24,7 @@ import java.util.List;
 public class SystemArgsController extends BaseController {
 
 	// 每页显示多少条数据
-	private int numPerPage = 50;
+	private int numPerPage = Utils.getNumPerPage();
 
 	@RequestMapping("/ssadmin/systemArgsList")
 	public ModelAndView Index(HttpServletRequest request) throws Exception {

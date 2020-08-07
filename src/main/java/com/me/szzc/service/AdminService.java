@@ -20,7 +20,7 @@ public class AdminService {
 	@Autowired
 	private FroleMapper froleMapper;
 
-	public Fadmin findById(int id) {
+	public Fadmin findById(Long id) {
 		return this.fadminMapper.selectByPrimaryKey(id);
 	}
 
@@ -28,7 +28,7 @@ public class AdminService {
 		this.fadminMapper.insert(obj);
 	}
 
-	public void deleteObj(int id) {
+	public void deleteObj(Long id) {
 		this.fadminMapper.deleteByPrimaryKey(id);
 	}
 
