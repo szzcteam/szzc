@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOG_HOME" value="/home/luwei/logs"/>
+
+    <!-- 项目名称 -->
+    <property name="PROJECT_NAME" value="yzs" />
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <property name="LOG_HOME" value="/home/luwei/tomcat-yzs/logs"/>
     <!-- 控制台输出 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <withJansi>true</withJansi>
@@ -10,9 +14,9 @@
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
         </encoder>
     </appender>
-    <!-- 自己打印的日志文件，用于记录重要日志信息 -->
+    <!-- 自己打印的日志文件，用于记录重要日志信息,INFO及以上 -->
     <appender name="DEFAULT_INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <!-- 设置过滤级别 -->
             <level>INFO</level>
             <!-- 用于配置符合过滤条件的操作 -->
@@ -21,16 +25,21 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <Encoding>UTF-8</Encoding>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/yzs.log.%d{yyyy-MM-dd}.%i.gz</FileNamePattern>
-            <!-- 日志保留天数 -->
-            <MaxHistory>30</MaxHistory>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <!-- or whenever the file size reaches 100MB -->
-                <maxFileSize>100MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
+        <file>${LOG_HOME}/${PROJECT_NAME}.info.log</file>
+        <!-- 根据固定窗口模式生成日志文件，结合triggeringPolicy（当日志文件达到10MB时触发滚动，生成新的日志文件） -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${PROJECT_NAME}.info.%i.log</FileNamePattern>
+            <minIndex>1</minIndex>
+            <!--最大归档文件数-->
+            <maxIndex>10</maxIndex>
         </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!--日志文件最大的大小-->
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] %highlight([%-5level] %logger{50} - %msg%n)</pattern>
             <charset>UTF-8</charset>
         </encoder>
@@ -42,13 +51,12 @@
     <logger name="jdbc.resultset" level="OFF"/>
     <logger name="jdbc.connection" level="OFF"/>
     <logger name="org.springframework" level="error"/>
-    <logger name="org.mybatis.spring" level="info"/>
-    <logger name="com.me.szzc" level="info"/>
+    <logger name="org.mybatis.spring" level="debug"/>
+    <logger name="com.me.szzc" level="debug"/>
 
-    <root>
+    <root level="INFO">
         <!-- DEBUG|INFO|WARN|ERROR -->
-        <level value="INFO"/>
-	    <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="DEFAULT_INFO_FILE"/>
     </root>
 
