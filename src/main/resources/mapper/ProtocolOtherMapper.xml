@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.ProtocolOtherMapper">
+    <resultMap id="BaseResultMap" type="com.me.szzc.pojo.entity.ProtocolOther">
+        <result column="id" jdbcType="BIGINT" property="id" />
+        <result column="accounts_id" jdbcType="BIGINT" property="accountsId" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+        <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+        <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
+        <result column="modified_user_id" jdbcType="BIGINT" property="modifiedUserId" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+            id, accounts_id, ‘remark’,create_date,create_user_id, modified_date,modified_user_id
+    </sql>
+
+    <select id="queryRemark"  resultType="com.me.szzc.pojo.entity.ProtocolOther">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_protocol_other
+        WHERE accounts_id = #{accountsId}
+    </select>
+
+    <insert id="addProtocolOther" parameterType="com.me.szzc.pojo.entity.ProtocolOther" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into t_protocol_other (accounts_id, ‘remark’,create_date,create_user_id, modified_date,modified_user_id)
+    values (#{accountsId}, #{remark}, #{createDate},#{createUserId},#{modifiedDate},#{modifiedUserId})
+  </insert>
+
+    <update id="updateRoomChange" parameterType="com.me.szzc.pojo.entity.ProtocolOther">
+        update t_protocol_other set remark = #{remark}, modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId} where accounts_id = #{accountsId}
+    </update>
+
+</mapper>
