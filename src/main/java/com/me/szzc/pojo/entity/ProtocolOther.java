@@ -14,7 +14,7 @@ public class ProtocolOther {
     /**
      *结算单
      */
-    private long accountsId;
+    private Long accountsId;
 
     /**
      * 备注

@@ -238,6 +238,57 @@ public class SettleAccountsController extends BaseController {
     }
 
 
+    /**去编辑备注界面**/
+    @RequestMapping("ssadmin/settleAccounts/to-remark-page")
+    public ModelAndView toUpdateRemarkPage(String idMore, String url){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(url);
+        String[] idArr = idMore.split(",");
+        Long id = Long.valueOf(idArr[0]);
+        SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
+        if (settleAccounts != null) {
+            modelAndView.addObject("settleAccounts", settleAccounts);
+            String houseOwner = "";
+            if(StringUtils.isNotBlank(settleAccounts.getHouseOwner())){
+                houseOwner = settleAccounts.getHouseOwner();
+            }else{
+                houseOwner = settleAccounts.getLessee();
+            }
+
+            //查询其他-备注信息
+            ProtocolOther protocolOther = protocolOtherService.queryRemark(settleAccounts.getId());
+            String remark = "";
+            if(protocolOther != null){
+                remark = protocolOther.getRemark();
+            }
+            modelAndView.addObject("remark", remark);
+            modelAndView.addObject("houseOwner", houseOwner);
+        }
+        return  modelAndView;
+    }
+
+    @RequestMapping("ssadmin/settleAccounts/updateRemark")
+    @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "编辑备注")
+    public ModelAndView updateRemark(Long id, String remark,  HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/comm/ajaxDone");
+
+        //修改人
+        Long userId = getAdminSession(request).getFid();
+        boolean result = protocolOtherService.addProtocolOther(remark, id, userId);
+        if (result) {
+            modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "操作成功");
+        } else {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "操作失败");
+        }
+
+        modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
+        return modelAndView;
+    }
+
+
     @RequestMapping(value = "ssadmin/settleAccounts/update", method = RequestMethod.POST)
     @SysLog(code = ModuleConstont.PROTOCOL_OPERATION, method = "修改结算单")
     public ModelAndView updateSettleAccounts( SettleAccounts settleAccounts) throws Exception {

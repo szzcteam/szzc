@@ -79,7 +79,7 @@ public class ProtocolExportController extends BaseController {
         //查询结算单
         List<SettleAccounts> settleAccountsList = settleAccountsService.list(0, 0, false,
                 null, null, null, null,
-                areaIdList, null, null, null, null);
+                areaIdList, null, null, null, null, null);
 
         //融合数据，生成excel vo
         List<ProtocolExportVO> list = new ArrayList<>();

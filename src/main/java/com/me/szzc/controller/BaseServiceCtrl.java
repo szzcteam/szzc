@@ -53,6 +53,9 @@ public class BaseServiceCtrl {
     @Autowired
     RoomChangeService roomChangeService;
 
+    @Autowired
+    ProtocolOtherService protocolOtherService;
+
 
 
 }

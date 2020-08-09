@@ -194,4 +194,34 @@ ADD COLUMN `is_trade_house`  tinyint(255) NULL COMMENT '是否申购交换新房
 ADD COLUMN `trade_house_json`  varchar(3000) NULL COMMENT '申购新房的相关信息' AFTER `is_trade_house`;
 
 
+-- 2020-08-09 增加协议其他关联字段
+
+-- 增加编辑备注按钮权限
+
+-- 报表统计一级菜单
+insert into f_security(fdescription, fname, fpriority, fparentid, furl)
+values('编辑备注','编辑备注', 4, 3, 'ssadmin/settleAccounts/update-remark.html');
+
+-- 插入菜单权限
+insert into f_role_security(fsecurityid, froleid)
+values(50,1);
+
+-- 增加协议备注表
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for t_protocol_other
+-- ----------------------------
+DROP TABLE IF EXISTS `t_protocol_other`;
+CREATE TABLE `t_protocol_other` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `accounts_id` bigint(20) NOT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `create_user_id` bigint(20) NOT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `modified_user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 

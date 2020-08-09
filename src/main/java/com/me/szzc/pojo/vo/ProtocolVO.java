@@ -32,5 +32,7 @@ public class ProtocolVO {
 
     private Long rmbRecompenseId;
 
+    private String remark;
+
 }
 

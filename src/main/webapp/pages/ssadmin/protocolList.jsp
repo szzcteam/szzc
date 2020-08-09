@@ -9,7 +9,7 @@
     <input type="hidden" name="startDate" value="${startDate}" />
     <input type="hidden" name="endDate" value="${endDate}" />
     <input type="hidden" name="compensateType" value="${compensateType}" />
-
+    <input type="hidden" name="remark" value="${remark}" />
     <input type="hidden" name="pageNum" value="${currentPage}"/>
     <input type="hidden" name="numPerPage" value="${numPerPage}"/>
     <input type="hidden" name="orderField" value="${param.orderField}"/>
@@ -41,6 +41,9 @@
                                 <option value="${item.key}" <c:if test="${signingStatus ==  item.key}">selected</c:if>>${item.value}</option>
                             </c:forEach>
                         </select>
+                    </td>
+                    <td>
+                        备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<input type="text" name="remark" value="${remark}" size="20"/>
                     </td>
                 </tr>
                 <tr>
@@ -78,7 +81,7 @@
     </form>
 </div>
 <div class="pageContent">
-    <div class="panelBar" style="height: 30px;">
+    <div class="panelBar" style="height: 50px;">
         <ul class="toolBar">
             <!-- 新增 -->
             <shiro:hasPermission name="ssadmin/addProtocol.html">
@@ -209,9 +212,15 @@
                        height="300" width="800" target="dialog"><span>修改签约时间</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/settleAccounts/update-remark.html">
+                <li><a class="edit"
+                       href="ssadmin/settleAccounts/to-remark-page.html?idMore={sid_user}&url=ssadmin/updateSettleRemark"
+                       height="350" width="800" target="dialog"><span>编辑备注</span>
+                </a></li>
+            </shiro:hasPermission>
         </ul>
     </div>
-    <table class="table" width="100%" layoutH="138">
+    <table class="table" width="100%" layoutH="158">
         <thead>
         <tr>
             <th width="20">序号</th>
@@ -221,7 +230,7 @@
             <th width="60">地址</th>
             <th width="40">电话</th>
             <th width="50">签约状态</th>
-            <%--<th width="60">付(收)款手续通知单</th>--%>
+            <th width="50">备注</th>
             <th width="50">产权调换协议</th>
             <th width="50">货币补偿协议</th>
             <th width="30">结算单</th>
@@ -254,7 +263,7 @@
                     </c:otherwise>
                 </c:choose>
                 <!--签约状态结束-->
-               <%-- <td><c:if test="${protocol.noticeFlag == true}">√</c:if></td>--%>
+                <td>${protocol.remark}</td>
                 <td style="text-align: center;">
                     <c:if test="${protocol.swapHouseId > 0 }">
                         <a href="ssadmin/swapHouse/preview.html?id=${protocol.swapHouseId}" target="_blank" style="text-decoration: none;color: #1e88e5;" title="预览">

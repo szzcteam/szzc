@@ -159,15 +159,17 @@ public class SettleAccountsService {
 
 
     public List<SettleAccounts> list(int firstResult, int maxResults, boolean isFY, Integer signingStatus, String address, String houseOwner, Long areaId,
-                                     List<Long> areaIdList, String startDate, String endDate, Integer compensateType, String cardNo) {
+                                     List<Long> areaIdList, String startDate, String endDate, Integer compensateType, String cardNo,
+                                     String remark) {
         List<SettleAccounts> listSettleAccounts = this.settleAccountsMapper.list(firstResult, maxResults, isFY, signingStatus, address, houseOwner, areaId,
-                areaIdList, startDate, endDate, compensateType, cardNo);
+                areaIdList, startDate, endDate, compensateType, cardNo, remark);
         return listSettleAccounts;
     }
 
     public Integer getCount(Integer signingStatus, String address, String houseOwner, Long areaId, List<Long> areaIdList,
-                            String startDate, String endDate, Integer compensateType, String cardNo) {
-        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo);
+                            String startDate, String endDate, Integer compensateType, String cardNo, String remark) {
+        return this.settleAccountsMapper.getCount(signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo,
+                remark);
     }
 
     /**变更签约状态**/

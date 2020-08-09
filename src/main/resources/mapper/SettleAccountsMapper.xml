@@ -154,7 +154,7 @@
     <result column="signing_date" jdbcType="TIMESTAMP" property="signingDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, area_id, card_no, project_name, house_owner, identity_no, compensate_type, lessee,
+    a.id, area_id, card_no, project_name, house_owner, identity_no, compensate_type, lessee,
     phone, lessee_phone, useing, certified_area, no_register_legal_area, history_legacy_area,
     check_in_area, no_checkin_area, in_area, assess_price, address, new_house_name, calc_value_compensate,
     value_compensate, value_compensate_bz, calc_no_register_legal, no_register_legal,
@@ -182,28 +182,28 @@
     swap_price1, swap_price2, swap_price3, swap_price4, swap_price5, swap_area1, swap_area2,
     swap_area3, swap_area4, swap_area5, swap_money_1, swap_money_2, swap_money_3, swap_money_4,
     swap_money_5,
-    pay_total, receive_total, pay_money, receive_money, create_date, create_user_id,
-    modified_date, modified_user_id, deleted, signing_status,signing_date
+    pay_total, receive_total, pay_money, receive_money, a.create_date, a.create_user_id,
+    a.modified_date, a.modified_user_id, deleted, signing_status,signing_date
   </sql>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from t_settle_accounts
+    from t_settle_accounts a
     where id = #{id,jdbcType=BIGINT}
   </select>
 
   <select id="getByHouseOwnerAddr" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from t_settle_accounts
+    from t_settle_accounts a
     where (house_owner = #{houseOwner} or lessee = #{houseOwner}) and address = #{address} and deleted = 0
   </select>
 
   <select id="getByHouseOwnerAddrNeqId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from t_settle_accounts
+    from t_settle_accounts a
     where (house_owner = #{houseOwner} or lessee = #{houseOwner}) and address = #{address} and deleted = 0
     and id <![CDATA[ <> ]]> #{id}
   </select>
@@ -511,6 +511,9 @@
     <if test="houseOwner != null and houseOwner !='' ">
       and (house_owner like concat('%',#{houseOwner} ,'%') or lessee like concat('%',#{houseOwner} ,'%'))
     </if>
+    <if test="remark != null and remark !='' ">
+      and (b.remark like concat('%',#{remark} ,'%') )
+    </if>
     <if test="areaId != null ">
       and area_id = #{areaId}
     </if>
@@ -526,15 +529,16 @@
   <select id="list" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from t_settle_accounts
+    from t_settle_accounts a
+    left join t_protocol_other b on a.id = b.accounts_id
     where deleted = 0
     <include refid="listCommonCondition"/>
     <if test="isFY != null and isFY == true ">
-      order by create_date asc
+      order by a.create_date asc
       limit ${firstResult}, ${maxResults}
     </if>
     <if test="isFY != null and isFY == false ">
-      order by area_id, create_date asc
+      order by area_id, a.create_date asc
     </if>
   </select>
 
@@ -542,7 +546,8 @@
   <select id="getCount" resultType="java.lang.Integer">
     select
     count(1)
-    from t_settle_accounts
+    from t_settle_accounts a
+    left join t_protocol_other b on a.id = b.accounts_id
     where deleted = 0
     <include refid="listCommonCondition"/>
   </select>

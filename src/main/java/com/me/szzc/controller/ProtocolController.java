@@ -63,6 +63,13 @@ public class ProtocolController extends BaseController {
             view.addObject("houseOwner", houseOwner);
         }
 
+        String remark = request.getParameter("remark");
+        if(remark != null && remark.trim().length()> 0 ){
+            remark = remark.trim();
+            view.addObject("remark", remark);
+        }
+
+
         String areaIdStr = request.getParameter("areaId");
         Long areaId =  null;
         if(areaIdStr != null && areaIdStr.trim().length() >0){
@@ -102,9 +109,18 @@ public class ProtocolController extends BaseController {
 
         int firstResult = (currentPage - 1) * numPerPage;
         List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true,
-                signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo);
+                signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo,
+                remark);
 
-        //Map<String ,String>map= this.noticeService.queryAll();
+        //一次性查出所有的备注
+        List<ProtocolOther> protocolOtherList = this.protocolOtherService.queryAll();
+        Map<Long, ProtocolOther> protocolOtherMap = new HashMap<>();
+        if (protocolOtherList != null && !protocolOtherList.isEmpty()) {
+            protocolOtherList.forEach(other -> {
+                protocolOtherMap.put(other.getAccountsId(), other);
+            });
+        }
+
         List<ProtocolVO> list = new ArrayList<>();
 
         for (SettleAccounts account : dataList) {
@@ -134,6 +150,12 @@ public class ProtocolController extends BaseController {
             protocol.setRmbRecompenseId(rmbRecompense != null ? rmbRecompense.getId() : 0);
             protocol.setAreaName(areaMap.get(account.getAreaId()));
 
+            ProtocolOther other = protocolOtherMap.get(account.getId());
+            if(other != null){
+                protocol.setRemark(other.getRemark());
+            }
+
+
             list.add(protocol);
         }
 
@@ -147,7 +169,7 @@ public class ProtocolController extends BaseController {
 
         //总数量
         view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner,
-                areaId, areaIdList, startDate, endDate, compensateType, cardNo));
+                areaId, areaIdList, startDate, endDate, compensateType, cardNo, remark));
         return view;
     }
 

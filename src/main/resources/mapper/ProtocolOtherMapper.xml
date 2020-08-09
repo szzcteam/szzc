@@ -12,10 +12,16 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-            id, accounts_id, ‘remark’,create_date,create_user_id, modified_date,modified_user_id
+            id, accounts_id, `remark`, create_date,create_user_id, modified_date,modified_user_id
     </sql>
 
-    <select id="queryRemark"  resultType="com.me.szzc.pojo.entity.ProtocolOther">
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_protocol_other
+    </select>
+
+    <select id="queryRemark"  resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM t_protocol_other
@@ -23,7 +29,7 @@
     </select>
 
     <insert id="addProtocolOther" parameterType="com.me.szzc.pojo.entity.ProtocolOther" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-    insert into t_protocol_other (accounts_id, ‘remark’,create_date,create_user_id, modified_date,modified_user_id)
+    insert into t_protocol_other (accounts_id, remark,create_date,create_user_id, modified_date,modified_user_id)
     values (#{accountsId}, #{remark}, #{createDate},#{createUserId},#{modifiedDate},#{modifiedUserId})
   </insert>
 
