@@ -1114,8 +1114,8 @@ var settleAccountObj = {
         var calcHistoryLegacyProportion = $("input[name='calcHistoryLegacyProportion']").eq(0).val() || 1;
         var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea) + (new Number(calcHistoryLegacyArea) * new Number(calcHistoryLegacyProportion));*/
         var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea);
-        //将计算后得面积保留2位小数
-        sumArea = Math.round(sumArea*100)/100;
+        //将计算后得面积保留2位小数  兼容武船二分厂，3位需求
+        sumArea = Math.round(sumArea*1000)/1000;
         console.log("西城壕装修补偿、临时安置面积" + sumArea);
         $("input[name='calcDecorationCompensateArea']").eq(0).val(sumArea).change();
         $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
