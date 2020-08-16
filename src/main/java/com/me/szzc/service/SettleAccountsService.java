@@ -420,10 +420,19 @@ public class SettleAccountsService {
     }
 
 
-    /**微信小程序 获取协议摘要**/
-    public List<List<Object>> summaryListByWx(String projectCode) {
+    /**
+     * 微信小程序 获取协议摘要
+     * @param projectCode 项目code
+     * @param areaId  片区id
+     * **/
+    public List<List<Object>> summaryListByWx(String projectCode, Long areaId) {
         List<List<Object>> resultList = new ArrayList<>();
-        List<ProtocolSummaryDTO> list = settleAccountsMapper.summaryList(projectCode, null);
+        List<Long> areaIdList = null;
+        if(areaId != null && areaId > 0){
+            areaIdList = new ArrayList<>();
+            areaIdList.add(areaId);
+        }
+        List<ProtocolSummaryDTO> list = settleAccountsMapper.summaryList(projectCode, areaIdList);
         list.forEach(dto -> {
             //金额转亿元
             BigDecimal sumCompensate = dto.getSumCompensate().divide(Constant.ONE_Y, 4, BigDecimal.ROUND_DOWN);

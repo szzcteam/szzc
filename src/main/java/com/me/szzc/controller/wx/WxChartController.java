@@ -9,6 +9,7 @@ import com.me.szzc.service.RoomChangeService;
 import com.me.szzc.service.SettleAccountsService;
 import com.me.szzc.utils.PasswordHelper;
 import com.me.szzc.utils.Utils;
+import com.me.szzc.utils.WxSecurityMappingUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URLDecoder;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 微信图表响应
@@ -37,15 +39,15 @@ public class WxChartController {
     /**获取权限范围下的项目**/
     @RequestMapping(value={"/{projectScope}/get-project"}, method= RequestMethod.POST)
     @ResponseBody
-    public ResultRO<List<String>> getProject(@PathVariable("projectScope") String projectScope) throws Exception{
+    public ResultRO<Set<String>> getProject(@PathVariable("projectScope") String projectScope) throws Exception {
         if (StringUtils.isBlank(projectScope)) {
             return new ResultRO<>(false, "参数不能为空");
         }
         log.info("权限标识,projectScope:{}", projectScope);
         String mgtName = URLDecoder.decode(projectScope, Constant.UTF8);
-        List<String> list = GovernmentEnum.getProjectByScope(mgtName);
-        ResultRO<List<String>> resultRO = new ResultRO(true);
-        resultRO.setData(list);
+        Set<String> set = WxSecurityMappingUtils.getProjectByScope(mgtName);
+        ResultRO<Set<String>> resultRO = new ResultRO(true);
+        resultRO.setData(set);
         return resultRO;
     }
 
@@ -84,11 +86,15 @@ public class WxChartController {
         }
 
         //获取项目名称、code
-        String projectCode = GovernmentEnum.getCodeByName(projectName);
+        WxSecurityMappingUtils.AreaMark areaMark = WxSecurityMappingUtils.AreaMark.allAreaMap.get(projectName);
+        if(areaMark == null){
+            log.error("请求参数错误，名称:" + projectName);
+            return new ResultRO<>(false, "非法请求");
+        }
 
-        List<List<Object>> summaryList = settleAccountsService.summaryListByWx(projectCode);
+        List<List<Object>> summaryList = settleAccountsService.summaryListByWx(areaMark.getMpProjectCode(), areaMark.getMpCode());
         //获取房源
-        JSONArray jsonArray = roomChangeService.countAreaNumByProjectCode(projectCode);
+        JSONArray jsonArray = roomChangeService.countAreaNumByProjectCode(areaMark.getMpProjectCode());
 
         //返回数据组装
         JSONObject jsonObject = new JSONObject();
