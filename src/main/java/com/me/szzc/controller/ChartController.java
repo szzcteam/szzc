@@ -60,7 +60,16 @@ public class ChartController extends BaseController{
         JSONObject resultJSON = new JSONObject();
 
         //未签约
-        int notSignedNum = settleAccountsService.getNoSigning(criVO.getAreaIdList(), criVO.getStartDate(), criVO.getEndDate());
+        Long notSignedNum = 0L;
+        //查询片区，得到各片区负责的总户数
+        Long sumTotalFamily = 0L;
+        List<Area> areaList = areaService.listAll();
+        for (Area area : areaList) {
+            if (criVO.getAreaIdList().contains(area.getId())) {
+                sumTotalFamily += area.getTotalFamily();
+            }
+        }
+
         //已签约
         List<SettleAccounts> list = settleAccountsService.getSigning(criVO.getAreaIdList(), criVO.getStartDate(), criVO.getEndDate());
         Long rmbNum = 0L;
@@ -73,6 +82,12 @@ public class ChartController extends BaseController{
                     swapNum = accounts.getId();
                 }
             }
+        }
+
+        //拿总户数 减 已签约的  = 未签约的
+        notSignedNum = sumTotalFamily - rmbNum - swapNum;
+        if (notSignedNum < 0) {
+            notSignedNum = 0L;
         }
 
         List<JSONObject> seriesData = new ArrayList<>();

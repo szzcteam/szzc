@@ -162,4 +162,8 @@ public class AreaService {
     public List<Area> listEnableByUserId(Long userId){
         return areaMapper.listEnableByUserId(userId, AreaStatusEnum.ENABLE.getCode());
     }
+
+    public List<Area> listAll() {
+        return areaMapper.listAll();
+    }
 }

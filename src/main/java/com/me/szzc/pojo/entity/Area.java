@@ -83,4 +83,11 @@ public class Area {
         modifiedDateStr = DateHelper.date2String(modifiedDate, DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond);
         return modifiedDateStr;
     }
+
+    public Integer getTotalFamily() {
+        if(this.totalFamily == null){
+            return 0;
+        }
+        return totalFamily;
+    }
 }

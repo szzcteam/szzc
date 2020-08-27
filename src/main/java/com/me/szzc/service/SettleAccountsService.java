@@ -233,11 +233,6 @@ public class SettleAccountsService {
         return result;
     }
 
-    public Integer getNoSigning(List areaIdList, String startDate, String endDate) {
-        int result = this.settleAccountsMapper.getNoSigning(SigningStatusEnum.NOT_SIGNED.getCode(), areaIdList, startDate, endDate);
-        return result;
-    }
-
     public List<SettleAccounts> getSigning(List areaIdList, String startDate, String endDate) {
         List<SettleAccounts> list = this.settleAccountsMapper.getSigning(SigningStatusEnum.NOT_SIGNED.getCode(), areaIdList, startDate, endDate);
         return list;

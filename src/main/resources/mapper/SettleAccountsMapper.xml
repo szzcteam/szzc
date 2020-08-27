@@ -582,21 +582,12 @@
     </if>
   </sql>
 
-  <select id="getNoSigning" resultType="java.lang.Integer">
-    select
-    count(1)
-    from t_settle_accounts
-    where deleted = 0
-    and signing_status = 0
-    <include refid="listSigning"/>
-  </select>
 
   <select id="getSigning" resultMap="BaseResultMap">
     select
     compensate_type , count(1) as id
     from t_settle_accounts
     where deleted = 0
-    and signing_status > 0
     <include refid="listSigning"/>
     group by compensate_type
   </select>

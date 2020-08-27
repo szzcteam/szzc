@@ -99,4 +99,11 @@
         and a.status = #{status}
         and c.fid = #{userId}
     </select>
+
+    <select id="listAll"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_area
+        where deleted = 0
+    </select>
 </mapper>
