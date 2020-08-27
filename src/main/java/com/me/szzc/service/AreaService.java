@@ -8,6 +8,7 @@ import com.me.szzc.pojo.entity.Area;
 import com.me.szzc.pojo.entity.AreaRole;
 import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.utils.DateHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class AreaService {
 
     @Autowired
@@ -27,11 +29,12 @@ public class AreaService {
     private AreaRoleMapper areaRoleMapper;
 
     @Transactional
-    public int insert(String name, String projectCode,  String roleIds, Long createUserId) {
+    public int insert(String name, Integer totalFamily,  String projectCode,  String roleIds, Long createUserId) {
         //保存片区
         Area area = new Area();
         area.setStatus(AreaStatusEnum.ENABLE.getCode());
         area.setName(name);
+        area.setTotalFamily(totalFamily);
         area.setProjectCode(projectCode);
         area.setDeleted(false);
         area.setCreateDate(DateHelper.getTimestamp());
@@ -106,11 +109,12 @@ public class AreaService {
         return areaMapper.existsByUpdateName(name, id);
     }
 
-    public void update(String roleIds, String name, String projectCode, Long id, Long userId){
+    public void update(String roleIds, String name, Integer totalFamily, String projectCode, Long id, Long userId){
         Area area = areaMapper.getById(id);
         area.setModifiedUserId(userId);
         area.setModifiedDate(DateHelper.getTimestamp());
         area.setName(name);
+        area.setTotalFamily(totalFamily);
         area.setProjectCode(projectCode);
         //更新片区
         areaMapper.update(area);
@@ -131,6 +135,25 @@ public class AreaService {
         }
     }
 
+    /**
+     * 修改总户数
+     * @param id 片区ID
+     * @param totalFamily  总户数
+     * @return  true or false
+     */
+    public boolean updateTotalFamily(Long id, Integer totalFamily, Long userId) {
+        Area area = areaMapper.getById(id);
+        if (area == null) {
+            log.info("查询片区为空，操作失败, id:{}", id);
+            return false;
+        }
+
+        area.setTotalFamily(totalFamily);
+        area.setModifiedUserId(userId);
+        area.setModifiedDate(DateHelper.getTimestamp());
+        int count = areaMapper.update(area);
+        return count > 0 ? true : false;
+    }
 
     public List<Area> listByUserId(Long userId) {
         return areaMapper.listByUserId(userId);

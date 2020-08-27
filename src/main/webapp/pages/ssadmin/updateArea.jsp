@@ -18,6 +18,13 @@
 				</dd>
 			</dl>
 			<dl>
+				<dt>总户数：</dt>
+				<dd>
+					<input type="text" name="totalFamily" maxlength="5" value="${area.totalFamily}"
+						   class="required number" size="20" placeholder="未知或不确定则填写0"/>
+				</dd>
+			</dl>
+			<dl>
 				<dt>管辖项目：</dt>
 				<dd>
 					<select name="projectCode" style="width: 200px;height: 22px;">

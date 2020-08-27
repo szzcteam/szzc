@@ -74,7 +74,7 @@ public class AreaController extends BaseController {
 
     @RequestMapping("add")
     @SysLog(code = ModuleConstont.AREA_OPERATION, method = "新增片区")
-    public ModelAndView add(String roleIds, String name, String projectCode, HttpServletRequest request) {
+    public ModelAndView add(String roleIds, String name, Integer totalFamily, String projectCode, HttpServletRequest request) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
         if (StringUtils.isBlank(name)) {
@@ -101,7 +101,7 @@ public class AreaController extends BaseController {
 
         //创建人
         Long userId = getAdminSession(request).getFid();
-        int resul = areaService.insert(name, projectCode, roleIds, userId);
+        int resul = areaService.insert(name, totalFamily, projectCode, roleIds, userId);
         if(resul <= 0 ) {
             view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
             view.addObject(MESSAGE_KEY, "操作失败");
@@ -218,7 +218,9 @@ public class AreaController extends BaseController {
     }
 
     @RequestMapping("update")
-    public ModelAndView update(String roleIds, String name, String projectCode, Long id, HttpServletRequest request){
+    @SysLog(code = ModuleConstont.AREA_OPERATION, method = "修改片区")
+    public ModelAndView update(String roleIds, String name, Integer totalFamily,
+                               String projectCode, Long id, HttpServletRequest request){
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");
         name = name.trim();
@@ -236,11 +238,45 @@ public class AreaController extends BaseController {
             return view;
         }
         Long userId = getAdminSession(request).getFid();
-        areaService.update(roleIds, name, projectCode, id, userId);
+        areaService.update(roleIds, name, totalFamily, projectCode, id, userId);
 
         view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
         view.addObject(MESSAGE_KEY, "修改成功");
         view.addObject("callbackType","closeCurrent");
+        return view;
+    }
+
+
+    @RequestMapping("to-total-famliy-page")
+    public ModelAndView toTotalFamilyPage(String url, Long id) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName(url);
+        //查询片区
+        Area area = areaService.getById(id);
+        view.addObject("area", area);
+        return view;
+    }
+
+
+    @RequestMapping("update-total-family")
+    @SysLog(code = ModuleConstont.AREA_OPERATION, method = "修改总户数")
+    public ModelAndView updateTotalFamily(Long id, Integer totalFamily, HttpServletRequest request) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("ssadmin/comm/ajaxDone");
+        Long userId = getAdminSession(request).getFid();
+        if (totalFamily == null) {
+            totalFamily = 0;
+        }
+
+        boolean flag = areaService.updateTotalFamily(id, totalFamily, userId);
+        if (flag) {
+            view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "修改成功");
+        } else {
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "修改失败,请核对数据");
+        }
+        view.addObject("callbackType", "closeCurrent");
         return view;
     }
 

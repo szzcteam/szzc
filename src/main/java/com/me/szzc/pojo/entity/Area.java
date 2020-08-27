@@ -19,6 +19,11 @@ public class Area {
     private String name;
 
     /**
+     * 总户数
+     */
+    private Integer totalFamily;
+
+    /**
      * 项目code
      */
     private String projectCode;

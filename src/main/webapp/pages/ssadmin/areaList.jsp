@@ -48,7 +48,7 @@
             <shiro:hasPermission name="ssadmin/area/add.html">
                 <li><a class="add"
                        href="ssadmin/area/initAdd.html?url=ssadmin/addArea"
-                       height="400" width="700" target="dialog" rel="addProtocol"><span>新增</span>
+                       height="400" width="800" target="dialog" rel="addProtocol"><span>新增</span>
                 </a></li>
             </shiro:hasPermission>
             <!-- 修改 -->
@@ -56,6 +56,13 @@
                 <li><a class="edit"
                        href="ssadmin/area/initUpdate.html?url=ssadmin/updateArea&id={sid_user}"
                        height="400" width="800" target="dialog" rel="updateRoomChange"><span>修改</span>
+                </a></li>
+            </shiro:hasPermission>
+            <!-- 修改总户数 -->
+            <shiro:hasPermission name="ssadmin/area/update-total-family.html">
+                <li><a class="edit"
+                       href="ssadmin/area/to-total-famliy-page.html?url=ssadmin/updateAreaTotalFamily&id={sid_user}"
+                       height="300" width="600" target="dialog" rel="updateRoomChange"><span>修改总户数</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/area/enable.html">
@@ -72,11 +79,12 @@
             </shiro:hasPermission>
         </ul>
     </div>
-    <table class="table" width="100%" layoutH="138">
+    <table class="table" width="100%" layoutH="118">
         <thead>
         <tr>
             <th width="30">序号</th>
             <th>片区名称</th>
+            <th>总户数</th>
             <th>管辖项目</th>
             <th>状态</th>
             <th>最后一次操作时间</th>
@@ -88,6 +96,7 @@
             <tr target="sid_user" rel="${area.id}">
                 <td>${ (currentPage-1) * numPerPage+ num.index +1}</td>
                 <td>${area.name}</td>
+                <td>${area.totalFamily}</td>
                 <td>${area.projectName}</td>
                 <td>${area.statusDesc}</td>
                 <td>${area.modifiedDateStr}</td>
@@ -102,7 +111,7 @@
             <span>总共: ${totalCount}条</span>
         </div>
         <div class="pagination" targetType="navTab" totalCount="${totalCount}"
-             numPerPage="${numPerPage}" pageNumShown="5"
+             numPerPage="${numPerPage}" pageNumShown="6"
              currentPage="${currentPage}"></div>
     </div>
 </div>
