@@ -168,7 +168,7 @@ public class AdminController extends BaseController {
 		Long fid = Long.parseLong(request.getParameter("fadmin.fid"));
 		Fadmin fadmin = this.adminService.findById(fid);
 		Fadmin sessionAdmin = (Fadmin)request.getSession().getAttribute("login_admin");
-		if(fid == sessionAdmin.getFid()){
+		if(fid.equals(sessionAdmin.getFid())){
 			modelAndView.setViewName("ssadmin/comm/ajaxDone") ;
 			modelAndView.addObject("statusCode",300);
 			modelAndView.addObject("message","不允许修改当前登陆的管理员密码！");

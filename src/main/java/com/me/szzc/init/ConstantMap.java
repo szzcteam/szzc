@@ -34,7 +34,7 @@ public class ConstantMap {
 	}
 
 	public Map<String, Object> getMap(){
-		return this.map ;
+		return map ;
 	}
 
 	public String getValue(String key){

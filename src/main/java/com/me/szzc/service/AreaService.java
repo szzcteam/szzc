@@ -28,7 +28,7 @@ public class AreaService {
     @Autowired
     private AreaRoleMapper areaRoleMapper;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insert(String name, Integer totalFamily,  String projectCode,  String roleIds, Long createUserId) {
         //保存片区
         Area area = new Area();
@@ -92,7 +92,7 @@ public class AreaService {
         return areaMapper.updateStatus(area);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Area area) {
         //删除片区
         areaMapper.delete(area.getId());

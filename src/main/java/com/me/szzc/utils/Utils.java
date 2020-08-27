@@ -148,11 +148,12 @@ public class Utils {
 		StringBuffer md5StrBuff = new StringBuffer();
 
 		for (int i = 0; i < byteArray.length; i++) {
-			if (Integer.toHexString(0xFF & byteArray[i]).length() == 1)
+			if (Integer.toHexString(0xFF & byteArray[i]).length() == 1) {
 				md5StrBuff.append("0").append(
 						Integer.toHexString(0xFF & byteArray[i]));
-			else
+			} else {
 				md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
 		}
 
 		return md5StrBuff.toString();
@@ -299,8 +300,9 @@ public class Utils {
 	}
 
 	public static boolean isNumeric(String str) {
-		if (str == null || str.trim().length() == 0)
+		if (str == null || str.trim().length() == 0) {
 			return false;
+		}
 		Pattern pattern = Pattern.compile("[0-9]*");
 		return pattern.matcher(str).matches();
 	}
@@ -398,8 +400,9 @@ public class Utils {
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, days);
 		int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-		if (day_of_week == 0)
+		if (day_of_week == 0) {
 			day_of_week = 7;
+		}
 		c.add(Calendar.DATE, -day_of_week + 1);
 		return sdf.format(c.getTime());
 	}
@@ -414,8 +417,9 @@ public class Utils {
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, days);
 		int day_of_week = c.get(Calendar.DAY_OF_WEEK) - 1;
-		if (day_of_week == 0)
+		if (day_of_week == 0) {
 			day_of_week = 7;
+		}
 		c.add(Calendar.DATE, -day_of_week + 7);
 		return sdf.format(c.getTime());
 	}

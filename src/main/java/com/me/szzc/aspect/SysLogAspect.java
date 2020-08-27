@@ -84,7 +84,6 @@ public class SysLogAspect extends AbsSysLogAspect{
         String className = targetClass.getName();
 
         String requestParameters = "";
-        Long uid = 0l;
         String loginName = "";
 
         Fadmin admin = (Fadmin)request.getSession().getAttribute("login_admin");

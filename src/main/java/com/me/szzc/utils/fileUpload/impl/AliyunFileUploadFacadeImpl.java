@@ -445,6 +445,7 @@ public class AliyunFileUploadFacadeImpl implements AliyunFileUploadFacade {
      *
      * @param filePath
      */
+    @Override
     public void delFile(String filePath, AliyunConfigReq configReq) {
         try {
             if (filePath == null) {
