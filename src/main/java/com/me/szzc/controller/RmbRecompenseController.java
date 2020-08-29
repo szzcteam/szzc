@@ -203,7 +203,7 @@ public class RmbRecompenseController extends BaseController {
 
             Area area = areaService.getById(recompense.getAreaId());
             //电二南侧项目独立
-            if (area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())) {
+            if (area != null && (area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode()) || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode()))) {
                 modelAndView.setViewName(url + "_drnc");
             }
         }

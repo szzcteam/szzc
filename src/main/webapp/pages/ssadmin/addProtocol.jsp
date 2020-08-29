@@ -26,7 +26,7 @@
             </c:otherwise>
         </c:choose>
         <c:choose>
-            <c:when test="${projectCode != null && projectCode == 'C001001' }">
+            <c:when test="${projectCode != null && (projectCode == 'C001001' || projectCode == 'C001002') }">
                 <div id="div_rmbRecompense" style="display: none;"><%@ include file="addRmbRecompense_drnc.jsp" %></div>
             </c:when>
             <c:otherwise>
