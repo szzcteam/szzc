@@ -363,7 +363,9 @@ public class SettleAccountsController extends BaseController {
 
             if (area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())) {
                 modelAndView.setViewName(url + "_zyc");
-            } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode()) || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode()))) {
+            } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode()))) {
                 modelAndView.setViewName(url + "_xch");
             } else if (area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())) {
                 modelAndView.setViewName(url + "_drnc");
@@ -415,7 +417,7 @@ public class SettleAccountsController extends BaseController {
         String url = "ssadmin/detailSettleAccounts";
         modelAndView.setViewName(url);
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
-        if(settleAccounts != null) {
+        if (settleAccounts != null) {
             SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
             modelAndView.addObject("settleAccounts", vo);
 
@@ -423,7 +425,8 @@ public class SettleAccountsController extends BaseController {
             if (area != null && (area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode()))) {
+                    || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode()))) {
                 modelAndView.setViewName(url + "_zyc");
             }
 
@@ -439,7 +442,8 @@ public class SettleAccountsController extends BaseController {
                 modelAndView.addObject("showAdjunctOther", false);
 
             } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode()))) {
+                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode()))) {
                 modelAndView.addObject("adjunctRow", 11);
                 modelAndView.addObject("strustRow", 6);
                 modelAndView.addObject("showAdjunctOther", true);

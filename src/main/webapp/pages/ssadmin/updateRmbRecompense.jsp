@@ -155,9 +155,9 @@
                 <dl>
                     <dt>4、临时安置补偿:</dt>
                     <dd style="width: 300px;">
-                        <%--  <input type="text" name="interimArea" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>&nbsp;&nbsp;×&nbsp;&nbsp;--%>
+                        <input type="hidden" name="interimArea" maxlength="50" value="${rmbRecom.interimArea}" class="samll_input_text" style="clear: both;float: none;"/><%--&nbsp;&nbsp;M<sup>2</sup>&nbsp;&nbsp;×&nbsp;&nbsp;--%>
                         标准：<input type="text" name="interimPrice" value="${rmbRecom.interimPrice}" class="samll_input_text" style="clear: both;float: none;margin-left: 0px;"/>&nbsp;&nbsp;元/M<sup>2</sup>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <%--<input type="text" name="interimMonth" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;个月--%>
+                        <input type="hidden" name="interimMonth" maxlength="50" value="${rmbRecom.interimMonth}" class="samll_input_text" style="clear: both;float: none;"/><%--&nbsp;&nbsp;个月--%>
                         总额：<input type="text" name="interimFee" value="${rmbRecom.interimFee}" class="samll_input_text" style="clear: both;float: none;margin-left: 0px;"/>&nbsp;&nbsp;元
                     </dd>
                 </dl>

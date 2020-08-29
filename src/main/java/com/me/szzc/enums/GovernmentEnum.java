@@ -31,6 +31,7 @@ public enum GovernmentEnum {
 
     HZJRC("C001", "华中金融城", GovernmentEnum.WCQ.getCode()),
     DZRGS("C001001", "电车二公司南侧地块", GovernmentEnum.HZJRC.getCode()),
+    JYQC("C001002", "积玉桥C扩大", GovernmentEnum.HZJRC.getCode()),
 
     WCJSJ("D001", "武昌区建设局", GovernmentEnum.WCQ.getCode()),
     WCEFC("D001001", "武船二分厂宿舍", "武船二分厂宿舍区旧城改建", GovernmentEnum.WCJSJ.getCode()),

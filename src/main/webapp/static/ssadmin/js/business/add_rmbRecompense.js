@@ -231,9 +231,9 @@ var rmbRecompenseObj = {
                         //临时安置补偿(过渡费)
                         var calcInterimFee = data.calcInterimFee;
                         var calcInterimFeeArr = calcInterimFee.split("*");
-                        // $("#rmbRecompenseDiv input[name='interimArea']").eq(0).val(calcInterimFeeArr[0]);
+                        $("#rmbRecompenseDiv input[name='interimArea']").eq(0).val(calcInterimFeeArr[0]);
                         $("#rmbRecompenseDiv input[name='interimPrice']").eq(0).val(calcInterimFeeArr[1]);
-                        // $("#rmbRecompenseDiv input[name='interimMonth']").eq(0).val(calcInterimFeeArr[2]);
+                        $("#rmbRecompenseDiv input[name='interimMonth']").eq(0).val(calcInterimFeeArr[2]);
                         $("#rmbRecompenseDiv input[name='interimFee']").eq(0).val(data.interimFee);
 
                         //保底
