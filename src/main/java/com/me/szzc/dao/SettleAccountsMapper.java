@@ -62,4 +62,6 @@ public interface SettleAccountsMapper {
     List<ProtocolCountMoneyDTO> countMoney();
 
     List<ProtocolSummaryDTO> summaryList(@Param("projectCode") String projectCode, @Param("areaIdList") List<Long> areaIdList);
+
+    SettleAccounts getByHouseOwner(String choosePeople);
 }

@@ -1,20 +1,17 @@
 package com.me.szzc.service;
 
-import com.me.szzc.dao.FieldCoordinateMapper;
-import com.me.szzc.dao.RmbRecompenseMapper;
-import com.me.szzc.dao.SettleAccountsMapper;
-import com.me.szzc.dao.SwapHouseMapper;
+import com.me.szzc.constant.Constant;
+import com.me.szzc.dao.*;
 import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.PrintTableEnum;
 import com.me.szzc.enums.PrintTypeEnum;
 import com.me.szzc.pojo.dto.FieldCoordinateDto;
-import com.me.szzc.pojo.entity.Area;
-import com.me.szzc.pojo.entity.RmbRecompense;
-import com.me.szzc.pojo.entity.SettleAccounts;
-import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.entity.*;
+import com.me.szzc.pojo.vo.PaymentNoticeVO;
 import com.me.szzc.pojo.vo.RmbRecompenseVO;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.pojo.vo.SwapHouseVO;
+import com.me.szzc.utils.NumberToCapitalizedUtils;
 import com.me.szzc.utils.PrintUtil;
 import com.me.szzc.utils.StringUtils;
 import org.slf4j.Logger;
@@ -54,6 +51,9 @@ public class StylusPrintService {
 
     @Autowired
     private PrintUtil printUtil;
+
+    @Autowired
+    private RoomChangeMapper roomChangeMapper;
 
     public List<Map<String, Object>> settleAccountsPrint(Long id) throws Exception {
         //根据ID获取数据
@@ -139,8 +139,8 @@ public class StylusPrintService {
         Area area = areaService.getById(swapHouse.getAreaId());
         String projectCode = area.getProjectCode();
         //数据特殊处理：紫阳村模板少打印一个百分号
-        if(area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())){
-            vo.setHistoryProportion(vo.getHistoryProportion()+"%");
+        if (area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())) {
+            vo.setHistoryProportion(vo.getHistoryProportion() + "%");
         }
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
@@ -187,8 +187,8 @@ public class StylusPrintService {
         Area area = areaService.getById(recompense.getAreaId());
         String projectCode = area.getProjectCode();
         //数据特殊处理：紫阳村模板少打印一个百分号
-        if(area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())){
-            vo.setHistoryProportion(vo.getHistoryProportion()+"%");
+        if (area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())) {
+            vo.setHistoryProportion(vo.getHistoryProportion() + "%");
         }
         //获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
@@ -317,5 +317,112 @@ public class StylusPrintService {
             return objValue.toString();
         }
 
+    }
+
+    /*
+    交房通知书打印
+     */
+
+    public List<Map<String, Object>> noticePrint(Long id) throws NoSuchFieldException, IllegalAccessException {
+        //1、根据房源ID获取数据
+        RoomChange roomChange = roomChangeMapper.getRoomChangeById(id);
+        //2、判断roomChange是否为空
+        if (StringUtils.isNullOrEmpty(roomChange)) {
+            return null;
+        }
+        //3、判断状态是否已签
+        if (roomChange.getStatus() != 1) {
+            return null;
+        }
+        //4、通过姓名获取结算单数据
+        SettleAccounts settleAccounts = settleAccountsMapper.getByHouseOwner(roomChange.getChoosePeople());
+        if (StringUtils.isNullOrEmpty(settleAccounts)) {
+            return null;
+        }
+        //创建甲方通知书实体类
+        PaymentNoticeVO paymentNoticeVO = new PaymentNoticeVO();
+        //5、用人名获取产权调换数据
+        if (settleAccounts.getCompensateType() == 0) {
+            RmbRecompense recompense = rmbRecompenseMapper.getByHouseOwnerAddr(settleAccounts.getHouseOwner(), settleAccounts.getAddress());
+            paymentNoticeVO.setIdentityNo(recompense.getIdentityNo());
+        } else if (settleAccounts.getCompensateType() == 1) {
+            SwapHouse swapHouse = swapHouseMapper.getByHouseOwnerAddr(settleAccounts.getHouseOwner(), settleAccounts.getAddress());
+            paymentNoticeVO.setIdentityNo(swapHouse.getIdentityNo());
+        }
+
+        //6、放入实体类
+        paymentNoticeVO.setName(roomChange.getName());
+        paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
+        paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
+        paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
+        paymentNoticeVO.setRidgepole(roomChange.getRidgepole());
+        paymentNoticeVO.setUnit(roomChange.getUnit());
+        paymentNoticeVO.setFloor(roomChange.getFloor());
+        paymentNoticeVO.setMark(roomChange.getMark());
+        paymentNoticeVO.setArea(roomChange.getArea());
+
+        paymentNoticeVO.setSumRbm(settleAccounts.getHouseMoney().toPlainString());
+        paymentNoticeVO.setTransferRmb(settleAccounts.getDeduction().toPlainString());
+
+        if (settleAccounts.getSumCompensate().compareTo(settleAccounts.getHouseMoney()) > 0) {
+            paymentNoticeVO.setDifference(settleAccounts.getPayTotal().toPlainString());
+        } else {
+            paymentNoticeVO.setLessDifference(settleAccounts.getPayTotal().toPlainString());
+        }
+
+        //7、金额大写拆分存储
+        String tempMoney = paymentNoticeVO.getSumRbm();
+        if (tempMoney.length() < 8) {
+            tempMoney = "00000000" + tempMoney;
+        }
+        tempMoney = tempMoney.substring(tempMoney.length() - 8, tempMoney.length());
+        paymentNoticeVO.setPayParm1(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 1, tempMoney.length()))));
+        paymentNoticeVO.setPayParm2(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 2, tempMoney.length() - 1))));
+        paymentNoticeVO.setPayParm3(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 3, tempMoney.length() - 2))));
+        paymentNoticeVO.setPayParm4(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 4, tempMoney.length() - 3))));
+        paymentNoticeVO.setPayParm5(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 5, tempMoney.length() - 4))));
+        paymentNoticeVO.setPayParm6(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 6, tempMoney.length() - 5))));
+        paymentNoticeVO.setPayParm7(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 7, tempMoney.length() - 6))));
+        paymentNoticeVO.setPayParm8(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 8, tempMoney.length() - 7))));
+
+        if (paymentNoticeVO.getPayParm8().equals(Constant.CHINESE_ZERO)) {
+            paymentNoticeVO.setPayParm8("");
+        }
+        if (org.apache.commons.lang3.StringUtils.isBlank(paymentNoticeVO.getPayParm8()) && paymentNoticeVO.getPayParm7().equals(Constant.CHINESE_ZERO)) {
+            paymentNoticeVO.setPayParm7("");
+        }
+        if (org.apache.commons.lang3.StringUtils.isAllBlank(paymentNoticeVO.getPayParm8(), paymentNoticeVO.getPayParm7()) && paymentNoticeVO.getPayParm6().equals(Constant.CHINESE_ZERO)) {
+            paymentNoticeVO.setPayParm6("");
+        }
+        //8、获取打印数据坐标
+        List<FieldCoordinateDto> FieldCoordinateList =
+                fieldCoordinateMapper.getNoticeFieldCoordinateList(PrintTableEnum.HOUSE_NOTICE.getName());
+        if (StringUtils.isNullOrEmpty(FieldCoordinateList)) {
+            logger.error("交房通知书打印获取坐标数据为空,tableName(" + PrintTableEnum.HOUSE_NOTICE.getName() + ")");
+            return null;
+        }
+        List<Map<String, Object>> dataList = new ArrayList();
+        Map<String, Object> map = null;
+        //9、打印数据封装
+        for (FieldCoordinateDto fieldCoordinateDto : FieldCoordinateList) {
+            map = new HashMap();
+            String value = getFieldValueByFieldName(fieldCoordinateDto.getCode(), paymentNoticeVO);
+            if (StringUtils.isNullOrEmpty(value)) {
+                continue;
+            }
+            map.put("data", value);
+            map.put("fontName", fieldCoordinateDto.getFontName());
+            map.put("fontSize", fieldCoordinateDto.getFontSize());
+            map.put("x", fieldCoordinateDto.getAbscissa());
+            map.put("y", fieldCoordinateDto.getOrdinate());
+            dataList.add(map);
+        }
+        if (StringUtils.isNullOrEmpty(dataList)) {
+            logger.error("交房通知书打印获取数据为空");
+            return null;
+        }
+        //调用打印工具
+        //printUtil.starPrint(PrintTypeEnum.LENGTHWAYS.getCode(), dataList);
+        return dataList;
     }
 }

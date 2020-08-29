@@ -13,4 +13,6 @@ public interface FieldCoordinateMapper {
 
     List<FieldCoordinateDto> getFieldCoordinateListByTableName(@Param("tableName") String tableNamesss,
                                                                @Param("itemCode") String projectCode);
+
+    List<FieldCoordinateDto> getNoticeFieldCoordinateList(String name);
 }

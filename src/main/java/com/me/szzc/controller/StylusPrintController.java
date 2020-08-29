@@ -1,6 +1,7 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.service.StylusPrintService;
+import com.me.szzc.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,6 +71,13 @@ public class StylusPrintController {
     @ResponseBody
     public List<Map<String, Object>> printHouseSwap(Long id) throws Exception {
         List<Map<String, Object>> dataList = stylusPrintService.houseSwapPrint(id);
+        return dataList;
+    }
+
+    @RequestMapping("/notice-print")
+    @ResponseBody
+    public List<Map<String, Object>> notice(Long id) throws Exception {
+        List<Map<String, Object>> dataList = stylusPrintService.noticePrint(id);
         return dataList;
     }
 }
