@@ -333,7 +333,7 @@
                         </tr>
                     </table>
                 </div>
-            </c:otherwise>
+            </c:otherwise>=
         </c:choose>
 
 

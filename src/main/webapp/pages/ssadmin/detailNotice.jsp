@@ -26,6 +26,11 @@
             border-bottom:1px solid black;
             display:inline-block;
             text-align: center;
+            height: 30px;
+        }
+        .font-size-16{
+            font-size: 16px;
+            line-height: 40px;
         }
     </style>
 </head>
@@ -41,6 +46,37 @@
             <div style="text-align: right;margin-right: 13%;">
                 <input type="hidden" value="${id}" id="recordId">
                 <button type="button" id="print" style="width: 70px;height: 26px;" onclick="eventPrint()">打印</button>
+            </div>
+        </dl>
+        <dl>
+            <div style="text-align: center;font-size: 26px;">
+                <div class="rows_div" style="width: 200px;">${vo.name}&nbsp;</div>&nbsp;交房通知书
+            </div>
+        </dl>
+        <dl style="margin-left: 10%;">
+            <div class="font-size-16">台账号：${vo.cardNo}</div>
+            <div class="font-size-16">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 姓名：<div class="rows_div" style="width: 150px;">${vo.houseOwner}</div>
+                （身份证号：<div class="rows_div" style="width: 230px;">${vo.identityNo}</div>），
+                系 <div class="rows_div" style="width: 200px;">${vo.name}</div> <br/>
+                被征收人， 所点安置房为：<div class="rows_div" style="width: 230px;"> ${vo.ridgepole} &nbsp;</div>栋
+                <div class="rows_div" style="width: 70px;"> ${vo.unit} &nbsp;</div>单元
+                <div class="rows_div" style="width: 70px;">${vo.floor} &nbsp;</div>楼
+                <div class="rows_div" style="width: 70px;">${vo.mark}&nbsp;</div>号房，
+                建筑面
+                <br/>
+                积<div class="rows_div" style="width: 60px;">${vo.area}&nbsp;</div> M<sup>2</sup>，
+                总房款大写：
+                <div class="rows_div" style="width: 60px;">${vo.payParm8}${vo.payParm7}${vo.payParm6}&nbsp;</div>拾
+                <div class="rows_div" style="width: 40px;">${vo.payParm5}&nbsp;</div>万
+                <div class="rows_div" style="width: 40px;">${vo.payParm4}&nbsp;</div>仟
+                <div class="rows_div" style="width: 40px;">${vo.payParm3}&nbsp;</div>佰
+                <div class="rows_div" style="width: 40px;">${vo.payParm2}&nbsp;</div>拾
+                <div class="rows_div" style="width: 40px;">${vo.payParm1}&nbsp;</div>元
+                （￥<div class="rows_div" style="width: 145px;">${vo.sumRbm}</div>）整，<br/>
+                补偿协议已抵扣房款<div class="rows_div" style="width: 145px;">${vo.transferRmb}&nbsp;</div>元，
+                需补缴房款 <div class="rows_div" style="width: 120px;"> ${vo.lessDifference}&nbsp;</div> 元
+                （需退还房款 <div class="rows_div" style="width: 120px;">${vo.difference}&nbsp;</div> 元）。
             </div>
         </dl>
     </div>
@@ -66,7 +102,7 @@
          **/
         // LODOP.SET_PRINT_PAGESIZE(0,"595in","841in", "A4");
         LODOP.SET_PRINT_PAGESIZE(1,0,0, "A3");
-        LODOP.SET_PRINT_STYLE("Angle",270);
+        // LODOP.SET_PRINT_STYLE("Angle",270);
         //设置纯文本打印的文字大小
         LODOP.SET_PRINT_STYLE("FontSize",11);
         var recordId = $("#recordId").val();

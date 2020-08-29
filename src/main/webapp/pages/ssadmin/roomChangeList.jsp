@@ -140,13 +140,13 @@
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/batchUpdateRoomChangeItem">
                 <li><a class="edit"
-                       href="" onclick="getids(this)"
+                       href="ssadmin/roomChange/batchUpdateItemPage.html?url=ssadmin/batchUpdateRoomChangeItem" onclick="getids(this)"
                        height="300" width="700" target="dialog"><span>批量修改项目</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/stylusPrint/notice-print.html">
-                <li><a class="icon" target="_blank" onclick="openDetailNotice(this)"
-                       href="" ><span>交房通知</span>
+                <li><a class="icon" onclick="openDetailNotice(this);"
+                       href="javascript:void(0)"  ><span>交房通知</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>
@@ -214,9 +214,10 @@
             ids += i==0 ? val : ","+val;
         });
         if(ids == ""){
-            alertMsg("请选择需要修改的房源");
-            return;
+            alertMsg.info("请选择需要修改的房源");
+            return false;
         }
+        console.log("选择的id:" + ids);
         url = url + '&ids=' + ids;
         $(obj).attr("href",url);
     }
@@ -229,7 +230,8 @@
             return false;
         }
         url = url + id;
-        $(obj).attr("href",url);
+        // $(obj).attr("href",url);
+        window.open(url);
     }
 
 </script>

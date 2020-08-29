@@ -5,9 +5,11 @@ import com.me.szzc.enums.ChooseStatusEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.RoomChangeExport;
 import com.me.szzc.pojo.entity.RoomChange;
+import com.me.szzc.pojo.vo.PaymentNoticeVO;
 import com.me.szzc.pojo.vo.ResultVO;
 import com.me.szzc.pojo.vo.RoomChangeVo;
 import com.me.szzc.service.RoomChangeService;
+import com.me.szzc.service.StylusPrintService;
 import com.me.szzc.utils.CustomizedPropertyConfigurer;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.StringUtils;
@@ -39,6 +41,9 @@ import java.util.Map;
 public class RoomChangeController extends BaseController {
     @Autowired
     private RoomChangeService roomChangeService;
+
+    @Autowired
+    private StylusPrintService stylusPrintService;
 
     /**
      * 房源信息excle导入
@@ -563,12 +568,15 @@ public class RoomChangeController extends BaseController {
     }
 
     @RequestMapping("/to-notice-preview")
-    public ModelAndView toNoticePreview(String id){
+    public ModelAndView toNoticePreview(Long id){
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/detailNotice");
         view.addObject("id", id);
 
         //根据房源ID查询数据
+        PaymentNoticeVO vo = stylusPrintService.getDetailNotice(id);
+        view.addObject("vo", vo);
+
         return view;
     }
 }

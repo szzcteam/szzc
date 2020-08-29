@@ -11,6 +11,7 @@ import com.me.szzc.pojo.vo.PaymentNoticeVO;
 import com.me.szzc.pojo.vo.RmbRecompenseVO;
 import com.me.szzc.pojo.vo.SettleAccountsVO;
 import com.me.szzc.pojo.vo.SwapHouseVO;
+import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.NumberToCapitalizedUtils;
 import com.me.szzc.utils.PrintUtil;
 import com.me.szzc.utils.StringUtils;
@@ -366,15 +367,14 @@ public class StylusPrintService {
         //long l  = bd.setScale( 0, BigDecimal.ROUND_DOWN ).longValue();
         //BigDecimal houseMoney = settleAccounts.getHouseMoney();
         //BigDecimal bigDecimal = houseMoney.setScale(0, BigDecimal.ROUND_DOWN);
-        String s = settleAccounts.getHouseMoney().setScale(0, BigDecimal.ROUND_DOWN).toPlainString();
 //        paymentNoticeVO.setSumRbm(settleAccounts.getHouseMoney().toPlainString());
-        paymentNoticeVO.setSumRbm(s);
-        paymentNoticeVO.setTransferRmb(settleAccounts.getDeduction().toPlainString());
+        paymentNoticeVO.setSumRbm(BigDecimalUtil.stripTrailingZeros(settleAccounts.getSumCompensate()));
+        paymentNoticeVO.setTransferRmb(BigDecimalUtil.stripTrailingZeros(settleAccounts.getDeduction()));
 
         if (settleAccounts.getSumCompensate().compareTo(settleAccounts.getHouseMoney()) > 0) {
-            paymentNoticeVO.setDifference(settleAccounts.getPayTotal().toPlainString());
+            paymentNoticeVO.setDifference(BigDecimalUtil.stripTrailingZeros(settleAccounts.getPayTotal()));
         } else {
-            paymentNoticeVO.setLessDifference(settleAccounts.getPayTotal().toPlainString());
+            paymentNoticeVO.setLessDifference(BigDecimalUtil.stripTrailingZeros(settleAccounts.getPayTotal()));
         }
 
         //7、金额大写拆分存储
@@ -394,9 +394,13 @@ public class StylusPrintService {
 
         if (paymentNoticeVO.getPayParm8().equals(Constant.CHINESE_ZERO)) {
             paymentNoticeVO.setPayParm8("");
+        }else{
+            paymentNoticeVO.setPayParm8(paymentNoticeVO.getPayParm8()+"仟");
         }
         if (org.apache.commons.lang3.StringUtils.isBlank(paymentNoticeVO.getPayParm8()) && paymentNoticeVO.getPayParm7().equals(Constant.CHINESE_ZERO)) {
             paymentNoticeVO.setPayParm7("");
+        }else{
+            paymentNoticeVO.setPayParm7(paymentNoticeVO.getPayParm7() + "佰");
         }
         if (org.apache.commons.lang3.StringUtils.isAllBlank(paymentNoticeVO.getPayParm8(), paymentNoticeVO.getPayParm7()) && paymentNoticeVO.getPayParm6().equals(Constant.CHINESE_ZERO)) {
             paymentNoticeVO.setPayParm6("");
