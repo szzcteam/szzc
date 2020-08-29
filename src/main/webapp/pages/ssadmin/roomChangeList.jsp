@@ -139,6 +139,12 @@
                        target="dwzExport" targetType="navTab"><span>导出</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/batchUpdateRoomChangeItem">
+                <li><a class="edit"
+                       href="" onclick="getids(this)"
+                       height="300" width="700" target="dialog"><span>批量修改项目</span>
+                </a></li>
+            </shiro:hasPermission>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="138">
@@ -193,3 +199,17 @@
              currentPage="${currentPage}"></div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function getids(obj) {
+        var url = 'ssadmin/roomChange/batchUpdateItemPage.html?url=ssadmin/batchUpdateRoomChangeItem';
+        var ids = ""
+        $("input:checked").filter("[name='ids']").each(function(i){
+            var val = $(this).val();
+            ids += i==0 ? val : ","+val;
+        });
+        url = url + '&ids=' + ids;
+        $(obj).attr("href",url);
+    }
+
+</script>

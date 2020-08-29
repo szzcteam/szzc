@@ -507,4 +507,58 @@ public class RoomChangeController extends BaseController {
         view.addObject("projectMap", projectMap);
         return view;
     }
+
+    /**
+     * 批量修改房源项目页面
+     */
+    @RequestMapping("/batchUpdateItemPage")
+    public ModelAndView batchUpdateItemPage(String ids, String url, HttpServletRequest request) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName(url);
+        int result = 0;
+        if (StringUtils.isNullOrEmpty(ids)) {
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "请选择需要修改的记录");
+        } else {
+            Long userId = getAdminSession(request).getFid();
+            Map<String, String> projectMap = getUserEnableProject(userId);
+            view.addObject("projectMap", projectMap);
+            view.addObject("ids", ids);
+        }
+        return view;
+    }
+
+    /**
+     * 批量修改房源项目
+     */
+    @RequestMapping("/batchUpdateItem")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "批量修改房源项目")
+    public ModelAndView batchUpdateItem(String ids, String itemCode) {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("ssadmin/comm/ajaxDone");
+        int result = 0;
+        if (!StringUtils.isNullOrEmpty(ids)) {
+            String[] idArr = ids.split(",");
+            for (String idStr : idArr) {
+                Long id = Long.valueOf(idStr);
+                result = roomChangeService.updateRoomChangeItemById(id, itemCode);
+                if (result == 0) {
+                    break;
+                }
+            }
+            if (result > 0) {
+                view.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
+                view.addObject(MESSAGE_KEY, "修改成功");
+                view.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
+            } else {
+                view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+                view.addObject(MESSAGE_KEY, "修改失败");
+            }
+
+            return view;
+        }
+        view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+        view.addObject(MESSAGE_KEY, "请选择需要修改的记录");
+        return view;
+    }
 }

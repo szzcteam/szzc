@@ -366,4 +366,8 @@
         select r_name as projectName,r_area as area, count(1) as num from r_change where item_code = #{projectCode} and r_del = 0
         group by r_name, r_area
     </select>
+
+    <update id="updateRoomChangeItemById">
+        update r_change set item_code = #{itemCode},assigned_project = #{assignedProject} where id = #{id};
+    </update>
 </mapper>

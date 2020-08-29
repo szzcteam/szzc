@@ -118,6 +118,7 @@ public class RoomChangeService {
 
     /**
      * 房源信息条件分页查询
+     *
      * @return
      */
     public Map<String, Object> queryPage(RoomChangeVo roomChangeVo, List<String> list) {
@@ -177,19 +178,23 @@ public class RoomChangeService {
         return roomChangeExports;
     }
 
-    /**房源数量统计**/
-    public List<RoomChangeNumDTO> countRoomNum(){
+    /**
+     * 房源数量统计
+     **/
+    public List<RoomChangeNumDTO> countRoomNum() {
         List<RoomChangeNumDTO> list = roomChangeMapper.countNum();
-        if(list == null || list.isEmpty()){
+        if (list == null || list.isEmpty()) {
             return list;
         }
-        for(RoomChangeNumDTO dto : list){
+        for (RoomChangeNumDTO dto : list) {
             dto.setProjectName(GovernmentEnum.getNameByCode(dto.getProjectCode()));
         }
         return list;
     }
 
-    /**统计各项目的房源套数信息**/
+    /**
+     * 统计各项目的房源套数信息
+     **/
     public JSONArray countAreaNumByProjectCode(String projectCode) {
         List<RoomChangeNumDTO> list = roomChangeMapper.countAreaNumByProjectCode(projectCode);
         //先以房源名称做拆分
@@ -241,5 +246,10 @@ public class RoomChangeService {
         }
 
         return jsonArray;
+    }
+
+    public Integer updateRoomChangeItemById(Long id, String itemCode) {
+        String assignedProject = GovernmentEnum.getNameByCode(itemCode);
+        return roomChangeMapper.updateRoomChangeItemById(id, itemCode, assignedProject);
     }
 }
