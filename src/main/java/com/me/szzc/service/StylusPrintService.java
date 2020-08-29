@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -319,11 +320,13 @@ public class StylusPrintService {
 
     }
 
-    /*
-    交房通知书打印
-     */
 
-    public List<Map<String, Object>> noticePrint(Long id) throws NoSuchFieldException, IllegalAccessException {
+    /**
+     * 获取交房通知书详情
+     * @param id  房源ID
+     * @return
+     */
+    public PaymentNoticeVO getDetailNotice(Long id){
         //1、根据房源ID获取数据
         RoomChange roomChange = roomChangeMapper.getRoomChangeById(id);
         //2、判断roomChange是否为空
@@ -360,8 +363,12 @@ public class StylusPrintService {
         paymentNoticeVO.setFloor(roomChange.getFloor());
         paymentNoticeVO.setMark(roomChange.getMark());
         paymentNoticeVO.setArea(roomChange.getArea());
-
-        paymentNoticeVO.setSumRbm(settleAccounts.getHouseMoney().toPlainString());
+        //long l  = bd.setScale( 0, BigDecimal.ROUND_DOWN ).longValue();
+        //BigDecimal houseMoney = settleAccounts.getHouseMoney();
+        //BigDecimal bigDecimal = houseMoney.setScale(0, BigDecimal.ROUND_DOWN);
+        String s = settleAccounts.getHouseMoney().setScale(0, BigDecimal.ROUND_DOWN).toPlainString();
+//        paymentNoticeVO.setSumRbm(settleAccounts.getHouseMoney().toPlainString());
+        paymentNoticeVO.setSumRbm(s);
         paymentNoticeVO.setTransferRmb(settleAccounts.getDeduction().toPlainString());
 
         if (settleAccounts.getSumCompensate().compareTo(settleAccounts.getHouseMoney()) > 0) {
@@ -394,6 +401,15 @@ public class StylusPrintService {
         if (org.apache.commons.lang3.StringUtils.isAllBlank(paymentNoticeVO.getPayParm8(), paymentNoticeVO.getPayParm7()) && paymentNoticeVO.getPayParm6().equals(Constant.CHINESE_ZERO)) {
             paymentNoticeVO.setPayParm6("");
         }
+        return paymentNoticeVO;
+    }
+
+
+    /*
+    交房通知书打印
+     */
+    public List<Map<String, Object>> noticePrint(Long id) throws NoSuchFieldException, IllegalAccessException {
+        PaymentNoticeVO paymentNoticeVO = getDetailNotice(id);
         //8、获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
                 fieldCoordinateMapper.getNoticeFieldCoordinateList(PrintTableEnum.HOUSE_NOTICE.getName());
@@ -415,6 +431,8 @@ public class StylusPrintService {
             map.put("fontSize", fieldCoordinateDto.getFontSize());
             map.put("x", fieldCoordinateDto.getAbscissa());
             map.put("y", fieldCoordinateDto.getOrdinate());
+            map.put("width", fieldCoordinateDto.getWidth());
+            map.put("height", fieldCoordinateDto.getHeight());
             dataList.add(map);
         }
         if (StringUtils.isNullOrEmpty(dataList)) {

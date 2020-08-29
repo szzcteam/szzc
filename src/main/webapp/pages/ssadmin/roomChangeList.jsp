@@ -21,7 +21,6 @@
     <input type="hidden" name="orderField" value="${param.orderField}"/>
 </form>
 
-
 <div class="pageHeader">
     <form onsubmit="return navTabSearch(this);"
           action="ssadmin/roomChange/queryPage.html" method="post">
@@ -145,6 +144,11 @@
                        height="300" width="700" target="dialog"><span>批量修改项目</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/stylusPrint/notice-print.html">
+                <li><a class="icon" target="_blank" onclick="openDetailNotice(this)"
+                       href="" ><span>交房通知</span>
+                </a></li>
+            </shiro:hasPermission>
         </ul>
     </div>
     <table class="table" width="100%" layoutH="138">
@@ -201,6 +205,7 @@
 </div>
 
 <script type="text/javascript">
+    //批量修改
     function getids(obj) {
         var url = 'ssadmin/roomChange/batchUpdateItemPage.html?url=ssadmin/batchUpdateRoomChangeItem';
         var ids = ""
@@ -208,7 +213,22 @@
             var val = $(this).val();
             ids += i==0 ? val : ","+val;
         });
+        if(ids == ""){
+            alertMsg("请选择需要修改的房源");
+            return;
+        }
         url = url + '&ids=' + ids;
+        $(obj).attr("href",url);
+    }
+
+    function openDetailNotice(obj) {
+        var url = "ssadmin/roomChange/to-notice-preview.html?id=";
+        var id = $("input:checked").filter("[name='ids']").eq(0).val();
+        if (id == undefined) {
+            alertMsg.info("请勾选需要打印的房源");
+            return false;
+        }
+        url = url + id;
         $(obj).attr("href",url);
     }
 

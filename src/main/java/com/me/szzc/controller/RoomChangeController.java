@@ -561,4 +561,14 @@ public class RoomChangeController extends BaseController {
         view.addObject(MESSAGE_KEY, "请选择需要修改的记录");
         return view;
     }
+
+    @RequestMapping("/to-notice-preview")
+    public ModelAndView toNoticePreview(String id){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("ssadmin/detailNotice");
+        view.addObject("id", id);
+
+        //根据房源ID查询数据
+        return view;
+    }
 }

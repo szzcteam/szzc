@@ -674,6 +674,6 @@
     select
     <include refid="Base_Column_List" />
     from t_settle_accounts a
-    where (house_owner = #{houseOwner}  and deleted = 0
+    where house_owner = #{houseOwner}  and deleted = 0
   </select>
 </mapper>
