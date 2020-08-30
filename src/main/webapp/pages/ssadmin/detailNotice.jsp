@@ -28,6 +28,14 @@
             text-align: center;
             height: 30px;
         }
+        .text_bottom{
+            border: none;
+            font-size: 16px;
+            border-bottom: 1px solid black;
+            height: 28px;
+            text-align: center;
+            color: #000080;
+        }
         .font-size-16{
             font-size: 16px;
             line-height: 40px;
@@ -44,39 +52,38 @@
     <div class="pageFormContent nowrap" layoutH="97">
         <dl>
             <div style="text-align: right;margin-right: 13%;">
-                <input type="hidden" value="${id}" id="recordId">
-                <button type="button" id="print" style="width: 70px;height: 26px;" onclick="eventPrint()">打印</button>
+                <input type="hidden" value="${vo.changeId}" name="changeId"  id="changeId">
+                <input type="hidden" value="${vo.id}" name="id"  id="id">
+                <button type="button" id="print" style="width: 100px;height: 26px;" onclick="eventPrint()">保存并打印</button>
             </div>
         </dl>
         <dl>
             <div style="text-align: center;font-size: 26px;">
-                <div class="rows_div" style="width: 200px;">${vo.name}&nbsp;</div>&nbsp;交房通知书
+                <input type="text" name="name" value="${vo.name}" class="text_bottom"/>交房通知书
             </div>
         </dl>
         <dl style="margin-left: 10%;">
-            <div class="font-size-16">台账号：${vo.cardNo}</div>
+            <div class="font-size-16">台账号：<input type="text" name="cardNo" value="${vo.cardNo}" class="text_bottom" style="width: 60px"/></div>
             <div class="font-size-16">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 姓名：<div class="rows_div" style="width: 150px;">${vo.houseOwner}</div>
-                （身份证号：<div class="rows_div" style="width: 230px;">${vo.identityNo}</div>），
-                系 <div class="rows_div" style="width: 200px;">${vo.name}</div> <br/>
-                被征收人， 所点安置房为：<div class="rows_div" style="width: 230px;"> ${vo.ridgepole} &nbsp;</div>栋
-                <div class="rows_div" style="width: 70px;"> ${vo.unit} &nbsp;</div>单元
-                <div class="rows_div" style="width: 70px;">${vo.floor} &nbsp;</div>楼
-                <div class="rows_div" style="width: 70px;">${vo.mark}&nbsp;</div>号房，
-                建筑面
-                <br/>
-                积<div class="rows_div" style="width: 60px;">${vo.area}&nbsp;</div> M<sup>2</sup>，
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 姓名：<input type="text" name="houseOwner" value="${vo.houseOwner}" class="text_bottom"/>
+                （身份证号：<input type="text" name="identityNo" value="${vo.identityNo}" class="text_bottom"/>），
+                系 <input type="text" name="projectCode" value="${vo.projectCode}" class="text_bottom"/><br/>
+                被征收人， 所点安置房为：<input type="text" name="ridgepole" value="${vo.ridgepole}" class="text_bottom"/>栋
+                <input type="text" name="unit" value="${vo.unit}" class="text_bottom" style="width: 50px;"/>单元
+                <input type="text" name="floor" value="${vo.floor}" class="text_bottom" style="width: 50px;"/>楼
+                <input type="text" name="mark" value="${vo.mark}" class="text_bottom" style="width: 50px;"/>号房，
+                建筑面积<input type="text" name="area" value="${vo.area}" class="text_bottom" style="width: 80px;"/> M<sup>2</sup>，
                 总房款大写：
-                <div class="rows_div" style="width: 60px;">${vo.payParm8}${vo.payParm7}${vo.payParm6}&nbsp;</div>拾
-                <div class="rows_div" style="width: 40px;">${vo.payParm5}&nbsp;</div>万
-                <div class="rows_div" style="width: 40px;">${vo.payParm4}&nbsp;</div>仟
-                <div class="rows_div" style="width: 40px;">${vo.payParm3}&nbsp;</div>佰
-                <div class="rows_div" style="width: 40px;">${vo.payParm2}&nbsp;</div>拾
-                <div class="rows_div" style="width: 40px;">${vo.payParm1}&nbsp;</div>元
-                （￥<div class="rows_div" style="width: 145px;">${vo.sumRbm}</div>）整，<br/>
-                补偿协议已抵扣房款<div class="rows_div" style="width: 145px;">${vo.transferRmb}&nbsp;</div>元，
-                需补缴房款 <div class="rows_div" style="width: 120px;"> ${vo.lessDifference}&nbsp;</div> 元
-                （需退还房款 <div class="rows_div" style="width: 120px;">${vo.difference}&nbsp;</div> 元）。
+                <input type="text" name="payParm6" value="${vo.payParm8}${vo.payParm7}${vo.payParm6}" class="text_bottom" style="width: 100px;"/>拾
+                <input type="text" name="payParm5" value="${vo.payParm5}" class="text_bottom" style="width: 50px;"/>万
+                <input type="text" name="payParm4" value="${vo.payParm4}" class="text_bottom" style="width: 50px;"/>仟
+                <input type="text" name="payParm3" value="${vo.payParm3}" class="text_bottom" style="width: 50px;"/>佰
+                <input type="text" name="payParm2" value="${vo.payParm2}" class="text_bottom" style="width: 50px;"/>拾
+                <input type="text" name="payParm1" value="${vo.payParm1}" class="text_bottom" style="width: 50px;"/>元
+                （￥<input type="text" name="sumRbm" value="${vo.sumRbm}" class="text_bottom" style="width: 120px;"/>）整，<br/>
+                补偿协议已抵扣房款<input type="text" name="transferRmb" value="${vo.transferRmb}" class="text_bottom" style="width: 120px;"/>元，
+                需补缴房款 <input type="text" name="lessDifference" value="${vo.lessDifference}" class="text_bottom" style="width: 120px;"/> 元
+                （需退还房款 <input type="text" name="difference" value="${vo.difference}" class="text_bottom" style="width: 120px;"/>元）。
             </div>
         </dl>
     </div>
@@ -105,11 +112,27 @@
         // LODOP.SET_PRINT_STYLE("Angle",270);
         //设置纯文本打印的文字大小
         LODOP.SET_PRINT_STYLE("FontSize",11);
-        var recordId = $("#recordId").val();
+        //房源ID
+        var changeId = $("#changeId").val();
+        //主键ID
+        var id = $("#id").val();
+
+        //获取所有文本框的内容
+        var dataMap = {};
+        $("input[type=text]").each(function(i){
+            var field = $(this).attr("name");
+            var value = $(this).val();
+            dataMap[field]=value;
+        });
+
+        dataMap["changeId"] = changeId;
+        dataMap["id"] = id;
+        console.log("获取到的数据" + JSON.stringify(dataMap));
+
         $.ajax({
             url: "ssadmin/stylusPrint/notice-print.html",
             type: "post",
-            data: {"id": recordId},
+            data: dataMap,
             async: false,
             dataType: "json",
             success: function (data) {

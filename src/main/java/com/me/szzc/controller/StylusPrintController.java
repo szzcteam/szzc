@@ -1,9 +1,7 @@
 package com.me.szzc.controller;
 
-import com.me.szzc.enums.PrintTableEnum;
 import com.me.szzc.pojo.vo.PaymentNoticeVO;
 import com.me.szzc.service.StylusPrintService;
-import com.me.szzc.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +83,7 @@ public class StylusPrintController {
     @ResponseBody
     public List<Map<String, Object>> notice(PaymentNoticeVO paymentNoticeVO) throws Exception {
         if (null == paymentNoticeVO.getChangeId()) {
-            logger.error("交房通知书打印获取坐标房源ID为空");
+            logger.warn("交房通知书打印获取坐标房源ID为空");
             return null;
         }
         List<Map<String, Object>> dataList = stylusPrintService.noticePrint(paymentNoticeVO);

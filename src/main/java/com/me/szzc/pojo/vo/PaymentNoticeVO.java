@@ -9,8 +9,10 @@ import java.math.BigDecimal;
 @Getter
 public class PaymentNoticeVO {
 
+    //自增主键ID
     private Long id;
 
+    //房源ID
     private Long changeId;
 
     /**
