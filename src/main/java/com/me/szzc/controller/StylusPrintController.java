@@ -1,8 +1,12 @@
 package com.me.szzc.controller;
 
+import com.me.szzc.enums.PrintTableEnum;
+import com.me.szzc.pojo.vo.PaymentNoticeVO;
 import com.me.szzc.service.StylusPrintService;
 import com.me.szzc.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +24,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/ssadmin/stylusPrint")
 public class StylusPrintController {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private StylusPrintService stylusPrintService;
 
@@ -76,8 +83,12 @@ public class StylusPrintController {
 
     @RequestMapping("/notice-print")
     @ResponseBody
-    public List<Map<String, Object>> notice(Long id) throws Exception {
-        List<Map<String, Object>> dataList = stylusPrintService.noticePrint(id);
+    public List<Map<String, Object>> notice(PaymentNoticeVO paymentNoticeVO) throws Exception {
+        if (null == paymentNoticeVO.getChangeId()) {
+            logger.error("交房通知书打印获取坐标房源ID为空");
+            return null;
+        }
+        List<Map<String, Object>> dataList = stylusPrintService.noticePrint(paymentNoticeVO);
         return dataList;
     }
 }

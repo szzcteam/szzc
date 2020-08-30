@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * 针式打印service
@@ -56,6 +57,9 @@ public class StylusPrintService {
 
     @Autowired
     private RoomChangeMapper roomChangeMapper;
+
+    @Autowired
+    private PaymentNoticeMapper paymentNoticeMapper;
 
     public List<Map<String, Object>> settleAccountsPrint(Long id) throws Exception {
         //根据ID获取数据
@@ -324,10 +328,18 @@ public class StylusPrintService {
 
     /**
      * 获取交房通知书详情
-     * @param id  房源ID
+     *
+     * @param id 房源ID
      * @return
      */
-    public PaymentNoticeVO getDetailNotice(Long id){
+    public PaymentNoticeVO getDetailNotice(Long id) {
+        PaymentNoticeVO paymentNoticeVO = null;
+        //查看是否已打印过
+        paymentNoticeVO = paymentNoticeMapper.selectOneByChangeId(id);
+        if (!StringUtils.isNullOrEmpty(paymentNoticeVO)) {
+            return paymentNoticeVO;
+        }
+
         //1、根据房源ID获取数据
         RoomChange roomChange = roomChangeMapper.getRoomChangeById(id);
         //2、判断roomChange是否为空
@@ -344,7 +356,7 @@ public class StylusPrintService {
             return null;
         }
         //创建甲方通知书实体类
-        PaymentNoticeVO paymentNoticeVO = new PaymentNoticeVO();
+        paymentNoticeVO = new PaymentNoticeVO();
         //5、用人名获取产权调换数据
         if (settleAccounts.getCompensateType() == 0) {
             RmbRecompense recompense = rmbRecompenseMapper.getByHouseOwnerAddr(settleAccounts.getHouseOwner(), settleAccounts.getAddress());
@@ -355,19 +367,44 @@ public class StylusPrintService {
         }
 
         //6、放入实体类
-        paymentNoticeVO.setName(roomChange.getName());
-        paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
-        paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
-        paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
-        paymentNoticeVO.setRidgepole(roomChange.getRidgepole());
-        paymentNoticeVO.setUnit(roomChange.getUnit());
-        paymentNoticeVO.setFloor(roomChange.getFloor());
-        paymentNoticeVO.setMark(roomChange.getMark());
-        paymentNoticeVO.setArea(roomChange.getArea());
-        //long l  = bd.setScale( 0, BigDecimal.ROUND_DOWN ).longValue();
-        //BigDecimal houseMoney = settleAccounts.getHouseMoney();
-        //BigDecimal bigDecimal = houseMoney.setScale(0, BigDecimal.ROUND_DOWN);
-//        paymentNoticeVO.setSumRbm(settleAccounts.getHouseMoney().toPlainString());
+        if (StringUtils.isNotEmpty(roomChange.getNumber()) && StringUtils.isNullOrEmpty(roomChange.getRidgepole())
+                && StringUtils.isNullOrEmpty(roomChange.getUnit()) && StringUtils.isNullOrEmpty(roomChange.getFloor())
+                && StringUtils.isNullOrEmpty(roomChange.getMark())) {
+            if (Pattern.compile("\\d-\\d-\\d").matcher(roomChange.getNumber()).matches()) {//匹配
+                String[] arr = roomChange.getNumber().split("-");
+                String s = arr[0];
+                paymentNoticeVO.setName(roomChange.getName());
+                paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
+                paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
+                paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
+                paymentNoticeVO.setRidgepole(arr[0]);
+                paymentNoticeVO.setUnit(arr[1]);
+                String arr2 = arr[2];
+                paymentNoticeVO.setFloor(arr2.substring(0, arr2.length() - 2));
+                paymentNoticeVO.setMark(arr2.substring(arr2.length() - 2, arr2.length()));
+                paymentNoticeVO.setArea(roomChange.getArea());
+            } else {
+                paymentNoticeVO.setName(roomChange.getName());
+                paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
+                paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
+                paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
+                paymentNoticeVO.setRidgepole(roomChange.getRidgepole());
+                paymentNoticeVO.setUnit(roomChange.getUnit());
+                paymentNoticeVO.setFloor(roomChange.getFloor());
+                paymentNoticeVO.setMark(roomChange.getMark());
+                paymentNoticeVO.setArea(roomChange.getArea());
+            }
+        } else {
+            paymentNoticeVO.setName(roomChange.getName());
+            paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
+            paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
+            paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
+            paymentNoticeVO.setRidgepole(roomChange.getRidgepole());
+            paymentNoticeVO.setUnit(roomChange.getUnit());
+            paymentNoticeVO.setFloor(roomChange.getFloor());
+            paymentNoticeVO.setMark(roomChange.getMark());
+            paymentNoticeVO.setArea(roomChange.getArea());
+        }
         paymentNoticeVO.setSumRbm(BigDecimalUtil.stripTrailingZeros(settleAccounts.getSumCompensate()));
         paymentNoticeVO.setTransferRmb(BigDecimalUtil.stripTrailingZeros(settleAccounts.getDeduction()));
 
@@ -394,12 +431,12 @@ public class StylusPrintService {
 
         if (paymentNoticeVO.getPayParm8().equals(Constant.CHINESE_ZERO)) {
             paymentNoticeVO.setPayParm8("");
-        }else{
-            paymentNoticeVO.setPayParm8(paymentNoticeVO.getPayParm8()+"仟");
+        } else {
+            paymentNoticeVO.setPayParm8(paymentNoticeVO.getPayParm8() + "仟");
         }
         if (org.apache.commons.lang3.StringUtils.isBlank(paymentNoticeVO.getPayParm8()) && paymentNoticeVO.getPayParm7().equals(Constant.CHINESE_ZERO)) {
             paymentNoticeVO.setPayParm7("");
-        }else{
+        } else {
             paymentNoticeVO.setPayParm7(paymentNoticeVO.getPayParm7() + "佰");
         }
         if (org.apache.commons.lang3.StringUtils.isAllBlank(paymentNoticeVO.getPayParm8(), paymentNoticeVO.getPayParm7()) && paymentNoticeVO.getPayParm6().equals(Constant.CHINESE_ZERO)) {
@@ -408,12 +445,15 @@ public class StylusPrintService {
         return paymentNoticeVO;
     }
 
-
-    /*
-    交房通知书打印
+    /**
+     * 交房通知书打印
+     *
+     * @param paymentNoticeVO
+     * @return
+     * @throws NoSuchFieldException
+     * @throws IllegalAccessException
      */
-    public List<Map<String, Object>> noticePrint(Long id) throws NoSuchFieldException, IllegalAccessException {
-        PaymentNoticeVO paymentNoticeVO = getDetailNotice(id);
+    public List<Map<String, Object>> noticePrint(PaymentNoticeVO paymentNoticeVO) throws NoSuchFieldException, IllegalAccessException {
         //8、获取打印数据坐标
         List<FieldCoordinateDto> FieldCoordinateList =
                 fieldCoordinateMapper.getNoticeFieldCoordinateList(PrintTableEnum.HOUSE_NOTICE.getName());
@@ -443,8 +483,20 @@ public class StylusPrintService {
             logger.error("交房通知书打印获取数据为空");
             return null;
         }
-        //调用打印工具
-        //printUtil.starPrint(PrintTypeEnum.LENGTHWAYS.getCode(), dataList);
+        //存数据库
+        //1、判断是否已存
+        if (null != paymentNoticeVO.getId()) {
+            if (StringUtils.isNullOrEmpty(paymentNoticeMapper.selectOneByIdAndChangeId(paymentNoticeVO.getId(), paymentNoticeVO.getChangeId()))) {
+                //新增
+                paymentNoticeMapper.addPaymentNotice(paymentNoticeVO);
+            } else {
+                //修改
+                paymentNoticeMapper.updatePaymentNotice(paymentNoticeVO);
+            }
+        } else {
+            //新增
+            paymentNoticeMapper.addPaymentNotice(paymentNoticeVO);
+        }
         return dataList;
     }
 }

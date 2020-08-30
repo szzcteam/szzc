@@ -567,8 +567,14 @@ public class RoomChangeController extends BaseController {
         return view;
     }
 
+    /**
+     * 房源交房通知书预览
+     *
+     * @param id    房源ID
+     * @return
+     */
     @RequestMapping("/to-notice-preview")
-    public ModelAndView toNoticePreview(Long id){
+    public ModelAndView toNoticePreview(Long id) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/detailNotice");
         view.addObject("id", id);

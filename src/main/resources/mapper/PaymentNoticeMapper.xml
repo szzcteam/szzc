@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.szzc.dao.PaymentNoticeMapper">
+
+    <select id="selectOneByChangeId" resultType="com.me.szzc.pojo.vo.PaymentNoticeVO">
+        SELECT
+        `id` as id,`name` as name,`card_no` as cardNo,`house_owner` as houseOwner,
+        `identity_no` as identityNo,`project_code` as projectCode,`ridgepole` as ridgepole,`unit` as unit,
+        `floor` as floor,`mark` as mark,`area` as area,`sum_rbm` as sumRbm,`pay_parm1` as payParm1,
+        `pay_parm2` as payParm2,`pay_parm3` as payParm3,`pay_parm4` as payParm4,`pay_parm5` as payParm5,
+        `pay_parm6` as payParm6,`pay_parm7` as payParm7,`pay_parm8` as payParm8,`transfer_rmb` as transferRmb,
+        `difference` as difference,`less_difference` as lessDifference,`change_id` as changeId
+        FROM `t_payment_notice`
+        WHERE `del` = 0 AND `change_id` = #{id}
+    </select>
+
+    <select id="selectOneByIdAndChangeId" resultType="com.me.szzc.pojo.vo.PaymentNoticeVO">
+        SELECT
+        `id` as id,`name` as name,`card_no` as cardNo,`house_owner` as houseOwner,
+        `identity_no` as identityNo,`project_code` as projectCode,`ridgepole` as ridgepole,`unit` as unit,
+        `floor` as floor,`mark` as mark,`area` as area,`sum_rbm` as sumRbm,`pay_parm1` as payParm1,
+        `pay_parm2` as payParm2,`pay_parm3` as payParm3,`pay_parm4` as payParm4,`pay_parm5` as payParm5,
+        `pay_parm6` as payParm6,`pay_parm7` as payParm7,`pay_parm8` as payParm8,`transfer_rmb` as transferRmb,
+        `difference` as difference,`less_difference` as lessDifference,`change_id` as changeId
+        FROM `t_payment_notice`
+        WHERE `del` = 0 AND `change_id` = #{changeId} AND id = #{id}
+    </select>
+
+    <insert id="addPaymentNotice" parameterType="com.me.szzc.pojo.vo.PaymentNoticeVO">
+        INSERT INTO `t_payment_notice`
+        (
+        `name`,`card_no`,`house_owner`,`identity_no`,`project_code`,`ridgepole`,`unit`,`floor`,`mark`,
+        `area`,`sum_rbm`,`pay_parm1`,`pay_parm2`,`pay_parm3`,`pay_parm4`,`pay_parm5`,`pay_parm6`,
+        `pay_parm7`,`pay_parm8`,`transfer_rmb`,`difference`,`less_difference`,`change_id`
+        )
+        values
+        (
+            #{name},#{cardNo},#{houseOwner},#{identityNo},#{projectCode},#{ridgepole},#{unit},#{floor},#{mark},
+            #{area},#{sumRbm},#{payParm1},#{payParm2},#{payParm3},#{payParm4},#{payParm5},#{payParm6},
+            #{payParm7},#{payParm8},#{transferRmb},#{difference},#{lessDifference},#{changeId}
+        )
+    </insert>
+
+    <update id="updatePaymentNotice" parameterType="com.me.szzc.pojo.vo.PaymentNoticeVO">
+        UPDATE `t_payment_notice`
+        set
+        `name` = #{name},
+        card_no = #{cardNo},
+        house_owner = #{houseOwner},
+        identity_no = #{identityNo},
+        project_code = #{projectCode},
+        ridgepole = #{ridgepole},
+        unit =  #{unit},
+        floor = #{floor},
+        mark = #{mark},
+        area = #{area},
+        sum_rbm = #{sumRbm},
+        pay_parm1 = #{payParm1},
+        pay_parm2 = #{payParm2},
+        pay_parm3 = #{payParm3},
+        pay_parm4 = #{payParm4},
+        pay_parm5 = #{payParm5},
+        pay_parm6 = #{payParm6},
+        pay_parm7 = #{payParm7},
+        pay_parm8 = #{payParm8},
+        transfer_rmb = #{transferRmb},
+        difference = #{difference},
+        less_difference = #{lessDifference},
+        change_id = #{changeId}
+        where `del` = 0 AND `change_id` = #{changeId} AND id = #{id}
+    </update>
+</mapper>
