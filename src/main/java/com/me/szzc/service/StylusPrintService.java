@@ -406,13 +406,18 @@ public class StylusPrintService {
             paymentNoticeVO.setMark(roomChange.getMark());
             paymentNoticeVO.setArea(roomChange.getArea());
         }
-        paymentNoticeVO.setSumRbm(BigDecimalUtil.stripTrailingZeros(settleAccounts.getSumCompensate()));
+        paymentNoticeVO.setSumRbm(BigDecimalUtil.stripTrailingZeros(settleAccounts.getHouseMoney()));
         paymentNoticeVO.setTransferRmb(BigDecimalUtil.stripTrailingZeros(settleAccounts.getDeduction()));
 
-        if (settleAccounts.getSumCompensate().compareTo(settleAccounts.getHouseMoney()) > 0) {
-            paymentNoticeVO.setDifference(BigDecimalUtil.stripTrailingZeros(settleAccounts.getPayTotal()));
-        } else {
-            paymentNoticeVO.setLessDifference(BigDecimalUtil.stripTrailingZeros(settleAccounts.getPayTotal()));
+        //新房金额大于抵扣金额，则需要补缴
+        if (settleAccounts.getHouseMoney().compareTo(settleAccounts.getDeduction()) == 1) {
+            paymentNoticeVO.setDifference(BigDecimalUtil.stripTrailingZeros(settleAccounts.getHouseMoney().subtract(settleAccounts.getDeduction())));
+        } else if(settleAccounts.getHouseMoney().compareTo(settleAccounts.getDeduction()) == -1){
+            //新房金额小于抵扣金额，则需要退还
+            paymentNoticeVO.setLessDifference(BigDecimalUtil.stripTrailingZeros(settleAccounts.getDeduction().subtract(settleAccounts.getHouseMoney())));
+        } else{
+            paymentNoticeVO.setDifference("");
+            paymentNoticeVO.setLessDifference("");
         }
 
         //7、金额大写拆分存储
@@ -485,7 +490,7 @@ public class StylusPrintService {
             return null;
         }
         //存数据库
-        //1、判断是否已存
+        //主键ID 非空，标识修改
         if (null != paymentNoticeVO.getId()) {
             if (StringUtils.isNullOrEmpty(paymentNoticeMapper.selectOneByIdAndChangeId(paymentNoticeVO.getId(), paymentNoticeVO.getChangeId()))) {
                 //新增
@@ -495,8 +500,13 @@ public class StylusPrintService {
                 paymentNoticeMapper.updatePaymentNotice(paymentNoticeVO);
             }
         } else {
-            //新增
-            paymentNoticeMapper.addPaymentNotice(paymentNoticeVO);
+            //主键ID空，需要新增，但页面没刷新，二次点击保存，需要根据房源ID判断
+            PaymentNoticeVO entity = paymentNoticeMapper.selectOneByChangeId(paymentNoticeVO.getChangeId());
+            if (entity != null) {
+                paymentNoticeMapper.updatePaymentNotice(paymentNoticeVO);
+            } else {
+                paymentNoticeMapper.addPaymentNotice(paymentNoticeVO);
+            }
         }
         return dataList;
     }

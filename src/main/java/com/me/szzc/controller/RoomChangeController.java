@@ -537,7 +537,7 @@ public class RoomChangeController extends BaseController {
      * 批量修改房源项目
      */
     @RequestMapping("/batchUpdateItem")
-    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "批量修改房源项目")
+    @SysLog(code = ModuleConstont.ROOM_CHANGE_OPERATION, method = "调拨房源")
     public ModelAndView batchUpdateItem(String ids, String itemCode) {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/comm/ajaxDone");

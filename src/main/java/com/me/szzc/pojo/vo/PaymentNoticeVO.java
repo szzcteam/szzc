@@ -117,12 +117,12 @@ public class PaymentNoticeVO {
     private String transferRmb;
 
     /**
-     * 差额：征收补偿款总额大于预购房款
+     * 需补缴房款
      */
     private String difference;
 
     /**
-     * 差额：收补偿总额小于预购房款
+     * 需退还房款
      */
     private String lessDifference;
 }
