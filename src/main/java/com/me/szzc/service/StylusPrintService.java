@@ -357,6 +357,7 @@ public class StylusPrintService {
         }
         //创建甲方通知书实体类
         paymentNoticeVO = new PaymentNoticeVO();
+        paymentNoticeVO.setChangeId(id);
         //5、用人名获取产权调换数据
         if (settleAccounts.getCompensateType() == 0) {
             RmbRecompense recompense = rmbRecompenseMapper.getByHouseOwnerAddr(settleAccounts.getHouseOwner(), settleAccounts.getAddress());
