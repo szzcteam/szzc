@@ -13,7 +13,8 @@ public enum ChooseStatusEnum {
     CHOOSE_STATUS_STATUS_0(0, "空置"),
     CHOOSE_STATUS_STATUS_1(1, "已签"),
     CHOOSE_STATUS_STATUS_2(2, "预留"),
-    CHOOSE_STATUS_STATUS_3(3, "作废");
+    CHOOSE_STATUS_STATUS_3(3, "作废"),
+    CHOOSE_STATUS_STATUS_4(4, "已交房");
 
     private Integer code;
     private String text;

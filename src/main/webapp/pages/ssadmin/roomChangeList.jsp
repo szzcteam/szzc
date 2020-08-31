@@ -141,12 +141,12 @@
             <shiro:hasPermission name="ssadmin/batchUpdateRoomChangeItem">
                 <li><a class="edit"
                        href="ssadmin/roomChange/batchUpdateItemPage.html?url=ssadmin/batchUpdateRoomChangeItem" onclick="getids(this)"
-                       height="300" width="700" target="dialog"><span>批量修改项目</span>
+                       height="300" width="700" target="dialog"><span>调拨房源</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/stylusPrint/notice-print.html">
                 <li><a class="icon" onclick="openDetailNotice(this);"
-                       href="javascript:void(0)"  ><span>交房通知</span>
+                       href="javascript:void(0)"  title="交房通知书"><span>新增入住单</span>
                 </a></li>
             </shiro:hasPermission>
         </ul>

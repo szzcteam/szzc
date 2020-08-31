@@ -63,7 +63,7 @@
             </div>
         </dl>
         <dl style="margin-left: 10%;">
-            <div class="font-size-16">台账号：<input type="text" name="cardNo" value="${vo.cardNo}" class="text_bottom" style="width: 60px"/></div>
+            <div class="font-size-16">台账号：<input type="text" name="cardNo" value="${vo.cardNo}" class="text_bottom" style="width: 100px"/></div>
             <div class="font-size-16">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 姓名：<input type="text" name="houseOwner" value="${vo.houseOwner}" class="text_bottom"/>
                 （身份证号：<input type="text" name="identityNo" value="${vo.identityNo}" class="text_bottom"/>），
@@ -82,8 +82,8 @@
                 <input type="text" name="payParm1" value="${vo.payParm1}" class="text_bottom" style="width: 50px;"/>元
                 （￥<input type="text" name="sumRbm" value="${vo.sumRbm}" class="text_bottom" style="width: 120px;"/>）整，<br/>
                 补偿协议已抵扣房款<input type="text" name="transferRmb" value="${vo.transferRmb}" class="text_bottom" style="width: 120px;"/>元，
-                需补缴房款 <input type="text" name="lessDifference" value="${vo.lessDifference}" class="text_bottom" style="width: 120px;"/> 元
-                （需退还房款 <input type="text" name="difference" value="${vo.difference}" class="text_bottom" style="width: 120px;"/>元）。
+                需补缴房款 <input type="text" name="difference" value="${vo.difference}" class="text_bottom" style="width: 120px;"/> 元
+                （需退还房款 <input type="text" name="lessDifference" value="${vo.lessDifference}" class="text_bottom" style="width: 120px;"/>元）。
             </div>
         </dl>
     </div>
