@@ -570,7 +570,7 @@ public class RoomChangeController extends BaseController {
     /**
      * 房源交房通知书预览
      *
-     * @param id    房源ID
+     * @param id 房源ID
      * @return
      */
     @RequestMapping("/to-notice-preview")
@@ -581,8 +581,12 @@ public class RoomChangeController extends BaseController {
 
         //根据房源ID查询数据
         PaymentNoticeVO vo = stylusPrintService.getDetailNotice(id);
-        view.addObject("vo", vo);
-
+        if (StringUtils.isNullOrEmpty(vo)) {
+            view.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            view.addObject(MESSAGE_KEY, "未签约或数据异常");
+        } else {
+            view.addObject("vo", vo);
+        }
         return view;
     }
 }

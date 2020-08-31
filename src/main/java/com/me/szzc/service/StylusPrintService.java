@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -371,14 +372,14 @@ public class StylusPrintService {
         if (StringUtils.isNotEmpty(roomChange.getNumber()) && StringUtils.isNullOrEmpty(roomChange.getRidgepole())
                 && StringUtils.isNullOrEmpty(roomChange.getUnit()) && StringUtils.isNullOrEmpty(roomChange.getFloor())
                 && StringUtils.isNullOrEmpty(roomChange.getMark())) {
-            if (Pattern.compile("\\d-\\d-\\d").matcher(roomChange.getNumber()).matches()) {//匹配
+            if (Pattern.compile("\\d{1,20}-\\d{1,20}-\\d{3,20}").matcher(roomChange.getNumber()).matches()) {//匹配
                 String[] arr = roomChange.getNumber().split("-");
                 String s = arr[0];
                 paymentNoticeVO.setName(roomChange.getName());
                 paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
                 paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
                 paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
-                paymentNoticeVO.setRidgepole(arr[0]);
+                paymentNoticeVO.setRidgepole(roomChange.getName() + arr[0]);
                 paymentNoticeVO.setUnit(arr[1]);
                 String arr2 = arr[2];
                 paymentNoticeVO.setFloor(arr2.substring(0, arr2.length() - 2));
@@ -389,7 +390,7 @@ public class StylusPrintService {
                 paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
                 paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
                 paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
-                paymentNoticeVO.setRidgepole(roomChange.getRidgepole());
+                paymentNoticeVO.setRidgepole(roomChange.getName() + roomChange.getRidgepole());
                 paymentNoticeVO.setUnit(roomChange.getUnit());
                 paymentNoticeVO.setFloor(roomChange.getFloor());
                 paymentNoticeVO.setMark(roomChange.getMark());
@@ -400,7 +401,7 @@ public class StylusPrintService {
             paymentNoticeVO.setCardNo(settleAccounts.getCardNo());
             paymentNoticeVO.setHouseOwner(settleAccounts.getHouseOwner());
             paymentNoticeVO.setProjectCode(settleAccounts.getProjectName());
-            paymentNoticeVO.setRidgepole(roomChange.getRidgepole());
+            paymentNoticeVO.setRidgepole(roomChange.getName() + roomChange.getRidgepole());
             paymentNoticeVO.setUnit(roomChange.getUnit());
             paymentNoticeVO.setFloor(roomChange.getFloor());
             paymentNoticeVO.setMark(roomChange.getMark());
