@@ -214,7 +214,7 @@
             ids += i==0 ? val : ","+val;
         });
         if(ids == ""){
-            alertMsg.info("请选择需要修改的房源");
+            alertMsg.info("请选择需要调拨的房源");
             return false;
         }
         console.log("选择的id:" + ids);
