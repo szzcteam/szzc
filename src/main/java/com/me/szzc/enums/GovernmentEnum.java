@@ -36,6 +36,7 @@ public enum GovernmentEnum {
     WCJSJ("D001", "武昌区建设局", GovernmentEnum.WCQ.getCode()),
     WCEFC("D001001", "武船二分厂宿舍", "武船二分厂宿舍区旧城改建", GovernmentEnum.WCJSJ.getCode()),
     WCQBXFY("D001002", "武昌区建设局备选房源", GovernmentEnum.WCJSJ.getCode()),
+    WCQBXFY2("D001003", "武昌区建设局备选房源二", GovernmentEnum.WCJSJ.getCode()),
 
     QKQ("qkq", "硚口区", GovernmentEnum.ROOT.getCode()),
     ;
