@@ -176,7 +176,7 @@
                 <dl>
                     <dt>5、临时安置补偿:</dt>
                     <dd style="width: 300px;">
-                      <%--  <input type="text" name="interimArea" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/>&nbsp;&nbsp;M<sup>2</sup>&nbsp;&nbsp;×&nbsp;&nbsp;--%>
+                        <input type="hidden" name="interimArea" maxlength="50" class="samll_input_text" style="clear: both;float: none;"/><%--&nbsp;&nbsp;M<sup>2</sup>&nbsp;&nbsp;×&nbsp;&nbsp;--%>
                         <input type="text" name="interimPrice" class="samll_input_text" style="clear: both;float: none;margin-left: 0px;"/>&nbsp;&nbsp;元/M<sup>2</sup>&nbsp;&nbsp;
                         <input type="text" name="interimMonth" maxlength="50" class="samll_input_text" style="clear: both;float: none;margin-left: 5px;"/>&nbsp;&nbsp;个月
                         ＝<input type="text" name="interimFee" class="samll_input_text" style="clear: both;float: none;margin-left: 0px;"/>&nbsp;&nbsp;元
