@@ -93,7 +93,7 @@ public class RoomChangeService {
         if (!StringUtils.isNullOrEmpty(number)) {
             //判断是否重复
             List<RoomChange> roomChanges = roomChangeMapper.selectRoomChange(roomChange);
-            if (StringUtils.isNullOrEmpty(roomChanges) && roomChanges.size() > 0) {
+            if (!StringUtils.isNullOrEmpty(roomChanges) && roomChanges.size() > 0) {
                 throw new RuntimeException("片区项目(" + roomChange.getName() + "),房号(" + number + ")已存在");
             }
         }
