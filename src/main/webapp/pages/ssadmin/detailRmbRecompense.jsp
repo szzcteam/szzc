@@ -187,7 +187,7 @@
         </div>
 
         <c:choose>
-            <c:when test="${rmbRecom.projectCode == 'B001001' or rmbRecom.projectCode == 'B001002'}">
+            <c:when test="${rmbRecom.projectCode == 'B001001' or rmbRecom.projectCode == 'B001002' or rmbRecom.projectCode == 'B001003'}">
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签约、搬迁及付款</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

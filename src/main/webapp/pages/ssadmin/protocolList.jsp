@@ -119,6 +119,12 @@
                        height="550" width="1000" target="dialog" rel="addProtocol"><span>西城壕新增</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=B001003">
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=B001003"
+                       height="550" width="1000" target="dialog" rel="addProtocol"><span>古轴新增</span>
+                </a></li>
+            </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=C001001">
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=C001001"
