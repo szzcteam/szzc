@@ -28,7 +28,10 @@ public enum GovernmentEnum {
     GCC("B001", "古城区", GovernmentEnum.WCQ.getCode()),
     ZYC("B001001", "紫阳村", GovernmentEnum.GCC.getCode()),
     XCH("B001002", "西城壕", GovernmentEnum.GCC.getCode()),
-    QNGZ("B001003", "千年古轴", GovernmentEnum.GCC.getCode()),
+    QNGZ("B001003", "千年古轴A片项目", "得胜桥千年古轴B片项目", GovernmentEnum.GCC.getCode()),
+    QNGZB("B001004", "千年古轴B片项目", "得胜桥千年古轴B片项目", GovernmentEnum.GCC.getCode()),
+    QNGZC("B001005", "千年古轴C片项目", "得胜桥千年古轴C片项目", GovernmentEnum.GCC.getCode()),
+
 
     HZJRC("C001", "华中金融城", GovernmentEnum.WCQ.getCode()),
     DZRGS("C001001", "电车二公司南侧地块", GovernmentEnum.HZJRC.getCode()),

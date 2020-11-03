@@ -17,7 +17,7 @@ import java.util.*;
 public class WxSecurityMappingUtils {
 
     public static void main(String[] args) {
-        String scopeName = "金融城";
+        String scopeName = "粮道街";
         Set<String> list = WxSecurityMappingUtils.getProjectByScope(scopeName);
         System.out.println(JSONObject.toJSONString(list));
     }
@@ -82,7 +82,8 @@ public class WxSecurityMappingUtils {
 
 
         BJSWQ("A001", "滨江", ProjectMark.WCQ.getCode(), new String[]{AreaMark.MLJ_B.name, AreaMark.MLJ_C.name}),
-        GCC("B001", "古城", ProjectMark.WCQ.getCode(), new String[]{AreaMark.XCH.name, AreaMark.ZYC_E.name, AreaMark.ZYC_W.name}),
+        GCC("B001", "古城", ProjectMark.WCQ.getCode(), new String[]{AreaMark.XCH.name, AreaMark.ZYC_E.name, AreaMark.ZYC_W.name,
+                AreaMark.QNGZA.name, AreaMark.QNGZB.name, AreaMark.QNGZC.name}),
         HZJRC("C001", "金融城", ProjectMark.WCQ.getCode(), new String[]{AreaMark.DZRGS.name}),
         WCJSJ("D001", "建设局", ProjectMark.WCQ.getCode(), new String[]{AreaMark.WCEFC.name}),
 
@@ -90,9 +91,10 @@ public class WxSecurityMappingUtils {
 
         ZY_STREET("WCQ_Z001", "紫阳街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.MLJ_B.name, AreaMark.MLJ_C.name}),
         YWLLOW_TOWER_STREE("WCQ_Z002", "黄鹤楼街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.ZYC_E.name, AreaMark.ZYC_W.name}),
-        ZHL_STREET("WCQ_Z003", "中华路街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.XCH.name}),
+        ZHL_STREET("WCQ_Z003", "中华路街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.XCH.name, AreaMark.QNGZA.name, AreaMark.QNGZB.name, AreaMark.QNGZC.name}),
         SGH_STREET("WCQ_Z004", "·水果湖街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.DZRGS.name}),
         BSZ_STREET("WCQ_Z005", "·白沙洲街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.WCEFC.name}),
+        LDJ_STREET("WCQ_Z006", "粮道街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.QNGZA.name, AreaMark.QNGZC.name}),
         ;
 
         //唯一code
@@ -159,6 +161,13 @@ public class WxSecurityMappingUtils {
         XCH(7L, GovernmentEnum.XCH.getCode(), "西城壕项目"),
         DZRGS(6L, GovernmentEnum.DZRGS.getCode(), "电车二公司项目"),
         WCEFC(8L, GovernmentEnum.WCEFC.getCode(), "武船二分厂项目"),
+
+
+        JYQC(10L, GovernmentEnum.JYQC.getCode(), "积玉桥C片"),
+
+        QNGZA(12L, GovernmentEnum.QNGZ.getCode(), "千年古轴A片"),
+        QNGZB(13L, GovernmentEnum.QNGZB.getCode(), "千年古轴B片"),
+        QNGZC(14L, GovernmentEnum.QNGZC.getCode(), "千年古轴C片"),
 
         ;
         public static final Map<String, AreaMark> allAreaMap = new HashMap<>();
