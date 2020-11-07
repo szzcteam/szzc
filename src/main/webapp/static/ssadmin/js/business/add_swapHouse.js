@@ -253,12 +253,23 @@ var swapHouseObj = {
                         //搬家费
                         $("#swapHouseDiv input[name='moveHouseFee']").eq(0).val(data.moveHouseFee);
                         //临时安置补偿(过渡费)
-                        var calcInterimFee = data.calcInterimFee;
-                        var calcInterimFeeArr = calcInterimFee.split("*");
-                        // $("#swapHouseDiv input[name='interimArea']").eq(0).val(calcInterimFeeArr[0]);
-                        $("#swapHouseDiv input[name='interimPrice']").eq(0).val(calcInterimFeeArr[1]);
-                        // $("#swapHouseDiv input[name='interimMonth']").eq(0).val(calcInterimFeeArr[2]);
-                        $("#swapHouseDiv input[name='interimFee']").eq(0).val(data.interimFee);
+                        if(data.interimFee != null && data.interimFee > 0){
+                            var interimFeeOtherFlag = data.calcInterimFee.indexOf("+");
+                            if (interimFeeOtherFlag != -1) {
+                                //存在2个公式，取其中一个
+                                data.calcInterimFee = data.calcInterimFee.substring(0, interimFeeOtherFlag);
+                            }
+                            var calcInterimFee = data.calcInterimFee;
+                            var calcInterimFeeArr = calcInterimFee.split("*");
+                            $("#swapHouseDiv input[name='interimArea']").eq(0).val(calcInterimFeeArr[0]);
+                            $("#swapHouseDiv input[name='interimPrice']").eq(0).val(calcInterimFeeArr[1]);
+                            $("#swapHouseDiv input[name='interimMonth']").eq(0).val(calcInterimFeeArr[2]);
+                            $("#swapHouseDiv input[name='interimFee']").eq(0).val(data.interimFee);
+
+                            //填充过渡期限
+                            $("#swapHouseDiv input[name='moveMonth']").eq(0).val(calcInterimFeeArr[2]);
+
+                        }
 
                         //保底
                         $("#swapHouseDiv input[name='guarantee']").eq(0).val(data.guarantee);
