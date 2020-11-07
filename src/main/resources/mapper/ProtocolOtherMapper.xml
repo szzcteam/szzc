@@ -37,4 +37,18 @@
         update t_protocol_other set remark = #{remark}, modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId} where accounts_id = #{accountsId}
     </update>
 
+    <select id="queryByAreaId" resultMap="BaseResultMap">
+        select
+        a.*
+        from t_protocol_other a
+        inner join t_settle_accounts b on a.accounts_id = b.id
+        where 1=1
+        <if test="areaIdList != null and areaIdList.size >0 ">
+            and b.area_id in
+            <foreach collection="areaIdList" item="itemId" separator="," open="(" close=")">
+                #{itemId}
+            </foreach>
+        </if>
+    </select>
+
 </mapper>

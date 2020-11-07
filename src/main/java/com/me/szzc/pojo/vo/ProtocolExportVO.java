@@ -398,6 +398,9 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     @ExcelProperty(value = {"房屋征收补偿明细表", "其它约定", "其它约定", "其它约定"}, index = 54)
     private String otherTerms;
 
+    @ExcelProperty(value = {"房屋征收补偿明细表", "备注", "备注", "备注"}, index = 55)
+    private String remark;
+
     /**
      * 大写差额
      */

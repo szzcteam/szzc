@@ -2,10 +2,7 @@ package com.me.szzc.controller;
 
 import com.me.szzc.enums.CompensateTypeEnum;
 import com.me.szzc.enums.SigningStatusEnum;
-import com.me.szzc.pojo.entity.Area;
-import com.me.szzc.pojo.entity.RmbRecompense;
-import com.me.szzc.pojo.entity.SettleAccounts;
-import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.ProtocolExportVO;
 import com.me.szzc.pojo.vo.RmbRecompenseVO;
 import com.me.szzc.pojo.vo.SwapHouseVO;
@@ -81,6 +78,15 @@ public class ProtocolExportController extends BaseController {
                 null, null, null, null,
                 areaIdList, null, null, null, null, null);
 
+        //查询备注
+        List<ProtocolOther>  protocolOtherList = protocolOtherService.queryByAreaId(areaIdList);
+        Map<Long, ProtocolOther> otherMap = new HashMap<>();
+        if(protocolOtherList != null && protocolOtherList.size() > 0){
+            for(ProtocolOther o : protocolOtherList){
+                otherMap.put(o.getAccountsId(), o);
+            }
+        }
+
         //融合数据，生成excel vo
         List<ProtocolExportVO> list = new ArrayList<>();
         if(settleAccountsList != null && !settleAccountsList.isEmpty()) {
@@ -114,7 +120,7 @@ public class ProtocolExportController extends BaseController {
                     }
 
                     //其他约定
-                    exportVO.setOtherTerms(rmbVo.getOtherTermsOne() +"\r\n" + rmbVo.getOtherTermsTwo());
+                    exportVO.setOtherTerms(rmbVo.getOtherTermsOne() + "\r\n" + rmbVo.getOtherTermsTwo());
 
                 } else if (swapVo != null) {
                     BeanUtils.copyProperties(swapVo, exportVO);
@@ -159,8 +165,16 @@ public class ProtocolExportController extends BaseController {
 
                 //片区
                 String areaName = areaMap.get(settle.getAreaId());
-                areaName = StringUtils.isNotBlank(areaName) ? areaName :"";
+                areaName = StringUtils.isNotBlank(areaName) ? areaName : "";
                 exportVO.setAreaName(areaName);
+
+                //备注
+                ProtocolOther protocolOther = otherMap.get(settle.getId());
+                if (protocolOther != null) {
+                    if (StringUtils.isNotBlank(protocolOther.getRemark())) {
+                        exportVO.setRemark(protocolOther.getRemark());
+                    }
+                }
 
                 list.add(exportVO);
 

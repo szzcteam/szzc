@@ -1,9 +1,7 @@
 package com.me.szzc.service;
 
 import com.me.szzc.dao.ProtocolOtherMapper;
-import com.me.szzc.dao.SettleAccountsMapper;
 import com.me.szzc.pojo.entity.ProtocolOther;
-import com.me.szzc.pojo.entity.RoomChange;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +50,11 @@ public class ProtocolOtherService {
         protocolOther.setModifiedDate(DateHelper.getTimestamp());
         return protocolOtherMapper.updateRoomChange(protocolOther) > 0 ? true : false;
 
+    }
+
+
+    public List<ProtocolOther> queryByAreaId(List<Long> areaIdList) {
+        return protocolOtherMapper.queryByAreaId(areaIdList);
     }
 
 }
