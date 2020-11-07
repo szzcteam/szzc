@@ -1118,7 +1118,13 @@ var settleAccountObj = {
         sumArea = Math.round(sumArea*1000)/1000;
         console.log("西城壕装修补偿、临时安置面积" + sumArea);
         $("input[name='calcDecorationCompensateArea']").eq(0).val(sumArea).change();
-        $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
+        //2020-11-07 面积小于60平时，临时安置面积按60平计算
+        if (sumArea < 60) {
+            $("input[name='calcInterimFeeArea']").eq(0).val(60).change();
+        } else {
+            $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
+        }
+
 
     }
 

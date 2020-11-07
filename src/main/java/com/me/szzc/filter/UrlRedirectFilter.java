@@ -48,6 +48,7 @@ public class UrlRedirectFilter implements Filter {
             return ;
         }
 
+        log.info("请求 url:{}", uri);
 
         //免登陆可访问
         if(	uri.startsWith("/testa.html")){
