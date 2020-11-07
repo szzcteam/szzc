@@ -46,20 +46,20 @@ public class SettleAccountsController extends BaseController {
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
 
         String houseOwner = "";
-        if(StringUtils.isNoneBlank(settleAccounts.getHouseOwner())){
+        if (StringUtils.isNoneBlank(settleAccounts.getHouseOwner())) {
             houseOwner = settleAccounts.getHouseOwner();
-        }else if(StringUtils.isNoneBlank(settleAccounts.getLessee())){
+        } else if (StringUtils.isNoneBlank(settleAccounts.getLessee())) {
             houseOwner = settleAccounts.getLessee();
         }
 
-        if(StringUtils.isBlank(houseOwner)){
+        if (StringUtils.isBlank(houseOwner)) {
             modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
             modelAndView.addObject(MESSAGE_KEY, "操作失败，被征收人或承租人姓名不能都为空，必须填写一项");
             return modelAndView;
         }
 
         ResultVO resultVO = checkSettle(settleAccounts);
-        if(!resultVO.getSuccess()){
+        if (!resultVO.getSuccess()) {
             modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
             modelAndView.addObject(MESSAGE_KEY, resultVO.getMessage());
             return modelAndView;
@@ -80,30 +80,18 @@ public class SettleAccountsController extends BaseController {
         Long userId = getAdminSession(request).getFid();
         settleAccounts.setCreateUserId(userId);
         settleAccounts.setModifiedUserId(userId);
-        //条件判断
 
-        BigDecimal moveHous = new BigDecimal(2000);
-        if(settleAccounts.getMoveHouseFee()!=null&&settleAccounts.getMoveHouseFee().compareTo(moveHous)==0){
-            settleAccounts.setCalcRmbCompensate("");
-            settleAccounts.setRmbCompensate(null);
-            settleAccounts.setCalcRmbMoveReward("");
-            settleAccounts.setRmbMoveReward(null);
-        }
-
-        String str = "true";  //settleAccountsTerm(settleAccounts);
-        if(str.equals("true")){
+        try {
             this.settleAccountsService.add(settleAccounts);
             modelAndView.addObject(STATUS_CODE_KEY, SUCCESS_CODE_NUM);
             modelAndView.addObject(MESSAGE_KEY, "新增成功");
-            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
-            return modelAndView;
-        }else{
+        } catch (Exception e) {
+            log.error("添加结算单异常", e);
             modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
-            modelAndView.addObject(MESSAGE_KEY, "数据校验失败"+str);
-            modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
-            return modelAndView;
+            modelAndView.addObject(MESSAGE_KEY, "添加结算单异常" + e.getMessage());
         }
-
+        modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
+        return modelAndView;
 
     }
 
@@ -496,41 +484,10 @@ public class SettleAccountsController extends BaseController {
 
 
     //条件判断
-    public String  settleAccountsTerm(SettleAccounts settleAccounts){
+    public ResultVO<String> check(SettleAccounts entity) {
 
         //条件判断
-        if (StringUtils.isEmpty(settleAccounts.getProjectName())) {
-            return "项目名称未填";//项目名称
-        }
-        if (StringUtils.isEmpty(settleAccounts.getCardNo())) {
-            return "编号未填";//编号
-        }
-        if (StringUtils.isEmpty(settleAccounts.getHouseOwner())) {
-            return "被征收人未填";//被征收人
-        }
-        if (StringUtils.isEmpty(settleAccounts.getLessee())) {
-            return "承租人未填";//承租人
-        }
-        if (StringUtils.isEmpty(settleAccounts.getPhone())) {
-            return "电话未填";//电话
-        }
-        if (StringUtils.isEmpty(settleAccounts.getLesseePhone())) {
-            return "承租人电话未填";//承租人电话
-        }
-        if (StringUtils.isEmpty(settleAccounts.getUseing())) {
-            return "房屋用途未填";//房屋用途
-        }
-        if (settleAccounts.getCheckInArea()==null || settleAccounts.getCheckInArea().compareTo(BigDecimal.ZERO)<=0) {
-            return "建筑面积未填";//建筑面积
-        }
-        if (settleAccounts.getInArea()==null || settleAccounts.getInArea().compareTo(BigDecimal.ZERO)<=0) {
-            return "内套面积未填";//内套面积
-        }
-
-        if (StringUtils.isEmpty(settleAccounts.getAddress())) {
-            return "房房地址未填";//房房地址
-        }
-        if(settleAccounts.getValueCompensate()==null||settleAccounts.getValueCompensate().compareTo(BigDecimal.ZERO)<=0){
+        /*if(settleAccounts.getValueCompensate()==null||settleAccounts.getValueCompensate().compareTo(BigDecimal.ZERO)<=0){
             return "被征收房屋价值补偿金额未填";//被征收房屋价值补偿金额
         }
         if(StringUtils.isEmpty((settleAccounts.getCalcValueCompensate()))){
@@ -923,7 +880,9 @@ public class SettleAccountsController extends BaseController {
                 return "应支付大写金额不能为空";//应支付不能为空
             }
         }
-        return "true";
+        return "true";*/
+
+        return null;
     }
 
 
@@ -943,17 +902,25 @@ public class SettleAccountsController extends BaseController {
         }
     }
 
-    private ResultVO checkSettle(SettleAccounts settleAccounts){
+    private ResultVO checkSettle(SettleAccounts entity) {
 
-        if(StringUtils.isBlank(settleAccounts.getCardNo())){
+        if (entity == null) {
+            return new ResultVO(false, "数据为空，非法操作");
+        }
+
+        if (entity.getAreaId() == null || entity.getAreaId().longValue() <= 0) {
+            return new ResultVO<>(false, "账号权限错误，禁止添加结算单");
+        }
+
+        if (StringUtils.isBlank(entity.getCardNo())) {
             return new ResultVO(false, "协议编号不能为空");
         }
 
-        if(StringUtils.isBlank(settleAccounts.getAddress())){
+        if (StringUtils.isBlank(entity.getAddress())) {
             return new ResultVO(false, "被征收房屋地址不能为空");
         }
 
-        if(StringUtils.isBlank(settleAccounts.getUseing())){
+        if (StringUtils.isBlank(entity.getUseing())) {
             return new ResultVO(false, "用途不能为空");
         }
 

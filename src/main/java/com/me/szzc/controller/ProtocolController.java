@@ -107,6 +107,11 @@ public class ProtocolController extends BaseController {
         //封装片区
         Map<Long, String> areaMap = convertUserAreaMap(areaList);
 
+        //如果没有片区权限，则页面应该无记录
+        if (areaList == null || areaList.isEmpty()) {
+            areaId = -1L;
+        }
+
         int firstResult = (currentPage - 1) * numPerPage;
         List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true,
                 signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo,

@@ -1,7 +1,6 @@
 package com.me.szzc.utils;
 
 import com.me.szzc.constant.Constant;
-import com.me.szzc.pojo.ro.ResultRO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.AesCipherService;
 import org.apache.shiro.crypto.hash.DefaultHashService;
