@@ -396,6 +396,7 @@ $(document).ready(function(){
     $("input[name='compensateType']").on("click", function () {
         settleAccountObj.calcMoveReward();
         settleAccountObj.calcRmbCompensate();
+        settleAccountObj.calcSmallAreaReward();
     });
 
 
@@ -561,6 +562,7 @@ var settleAccountObj = {
         $("input[name='valueCompensate']").eq(0).val(valueCompensate).change();
         settleAccountObj.calcMoveReward();
         settleAccountObj.calcRmbCompensate();
+        settleAccountObj.calcSmallAreaReward();
     },
 
     //填充房屋价值补偿-未经登记合法
@@ -590,6 +592,7 @@ var settleAccountObj = {
         $("input[name='noRegisterLegal']").eq(0).val(noRegisterLegal).change();
         settleAccountObj.calcMoveReward();
         settleAccountObj.calcRmbCompensate();
+        settleAccountObj.calcSmallAreaReward();
     },
 
 
@@ -957,27 +960,6 @@ var settleAccountObj = {
             return;
         }
 
-        // 开始拼接公式
-        var calcMoveReward = "(";
-        //有证金额
-        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
-        var valueCompensate = $("input[name='valueCompensate']").eq(0).val();
-        if (valueCompensate && valueCompensate > 0) {
-            calcMoveReward += calcValueCompensate;
-        }
-        //无证合法金额
-        var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
-        var noRegisterLegal = $("input[name='noRegisterLegal']").eq(0).val();
-        if (noRegisterLegal && noRegisterLegal > 0) {
-            calcMoveReward += "+" + calcNoRegisterLegal;
-        }
-        //历史遗留金额
-       /* var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
-        var historyLegacy = $("input[name='historyLegacy']").eq(0).val();
-        if (historyLegacy && historyLegacy > 0) {
-            calcMoveReward += "+" + calcHistoryLegacy;
-        }*/
-        calcMoveReward += ")";
         //比例
         var proportion = 0;
         if (compensateType == 0) {
@@ -986,12 +968,42 @@ var settleAccountObj = {
             proportion = $("input[name='rewardSwapProportion']").eq(0).val() || 0;
         }
 
-        calcMoveReward += "*" + proportion;
+        var calcMoveReward = settleAccountObj.extReward(proportion);
+
         console.log("西城壕奖励计算公式：" + calcMoveReward);
         $("input[name='calcMoveReward']").eq(0).val(calcMoveReward).change();
 
     },
+    //计算小户型住房困难补助
+    calcSmallAreaReward: function () {
+        //仅选择货币时有值，选产权调换的没有
+        var compensateType = $("input[name='compensateType']:checked").val();
+        if (compensateType == 1) {
+            $("input[name='calcSmallAreaReward']").eq(0).val("").change();
+            return;
+        }
 
+        var calcValueCompensateArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
+        var calcNoRegisterLegalArea = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
+        var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea);
+        sumArea = Math.round(sumArea * 1000) / 1000;
+        //不足40，按40计算
+        if (sumArea < 40) {
+            sumArea = 40;
+        }
+
+        //根据面积，计算比例
+        var rate = funSmallAreaRate(sumArea);
+        //超出小户型限定，没有补偿，置为空
+        if (rate <= 0) {
+            $("input[name='calcSmallAreaReward']").eq(0).val("").change();
+            return;
+        }
+        //(有证面积*单价+未登记面积*单价)*比例
+        var calcStr = settleAccountObj.extReward(rate);
+        $("input[name='calcSmallAreaReward']").eq(0).val(calcStr).change();
+
+    },
     //货币补偿补助公式
     calcRmbCompensate: function () {
         var compensateType = $("input[name='compensateType']:checked").val();
@@ -1008,33 +1020,12 @@ var settleAccountObj = {
             return;
         }
 
-        //开始拼接公式
-        var calcRmbCompensate = "(";
-        //有证金额
-        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
-        var valueCompensate = $("input[name='valueCompensate']").eq(0).val();
-        if (valueCompensate && valueCompensate > 0) {
-            calcRmbCompensate += calcValueCompensate;
-        }
-
-        //无证合法金额
-        var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
-        var noRegisterLegal = $("input[name='noRegisterLegal']").eq(0).val();
-        if (noRegisterLegal && noRegisterLegal > 0) {
-            calcRmbCompensate += "+" + calcNoRegisterLegal;
-        }
-
-        //历史遗留金额
-        /*var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
-        var historyLegacy = $("input[name='historyLegacy']").eq(0).val();
-        if (historyLegacy && historyLegacy > 0) {
-            calcRmbCompensate += "+" + calcHistoryLegacy;
-        }*/
-        calcRmbCompensate += ")";
         //比例
         var proportion = $("input[name='rmbCompensateProportion']").eq(0).val() || 0;
 
-        calcRmbCompensate += "*" + proportion;
+        //开始拼接公式
+        var calcRmbCompensate = settleAccountObj.extReward(proportion);
+
         console.log("货币补偿补助公式：" + calcRmbCompensate);
         $("input[name='calcRmbCompensate']").eq(0).val(calcRmbCompensate).change();
     },
@@ -1124,7 +1115,79 @@ var settleAccountObj = {
         } else {
             $("input[name='calcInterimFeeArea']").eq(0).val(sumArea).change();
         }
+    },
+    //根据面积、特殊计算的奖励
+    extReward: function (proportion) {
+        var calcStr = "";
 
+        //金额
+        var valueCompensate = $("input[name='valueCompensate']").eq(0).val() || 0;
+        var noRegisterLegal = $("input[name='noRegisterLegal']").eq(0).val() || 0;
+        if (valueCompensate == 0 && noRegisterLegal == 0) {
+            return calcStr;
+        }
+
+        //面积
+        var calcValueCompensateArea = $("input[name='calcValueCompensateArea']").eq(0).val() || 0;
+        var calcNoRegisterLegalArea = $("input[name='calcNoRegisterLegalArea']").eq(0).val() || 0;
+
+        //单价
+        var calcValueCompensatePrice = $("input[name='calcValueCompensatePrice']").eq(0).val() || 0;
+        var calcNoRegisterLegalPrice = $("input[name='calcNoRegisterLegalPrice']").eq(0).val() || 0;
+
+        //其他公式
+        var calcValueCompensateOther = $("input[name='calcValueCompensateOther']").eq(0).val() || 0;
+        var calcNoRegisterLegalOther = $("input[name='calcNoRegisterLegalOther']").eq(0).val() || 0;
+
+        //完整公式
+        var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val();
+        var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val();
+
+        //存在2个公式
+        if (valueCompensate > 0 && noRegisterLegal > 0) {
+            //不存在其他公式
+            if (calcValueCompensateOther == 0 && calcNoRegisterLegalOther == 0) {
+                //2个面积和，小于40，则40*有证单价*比例;  反之，和大于40，则（有证面积*单价+未登记面积*单价）*比例
+                var sumArea = new Number(calcValueCompensateArea) + new Number(calcNoRegisterLegalArea);
+                sumArea = Math.round(sumArea * 1000) / 1000;
+                if (sumArea < 40) {
+                    calcStr = "40*" + calcValueCompensatePrice + "*" + proportion;
+                } else {
+                    calcStr = "(" + calcValueCompensateArea + "*" + calcValueCompensatePrice + "+" + calcNoRegisterLegalArea + "*" + calcNoRegisterLegalPrice + ")*" + proportion;
+                }
+            } else {
+                //有其他公式，则使用2个公式和*比例
+                calcStr = "(" + calcValueCompensate + "+" + calcNoRegisterLegal + ")*" + proportion;
+            }
+        } else if (valueCompensate > 0) {
+            //只有 有证
+            if (calcValueCompensateOther != 0) {
+                //有证存在其他公式
+                calcStr = "(" + calcValueCompensate + ")*" + proportion;
+            } else {
+                //有证是默认公式
+                var areaNum = new Number(calcValueCompensateArea);
+                if (areaNum < 40) {
+                    areaNum = 40;
+                }
+                calcStr = "(" + areaNum + "*" + calcValueCompensatePrice + ")*" + proportion;
+            }
+        } else if (noRegisterLegal > 0) {
+            //只有 未登记
+            if (calcNoRegisterLegalOther != 0) {
+                //未登记存在其他公式
+                calcStr = "(" + calcNoRegisterLegal + ")*" + proportion;
+            } else {
+                //未登记是默认公式
+                var areaNum = new Number(calcNoRegisterLegalArea);
+                if (areaNum < 40) {
+                    areaNum = 40;
+                }
+                calcStr = "(" + areaNum + "*" + calcNoRegisterLegalPrice + ")*" + proportion;
+            }
+        }
+
+        return calcStr;
 
     }
 
