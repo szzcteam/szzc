@@ -208,6 +208,12 @@ public class ProtocolController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping("/ssadmin/to-print-test")
+    public ModelAndView toPrintTest(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ssadmin/printTest");
+        return modelAndView;
+    }
 
 
 }
