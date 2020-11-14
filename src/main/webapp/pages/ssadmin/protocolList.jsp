@@ -125,6 +125,12 @@
                        height="550" width="1000" target="dialog" rel="addProtocol"><span>古轴新增</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=B001006">
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=B001006"
+                       height="550" width="1000" target="dialog" rel="addProtocol"><span>保安街新增</span>
+                </a></li>
+            </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=C001001">
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=C001001"
@@ -134,7 +140,7 @@
             <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=C001002">
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=C001002"
-                       height="550" width="1000" target="dialog" rel="addProtocol"><span> 积玉桥C新增</span>
+                       height="550" width="1000" target="dialog" rel="addProtocol"><span>积玉桥C新增</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=D001001">

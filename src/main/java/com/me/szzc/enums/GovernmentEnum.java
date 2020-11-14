@@ -31,6 +31,7 @@ public enum GovernmentEnum {
     QNGZ("B001003", "千年古轴A片项目", "得胜桥千年古轴B片项目", GovernmentEnum.GCC.getCode()),
     QNGZB("B001004", "千年古轴B片项目", "得胜桥千年古轴B片项目", GovernmentEnum.GCC.getCode()),
     QNGZC("B001005", "千年古轴C片项目", "得胜桥千年古轴C片项目", GovernmentEnum.GCC.getCode()),
+    BAJEQ("B001006", "保安街二期", GovernmentEnum.GCC.getCode()),
 
 
     HZJRC("C001", "华中金融城", GovernmentEnum.WCQ.getCode()),

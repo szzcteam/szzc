@@ -356,7 +356,9 @@ public class SettleAccountsController extends BaseController {
                     || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode()))) {
+                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
+                    )) {
                 modelAndView.setViewName(url + "_xch");
             } else if (area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())) {
                 modelAndView.setViewName(url + "_drnc");
@@ -420,7 +422,9 @@ public class SettleAccountsController extends BaseController {
                     || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode()))) {
+                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
+                    )) {
                 modelAndView.setViewName(url + "_zyc");
             }
 
@@ -440,7 +444,9 @@ public class SettleAccountsController extends BaseController {
                     || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
                     || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode()))) {
+                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode())
+                    || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
+                    )) {
                 modelAndView.addObject("adjunctRow", 11);
                 modelAndView.addObject("strustRow", 6);
                 modelAndView.addObject("showAdjunctOther", true);

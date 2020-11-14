@@ -182,7 +182,7 @@
         </div>
 
         <c:choose>
-            <c:when test="${swapHouse.projectCode == 'B001001' or swapHouse.projectCode == 'B001002' or swapHouse.projectCode == 'B001003' or swapHouse.projectCode == 'B001004'  or swapHouse.projectCode == 'B001005' or swapHouse.projectCode == 'C001001' or swapHouse.projectCode == 'C001002'}">
+            <c:when test="${swapHouse.projectCode == 'B001001' or swapHouse.projectCode == 'B001002' or swapHouse.projectCode == 'B001003' or swapHouse.projectCode == 'B001004'  or swapHouse.projectCode == 'B001005' or swapHouse.projectCode == 'B001006' or swapHouse.projectCode == 'C001001' or swapHouse.projectCode == 'C001002'}">
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产权调换房屋情况</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -169,6 +169,8 @@ public class WxSecurityMappingUtils {
         QNGZB(13L, GovernmentEnum.QNGZB.getCode(), "千年古轴B片"),
         QNGZC(14L, GovernmentEnum.QNGZC.getCode(), "千年古轴C片"),
 
+        BAJEQ(15L, GovernmentEnum.BAJEQ.getCode(), "保安街二期"),
+
         ;
         public static final Map<String, AreaMark> allAreaMap = new HashMap<>();
 
