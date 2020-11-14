@@ -146,7 +146,12 @@ public class StylusPrintService {
         Area area = areaService.getById(swapHouse.getAreaId());
         String projectCode = area.getProjectCode();
         //数据特殊处理：紫阳村模板少打印一个百分号
-        if (area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())) {
+        if (area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.QNGZ.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
+        ) {
             vo.setHistoryProportion(vo.getHistoryProportion() + "%");
         }
         //获取打印数据坐标
@@ -194,7 +199,12 @@ public class StylusPrintService {
         Area area = areaService.getById(recompense.getAreaId());
         String projectCode = area.getProjectCode();
         //数据特殊处理：紫阳村模板少打印一个百分号
-        if (area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())) {
+        if (area.getProjectCode().equalsIgnoreCase(GovernmentEnum.ZYC.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.QNGZ.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
+                || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
+        ) {
             vo.setHistoryProportion(vo.getHistoryProportion() + "%");
         }
         //获取打印数据坐标
