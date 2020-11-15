@@ -24,14 +24,14 @@ public class NumberToCapitalizedUtils {
 
 
     public static void main(String[] args) {
-        double a = 2365;
+        double a = 2631130;
         System.out.println(digitUppercase(a));
     }
 
     /**
      * 数字金额大写转换，思想先写个完整的然后将如零拾替换成零 要用到正则表达式
      */
-    private static String digitUppercase(double n) {
+    public static String digitUppercase(double n) {
         String fraction[] = {"角", "分"};
         String digit[] = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
         String unit[][] = {{"元", "万", "亿"}, {"", "拾", "佰", "仟"}};

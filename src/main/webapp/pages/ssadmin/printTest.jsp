@@ -59,7 +59,7 @@
             LODOP.SET_PRINT_PAGESIZE(1,0,0, "A4");
 
             // 横轴
-            for (var i = 10; i < 750; i=i+50 ) {
+            for (var i = 10; i < 750; i=i+30 ) {
                 var top  = 10;
                 var left  = i;
                 var height =  26
@@ -72,7 +72,7 @@
                 LODOP.ADD_PRINT_TEXT(top,left,width,height,content);
             }
             // 竖轴
-            for (var i = 10; i < 1100; i=i+50 ) {
+            for (var i = 10; i < 1100; i=i+30 ) {
                 var top  =  i;
                 var left  = 10;
                 var height =  26
@@ -91,7 +91,7 @@
             LODOP.SET_PRINT_STYLE("Angle",270);
 
             // 横轴
-            for (var i = 10; i < 1100; i=i+50 ) {
+            for (var i = 10; i < 1100; i=i+30 ) {
                 var top  = 10;
                 var left  = i;
                 var height =  26
@@ -105,7 +105,7 @@
             }
 
             // 竖轴
-            for (var i = 10; i < 1600; i=i+50 ) {
+            for (var i = 10; i < 1500; i=i+50 ) {
                 var top  =  i;
                 var left  = 10;
                 var height =  26

@@ -58,7 +58,7 @@
                     <td>代办单位：<div style="width: 208px;" class="rows_div">${rmbRecom.agencyCompany}</div></td>
                 </tr>
                 <c:choose>
-                    <c:when test="${rmbRecom.projectCode == 'B001001'}">
+                    <c:when test="${rmbRecom.projectCode == 'B001001' or rmbRecom.projectCode == 'B001006'}">
                         <tr>
                             <td>被征收人（乙方）：<div style="width: 175px;" class="rows_div">${rmbRecom.twoHouseOwner}</div></td>
                             <td>身份证号：<div style="width: 208px;" class="rows_div">${rmbRecom.twoIdentityNo}</div></td>

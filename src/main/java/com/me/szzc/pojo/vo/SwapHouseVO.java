@@ -524,6 +524,11 @@ public class SwapHouseVO {
     private String transferRmb;
 
     /**
+     * 乙方同意将N元由甲方支付给调换房建设单位，大写金额
+     */
+    private String upperTransferRmb;
+
+    /**
      * 差额：征收补偿款总额大于预购房款
      */
     private String difference;
@@ -749,6 +754,7 @@ public class SwapHouseVO {
         vo.setYears(entity.getYears());
         vo.setMonths(entity.getMonths());
         vo.setTransferRmb(BigDecimalUtil.stripTrailingZeros(entity.getTransferRmb()));
+        vo.setUpperTransferRmb(NumberToCapitalizedUtils.digitUppercase(entity.getTransferRmb().doubleValue()));
         vo.setDifference(BigDecimalUtil.stripTrailingZeros(entity.getDifference()));
         vo.setUpperDifference(entity.getUpperDifference());
 
