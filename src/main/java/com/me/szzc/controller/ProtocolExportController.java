@@ -175,6 +175,8 @@ public class ProtocolExportController extends BaseController {
                         exportVO.setRemark(protocolOther.getRemark());
                     }
                 }
+                //补偿合计
+                exportVO.setSumCompensate(BigDecimalUtil.stripTrailingZeros(settle.getSumCompensate()));
 
                 list.add(exportVO);
 
