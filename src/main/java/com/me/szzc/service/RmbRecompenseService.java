@@ -55,4 +55,7 @@ public class RmbRecompenseService {
         return rmbRecompenseMapper.listAll(areaIdList);
     }
 
+    public RmbRecompense getByHouseOwnerAddrID(String houseOwner, String address, Long id) {
+        return this.rmbRecompenseMapper.getByHouseOwnerAddrID(houseOwner,address,id);
+    }
 }

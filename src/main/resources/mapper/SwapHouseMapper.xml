@@ -382,4 +382,15 @@
     </if>
   </select>
 
+  <select id="getByHouseOwnerAddrId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_swap_house
+    where house_owner = #{houseOwner}
+    and address = #{address}
+    and id != #{id}
+    and deleted = 0
+  </select>
+
+
 </mapper>

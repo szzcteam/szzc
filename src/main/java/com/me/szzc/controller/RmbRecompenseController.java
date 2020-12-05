@@ -139,6 +139,13 @@ public class RmbRecompenseController extends BaseController {
             modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址查找结算单失败，请按照流程，先添加被征收人、地址的结算单。");
             return modelAndView;
         }
+        //查询货币补偿是否已存在修改后协议
+        RmbRecompense rmbRecompense1 = rmbRecompenseService.getByHouseOwnerAddrID(rmbRecompense.getHouseOwner(), rmbRecompense.getAddress(),rmbRecompense.getId());
+        if(rmbRecompense1 != null){
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址检测到货币补偿协议已存在，协议必须唯一，请先删除原协议，再操作");
+            return modelAndView;
+        }
 
         //修改人
         Long userId = getAdminSession(request).getFid();

@@ -91,6 +91,13 @@ public class SwapHouseController extends BaseController {
             modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址查找结算单失败，请核对后再操作。");
             return modelAndView;
         }
+        //查询产权调换协议是否已存在
+        SwapHouse swapHouse1 = swapHouseService.getByHouseOwnerAddrID(swapHouse.getHouseOwner(), swapHouse.getAddress(),swapHouse.getId());
+        if(swapHouse1 != null){
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "根据被征收人姓名、地址检测到产权调换议已存在，协议必须唯一，请先删除原协议，再操作");
+            return modelAndView;
+        }
 
         //修改人
         Long userId = getAdminSession(request).getFid();

@@ -27,4 +27,5 @@ public interface SwapHouseMapper {
 
     List<SwapHouse> listAll(@Param("areaIdList") List<Long> areaIdList);
 
+    SwapHouse getByHouseOwnerAddrId(@Param("houseOwner")String houseOwner, @Param("address")String address, @Param("id") Long id);
 }

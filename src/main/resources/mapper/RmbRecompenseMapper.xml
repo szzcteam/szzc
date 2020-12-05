@@ -335,4 +335,15 @@
       modified_date = #{modifiedDate}, modified_user_id = #{modifiedUserId}
       where id = #{id}
   </update>
+
+
+  <select id="getByHouseOwnerAddrID" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from t_rmb_recompense
+    where house_owner = #{houseOwner}
+    and address = #{address}
+    and id !=#{id}
+    and deleted = 0
+  </select>
+
 </mapper>

@@ -54,4 +54,8 @@ public class SwapHouseService {
     public List<SwapHouse> listAll(List<Long> areaIdList){
         return swapHouseMapper.listAll(areaIdList);
     }
+
+    public SwapHouse getByHouseOwnerAddrID(String houseOwner, String address, Long id) {
+        return swapHouseMapper.getByHouseOwnerAddrId(houseOwner, address,id);
+    }
 }
