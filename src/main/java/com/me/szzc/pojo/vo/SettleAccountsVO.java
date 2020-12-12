@@ -1234,6 +1234,21 @@ public class SettleAccountsVO {
             vo.setPayParm6("");
         }
 
+        if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7(), vo.getPayParm6())
+                && vo.getPayParm5().equals(Constant.CHINESE_ZERO)) {
+            vo.setPayParm5("");
+        }
+
+        if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7(), vo.getPayParm6(), vo.getPayParm5())
+                && vo.getPayParm4().equals(Constant.CHINESE_ZERO)) {
+            vo.setPayParm4("");
+        }
+
+        if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7(), vo.getPayParm6(), vo.getPayParm5(), vo.getPayParm4())
+                && vo.getPayParm3().equals(Constant.CHINESE_ZERO)) {
+            vo.setPayParm3("");
+        }
+
         vo.setCreateDate(DateHelper.date2String(entity.getCreateDate(), DateHelper.DateFormatType.YearMonthDay_Chines));
 
         return vo;
