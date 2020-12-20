@@ -17,7 +17,7 @@
             </c:when>
             <c:when test="${projectCode != null && (projectCode == 'B001002' || projectCode == 'D001001' || projectCode == 'C001002'
                 || projectCode == 'B001003' || projectCode == 'B001004' || projectCode == 'B001005'
-                || projectCode == 'B001006') }">
+                || projectCode == 'B001006' || projectCode == 'B001007' || projectCode == 'B001008' ) }">
                 <div id="div_settleAccounts" style="display: none;"><%@ include file="addSettleAccounts_xch.jsp" %></div>
             </c:when>
             <c:when test="${projectCode != null && projectCode == 'C001001' }">

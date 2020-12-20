@@ -81,20 +81,49 @@ public class WxSecurityMappingUtils {
         WCQ("wcq", "武昌区", ProjectMark.ROOT.getCode()),
 
 
-        BJSWQ("A001", "滨江", ProjectMark.WCQ.getCode(), new String[]{AreaMark.MLJ_B.name, AreaMark.MLJ_C.name}),
-        GCC("B001", "古城", ProjectMark.WCQ.getCode(), new String[]{AreaMark.XCH.name, AreaMark.ZYC_E.name, AreaMark.ZYC_W.name,
-                AreaMark.QNGZA.name, AreaMark.QNGZB.name, AreaMark.QNGZC.name}),
-        HZJRC("C001", "金融城", ProjectMark.WCQ.getCode(), new String[]{AreaMark.DZRGS.name}),
-        WCJSJ("D001", "建设局", ProjectMark.WCQ.getCode(), new String[]{AreaMark.WCEFC.name}),
+        BJSWQ("A001", "滨江", ProjectMark.WCQ.getCode(), new String[]{
+                AreaMark.MLJ_B.name, AreaMark.MLJ_C.name
+        }),
+
+        GCC("B001", "古城", ProjectMark.WCQ.getCode(), new String[]{
+                AreaMark.XCH.name, AreaMark.ZYC_E.name, AreaMark.ZYC_W.name,
+                AreaMark.QNGZA.name, AreaMark.QNGZB.name, AreaMark.QNGZC.name,
+                AreaMark.WCM.name, AreaMark.SSBP.name
+        }),
+
+        HZJRC("C001", "金融城", ProjectMark.WCQ.getCode(), new String[]{
+                AreaMark.DZRGS.name
+        }),
+
+        WCJSJ("D001", "建设局", ProjectMark.WCQ.getCode(), new String[]{
+                AreaMark.WCEFC.name
+        }),
 
         WC_STREET("WCQ_001", "街道二次分级", ProjectMark.WCQ.getCode()),
 
-        ZY_STREET("WCQ_Z001", "紫阳街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.MLJ_B.name, AreaMark.MLJ_C.name}),
-        YWLLOW_TOWER_STREE("WCQ_Z002", "黄鹤楼街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.ZYC_E.name, AreaMark.ZYC_W.name}),
-        ZHL_STREET("WCQ_Z003", "中华路街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.XCH.name, AreaMark.QNGZA.name, AreaMark.QNGZB.name, AreaMark.QNGZC.name}),
-        SGH_STREET("WCQ_Z004", "·水果湖街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.DZRGS.name}),
-        BSZ_STREET("WCQ_Z005", "·白沙洲街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.WCEFC.name}),
-        LDJ_STREET("WCQ_Z006", "粮道街", ProjectMark.WC_STREET.getCode(), new String[]{AreaMark.QNGZA.name, AreaMark.QNGZC.name}),
+        ZY_STREET("WCQ_Z001", "紫阳街", ProjectMark.WC_STREET.getCode(), new String[]{
+                AreaMark.MLJ_B.name, AreaMark.MLJ_C.name, AreaMark.WCM.name
+        }),
+
+        YWLLOW_TOWER_STREE("WCQ_Z002", "黄鹤楼街", ProjectMark.WC_STREET.getCode(), new String[]{
+                AreaMark.ZYC_E.name, AreaMark.ZYC_W.name
+        }),
+
+        ZHL_STREET("WCQ_Z003", "中华路街", ProjectMark.WC_STREET.getCode(), new String[]{
+                AreaMark.XCH.name, AreaMark.QNGZA.name, AreaMark.QNGZB.name, AreaMark.QNGZC.name,
+                AreaMark.SSBP.name
+        }),
+
+        SGH_STREET("WCQ_Z004", "·水果湖街", ProjectMark.WC_STREET.getCode(), new String[]{
+                AreaMark.DZRGS.name
+        }),
+        BSZ_STREET("WCQ_Z005", "·白沙洲街", ProjectMark.WC_STREET.getCode(), new String[]{
+                AreaMark.WCEFC.name
+        }),
+
+        LDJ_STREET("WCQ_Z006", "粮道街", ProjectMark.WC_STREET.getCode(), new String[]{
+                AreaMark.QNGZA.name, AreaMark.QNGZC.name, AreaMark.SSBP.name
+        }),
         ;
 
         //唯一code
@@ -170,6 +199,10 @@ public class WxSecurityMappingUtils {
         QNGZC(14L, GovernmentEnum.QNGZC.getCode(), "千年古轴C片"),
 
         BAJEQ(15L, GovernmentEnum.BAJEQ.getCode(), "保安街二期"),
+
+        WCM(16L, GovernmentEnum.WCM.getCode(), "文昌门"),
+
+        SSBP(17L, GovernmentEnum.SSBP.getCode(), "蛇山北坡"),
 
         ;
         public static final Map<String, AreaMark> allAreaMap = new HashMap<>();

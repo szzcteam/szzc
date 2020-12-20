@@ -349,20 +349,32 @@ public class SettleAccountsController extends BaseController {
                 log.error("根据片区ID查询片区为空,areaId:" + settleAccounts.getAreaId());
             }
 
-            if (area != null && area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())) {
-                modelAndView.setViewName(url + "_zyc");
-            } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZ.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
-                    )) {
-                modelAndView.setViewName(url + "_xch");
-            } else if (area != null && area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())) {
-                modelAndView.setViewName(url + "_drnc");
+            GovernmentEnum projectCode = GovernmentEnum.getByCode(area.getProjectCode());
+
+            switch (projectCode) {
+                case ZYC:
+                    modelAndView.setViewName(url + "_zyc");
+                    break;
+                case DZRGS:
+                    modelAndView.setViewName(url + "_drnc");
+                    break;
+                case XCH:
+                case QNGZ:
+                case QNGZB:
+                case QNGZC:
+                case WCEFC:
+                case JYQC:
+                case BAJEQ:
+                case WCM:
+                case SSBP:
+                    modelAndView.setViewName(url + "_xch");
+                    break;
+                default:
+                    modelAndView.setViewName(url);
+                    log.info("修改结算单时，返回到默认页面");
+                    break;
             }
+
         }
 
         //获取用户管理的片区
@@ -410,49 +422,61 @@ public class SettleAccountsController extends BaseController {
         String url = "ssadmin/detailSettleAccounts";
         modelAndView.setViewName(url);
         SettleAccounts settleAccounts = this.settleAccountsService.getById(id);
-        if (settleAccounts != null) {
-            SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
-            modelAndView.addObject("settleAccounts", vo);
-
-            Area area = areaService.getById(settleAccounts.getAreaId());
-            if (area != null && (area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZ.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
-                    )) {
-                modelAndView.setViewName(url + "_zyc");
-            }
-
-            /**
-             * 紫阳、西城壕、电二的结算单一样
-             * 西城壕新增区别点：附属设备设施增加了其他，所以表格合并行列不一样
-             */
-            if (area != null && (area.getProjectCode().equals(GovernmentEnum.ZYC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.DZRGS.getCode()))) {
-                modelAndView.addObject("adjunctRow", 10);
-                modelAndView.addObject("strustRow", 5);
-                //showAdjunctOther 是否显示附属项中的其它
-                modelAndView.addObject("showAdjunctOther", false);
-
-            } else if (area != null && (area.getProjectCode().equals(GovernmentEnum.XCH.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZ.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.WCEFC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.JYQC.getCode())
-                    || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
-                    )) {
-                modelAndView.addObject("adjunctRow", 11);
-                modelAndView.addObject("strustRow", 6);
-                modelAndView.addObject("showAdjunctOther", true);
-            }
-
+        if (settleAccounts == null) {
+            log.info("根据结算单ID查询详情返回空,id:{}", id);
+            return modelAndView;
         }
+        SettleAccountsVO vo = SettleAccountsVO.parse(settleAccounts);
+        modelAndView.addObject("settleAccounts", vo);
+
+        Area area = areaService.getById(settleAccounts.getAreaId());
+        if (area == null) {
+            log.error("根据片区ID查询片区为空,areaId:" + settleAccounts.getAreaId());
+        }
+
+        GovernmentEnum projectCode = GovernmentEnum.getByCode(area.getProjectCode());
+
+        if (projectCode == GovernmentEnum.ZYC
+                || projectCode == GovernmentEnum.XCH
+                || projectCode == GovernmentEnum.QNGZ
+                || projectCode == GovernmentEnum.QNGZB
+                || projectCode == GovernmentEnum.QNGZC
+                || projectCode == GovernmentEnum.WCEFC
+                || projectCode == GovernmentEnum.DZRGS
+                || projectCode == GovernmentEnum.JYQC
+                || projectCode == GovernmentEnum.BAJEQ
+                || projectCode == GovernmentEnum.WCM
+                || projectCode == GovernmentEnum.SSBP
+        ) {
+            modelAndView.setViewName(url + "_zyc");
+        }
+
+        /**
+         * 紫阳、西城壕、电二的结算单一样
+         * 西城壕新增区别点：附属设备设施增加了其他，所以表格合并行列不一样
+         */
+        if (projectCode == GovernmentEnum.ZYC
+                || projectCode == GovernmentEnum.DZRGS) {
+            modelAndView.addObject("adjunctRow", 10);
+            modelAndView.addObject("strustRow", 5);
+            //showAdjunctOther 是否显示附属项中的其它
+            modelAndView.addObject("showAdjunctOther", false);
+
+        } else if (projectCode == GovernmentEnum.XCH
+                || projectCode == GovernmentEnum.QNGZ
+                || projectCode == GovernmentEnum.QNGZB
+                || projectCode == GovernmentEnum.QNGZC
+                || projectCode == GovernmentEnum.WCEFC
+                || projectCode == GovernmentEnum.JYQC
+                || projectCode == GovernmentEnum.BAJEQ
+                || projectCode == GovernmentEnum.WCM
+                || projectCode == GovernmentEnum.SSBP
+        ) {
+            modelAndView.addObject("adjunctRow", 11);
+            modelAndView.addObject("strustRow", 6);
+            modelAndView.addObject("showAdjunctOther", true);
+        }
+
         return modelAndView;
     }
 

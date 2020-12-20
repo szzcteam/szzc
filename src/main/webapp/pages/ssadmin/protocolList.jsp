@@ -131,6 +131,18 @@
                        height="550" width="1000" target="dialog" rel="addProtocol"><span>保安街新增</span>
                 </a></li>
             </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=B001007">
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=B001007"
+                       height="550" width="1000" target="dialog" rel="addProtocol"><span>文昌门新增</span>
+                </a></li>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=B001008">
+                <li><a class="add"
+                       href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=B001008"
+                       height="550" width="1000" target="dialog" rel="addProtocol"><span>蛇山北坡新增</span>
+                </a></li>
+            </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/addProtocol.html?projectCode=C001001">
                 <li><a class="add"
                        href="ssadmin/goProtocolJSP.html?url=ssadmin/addProtocol&projectCode=C001001"
