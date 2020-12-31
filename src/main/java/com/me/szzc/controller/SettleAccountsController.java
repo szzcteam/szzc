@@ -367,6 +367,7 @@ public class SettleAccountsController extends BaseController {
                 case BAJEQ:
                 case WCM:
                 case SSBP:
+                case SSBPB:
                     modelAndView.setViewName(url + "_xch");
                     break;
                 default:
@@ -447,6 +448,7 @@ public class SettleAccountsController extends BaseController {
                 || projectCode == GovernmentEnum.BAJEQ
                 || projectCode == GovernmentEnum.WCM
                 || projectCode == GovernmentEnum.SSBP
+                || projectCode == GovernmentEnum.SSBPB
         ) {
             modelAndView.setViewName(url + "_zyc");
         }
@@ -471,6 +473,7 @@ public class SettleAccountsController extends BaseController {
                 || projectCode == GovernmentEnum.BAJEQ
                 || projectCode == GovernmentEnum.WCM
                 || projectCode == GovernmentEnum.SSBP
+                || projectCode == GovernmentEnum.SSBPB
         ) {
             modelAndView.addObject("adjunctRow", 11);
             modelAndView.addObject("strustRow", 6);

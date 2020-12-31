@@ -88,7 +88,7 @@ public class WxSecurityMappingUtils {
         GCC("B001", "古城", ProjectMark.WCQ.getCode(), new String[]{
                 AreaMark.XCH.name, AreaMark.ZYC_E.name, AreaMark.ZYC_W.name,
                 AreaMark.QNGZA.name, AreaMark.QNGZB.name, AreaMark.QNGZC.name,
-                AreaMark.WCM.name, AreaMark.SSBP.name
+                AreaMark.WCM.name, AreaMark.SSBP.name, AreaMark.SSBPB.name
         }),
 
         HZJRC("C001", "金融城", ProjectMark.WCQ.getCode(), new String[]{
@@ -122,7 +122,7 @@ public class WxSecurityMappingUtils {
         }),
 
         LDJ_STREET("WCQ_Z006", "粮道街", ProjectMark.WC_STREET.getCode(), new String[]{
-                AreaMark.QNGZA.name, AreaMark.QNGZC.name, AreaMark.SSBP.name
+                AreaMark.QNGZA.name, AreaMark.QNGZC.name,  AreaMark.SSBPB.name
         }),
         ;
 
@@ -202,7 +202,8 @@ public class WxSecurityMappingUtils {
 
         WCM(16L, GovernmentEnum.WCM.getCode(), "文昌门"),
 
-        SSBP(17L, GovernmentEnum.SSBP.getCode(), "蛇山北坡"),
+        SSBP(17L, GovernmentEnum.SSBP.getCode(), "蛇山北坡(粮道街)"),
+        SSBPB(18L, GovernmentEnum.SSBPB.getCode(), "蛇山北坡(中华路街)")
 
         ;
         public static final Map<String, AreaMark> allAreaMap = new HashMap<>();

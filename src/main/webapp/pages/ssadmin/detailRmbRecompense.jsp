@@ -189,7 +189,7 @@
         <c:choose>
             <c:when test="${rmbRecom.projectCode == 'B001001' or rmbRecom.projectCode == 'B001002' or rmbRecom.projectCode == 'B001003'
                 or rmbRecom.projectCode == 'B001004' or rmbRecom.projectCode == 'B001005' or rmbRecom.projectCode == 'B001006'
-                or rmbRecom.projectCode == 'B001007' or rmbRecom.projectCode == 'B001008' }">
+                or rmbRecom.projectCode == 'B001007' or rmbRecom.projectCode == 'B001008' or rmbRecom.projectCode == 'B001009' }">
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签约、搬迁及付款</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
