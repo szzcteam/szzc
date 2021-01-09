@@ -151,6 +151,9 @@ public class StylusPrintService {
                 || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
                 || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
                 || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
+                || projectCode.equals(GovernmentEnum.SSBP.getCode())
+                || projectCode.equals(GovernmentEnum.SSBPB.getCode())
+                || projectCode.equals(GovernmentEnum.WCM.getCode())
         ) {
             vo.setHistoryProportion(vo.getHistoryProportion() + "%");
         }
@@ -204,6 +207,9 @@ public class StylusPrintService {
                 || area.getProjectCode().equals(GovernmentEnum.QNGZB.getCode())
                 || area.getProjectCode().equals(GovernmentEnum.QNGZC.getCode())
                 || area.getProjectCode().equals(GovernmentEnum.BAJEQ.getCode())
+                || projectCode.equals(GovernmentEnum.SSBP.getCode())
+                || projectCode.equals(GovernmentEnum.SSBPB.getCode())
+                || projectCode.equals(GovernmentEnum.WCM.getCode())
         ) {
             vo.setHistoryProportion(vo.getHistoryProportion() + "%");
         }
