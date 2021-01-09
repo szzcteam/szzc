@@ -240,7 +240,8 @@
 
 
 <div id="footer">
-    ${requestScope.constant['webinfo'].fcopyRights }
+    <a href="https://beian.miit.gov.cn" target="_blank">${requestScope.constant['webinfo'].fbeianInfo }</a>
+    Copyright © 易征收 版权所有
 </div>
 
 </body>
