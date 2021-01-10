@@ -64,7 +64,7 @@
                 var left  = i;
                 var height =  26
                 var width =  30;
-                var content = "1";
+                var content = ".";
                 top = new Number(top);
                 left = new Number(left);
                 height = new Number(height);
@@ -77,7 +77,7 @@
                 var left  = 10;
                 var height =  26
                 var width =  30;
-                var content = "1";
+                var content = ".";
                 top = new Number(top);
                 left = new Number(left);
                 height = new Number(height);
@@ -96,7 +96,7 @@
                 var left  = i;
                 var height =  26
                 var width =  30;
-                var content = "1";
+                var content = ".";
                 top = new Number(top);
                 left = new Number(left);
                 height = new Number(height);
@@ -110,7 +110,7 @@
                 var left  = 10;
                 var height =  26
                 var width =  30;
-                var content = "1";
+                var content = ".";
                 top = new Number(top);
                 left = new Number(left);
                 height = new Number(height);
