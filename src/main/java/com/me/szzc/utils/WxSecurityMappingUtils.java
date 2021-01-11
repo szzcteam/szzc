@@ -200,10 +200,9 @@ public class WxSecurityMappingUtils {
 
         BAJEQ(15L, GovernmentEnum.BAJEQ.getCode(), "保安街二期"),
 
-        WCM(16L, GovernmentEnum.WCM.getCode(), "文昌门"),
-
+        SSBPB(16L, GovernmentEnum.SSBPB.getCode(), "蛇山北坡(中华路街)"),
         SSBP(17L, GovernmentEnum.SSBP.getCode(), "蛇山北坡(粮道街)"),
-        SSBPB(18L, GovernmentEnum.SSBPB.getCode(), "蛇山北坡(中华路街)")
+        WCM(18L, GovernmentEnum.WCM.getCode(), "文昌门")
 
         ;
         public static final Map<String, AreaMark> allAreaMap = new HashMap<>();
