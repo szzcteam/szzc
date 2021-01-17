@@ -462,6 +462,7 @@ var swapHouseObj = {
             moveHouseFee + "+" + interimFee + "+" + guarantee + "+" + suspendBusinessFee + "+" + subtotal + "+" + changeCompensate + "+" +
             lifeCompensate + "+" + rmbCompensate + "+" + buildingAreaFee + "+" + moveReward + "+" + otherFee;
         var sumRbm = eval(sumRbm_calc);
+        sumRbm = Math.round(sumRbm);
         $("#swapHouseDiv  input[name='sumRbm']").eq(0).val(sumRbm).change();
     }
 

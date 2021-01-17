@@ -558,7 +558,7 @@ var settleAccountObj = {
     //改变房屋价值补偿-有证计算公式
     changeCalcValueCompensate: function () {
         var calcValueCompensate = $("input[name='calcValueCompensate']").eq(0).val() || 0;
-        var valueCompensate = Math.round(eval(calcValueCompensate));
+        var valueCompensate = calcObj.roundLastNum(eval(calcValueCompensate));
         $("input[name='valueCompensate']").eq(0).val(valueCompensate).change();
         settleAccountObj.calcMoveReward();
         settleAccountObj.calcRmbCompensate();
@@ -587,7 +587,7 @@ var settleAccountObj = {
     //改变房屋价值补偿-未登记合法计算公式
     changeCalcNoRegisterLegal: function () {
         var calcNoRegisterLegal = $("input[name='calcNoRegisterLegal']").eq(0).val() || 0;
-        var noRegisterLegal = Math.round(eval(calcNoRegisterLegal));
+        var noRegisterLegal = calcObj.roundLastNum(eval(calcNoRegisterLegal));
         console.log("运行未登记合法计算公式: " + noRegisterLegal);
         $("input[name='noRegisterLegal']").eq(0).val(noRegisterLegal).change();
         settleAccountObj.calcMoveReward();
@@ -616,7 +616,7 @@ var settleAccountObj = {
     //改变房屋价值补偿-历史遗留计算公式
     changeCalcHistoryLegacy: function () {
         var calcHistoryLegacy = $("input[name='calcHistoryLegacy']").eq(0).val() || 0;
-        var historyLegacy = Math.round(eval(calcHistoryLegacy));
+        var historyLegacy = calcObj.roundLastNum(eval(calcHistoryLegacy));
         $("input[name='historyLegacy']").eq(0).val(historyLegacy).change();
         settleAccountObj.calcMoveReward();
         settleAccountObj.calcRmbCompensate();
@@ -631,7 +631,8 @@ var settleAccountObj = {
             var num = $("input[name='" + nameText + "']").eq(0).val();
             sumCompensate += new Number(num);
         }
-        $("input[name='sumCompensate']").eq(0).val(sumCompensate).change();
+        var lastSumCompensate = calcObj.getSumCompensate(sumCompensate);
+        $("input[name='sumCompensate']").eq(0).val(lastSumCompensate).change();
     },
 
     //填充应收、应付款
@@ -657,6 +658,7 @@ var settleAccountObj = {
             $("input[name='deduction']").eq(0).val(sumCompensate).change();
         }
 
+        money = calcObj.getPayTotal(money);
         $("input[name='payTotal']").eq(0).val(money);
         var payTotalChinese = Araia_To_Chinese(money);
         $("input[name='payMoney']").eq(0).val(payTotalChinese);
@@ -671,7 +673,8 @@ var settleAccountObj = {
         var deduction = $("input[name='deduction']").eq(0).val() || 0;
         deduction = new Number(deduction);
 
-        var money = Math.abs(sumCompensate - deduction)
+        var money = Math.abs(sumCompensate - deduction);
+        money = calcObj.getPayTotal(money);
         $("input[name='payTotal']").eq(0).val(money);
         var payTotalChinese = Araia_To_Chinese(money);
         $("input[name='payMoney']").eq(0).val(payTotalChinese);
@@ -734,7 +737,7 @@ var settleAccountObj = {
     //运行装修补偿的计算公式，得到折旧费用
     calcDecorationCompensate: function () {
         var calcDecorationCompensate = $("input[name='calcDecorationCompensate']").eq(0).val() || 0;
-        var decorationCompensate = Math.round(eval(calcDecorationCompensate));
+        var decorationCompensate = calcObj.roundLastNum(eval(calcDecorationCompensate));
         $("input[name='decorationCompensate']").eq(0).val(decorationCompensate).change();
     },
     /**
@@ -744,7 +747,7 @@ var settleAccountObj = {
      */
     runCalc: function (calcObjName, moneyObjName) {
         var calcText = $("input[name='" + calcObjName + "']").eq(0).val() || 0;
-        var money = Math.round(eval(calcText));
+        var money = calcObj.roundLastNum(eval(calcText));
         $("input[name='" + moneyObjName + "']").eq(0).val(money).change();
     },
     //装修折旧补偿，利用2小框数字，得到计算公式
@@ -1046,7 +1049,7 @@ var settleAccountObj = {
         if (swap_price1 != 0 && swap_area1 != 0) {
             var swap_money1 = new Number(eval(swap_price1)) * new Number(swap_area1);
             // $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
-            swap_money1 = Math.round(swap_money1);
+            swap_money1 = calcObj.roundLastNum(swap_money1);
             $("input[name='swapMoney1']").eq(0).val(swap_money1).change();
         } else {
             $("input[name='swapMoney1']").eq(0).val("").change();
@@ -1054,7 +1057,7 @@ var settleAccountObj = {
 
         if (swap_price2 != 0 && swap_area2 != 0) {
             var swap_money2 = new Number(eval(swap_price2)) * new Number(swap_area2);
-            swap_money2 = Math.round(swap_money2);
+            swap_money2 = calcObj.roundLastNum(swap_money2);
             $("input[name='swapMoney2']").eq(0).val(swap_money2).change();
         } else {
             $("input[name='swapMoney2']").eq(0).val("").change();
@@ -1062,7 +1065,7 @@ var settleAccountObj = {
 
         if (swap_price3 != 0 && swap_area3 != 0) {
             var swap_money3 = new Number(eval(swap_price3)) * new Number(swap_area3);
-            swap_money3 = Math.round(swap_money3);
+            swap_money3 = calcObj.roundLastNum(swap_money3);
             $("input[name='swapMoney3']").eq(0).val(swap_money3).change();
         } else {
             $("input[name='swapMoney3']").eq(0).val("").change();
@@ -1091,9 +1094,10 @@ var settleAccountObj = {
         var swap_money4 = $("input[name='swapMoney4']").eq(0).val() || 0;
         var swap_money5 = $("input[name='swapMoney5']").eq(0).val() || 0;
 
-        var houseMoney = Math.round(eval(swap_money1)) + Math.round(eval(swap_money2))
-            + Math.round(eval(swap_money3)) + Math.round(eval(swap_money4))
-            + Math.round(eval(swap_money5));
+        var houseMoney = calcObj.roundLastNum(eval(swap_money1)) + calcObj.roundLastNum(eval(swap_money2))
+            + calcObj.roundLastNum(eval(swap_money3)) + calcObj.roundLastNum(eval(swap_money4))
+            + calcObj.roundLastNum(eval(swap_money5));
+        houseMoney = calcObj.roundLastNum(houseMoney);
         $("input[name='houseMoney']").eq(0).val(houseMoney).change();
 
     },
@@ -1193,3 +1197,41 @@ var settleAccountObj = {
 
 
 };
+
+
+var calcObj = {
+
+    roundLastNum: function (num) {
+        var projectCode = $("#projectCode").val();
+        //文昌门保留2位小数
+        if (projectCode == "B001007") {
+            return funMath(num, 2, "round");
+        } else {
+            //其它片区，整数
+            return funMath(num, 0, "round")
+        }
+    },
+    //得到总的被征收房屋合计
+    getSumCompensate: function (num) {
+        var projectCode = $("#projectCode").val();
+        if (projectCode == "B001007") {
+            //文昌门：单项金额保留2位小数，求和后，要四舍五入保留整数
+            return funMath(num, 0, "round");
+        } else {
+            //其它片区是整数，求和后，还是整数无需操作
+            return num;
+        }
+    },
+    //得到应收应付
+    getPayTotal: function (num) {
+        var projectCode = $("#projectCode").val();
+        if (projectCode == "B001007") {
+            //文昌门：带小数位的相减，结果保留2位小数
+            return funMath(num, 2, "round");
+        } else {
+            //其它片区是整数，相减后，还是整数无需操作
+            return num;
+        }
+    }
+
+}

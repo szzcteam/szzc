@@ -7,6 +7,7 @@ import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.NumberToCapitalizedUtils;
 import com.me.szzc.utils.ScriptEngineUtil;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.script.ScriptEngine;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
  * @author luwei
  * @date 2019/3/29
  */
+@Slf4j
 @Data
 public class SettleAccountsVO {
 
@@ -734,6 +736,15 @@ public class SettleAccountsVO {
      */
     private String payMoney;
 
+    /**应付-分**/
+    private String payScale2;
+
+    /**应付-角**/
+    private String payScale1;
+
+    /**应付小数部分大写汇总成一个字段，如: 伍角柒分**/
+    private String payScaleMoney;
+
     /**应付-元**/
     private String payParm1;
     /**应付-拾**/
@@ -756,9 +767,9 @@ public class SettleAccountsVO {
 
    
 
-    public static SettleAccountsVO parse(SettleAccounts entity) throws Exception{
+    public static SettleAccountsVO parse(SettleAccounts entity) throws Exception {
         SettleAccountsVO vo = new SettleAccountsVO();
-        if(entity == null) {
+        if (entity == null) {
             return vo;
         }
 
@@ -789,7 +800,7 @@ public class SettleAccountsVO {
         vo.setValueCompensateBz(entity.getValueCompensateBz());
 
         //未经登记合法
-        if(entity.getNoRegisterLegal() != null && entity.getNoRegisterLegal().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getNoRegisterLegal() != null && entity.getNoRegisterLegal().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcNoRegisterLegal(entity.getCalcNoRegisterLegal());
             vo.setNoRegisterLegal(BigDecimalUtil.stripTrailingZeros(entity.getNoRegisterLegal()));
             vo.setCalcNoRegisterLegal(vo.getCalcNoRegisterLegal().replace("0*0+", ""));
@@ -797,7 +808,7 @@ public class SettleAccountsVO {
         vo.setNoRegisterLegalBz(entity.getNoRegisterLegalBz());
 
         //历史遗留
-        if(entity.getHistoryLegacy() != null && entity.getHistoryLegacy().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getHistoryLegacy() != null && entity.getHistoryLegacy().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcHistoryLegacy(entity.getCalcHistoryLegacy());
             vo.setHistoryLegacy(BigDecimalUtil.stripTrailingZeros(entity.getHistoryLegacy()));
             vo.setCalcHistoryLegacy(vo.getCalcHistoryLegacy().replace("0*0+", ""));
@@ -805,7 +816,7 @@ public class SettleAccountsVO {
         vo.setHistoryLegacyBz(entity.getHistoryLegacyBz());
 
         //装修补偿金额，存在2个公式，其中第一个可能为0*0
-        if(entity.getDecorationCompensate() != null && entity.getDecorationCompensate().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getDecorationCompensate() != null && entity.getDecorationCompensate().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcDecorationCompensate(entity.getCalcDecorationCompensate());
             vo.setDecorationCompensate(BigDecimalUtil.stripTrailingZeros(entity.getDecorationCompensate()));
             vo.setCalcDecorationCompensate(vo.getCalcDecorationCompensate().replace("0*0+", ""));
@@ -822,7 +833,7 @@ public class SettleAccountsVO {
         vo.setMoveHouseFeeBz(entity.getMoveHouseFeeBz());
 
         //临时过渡费
-        if(entity.getInterimFee() != null && entity.getInterimFee().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getInterimFee() != null && entity.getInterimFee().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcInterimFee(entity.getCalcInterimFee());
             vo.setInterimFee(BigDecimalUtil.stripTrailingZeros(entity.getInterimFee()));
             vo.setCalcInterimFee(vo.getCalcInterimFee().replace("0*0*0+", ""));
@@ -831,17 +842,17 @@ public class SettleAccountsVO {
 
         //水表
         String calcMoveWaterMeterFee = entity.getCalcMoveWaterMeterFee();
-        if(StringUtils.isNotBlank(calcMoveWaterMeterFee)) {
+        if (StringUtils.isNotBlank(calcMoveWaterMeterFee)) {
             int water_add_index = calcMoveWaterMeterFee.indexOf("+");
-            if(water_add_index != -1) {
+            if (water_add_index != -1) {
                 String[] arr = calcMoveWaterMeterFee.split("\\+");
                 String txt = "";
                 String num1 = arr[0].substring(0, arr[0].indexOf("*"));
-                if(Integer.valueOf(num1) > 0) {
+                if (Integer.valueOf(num1) > 0) {
                     txt += num1 + " 主表 ";
                 }
                 String num2 = arr[1].substring(0, arr[1].indexOf("*"));
-                if(Integer.valueOf(num2) >0 ) {
+                if (Integer.valueOf(num2) > 0) {
                     txt += num2 + " 副表";
                 }
                 vo.setCalcMoveWaterMeterFee(txt);
@@ -852,26 +863,26 @@ public class SettleAccountsVO {
 
         //电表
         String calcMoveAmmeterFee = entity.getCalcMoveAmmeterFee();
-        if(StringUtils.isNotBlank(calcMoveAmmeterFee)) {
+        if (StringUtils.isNotBlank(calcMoveAmmeterFee)) {
             int ammeter_add_index = calcMoveAmmeterFee.indexOf("+");
-            if(ammeter_add_index != -1) {
+            if (ammeter_add_index != -1) {
                 String[] arr = calcMoveAmmeterFee.split("\\+");
                 String txt = "";
                 String num1 = arr[0].substring(0, arr[0].indexOf("*"));
-                if(Integer.valueOf(num1) > 0) {
+                if (Integer.valueOf(num1) > 0) {
                     txt += num1 + " 民用独表 ";
                 }
                 String num2 = arr[1].substring(0, arr[1].indexOf("*"));
-                if(Integer.valueOf(num2) >0 ) {
+                if (Integer.valueOf(num2) > 0) {
                     txt += num2 + " 分表";
                 }
-                if(arr.length == 4) {
+                if (arr.length == 4) {
                     String num3 = arr[2].substring(0, arr[2].indexOf("*"));
-                    if(Integer.valueOf(num3) >0 ) {
+                    if (Integer.valueOf(num3) > 0) {
                         txt += num3 + " 三相电表";
                     }
                     String num4 = arr[3].substring(0, arr[3].indexOf("*"));
-                    if(Integer.valueOf(num4) >0 ) {
+                    if (Integer.valueOf(num4) > 0) {
                         txt += num4 + " 分时表";
                     }
                 }
@@ -885,21 +896,21 @@ public class SettleAccountsVO {
 
         //空调
         String calcMoveAirConditioningFee = entity.getCalcMoveAirConditioningFee();
-        if(StringUtils.isNotBlank(calcMoveAirConditioningFee)) {
-            int  air_add_index = calcMoveAirConditioningFee.indexOf("+");
+        if (StringUtils.isNotBlank(calcMoveAirConditioningFee)) {
+            int air_add_index = calcMoveAirConditioningFee.indexOf("+");
             if (air_add_index != -1) {
                 String[] airArr = calcMoveAirConditioningFee.split("\\+");
                 String txt = "";
                 String num1 = airArr[0].substring(0, airArr[0].indexOf("*"));
-                if(Integer.valueOf(num1) > 0 ) {
+                if (Integer.valueOf(num1) > 0) {
                     txt += num1 + " 窗机 ";
                 }
                 String num2 = airArr[1].substring(0, airArr[1].indexOf("*"));
-                if(Integer.valueOf(num2) > 0 ) {
+                if (Integer.valueOf(num2) > 0) {
                     txt += num2 + " 挂机 ";
                 }
                 String num3 = airArr[2].substring(0, airArr[2].indexOf("*"));
-                if(Integer.valueOf(num3) > 0 ) {
+                if (Integer.valueOf(num3) > 0) {
                     txt += num3 + " 柜机 ";
                 }
                 vo.setCalcMoveAirConditioningFee(txt);
@@ -984,7 +995,7 @@ public class SettleAccountsVO {
         vo.setAffiliatedOtherBz(entity.getAffiliatedOtherBz());
 
         //未登记房屋补偿计算公式
-        if(entity.getNoCheckCompensate()!=null&&entity.getNoCheckCompensate().compareTo(BigDecimal.ZERO)>0){
+        if (entity.getNoCheckCompensate() != null && entity.getNoCheckCompensate().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcNoCheckCompensate(entity.getCalcNoCheckCompensate());
             vo.setNoCheckCompensate(BigDecimalUtil.stripTrailingZeros(entity.getNoCheckCompensate()));
         }
@@ -999,24 +1010,24 @@ public class SettleAccountsVO {
 
         //生活困难补助
         String calcLifeCompensate = entity.getCalcLifeCompensate();
-        if(StringUtils.isNotBlank(calcLifeCompensate)) {
+        if (StringUtils.isNotBlank(calcLifeCompensate)) {
             String[] arr = calcLifeCompensate.split("\\+");
             String txt = "";
             if (Integer.valueOf(arr[0]) > 0) {
-                txt+= " 重症 ";
+                txt += " 重症 ";
             }
             if (Integer.valueOf(arr[1]) > 0) {
-                txt+= " 残疾 ";
+                txt += " 残疾 ";
             }
             if (Integer.valueOf(arr[2]) > 0) {
-                txt+=" 低保 ";
+                txt += " 低保 ";
             }
-            if(arr.length == 5){
+            if (arr.length == 5) {
                 if (Integer.valueOf(arr[3]) > 0) {
-                    txt+=" 烈士家庭 ";
+                    txt += " 烈士家庭 ";
                 }
                 if (Integer.valueOf(arr[4]) > 0) {
-                    txt+=" 失独 ";
+                    txt += " 失独 ";
                 }
             }
             vo.setCalcLifeCompensate(txt.trim());
@@ -1063,21 +1074,21 @@ public class SettleAccountsVO {
         vo.setMoveRewardBz(entity.getMoveRewardBz());
 
         //货币搬迁奖励
-        if(entity.getRmbMoveReward()!=null&&entity.getRmbMoveReward().compareTo(BigDecimal.ZERO)>0){
+        if (entity.getRmbMoveReward() != null && entity.getRmbMoveReward().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcRmbMoveReward(entity.getCalcRmbMoveReward());
             vo.setRmbMoveReward(BigDecimalUtil.stripTrailingZeros(entity.getRmbMoveReward()));
         }
         vo.setRmbMoveRewardBz(entity.getRmbMoveRewardBz());
 
         //小面积住房搬迁奖励
-        if(entity.getSmallAreaReward() != null && entity.getSmallAreaReward().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getSmallAreaReward() != null && entity.getSmallAreaReward().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcSmallAreaReward(entity.getCalcSmallAreaReward());
             vo.setSmallAreaReward(BigDecimalUtil.stripTrailingZeros(entity.getSmallAreaReward()));
         }
         vo.setSmallAreaRewardBz(entity.getSmallAreaRewardBz());
 
         //保底
-        if(entity.getGuarantee() != null && entity.getGuarantee().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getGuarantee() != null && entity.getGuarantee().compareTo(BigDecimal.ZERO) > 0) {
             vo.setCalcGuarantee(entity.getCalcGuarantee());
             vo.setGuarantee(BigDecimalUtil.stripTrailingZeros(entity.getGuarantee()));
             vo.setCalcGuarantee(vo.getCalcGuarantee().replace("-0-0*1", ""));
@@ -1085,7 +1096,7 @@ public class SettleAccountsVO {
         vo.setGuaranteeBz(entity.getGuaranteeBz());
 
         //其他描述
-        if(entity.getOtherRmb() != null && entity.getOtherRmb().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getOtherRmb() != null && entity.getOtherRmb().compareTo(BigDecimal.ZERO) > 0) {
             vo.setOtherDesc(entity.getOtherDesc());
             vo.setCalcOther(entity.getCalcOther());
             vo.setOtherRmb(BigDecimalUtil.stripTrailingZeros(entity.getOtherRmb()));
@@ -1107,7 +1118,7 @@ public class SettleAccountsVO {
         vo.setHouseMoneyBz(entity.getHouseMoneyBz());
 
         //已抵扣安置房款
-        if(entity.getDeduction() != null && entity.getDeduction().compareTo(BigDecimal.ZERO) > 0){
+        if (entity.getDeduction() != null && entity.getDeduction().compareTo(BigDecimal.ZERO) > 0) {
             vo.setDeduction(BigDecimalUtil.stripTrailingZeros(entity.getDeduction()));
         }
         vo.setCalcDeduction(entity.getCalcDeduction());
@@ -1115,122 +1126,131 @@ public class SettleAccountsVO {
 
 
         //交换房
-        if(StringUtils.isNotBlank(entity.getSwapPrice1())){
+        if (StringUtils.isNotBlank(entity.getSwapPrice1())) {
             vo.setSwapPrice1(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice1()));
-        }else{
+        } else {
             vo.setSwapPrice1("");
         }
 
-        if(StringUtils.isNotBlank(entity.getSwapPrice2())){
+        if (StringUtils.isNotBlank(entity.getSwapPrice2())) {
             vo.setSwapPrice2(BigDecimalUtil.stripTrailingZeros(entity.getSwapPrice2()));
-        }else{
+        } else {
             vo.setSwapPrice2("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapPrice3())){
+        if (StringUtils.isNotBlank(entity.getSwapPrice3())) {
             vo.setSwapPrice3(entity.getSwapPrice3());
-        }else{
+        } else {
             vo.setSwapPrice3("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapPrice4())){
+        if (StringUtils.isNotBlank(entity.getSwapPrice4())) {
             vo.setSwapPrice4(entity.getSwapPrice4());
-        }else{
+        } else {
             vo.setSwapPrice4("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapPrice5())){
+        if (StringUtils.isNotBlank(entity.getSwapPrice5())) {
             vo.setSwapPrice5(entity.getSwapPrice5());
-        }else{
+        } else {
             vo.setSwapPrice5("");
         }
 
-        vo.setSwapPrice(vo.getSwapPrice1()+" "+vo.getSwapPrice2()+" "+vo.getSwapPrice3()+" " + vo.getSwapPrice4() + " "+ vo.getSwapPrice5());
+        vo.setSwapPrice(vo.getSwapPrice1() + " " + vo.getSwapPrice2() + " " + vo.getSwapPrice3() + " " + vo.getSwapPrice4() + " " + vo.getSwapPrice5());
         vo.setSwapPrice(vo.getSwapPrice().trim());
 
-        if(StringUtils.isNotBlank(entity.getSwapArea1())){
+        if (StringUtils.isNotBlank(entity.getSwapArea1())) {
             vo.setSwapArea1(entity.getSwapArea1());
-        }else{
+        } else {
             vo.setSwapArea1("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapArea2())){
+        if (StringUtils.isNotBlank(entity.getSwapArea2())) {
             vo.setSwapArea2(entity.getSwapArea2());
-        }else{
+        } else {
             vo.setSwapArea2("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapArea3())){
+        if (StringUtils.isNotBlank(entity.getSwapArea3())) {
             vo.setSwapArea3(entity.getSwapArea3());
-        }else{
+        } else {
             vo.setSwapArea3("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapArea4())){
+        if (StringUtils.isNotBlank(entity.getSwapArea4())) {
             vo.setSwapArea4(entity.getSwapArea4());
-        }else{
+        } else {
             vo.setSwapArea4("");
         }
 
-        if(StringUtils.isNotBlank(entity.getSwapArea5())){
+        if (StringUtils.isNotBlank(entity.getSwapArea5())) {
             vo.setSwapArea5(entity.getSwapArea5());
-        }else{
+        } else {
             vo.setSwapArea5("");
         }
 
-        vo.setSwapArea(vo.getSwapArea1()+" "+vo.getSwapArea2()+" "+vo.getSwapArea3()+" " + vo.getSwapArea4() + " "+vo.getSwapArea5());
+        vo.setSwapArea(vo.getSwapArea1() + " " + vo.getSwapArea2() + " " + vo.getSwapArea3() + " " + vo.getSwapArea4() + " " + vo.getSwapArea5());
         vo.setSwapArea(vo.getSwapArea().trim());
 
 
-        if(StringUtils.isNotBlank(entity.getSwapMoney1())){
+        if (StringUtils.isNotBlank(entity.getSwapMoney1())) {
             vo.setSwapMoney1(entity.getSwapMoney1());
-        }else{
+        } else {
             vo.setSwapMoney1("");
         }
 
-        if(StringUtils.isNotBlank(entity.getSwapMoney2())){
+        if (StringUtils.isNotBlank(entity.getSwapMoney2())) {
             vo.setSwapMoney2(entity.getSwapMoney2());
-        }else{
+        } else {
             vo.setSwapMoney2("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapMoney3())){
+        if (StringUtils.isNotBlank(entity.getSwapMoney3())) {
             vo.setSwapMoney3(entity.getSwapMoney3());
-        }else{
+        } else {
             vo.setSwapMoney3("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapMoney4())){
+        if (StringUtils.isNotBlank(entity.getSwapMoney4())) {
             vo.setSwapMoney4(entity.getSwapMoney4());
-        }else{
+        } else {
             vo.setSwapMoney4("");
         }
-        if(StringUtils.isNotBlank(entity.getSwapMoney5())){
+        if (StringUtils.isNotBlank(entity.getSwapMoney5())) {
             vo.setSwapMoney5(entity.getSwapMoney5());
-        }else{
+        } else {
             vo.setSwapMoney5("");
         }
 
-        vo.setSwapMoney(vo.getSwapMoney1()+" "+vo.getSwapMoney2()+" "+vo.getSwapMoney3()+" " + vo.getSwapMoney4() + " "+vo.getSwapMoney5());
+        vo.setSwapMoney(vo.getSwapMoney1() + " " + vo.getSwapMoney2() + " " + vo.getSwapMoney3() + " " + vo.getSwapMoney4() + " " + vo.getSwapMoney5());
         vo.setSwapMoney(vo.getSwapMoney().trim());
 
 
         vo.setPayTotal(BigDecimalUtil.stripTrailingZeros(entity.getPayTotal()));
         vo.setPayMoney(entity.getPayMoney());
         //金额大写拆分存储
-        String tempMoney =  vo.getPayTotal();
-        if(tempMoney.length()<8){
-            tempMoney = "00000000"+tempMoney;
+        String tempMoney = "";
+        String tempScaleMoney = "";
+        int payTotalPoint = vo.getPayTotal().indexOf(".");
+        if (payTotalPoint != -1) {
+            tempMoney = vo.getPayTotal().substring(0, payTotalPoint);
+            tempScaleMoney = vo.getPayTotal().substring(payTotalPoint + 1);
+            log.info("应收应付金额有小数, 整数部分处理 before:{},after:{},scale:{}", vo.getPayTotal(), tempMoney, tempScaleMoney);
+        } else {
+            tempMoney = vo.getPayTotal();
         }
-        tempMoney = tempMoney.substring(tempMoney.length()-8, tempMoney.length());
-        vo.setPayParm1(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-1, tempMoney.length()))));
-        vo.setPayParm2(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-2, tempMoney.length()-1))));
-        vo.setPayParm3(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-3, tempMoney.length()-2))));
-        vo.setPayParm4(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-4, tempMoney.length()-3))));
-        vo.setPayParm5(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-5, tempMoney.length()-4))));
-        vo.setPayParm6(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-6, tempMoney.length()-5))));
-        vo.setPayParm7(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-7, tempMoney.length()-6))));
-        vo.setPayParm8(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length()-8, tempMoney.length()-7))));
+        if (tempMoney.length() < 8) {
+            tempMoney = "00000000" + tempMoney;
+        }
+        tempMoney = tempMoney.substring(tempMoney.length() - 8, tempMoney.length());
+        vo.setPayParm1(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 1, tempMoney.length()))));
+        vo.setPayParm2(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 2, tempMoney.length() - 1))));
+        vo.setPayParm3(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 3, tempMoney.length() - 2))));
+        vo.setPayParm4(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 4, tempMoney.length() - 3))));
+        vo.setPayParm5(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 5, tempMoney.length() - 4))));
+        vo.setPayParm6(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 6, tempMoney.length() - 5))));
+        vo.setPayParm7(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 7, tempMoney.length() - 6))));
+        vo.setPayParm8(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempMoney.substring(tempMoney.length() - 8, tempMoney.length() - 7))));
 
-        if(vo.getPayParm8().equals(Constant.CHINESE_ZERO)){
+        if (vo.getPayParm8().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm8("");
         }
-        if(StringUtils.isBlank(vo.getPayParm8()) && vo.getPayParm7().equals(Constant.CHINESE_ZERO)){
+        if (StringUtils.isBlank(vo.getPayParm8()) && vo.getPayParm7().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm7("");
         }
-        if(StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7()) && vo.getPayParm6().equals(Constant.CHINESE_ZERO)){
+        if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7()) && vo.getPayParm6().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm6("");
         }
 
@@ -1248,6 +1268,28 @@ public class SettleAccountsVO {
                 && vo.getPayParm3().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm3("");
         }
+
+        //小数位拆分存储
+        if (StringUtils.isBlank(tempScaleMoney)) {
+            vo.setPayScale1("");
+            vo.setPayScale2("");
+            vo.setPayScaleMoney("");
+        } else {
+            tempScaleMoney = tempScaleMoney+"00";
+            tempScaleMoney = tempScaleMoney.substring(0,2);
+            vo.setPayScale2(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempScaleMoney.substring(tempScaleMoney.length() - 1))));
+            vo.setPayScale1(NumberToCapitalizedUtils.CHINESE_NUM_MAP.get(Integer.valueOf(tempScaleMoney.substring(tempScaleMoney.length() - 2, tempScaleMoney.length() - 1))));
+
+            //分为0，不打印
+            if (vo.getPayScale2().equals(Constant.CHINESE_ZERO)) {
+                vo.setPayScale2("");
+                vo.setPayScaleMoney(vo.getPayScale1() + "角");
+            } else {
+                vo.setPayScaleMoney(vo.getPayScale1() + "角" + vo.getPayScale2() + "分");
+            }
+
+        }
+
 
         vo.setCreateDate(DateHelper.date2String(entity.getCreateDate(), DateHelper.DateFormatType.YearMonthDay_Chines));
 

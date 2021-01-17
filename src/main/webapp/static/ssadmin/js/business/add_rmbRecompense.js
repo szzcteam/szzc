@@ -359,6 +359,7 @@ var rmbRecompenseObj = {
             moveHouseFee + "+" + interimFee + "+" + guarantee + "+" + suspendBusinessFee + "+" + subtotal + "+" + changeCompensate + "+" +
             lifeCompensate + "+" + rmbCompensate + "+" + smallAreaReward + "+" + moveReward + "+" + otherFee;
         var sumRbm = eval(sumRbm_calc);
+        sumRbm = Math.round(sumRbm);
         $("#rmbRecompenseDiv  input[name='sumRbm']").eq(0).val(sumRbm).change();
     }
 

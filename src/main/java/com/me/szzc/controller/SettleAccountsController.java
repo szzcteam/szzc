@@ -349,6 +349,9 @@ public class SettleAccountsController extends BaseController {
                 log.error("根据片区ID查询片区为空,areaId:" + settleAccounts.getAreaId());
             }
 
+            //返回项目code
+            modelAndView.addObject("projectCode", area.getProjectCode());
+
             GovernmentEnum projectCode = GovernmentEnum.getByCode(area.getProjectCode());
 
             switch (projectCode) {
@@ -385,6 +388,7 @@ public class SettleAccountsController extends BaseController {
 
         //初始化水电空调参数
         initWaterAmmerParam(modelAndView);
+
         modelAndView.addObject(STATUS_CODE_KEY,SUCCESS_CODE_NUM);
         modelAndView.addObject(MESSAGE_KEY,"查询成功");
         return modelAndView;

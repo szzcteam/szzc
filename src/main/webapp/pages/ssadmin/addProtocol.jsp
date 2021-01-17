@@ -9,6 +9,7 @@
             <option value="2">货币补偿协议</option>
             <option value="3">产权调换协议</option>
         </select>
+        <input type="hidden" name="projectCode" id="projectCode" value="${projectCode}"/>
     </div>
     <div id="businessPage">
         <c:choose>

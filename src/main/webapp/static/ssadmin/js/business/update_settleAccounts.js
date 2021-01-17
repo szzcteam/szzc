@@ -43,8 +43,9 @@ $(document).ready(function () {
         if(isNaN(obj_value)){
             return;
         }
-        if (obj_value && obj_value.indexOf(".00") != -1) {
-            obj_value = Math.round(obj_value);
+        var doubleZero = obj_value.indexOf(".00");
+        if (obj_value && doubleZero != -1) {
+            obj_value = obj_value.substring(0, doubleZero);
             $(obj).val(obj_value);
         }
     });

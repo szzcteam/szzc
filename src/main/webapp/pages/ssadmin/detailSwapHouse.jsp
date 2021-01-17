@@ -196,7 +196,7 @@
                     <div style="width: 60px;" class="rows_div">${swapHouse.houseNumber}</div>号产权调换房屋，
                     该房屋预测建筑面积<div style="width: 120px;" class="rows_div">${swapHouse.coveredArea}</div>㎡（最终以不动产登记机构确认的实测面积为准），
                     房屋预估单价<div style="width: 120px;" class="rows_div">${swapHouse.price}</div>元/㎡(最终价格以政府批准文件或以乙方（丙方）与建设单位签定合同约定为准），
-                    预估房屋总价计人民币<div style="width: 60px;" class="rows_div">${swapHouse.totalPrice}</div>元，
+                    预估房屋总价计人民币<div style="width: 100px;" class="rows_div">${swapHouse.totalPrice}</div>元，
                     由于建筑面积变化引起房屋总价变动的，双方同意随之调整房屋价款，多退少补。
                     预计交房时间为<div style="width: 60px;" class="rows_div">${swapHouse.years}</div>年<div style="width: 60px;" class="rows_div">${swapHouse.months}</div>月（具体以甲方通知时间为准），
                     购房合同由乙方（丙方）与产权调换房建设单位签订，房屋购销双方权利义务以合同为准。
@@ -204,10 +204,10 @@
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;房款结算和支付期限</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    乙方（丙方）同意将房屋征收补偿款 <div style="width: 60px;" class="rows_div">${swapHouse.transferRmb}</div>元由甲方支付给产权调换房建设单位冲抵其选定房屋的预购房款。
-                    如房屋征收补偿款总额大于预购房款，其差额部分<div style="width: 60px;" class="rows_div">${swapHouse.difference}</div>元（大写：<div style="width: 200px;" class="rows_div">${swapHouse.upperDifference}</div>）
+                    乙方（丙方）同意将房屋征收补偿款 <div style="width: 100px;" class="rows_div">${swapHouse.transferRmb}</div>元由甲方支付给产权调换房建设单位冲抵其选定房屋的预购房款。
+                    如房屋征收补偿款总额大于预购房款，其差额部分<div style="width: 100px;" class="rows_div">${swapHouse.difference}</div>元（大写：<div style="width: 255px;" class="rows_div">${swapHouse.upperDifference}</div>）
                     经会计机构审核出具审计报告后15个工作日内由甲方支付给乙方（丙方）；如房屋征收补偿总额小于预购房款，
-                    其差额部分<div style="width: 60px;" class="rows_div">${swapHouse.lessDifference}</div> 元（大写：<div style="width: 200px;" class="rows_div">${swapHouse.upperLessDifference}</div>）
+                    其差额部分<div style="width: 100px;" class="rows_div">${swapHouse.lessDifference}</div> 元（大写：<div style="width: 255px;" class="rows_div">${swapHouse.upperLessDifference}</div>）
                     待办理入住手续时由乙方（丙方）据实结算支付给甲方。
                 </div>
                 <div>
@@ -272,7 +272,7 @@
                     <div style="width: 60px;" class="rows_div">${swapHouse.houseNumber}</div>号（暂定编号，以实际交房时编号为准）产权调换房屋，
                     该房屋预测建筑面积<div style="width: 120px;" class="rows_div">${swapHouse.coveredArea}</div>㎡（最终以不动产登记机构确认的实测面积为准），
                     房屋预估单价<div style="width: 120px;" class="rows_div">${swapHouse.price}</div>元/㎡(最终价格以政府批准文件或以乙方与建设单位签定合同约定为准），
-                    预估房屋总价计人民币<div style="width: 80px;" class="rows_div">${swapHouse.totalPrice}</div>元，
+                    预估房屋总价计人民币<div style="width: 100px;" class="rows_div">${swapHouse.totalPrice}</div>元，
                     由于建筑面积变化引起房屋总价变动的，双方同意随之调整房屋价款，多退少补。
                     预计交房时间为<div style="width: 60px;" class="rows_div">${swapHouse.years}</div>年<div style="width: 60px;" class="rows_div">${swapHouse.months}</div>月（具体以甲方通知时间为准），
                     购房合同由乙方与产权调换房建设单位签订，房屋购销双方权利义务以合同为准。
@@ -284,10 +284,10 @@
                 <div style="font-size: 14px;text-align: left;line-height: 26px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第四条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;房款结算和支付期限</b></div>
                 <div style="text-align: left;line-height: 26px;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    乙方同意将房屋征收补偿款 <div style="width: 60px;" class="rows_div">${swapHouse.transferRmb}</div>元由甲方支付给产权调换房建设单位抵扣其选定房屋的预购房款。
-                    房屋征收补偿款总额大于预购房款，其差额部分<div style="width: 60px;" class="rows_div">${swapHouse.difference}</div>元（大写：<div style="width: 200px;" class="rows_div">${swapHouse.upperDifference}</div>）
+                    乙方同意将房屋征收补偿款 <div style="width: 100px;" class="rows_div">${swapHouse.transferRmb}</div>元由甲方支付给产权调换房建设单位抵扣其选定房屋的预购房款。
+                    房屋征收补偿款总额大于预购房款，其差额部分<div style="width: 100px;" class="rows_div">${swapHouse.difference}</div>元（大写：<div style="width: 255px;" class="rows_div">${swapHouse.upperDifference}</div>）
                     经会计机构审核出具审计报告并完成征收工作相关手续后，由甲方支付给乙方；房屋征收补偿总额小于预购房款，
-                    其差额部分<div style="width: 60px;" class="rows_div">${swapHouse.lessDifference}</div> 元（大写：<div style="width: 200px;" class="rows_div">${swapHouse.upperLessDifference}</div>）
+                    其差额部分<div style="width: 100px;" class="rows_div">${swapHouse.lessDifference}</div> 元（大写：<div style="width: 255px;" class="rows_div">${swapHouse.upperLessDifference}</div>）
                     待办理入住手续时由乙方据实结算支付给甲方。
                 </div>
                 <div>

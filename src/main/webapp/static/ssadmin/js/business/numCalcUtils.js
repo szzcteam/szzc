@@ -1,11 +1,53 @@
-//2个数字求和后，保留2位整数，超出2位小数的四舍五入
-function funSumByRound(num1, num2) {
-    if (isNaN(num1) || isNaN(num2)) {
-        return 0;
+/**
+ * 对数字进行转换
+ * @param num  数字
+ * @param scale 保留的小数位
+ * @param type  类型
+ * @returns {number} 转换之后的数字
+ */
+function funMath(num, scale, type) {
+    if (isNaN(num)) {
+        console.log("参数错误，非数字类型" + num);
+        return num;
     }
-    var value = Math.round(eval(num1 + "*" + num2) * 100) / 100;
-    return value;
+
+    //是个整数，无需操作
+    if (isInteger(num)) {
+        return num;
+    }
+
+    var resultValue = 0;
+    //要四舍五入
+    if (type == "round") {
+        //整数
+        if (scale == 0) {
+            resultValue = Math.round(num);
+        } else if (scale == 2) {   //四舍五入，保留2位小数
+            //示例：10.51*390*0.95=3893.954999, 需要=3893.96
+            resultValue = Math.round(num * 1000) / 1000;
+            resultValue = Math.round(resultValue * 100) / 100;
+        } else {
+            console.log("参数错误，未验证的小数位" + scale);
+            return 0;
+        }
+    }
+    return resultValue;
 }
+
+/**
+ * 判断一个是正整数
+ * @param num
+ * @returns {boolean}
+ */
+function isInteger(num) {
+    var reg = /^[0-9]+$/;
+
+    if(reg.test(num)){
+        return true;
+    }
+    return false;
+}
+
 
 /**
  * 小户型住房困难补助比例

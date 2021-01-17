@@ -582,6 +582,8 @@
                         <div class="buttonContent">
                             <!--  主键Id -->
                             <input type="hidden" name="id" value="${settleAccounts.id}">
+                            <!-- 项目code -->
+                            <input type="hidden" name="projectCode" id="projectCode" value="${projectCode}"/>
                             <button type="submit">保存</button>
                         </div>
                     </div>
