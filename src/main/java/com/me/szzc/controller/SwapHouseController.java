@@ -6,8 +6,11 @@ import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.CompensateTypeEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.enums.ProtocolEnum;
-import com.me.szzc.pojo.entity.*;
-import com.me.szzc.pojo.vo.RmbRecompenseVO;
+import com.me.szzc.pojo.entity.Adjudication;
+import com.me.szzc.pojo.entity.Area;
+import com.me.szzc.pojo.entity.SettleAccounts;
+import com.me.szzc.pojo.entity.SwapHouse;
+import com.me.szzc.pojo.vo.ResultVO;
 import com.me.szzc.pojo.vo.SwapHouseVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.ObjTransMapUtils;
@@ -39,6 +42,14 @@ public class SwapHouseController extends BaseController {
     public ModelAndView addSwapHouse(SwapHouse swapHouse, Adjudication adjudication,  HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //基本参数校验
+        ResultVO resultVO = checkParam(swapHouse);
+        if (!resultVO.getSuccess()) {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, resultVO.getMessage());
+            return modelAndView;
+        }
+
         //判断结算单是否存在
         SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
         if (settleAccounts == null) {
@@ -84,6 +95,13 @@ public class SwapHouseController extends BaseController {
     public ModelAndView updateSwapHouse(SwapHouse swapHouse,  Adjudication adjudication, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("ssadmin/comm/ajaxDone");
+        //基本参数校验
+        ResultVO resultVO = checkParam(swapHouse);
+        if (!resultVO.getSuccess()) {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, resultVO.getMessage());
+            return modelAndView;
+        }
         //防止修改后，名字、地址错乱
         SettleAccounts settleAccounts = settleAccountsService.getByHouseOwnerAddr(swapHouse.getHouseOwner(), swapHouse.getAddress());
         if (settleAccounts == null) {
@@ -211,5 +229,39 @@ public class SwapHouseController extends BaseController {
             modelAndView.addObject("swapHouse", vo);
         }
         return modelAndView;
+    }
+
+    /**
+     * 校验相关参数
+     *
+     * @param entity
+     * @return
+     */
+    private ResultVO checkParam(SwapHouse entity) {
+        if (entity == null) {
+            return new ResultVO(false, "数据为空，非法操作");
+        }
+
+        if (entity.getAreaId() == null || entity.getAreaId().longValue() <= 0) {
+            return new ResultVO<>(false, "账号权限错误，禁止添加协议");
+        }
+
+        if (StringUtils.isBlank(entity.getCardNo())) {
+            return new ResultVO(false, "协议编号不能为空");
+        }
+
+        if (StringUtils.isBlank(entity.getHouseOwner())) {
+            return new ResultVO(false, "被征收人姓名不能为空");
+        }
+
+        if (StringUtils.isBlank(entity.getAddress())) {
+            return new ResultVO(false, "被征收房屋地址不能为空");
+        }
+
+        if (entity.getSumRbm() == null) {
+            return new ResultVO(false, "被征收房屋补偿合计不能为空");
+        }
+
+        return new ResultVO(true);
     }
 }
