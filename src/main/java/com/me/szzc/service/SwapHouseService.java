@@ -58,4 +58,8 @@ public class SwapHouseService {
     public SwapHouse getByHouseOwnerAddrID(String houseOwner, String address, Long id) {
         return swapHouseMapper.getByHouseOwnerAddrId(houseOwner, address,id);
     }
+
+    public List<SwapHouse> listByNameAddressList(List<String> houseOwnerList, List<String> addressList) {
+        return swapHouseMapper.listByNameAddressList(houseOwnerList, addressList);
+    }
 }

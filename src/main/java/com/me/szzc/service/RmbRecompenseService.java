@@ -7,9 +7,7 @@ import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -57,5 +55,9 @@ public class RmbRecompenseService {
 
     public RmbRecompense getByHouseOwnerAddrID(String houseOwner, String address, Long id) {
         return this.rmbRecompenseMapper.getByHouseOwnerAddrID(houseOwner,address,id);
+    }
+
+    public List<RmbRecompense> listByNameAddressList(List<String> houseOwnerList, List<String> addressList) {
+        return rmbRecompenseMapper.listByNameAddressList(houseOwnerList, addressList);
     }
 }

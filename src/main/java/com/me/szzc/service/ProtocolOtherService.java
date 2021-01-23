@@ -20,6 +20,19 @@ public class ProtocolOtherService {
         return list;
     }
 
+    /**
+     * 查询指定结算单的其它信息
+     * @param accounts
+     * @return
+     */
+    public List<ProtocolOther> queryByAccounts(List<Long> accounts){
+        if(accounts == null || accounts.isEmpty()){
+            return queryAll();
+        }
+        List<ProtocolOther> list = protocolOtherMapper.queryByAccounts(accounts);
+        return list;
+    }
+
     /*查询备注*/
     public ProtocolOther queryRemark(long accountsId){
         ProtocolOther protocolOther = this.protocolOtherMapper.queryRemark(accountsId);

@@ -21,6 +21,16 @@
         from t_protocol_other
     </select>
 
+    <select id="queryByAccounts" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_protocol_other
+        where accounts_id in
+        <foreach collection="accounts" item="itemId" separator="," open="(" close=")">
+            #{itemId}
+        </foreach>
+    </select>
+
     <select id="queryRemark"  resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>

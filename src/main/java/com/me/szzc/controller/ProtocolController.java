@@ -1,8 +1,6 @@
 package com.me.szzc.controller;
 
-import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.CompensateTypeEnum;
-import com.me.szzc.enums.GovernmentEnum;
 import com.me.szzc.enums.SigningStatusEnum;
 import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.ProtocolVO;
@@ -14,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 协议管理
@@ -113,50 +107,95 @@ public class ProtocolController extends BaseController {
         }
 
         int firstResult = (currentPage - 1) * numPerPage;
+
+        //查询符合条件的结算单
         List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true,
                 signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo,
                 remark);
 
-        //一次性查出所有的备注
-        List<ProtocolOther> protocolOtherList = this.protocolOtherService.queryAll();
-        Map<Long, ProtocolOther> protocolOtherMap = new HashMap<>();
-        if (protocolOtherList != null && !protocolOtherList.isEmpty()) {
-            protocolOtherList.forEach(other -> {
-                protocolOtherMap.put(other.getAccountsId(), other);
-            });
+        //结算单ID 集合
+        List<Long> accountIdList = new ArrayList<>();
+        //结算单姓名集合
+        List<String> houseOwnerList = new ArrayList<>();
+        //计算单地址集合
+        List<String> addressList = new ArrayList<>();
+
+        for (SettleAccounts account : dataList) {
+            accountIdList.add(account.getId());
+
+            addressList.add(account.getAddress());
+            if (StringUtils.isNotBlank(account.getHouseOwner())) {
+                houseOwnerList.add(account.getHouseOwner());
+            } else {
+                houseOwnerList.add(account.getLessee());
+            }
         }
 
+        //结算单的其它信息-备注
+        Map<Long, ProtocolOther> protocolOtherMap = new HashMap<>();
+        if (!accountIdList.isEmpty()) {
+            List<ProtocolOther> protocolOtherList = this.protocolOtherService.queryByAccounts(accountIdList);
+            if (protocolOtherList != null && !protocolOtherList.isEmpty()) {
+                protocolOtherList.forEach(other -> {
+                    protocolOtherMap.put(other.getAccountsId(), other);
+                });
+            }
+        }
+
+        //结算单-对应的货币补偿
+        List<SwapHouse> swapHouseList = swapHouseService.listByNameAddressList(houseOwnerList, addressList);
+
+        //结算单-对应的产权调换
+        List<RmbRecompense> rmbRecompensesList = rmbRecompenseService.listByNameAddressList(houseOwnerList, addressList);
+
+        //封装返回对象VO
         List<ProtocolVO> list = new ArrayList<>();
 
         for (SettleAccounts account : dataList) {
             ProtocolVO protocol = new ProtocolVO();
-            if(StringUtils.isNotBlank(account.getHouseOwner())){
+            if (StringUtils.isNotBlank(account.getHouseOwner())) {
                 protocol.setName(account.getHouseOwner());
-            }else{
+            } else {
                 protocol.setName(account.getLessee());
             }
 
             protocol.setCardNo(account.getCardNo());
             protocol.setAddress(account.getAddress());
-            if(StringUtils.isNotBlank(account.getPhone())){
+            if (StringUtils.isNotBlank(account.getPhone())) {
                 protocol.setPhone(account.getPhone());
-            }else{
+            } else {
                 protocol.setPhone(account.getLesseePhone());
             }
-
-            SwapHouse swapHouse = this.swapHouseService.getByHouseOwnerAddr(protocol.getName(), account.getAddress());
-            RmbRecompense rmbRecompense = this.rmbRecompenseService.getByHouseOwnerAddr(protocol.getName(), account.getAddress());
 
             protocol.setSigningStatus(account.getSigningStatus());
             protocol.setSigningStatusDesc(SigningStatusEnum.getDesc(account.getSigningStatus()));
             protocol.setSigningDateStr(DateHelper.date2String(account.getSigningDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
             protocol.setSettleAccountId(account.getId());
-            protocol.setSwapHouseId(swapHouse != null ? swapHouse.getId() : 0);
-            protocol.setRmbRecompenseId(rmbRecompense != null ? rmbRecompense.getId() : 0);
+
+            //填充协议ID
+            if (account.getCompensateType().equals(CompensateTypeEnum.RMB_TYPE.getCode()) && rmbRecompensesList != null && !rmbRecompensesList.isEmpty()) {
+                Optional<RmbRecompense> opt = rmbRecompensesList.stream().filter(po -> po.getHouseOwner().equals(protocol.getName())).filter(po -> po.getAddress().equals(protocol.getAddress())).findFirst();
+                if (opt != null && opt.isPresent()) {
+                    protocol.setRmbRecompenseId(opt.get().getId());
+                } else {
+                    protocol.setRmbRecompenseId(0L);
+                }
+            } else if (account.getCompensateType().equals(CompensateTypeEnum.SWAP_TYPE.getCode()) && swapHouseList != null && !swapHouseList.isEmpty()) {
+                Optional<SwapHouse> opt = swapHouseList.stream().filter(po -> po.getHouseOwner().equals(protocol.getName())).filter(po -> po.getAddress().equals(protocol.getAddress())).findFirst();
+                if (opt != null && opt.isPresent()) {
+                    protocol.setSwapHouseId(opt.get().getId());
+                } else {
+                    protocol.setSwapHouseId(0L);
+                }
+            } else {
+                protocol.setSwapHouseId(0L);
+                protocol.setRmbRecompenseId(0L);
+            }
+
             protocol.setAreaName(areaMap.get(account.getAreaId()));
 
             ProtocolOther other = protocolOtherMap.get(account.getId());
-            if(other != null){
+            if (other != null) {
                 protocol.setRemark(other.getRemark());
             }
 

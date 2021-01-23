@@ -9,6 +9,8 @@ public interface ProtocolOtherMapper {
 
     List<ProtocolOther> queryAll();
 
+    List<ProtocolOther> queryByAccounts(@Param("accounts")  List<Long> accounts);
+
     ProtocolOther queryRemark(long accountsId);
 
     Integer addProtocolOther(ProtocolOther protocolOther);

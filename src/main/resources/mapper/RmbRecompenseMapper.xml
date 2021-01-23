@@ -346,4 +346,19 @@
     and deleted = 0
   </select>
 
+  <select id="listByNameAddressList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_rmb_recompense
+    where deleted = 0
+    and house_owner in
+    <foreach collection="houseOwnerList" item="itemName" separator="," open="(" close=")">
+      #{itemName}
+    </foreach>
+    and address in
+    <foreach collection="addressList" item="itemAddress" separator="," open="(" close=")">
+      #{itemAddress}
+    </foreach>
+  </select>
+
 </mapper>
