@@ -175,6 +175,9 @@ var swapHouseObj = {
                             var calcChangeCompensate = data.calcChangeCompensate.split("*");
                             $("#swapHouseDiv input[name='valueCompensateBusinessArea']").eq(0).val(calcChangeCompensate[0]);
                             $("#swapHouseDiv input[name='valueCompensateRate']").eq(0).val(eval(calcChangeCompensate[2]*100));
+                        } else {
+                            $("#swapHouseDiv input[name='valueCompensateBusinessArea']").eq(0).val("");
+                            $("#swapHouseDiv input[name='valueCompensateRate']").eq(0).val("");
                         }
 
                         //未登记的合法建筑面积
@@ -318,6 +321,14 @@ var swapHouseObj = {
                             $("#swapHouseDiv input[name='basicLivingSubsidy']").val(lifeCompensateArr[2])
                             $("#swapHouseDiv input[name='martyr']").val(lifeCompensateArr[3]);
                             $("#swapHouseDiv input[name='noChild']").val(lifeCompensateArr[4]);
+                        } else {
+                            //没有生活困难补助，则将金额都设置为0
+                            $("#swapHouseDiv input[name='lifeCompensate']").val("");
+                            $("#swapHouseDiv input[name='diseaseSubsidy']").val("");
+                            $("#swapHouseDiv input[name='disabilitySubsidy']").val("");
+                            $("#swapHouseDiv input[name='basicLivingSubsidy']").val("")
+                            $("#swapHouseDiv input[name='martyr']").val("");
+                            $("#swapHouseDiv input[name='noChild']").val("");
                         }
 
                         //货币补偿补助

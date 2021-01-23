@@ -152,6 +152,9 @@ var rmbRecompenseObj = {
                             var calcChangeCompensate = data.calcChangeCompensate.split("*");
                             $("#rmbRecompenseDiv input[name='valueCompensateBusinessArea']").eq(0).val(calcChangeCompensate[0]);
                             $("#rmbRecompenseDiv input[name='valueCompensateRate']").eq(0).val(eval(calcChangeCompensate[2]*100));
+                        } else {
+                            $("#rmbRecompenseDiv input[name='valueCompensateBusinessArea']").eq(0).val("");
+                            $("#rmbRecompenseDiv input[name='valueCompensateRate']").eq(0).val("");
                         }
 
                         //未登记的合法建筑面积
@@ -290,6 +293,14 @@ var rmbRecompenseObj = {
                             $("#rmbRecompenseDiv input[name='basicLivingSubsidy']").val(lifeCompensateArr[2])
                             $("#rmbRecompenseDiv input[name='martyr']").val(lifeCompensateArr[3]);
                             $("#rmbRecompenseDiv input[name='noChild']").val(lifeCompensateArr[4]);
+                        } else {
+                            //没有生活困难补助，则将金额都设置为0
+                            $("#rmbRecompenseDiv input[name='lifeCompensate']").val("");
+                            $("#rmbRecompenseDiv input[name='diseaseSubsidy']").val("");
+                            $("#rmbRecompenseDiv input[name='disabilitySubsidy']").val("");
+                            $("#rmbRecompenseDiv input[name='basicLivingSubsidy']").val("")
+                            $("#rmbRecompenseDiv input[name='martyr']").val("");
+                            $("#rmbRecompenseDiv input[name='noChild']").val("");
                         }
 
                         //货币补偿补助
