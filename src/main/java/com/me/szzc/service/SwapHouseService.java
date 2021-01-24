@@ -7,6 +7,7 @@ import com.me.szzc.utils.DateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,6 +61,9 @@ public class SwapHouseService {
     }
 
     public List<SwapHouse> listByNameAddressList(List<String> houseOwnerList, List<String> addressList) {
+        if(addressList == null || addressList.isEmpty() || houseOwnerList == null || houseOwnerList.isEmpty()){
+            return Collections.EMPTY_LIST;
+        }
         return swapHouseMapper.listByNameAddressList(houseOwnerList, addressList);
     }
 }

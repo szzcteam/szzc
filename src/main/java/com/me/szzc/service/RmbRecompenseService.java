@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -58,6 +59,9 @@ public class RmbRecompenseService {
     }
 
     public List<RmbRecompense> listByNameAddressList(List<String> houseOwnerList, List<String> addressList) {
+        if (addressList == null || addressList.isEmpty() || houseOwnerList == null || houseOwnerList.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
         return rmbRecompenseMapper.listByNameAddressList(houseOwnerList, addressList);
     }
 }
