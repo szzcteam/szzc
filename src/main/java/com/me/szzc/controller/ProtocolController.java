@@ -171,25 +171,20 @@ public class ProtocolController extends BaseController {
             protocol.setSigningStatusDesc(SigningStatusEnum.getDesc(account.getSigningStatus()));
             protocol.setSigningDateStr(DateHelper.date2String(account.getSigningDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
             protocol.setSettleAccountId(account.getId());
+            protocol.setSwapHouseId(0L);
+            protocol.setRmbRecompenseId(0L);
 
             //填充协议ID
             if (account.getCompensateType().equals(CompensateTypeEnum.RMB_TYPE.getCode()) && rmbRecompensesList != null && !rmbRecompensesList.isEmpty()) {
                 Optional<RmbRecompense> opt = rmbRecompensesList.stream().filter(po -> po.getHouseOwner().equals(protocol.getName())).filter(po -> po.getAddress().equals(protocol.getAddress())).findFirst();
                 if (opt != null && opt.isPresent()) {
                     protocol.setRmbRecompenseId(opt.get().getId());
-                } else {
-                    protocol.setRmbRecompenseId(0L);
                 }
             } else if (account.getCompensateType().equals(CompensateTypeEnum.SWAP_TYPE.getCode()) && swapHouseList != null && !swapHouseList.isEmpty()) {
                 Optional<SwapHouse> opt = swapHouseList.stream().filter(po -> po.getHouseOwner().equals(protocol.getName())).filter(po -> po.getAddress().equals(protocol.getAddress())).findFirst();
                 if (opt != null && opt.isPresent()) {
                     protocol.setSwapHouseId(opt.get().getId());
-                } else {
-                    protocol.setSwapHouseId(0L);
                 }
-            } else {
-                protocol.setSwapHouseId(0L);
-                protocol.setRmbRecompenseId(0L);
             }
 
             protocol.setAreaName(areaMap.get(account.getAreaId()));
