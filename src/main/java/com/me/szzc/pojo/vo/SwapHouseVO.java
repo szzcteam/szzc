@@ -7,6 +7,7 @@ import com.me.szzc.pojo.entity.Adjudication;
 import com.me.szzc.pojo.entity.SwapHouse;
 import com.me.szzc.utils.BigDecimalUtil;
 import com.me.szzc.utils.NumberToCapitalizedUtils;
+import com.me.szzc.utils.WxSecurityMappingUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -785,6 +786,29 @@ public class SwapHouseVO {
         }
         if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7()) && vo.getPayParm6().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm6("");
+        }
+
+        //2021-01-31 文昌门要求大写金额加拦头"币"，算法：求整数位的长度，知道从哪里开始
+        if (entity.getAreaId() != null && entity.getAreaId().longValue() == WxSecurityMappingUtils.AreaMark.WCM.getMpCode().longValue()) {
+            int coinIndex = vo.getSumRbm().length();
+            coinIndex++;
+
+            String coinStr = "币";
+
+            //产权调换的大写是征收补偿合计，常规情况下金额都过W
+            switch (coinIndex) {
+                case 6:
+                    vo.setPayParm6(coinStr);
+                    break;
+                case 7:
+                    vo.setPayParm7(coinStr);
+                    break;
+                case 8:
+                    vo.setPayParm8(coinStr);
+                    break;
+                default:
+                    break;
+            }
         }
 
         if(entity.getIsLesseeFlag() == null){

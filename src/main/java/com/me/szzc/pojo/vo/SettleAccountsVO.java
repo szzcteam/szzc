@@ -2,10 +2,7 @@ package com.me.szzc.pojo.vo;
 
 import com.me.szzc.constant.Constant;
 import com.me.szzc.pojo.entity.SettleAccounts;
-import com.me.szzc.utils.BigDecimalUtil;
-import com.me.szzc.utils.DateHelper;
-import com.me.szzc.utils.NumberToCapitalizedUtils;
-import com.me.szzc.utils.ScriptEngineUtil;
+import com.me.szzc.utils.*;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -1267,6 +1264,42 @@ public class SettleAccountsVO {
         if (StringUtils.isAllBlank(vo.getPayParm8(), vo.getPayParm7(), vo.getPayParm6(), vo.getPayParm5(), vo.getPayParm4())
                 && vo.getPayParm3().equals(Constant.CHINESE_ZERO)) {
             vo.setPayParm3("");
+        }
+
+        //2021-01-31 文昌门要求大写金额加拦头"币"，算法：求整数位的长度，知道从哪里开始
+        if (entity.getAreaId() != null && entity.getAreaId().longValue() == WxSecurityMappingUtils.AreaMark.WCM.getMpCode().longValue()) {
+            int coinIndex = 0;
+            if (payTotalPoint != -1) {
+                coinIndex = vo.getPayTotal().substring(0, payTotalPoint).length();
+            } else {
+                coinIndex = vo.getPayTotal().length();
+            }
+            coinIndex++;
+
+            String coinStr = "币";
+
+            switch (coinIndex) {
+                case 3:
+                    vo.setPayParm3(coinStr);
+                    break;
+                case 4:
+                    vo.setPayParm4(coinStr);
+                    break;
+                case 5:
+                    vo.setPayParm5(coinStr);
+                    break;
+                case 6:
+                    vo.setPayParm6(coinStr);
+                    break;
+                case 7:
+                    vo.setPayParm7(coinStr);
+                    break;
+                case 8:
+                    vo.setPayParm8(coinStr);
+                    break;
+                default:
+                    break;
+            }
         }
 
         //小数位拆分存储
