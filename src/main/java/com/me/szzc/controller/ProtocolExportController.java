@@ -50,7 +50,7 @@ public class ProtocolExportController extends BaseController {
             if (swapHouseList != null && swapHouseList.size() > 0) {
                 for (SwapHouse po : swapHouseList) {
                     SwapHouseVO vo = SwapHouseVO.parse(po);
-                    String key = vo.getAddress().trim() + "|" + vo.getHouseOwner().trim();
+                    String key = vo.getAddress() + "|" + vo.getHouseOwner();
                     swapMap.put(key, vo);
                 }
             }
@@ -65,7 +65,7 @@ public class ProtocolExportController extends BaseController {
             if (rmbRecompenseList != null && rmbRecompenseList.size() > 0) {
                 for (RmbRecompense po : rmbRecompenseList) {
                     RmbRecompenseVO vo = RmbRecompenseVO.parse(po);
-                    String key = vo.getAddress().trim() + "|" + vo.getHouseOwner().trim();
+                    String key = vo.getAddress() + "|" + vo.getHouseOwner();
                     rmbMap.put(key, vo);
                 }
             }
@@ -92,7 +92,7 @@ public class ProtocolExportController extends BaseController {
         if(settleAccountsList != null && !settleAccountsList.isEmpty()) {
             for (SettleAccounts settle : settleAccountsList) {
                 String houseOwner = StringUtils.isNotBlank(settle.getHouseOwner()) ? settle.getHouseOwner() : settle.getLessee();
-                String key = settle.getAddress().trim() + "|" + houseOwner.trim();
+                String key = settle.getAddress() + "|" + houseOwner;
                 ProtocolExportVO exportVO = new ProtocolExportVO();
 
                 //取货币补偿
@@ -103,7 +103,7 @@ public class ProtocolExportController extends BaseController {
                     log.error("异常，同一个客户，同时存在货币和调换协议，key:{}", key);
                     continue;
                 } else if (rmbVo == null && swapVo == null) {
-                    log.error("当前只有结算单信息，没有签订协议,key:{}", key);
+                    log.warn("当前只有结算单信息，没有签订协议,key:{}", key);
                     continue;
                 }
 
