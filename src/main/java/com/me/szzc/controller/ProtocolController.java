@@ -6,6 +6,7 @@ import com.me.szzc.pojo.entity.*;
 import com.me.szzc.pojo.vo.ProtocolVO;
 import com.me.szzc.utils.DateHelper;
 import com.me.szzc.utils.Utils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,72 +20,73 @@ import java.util.*;
  * @author luwei
  * @date 2019-02-17
  */
+@Slf4j
 @Controller
 public class ProtocolController extends BaseController {
 
     private int numPerPage = Utils.getNumPerPage();
 
     @RequestMapping("/ssadmin/protocolList")
-    public ModelAndView Index(HttpServletRequest request) throws Exception{
+    public ModelAndView Index(HttpServletRequest request) throws Exception {
         ModelAndView view = new ModelAndView();
         view.setViewName("ssadmin/protocolList");
         int currentPage = 1;
-        if(request.getParameter("pageNum") != null){
+        if (request.getParameter("pageNum") != null) {
             currentPage = Integer.parseInt(request.getParameter("pageNum"));
         }
 
         String signingStatusStr = request.getParameter("signingStatus");
         Integer signingStatus = null;
-        if(StringUtils.isNotBlank(signingStatusStr)) {
+        if (StringUtils.isNotBlank(signingStatusStr)) {
             signingStatus = Integer.valueOf(signingStatusStr);
             view.addObject("signingStatus", signingStatus);
         }
         String address = request.getParameter("address");
-        if(address != null && address.trim().length() >0){
+        if (address != null && address.trim().length() > 0) {
             address = address.trim();
             view.addObject("address", address);
         }
 
         String cardNo = request.getParameter("cardNo");
-        if(StringUtils.isNotBlank(cardNo)){
+        if (StringUtils.isNotBlank(cardNo)) {
             cardNo = cardNo.trim();
             view.addObject("cardNo", cardNo);
         }
 
         String houseOwner = request.getParameter("houseOwner");
-        if(houseOwner != null && houseOwner.trim().length() >0){
+        if (houseOwner != null && houseOwner.trim().length() > 0) {
             houseOwner = houseOwner.trim();
             view.addObject("houseOwner", houseOwner);
         }
 
         String remark = request.getParameter("remark");
-        if(remark != null && remark.trim().length()> 0 ){
+        if (remark != null && remark.trim().length() > 0) {
             remark = remark.trim();
             view.addObject("remark", remark);
         }
 
 
         String areaIdStr = request.getParameter("areaId");
-        Long areaId =  null;
-        if(areaIdStr != null && areaIdStr.trim().length() >0){
+        Long areaId = null;
+        if (areaIdStr != null && areaIdStr.trim().length() > 0) {
             areaIdStr = areaIdStr.trim();
-            areaId =  Long.valueOf(areaIdStr);
+            areaId = Long.valueOf(areaIdStr);
             view.addObject("areaId", areaId);
         }
 
         String startDate = request.getParameter("startDate");
-        if(StringUtils.isNotBlank(startDate) && startDate.trim().length()>0){
+        if (StringUtils.isNotBlank(startDate) && startDate.trim().length() > 0) {
             view.addObject("startDate", startDate);
         }
 
         String endDate = request.getParameter("endDate");
-        if(StringUtils.isNotBlank(endDate) && endDate.trim().length()>0){
+        if (StringUtils.isNotBlank(endDate) && endDate.trim().length() > 0) {
             view.addObject("endDate", endDate);
         }
 
         String compensateTypeStr = request.getParameter("compensateType");
         Integer compensateType = null;
-        if(StringUtils.isNotBlank(compensateTypeStr)){
+        if (StringUtils.isNotBlank(compensateTypeStr)) {
             compensateType = Integer.valueOf(compensateTypeStr);
             view.addObject("compensateType", compensateType);
         }
@@ -108,10 +110,13 @@ public class ProtocolController extends BaseController {
 
         int firstResult = (currentPage - 1) * numPerPage;
 
+        long startTime = System.currentTimeMillis();
         //查询符合条件的结算单
         List<SettleAccounts> dataList = this.settleAccountsService.list(firstResult, numPerPage, true,
                 signingStatus, address, houseOwner, areaId, areaIdList, startDate, endDate, compensateType, cardNo,
                 remark);
+        long endTime = System.currentTimeMillis();
+        log.info("查询结算单耗时 ms:{}", endTime - startTime);
 
         //结算单ID 集合
         List<Long> accountIdList = new ArrayList<>();
@@ -141,12 +146,18 @@ public class ProtocolController extends BaseController {
                 });
             }
         }
+        long otherTime = System.currentTimeMillis();
+        log.info("查询结算单其他信息信息耗时 ms:{}", otherTime - endTime);
 
         //结算单-对应的货币补偿
         List<SwapHouse> swapHouseList = swapHouseService.listByNameAddressList(houseOwnerList, addressList);
+        long swapTime = System.currentTimeMillis();
+        log.info("查询产权调换耗时 ms:{}", swapTime - otherTime);
 
         //结算单-对应的产权调换
         List<RmbRecompense> rmbRecompensesList = rmbRecompenseService.listByNameAddressList(houseOwnerList, addressList);
+        long rmbTime = System.currentTimeMillis();
+        log.info("查询货币补偿耗时 ms:{}", rmbTime - swapTime);
 
         //封装返回对象VO
         List<ProtocolVO> list = new ArrayList<>();
@@ -175,12 +186,13 @@ public class ProtocolController extends BaseController {
             protocol.setRmbRecompenseId(0L);
 
             //填充协议ID
-            if (account.getCompensateType().equals(CompensateTypeEnum.RMB_TYPE.getCode()) && rmbRecompensesList != null && !rmbRecompensesList.isEmpty()) {
+            if (rmbRecompensesList != null && !rmbRecompensesList.isEmpty()) {
                 Optional<RmbRecompense> opt = rmbRecompensesList.stream().filter(po -> po.getHouseOwner().equals(protocol.getName())).filter(po -> po.getAddress().equals(protocol.getAddress())).findFirst();
                 if (opt != null && opt.isPresent()) {
                     protocol.setRmbRecompenseId(opt.get().getId());
                 }
-            } else if (account.getCompensateType().equals(CompensateTypeEnum.SWAP_TYPE.getCode()) && swapHouseList != null && !swapHouseList.isEmpty()) {
+            }
+            if (swapHouseList != null && !swapHouseList.isEmpty()) {
                 Optional<SwapHouse> opt = swapHouseList.stream().filter(po -> po.getHouseOwner().equals(protocol.getName())).filter(po -> po.getAddress().equals(protocol.getAddress())).findFirst();
                 if (opt != null && opt.isPresent()) {
                     protocol.setSwapHouseId(opt.get().getId());
@@ -194,9 +206,11 @@ public class ProtocolController extends BaseController {
                 protocol.setRemark(other.getRemark());
             }
 
-
             list.add(protocol);
         }
+
+        long fullTime = System.currentTimeMillis();
+        log.info("封装协议列表数据耗时 ms:{}", fullTime - rmbTime);
 
         view.addObject("protocolList", list);
         view.addObject("signingStatusMap", SigningStatusEnum.getDescMap());
@@ -207,8 +221,11 @@ public class ProtocolController extends BaseController {
         view.addObject("compensateTypeMap", CompensateTypeEnum.getDescMap());
 
         //总数量
-        view.addObject("totalCount", this.settleAccountsService.getCount(signingStatus, address, houseOwner,
-                areaId, areaIdList, startDate, endDate, compensateType, cardNo, remark));
+        int total = this.settleAccountsService.getCount(signingStatus, address, houseOwner,
+                areaId, areaIdList, startDate, endDate, compensateType, cardNo, remark);
+        long countTime = System.currentTimeMillis();
+        log.info("查询总记录条数耗时 ms:{}", countTime - fullTime);
+        view.addObject("totalCount", total);
         return view;
     }
 
