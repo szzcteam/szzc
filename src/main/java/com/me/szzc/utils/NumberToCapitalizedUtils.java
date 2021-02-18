@@ -1,5 +1,8 @@
 package com.me.szzc.utils;
 
+
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,55 +11,141 @@ import java.util.Map;
  */
 public class NumberToCapitalizedUtils {
 
+    private static final String[] SIMPLE_DIGITS = new String[]{"零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
+    private static final String[] TRADITIONAL_DIGITS = new String[]{"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
+    private static final String[] SIMPLE_UNITS = new String[]{"", "十", "百", "千"};
+    private static final String[] TRADITIONAL_UNITS = new String[]{"", "拾", "佰", "仟"};
+
     public static final Map<Integer, String> CHINESE_NUM_MAP = new HashMap<>();
+
     static {
-        CHINESE_NUM_MAP.put(0, "零");
-        CHINESE_NUM_MAP.put(1, "壹");
-        CHINESE_NUM_MAP.put(2, "贰");
-        CHINESE_NUM_MAP.put(3, "叁");
-        CHINESE_NUM_MAP.put(4, "肆");
-        CHINESE_NUM_MAP.put(5, "伍");
-        CHINESE_NUM_MAP.put(6, "陆");
-        CHINESE_NUM_MAP.put(7, "柒");
-        CHINESE_NUM_MAP.put(8, "捌");
-        CHINESE_NUM_MAP.put(9, "玖");
+        for (int i = 0; i < TRADITIONAL_DIGITS.length; i++) {
+            CHINESE_NUM_MAP.put(i, TRADITIONAL_DIGITS[i]);
+        }
     }
 
 
     public static void main(String[] args) {
-        double a = 2631130;
+        double a = 958189.44;
         System.out.println(digitUppercase(a));
     }
 
-    /**
-     * 数字金额大写转换，思想先写个完整的然后将如零拾替换成零 要用到正则表达式
-     */
     public static String digitUppercase(double n) {
-        String fraction[] = {"角", "分"};
-        String digit[] = {"零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"};
-        String unit[][] = {{"元", "万", "亿"}, {"", "拾", "佰", "仟"}};
-
-        String head = n < 0 ? "负" : "";
-        n = Math.abs(n);
-
-        String s = "";
-        for (int i = 0; i < fraction.length; i++) {
-            s += (digit[(int) (Math.floor(n * 10 * Math.pow(10, i)) % 10)] + fraction[i]).replaceAll("(零.)+", "");
-        }
-        if (s.length() < 1) {
-            s = "整";
-        }
-        int integerPart = (int) Math.floor(n);
-
-        for (int i = 0; i < unit[0].length && integerPart > 0; i++) {
-            String p = "";
-            for (int j = 0; j < unit[1].length && n > 0; j++) {
-                p = digit[integerPart % 10] + unit[1][j] + p;
-                integerPart = integerPart / 10;
-            }
-            s = p.replaceAll("(零.)*零$", "").replaceAll("^$", "零") + unit[0][i] + s;
-        }
-        return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$", "零元整");
+        return format(n, true, true);
     }
+
+    /**
+     * 阿拉伯数字转换成中文
+     * 小数点后四舍五入保留2位小数
+     *
+     * @param amount           阿拉伯数字
+     * @param isUseTraditional 是否使用金额大写
+     * @param isMoneyMode      是否是金额模式
+     * @return
+     */
+    public static String format(double amount, boolean isUseTraditional, boolean isMoneyMode) {
+        String[] numArray = isUseTraditional ? TRADITIONAL_DIGITS : SIMPLE_DIGITS;
+        if (amount <= 9.999999999999998E13D && amount >= -9.999999999999998E13D) {
+            boolean negative = false;
+            if (amount < 0.0D) {
+                negative = true;
+                amount = -amount;
+            }
+
+            long temp = Math.round(amount * 100.0D);
+            int numFen = (int) (temp % 10L);
+            temp /= 10L;
+            int numJiao = (int) (temp % 10L);
+            temp /= 10L;
+            int[] parts = new int[20];
+            int numParts = 0;
+
+            for (int i = 0; temp != 0L; ++i) {
+                int part = (int) (temp % 10000L);
+                parts[i] = part;
+                ++numParts;
+                temp /= 10000L;
+            }
+
+            boolean beforeWanIsZero = true;
+            StringBuilder chineseStr = new StringBuilder();
+
+            for (int i = 0; i < numParts; ++i) {
+                String partChinese = toChinese(parts[i], isUseTraditional);
+                if (i % 2 == 0) {
+                    beforeWanIsZero = StringUtils.isEmpty(partChinese);
+                }
+
+                if (i != 0) {
+                    if (i % 2 == 0) {
+                        chineseStr.insert(0, "亿");
+                    } else if ("".equals(partChinese) && !beforeWanIsZero) {
+                        chineseStr.insert(0, "零");
+                    } else {
+                        if (parts[i - 1] < 1000 && parts[i - 1] > 0) {
+                            chineseStr.insert(0, "零");
+                        }
+
+                        if (parts[i] > 0) {
+                            chineseStr.insert(0, "万");
+                        }
+                    }
+                }
+
+                chineseStr.insert(0, partChinese);
+            }
+
+            if ("".equals(chineseStr.toString())) {
+                chineseStr = new StringBuilder(numArray[0]);
+            }
+
+            if (negative) {
+                chineseStr.insert(0, "负");
+            }
+
+            if (numFen == 0 && numJiao == 0) {
+                if (isMoneyMode) {
+                    chineseStr.append("元整");
+                }
+            } else if (numFen == 0) {
+                chineseStr.append(isMoneyMode ? "元" : "点").append(numArray[numJiao]).append(isMoneyMode ? "角" : "");
+            } else if (numJiao == 0) {
+                chineseStr.append(isMoneyMode ? "元零" : "点零").append(numArray[numFen]).append(isMoneyMode ? "分" : "");
+            } else {
+                chineseStr.append(isMoneyMode ? "元" : "点").append(numArray[numJiao]).append(isMoneyMode ? "角" : "").append(numArray[numFen]).append(isMoneyMode ? "分" : "");
+            }
+
+            return chineseStr.toString();
+        } else {
+            throw new IllegalArgumentException("Number support only: (-99999999999999.99 ～ 99999999999999.99)！");
+        }
+    }
+
+    private static String toChinese(int amountPart, boolean isUseTraditional) {
+        String[] numArray = isUseTraditional ? TRADITIONAL_DIGITS : SIMPLE_DIGITS;
+        String[] units = isUseTraditional ? TRADITIONAL_UNITS : SIMPLE_UNITS;
+        int temp = amountPart;
+        StringBuilder chineseStr = new StringBuilder();
+        boolean lastIsZero = true;
+
+        for (int i = 0; temp > 0; ++i) {
+            int digit = temp % 10;
+            if (digit == 0) {
+                if (!lastIsZero) {
+                    chineseStr.insert(0, "零");
+                }
+
+                lastIsZero = true;
+            } else {
+                chineseStr.insert(0, numArray[digit] + units[i]);
+                lastIsZero = false;
+            }
+
+            temp /= 10;
+        }
+
+        return chineseStr.toString();
+    }
+
 }
 
