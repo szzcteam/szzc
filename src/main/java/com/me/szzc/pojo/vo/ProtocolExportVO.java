@@ -257,15 +257,21 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     private String structureRoof;
 
     /**
+     * 附属其它金额
+     */
+    @ExcelProperty(value = {"房屋征收补偿明细表", "附属设施", "构筑物补偿", "其它"}, index = 39)
+    private String affiliatedOther;
+
+    /**
      * 住改商补助
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "住改商补助", "住改商补助", "住改商补助"}, index = 39)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "住改商补助", "住改商补助", "住改商补助"}, index = 40)
     private String changeCompensate;
 
     /**
      * 生活困难补助
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "生活困难补助", "生活困难补助", "生活困难补助"}, index = 40)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "生活困难补助", "生活困难补助", "生活困难补助"}, index = 41)
     private String lifeCompensate;
 
 
@@ -273,36 +279,36 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     /**
      * 产权调换时的补偿货币金额
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "货币补偿补助（或产权调换补偿）", "货币补偿补助（或产权调换补偿）", "货币补偿补助（或产权调换补偿）"}, index = 41)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "货币补偿补助（或产权调换补偿）", "货币补偿补助（或产权调换补偿）", "货币补偿补助（或产权调换补偿）"}, index = 42)
     private String rmbCompensate;
 
     /**
      * 小户型住房困难补助
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表","小户型住房困难补助","小户型住房困难补助","小户型住房困难补助"}, index = 42)
+    @ExcelProperty(value = {"房屋征收补偿明细表","小户型住房困难补助","小户型住房困难补助","小户型住房困难补助"}, index = 43)
     private String smallAreaReward;
     /**
      * 建筑面积补助
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表","建筑面积补助", "建筑面积补助", "建筑面积补助"}, index = 43)
+    @ExcelProperty(value = {"房屋征收补偿明细表","建筑面积补助", "建筑面积补助", "建筑面积补助"}, index = 44)
     private String buildingAreaFee;
 
     /**
      * 按期签约搬迁奖励
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表","征收奖励","征收奖励","征收奖励"}, index = 44)
+    @ExcelProperty(value = {"房屋征收补偿明细表","征收奖励","征收奖励","征收奖励"}, index = 45)
     private String moveReward;
 
     /**
      * 其他费用
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "其他", "其他", "其他"}, index = 45)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "其他", "其他", "其他"}, index = 46)
     private String otherFee;
 
     /**
      * 补偿总计
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "补偿合计", "补偿合计", "补偿合计"}, index = 46)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "补偿合计", "补偿合计", "补偿合计"}, index = 47)
     private String sumCompensate;
 
 
@@ -310,7 +316,7 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     /**
      * 新房地址
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "楼盘名称", "楼盘名称"}, index = 47)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "楼盘名称", "楼盘名称"}, index = 48)
     private String newHouseAddress;
 
     /**
@@ -337,25 +343,25 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     @ExcelIgnore
     private String houseNumber;
 
-    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房号", "房号"}, index = 48)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房号", "房号"}, index = 49)
     private String newHouseNumber;
 
     /**
      * 该房屋建筑面积
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房屋面积", "房屋面积"}, index = 49)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房屋面积", "房屋面积"}, index = 50)
     private String coveredArea;
 
     /**
      * 单价
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房屋单价", "房屋单价"}, index = 50)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房屋单价", "房屋单价"}, index = 51)
     private String price;
 
     /**
      * 总价
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房屋总价", "房屋总价"}, index = 51)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "安置房屋情况", "房屋总价", "房屋总价"}, index = 52)
     private String totalPrice;
 
     /**
@@ -379,13 +385,13 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     /**
      * 乙方同意将N元由甲方支付给调换房建设单位
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "抵扣房款（元）", "抵扣房款（元）", "抵扣房款（元）"}, index = 52)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "抵扣房款（元）", "抵扣房款（元）", "抵扣房款（元）"}, index = 53)
     private String transferRmb;
 
     /**
      * 差额：征收补偿款总额大于预购房款
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "实际应付金额（元）", "实际应付金额（元）", "实际应付金额（元）"}, index = 53)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "实际应付金额（元）", "实际应付金额（元）", "实际应付金额（元）"}, index = 54)
     private String difference;
 
     /**
@@ -397,14 +403,14 @@ public class ProtocolExportVO extends BaseRowModel implements Comparable<Protoco
     /**
      * 差额：收补偿总额小于预购房款
      */
-    @ExcelProperty(value = {"房屋征收补偿明细表", "实际应收金额（元）", "实际应收金额（元）", "实际应收金额（元）"}, index = 54)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "实际应收金额（元）", "实际应收金额（元）", "实际应收金额（元）"}, index = 55)
     private String lessDifference;
 
 
-    @ExcelProperty(value = {"房屋征收补偿明细表", "其它约定", "其它约定", "其它约定"}, index = 55)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "其它约定", "其它约定", "其它约定"}, index = 56)
     private String otherTerms;
 
-    @ExcelProperty(value = {"房屋征收补偿明细表", "备注", "备注", "备注"}, index = 56)
+    @ExcelProperty(value = {"房屋征收补偿明细表", "备注", "备注", "备注"}, index = 57)
     private String remark;
 
     /**
