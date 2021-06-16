@@ -88,4 +88,8 @@ public class RoomChangeVo implements Serializable {
      */
     private String remark;
 
+    private String idcard;
+
+    private String auditFirm;
+
 }

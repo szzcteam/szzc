@@ -56,7 +56,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积：<input type="text" name="minArea"
+                    <td>预测面积：<input type="text" name="minArea"
                                  size="16"   value="${minArea }"/>
                     </td>
                     <td>
@@ -116,13 +116,13 @@
             <shiro:hasPermission name="ssadmin/roomChange/addChooseRoom.html">
                 <li><a class="edit"
                        href="ssadmin/roomChange/toChooseRoomPage.html?url=ssadmin/updateChooseRoom&id={sid_user}&postUrl=add"
-                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>新增点房</span>
+                       height="370" width="800" target="dialog" rel="updateRoomChange"><span>新增点房</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/roomChange/updateChooseRoom.html">
                 <li><a class="edit"
                        href="ssadmin/roomChange/toChooseRoomPage.html?url=ssadmin/updateChooseRoom&id={sid_user}&postUrl=update"
-                       height="350" width="800" target="dialog" rel="updateRoomChange"><span>修改点房</span>
+                       height="370" width="800" target="dialog" rel="updateRoomChange"><span>修改点房</span>
                 </a></li>
             </shiro:hasPermission>
             <shiro:hasPermission name="ssadmin/roomChange/batchDelete.html">
@@ -156,17 +156,21 @@
         <tr>
             <th width="30"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
             <th width="30">序号</th>
-            <th width="100">分配征收项目</th>
+            <th width="90">分配征收项目</th>
             <th width="100">提供房源平台</th>
             <th width="100">房源项目</th>
             <th width="60">房号</th>
-            <th width="70">面积&nbsp;(M<sup>2</sup>)</th>
+            <th width="85">预测面积&nbsp;(M<sup>2</sup>)</th>
+            <th width="85">实测面积&nbsp;(M<sup>2</sup>)</th>
             <th width="80">单价&nbsp;(元/M<sup>2</sup>)</th>
-            <th width="70">总价&nbsp;(元)</th>
-            <th width="100">点房人</th>
-            <th width="150">点房时间</th>
-            <th width="100">代办公司</th>
-            <th width="80">状态</th>
+            <th width="85">预测总价&nbsp;(元)</th>
+            <th width="85">实测总价&nbsp;(元)</th>
+            <th width="60">点房人</th>
+            <th width="85">身份证号码</th>
+            <th width="130">点房时间</th>
+            <th width="80">代办公司</th>
+            <th width="80">审计公司</th>
+            <th width="50">状态</th>
             <th>备注</th>
         </tr>
         </thead>
@@ -181,11 +185,15 @@
                 <td>${room.name}</td>
                 <td>${room.number}</td>
                 <td>${room.area}</td>
+                <td>${room.realArea}</td>
                 <td>${room.unitPrice}</td>
                 <td>${room.totalPrice}</td>
+                <td>${room.realTotalPrice}</td>
                 <td>${room.choosePeople}</td>
+                <td>${room.idcard}</td>
                 <td>${room.chooseDateStr}</td>
                 <td>${room.commissionCompany}</td>
+                <td>${room.auditFirm}</td>
                 <td>${room.statusDesc}</td>
                 <td>${room.remark}</td>
             </tr>

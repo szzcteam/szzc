@@ -1,6 +1,7 @@
 package com.me.szzc.controller;
 
 import com.me.szzc.aspect.SysLog;
+import com.me.szzc.constant.SystemArgsConstant;
 import com.me.szzc.enums.ChooseStatusEnum;
 import com.me.szzc.enums.ModuleConstont;
 import com.me.szzc.pojo.RoomChangeExport;
@@ -28,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -427,6 +429,16 @@ public class RoomChangeController extends BaseController {
             modelAndView.addObject(MESSAGE_KEY, "点房人为空");
             return modelAndView;
         }
+        if (StringUtils.isNullOrEmpty(roomChangeVo.getIdcard())) {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "身份证号码为空");
+            return modelAndView;
+        }
+        if (StringUtils.isNullOrEmpty(roomChangeVo.getAuditFirm())) {
+            modelAndView.addObject(STATUS_CODE_KEY, ERROR_CODE_NUM);
+            modelAndView.addObject(MESSAGE_KEY, "审计公司为空");
+            return modelAndView;
+        }
         ResultVO resultVo = roomChangeService.addChooseRoom(roomChangeVo);
         if (resultVo.getSuccess()) {
             modelAndView.addObject(CALLBACK_TYPE_KEY, "closeCurrent");
@@ -482,6 +494,7 @@ public class RoomChangeController extends BaseController {
             }
         }
         view.addObject("chooseStatusMap", ChooseStatusEnum.getDescMap());
+        view.addObject("auditFirmList", Arrays.asList(systemArgsService.getValue(SystemArgsConstant.AUDIT_FIRM).split(",")));
         return view;
     }
 

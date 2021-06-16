@@ -9,7 +9,8 @@
                r_choose_people AS choosePeople,
                assigned_project AS assignedProject,housing_platform AS housingPlatform,
                status,commission_company AS commissionCompany,
-               choose_date AS chooseDate,r_remark as remark
+               choose_date AS chooseDate,r_remark as remark,r_real_area as realArea,
+               r_real_total_price as realTotalPrice,r_idcard as idcard,r_audit_firm as auditFirm
     </sql>
 
     <insert id="insertRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
@@ -57,6 +58,12 @@
             <if test="itemCode != null">
                 item_code,
             </if>
+            <if test="realArea != null">
+                r_real_area,
+            </if>
+            <if test="realTotalPrice != null">
+                r_real_total_price,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -100,6 +107,13 @@
             </if>
             <if test="itemCode != null">
                 #{itemCode,jdbcType=VARCHAR},
+            </if>
+
+            <if test="realArea != null">
+                #{realArea,jdbcType=VARCHAR},
+            </if>
+            <if test="realTotalPrice != null">
+                #{realTotalPrice,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -269,11 +283,17 @@
             <if test="area!=null and area !=''">
                 r_area = #{area,jdbcType=VARCHAR},
             </if>
+            <if test="realArea!=null and realArea !=''">
+                r_real_area = #{realArea,jdbcType=VARCHAR},
+            </if>
             <if test="unitPrice!=null and unitPrice !=''">
                 r_unit_price = #{unitPrice,jdbcType=VARCHAR},
             </if>
             <if test="totalPrice!=null and totalPrice !=''">
                 r_total_price = #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="realTotalPrice !=null and realTotalPrice !=''">
+                r_real_total_price = #{realTotalPrice,jdbcType=VARCHAR},
             </if>
             <if test="choosePeople!=null and choosePeople !=''">
                 r_choose_people = #{choosePeople,jdbcType=VARCHAR},
@@ -306,7 +326,9 @@
         status = #{status},
         choose_date = #{chooseDate},
         commission_company = #{commissionCompany},
-        r_choose_people = #{choosePeople}
+        r_choose_people = #{choosePeople},
+        r_idcard = #{idcard},
+        r_audit_firm = #{auditFirm}
         WHERE id = #{id}
     </update>
 
@@ -316,7 +338,9 @@
         status = 0,
         choose_date = NULL ,
         commission_company = NULL ,
-        r_choose_people = NULL
+        r_choose_people = NULL,
+        r_idcard = NULL,
+        r_audit_firm = NULL
         WHERE id = #{id}
     </update>
 
@@ -335,6 +359,13 @@
             </if>
             <if test="commissionCompany!=null and commissionCompany !=''">
                 commission_company = #{commissionCompany},
+            </if>
+
+            <if test="idcard !=null and idcard !=''">
+                r_idcard = #{idcard},
+            </if>
+            <if test="auditFirm !=null and auditFirm !=''">
+                r_audit_firm = #{auditFirm},
             </if>
         </set>
         WHERE id = #{id}

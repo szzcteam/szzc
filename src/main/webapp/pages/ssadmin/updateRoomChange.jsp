@@ -30,9 +30,15 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>面积：</dt>
+				<dt>预测面积：</dt>
 				<dd>
 					<input type="text" name="area" maxlength="120" class="required" size="30" value="${roomChange.area}"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt>实测面积：</dt>
+				<dd>
+					<input type="text" name="realArea" maxlength="120" size="30" value="${roomChange.realArea}"/>
 				</dd>
 			</dl>
 			<dl>
@@ -42,9 +48,15 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>金额：</dt>
+				<dt>预测金额：</dt>
 				<dd>
 					<input type="text" name="totalPrice"  size="30" value="${roomChange.totalPrice}" readonly="readonly"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt>实测金额：</dt>
+				<dd>
+					<input type="text" name="realTotalPrice"  size="30" value="${roomChange.realTotalPrice}" readonly="readonly"/>
 				</dd>
 			</dl>
 		</div>
@@ -64,10 +76,20 @@
 		$("input[name='area'],input[name='unitPrice']").on("blur change", function () {
 			var area = $("input[name='area']").eq(0).val() || 0;
 			var unitPrice = $("input[name='unitPrice']").eq(0).val() || 0;
-			console.log("房源计算金额");
+			console.log("房源计算预测金额");
 			var calcText = area + "*" + unitPrice;
 			var totalPrice = Math.round(eval(calcText));
 			$("input[name='totalPrice']").eq(0).val(totalPrice);
+		});
+	});
+	$(document).ready(function () {
+		$("input[name='realArea'],input[name='unitPrice']").on("blur change", function () {
+			var realArea = $("input[name='realArea']").eq(0).val() || 0;
+			var unitPrice = $("input[name='unitPrice']").eq(0).val() || 0;
+			console.log("房源计算实测金额");
+			var calcText = realArea + "*" + unitPrice;
+			var realTotalPrice = Math.round(eval(calcText));
+			$("input[name='realTotalPrice']").eq(0).val(realTotalPrice);
 		});
 	});
 </script>

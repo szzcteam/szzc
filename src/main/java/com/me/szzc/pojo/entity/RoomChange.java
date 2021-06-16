@@ -33,33 +33,45 @@ public class RoomChange extends BaseRowModel implements Serializable {
     private String number;
 
     /**
-     * 面积
+     * 预测面积
      */
-    @ExcelProperty(value = "面积", index = 3)
+    @ExcelProperty(value = "预测面积", index = 3)
     private String area;
+
+    /**
+     * 实测面积
+     */
+    @ExcelProperty(value = "实测面积", index = 4)
+    private String realArea;
 
     /**
      * 单价
      */
-    @ExcelProperty(value = "单价", index = 4)
+    @ExcelProperty(value = "单价", index = 5)
     private String unitPrice;
 
     /**
-     * 总价
+     * 预测总价
      */
-    @ExcelProperty(value = "总价", index = 5)
+    @ExcelProperty(value = "预测总价", index = 6)
     private String totalPrice;
+
+    /**
+     * 实测总价
+     */
+    @ExcelProperty(value = "实测总价", index = 7)
+    private String realTotalPrice;
 
     /**
      * 分配房源
      */
-    @ExcelProperty(value = "分配征收项目", index = 6)
+    @ExcelProperty(value = "分配征收项目", index = 8)
     private String assignedProject;
 
     /**
      * 房源平台
      */
-    @ExcelProperty(value = "提供房源平台", index = 7)
+    @ExcelProperty(value = "提供房源平台", index = 9)
     private String housingPlatform;
 
     /**
@@ -114,24 +126,30 @@ public class RoomChange extends BaseRowModel implements Serializable {
      */
     private String itemCode;
 
+    private String idcard;
+
+    private String auditFirm;
+
     /**
      * TODO 2019/12/17 bbfang 新增字段
      * 备注
      */
     private String remark;
 
-    /**点房时间-字符串格式**/
+    /**
+     * 点房时间-字符串格式
+     **/
     private String chooseDateStr;
 
     public String getStatusDesc() {
-        if(status != null){
+        if (status != null) {
             statusDesc = ChooseStatusEnum.getDescMap().get(status);
         }
         return statusDesc;
     }
 
     public String getChooseDateStr() {
-        if(chooseDate == null){
+        if (chooseDate == null) {
             return "";
         }
         return DateHelper.date2String(chooseDate, DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond);

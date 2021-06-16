@@ -30,9 +30,15 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>面积：</dt>
+				<dt>预测面积：</dt>
 				<dd>
 					${roomChange.area}
+				</dd>
+			</dl>
+			<dl>
+				<dt>实测面积：</dt>
+				<dd>
+					${roomChange.realArea}
 				</dd>
 			</dl>
 			<dl>
@@ -42,9 +48,15 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>金额：</dt>
+				<dt>预测金额：</dt>
 				<dd>
 					${roomChange.totalPrice}
+				</dd>
+			</dl>
+			<dl>
+				<dt>实测金额：</dt>
+				<dd>
+					${roomChange.realTotalPrice}
 				</dd>
 			</dl>
 			<dl>

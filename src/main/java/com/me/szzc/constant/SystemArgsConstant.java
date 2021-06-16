@@ -83,4 +83,7 @@ public interface SystemArgsConstant {
 
     /**会计机构审核出具报告N天后，甲方付款给乙方**/
     String RMB_AFTER_DAY_AUDIT = "rmb_after_day_audit";
+
+    /**审计公司**/
+    String AUDIT_FIRM = "audit_firm";
 }

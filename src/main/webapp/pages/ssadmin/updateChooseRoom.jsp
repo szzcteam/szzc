@@ -18,27 +18,45 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt>面积：</dt>
+				<dt>预测面积：</dt>
 				<dd>
 					${roomChange.area}
 				</dd>
 			</dl>
 			<dl>
+				<dt>实测面积：</dt>
+				<dd>
+					${roomChange.realArea}
+				</dd>
+			</dl>
+			<dl style="width: 100%;">
 				<dt>单价：</dt>
 				<dd>
 					${roomChange.unitPrice}
 				</dd>
 			</dl>
-			<dl style="width: 100%;">
-				<dt>金额：</dt>
+			<dl>
+				<dt>预测金额：</dt>
 				<dd>
 					${roomChange.totalPrice}
+				</dd>
+			</dl>
+			<dl>
+				<dt>实测金额：</dt>
+				<dd>
+					${roomChange.realTotalPrice}
 				</dd>
 			</dl>
 			<dl>
 				<dt>点房人：</dt>
 				<dd>
 					<input type="text" name="choosePeople" value="${roomChange.choosePeople}" size="20" value=""/>
+				</dd>
+			</dl>
+			<dl>
+				<dt>身份证号码：</dt>
+				<dd>
+					<input type="text" name="idcard" value="${roomChange.idcard}" size="20" value=""/>
 				</dd>
 			</dl>
 			<dl>
@@ -61,6 +79,22 @@
 				<dt>代办公司：</dt>
 				<dd>
 					<input type="text" name="commissionCompany" value="${roomChange.commissionCompany}"/>
+				</dd>
+			</dl>
+			<%--<dl>
+				<dt>审计公司：</dt>
+				<dd>
+					<input type="text" name="auditFirm" value="${roomChange.auditFirm}"/>
+				</dd>
+			</dl>--%>
+			<dl>
+				<dt>审计公司：</dt>
+				<dd>
+					<select name="auditFirm" style="width: 150px;">
+						<c:forEach items="${auditFirmList}" var="item">
+							<option value="${item}" <c:if test="${roomChange.auditFirm ==  item}">selected</c:if>>${item}</option>
+						</c:forEach>
+					</select>
 				</dd>
 			</dl>
 		</div>

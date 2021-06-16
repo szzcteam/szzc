@@ -174,6 +174,9 @@ public class RoomChangeService {
             if (roomChangeExport.getChooseDate() != null) {
                 roomChangeExport.setChooseDateString(DateHelper.date2String(roomChangeExport.getChooseDate(), DateHelper.DateFormatType.YearMonthDay_HourMinuteSecond));
             }
+            if (roomChangeExport.getIdcard() != null) {
+                roomChangeExport.setIdcard(roomChangeExport.getIdcard().replaceAll("(?<=\\d{4})\\d(?=\\d{4})", "*"));
+            }
         }
         return roomChangeExports;
     }
