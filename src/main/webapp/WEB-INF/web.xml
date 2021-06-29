@@ -80,6 +80,10 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>*.html</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>*.api</url-pattern>
+  </servlet-mapping>
 
   <!-- 登陆用户过滤 -->
   <filter>

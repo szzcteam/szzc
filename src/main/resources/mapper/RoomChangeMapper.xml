@@ -232,6 +232,9 @@
     <delete id="deleteRoomChange">
         UPDATE r_change SET r_del = 1  WHERE id = #{id}
     </delete>
+    <update id="delByProjectAndNumber">
+        UPDATE r_change SET r_del = 1 WHERE name = #{name} and r_number = #{number} and r_del = 0
+    </update>
 
     <select id="getRoomChangeById" resultType="com.me.szzc.pojo.entity.RoomChange">
         SELECT
@@ -400,5 +403,50 @@
 
     <update id="updateRoomChangeItemById">
         update r_change set item_code = #{itemCode},assigned_project = #{assignedProject} where id = #{id};
+    </update>
+    <update id="updateByProjectAndNumber">
+        UPDATE r_change
+        <set>
+            <if test="remark!=null ">
+                r_remark = #{remark},
+            </if>
+            <if test="ridgepole!=null and ridgepole !=''">
+                r_ridgepole = #{ridgepole,jdbcType=VARCHAR},
+            </if>
+            <if test="unit!=null and unit !=''">
+                r_unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="floor!=null and floor !=''">
+                r_floor = #{floor,jdbcType=VARCHAR},
+            </if>
+            <if test="mark!=null and mark !=''">
+                r_mark = #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="area!=null and area !=''">
+                r_area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="realArea!=null and realArea !=''">
+                r_real_area = #{realArea,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice!=null and unitPrice !=''">
+                r_unit_price = #{unitPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice!=null and totalPrice !=''">
+                r_total_price = #{totalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="realTotalPrice !=null and realTotalPrice !=''">
+                r_real_total_price = #{realTotalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="choosePeople!=null and choosePeople !=''">
+                r_choose_people = #{choosePeople,jdbcType=VARCHAR},
+            </if>
+            <if test="assignedProject!=null and assignedProject !=''">
+                assigned_project = #{assignedProject,jdbcType=VARCHAR},
+            </if>
+            <if test="housingPlatform!=null and housingPlatform !=''">
+                housing_platform = #{housingPlatform,jdbcType=VARCHAR}
+            </if>
+        </set>
+        WHERE r_name = #{name} and r_number = #{number} and r_del = 0
     </update>
 </mapper>

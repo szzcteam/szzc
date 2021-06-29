@@ -55,4 +55,14 @@ public interface RoomChangeMapper {
     Integer updateRoomChangeItemById(@Param("id") Long id,
                                      @Param("itemCode") String itemCode,
                                      @Param("assignedProject") String assignedProject);
+
+    /**
+     * 根据楼盘名称和房号更新
+     */
+    int updateByProjectAndNumber(RoomChange roomChange);
+
+    /**
+     * 根据楼盘名称和房号删除
+     */
+    int delByProjectAndNumber(@Param("name") String name, @Param("number") String number);
 }

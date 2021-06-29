@@ -12,6 +12,7 @@ import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
@@ -32,6 +33,8 @@ import java.util.Date;
 @Component
 public class SysLogAspect extends AbsSysLogAspect{
 
+    @Lookup
+    SysLogAspect _this(){return null;}
 
     @Autowired
     private HttpServletRequest request ;
@@ -55,7 +58,7 @@ public class SysLogAspect extends AbsSysLogAspect{
     public void afterReturning(JoinPoint joinPoint, Object result) {
         super.afterReturning(joinPoint, result);
 
-        doSaveLog(joinPoint, result, null);
+        _this().doSaveLog(joinPoint, result, null);
     }
 
     public static void doSaveLog() {
@@ -141,8 +144,13 @@ public class SysLogAspect extends AbsSysLogAspect{
                     resultInfo = message.toString();
                 }
 
-                if(statusCode != null && (Integer)statusCode != 200){
+                try {
+                    if(statusCode != null && (Integer)statusCode != 200){
+                        isSucess = Boolean.FALSE;
+                    }
+                } catch (Exception e) {
                     isSucess = Boolean.FALSE;
+                    e.printStackTrace();
                 }
             } else {
                 resultInfo = "成功！";

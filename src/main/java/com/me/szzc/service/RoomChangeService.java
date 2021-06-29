@@ -17,6 +17,8 @@ import com.me.szzc.utils.StringHelper;
 import com.me.szzc.utils.StringUtils;
 import com.me.szzc.utils.excle.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +36,9 @@ import java.util.Map;
 public class RoomChangeService {
     @Autowired
     private RoomChangeMapper roomChangeMapper;
+
+    @Autowired
+    private ApplicationContext ac;
 
     @Transactional(rollbackFor = Exception.class)
     public ResultVO importExcle(MultipartFile file, String itemCode) {
@@ -148,6 +153,7 @@ public class RoomChangeService {
             return ResultVO.error(Constant.ERROR_CODE, "该房源已签");
         }
         roomChangeMapper.addChooseRoom(roomChangeVo);
+        ac.publishEvent(new ChooseRoomEvent(this, roomChangeVo));
         return ResultVO.success("点房成功");
     }
 
@@ -163,6 +169,11 @@ public class RoomChangeService {
             roomChangeMapper.updateChooseRoomBy0(roomChangeVo);
         } else {
             roomChangeMapper.updateChooseRoomNot0(roomChangeVo);
+        }
+        try {
+            ac.publishEvent(new ChooseRoomEvent(this, roomChangeVo));
+        } catch (Exception e) {
+            return ResultVO.error(Constant.ERROR_CODE, e.getMessage());
         }
         return ResultVO.success("修改点房成功");
     }

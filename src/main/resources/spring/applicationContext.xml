@@ -95,4 +95,7 @@
 
 	<bean id="constantMap" class="com.me.szzc.init.ConstantMap" scope="singleton" init-method="init"></bean>
 
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+
+
 </beans>

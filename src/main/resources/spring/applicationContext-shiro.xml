@@ -26,6 +26,7 @@
 			<value>
             /ssadmin/2bcf8d4e-e2aa-11e6-bddf-005056ab18e8.html = anon
             /ssadmin/95afee23-e2ab-11e6-bddf-005056ab18e8.html = anon
+            /ssadmin/api/external/** = anon
             /ssadmin/** = authc,perms
 		 	</value>
 		</property>
