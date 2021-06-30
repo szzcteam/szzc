@@ -36,7 +36,7 @@ public class ExternalApi {
     @RequestMapping("/r_change/del")
     @ResponseBody
     public int delRoomChange(@RequestBody RoomChange roomChange) {
-        return roomChangeMapper.delByProjectAndNumber(roomChange.getName(), roomChange.getNumber());
+        return roomChangeMapper.delByRemoteId(roomChange.getRemoteId());
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "我报错了")
