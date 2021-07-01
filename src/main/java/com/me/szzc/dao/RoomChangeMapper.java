@@ -65,4 +65,9 @@ public interface RoomChangeMapper {
      * 根据红日的id删除
      */
     int delByRemoteId(@Param("remoteId") Integer remoteId);
+
+    /**
+     * find by remoteId
+     */
+    RoomChangeNumDTO findByRemoteId(Integer remoteId);
 }

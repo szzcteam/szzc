@@ -405,6 +405,9 @@
         select r_name as projectName,r_area as area, count(1) as num from r_change where item_code = #{projectCode} and r_del = 0
         group by r_name, r_area
     </select>
+    <select id="findByRemoteId" resultType="com.me.szzc.pojo.dto.RoomChangeNumDTO">
+        select <include refid="Base_Column_List"/> from r_change where r_del = 0 and remote_id = #{qwrt}
+    </select>
 
     <update id="updateRoomChangeItemById">
         update r_change set item_code = #{itemCode},assigned_project = #{assignedProject} where id = #{id};
@@ -449,7 +452,10 @@
                 assigned_project = #{assignedProject,jdbcType=VARCHAR},
             </if>
             <if test="housingPlatform!=null and housingPlatform !=''">
-                housing_platform = #{housingPlatform,jdbcType=VARCHAR}
+                housing_platform = #{housingPlatform,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                item_code = #{itemCode}
             </if>
         </set>
         WHERE remote_id = #{remoteId} and r_del = 0

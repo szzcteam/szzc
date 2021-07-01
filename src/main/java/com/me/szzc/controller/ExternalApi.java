@@ -26,6 +26,9 @@ public class ExternalApi {
     @RequestMapping("/r_change/insert")
     @ResponseBody
     public int insertRoomChange(@RequestBody RoomChange roomChange) {
+        if (roomChangeMapper.findByRemoteId(roomChange.getRemoteId()) != null) {
+            return roomChangeMapper.updateRoomChange(roomChange);
+        }
         return roomChangeMapper.insertRoomChange(roomChange);
     }
     @RequestMapping("/r_change/update")
@@ -36,7 +39,8 @@ public class ExternalApi {
     @RequestMapping("/r_change/del")
     @ResponseBody
     public int delRoomChange(@RequestBody RoomChange roomChange) {
-        return roomChangeMapper.delByRemoteId(roomChange.getRemoteId());
+        roomChangeMapper.delByRemoteId(roomChange.getRemoteId());
+        return 1;
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "我报错了")
