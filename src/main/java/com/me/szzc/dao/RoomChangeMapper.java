@@ -57,12 +57,17 @@ public interface RoomChangeMapper {
                                      @Param("assignedProject") String assignedProject);
 
     /**
-     * 根据楼盘名称和房号更新
+     * 根据remoteId更新
      */
     int updateByProjectAndNumber(RoomChange roomChange);
 
     /**
-     * 根据楼盘名称和房号删除
+     * 根据红日的id删除
      */
-    int delByProjectAndNumber(@Param("name") String name, @Param("number") String number);
+    int delByRemoteId(@Param("remoteId") Integer remoteId);
+
+    /**
+     * find by remoteId
+     */
+    RoomChangeNumDTO findByRemoteId(Integer remoteId);
 }

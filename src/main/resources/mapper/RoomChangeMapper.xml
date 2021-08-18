@@ -10,7 +10,7 @@
                assigned_project AS assignedProject,housing_platform AS housingPlatform,
                status,commission_company AS commissionCompany,
                choose_date AS chooseDate,r_remark as remark,r_real_area as realArea,
-               r_real_total_price as realTotalPrice,r_idcard as idcard,r_audit_firm as auditFirm
+               r_real_total_price as realTotalPrice,r_idcard as idcard,r_audit_firm as auditFirm, remote_id as remoteId
     </sql>
 
     <insert id="insertRoomChange" parameterType="com.me.szzc.pojo.entity.RoomChange">
@@ -64,6 +64,9 @@
             <if test="realTotalPrice != null">
                 r_real_total_price,
             </if>
+            <if test="remoteId != null">
+                remote_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -108,12 +111,14 @@
             <if test="itemCode != null">
                 #{itemCode,jdbcType=VARCHAR},
             </if>
-
             <if test="realArea != null">
                 #{realArea,jdbcType=VARCHAR},
             </if>
             <if test="realTotalPrice != null">
                 #{realTotalPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="remoteId != null">
+                #{remoteId},
             </if>
         </trim>
     </insert>
@@ -232,8 +237,8 @@
     <delete id="deleteRoomChange">
         UPDATE r_change SET r_del = 1  WHERE id = #{id}
     </delete>
-    <update id="delByProjectAndNumber">
-        UPDATE r_change SET r_del = 1 WHERE name = #{name} and r_number = #{number} and r_del = 0
+    <update id="delByRemoteId">
+        UPDATE r_change SET r_del = 1 WHERE remote_id = #{remoteId} and r_del = 0
     </update>
 
     <select id="getRoomChangeById" resultType="com.me.szzc.pojo.entity.RoomChange">
@@ -400,6 +405,9 @@
         select r_name as projectName,r_area as area, count(1) as num from r_change where item_code = #{projectCode} and r_del = 0
         group by r_name, r_area
     </select>
+    <select id="findByRemoteId" resultType="com.me.szzc.pojo.dto.RoomChangeNumDTO">
+        select <include refid="Base_Column_List"/> from r_change where r_del = 0 and remote_id = #{qwrt}
+    </select>
 
     <update id="updateRoomChangeItemById">
         update r_change set item_code = #{itemCode},assigned_project = #{assignedProject} where id = #{id};
@@ -444,9 +452,12 @@
                 assigned_project = #{assignedProject,jdbcType=VARCHAR},
             </if>
             <if test="housingPlatform!=null and housingPlatform !=''">
-                housing_platform = #{housingPlatform,jdbcType=VARCHAR}
+                housing_platform = #{housingPlatform,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode != null">
+                item_code = #{itemCode}
             </if>
         </set>
-        WHERE r_name = #{name} and r_number = #{number} and r_del = 0
+        WHERE remote_id = #{remoteId} and r_del = 0
     </update>
 </mapper>

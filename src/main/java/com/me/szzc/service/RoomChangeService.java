@@ -144,6 +144,7 @@ public class RoomChangeService {
         return map;
     }
 
+    @Transactional
     public synchronized ResultVO addChooseRoom(RoomChangeVo roomChangeVo) {
         RoomChange roomChange = roomChangeMapper.getRoomChangeById(roomChangeVo.getId());
         if (StringUtils.isNullOrEmpty(roomChange)) {

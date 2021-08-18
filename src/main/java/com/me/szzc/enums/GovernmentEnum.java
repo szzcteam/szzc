@@ -25,6 +25,9 @@ public enum GovernmentEnum {
     BJSWQ("A001", "滨江商务区", GovernmentEnum.WCQ.getCode()),
     MLJ("A001001", "明伦街", GovernmentEnum.BJSWQ.getCode()),
 
+//    FBB("A001002", "方兵兵测试拆迁项目", GovernmentEnum.BJSWQ.getCode()),
+//    FBB_2("A001003", "方兵兵测试拆迁项目2", GovernmentEnum.BJSWQ.getCode()),
+
     GCC("B001", "古城区", GovernmentEnum.WCQ.getCode()),
     ZYC("B001001", "紫阳村", GovernmentEnum.GCC.getCode()),
     XCH("B001002", "西城壕", GovernmentEnum.GCC.getCode()),
