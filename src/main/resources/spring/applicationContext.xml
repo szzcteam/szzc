@@ -31,6 +31,7 @@
 	<!-- mysql数据库连接池 -->
 	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<!--<property name="driverClass" value="com.mysql.cj.jdbc.Driver" />-->
 		<property name="jdbcUrl" value="${database.url}" />
 		<property name="username" value="${database.user}" />
 		<property name="password" value="${database.password}" />
